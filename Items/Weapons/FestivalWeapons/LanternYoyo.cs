@@ -20,9 +20,9 @@ namespace MythMod.Items.Weapons.FestivalWeapons
     {
         public override void SetStaticDefaults()
         {
-            ItemID.Sets.Yoyo[item.type] = true;
-            ItemID.Sets.GamepadExtraRange[item.type] = 15;
-            ItemID.Sets.GamepadSmartQuickReach[item.type] = true;
+            ItemID.Sets.Yoyo[Item.type] = true;
+            ItemID.Sets.GamepadExtraRange[Item.type] = 15;
+            ItemID.Sets.GamepadSmartQuickReach[Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "轮旋阑珊");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
@@ -30,27 +30,27 @@ namespace MythMod.Items.Weapons.FestivalWeapons
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            item.useStyle = 5;
-            item.width = 30;
-            item.height = 26;
-            item.noUseGraphic = true;
-            item.UseSound = SoundID.Item1;
-            item.melee = true;
-            item.channel = true;
-            item.shoot = mod.ProjectileType("LanternYoyo");
-            item.useAnimation = 5;
-            item.useTime = 14;
-            item.shootSpeed = 0f;
-            item.noMelee = true;
-            item.knockBack = 0.2f;
-            item.damage = 290;
-            item.value = Item.sellPrice(0, 9, 99, 99);
-            item.rare = 11;
+            Item.glowMask = GetGlowMask;
+            Item.useStyle = 5;
+            Item.width = 30;
+            Item.height = 26;
+            Item.noUseGraphic = true;
+            Item.UseSound = SoundID.Item1;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.channel = true;
+            Item.shoot = Mod.Find<ModProjectile>("LanternYoyo").Type;
+            Item.useAnimation = 5;
+            Item.useTime = 14;
+            Item.shootSpeed = 0f;
+            Item.noMelee = true;
+            Item.knockBack = 0.2f;
+            Item.damage = 290;
+            Item.value = Item.sellPrice(0, 9, 99, 99);
+            Item.rare = 11;
         }
         public override void PostUpdate()
         {
-            Lighting.AddLight((int)((base.item.position.X + (float)(base.item.width / 2)) / 16f), (int)((base.item.position.Y + (float)(base.item.height / 2)) / 16f), 0.4f, 0f, 0f);
+            Lighting.AddLight((int)((base.Item.position.X + (float)(base.Item.width / 2)) / 16f), (int)((base.Item.position.Y + (float)(base.Item.height / 2)) / 16f), 0.4f, 0f, 0f);
         }
     }
 }

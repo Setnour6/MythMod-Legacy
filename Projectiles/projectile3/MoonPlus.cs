@@ -4,7 +4,9 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.GameInput;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
@@ -22,38 +24,38 @@ namespace MythMod.Projectiles.projectile3
         }
 		public override void SetDefaults()
 		{
-            base.projectile.width = 80;
-            base.projectile.height = 80;
-            base.projectile.friendly = true;
-			base.projectile.melee = true;
-			base.projectile.penetrate = 8;
-			base.projectile.timeLeft = 720;
-            base.projectile.localNPCHitCooldown = 0;
-            base.projectile.extraUpdates = 1;
-            base.projectile.ignoreWater = true;
-            base.projectile.tileCollide = false;
-            base.projectile.alpha = 55;
+            base.Projectile.width = 80;
+            base.Projectile.height = 80;
+            base.Projectile.friendly = true;
+			base.Projectile.DamageType = DamageClass.Melee;
+			base.Projectile.penetrate = 8;
+			base.Projectile.timeLeft = 720;
+            base.Projectile.localNPCHitCooldown = 0;
+            base.Projectile.extraUpdates = 1;
+            base.Projectile.ignoreWater = true;
+            base.Projectile.tileCollide = false;
+            base.Projectile.alpha = 55;
 		}
         private float Omega = 0.8f;
         public override void AI()
         {
-            base.projectile.alpha = (int)(55 + (float)(400 - (float)projectile.timeLeft) / 2);
-            base.projectile.rotation += Omega;
+            base.Projectile.alpha = (int)(55 + (float)(400 - (float)Projectile.timeLeft) / 2);
+            base.Projectile.rotation += Omega;
             Omega *= 0.994f;
-            base.projectile.velocity.X *= 0.98f;
-            base.projectile.velocity.Y *= 0.98f;
-            Lighting.AddLight(base.projectile.Center, (float)projectile.timeLeft / 1200f, 0f, 0f);
-            float num2 = base.projectile.Center.X;
-            float num3 = base.projectile.Center.Y;
+            base.Projectile.velocity.X *= 0.98f;
+            base.Projectile.velocity.Y *= 0.98f;
+            Lighting.AddLight(base.Projectile.Center, (float)Projectile.timeLeft / 1200f, 0f, 0f);
+            float num2 = base.Projectile.Center.X;
+            float num3 = base.Projectile.Center.Y;
             float num4 = 400f;
             bool flag = false;
             for (int j = 0; j < 200; j++)
             {
-                if (Main.npc[j].CanBeChasedBy(base.projectile, false) && Collision.CanHit(base.projectile.Center, 1, 1, Main.npc[j].Center, 1, 1))
+                if (Main.npc[j].CanBeChasedBy(base.Projectile, false) && Collision.CanHit(base.Projectile.Center, 1, 1, Main.npc[j].Center, 1, 1))
                 {
                     float num5 = Main.npc[j].position.X + (float)(Main.npc[j].width / 2);
                     float num6 = Main.npc[j].position.Y + (float)(Main.npc[j].height / 2);
-                    float num7 = Math.Abs(base.projectile.position.X + (float)(base.projectile.width / 2) - num5) + Math.Abs(base.projectile.position.Y + (float)(base.projectile.height / 2) - num6);
+                    float num7 = Math.Abs(base.Projectile.position.X + (float)(base.Projectile.width / 2) - num5) + Math.Abs(base.Projectile.position.Y + (float)(base.Projectile.height / 2) - num6);
                     if (num7 < num4)
                     {
                         num4 = num7;
@@ -63,30 +65,30 @@ namespace MythMod.Projectiles.projectile3
                     }
                     if (num7 < 50)
                     {
-                        Main.npc[j].StrikeNPC(projectile.damage, projectile.knockBack, projectile.direction, Main.rand.Next(200) > 150 ? true : false);
-                        projectile.penetrate--;
+                        Main.npc[j].StrikeNPC(Projectile.damage, Projectile.knockBack, Projectile.direction, Main.rand.Next(200) > 150 ? true : false);
+                        Projectile.penetrate--;
                         NPC target = Main.npc[j];
                         if (Main.rand.Next(3) == 1)
                         {
-                            Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Item, "Sounds/Item/烟花爆炸"), (int)projectile.Center.X, (int)projectile.Center.Y);
+                            SoundEngine.PlaySound(Mod.GetLegacySoundSlot(SoundType.Item, "Sounds/Item/烟花爆炸"), (int)Projectile.Center.X, (int)Projectile.Center.Y);
                             for (int k = 0; k <= 10; k++)
                             {
                                 float a = (float)Main.rand.Next(0, 720) / 360 * 3.141592653589793238f;
                                 float m = (float)Main.rand.Next(0, 50000);
                                 float l = (float)Main.rand.Next((int)m, 50000) / 1800;
-                                int num48 = Projectile.NewProjectile(base.projectile.Center.X, base.projectile.Center.Y, (float)((float)l * Math.Cos((float)a)) * 0.36f, (float)((float)l * Math.Sin((float)a)) * 0.36f, base.mod.ProjectileType("火山溅射"), base.projectile.damage / 5, base.projectile.knockBack, base.projectile.owner, 0f, 0f);
+                                int num48 = Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, (float)((float)l * Math.Cos((float)a)) * 0.36f, (float)((float)l * Math.Sin((float)a)) * 0.36f, base.Mod.Find<ModProjectile>("火山溅射").Type, base.Projectile.damage / 5, base.Projectile.knockBack, base.Projectile.owner, 0f, 0f);
                                 Main.projectile[num48].scale = (float)Main.rand.Next(7000, 13000) / 10000f;
                             }
                             for (int k = 0; k <= 10; k++)
                             {
                                 Vector2 v = new Vector2(0, 40).RotatedByRandom(Math.PI * 2);
-                                int num48 = Projectile.NewProjectile(base.projectile.Center.X + v.X, base.projectile.Center.Y + v.Y, 0, 0, base.mod.ProjectileType("爆炸效果光"), base.projectile.damage, base.projectile.knockBack, base.projectile.owner, 0f, 0f);
-                                if (projectile.damage > 300)
+                                int num48 = Projectile.NewProjectile(base.Projectile.Center.X + v.X, base.Projectile.Center.Y + v.Y, 0, 0, base.Mod.Find<ModProjectile>("爆炸效果光").Type, base.Projectile.damage, base.Projectile.knockBack, base.Projectile.owner, 0f, 0f);
+                                if (Projectile.damage > 300)
                                 {
-                                    Projectile.NewProjectile(base.projectile.Center.X, base.projectile.Center.Y, 0, 0, base.mod.ProjectileType("火球冲击波"), 0, 0, base.projectile.owner, 0f, 0f);
+                                    Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, 0, 0, base.Mod.Find<ModProjectile>("火球冲击波").Type, 0, 0, base.Projectile.owner, 0f, 0f);
                                 }
                             }
-                            projectile.Kill();
+                            Projectile.Kill();
                         }
                     }
                 }
@@ -94,16 +96,16 @@ namespace MythMod.Projectiles.projectile3
             if (flag)
             {
                 float num8 = 20f;
-                Vector2 vector1 = new Vector2(base.projectile.position.X + (float)base.projectile.width * 0.5f, base.projectile.position.Y + (float)base.projectile.height * 0.5f);
+                Vector2 vector1 = new Vector2(base.Projectile.position.X + (float)base.Projectile.width * 0.5f, base.Projectile.position.Y + (float)base.Projectile.height * 0.5f);
                 float num9 = num2 - vector1.X;
                 float num10 = num3 - vector1.Y;
                 float num11 = (float)Math.Sqrt((double)(num9 * num9 + num10 * num10));
                 num11 = num8 / num11;
                 num9 *= num11;
                 num10 *= num11;
-                base.projectile.velocity.X = (base.projectile.velocity.X * 20f + num9) / 21f;
-                base.projectile.velocity.Y = (base.projectile.velocity.Y * 20f + num10) / 21f;
-                projectile.velocity *= 0.65f;
+                base.Projectile.velocity.X = (base.Projectile.velocity.X * 20f + num9) / 21f;
+                base.Projectile.velocity.Y = (base.Projectile.velocity.Y * 20f + num10) / 21f;
+                Projectile.velocity *= 0.65f;
             }
         }
 		public override void Kill(int timeLeft)
@@ -111,56 +113,56 @@ namespace MythMod.Projectiles.projectile3
 		}
         public override Color? GetAlpha(Color lightColor)
         {
-            if(projectile.timeLeft > 60)
+            if(Projectile.timeLeft > 60)
             {
                 return new Color?(new Color(255, 255, 255, 0));
             }
             else
             {
-                return new Color?(new Color((float)projectile.timeLeft / 60f, (float)projectile.timeLeft / 60f, (float)projectile.timeLeft / 60f, 0));
+                return new Color?(new Color((float)Projectile.timeLeft / 60f, (float)Projectile.timeLeft / 60f, (float)Projectile.timeLeft / 60f, 0));
             }
         }
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
             if(Main.rand.Next(3) == 1)
             {
-                Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Item, "Sounds/Item/烟花爆炸"), (int)projectile.Center.X, (int)projectile.Center.Y);
+                SoundEngine.PlaySound(Mod.GetLegacySoundSlot(SoundType.Item, "Sounds/Item/烟花爆炸"), (int)Projectile.Center.X, (int)Projectile.Center.Y);
                 for (int k = 0; k <= 10; k++)
                 {
                     float a = (float)Main.rand.Next(0, 720) / 360 * 3.141592653589793238f;
                     float m = (float)Main.rand.Next(0, 50000);
                     float l = (float)Main.rand.Next((int)m, 50000) / 1800;
-                    int num4 = Projectile.NewProjectile(base.projectile.Center.X, base.projectile.Center.Y, (float)((float)l * Math.Cos((float)a)) * 0.36f, (float)((float)l * Math.Sin((float)a)) * 0.36f, base.mod.ProjectileType("火山溅射"), base.projectile.damage / 5, base.projectile.knockBack, base.projectile.owner, 0f, 0f);
+                    int num4 = Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, (float)((float)l * Math.Cos((float)a)) * 0.36f, (float)((float)l * Math.Sin((float)a)) * 0.36f, base.Mod.Find<ModProjectile>("火山溅射").Type, base.Projectile.damage / 5, base.Projectile.knockBack, base.Projectile.owner, 0f, 0f);
                     Main.projectile[num4].scale = (float)Main.rand.Next(7000, 13000) / 10000f;
                 }
                 for (int k = 0; k <= 10; k++)
                 {
                     Vector2 v = new Vector2(0, 40).RotatedByRandom(Math.PI * 2);
-                    int num4 = Projectile.NewProjectile(base.projectile.Center.X + v.X, base.projectile.Center.Y + v.Y, 0, 0, base.mod.ProjectileType("爆炸效果光"), base.projectile.damage, base.projectile.knockBack, base.projectile.owner, 0f, 0f);
-                    if (projectile.damage > 300)
+                    int num4 = Projectile.NewProjectile(base.Projectile.Center.X + v.X, base.Projectile.Center.Y + v.Y, 0, 0, base.Mod.Find<ModProjectile>("爆炸效果光").Type, base.Projectile.damage, base.Projectile.knockBack, base.Projectile.owner, 0f, 0f);
+                    if (Projectile.damage > 300)
                     {
-                        Projectile.NewProjectile(base.projectile.Center.X, base.projectile.Center.Y, 0, 0, base.mod.ProjectileType("火球冲击波"), 0, 0, base.projectile.owner, 0f, 0f);
+                        Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, 0, 0, base.Mod.Find<ModProjectile>("火球冲击波").Type, 0, 0, base.Projectile.owner, 0f, 0f);
                     }
                 }
-                projectile.Kill();
+                Projectile.Kill();
             }
             target.AddBuff(24, 600);
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color drawColor)
+        public override bool PreDraw(ref Color lightColor)
         {
             SpriteEffects effects = SpriteEffects.None;
-            if (projectile.spriteDirection == 1)
+            if (Projectile.spriteDirection == 1)
             {
                 effects = SpriteEffects.FlipHorizontally;
             }
             Mod mod = ModLoader.GetMod("MythMod");
-            Texture2D texture = Main.projectileTexture[projectile.type];
+            Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
             float im = Omega * 50;
             if (im >= 1)
             {
                 for (int i = 0; i < im; i++)
                 {
-                    Main.spriteBatch.Draw(texture, projectile.Center - Main.screenPosition + new Vector2(0f, projectile.gfxOffY) - projectile.velocity * i / im, null, new Color(i / im * (float)Math.Log(Omega * 4 + 1), i / im * (float)Math.Log(Omega * 4 + 1), i / im * (float)Math.Log(Omega * 4 + 1), i / im * projectile.alpha / 255f * (float)Math.Log(Omega * 4 + 1)), projectile.rotation + Omega * i * 0.4f, new Vector2(38, 34), projectile.scale, effects, 0f);
+                    Main.spriteBatch.Draw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY) - Projectile.velocity * i / im, null, new Color(i / im * (float)Math.Log(Omega * 4 + 1), i / im * (float)Math.Log(Omega * 4 + 1), i / im * (float)Math.Log(Omega * 4 + 1), i / im * Projectile.alpha / 255f * (float)Math.Log(Omega * 4 + 1)), Projectile.rotation + Omega * i * 0.4f, new Vector2(38, 34), Projectile.scale, effects, 0f);
                 }
             }
             return false;

@@ -1,9 +1,12 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Terraria;
+using Terraria.Audio;
+using Terraria.GameContent;
+using Terraria.ID;
 using Terraria.ModLoader;
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
@@ -23,18 +26,18 @@ namespace MythMod.Projectiles.projectile3
         }
         public override void SetDefaults()
         {
-            projectile.width = 40;
-            projectile.height = 40;
-            projectile.aiStyle = -1;
-            projectile.friendly = true;
-            projectile.hostile = false;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = false;
-            projectile.timeLeft = 600;
-            projectile.magic = true;
-            projectile.alpha = 255;
-            projectile.penetrate = 1;
-            projectile.scale = 0.5f;
+            Projectile.width = 40;
+            Projectile.height = 40;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = true;
+            Projectile.hostile = false;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
+            Projectile.timeLeft = 600;
+            Projectile.DamageType = DamageClass.Magic;
+            Projectile.alpha = 255;
+            Projectile.penetrate = 1;
+            Projectile.scale = 0.5f;
         }
         private bool initialization = true;
         private double X;
@@ -42,33 +45,33 @@ namespace MythMod.Projectiles.projectile3
         private float b;
         public override void AI()
         {
-            projectile.rotation = (float)(Math.Atan2(projectile.velocity.Y, projectile.velocity.X));
-            if (projectile.timeLeft < 590)
+            Projectile.rotation = (float)(Math.Atan2(Projectile.velocity.Y, Projectile.velocity.X));
+            if (Projectile.timeLeft < 590)
             {
-                projectile.tileCollide = true;
+                Projectile.tileCollide = true;
             }
             else
             {
-                projectile.alpha -= 25;
+                Projectile.alpha -= 25;
             }
-            if (projectile.timeLeft < 52)
+            if (Projectile.timeLeft < 52)
             {
-                projectile.alpha += 5;
-                projectile.tileCollide = false;
+                Projectile.alpha += 5;
+                Projectile.tileCollide = false;
             }
-            if(projectile.velocity.Y < 30)
+            if(Projectile.velocity.Y < 30)
             {
-                projectile.velocity.Y += 0.25f;
+                Projectile.velocity.Y += 0.25f;
             }
         }
         public override void Kill(int timeLeft)
         {
-            Main.PlaySound(2, (int)projectile.position.X, (int)projectile.position.Y, 27, 1f, 0f);
+            SoundEngine.PlaySound(SoundID.Item27, Projectile.position);
             for (int a = 0; a < 8; a++)
             {
-                Vector2 vector = base.projectile.Center;
+                Vector2 vector = base.Projectile.Center;
                 Vector2 v = new Vector2(0, Main.rand.NextFloat(6f, 7.5f)).RotatedByRandom(Math.PI * 2);
-                int num = Dust.NewDust(vector - new Vector2(4, 4), 2, 2, mod.DustType("Crystal"), v.X, v.Y, 0, default(Color), 1.4f);
+                int num = Dust.NewDust(vector - new Vector2(4, 4), 2, 2, Mod.Find<ModDust>("Crystal").Type, v.X, v.Y, 0, default(Color), 1.4f);
                 Main.dust[num].noGravity = false;
                 Main.dust[num].fadeIn = 1f + (float)Main.rand.NextFloat(-0.5f, 0.5f) * 0.1f;
             }
@@ -82,18 +85,18 @@ namespace MythMod.Projectiles.projectile3
             }
             for (int j = 0; j < 200; j++)
             {
-                if (!Main.npc[j].dontTakeDamage && (Main.npc[j].Center - projectile.Center).Length() < 90f && !Main.npc[j].friendly)
+                if (!Main.npc[j].dontTakeDamage && (Main.npc[j].Center - Projectile.Center).Length() < 90f && !Main.npc[j].friendly)
                 {
-                    Main.npc[j].StrikeNPC((int)(projectile.damage * Main.rand.NextFloat(0.85f, 1.15f)), 100 / (Main.npc[j].Center - projectile.Center).Length(), (int)((Main.npc[j].Center.X - projectile.Center.X) / Math.Abs(Main.npc[j].Center.X - projectile.Center.X)));
+                    Main.npc[j].StrikeNPC((int)(Projectile.damage * Main.rand.NextFloat(0.85f, 1.15f)), 100 / (Main.npc[j].Center - Projectile.Center).Length(), (int)((Main.npc[j].Center.X - Projectile.Center.X) / Math.Abs(Main.npc[j].Center.X - Projectile.Center.X)));
                 }
             }
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color drawColor)
+        public override bool PreDraw(ref Color lightColor)
         {
             Mod mod = ModLoader.GetMod("MythMod");
-            Texture2D texture = Main.projectileTexture[projectile.type];
-            int p = (255 - projectile.alpha);
-            Main.spriteBatch.Draw(texture, projectile.Center - Main.screenPosition + new Vector2(0f, projectile.gfxOffY), null, new Color(p / 255f, p / 255f, p / 255f, (255 - p) / 255f), projectile.rotation, new Vector2(110, 110), projectile.scale, SpriteEffects.None, 0f);
+            Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
+            int p = (255 - Projectile.alpha);
+            Main.spriteBatch.Draw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), null, new Color(p / 255f, p / 255f, p / 255f, (255 - p) / 255f), Projectile.rotation, new Vector2(110, 110), Projectile.scale, SpriteEffects.None, 0f);
             return false;
         }
     }

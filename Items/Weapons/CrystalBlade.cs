@@ -1,4 +1,5 @@
-﻿using Terraria.ID;
+﻿using Terraria.DataStructures;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -13,23 +14,23 @@ namespace MythMod.Items.Weapons
         }
         public override void SetDefaults()
         {
-            item.damage = 480;
-            item.melee = true;
-            item.width = 90;
-            item.height = 100;
-            item.useTime = 60;
-            item.rare = 11;
-            item.useAnimation = 15;
-            item.useStyle = 1;
-            item.knockBack = 12;
-            item.UseSound = SoundID.Item1;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 25;
-            item.value = 10000;
-            item.scale = 1f;
-            item.shoot = base.mod.ProjectileType("HugeCrystalSpike");
-            item.shootSpeed = 21f;
+            Item.damage = 480;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 90;
+            Item.height = 100;
+            Item.useTime = 60;
+            Item.rare = 11;
+            Item.useAnimation = 15;
+            Item.useStyle = 1;
+            Item.knockBack = 12;
+            Item.UseSound = SoundID.Item1;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 25;
+            Item.value = 10000;
+            Item.scale = 1f;
+            Item.shoot = base.Mod.Find<ModProjectile>("HugeCrystalSpike").Type;
+            Item.shootSpeed = 21f;
         }
         public override Vector2? HoldoutOffset()
         {
@@ -42,7 +43,7 @@ namespace MythMod.Items.Weapons
                 target.StrikeNPC(target.life,0,-1);
             }
         }
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Projectile.NewProjectile(position.X, position.Y, speedX, speedY, type, (int)((double)damage * 3d), knockBack * 10, player.whoAmI, 0f, 0f);
             return false;

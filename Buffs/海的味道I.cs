@@ -7,7 +7,7 @@ namespace MythMod.Buffs
 {
     public class 海的味道I : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("海的味道I");
             base.Description.SetDefault("附近有海鲜\n提升3%闪避");

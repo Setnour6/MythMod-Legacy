@@ -10,7 +10,7 @@ namespace MythMod.Tiles.Foods
 {
 	public class 越南河粉 : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[(int)base.Type] = true;
 			Main.tileNoAttach[(int)base.Type] = true;
@@ -23,20 +23,20 @@ namespace MythMod.Tiles.Foods
             };
             TileObjectData.newTile.CoordinateWidth = 32;
             TileObjectData.addTile((int)base.Type);
-			this.dustType = 13;
-            this.drop = 2268;
+			this.DustType = 13;
+            this.ItemDrop = 2268;
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
             base.AddMapEntry(new Color(242, 141, 0), modTranslation);
-            this.mineResist = 3f;
-			base.SetDefaults();
+            this.MineResist = 3f;
+			base.SetStaticDefaults();
 			modTranslation.AddTranslation(GameCulture.Chinese, "");
 		}
         public override void NearbyEffects(int i, int j, bool closer)
         {
             Player player = Main.player[Main.myPlayer];
             //player.AddBuff(mod.BuffType("冰爽I"), 20);
-            player.AddBuff(mod.BuffType("热乎乎的美味I"), 20);
+            player.AddBuff(Mod.Find<ModBuff>("热乎乎的美味I").Type, 20);
         }
     }
 }

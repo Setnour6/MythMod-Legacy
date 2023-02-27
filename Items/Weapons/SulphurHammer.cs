@@ -15,31 +15,30 @@ namespace MythMod.Items.Weapons
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 46;
-			base.item.damage = 330;
-			base.item.noMelee = true;
-			base.item.noUseGraphic = true;
-			base.item.useAnimation = 20;
-            base.item.autoReuse = true;
-            base.item.useStyle = 1;
-			base.item.useTime = 20;
-			base.item.knockBack = 7.5f;
-			base.item.UseSound = SoundID.Item1;
-			base.item.melee = true;
-			base.item.height = 38;
-			base.item.value = Item.buyPrice(0, 3, 0, 0);
-			base.item.rare = 11;
-			base.item.shoot = base.mod.ProjectileType("SulfurHammer");
-			base.item.shootSpeed = 18.5f;
+			base.Item.width = 46;
+			base.Item.damage = 330;
+			base.Item.noMelee = true;
+			base.Item.noUseGraphic = true;
+			base.Item.useAnimation = 20;
+            base.Item.autoReuse = true;
+            base.Item.useStyle = 1;
+			base.Item.useTime = 20;
+			base.Item.knockBack = 7.5f;
+			base.Item.UseSound = SoundID.Item1;
+			base.Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+			base.Item.height = 38;
+			base.Item.value = Item.buyPrice(0, 3, 0, 0);
+			base.Item.rare = 11;
+			base.Item.shoot = base.Mod.Find<ModProjectile>("SulfurHammer").Type;
+			base.Item.shootSpeed = 18.5f;
 		}
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(null, "Basalt", 12);
             modRecipe.AddIngredient(null, "Sulfur", 72);
             modRecipe.requiredTile[0] = 412;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class LonelyJelly : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("孤独的水母");
             base.Description.SetDefault("生命回复增加5");

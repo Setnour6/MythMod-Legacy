@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,21 +28,21 @@ namespace MythMod.Projectiles.projectile2
         //7359668
         public override void SetDefaults()
         {
-            projectile.width = 40;
-            projectile.height = 36;
-            projectile.aiStyle = -1;
-            projectile.friendly = false;
-            projectile.hostile = true;
-            projectile.melee = false;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = true;
-            projectile.timeLeft = 2000;
-            projectile.alpha = 0;
-            projectile.penetrate = -1;
-            projectile.scale = 1f;
-            this.cooldownSlot = 1;
-            ProjectileID.Sets.TrailCacheLength[projectile.type] = 12;
-            ProjectileID.Sets.TrailingMode[projectile.type] = 0;
+            Projectile.width = 40;
+            Projectile.height = 36;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = false;
+            Projectile.hostile = true;
+            Projectile.melee = false/* tModPorter Suggestion: Remove. See Item.DamageType */;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = true;
+            Projectile.timeLeft = 2000;
+            Projectile.alpha = 0;
+            Projectile.penetrate = -1;
+            Projectile.scale = 1f;
+            this.CooldownSlot = 1;
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 12;
+            ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
         }
         //55555
         private bool initialization = true;
@@ -56,14 +56,14 @@ namespace MythMod.Projectiles.projectile2
                 Y = Main.rand.Next(0, 10000) / 5000f * (float)Math.PI;
                 initialization = false;
             }
-            projectile.rotation = Y + projectile.velocity.X * 0.2f;
-            projectile.velocity.X *= 0.995f;
-            projectile.velocity.Y += 0.07f;
+            Projectile.rotation = Y + Projectile.velocity.X * 0.2f;
+            Projectile.velocity.X *= 0.995f;
+            Projectile.velocity.Y += 0.07f;
         }
         public override void OnHitPlayer(Player target, int damage, bool crit)
         {
-            target.AddBuff(mod.BuffType("Starfishes"), 180, true);
-            projectile.timeLeft = 0;
+            target.AddBuff(Mod.Find<ModBuff>("Starfishes").Type, 180, true);
+            Projectile.timeLeft = 0;
         }
         //14141414141414
     }

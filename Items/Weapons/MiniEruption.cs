@@ -28,29 +28,29 @@ namespace MythMod.Items.Weapons
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            base.item.damage = 150;
-			base.item.width = 42;
-			base.item.height = 26;
-			base.item.useTime = 4;
-			base.item.useAnimation = 4;
-			base.item.useStyle = 5;
-            base.item.mana = 7;
-            base.item.noMelee = true;
-			base.item.magic = true;
-			base.item.knockBack = 1f;
-			base.item.value = 50000;
-			base.item.rare = 5;
-			base.item.UseSound = SoundID.Item31;
-			base.item.autoReuse = true;
-            base.item.shoot = base.mod.ProjectileType("MiniEruption");
-			base.item.shootSpeed = 9f;
+            Item.glowMask = GetGlowMask;
+            base.Item.damage = 150;
+			base.Item.width = 42;
+			base.Item.height = 26;
+			base.Item.useTime = 4;
+			base.Item.useAnimation = 4;
+			base.Item.useStyle = 5;
+            base.Item.mana = 7;
+            base.Item.noMelee = true;
+			base.Item.DamageType = DamageClass.Magic;
+			base.Item.knockBack = 1f;
+			base.Item.value = 50000;
+			base.Item.rare = 5;
+			base.Item.UseSound = SoundID.Item31;
+			base.Item.autoReuse = true;
+            base.Item.shoot = base.Mod.Find<ModProjectile>("MiniEruption").Type;
+			base.Item.shootSpeed = 9f;
 		}
-		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
             Vector2 v2 = position + new Vector2(speedX, speedY) * 4.2f;
             Vector2 v = new Vector2(speedX, speedY).RotatedBy(Main.rand.NextFloat(-0.05f, 0.05f)) * Main.rand.Next(10, 40) / 15f;
-            int num8 = Projectile.NewProjectile(v2.X, v2.Y - 4, v.X, v.Y, base.mod.ProjectileType("MiniEruption"), damage, knockBack, player.whoAmI, 0f, 0f);
+            int num8 = Projectile.NewProjectile(v2.X, v2.Y - 4, v.X, v.Y, base.Mod.Find<ModProjectile>("MiniEruption").Type, damage, knockBack, player.whoAmI, 0f, 0f);
             Main.projectile[num8].scale = Main.rand.NextFloat(0.44f, 1f);
             Vector2 v23 = position + new Vector2(speedX, speedY) * 2.1f;
             Vector2 v3 = new Vector2(speedX, speedY).RotatedBy(Main.rand.NextFloat(-0.05f, 0.05f)) * Main.rand.Next(10, 40) / 15f;
@@ -65,7 +65,7 @@ namespace MythMod.Items.Weapons
             }
             return false;
 		}
-		public override bool ConsumeAmmo(Player player)
+		public override bool CanConsumeAmmo(Item ammo, Player player)
 		{
 			return Main.rand.Next(0, 100) > 24;
 		}

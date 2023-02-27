@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -20,18 +20,18 @@ namespace MythMod.Items
 		// Token: 0x06001FC5 RID: 8133 RVA: 0x000C4CA8 File Offset: 0x000C2EA8
 		public override void SetDefaults()
 		{
-			base.item.width = 20;
-			base.item.height = 20;
-			base.item.maxStack = 30;
-			base.item.value = 100000;
-			base.item.rare = 10;
-			base.item.autoReuse = true;
-			base.item.useAnimation = 15;
-			base.item.useTime = 10;
-			base.item.useStyle = 1;
-			base.item.consumable = true;
-			base.item.createTile = base.mod.TileType("炸药桶");
-			base.item.placeStyle = 0;
+			base.Item.width = 20;
+			base.Item.height = 20;
+			base.Item.maxStack = 30;
+			base.Item.value = 100000;
+			base.Item.rare = 10;
+			base.Item.autoReuse = true;
+			base.Item.useAnimation = 15;
+			base.Item.useTime = 10;
+			base.Item.useStyle = 1;
+			base.Item.consumable = true;
+			base.Item.createTile = base.Mod.Find<ModTile>("炸药桶").Type;
+			base.Item.placeStyle = 0;
 		}
     }
 }

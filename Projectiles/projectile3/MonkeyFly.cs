@@ -4,6 +4,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.Graphics.Effects;
@@ -20,21 +21,21 @@ namespace MythMod.Projectiles.projectile3
         public override void SetStaticDefaults()
         {
             base.DisplayName.SetDefault("窜天猴");
-            Main.projFrames[projectile.type] = 1;
+            Main.projFrames[Projectile.type] = 1;
         }
 
         public override void SetDefaults()
         {
-            base.projectile.width = 48;
-            base.projectile.height = 48;
-            base.projectile.friendly = false;
-            base.projectile.hostile = false;
-            base.projectile.ignoreWater = true;
-            base.projectile.penetrate = 1;
-            base.projectile.timeLeft = 300;
-            base.projectile.usesLocalNPCImmunity = true;
-            base.projectile.localNPCHitCooldown = 1;
-            base.projectile.tileCollide = false;
+            base.Projectile.width = 48;
+            base.Projectile.height = 48;
+            base.Projectile.friendly = false;
+            base.Projectile.hostile = false;
+            base.Projectile.ignoreWater = true;
+            base.Projectile.penetrate = 1;
+            base.Projectile.timeLeft = 300;
+            base.Projectile.usesLocalNPCImmunity = true;
+            base.Projectile.localNPCHitCooldown = 1;
+            base.Projectile.tileCollide = false;
         }
         private float omega = 0;
         private float num4;
@@ -44,31 +45,31 @@ namespace MythMod.Projectiles.projectile3
         private float Distance;
         public override void AI()
         {
-            base.projectile.rotation = (float)Math.Atan2((double)base.projectile.velocity.Y, (double)base.projectile.velocity.X) + (float)Math.PI / 4f;
-            if(projectile.timeLeft > 120)
+            base.Projectile.rotation = (float)Math.Atan2((double)base.Projectile.velocity.Y, (double)base.Projectile.velocity.X) + (float)Math.PI / 4f;
+            if(Projectile.timeLeft > 120)
             {
-                if(projectile.velocity.Length() > 0.0000000000001f)
+                if(Projectile.velocity.Length() > 0.0000000000001f)
                 {
-                    projectile.velocity *= 0.1f;
+                    Projectile.velocity *= 0.1f;
                 }
-                Dust.NewDust(projectile.Center + new Vector2(12, 12).RotatedBy(projectile.rotation - Math.PI / 2d), 0, 0, 6);
+                Dust.NewDust(Projectile.Center + new Vector2(12, 12).RotatedBy(Projectile.rotation - Math.PI / 2d), 0, 0, 6);
             }
             else
             {
-                if(projectile.timeLeft == 40)
+                if(Projectile.timeLeft == 40)
                 {
-                    Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Item, "Sounds/Item/烟花冲天"), (int)projectile.Center.X, (int)projectile.Center.Y);
+                    SoundEngine.PlaySound(Mod.GetLegacySoundSlot(SoundType.Item, "Sounds/Item/烟花冲天"), (int)Projectile.Center.X, (int)Projectile.Center.Y);
                 }
-                if (projectile.velocity.Length() < 10f)
+                if (Projectile.velocity.Length() < 10f)
                 {
-                    projectile.velocity *= 1.5f;
+                    Projectile.velocity *= 1.5f;
                 }
-                Dust.NewDust(projectile.Center + new Vector2(12, 12).RotatedBy(projectile.rotation - Math.PI / 2d), 0, 0, 6);
-                int u = Dust.NewDust(projectile.Center + new Vector2(12, 12).RotatedBy(projectile.rotation - Math.PI / 2d), 0, 0, 188, 0, 0, 200, default(Color), 0.5f);
+                Dust.NewDust(Projectile.Center + new Vector2(12, 12).RotatedBy(Projectile.rotation - Math.PI / 2d), 0, 0, 6);
+                int u = Dust.NewDust(Projectile.Center + new Vector2(12, 12).RotatedBy(Projectile.rotation - Math.PI / 2d), 0, 0, 188, 0, 0, 200, default(Color), 0.5f);
                 Main.dust[u].velocity *= 0;
-                if (projectile.velocity.Length() > 1f)
+                if (Projectile.velocity.Length() > 1f)
                 {
-                    projectile.hostile = true;
+                    Projectile.hostile = true;
                     if (Math.Abs(omega) < 0.1f)
                     {
                         omega += Main.rand.NextFloat(-0.015f, 0.015f);
@@ -78,15 +79,15 @@ namespace MythMod.Projectiles.projectile3
                         omega *= 0.99f;
                     }
                 }
-                projectile.velocity = projectile.velocity.RotatedBy(omega);
+                Projectile.velocity = Projectile.velocity.RotatedBy(omega);
             }
         }
         public override void Kill(int timeLeft)
         {
-            Projectile.NewProjectile(base.projectile.Center.X + new Vector2(12, 12).RotatedBy(projectile.rotation - Math.PI / 2).X, base.projectile.Center.Y + new Vector2(12, 12).RotatedBy(projectile.rotation - Math.PI / 2).Y, 0, 0, mod.ProjectileType("爆炸鞭炮"), (int)((double)base.projectile.damage), base.projectile.knockBack, base.projectile.owner, 0f, 0f);
-            Gore.NewGore(projectile.position, new Vector2(0, 0), mod.GetGoreSlot("Gores/窜天猴放完"), 1f);
-            Dust.NewDust(projectile.Center + new Vector2(12, 12).RotatedBy(projectile.rotation - Math.PI / 2d), 0, 0, 188, 0, 0, 200, default(Color), 4f);
-            Dust.NewDust(projectile.Center + new Vector2(12, 12).RotatedBy(projectile.rotation - Math.PI / 2d), 0, 0, 188, 0, 0, 200, default(Color), 5f);
+            Projectile.NewProjectile(base.Projectile.Center.X + new Vector2(12, 12).RotatedBy(Projectile.rotation - Math.PI / 2).X, base.Projectile.Center.Y + new Vector2(12, 12).RotatedBy(Projectile.rotation - Math.PI / 2).Y, 0, 0, Mod.Find<ModProjectile>("爆炸鞭炮").Type, (int)((double)base.Projectile.damage), base.Projectile.knockBack, base.Projectile.owner, 0f, 0f);
+            Gore.NewGore(Projectile.position, new Vector2(0, 0), Mod.GetGoreSlot("Gores/窜天猴放完"), 1f);
+            Dust.NewDust(Projectile.Center + new Vector2(12, 12).RotatedBy(Projectile.rotation - Math.PI / 2d), 0, 0, 188, 0, 0, 200, default(Color), 4f);
+            Dust.NewDust(Projectile.Center + new Vector2(12, 12).RotatedBy(Projectile.rotation - Math.PI / 2d), 0, 0, 188, 0, 0, 200, default(Color), 5f);
             base.Kill(timeLeft);
         }
     }

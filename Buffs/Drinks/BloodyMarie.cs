@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class BloodyMarie : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("印度玛莎拉");
             base.Description.SetDefault("暴击增加11%");

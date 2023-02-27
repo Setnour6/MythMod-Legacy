@@ -18,17 +18,17 @@ namespace MythMod.Items.Magicpaper
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            item.width = 26;
-            item.height = 40;
-            item.maxStack = 999;
-            item.value = 3000000;
-            item.rare = 3;
-            base.item.useStyle = 1;
-            item.consumable = true;
-            base.item.useAnimation = 17;
-            base.item.useTime = 17;
-            base.item.consumable = true;
+            Item.glowMask = GetGlowMask;
+            Item.width = 26;
+            Item.height = 40;
+            Item.maxStack = 999;
+            Item.value = 3000000;
+            Item.rare = 3;
+            base.Item.useStyle = 1;
+            Item.consumable = true;
+            base.Item.useAnimation = 17;
+            base.Item.useTime = 17;
+            base.Item.consumable = true;
         }
         public override bool CanUseItem(Player player)
         {
@@ -37,17 +37,17 @@ namespace MythMod.Items.Magicpaper
             switch (Main.rand.Next(1, 4))
             {
                 case 1:
-                    type = base.mod.ItemType("LighIII");
+                    type = base.Mod.Find<ModItem>("LighIII").Type;
                     break;
                 case 2:
-                    type = base.mod.ItemType("ShadIII");
+                    type = base.Mod.Find<ModItem>("ShadIII").Type;
                     break;
                 case 3:
-                    type = base.mod.ItemType("FlowerIII");
+                    type = base.Mod.Find<ModItem>("FlowerIII").Type;
                     break;
             }
             player.QuickSpawnItem(type, 1);
-            item.stack--;
+            Item.stack--;
             return true;
         }
     }

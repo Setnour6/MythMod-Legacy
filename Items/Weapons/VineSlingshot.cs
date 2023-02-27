@@ -16,22 +16,22 @@ namespace MythMod.Items.Weapons
 		}
 		public override void SetDefaults()
 		{
-			item.damage = 9;
-			item.crit = 8;
-			item.ranged = true;
-			item.width = 42;
-			item.height = 30;
-			item.useTime = 14;
-			item.useAnimation = 14;
-			item.useStyle = 5;
-			item.noMelee = true;
-			item.knockBack = 2f;
-			item.autoReuse = false;
-			item.value = Item.sellPrice(0, 0, 0, 50);
-			item.rare = 2;
-			item.UseSound = SoundID.Item5;
-            item.shoot = 51;
-			item.shootSpeed = 12f;
+			Item.damage = 9;
+			Item.crit = 8;
+			Item.DamageType = DamageClass.Ranged;
+			Item.width = 42;
+			Item.height = 30;
+			Item.useTime = 14;
+			Item.useAnimation = 14;
+			Item.useStyle = 5;
+			Item.noMelee = true;
+			Item.knockBack = 2f;
+			Item.autoReuse = false;
+			Item.value = Item.sellPrice(0, 0, 0, 50);
+			Item.rare = 2;
+			Item.UseSound = SoundID.Item5;
+            Item.shoot = 51;
+			Item.shootSpeed = 12f;
 		}
 		public override Vector2? HoldoutOffset()
 		{

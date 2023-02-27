@@ -13,7 +13,7 @@ namespace MythMod.Tiles
 	{
 		private float num5 = 0;
 		private int num6 = 0;
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileShine[(int)base.Type] = 800;
 			Main.tileSolid[(int)base.Type] = true;
@@ -34,10 +34,10 @@ namespace MythMod.Tiles
 		// Token: 0x0600445D RID: 17501 RVA: 0x00271C44 File Offset: 0x0026FE44
 		public override bool CreateDust(int i, int j, ref int type)
 		{
-			switch (Main.tile[i, j].frameX / 18)
+			switch (Main.tile[i, j].TileFrameX / 18)
 			{
 			case 0:
-				type =  mod.DustType("Wave");
+				type =  Mod.Find<ModDust>("Wave").Type;
 				break;
 			case 1:
 				type = 29;
@@ -71,7 +71,7 @@ namespace MythMod.Tiles
 		public override bool Drop(int i, int j)
 		{
 			string text;
-			switch (Main.tile[i, j].frameX / 18)
+			switch (Main.tile[i, j].TileFrameX / 18)
 			{
 			case 0:
                 text = "OceanBlueBar";
@@ -103,7 +103,7 @@ namespace MythMod.Tiles
 			default:
 				return false;
 			}
-			Item.NewItem(i * 16, j * 16, 16, 48, base.mod.ItemType(text), 1, false, 0, false, false);
+			Item.NewItem(i * 16, j * 16, 16, 48, base.Mod.Find<ModItem>(text).Type, 1, false, 0, false, false);
 			return false;
 		}
 		public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
@@ -115,15 +115,15 @@ namespace MythMod.Tiles
 			{
 				return;
 			}
-			int num = (int)Main.tile[i, j].frameX;
-			int num2 = (int)Main.tile[i, j].frameY;
+			int num = (int)Main.tile[i, j].TileFrameX;
+			int num2 = (int)Main.tile[i, j].TileFrameY;
 			int num3 = i % 1;
 			int num4 = j % 1;
 			num3 *= 162;
 			num4 *= 40;
 			num += num3;
 			num2 += num4;
-			Texture2D texture = base.mod.GetTexture("Tiles/Bars_Glowmask");
+			Texture2D texture = base.Mod.GetTexture("Tiles/Bars_Glowmask");
 			Vector2 position = new Vector2((float)(i * 16) - Main.screenPosition.X + (float)this.GetDrawOffset(), (float)(j * 16) - Main.screenPosition.Y + (float)this.GetDrawOffset());
 			if (CaptureManager.Instance.IsCapturing)
 			{
@@ -133,7 +133,7 @@ namespace MythMod.Tiles
 		}
 		public override void NearbyEffects(int i, int j, bool closer)
 		{
-            if(Main.tile[i, j + 1].slope() != 0 || Main.tile[i, j + 1].halfBrick() || !Main.tile[i, j + 1].HasSameSlope(Main.tile[i, j]) || !Main.tile[i, j + 1].active())
+            if(Main.tile[i, j + 1].Slope != 0 || Main.tile[i, j + 1].IsHalfBlock || !Main.tile[i, j + 1].HasSameSlope(Main.tile[i, j]) || !Main.tile[i, j + 1].HasTile)
             {
                 WorldGen.KillTile(i, j);
             }

@@ -21,13 +21,13 @@ namespace MythMod.Items.Festival
 		// Token: 0x060005E4 RID: 1508 RVA: 0x00041780 File Offset: 0x0003F980
 		public override void SetDefaults()
 		{
-			base.item.width = 34;
-			base.item.height = 32;
-			base.item.useAnimation = 20;
-			base.item.useTime = 20;
-            base.item.maxStack = 999;
-            base.item.rare = 8;
-            base.item.value = Item.sellPrice(0, 0, 10, 0);
+			base.Item.width = 34;
+			base.Item.height = 32;
+			base.Item.useAnimation = 20;
+			base.Item.useTime = 20;
+            base.Item.maxStack = 999;
+            base.Item.rare = 8;
+            base.Item.value = Item.sellPrice(0, 0, 10, 0);
 		}
 	}
 }

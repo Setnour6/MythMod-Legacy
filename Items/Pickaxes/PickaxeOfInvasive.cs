@@ -19,29 +19,28 @@ namespace MythMod.Items.Pickaxes
 		}
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(null, "OceanBlueBar", 20);
             modRecipe.requiredTile[0] = 412;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
         public override void SetDefaults()
 		{
-			base.item.damage = 70;
-			base.item.melee = true;
-			base.item.width = 34;
-			base.item.height = 34;
-			base.item.useTime = 5;
-			base.item.useAnimation = 12;
-			base.item.useTurn = true;
-			base.item.pick = 240;
-			base.item.useStyle = 1;
-			base.item.knockBack = 9f;
-			base.item.value = 40000;
-			base.item.UseSound = SoundID.Item1;
-			base.item.autoReuse = true;
-			base.item.tileBoost += 4;
-            base.item.rare = 8;
+			base.Item.damage = 70;
+			base.Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+			base.Item.width = 34;
+			base.Item.height = 34;
+			base.Item.useTime = 5;
+			base.Item.useAnimation = 12;
+			base.Item.useTurn = true;
+			base.Item.pick = 240;
+			base.Item.useStyle = 1;
+			base.Item.knockBack = 9f;
+			base.Item.value = 40000;
+			base.Item.UseSound = SoundID.Item1;
+			base.Item.autoReuse = true;
+			base.Item.tileBoost += 4;
+            base.Item.rare = 8;
 		}
 		public override void MeleeEffects(Player player, Rectangle hitbox)
 		{

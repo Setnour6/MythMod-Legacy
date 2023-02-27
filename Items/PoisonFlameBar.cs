@@ -21,18 +21,18 @@ namespace MythMod.Items
         // Token: 0x06001FC5 RID: 8133 RVA: 0x000C4CA8 File Offset: 0x000C2EA8
         public override void SetDefaults()
         {
-            base.item.width = 20;
-            base.item.height = 20;
-            base.item.maxStack = 999;
-            base.item.value = Item.sellPrice(0, 8, 0, 0);
-            base.item.rare = 10;
-            base.item.autoReuse = true;
-            base.item.useAnimation = 15;
-            base.item.useTime = 10;
-            base.item.useStyle = 1;
-            base.item.consumable = true;
-            base.item.createTile = base.mod.TileType("Bars");
-            base.item.placeStyle = 6;
+            base.Item.width = 20;
+            base.Item.height = 20;
+            base.Item.maxStack = 999;
+            base.Item.value = Item.sellPrice(0, 8, 0, 0);
+            base.Item.rare = 10;
+            base.Item.autoReuse = true;
+            base.Item.useAnimation = 15;
+            base.Item.useTime = 10;
+            base.Item.useStyle = 1;
+            base.Item.consumable = true;
+            base.Item.createTile = base.Mod.Find<ModTile>("Bars").Type;
+            base.Item.placeStyle = 6;
         }
     }
 }

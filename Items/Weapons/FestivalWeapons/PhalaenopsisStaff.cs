@@ -20,27 +20,27 @@ namespace MythMod.Items.Weapons.FestivalWeapons
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("蝴蝶兰魔杖");
-			Item.staff[base.item.type] = true;
+			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "蝴蝶兰魔杖");
 		}
         public override void SetDefaults()
 		{
-			base.item.damage = 400;
-			base.item.magic = true;
-			base.item.mana = 16;
-			base.item.width = 54;
-			base.item.height = 54;
-			base.item.useTime = 26;
-			base.item.useAnimation = 20;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.knockBack = 0.5f;
-			base.item.value = 12000;
-			base.item.rare = 11;
-			base.item.UseSound = SoundID.Item60;
-			base.item.autoReuse = true;
-            base.item.shoot = base.mod.ProjectileType("Phalaenopsis");
-			base.item.shootSpeed = 8f;
+			base.Item.damage = 400;
+			base.Item.DamageType = DamageClass.Magic;
+			base.Item.mana = 16;
+			base.Item.width = 54;
+			base.Item.height = 54;
+			base.Item.useTime = 26;
+			base.Item.useAnimation = 20;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 0.5f;
+			base.Item.value = 12000;
+			base.Item.rare = 11;
+			base.Item.UseSound = SoundID.Item60;
+			base.Item.autoReuse = true;
+            base.Item.shoot = base.Mod.Find<ModProjectile>("Phalaenopsis").Type;
+			base.Item.shootSpeed = 8f;
 		}
 	}
 }

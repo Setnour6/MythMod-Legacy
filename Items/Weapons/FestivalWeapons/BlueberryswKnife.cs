@@ -16,23 +16,23 @@ namespace MythMod.Items.Weapons.FestivalWeapons
 		}
 		public override void SetDefaults()
 		{
-            base.item.thrown = true;
-            base.item.damage = 200;
-            base.item.crit = 15;
-            base.item.width = 40;
-            base.item.height = 40;
-            base.item.useTime = 18;
-            base.item.useAnimation = 18;
-            base.item.useStyle = 5;
-            base.item.noMelee = true;
-            base.item.knockBack = 2f;
-            base.item.autoReuse = true;
-            base.item.value = Item.sellPrice(0, 1, 0, 0);
-            base.item.shoot = base.mod.ProjectileType("BlueberryswKnife");
-            base.item.noUseGraphic = true;
-            base.item.rare = 6;
-            base.item.UseSound = SoundID.Item5;
-            base.item.shootSpeed = 27f;
+            base.Item.DamageType = DamageClass.Throwing;
+            base.Item.damage = 200;
+            base.Item.crit = 15;
+            base.Item.width = 40;
+            base.Item.height = 40;
+            base.Item.useTime = 18;
+            base.Item.useAnimation = 18;
+            base.Item.useStyle = 5;
+            base.Item.noMelee = true;
+            base.Item.knockBack = 2f;
+            base.Item.autoReuse = true;
+            base.Item.value = Item.sellPrice(0, 1, 0, 0);
+            base.Item.shoot = base.Mod.Find<ModProjectile>("BlueberryswKnife").Type;
+            base.Item.noUseGraphic = true;
+            base.Item.rare = 6;
+            base.Item.UseSound = SoundID.Item5;
+            base.Item.shootSpeed = 27f;
         }
 		public override void AddRecipes()
         {

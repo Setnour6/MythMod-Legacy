@@ -8,22 +8,22 @@ namespace MythMod.Tiles
 {
     public class 火烧云 : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileSolid[(int)base.Type] = true;
             Main.tileNoSunLight[(int)base.Type] = true;
             Main.tileMergeDirt[(int)base.Type] = false;
 			Main.tileBlockLight[(int)base.Type] = false;
             Main.tileBlockLight[(int)base.Type] = false;
-            Main.tileValue[(int)base.Type] = 0;
-            this.minPick = 0;
-			this.dustType = 55;
-            this.drop = base.mod.ItemType("RedCloud");
+            Main.tileOreFinderPriority[(int)base.Type] = 0;
+            this.MinPick = 0;
+			this.DustType = 55;
+            this.ItemDrop = base.Mod.Find<ModItem>("RedCloud").Type;
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
 			base.AddMapEntry(new Color(255, 222, 173), modTranslation);
-			this.mineResist = 5f;
-			this.soundType = 21;
+			this.MineResist = 5f;
+			this.HitSound = 21;
 			Main.tileSpelunker[(int)base.Type] = false;
             modTranslation.AddTranslation(GameCulture.Chinese, "");
 		}

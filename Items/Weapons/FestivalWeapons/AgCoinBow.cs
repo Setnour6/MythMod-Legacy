@@ -1,4 +1,4 @@
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -27,31 +27,31 @@ namespace MythMod.Items.Weapons.FestivalWeapons
         }
         public override void SetDefaults()
         {
-            item.ranged = true;
-            item.width = 46;
-            item.height = 82;
-            item.useTime = 14;
-            item.useAnimation = 14;
-            item.damage = 40;
-            item.UseSound = SoundID.Item11;
-            item.autoReuse = true;
-            item.crit = 5;
-            item.value = 8000;
-            item.scale = 1f;
-            item.rare = 4;
-            item.useStyle = 5;
-            item.knockBack = 1;
-            item.shoot = 1;
-            item.useAmmo = 40;
-            item.noMelee = true;
-            item.shootSpeed = 7.8f;
-            item.reuseDelay = 14;
+            Item.DamageType = DamageClass.Ranged;
+            Item.width = 46;
+            Item.height = 82;
+            Item.useTime = 14;
+            Item.useAnimation = 14;
+            Item.damage = 40;
+            Item.UseSound = SoundID.Item11;
+            Item.autoReuse = true;
+            Item.crit = 5;
+            Item.value = 8000;
+            Item.scale = 1f;
+            Item.rare = 4;
+            Item.useStyle = 5;
+            Item.knockBack = 1;
+            Item.shoot = 1;
+            Item.useAmmo = 40;
+            Item.noMelee = true;
+            Item.shootSpeed = 7.8f;
+            Item.reuseDelay = 14;
         }
         public override Vector2? HoldoutOffset()
         {
             return new Vector2(-12.0f, 0.0f);
         }
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Vector2 v = new Vector2(speedX, speedY);
             int num = Main.rand.Next(3, 7);
@@ -59,7 +59,7 @@ namespace MythMod.Items.Weapons.FestivalWeapons
             for(int i = 0; i < num; i++)
             {
                 v = v.RotatedBy(Main.rand.Next(-2000, 2000) / 4000f) * Main.rand.Next(1000, 1600) / 2000f;
-                Projectile.NewProjectile(position.X, position.Y, v.X, v.Y, mod.ProjectileType("AgCoin"), (int)((double)damage), knockBack, player.whoAmI, 0f, 0f);
+                Projectile.NewProjectile(position.X, position.Y, v.X, v.Y, Mod.Find<ModProjectile>("AgCoin").Type, (int)((double)damage), knockBack, player.whoAmI, 0f, 0f);
             }
             return false;
         }

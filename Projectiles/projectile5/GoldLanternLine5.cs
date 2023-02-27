@@ -18,19 +18,19 @@ namespace MythMod.Projectiles.projectile5
         }
         public override void SetDefaults()
         {
-            projectile.width = 1;
-            projectile.height = 1;
-            projectile.aiStyle = -1;
-            projectile.friendly = false;
-            projectile.hostile = true;
-            projectile.light = 0.1f;
-            projectile.timeLeft = 600;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = false;
-            projectile.penetrate = -1;
+            Projectile.width = 1;
+            Projectile.height = 1;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = false;
+            Projectile.hostile = true;
+            Projectile.light = 0.1f;
+            Projectile.timeLeft = 600;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
+            Projectile.penetrate = -1;
 
-            ProjectileID.Sets.TrailingMode[projectile.type] = 0;
-            ProjectileID.Sets.TrailCacheLength[projectile.type] = 20;
+            ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 20;
         }
         private float Z = 0;
         private Vector2 Vk;
@@ -39,34 +39,34 @@ namespace MythMod.Projectiles.projectile5
         }
 
 
-        public override void PostDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override void PostDraw(Color lightColor)
         {
             List<CustomVertexInfo> bars = new List<CustomVertexInfo>();
 
             // 把所有的点都生成出来，按照顺序
-            for (int i = 1; i < projectile.oldPos.Length; ++i)
+            for (int i = 1; i < Projectile.oldPos.Length; ++i)
             {
-                if (projectile.oldPos[i] == Vector2.Zero) break;
+                if (Projectile.oldPos[i] == Vector2.Zero) break;
                 //spriteBatch.Draw(Main.magicPixel, projectile.oldPos[i] - Main.screenPosition,
                 //    new Rectangle(0, 0, 1, 1), Color.White, 0f, new Vector2(0.5f, 0.5f), 5f, SpriteEffects.None, 0f);
                 int width = 12;
-                if (projectile.timeLeft > 30)
+                if (Projectile.timeLeft > 30)
                 {
                     width = 12;
                 }
                 else
                 {
-                    width = projectile.timeLeft / 5;
+                    width = Projectile.timeLeft / 5;
                 }
-                var normalDir = projectile.oldPos[i - 1] - projectile.oldPos[i];
+                var normalDir = Projectile.oldPos[i - 1] - Projectile.oldPos[i];
                 normalDir = Vector2.Normalize(new Vector2(-normalDir.Y, normalDir.X));
 
-                var factor = i / (float)projectile.oldPos.Length;
+                var factor = i / (float)Projectile.oldPos.Length;
                 var color = Color.Lerp(Color.White, Color.Red, factor);
                 var w = MathHelper.Lerp(1f, 0.05f, factor);
 
-                bars.Add(new CustomVertexInfo(projectile.oldPos[i] + normalDir * width, color, new Vector3((float)Math.Sqrt(factor), 1, w)));
-                bars.Add(new CustomVertexInfo(projectile.oldPos[i] + normalDir * -width, color, new Vector3((float)Math.Sqrt(factor), 0, w)));
+                bars.Add(new CustomVertexInfo(Projectile.oldPos[i] + normalDir * width, color, new Vector3((float)Math.Sqrt(factor), 1, w)));
+                bars.Add(new CustomVertexInfo(Projectile.oldPos[i] + normalDir * -width, color, new Vector3((float)Math.Sqrt(factor), 0, w)));
             }
 
             List<CustomVertexInfo> triangleList = new List<CustomVertexInfo>();
@@ -76,7 +76,7 @@ namespace MythMod.Projectiles.projectile5
 
                 // 按照顺序连接三角形
                 triangleList.Add(bars[0]);
-                var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + Vector2.Normalize(projectile.velocity) * 2, Color.White,
+                var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + Vector2.Normalize(Projectile.velocity) * 2, Color.White,
                     new Vector3(0, 0.5f, 1));
                 triangleList.Add(bars[1]);
                 triangleList.Add(vertex);
@@ -109,7 +109,7 @@ namespace MythMod.Projectiles.projectile5
                 MythMod.DefaultEffect2.Parameters["uTime"].SetValue(-(float)Main.time * 0.03f);
                 Main.graphics.GraphicsDevice.Textures[0] = MythMod.MainColorGoldYellow;
                 Main.graphics.GraphicsDevice.Textures[1] = MythMod.MainShape;
-                Main.graphics.GraphicsDevice.Textures[2] = mod.GetTexture("UIImages/Lightline2");
+                Main.graphics.GraphicsDevice.Textures[2] = Mod.GetTexture("UIImages/Lightline2");
                 Main.graphics.GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[1] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[2] = SamplerState.PointWrap;

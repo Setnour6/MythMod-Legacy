@@ -1,4 +1,5 @@
-﻿using Terraria.ID;
+﻿using Terraria.DataStructures;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -17,24 +18,24 @@ namespace MythMod.Items.Weapons.Weapon2
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            item.damage = 72;
-            item.melee = true;
-            item.width = 66;
-            item.height = 66;
-            item.useTime = 15;
-            item.rare = 11;
-            item.useAnimation = 15;
-            item.useStyle = 1;
-            item.knockBack = 12;
-            item.UseSound = SoundID.Item1;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 25;
-            item.value = 10000;
-            item.scale = 1f;
-            item.shoot = base.mod.ProjectileType("RedCrack");
-            item.shootSpeed = 8f;
+            Item.glowMask = GetGlowMask;
+            Item.damage = 72;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 66;
+            Item.height = 66;
+            Item.useTime = 15;
+            Item.rare = 11;
+            Item.useAnimation = 15;
+            Item.useStyle = 1;
+            Item.knockBack = 12;
+            Item.UseSound = SoundID.Item1;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 25;
+            Item.value = 10000;
+            Item.scale = 1f;
+            Item.shoot = base.Mod.Find<ModProjectile>("RedCrack").Type;
+            Item.shootSpeed = 8f;
         }
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {
@@ -45,7 +46,7 @@ namespace MythMod.Items.Weapons.Weapon2
                 double num46 = Math.Sin((float)num44);
                 float num47 = (float)Main.rand.Next(50000, 100000) / 60000f;
                 Vector2 v = player.Center - new Vector2(hitbox.Center.X, hitbox.Center.Y);
-                int num40 = Projectile.NewProjectile(hitbox.Center.X + v.X * 0.5f, hitbox.Center.Y + v.X * 0.5f, (float)num45 * (float)num47 * 0.7f, (float)num46 * (float)num47 * 0.7f, base.mod.ProjectileType("Lighting2"), item.damage / 2, 2f, Main.myPlayer, 0f, 0);
+                int num40 = Projectile.NewProjectile(hitbox.Center.X + v.X * 0.5f, hitbox.Center.Y + v.X * 0.5f, (float)num45 * (float)num47 * 0.7f, (float)num46 * (float)num47 * 0.7f, base.Mod.Find<ModProjectile>("Lighting2").Type, Item.damage / 2, 2f, Main.myPlayer, 0f, 0);
                 Main.projectile[num40].tileCollide = false;
                 Main.projectile[num40].timeLeft = 200;
             }
@@ -57,7 +58,7 @@ namespace MythMod.Items.Weapons.Weapon2
         public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
         {
         }
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Vector2 v = new Vector2(0,Main.rand.NextFloat(300,1500)).RotatedByRandom(MathHelper.TwoPi);
             Vector2 v2 = new Vector2(-v.X / 7500f, -v.Y / 7500f).RotatedBy(Main.rand.NextFloat(-0.15f,0.15f));
@@ -68,12 +69,11 @@ namespace MythMod.Items.Weapons.Weapon2
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(391, 20);
             recipe.AddIngredient(3829, 1);
-            recipe.SetResult(this, 1);
             recipe.requiredTile[0] = 134;
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

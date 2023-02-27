@@ -15,27 +15,24 @@ namespace MythMod.Items.Corals//制作是mod名字
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetDefaults()
         {
-            base.item.width = 40;//宽
-            base.item.height = 24;//高
-            base.item.rare = 2;//品质
-            base.item.scale = 1f;//大小
-            base.item.maxStack = 999;
-            base.item.value = 3000;
+            base.Item.width = 40;//宽
+            base.Item.height = 24;//高
+            base.Item.rare = 2;//品质
+            base.Item.scale = 1f;//大小
+            base.Item.maxStack = 999;
+            base.Item.value = 3000;
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(3);//制作一个武器
             recipe.AddIngredient(null, "Gorgonian", 1); //需要一个材料
-            recipe.SetResult(this, 3); //制作一个武器
-            recipe.AddRecipe();
-            ModRecipe recipe2 = new ModRecipe(mod);
+            recipe.Register();
+            Recipe recipe2 = CreateRecipe(5);//制作一个武器
             recipe2.AddIngredient(null, "LargeGorgonian", 1); //需要一个材料
-            recipe2.SetResult(this, 5); //制作一个武器
-            recipe2.AddRecipe();
-            ModRecipe recipe3 = new ModRecipe(mod);
+            recipe2.Register();
+            Recipe recipe3 = CreateRecipe(12);//制作一个武器
             recipe3.AddIngredient(null, "VastGorgonian", 1); //需要一个材料
-            recipe3.SetResult(this, 12); //制作一个武器
-            recipe3.AddRecipe();
+            recipe3.Register();
         }
     }
 }

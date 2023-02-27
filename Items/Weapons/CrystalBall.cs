@@ -1,4 +1,5 @@
-﻿using Terraria.ID;
+﻿using Terraria.DataStructures;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -13,25 +14,25 @@ namespace MythMod.Items.Weapons
         }
         public override void SetDefaults()
         {
-            item.damage = 500;
-            item.width = 20;
-            item.height = 20;
-            item.magic = true;
-            item.mana = 2;
-            item.useTime = 4;
-            item.rare = 11;
-            item.noMelee = true;
-            item.noUseGraphic = true;
-            item.useAnimation = 4;
-            item.useStyle = 5;
-            item.knockBack = 1.1f;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 12;
-            item.value = 80000;
-            item.scale = 1f;
-            item.shoot = mod.ProjectileType("CrystalBall");
-            item.shootSpeed = 0;
+            Item.damage = 500;
+            Item.width = 20;
+            Item.height = 20;
+            Item.DamageType = DamageClass.Magic;
+            Item.mana = 2;
+            Item.useTime = 4;
+            Item.rare = 11;
+            Item.noMelee = true;
+            Item.noUseGraphic = true;
+            Item.useAnimation = 4;
+            Item.useStyle = 5;
+            Item.knockBack = 1.1f;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 12;
+            Item.value = 80000;
+            Item.scale = 1f;
+            Item.shoot = Mod.Find<ModProjectile>("CrystalBall").Type;
+            Item.shootSpeed = 0;
         }
         private bool St = false;
         public override void HoldItem(Player player)
@@ -45,12 +46,12 @@ namespace MythMod.Items.Weapons
         {
             if(player.statMana <= 2)
             {
-                item.autoReuse = false;
+                Item.autoReuse = false;
                 return false;
             }
             return base.CanUseItem(player);
         }
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             if (player.statMana <= 2)
             {
@@ -60,7 +61,7 @@ namespace MythMod.Items.Weapons
             if (!St && Main.mouseLeft && player.statMana > 2)
             {
                 St = true;
-                Projectile.NewProjectile((float)player.Center.X, (float)player.Center.Y, 0, 0, mod.ProjectileType("CrystalBall"), damage, knockBack, player.whoAmI, 0f, 0f);
+                Projectile.NewProjectile((float)player.Center.X, (float)player.Center.Y, 0, 0, Mod.Find<ModProjectile>("CrystalBall").Type, damage, knockBack, player.whoAmI, 0f, 0f);
             }
             return false;
         }

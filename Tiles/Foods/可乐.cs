@@ -10,7 +10,7 @@ namespace MythMod.Tiles.Foods
 {
 	public class 可乐 : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileLighted[(int)base.Type] = true;
 			Main.tileFrameImportant[(int)base.Type] = true;
@@ -29,8 +29,8 @@ namespace MythMod.Tiles.Foods
 			modTranslation.SetDefault("可乐");
             base.AddMapEntry(new Color(242, 141, 0), modTranslation);
             base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
-			this.disableSmartCursor = true;
-			this.adjTiles = new int[]
+			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+			this.AdjTiles = new int[]
 			{
 				4
 			};
@@ -50,7 +50,7 @@ namespace MythMod.Tiles.Foods
 		}
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("可乐"));
+            Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("可乐").Type);
         }
     }
 }

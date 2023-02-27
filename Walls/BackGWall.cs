@@ -16,7 +16,7 @@ namespace MythMod.Walls
 {
     public class BackGWall : ModWall
     {
-        public override void SetDefaults()
+        public override void SetStaticDefaults()
         {
             ModTranslation modTranslation = CreateMapEntryName(null);
             modTranslation.SetDefault("");
@@ -43,7 +43,7 @@ namespace MythMod.Walls
                     {
                         for (int iy = -1; iy < 2; iy++)
                         {
-                            if (Main.tile[(int)((vd.X + X) / 16f) + ix, (int)((vd.Y + Y) / 16f) + iy].liquid == byte.MaxValue && Main.tile[(int)((vd.X + X) / 16f) + ix, (int)((vd.Y + Y) / 16f) + iy].wall <= 0)
+                            if (Main.tile[(int)((vd.X + X) / 16f) + ix, (int)((vd.Y + Y) / 16f) + iy].LiquidAmount == byte.MaxValue && Main.tile[(int)((vd.X + X) / 16f) + ix, (int)((vd.Y + Y) / 16f) + iy].WallType <= 0)
                             {
                                 w += 1;
                             }
@@ -86,19 +86,19 @@ namespace MythMod.Walls
                                 {
                                     if (X + (int)(player.position.X * 1) % 1536 + 120 <= 1520)
                                     {
-                                        spriteBatch.Draw(mod.GetTexture("Backgrounds/CoralFar"), new Vector2(X + 204, Y + 204), new Rectangle((int)X + (int)(player.position.X * 1) % 1536 + 120, (int)Y + (int)(player.position.Y / 8f) - 600, 16, 16), new Color(R, G, B, A), 0f, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
+                                        spriteBatch.Draw(Mod.GetTexture("Backgrounds/CoralFar"), new Vector2(X + 204, Y + 204), new Rectangle((int)X + (int)(player.position.X * 1) % 1536 + 120, (int)Y + (int)(player.position.Y / 8f) - 600, 16, 16), new Color(R, G, B, A), 0f, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
                                     }
                                     else
                                     {
-                                        spriteBatch.Draw(mod.GetTexture("Backgrounds/CoralFar"), new Vector2(X + 204, Y + 204), new Rectangle((int)X + (int)(player.position.X * 1) % 1536 - 1536 + 120, (int)Y + (int)(player.position.Y / 8f) - 600, 16, 16), new Color(R, G, B, A), 0f, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
+                                        spriteBatch.Draw(Mod.GetTexture("Backgrounds/CoralFar"), new Vector2(X + 204, Y + 204), new Rectangle((int)X + (int)(player.position.X * 1) % 1536 - 1536 + 120, (int)Y + (int)(player.position.Y / 8f) - 600, 16, 16), new Color(R, G, B, A), 0f, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
                                     }
                                     if (X + (int)(player.position.X * 0.6f) % 1536 + 120 <= 1520)
                                     {
-                                        spriteBatch.Draw(mod.GetTexture("Backgrounds/CoralClose"), new Vector2(X + 204, Y + 204), new Rectangle((int)X + (int)(player.position.X * 0.6f) % 1536 + 120, (int)Y + (int)(player.position.Y / 6f) - 1300, 16, 16), new Color(R, G, B, A), 0f, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
+                                        spriteBatch.Draw(Mod.GetTexture("Backgrounds/CoralClose"), new Vector2(X + 204, Y + 204), new Rectangle((int)X + (int)(player.position.X * 0.6f) % 1536 + 120, (int)Y + (int)(player.position.Y / 6f) - 1300, 16, 16), new Color(R, G, B, A), 0f, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
                                     }
                                     else
                                     {
-                                        spriteBatch.Draw(mod.GetTexture("Backgrounds/CoralClose"), new Vector2(X + 204, Y + 204), new Rectangle((int)X + (int)(player.position.X * 0.6f) % 1536 - 1536 + 120, (int)Y + (int)(player.position.Y / 6f) - 1300, 16, 16), new Color(R, G, B, A), 0f, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
+                                        spriteBatch.Draw(Mod.GetTexture("Backgrounds/CoralClose"), new Vector2(X + 204, Y + 204), new Rectangle((int)X + (int)(player.position.X * 0.6f) % 1536 - 1536 + 120, (int)Y + (int)(player.position.Y / 6f) - 1300, 16, 16), new Color(R, G, B, A), 0f, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
                                     }
                                 }
                             }
@@ -108,19 +108,19 @@ namespace MythMod.Walls
                                 {
                                     if (X + (int)(player.position.X * 1) % 1536 + 120 <= 1520)
                                     {
-                                        spriteBatch.Draw(mod.GetTexture("Backgrounds/CoralFar"), new Vector2(X + 204, Y + 204), new Rectangle((int)X + (int)(player.position.X * 1) % 1536 + 120, (int)Y + (int)(player.position.Y / 8f) - 600, 16, 16), color, 0f, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
+                                        spriteBatch.Draw(Mod.GetTexture("Backgrounds/CoralFar"), new Vector2(X + 204, Y + 204), new Rectangle((int)X + (int)(player.position.X * 1) % 1536 + 120, (int)Y + (int)(player.position.Y / 8f) - 600, 16, 16), color, 0f, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
                                     }
                                     else
                                     {
-                                        spriteBatch.Draw(mod.GetTexture("Backgrounds/CoralFar"), new Vector2(X + 204, Y + 204), new Rectangle((int)X + (int)(player.position.X * 1) % 1536 - 1536 + 120, (int)Y + (int)(player.position.Y / 8f) - 600, 16, 16), color, 0f, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
+                                        spriteBatch.Draw(Mod.GetTexture("Backgrounds/CoralFar"), new Vector2(X + 204, Y + 204), new Rectangle((int)X + (int)(player.position.X * 1) % 1536 - 1536 + 120, (int)Y + (int)(player.position.Y / 8f) - 600, 16, 16), color, 0f, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
                                     }
                                     if (X + (int)(player.position.X * 0.6f) % 1536 + 120 <= 1520)
                                     {
-                                        spriteBatch.Draw(mod.GetTexture("Backgrounds/CoralClose"), new Vector2(X + 204, Y + 204), new Rectangle((int)X + (int)(player.position.X * 0.6f) % 1536 + 120, (int)Y + (int)(player.position.Y / 6f) - 1300, 16, 16), color, 0f, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
+                                        spriteBatch.Draw(Mod.GetTexture("Backgrounds/CoralClose"), new Vector2(X + 204, Y + 204), new Rectangle((int)X + (int)(player.position.X * 0.6f) % 1536 + 120, (int)Y + (int)(player.position.Y / 6f) - 1300, 16, 16), color, 0f, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
                                     }
                                     else
                                     {
-                                        spriteBatch.Draw(mod.GetTexture("Backgrounds/CoralClose"), new Vector2(X + 204, Y + 204), new Rectangle((int)X + (int)(player.position.X * 0.6f) % 1536 - 1536 + 120, (int)Y + (int)(player.position.Y / 6f) - 1300, 16, 16), color, 0f, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
+                                        spriteBatch.Draw(Mod.GetTexture("Backgrounds/CoralClose"), new Vector2(X + 204, Y + 204), new Rectangle((int)X + (int)(player.position.X * 0.6f) % 1536 - 1536 + 120, (int)Y + (int)(player.position.Y / 6f) - 1300, 16, 16), color, 0f, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
                                     }
                                 }
                             }
@@ -131,19 +131,19 @@ namespace MythMod.Walls
                             {
                                 if (X + (int)(player.position.X * 1) % 1536 + 120 <= 1520)
                                 {
-                                    spriteBatch.Draw(mod.GetTexture("Backgrounds/CoralFar"), new Vector2(X + 204, Y + 204), new Rectangle((int)X + (int)(player.position.X * 1) % 1536 + 120, (int)Y + (int)(player.position.Y / 8f) - 600, 16, 16), color, 0f, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
+                                    spriteBatch.Draw(Mod.GetTexture("Backgrounds/CoralFar"), new Vector2(X + 204, Y + 204), new Rectangle((int)X + (int)(player.position.X * 1) % 1536 + 120, (int)Y + (int)(player.position.Y / 8f) - 600, 16, 16), color, 0f, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
                                 }
                                 else
                                 {
-                                    spriteBatch.Draw(mod.GetTexture("Backgrounds/CoralFar"), new Vector2(X + 204, Y + 204), new Rectangle((int)X + (int)(player.position.X * 1) % 1536 - 1536 + 120, (int)Y + (int)(player.position.Y / 8f) - 600, 16, 16), color, 0f, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
+                                    spriteBatch.Draw(Mod.GetTexture("Backgrounds/CoralFar"), new Vector2(X + 204, Y + 204), new Rectangle((int)X + (int)(player.position.X * 1) % 1536 - 1536 + 120, (int)Y + (int)(player.position.Y / 8f) - 600, 16, 16), color, 0f, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
                                 }
                                 if (X + (int)(player.position.X * 0.6f) % 1536 + 120 <= 1520)
                                 {
-                                    spriteBatch.Draw(mod.GetTexture("Backgrounds/CoralClose"), new Vector2(X + 204, Y + 204), new Rectangle((int)X + (int)(player.position.X * 0.6f) % 1536 + 120, (int)Y + (int)(player.position.Y / 6f) - 1300, 16, 16), color, 0f, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
+                                    spriteBatch.Draw(Mod.GetTexture("Backgrounds/CoralClose"), new Vector2(X + 204, Y + 204), new Rectangle((int)X + (int)(player.position.X * 0.6f) % 1536 + 120, (int)Y + (int)(player.position.Y / 6f) - 1300, 16, 16), color, 0f, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
                                 }
                                 else
                                 {
-                                    spriteBatch.Draw(mod.GetTexture("Backgrounds/CoralClose"), new Vector2(X + 204, Y + 204), new Rectangle((int)X + (int)(player.position.X * 0.6f) % 1536 - 1536 + 120, (int)Y + (int)(player.position.Y / 6f) - 1300, 16, 16), color, 0f, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
+                                    spriteBatch.Draw(Mod.GetTexture("Backgrounds/CoralClose"), new Vector2(X + 204, Y + 204), new Rectangle((int)X + (int)(player.position.X * 0.6f) % 1536 - 1536 + 120, (int)Y + (int)(player.position.Y / 6f) - 1300, 16, 16), color, 0f, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
                                 }
                             }
                         }

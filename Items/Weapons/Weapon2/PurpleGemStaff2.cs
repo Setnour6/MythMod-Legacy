@@ -14,42 +14,41 @@ namespace MythMod.Items.Weapons.Weapon2
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("紫晶神杖");
-			Item.staff[base.item.type] = true;
+			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "紫晶神杖");
         }
         public override void SetDefaults()
         {
-            base.item.damage = 600;
-			base.item.magic = true;
-			base.item.mana = 12;
-			base.item.width = 64;
-			base.item.height = 64;
-			base.item.useTime = 15;
-			base.item.useAnimation = 15;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.knockBack = 0.5f;
-			base.item.value = 120000;
-			base.item.rare = 11;
-			base.item.UseSound = SoundID.Item60;
-			base.item.autoReuse = true;
-            base.item.shoot = base.mod.ProjectileType("PurpleGemStaff2");
-			base.item.shootSpeed = 9f;
+            base.Item.damage = 600;
+			base.Item.DamageType = DamageClass.Magic;
+			base.Item.mana = 12;
+			base.Item.width = 64;
+			base.Item.height = 64;
+			base.Item.useTime = 15;
+			base.Item.useAnimation = 15;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 0.5f;
+			base.Item.value = 120000;
+			base.Item.rare = 11;
+			base.Item.UseSound = SoundID.Item60;
+			base.Item.autoReuse = true;
+            base.Item.shoot = base.Mod.Find<ModProjectile>("PurpleGemStaff2").Type;
+			base.Item.shootSpeed = 9f;
 		}
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Projectile.NewProjectile(position.X + speedX * 10f, position.Y + speedY * 10f, speedX, speedY, type, damage * 4, knockBack, Main.myPlayer, 0f, 0f);
             return false;
         }
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(739, 1);
             modRecipe.AddIngredient(1522, 15);
-            modRecipe.AddIngredient(mod.ItemType("CrystalSoul"), 1);
+            modRecipe.AddIngredient(Mod.Find<ModItem>("CrystalSoul").Type, 1);
             modRecipe.requiredTile[0] = 412;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
     }
 }

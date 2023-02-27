@@ -16,23 +16,23 @@ namespace MythMod.Items.Weapons
 		}
 		public override void SetDefaults()
 		{
-            base.item.thrown = true;
-            base.item.damage = 220;
-            base.item.crit = 15;
-            base.item.width = 40;
-            base.item.height = 40;
-            base.item.useTime = 6;
-            base.item.useAnimation = 6;
-            base.item.useStyle = 5;
-            base.item.noMelee = true;
-            base.item.knockBack = 2f;
-            base.item.autoReuse = true;
-            base.item.value = Item.sellPrice(0, 10, 0, 0);
-            base.item.shoot = base.mod.ProjectileType("CrystalThrownKnife");
-            base.item.noUseGraphic = true;
-            base.item.rare = 11;
-            base.item.UseSound = SoundID.Item5;
-            base.item.shootSpeed = 35f;
+            base.Item.DamageType = DamageClass.Throwing;
+            base.Item.damage = 220;
+            base.Item.crit = 15;
+            base.Item.width = 40;
+            base.Item.height = 40;
+            base.Item.useTime = 6;
+            base.Item.useAnimation = 6;
+            base.Item.useStyle = 5;
+            base.Item.noMelee = true;
+            base.Item.knockBack = 2f;
+            base.Item.autoReuse = true;
+            base.Item.value = Item.sellPrice(0, 10, 0, 0);
+            base.Item.shoot = base.Mod.Find<ModProjectile>("CrystalThrownKnife").Type;
+            base.Item.noUseGraphic = true;
+            base.Item.rare = 11;
+            base.Item.UseSound = SoundID.Item5;
+            base.Item.shootSpeed = 35f;
         }
 		public override void AddRecipes()
         {

@@ -19,34 +19,33 @@ namespace MythMod.Items.Weapons
 		// Token: 0x060019F3 RID: 6643 RVA: 0x000A88D0 File Offset: 0x000A6AD0
 		public override void SetDefaults()
 		{
-			base.item.damage = 28;
-			base.item.magic = true;
-			base.item.mana = 7;
-			base.item.width = 30;
-			base.item.height = 30;
-			base.item.useTime = 26;
-			base.item.useAnimation = 26;
-			base.item.useStyle = 5;
-			Item.staff[base.item.type] = true;
-			base.item.noMelee = true;
-			base.item.knockBack = 5f;
-			base.item.value = Item.sellPrice(0, 0, 45, 0);
-			base.item.rare = 1;
-			base.item.UseSound = SoundID.Item43;
-			base.item.autoReuse = true;
-            base.item.shoot = base.mod.ProjectileType("绿松石法杖Pro");
-			base.item.shootSpeed = 10.2f;
+			base.Item.damage = 28;
+			base.Item.DamageType = DamageClass.Magic;
+			base.Item.mana = 7;
+			base.Item.width = 30;
+			base.Item.height = 30;
+			base.Item.useTime = 26;
+			base.Item.useAnimation = 26;
+			base.Item.useStyle = 5;
+			Item.staff[base.Item.type] = true;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 5f;
+			base.Item.value = Item.sellPrice(0, 0, 45, 0);
+			base.Item.rare = 1;
+			base.Item.UseSound = SoundID.Item43;
+			base.Item.autoReuse = true;
+            base.Item.shoot = base.Mod.Find<ModProjectile>("绿松石法杖Pro").Type;
+			base.Item.shootSpeed = 10.2f;
 		}
 
 		// Token: 0x060019F4 RID: 6644 RVA: 0x000A89D8 File Offset: 0x000A6BD8
 		public override void AddRecipes()
 		{
-			ModRecipe modRecipe = new ModRecipe(base.mod);
+			Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
 			modRecipe.AddIngredient(1257, 10);
             modRecipe.AddIngredient(null, "Turquoise", 8);
 			modRecipe.AddTile(16);
-			modRecipe.SetResult(this, 1);
-			modRecipe.AddRecipe();
+			modRecipe.Register();
 		}
 	}
 }

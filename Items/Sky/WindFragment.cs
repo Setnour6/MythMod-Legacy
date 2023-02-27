@@ -17,11 +17,11 @@ namespace MythMod.Items.Sky
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 22;
-			base.item.height = 24;
-			base.item.maxStack = 999;
-			base.item.value = Item.sellPrice(0, 2, 50, 0);
-			base.item.rare = 11;
+			base.Item.width = 22;
+			base.Item.height = 24;
+			base.Item.maxStack = 999;
+			base.Item.value = Item.sellPrice(0, 2, 50, 0);
+			base.Item.rare = 11;
 		}
     }
 }

@@ -12,7 +12,7 @@ namespace MythMod.Tiles.Ocean
 	public class 小脑珊瑚 : ModTile
 	{
 		// Token: 0x06004868 RID: 18536 RVA: 0x0034883C File Offset: 0x00346A3C
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[(int)base.Type] = true;
 			Main.tileNoAttach[(int)base.Type] = true;
@@ -24,12 +24,12 @@ namespace MythMod.Tiles.Ocean
             };
             TileObjectData.newTile.CoordinateWidth = 36;
             TileObjectData.addTile((int)base.Type);
-			this.dustType = 253;
+			this.DustType = 253;
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
             base.AddMapEntry(new Color(42, 91, 10), modTranslation);
-			this.mineResist = 3f;
-			base.SetDefaults();
+			this.MineResist = 3f;
+			base.SetStaticDefaults();
 			modTranslation.AddTranslation(GameCulture.Chinese, "");
 		}
 

@@ -13,17 +13,17 @@ namespace MythMod.Items.Furnitures.Tangerine
         }
         public override void SetDefaults()
 		{
-			base.item.width = 16;
-			base.item.height = 38;
-			base.item.maxStack = 99;
-			base.item.useTurn = true;
-			base.item.autoReuse = true;
-			base.item.useAnimation = 15;
-			base.item.useTime = 10;
-			base.item.useStyle = 1;
-			base.item.consumable = true;
-			base.item.value = 1000;
-			base.item.createTile = base.mod.TileType("TangerineLamp");
+			base.Item.width = 16;
+			base.Item.height = 38;
+			base.Item.maxStack = 99;
+			base.Item.useTurn = true;
+			base.Item.autoReuse = true;
+			base.Item.useAnimation = 15;
+			base.Item.useTime = 10;
+			base.Item.useStyle = 1;
+			base.Item.consumable = true;
+			base.Item.value = 1000;
+			base.Item.createTile = base.Mod.Find<ModTile>("TangerineLamp").Type;
 		}
 	}
 }

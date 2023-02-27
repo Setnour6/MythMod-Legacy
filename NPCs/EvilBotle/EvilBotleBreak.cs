@@ -32,41 +32,41 @@ namespace MythMod.NPCs.EvilBotle
         private bool T = false;
         public override void SetDefaults()
         {
-            npc.behindTiles = true;
-            base.npc.damage = 0;
-            base.npc.width = 120;
-            base.npc.height = 160;
-            base.npc.defense = 0;
-            base.npc.lifeMax = 2000;
-            base.npc.knockBackResist = 0f;
-            base.npc.value = (float)Item.buyPrice(0, 0, 0, 0);
-            base.npc.color = new Color(0, 0, 0, 0);
-            base.npc.aiStyle = -1;
-            this.aiType = -1;
-            base.npc.lavaImmune = true;
-            base.npc.noGravity = false;
-            base.npc.noTileCollide = false;
-            base.npc.HitSound = SoundID.NPCHit1;
-            base.npc.DeathSound = SoundID.NPCDeath1;
+            NPC.behindTiles = true;
+            base.NPC.damage = 0;
+            base.NPC.width = 120;
+            base.NPC.height = 160;
+            base.NPC.defense = 0;
+            base.NPC.lifeMax = 2000;
+            base.NPC.knockBackResist = 0f;
+            base.NPC.value = (float)Item.buyPrice(0, 0, 0, 0);
+            base.NPC.color = new Color(0, 0, 0, 0);
+            base.NPC.aiStyle = -1;
+            this.AIType = -1;
+            base.NPC.lavaImmune = true;
+            base.NPC.noGravity = false;
+            base.NPC.noTileCollide = false;
+            base.NPC.HitSound = SoundID.NPCHit1;
+            base.NPC.DeathSound = SoundID.NPCDeath1;
         }
         Vector2[,] Pm = new Vector2[20,50];
         Vector2 O = Vector2.Zero;
         public override void AI()
         {
-            npc.dontTakeDamage = true;
+            NPC.dontTakeDamage = true;
             for(int i = 0;i < 40;i++)
             {
                 if (EvilBotle.Blife < i * 25f && Pm[i, 0] == Vector2.Zero)
                 {
-                    Pm[i, 0] = npc.Center + new Vector2(Main.rand.Next(-23, 23), Main.rand.Next(-50, 50));
+                    Pm[i, 0] = NPC.Center + new Vector2(Main.rand.Next(-23, 23), Main.rand.Next(-50, 50));
                 }
             }
-            O = npc.Center;
+            O = NPC.Center;
         }
         public override void HitEffect(int hitDirection, double damage)
         {
         }
-        public override void PostDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             for (int i = 1; i < 40; ++i)
             {

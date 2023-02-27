@@ -25,27 +25,27 @@ namespace MythMod.Items.Weapons
         }
         public override void SetDefaults()
         {
-            base.item.damage = 36;
-			base.item.mana = 15;
-			base.item.width = 58;
-			base.item.height = 64;
-			base.item.useTime = 36;
-			base.item.useAnimation = 36;
-			base.item.useStyle = 1;
-			base.item.noMelee = true;
-			base.item.knockBack = 2.25f;
-			base.item.value = 55000;
-			base.item.rare = 5;
-			base.item.UseSound = SoundID.Item44;
-			base.item.shoot = base.mod.ProjectileType("IcyAnimal");
-			base.item.autoReuse = true;
-			base.item.shootSpeed = 10f;
-			base.item.summon = true;
+            base.Item.damage = 36;
+			base.Item.mana = 15;
+			base.Item.width = 58;
+			base.Item.height = 64;
+			base.Item.useTime = 36;
+			base.Item.useAnimation = 36;
+			base.Item.useStyle = 1;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 2.25f;
+			base.Item.value = 55000;
+			base.Item.rare = 5;
+			base.Item.UseSound = SoundID.Item44;
+			base.Item.shoot = base.Mod.Find<ModProjectile>("IcyAnimal").Type;
+			base.Item.autoReuse = true;
+			base.Item.shootSpeed = 10f;
+			base.Item.DamageType = DamageClass.Summon;
 		}
-		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
-			float shootSpeed = base.item.shootSpeed;
-            player.AddBuff(base.mod.BuffType("IcyAnimal"), 36000000, true);
+			float shootSpeed = base.Item.shootSpeed;
+            player.AddBuff(base.Mod.Find<ModBuff>("IcyAnimal").Type, 36000000, true);
             Vector2 vector = player.RotatedRelativePoint(player.MountedCenter, true);
 			float num = (float)Main.mouseX + Main.screenPosition.X - vector.X;
 			float num2 = (float)Main.mouseY + Main.screenPosition.Y - vector.Y;
@@ -66,17 +66,16 @@ namespace MythMod.Items.Weapons
 			num2 = 0f;
 			vector.X = (float)Main.mouseX + Main.screenPosition.X;
 			vector.Y = (float)Main.mouseY + Main.screenPosition.Y;
-			Projectile.NewProjectile(vector.X, vector.Y, num, num2, base.mod.ProjectileType("IcyAnimal"), damage, knockBack, player.whoAmI, 0f, 0f);
+			Projectile.NewProjectile(vector.X, vector.Y, num, num2, base.Mod.Find<ModProjectile>("IcyAnimal").Type, damage, knockBack, player.whoAmI, 0f, 0f);
 			return false;
 		}
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(2161, 1);
             modRecipe.AddIngredient(521, 12);
             modRecipe.requiredTile[0] = 134;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
     }
 }

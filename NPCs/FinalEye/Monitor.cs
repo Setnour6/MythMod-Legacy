@@ -1,5 +1,6 @@
 ﻿using System;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -24,7 +25,7 @@ namespace MythMod.NPCs.FinalEye
 		{
 			base.DisplayName.SetDefault("Eye");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "监测之眼");
-			Main.npcFrameCount[base.npc.type] = 1;
+			Main.npcFrameCount[base.NPC.type] = 1;
 		}
         private bool canDespawn;
 		private const int sphereRadius = 300;
@@ -39,37 +40,37 @@ namespace MythMod.NPCs.FinalEye
 		private float num3;
 		public override void SetDefaults()
 		{
-			base.npc.damage = 4000;
-			base.npc.width = 30;
-			base.npc.height = 30;
-			base.npc.defense = 0;
-            base.npc.lifeMax = 1;
-			base.npc.aiStyle = 94;
-			this.aiType = -1;
-			base.npc.knockBackResist = 0f;
-			base.npc.alpha = 0;
-			base.npc.noGravity = true;
-			base.npc.noTileCollide = true;
-			base.npc.dontTakeDamage = true;
+			base.NPC.damage = 4000;
+			base.NPC.width = 30;
+			base.NPC.height = 30;
+			base.NPC.defense = 0;
+            base.NPC.lifeMax = 1;
+			base.NPC.aiStyle = 94;
+			this.AIType = -1;
+			base.NPC.knockBackResist = 0f;
+			base.NPC.alpha = 0;
+			base.NPC.noGravity = true;
+			base.NPC.noTileCollide = true;
+			base.NPC.dontTakeDamage = true;
 		}
 		// Token: 0x06001BA6 RID: 7078 RVA: 0x00153AEC File Offset: 0x00151CEC
 		public override void FindFrame(int frameHeight)
 		{
-			base.npc.frameCounter += 0.15000000596046448;
-			base.npc.frameCounter %= (double)Main.npcFrameCount[base.npc.type];
-			int num = (int)base.npc.frameCounter;
-			base.npc.frame.Y = num * frameHeight;
+			base.NPC.frameCounter += 0.15000000596046448;
+			base.NPC.frameCounter %= (double)Main.npcFrameCount[base.NPC.type];
+			int num = (int)base.NPC.frameCounter;
+			base.NPC.frame.Y = num * frameHeight;
 		}
 		public override void AI()
 		{
-			if(NPC.CountNPCS(mod.NPCType("终天灭世眼")) < 1)
+			if(NPC.CountNPCS(Mod.Find<ModNPC>("终天灭世眼").Type) < 1)
 			{
-				npc.active = false;
+				NPC.active = false;
 			}
 			canDespawn = false;
-			Player player = Main.player[base.npc.target];
-			Vector2 vector = new Vector2(base.npc.Center.X, base.npc.Center.Y);
-            Vector2 center = base.npc.Center;
+			Player player = Main.player[base.NPC.target];
+			Vector2 vector = new Vector2(base.NPC.Center.X, base.NPC.Center.Y);
+            Vector2 center = base.NPC.Center;
             float num = player.Center.X - vector.X;
             float num2 = player.Center.Y - vector.Y;
             num3 = (float)Math.Sqrt((double)(num * num + num2 * num2));
@@ -83,8 +84,8 @@ namespace MythMod.NPCs.FinalEye
 				{
 					AI1 = 100;
 				}
-				Vector2 Speed =  new Vector2(base.npc.Center.X - player.Center.X, base.npc.Center.Y - player.Center.Y) / num3 * 6;
-                int num35 = Projectile.NewProjectile(base.npc.Center.X, base.npc.Center.Y, -Speed.X * (int)AI1 / 100f, -Speed.Y * (int)AI1 / 100f, base.mod.ProjectileType("灭世火光"), 1080, 0f, Main.myPlayer, 0f, 0f);
+				Vector2 Speed =  new Vector2(base.NPC.Center.X - player.Center.X, base.NPC.Center.Y - player.Center.Y) / num3 * 6;
+                int num35 = Projectile.NewProjectile(base.NPC.Center.X, base.NPC.Center.Y, -Speed.X * (int)AI1 / 100f, -Speed.Y * (int)AI1 / 100f, base.Mod.Find<ModProjectile>("灭世火光").Type, 1080, 0f, Main.myPlayer, 0f, 0f);
 				Main.projectile[num35].scale = (int)AI1 / 100f;
 				Main.projectile[num35].timeLeft = (int)((int)AI1 / 1.25f + 20);
 			}
@@ -93,8 +94,8 @@ namespace MythMod.NPCs.FinalEye
                 if(AI1 >= 1)
 				{
                     AI1 -= 1;
-					Vector2 Speed =  new Vector2(base.npc.Center.X - player.Center.X, base.npc.Center.Y - player.Center.Y) / num3 * 6;
-                    int num35 = Projectile.NewProjectile(base.npc.Center.X, base.npc.Center.Y, -Speed.X * (int)AI1 / 100f, -Speed.Y * (int)AI1 / 100f, base.mod.ProjectileType("灭世火光"), 1080, 0f, Main.myPlayer, 0f, 0f);
+					Vector2 Speed =  new Vector2(base.NPC.Center.X - player.Center.X, base.NPC.Center.Y - player.Center.Y) / num3 * 6;
+                    int num35 = Projectile.NewProjectile(base.NPC.Center.X, base.NPC.Center.Y, -Speed.X * (int)AI1 / 100f, -Speed.Y * (int)AI1 / 100f, base.Mod.Find<ModProjectile>("灭世火光").Type, 1080, 0f, Main.myPlayer, 0f, 0f);
 				    Main.projectile[num35].scale = (int)AI1 / 100f;
 				}
 				else
@@ -103,26 +104,26 @@ namespace MythMod.NPCs.FinalEye
 				}
 			}
 		}
-		public override void PostDraw(SpriteBatch spriteBatch, Color drawColor)
+		public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
             SpriteEffects effects = SpriteEffects.None;
-            if (base.npc.spriteDirection == 1)
+            if (base.NPC.spriteDirection == 1)
             {
                 effects = SpriteEffects.FlipHorizontally;
             }
-            Vector2 value = new Vector2(base.npc.Center.X, base.npc.Center.Y);
-            Vector2 vector = new Vector2((float)(Main.npcTexture[base.npc.type].Width / 2), (float)(Main.npcTexture[base.npc.type].Height / Main.npcFrameCount[base.npc.type] / 2));
+            Vector2 value = new Vector2(base.NPC.Center.X, base.NPC.Center.Y);
+            Vector2 vector = new Vector2((float)(TextureAssets.Npc[base.NPC.type].Value.Width / 2), (float)(TextureAssets.Npc[base.NPC.type].Value.Height / Main.npcFrameCount[base.NPC.type] / 2));
             Vector2 vector2 = value - Main.screenPosition;
-            vector2 -= new Vector2((float)base.mod.GetTexture("NPCs/终天灭世眼/监测之眼Glow").Width, (float)(base.mod.GetTexture("NPCs/终天灭世眼/监测之眼Glow").Height / Main.npcFrameCount[base.npc.type])) * 1f / 2f;
-            vector2 += vector * 1f + new Vector2(0f, 4f + base.npc.gfxOffY);
-            Color color = Utils.MultiplyRGBA(new Color(297 - base.npc.alpha, 297 - base.npc.alpha, 297 - base.npc.alpha, 0), Color.White);
+            vector2 -= new Vector2((float)base.Mod.GetTexture("NPCs/终天灭世眼/监测之眼Glow").Width, (float)(base.Mod.GetTexture("NPCs/终天灭世眼/监测之眼Glow").Height / Main.npcFrameCount[base.NPC.type])) * 1f / 2f;
+            vector2 += vector * 1f + new Vector2(0f, 4f + base.NPC.gfxOffY);
+            Color color = Utils.MultiplyRGBA(new Color(297 - base.NPC.alpha, 297 - base.NPC.alpha, 297 - base.NPC.alpha, 0), Color.White);
 			if (num3 > 750)
             {
-                Main.spriteBatch.Draw(base.mod.GetTexture("NPCs/终天灭世眼/监测之眼Glow"), vector2, new Rectangle?(base.npc.frame), color * (500 / (num3 + 0.0001f)), base.npc.rotation, vector, 1f, effects, 0f);
+                Main.spriteBatch.Draw(base.Mod.GetTexture("NPCs/终天灭世眼/监测之眼Glow"), vector2, new Rectangle?(base.NPC.frame), color * (500 / (num3 + 0.0001f)), base.NPC.rotation, vector, 1f, effects, 0f);
 			}
 			else
 			{
-                Main.spriteBatch.Draw(base.mod.GetTexture("NPCs/终天灭世眼/监测之眼Glow"), vector2, new Rectangle?(base.npc.frame), color, base.npc.rotation, vector, 1f, effects, 0f);
+                Main.spriteBatch.Draw(base.Mod.GetTexture("NPCs/终天灭世眼/监测之眼Glow"), vector2, new Rectangle?(base.NPC.frame), color, base.NPC.rotation, vector, 1f, effects, 0f);
 			}
 		}
 		public override bool CheckActive()

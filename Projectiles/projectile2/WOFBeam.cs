@@ -26,48 +26,48 @@ namespace MythMod.Projectiles.projectile2
 		// Token: 0x0600221F RID: 8735 RVA: 0x001B7BC8 File Offset: 0x001B5DC8
 		public override void SetDefaults()
 		{
-            base.projectile.width = 38;
-            base.projectile.height = 38;
-            base.projectile.aiStyle = 27;
-            base.projectile.friendly = true;
-            base.projectile.melee = true;
-            base.projectile.ignoreWater = true;
-            base.projectile.penetrate = 1;
-            base.projectile.extraUpdates = 1;
-            base.projectile.timeLeft = 600;
-            base.projectile.usesLocalNPCImmunity = true;
-            base.projectile.localNPCHitCooldown = 1;
+            base.Projectile.width = 38;
+            base.Projectile.height = 38;
+            base.Projectile.aiStyle = 27;
+            base.Projectile.friendly = true;
+            base.Projectile.DamageType = DamageClass.Melee;
+            base.Projectile.ignoreWater = true;
+            base.Projectile.penetrate = 1;
+            base.Projectile.extraUpdates = 1;
+            base.Projectile.timeLeft = 600;
+            base.Projectile.usesLocalNPCImmunity = true;
+            base.Projectile.localNPCHitCooldown = 1;
 		}
 
 		// Token: 0x06002220 RID: 8736 RVA: 0x001B7C54 File Offset: 0x001B5E54
 		public override void AI()
 		{
-            if(projectile.timeLeft % 60 == 0)
+            if(Projectile.timeLeft % 60 == 0)
             {
-                int num = Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, projectile.velocity.X * 2, projectile.velocity.Y * 2, 83, projectile.damage, 1, Main.myPlayer, 0f, 0f);
+                int num = Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, Projectile.velocity.X * 2, Projectile.velocity.Y * 2, 83, Projectile.damage, 1, Main.myPlayer, 0f, 0f);
                 Main.projectile[num].hostile = false;
                 Main.projectile[num].friendly = true;
             }
             if(Main.rand.Next(0,150) > 75)
             {
-                int num9 = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) - new Vector2(4, 4) - base.projectile.velocity * 6f, 0, 0, 5, 0f, 0f, 100, default(Color), 1.2f);
+                int num9 = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) - new Vector2(4, 4) - base.Projectile.velocity * 6f, 0, 0, 5, 0f, 0f, 100, default(Color), 1.2f);
                 Main.dust[num9].noGravity = true;
                 Main.dust[num9].velocity *= 0.0f;
             }
             else
             {
-                int num9 = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) - new Vector2(4, 4) - base.projectile.velocity * 6f, 0, 0, 60, 0f, 0f, 100, default(Color), 1.2f);
+                int num9 = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) - new Vector2(4, 4) - base.Projectile.velocity * 6f, 0, 0, 60, 0f, 0f, 100, default(Color), 1.2f);
                 Main.dust[num9].noGravity = true;
                 Main.dust[num9].velocity *= 0.0f;
             }
-            Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 1f / 255f, (float)(255 - base.projectile.alpha) * 0f / 255f, (float)(255 - base.projectile.alpha) * 0f / 255f);
+            Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 1f / 255f, (float)(255 - base.Projectile.alpha) * 0f / 255f, (float)(255 - base.Projectile.alpha) * 0f / 255f);
 		}
         // Token: 0x06001E99 RID: 7833 RVA: 0x00188F8C File Offset: 0x0018718C
         public override void Kill(int timeLeft)
         {
             for (int i = 0; i < 15; i++)
             {
-                int num = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, 5, 0f, 0f, 100, default(Color), 2f);
+                int num = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, 5, 0f, 0f, 100, default(Color), 2f);
                 Main.dust[num].velocity *= 3f;
                 if (Main.rand.Next(2) == 0)
                 {
@@ -77,7 +77,7 @@ namespace MythMod.Projectiles.projectile2
             }
             for (int i = 0; i < 15; i++)
             {
-                int num = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, 60, 0f, 0f, 100, default(Color), 2f);
+                int num = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, 60, 0f, 0f, 100, default(Color), 2f);
                 Main.dust[num].velocity *= 3f;
                 if (Main.rand.Next(2) == 0)
                 {

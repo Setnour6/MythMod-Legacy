@@ -18,21 +18,21 @@ namespace MythMod.Items.Festival
         }
         public override void SetDefaults()
         {
-            base.item.width = 38;//宽
-            base.item.height = 60;//高
-            base.item.rare = 2;//品质
-            base.item.scale = 1f;//大小
-            base.item.useStyle = 4;
-            base.item.useTurn = true;
-            base.item.useAnimation = 30;
-            base.item.useTime = 30;
-            base.item.autoReuse = true;
-            base.item.consumable = true;
-            base.item.maxStack = 999;
-            base.item.value = 10000;
+            base.Item.width = 38;//宽
+            base.Item.height = 60;//高
+            base.Item.rare = 2;//品质
+            base.Item.scale = 1f;//大小
+            base.Item.useStyle = 4;
+            base.Item.useTurn = true;
+            base.Item.useAnimation = 30;
+            base.Item.useTime = 30;
+            base.Item.autoReuse = true;
+            base.Item.consumable = true;
+            base.Item.maxStack = 999;
+            base.Item.value = 10000;
         }
 
-        public override bool UseItem(Player player)
+        public override bool? UseItem(Player player)/* tModPorter Suggestion: Return null instead of false */
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
 
@@ -58,17 +58,16 @@ namespace MythMod.Items.Festival
         public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
         {
             Vector2 origin = new Vector2(19f, 30f);
-            spriteBatch.Draw(base.mod.GetTexture("Items/Festival/血莲灯Glow"), base.item.Center - Main.screenPosition, null, new Color(255,255,255,0), rotation, origin, 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(base.Mod.GetTexture("Items/Festival/血莲灯Glow"), base.Item.Center - Main.screenPosition, null, new Color(255,255,255,0), rotation, origin, 1f, SpriteEffects.None, 0f);
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);//制作一个材料
             recipe.AddIngredient(344, 1);
             recipe.AddIngredient(316, 1);
             recipe.AddIngredient(314, 1);
-            recipe.SetResult(this, 1);//制作一个材料
             recipe.requiredTile[0] = 16;
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

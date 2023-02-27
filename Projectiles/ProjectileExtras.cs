@@ -2,6 +2,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Audio;
+using Terraria.GameContent;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace MythMod.Projectiles
@@ -27,7 +30,7 @@ namespace MythMod.Projectiles
 					projectile.localAI[0] += (float)Main.rand.Next(10, 31) * 0.1f;
 				}
 				float num = projectile.localAI[0] / 60f;
-				num /= (1f + Main.player[projectile.owner].meleeSpeed) / 2f;
+				num /= (1f + Main.player[projectile.owner].GetAttackSpeed(DamageClass.Melee)) / 2f;
 				if (num > seconds)
 				{
 					projectile.ai[0] = -1f;
@@ -65,8 +68,8 @@ namespace MythMod.Projectiles
 			{
 				num2 = num2 * 1.25f + 30f;
 			}
-			num2 /= (1f + Main.player[projectile.owner].meleeSpeed * 3f) / 4f;
-			float num3 = acceleration / ((1f + Main.player[projectile.owner].meleeSpeed * 3f) / 4f);
+			num2 /= (1f + Main.player[projectile.owner].GetAttackSpeed(DamageClass.Melee) * 3f) / 4f;
+			float num3 = acceleration / ((1f + Main.player[projectile.owner].GetAttackSpeed(DamageClass.Melee) * 3f) / 4f);
 			float num4 = 14f - num3 / 2f;
 			float num5 = 5f + num3 / 2f;
 			if (flag)
@@ -235,7 +238,7 @@ namespace MythMod.Projectiles
 			{
 				projectile.netUpdate = true;
 				Collision.HitTiles(projectile.position, projectile.velocity, projectile.width, projectile.height);
-				Main.PlaySound(0, (int)projectile.position.X, (int)projectile.position.Y, 1, 1f, 0f);
+				SoundEngine.PlaySound(SoundID.Dig, projectile.position);
 			}
 			return false;
 		}
@@ -383,7 +386,7 @@ namespace MythMod.Projectiles
 					float num10 = 0.5f;
 					color = Lighting.GetColor((int)vector.X / 16, (int)(vector.Y / 16f), color);
 					color = new Color((int)((byte)((float)color.R * num10)), (int)((byte)((float)color.G * num10)), (int)((byte)((float)color.B * num10)), (int)((byte)((float)color.A * num10)));
-					Main.spriteBatch.Draw(Main.fishingLineTexture, new Vector2(vector.X - Main.screenPosition.X + (float)Main.fishingLineTexture.Width * 0.5f, vector.Y - Main.screenPosition.Y + (float)Main.fishingLineTexture.Height * 0.5f) - new Vector2(6f, 0f), new Rectangle?(new Rectangle(0, 0, Main.fishingLineTexture.Width, (int)num5)), color, rotation, new Vector2((float)Main.fishingLineTexture.Width * 0.5f, 0f), 1f, SpriteEffects.None, 0f);
+					Main.spriteBatch.Draw(TextureAssets.FishingLine.Value, new Vector2(vector.X - Main.screenPosition.X + (float)TextureAssets.FishingLine.Value.Width * 0.5f, vector.Y - Main.screenPosition.Y + (float)TextureAssets.FishingLine.Value.Height * 0.5f) - new Vector2(6f, 0f), new Rectangle?(new Rectangle(0, 0, TextureAssets.FishingLine.Value.Width, (int)num5)), color, rotation, new Vector2((float)TextureAssets.FishingLine.Value.Width * 0.5f, 0f), 1f, SpriteEffects.None, 0f);
 				}
 			}
 		}
@@ -432,7 +435,7 @@ namespace MythMod.Projectiles
 		public static void DrawAroundOrigin(int index, Color lightColor)
 		{
 			Projectile projectile = Main.projectile[index];
-			Texture2D texture2D = Main.projectileTexture[projectile.type];
+			Texture2D texture2D = TextureAssets.Projectile[projectile.type].Value;
 			Vector2 origin = new Vector2((float)texture2D.Width * 0.5f, (float)(texture2D.Height / Main.projFrames[projectile.type]) * 0.5f);
 			SpriteEffects effects = (projectile.direction == -1) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 			Main.spriteBatch.Draw(texture2D, projectile.Center - Main.screenPosition, new Rectangle?(Utils.Frame(texture2D, 1, Main.projFrames[projectile.type], 0, projectile.frame)), lightColor, projectile.rotation, origin, projectile.scale, effects, 0f);
@@ -446,10 +449,10 @@ namespace MythMod.Projectiles
 			SpriteEffects effects = SpriteEffects.None;
 			if (projectile.spriteDirection == -1)
 			{
-				zero.X = (float)Main.projectileTexture[projectile.type].Width;
+				zero.X = (float)TextureAssets.Projectile[projectile.type].Value.Width;
 				effects = SpriteEffects.FlipHorizontally;
 			}
-			Main.spriteBatch.Draw(Main.projectileTexture[projectile.type], new Vector2(projectile.position.X - Main.screenPosition.X + (float)(projectile.width / 2), projectile.position.Y - Main.screenPosition.Y + (float)(projectile.height / 2) + projectile.gfxOffY), new Rectangle?(new Rectangle(0, 0, Main.projectileTexture[projectile.type].Width, Main.projectileTexture[projectile.type].Height)), projectile.GetAlpha(lightColor), projectile.rotation, zero, projectile.scale, effects, 0f);
+			Main.spriteBatch.Draw(TextureAssets.Projectile[projectile.type].Value, new Vector2(projectile.position.X - Main.screenPosition.X + (float)(projectile.width / 2), projectile.position.Y - Main.screenPosition.Y + (float)(projectile.height / 2) + projectile.gfxOffY), new Rectangle?(new Rectangle(0, 0, TextureAssets.Projectile[projectile.type].Value.Width, TextureAssets.Projectile[projectile.type].Value.Height)), projectile.GetAlpha(lightColor), projectile.rotation, zero, projectile.scale, effects, 0f);
 		}
 	}
 }

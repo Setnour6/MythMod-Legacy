@@ -19,20 +19,20 @@ namespace MythMod.Items
         }
         public override void SetDefaults()
         {
-            base.item.width = 52;
-            base.item.height = 58;
-            base.item.expert = true;
-            base.item.useAnimation = 45;
-            base.item.useTime = 45;
-            base.item.useStyle = 4;
-            base.item.UseSound = SoundID.Item105;
-            base.item.consumable = false;
+            base.Item.width = 52;
+            base.Item.height = 58;
+            base.Item.expert = true;
+            base.Item.useAnimation = 45;
+            base.Item.useTime = 45;
+            base.Item.useStyle = 4;
+            base.Item.UseSound = SoundID.Item105;
+            base.Item.consumable = false;
         }
         public override bool CanUseItem(Player player)
         {
             return Main.expertMode;
         }
-        public override bool UseItem(Player player)
+        public override bool? UseItem(Player player)/* tModPorter Suggestion: Return null instead of false */
         {
             bool z = false;
             for (int i = 0; i < 200; i++)
@@ -61,14 +61,13 @@ namespace MythMod.Items
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
-            recipe.SetResult(this, 1);//制作一个材料
-            recipe.AddRecipe();
+            Recipe recipe = CreateRecipe(1);//制作一个材料
+            recipe.Register();
         }
         public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
         {
             Vector2 origin = new Vector2(26f, 29f);
-            spriteBatch.Draw(base.mod.GetTexture("Items/恶灵封印卡Glow"), base.item.Center - Main.screenPosition, null, Color.White, rotation, origin, 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(base.Mod.GetTexture("Items/恶灵封印卡Glow"), base.Item.Center - Main.screenPosition, null, Color.White, rotation, origin, 1f, SpriteEffects.None, 0f);
         }
     }
 }

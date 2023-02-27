@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.Localization;
@@ -16,71 +17,71 @@ namespace MythMod.Projectiles.projectile2
 		}
 		public override void SetDefaults()
 		{
-			base.projectile.width = 210;
-			base.projectile.height = 210;
-			base.projectile.hostile = false;
-			base.projectile.ignoreWater = false;
-			base.projectile.tileCollide = false;
-			base.projectile.penetrate = -1;
-            base.projectile.tileCollide = true;
-            base.projectile.timeLeft = 90;
-            base.projectile.friendly = true;
-			this.cooldownSlot = 1;
-            base.projectile.scale = 0.1f;
+			base.Projectile.width = 210;
+			base.Projectile.height = 210;
+			base.Projectile.hostile = false;
+			base.Projectile.ignoreWater = false;
+			base.Projectile.tileCollide = false;
+			base.Projectile.penetrate = -1;
+            base.Projectile.tileCollide = true;
+            base.Projectile.timeLeft = 90;
+            base.Projectile.friendly = true;
+			this.CooldownSlot = 1;
+            base.Projectile.scale = 0.1f;
 
         }
         private bool boom = false;
 		public override void AI()
 		{
-            projectile.velocity *= 0.98f;
-            if (base.projectile.timeLeft <= 90)
+            Projectile.velocity *= 0.98f;
+            if (base.Projectile.timeLeft <= 90)
             {
                 boom = true;
             }
             if (boom)
             {
-                base.projectile.scale += (float)(projectile.ai[0] - base.projectile.scale) / 24f;
-                projectile.velocity *= 0.97f;
+                base.Projectile.scale += (float)(Projectile.ai[0] - base.Projectile.scale) / 24f;
+                Projectile.velocity *= 0.97f;
             }
-            projectile.velocity -= new Vector2(0,Main.rand.NextFloat(0.8f)).RotatedByRandom(Math.PI * 2) + new Vector2(projectile.ai[0], projectile.ai[0]) / 10f;
-            projectile.velocity.Y -= 0.2f;
-            base.projectile.width = (int)(210 * projectile.scale);
-            base.projectile.height = (int)(210 * projectile.scale);
-            if(projectile.wet)
+            Projectile.velocity -= new Vector2(0,Main.rand.NextFloat(0.8f)).RotatedByRandom(Math.PI * 2) + new Vector2(Projectile.ai[0], Projectile.ai[0]) / 10f;
+            Projectile.velocity.Y -= 0.2f;
+            base.Projectile.width = (int)(210 * Projectile.scale);
+            base.Projectile.height = (int)(210 * Projectile.scale);
+            if(Projectile.wet)
             {
-                projectile.velocity.Y -= 0.4f;
-                projectile.timeLeft -= 4;
-                int dustID = Dust.NewDust(projectile.position, projectile.width, projectile.height, 188, 0, -0.5f, 201, default(Color), 4f);
+                Projectile.velocity.Y -= 0.4f;
+                Projectile.timeLeft -= 4;
+                int dustID = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, 188, 0, -0.5f, 201, default(Color), 4f);
             }
-            Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 3.75f / 255f * projectile.scale * projectile.timeLeft / 120f, (float)(255 - base.projectile.alpha) * 0.24f * projectile.scale / 255f * projectile.timeLeft / 120f, (float)(255 - base.projectile.alpha) * 0f / 255f * projectile.scale * projectile.timeLeft / 120f);
+            Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 3.75f / 255f * Projectile.scale * Projectile.timeLeft / 120f, (float)(255 - base.Projectile.alpha) * 0.24f * Projectile.scale / 255f * Projectile.timeLeft / 120f, (float)(255 - base.Projectile.alpha) * 0f / 255f * Projectile.scale * Projectile.timeLeft / 120f);
         }
 		public override Color? GetAlpha(Color lightColor)
 		{
-            if(base.projectile.timeLeft > 60)
+            if(base.Projectile.timeLeft > 60)
             {
                 return new Color?(new Color(255, 255, 255, 0));
             }
             else
             {
-                if (base.projectile.timeLeft > 30)
+                if (base.Projectile.timeLeft > 30)
                 {
-                    return new Color?(new Color(1, (base.projectile.timeLeft - 25) / 30f, (base.projectile.timeLeft - 25) / 30f, 0));
+                    return new Color?(new Color(1, (base.Projectile.timeLeft - 25) / 30f, (base.Projectile.timeLeft - 25) / 30f, 0));
                 }
                 else
                 {
-                    if (base.projectile.timeLeft > 20)
+                    if (base.Projectile.timeLeft > 20)
                     {
-                        return new Color?(new Color(base.projectile.timeLeft / 30f, base.projectile.timeLeft / 180f, base.projectile.timeLeft / 180f, 0));
+                        return new Color?(new Color(base.Projectile.timeLeft / 30f, base.Projectile.timeLeft / 180f, base.Projectile.timeLeft / 180f, 0));
                     }
                     else
                     {
-                        if (base.projectile.timeLeft > 10)
+                        if (base.Projectile.timeLeft > 10)
                         {
-                            return new Color?(new Color(base.projectile.timeLeft * base.projectile.timeLeft / 600f, base.projectile.timeLeft / 180f, base.projectile.timeLeft / 180f, (20 - base.projectile.timeLeft) / 60f));
+                            return new Color?(new Color(base.Projectile.timeLeft * base.Projectile.timeLeft / 600f, base.Projectile.timeLeft / 180f, base.Projectile.timeLeft / 180f, (20 - base.Projectile.timeLeft) / 60f));
                         }
                         else
                         {
-                            return new Color?(new Color(base.projectile.timeLeft * base.projectile.timeLeft / 600f, base.projectile.timeLeft / 180f, base.projectile.timeLeft / 180f, base.projectile.timeLeft / 60f));
+                            return new Color?(new Color(base.Projectile.timeLeft * base.Projectile.timeLeft / 600f, base.Projectile.timeLeft / 180f, base.Projectile.timeLeft / 180f, base.Projectile.timeLeft / 60f));
                         }
                     }
                 }
@@ -88,16 +89,16 @@ namespace MythMod.Projectiles.projectile2
 		}
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            base.projectile.tileCollide = false;
-            projectile.velocity *= 0;
+            base.Projectile.tileCollide = false;
+            Projectile.velocity *= 0;
             return false;
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D texture2D = Main.projectileTexture[base.projectile.type];
-			int num = Main.projectileTexture[base.projectile.type].Height / Main.projFrames[base.projectile.type];
-			int y = num * base.projectile.frame;
-			Main.spriteBatch.Draw(texture2D, base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), base.projectile.GetAlpha(lightColor), base.projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.projectile.scale, SpriteEffects.None, 0f);
+			Texture2D texture2D = TextureAssets.Projectile[base.Projectile.type].Value;
+			int num = TextureAssets.Projectile[base.Projectile.type].Value.Height / Main.projFrames[base.Projectile.type];
+			int y = num * base.Projectile.frame;
+			Main.spriteBatch.Draw(texture2D, base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), base.Projectile.GetAlpha(lightColor), base.Projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.Projectile.scale, SpriteEffects.None, 0f);
 			return false;
 		}
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)

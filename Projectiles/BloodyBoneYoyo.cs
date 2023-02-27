@@ -14,10 +14,10 @@ namespace MythMod.Projectiles
 		// Token: 0x06003182 RID: 12674 RVA: 0x0000EF18 File Offset: 0x0000D118
 		public override void SetDefaults()
 		{
-			base.projectile.CloneDefaults(547);
-			base.projectile.width = 16;
-			base.projectile.height = 16;
-			base.projectile.scale = 1f;
+			base.Projectile.CloneDefaults(547);
+			base.Projectile.width = 16;
+			base.Projectile.height = 16;
+			base.Projectile.scale = 1f;
 		}
 		// Token: 0x06002220 RID: 8736 RVA: 0x001B7C54 File Offset: 0x001B5E54
 		public override void AI()

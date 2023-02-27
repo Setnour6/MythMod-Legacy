@@ -20,20 +20,20 @@ namespace MythMod.NPCs.LanternMoon
 		}
 		public override void SetDefaults()
 		{
-			base.npc.aiStyle = -1;
-			base.npc.damage = 90;
-			base.npc.width = 100;
-			base.npc.height = 100;
-			base.npc.defense = 5;
-			base.npc.lifeMax = 9000;
-			base.npc.knockBackResist = 0.8f;
-			base.npc.alpha = 0;
-			base.npc.lavaImmune = false;
-			base.npc.noGravity = false;
-            base.npc.noTileCollide = true;
-            base.npc.HitSound = SoundID.NPCHit1;
-			base.npc.DeathSound = SoundID.NPCDeath1;
-			base.npc.buffImmune[24] = true;
+			base.NPC.aiStyle = -1;
+			base.NPC.damage = 90;
+			base.NPC.width = 100;
+			base.NPC.height = 100;
+			base.NPC.defense = 5;
+			base.NPC.lifeMax = 9000;
+			base.NPC.knockBackResist = 0.8f;
+			base.NPC.alpha = 0;
+			base.NPC.lavaImmune = false;
+			base.NPC.noGravity = false;
+            base.NPC.noTileCollide = true;
+            base.NPC.HitSound = SoundID.NPCHit1;
+			base.NPC.DeathSound = SoundID.NPCDeath1;
+			base.NPC.buffImmune[24] = true;
 		}
         private float Omega = 0;
         private int G = 0;
@@ -46,18 +46,18 @@ namespace MythMod.NPCs.LanternMoon
                 T = Main.rand.Next(5);
             }
             G += 1;
-            npc.rotation += Omega;
+            NPC.rotation += Omega;
             Omega = (float)((Math.Sin(G / 20f) + 1) / 3f);
             Player player = Main.player[Main.myPlayer];
-            Vector2 v = player.Center + new Vector2((float)Math.Sin(G / 40f) * 500f, (float)Math.Sin((G + 200) / 40f) * 10f - 750) - npc.Center;
-            if (npc.velocity.Length() < 9f)
+            Vector2 v = player.Center + new Vector2((float)Math.Sin(G / 40f) * 500f, (float)Math.Sin((G + 200) / 40f) * 10f - 750) - NPC.Center;
+            if (NPC.velocity.Length() < 9f)
             {
-                npc.velocity += v / v.Length() * 0.35f;
+                NPC.velocity += v / v.Length() * 0.35f;
             }
-            npc.velocity *= 0.96f;
+            NPC.velocity *= 0.96f;
             if (Main.dayTime)
             {
-                npc.velocity.Y += 1;
+                NPC.velocity.Y += 1;
             }
             if(Omega > 0.2f)
             {
@@ -65,48 +65,48 @@ namespace MythMod.NPCs.LanternMoon
                 if(D > 1)
                 {
                     D -= 1;
-                    Vector2 vi = new Vector2(0, 5).RotatedBy(npc.rotation);
-                    int Ty = base.mod.ProjectileType("烟花火球棕色尾迹2");
+                    Vector2 vi = new Vector2(0, 5).RotatedBy(NPC.rotation);
+                    int Ty = base.Mod.Find<ModProjectile>("烟花火球棕色尾迹2").Type;
                     if (T == 0)
                     {
-                        Ty = base.mod.ProjectileType("烟花火球棕色尾迹2");
+                        Ty = base.Mod.Find<ModProjectile>("烟花火球棕色尾迹2").Type;
                     }
                     if (T == 1)
                     {
-                        Ty = base.mod.ProjectileType("烟花火球金闪2");
+                        Ty = base.Mod.Find<ModProjectile>("烟花火球金闪2").Type;
                     }
                     if (T == 2)
                     {
-                        Ty = base.mod.ProjectileType("烟花火球绿2");
+                        Ty = base.Mod.Find<ModProjectile>("烟花火球绿2").Type;
                     }
                     if (T == 3)
                     {
-                        Ty = base.mod.ProjectileType("烟花火球紫2");
+                        Ty = base.Mod.Find<ModProjectile>("烟花火球紫2").Type;
                     }
                     if (T == 4)
                     {
-                        Ty = base.mod.ProjectileType("烟花火球红2");
+                        Ty = base.Mod.Find<ModProjectile>("烟花火球红2").Type;
                     }
-                    int p = Projectile.NewProjectile(base.npc.Center.X, base.npc.Center.Y, vi.X, vi.Y, Ty, base.npc.damage / 4, 2, 255, 0f, 0f);
+                    int p = Projectile.NewProjectile(base.NPC.Center.X, base.NPC.Center.Y, vi.X, vi.Y, Ty, base.NPC.damage / 4, 2, 255, 0f, 0f);
                     Main.projectile[p].friendly = false;
                     Main.projectile[p].hostile = true;
                 }
             }
         }
 
-		public override bool PreNPCLoot()
+		public override bool PreKill()
 		{
 			return false;
 		}
 		public override void HitEffect(int hitDirection, double damage)
 		{
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
-            if (Main.netMode != 1 && base.npc.life <= 0)
+            if (Main.netMode != 1 && base.NPC.life <= 0)
 			{
                 float scaleFactor = (float)(Main.rand.Next(-200, 200) / 100f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/火焰风车碎块"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/火焰风车碎块"), 1f);
-                Vector2 vector = base.npc.Center + new Vector2(0f, (float)base.npc.height / 2f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/火焰风车碎块"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/火焰风车碎块"), 1f);
+                Vector2 vector = base.NPC.Center + new Vector2(0f, (float)base.NPC.height / 2f);
                 if (Main.expertMode)
                 {
                     mplayer.LanternMoonPoint += 50;

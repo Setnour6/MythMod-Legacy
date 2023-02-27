@@ -18,21 +18,21 @@ namespace MythMod.Tiles
             {
                 if (Main.rand.Next(2400) == 1)
                 {
-                    Item.NewItem(i * 16, j * 16, 64, 48, mod.ItemType("SnowFeather"), 1);
+                    Item.NewItem(i * 16, j * 16, 64, 48, Mod.Find<ModItem>("SnowFeather").Type, 1);
                 }
             }
             if (type == 5 && player.ZoneCorrupt)
             {
                 if (Main.rand.Next(2400) == 1)
                 {
-                    Item.NewItem(i * 16, j * 16, 64, 48, mod.ItemType("CorruptFeather"), 1);
+                    Item.NewItem(i * 16, j * 16, 64, 48, Mod.Find<ModItem>("CorruptFeather").Type, 1);
                 }
             }
             if (type == 5 && player.ZoneCrimson)
             {
                 if (Main.rand.Next(2400) == 1)
                 {
-                    Item.NewItem(i * 16, j * 16, 64, 48, mod.ItemType("CrimsonFeather"), 1);
+                    Item.NewItem(i * 16, j * 16, 64, 48, Mod.Find<ModItem>("CrimsonFeather").Type, 1);
                 }
             }
         }
@@ -42,126 +42,126 @@ namespace MythMod.Tiles
             {
                 if(Main.rand.Next(10000) == 1)
                 {
-                    if (!Main.tile[i, j - 1].active())
+                    if (!Main.tile[i, j - 1].HasTile)
                     {
-                        Item.NewItem(i * 16, j * 16 - 16, 64, 48, mod.ItemType("TwilightFeather"), 1);
+                        Item.NewItem(i * 16, j * 16 - 16, 64, 48, Mod.Find<ModItem>("TwilightFeather").Type, 1);
                     }
                 }
                 if (Main.rand.Next(20000) == 1)
                 {
-                    if (!Main.tile[i, j - 1].active())
+                    if (!Main.tile[i, j - 1].HasTile)
                     {
-                        Item.NewItem(i * 16, j * 16 - 16, 64, 48, mod.ItemType("GoldFeather"), 1);
+                        Item.NewItem(i * 16, j * 16 - 16, 64, 48, Mod.Find<ModItem>("GoldFeather").Type, 1);
                     }
                 }
                 if (Main.rand.Next(8000) == 1)
                 {
-                    if (!Main.tile[i, j - 1].active())
+                    if (!Main.tile[i, j - 1].HasTile)
                     {
-                        Item.NewItem(i * 16, j * 16 - 16, 64, 48, mod.ItemType("SnowFeather"), 1);
+                        Item.NewItem(i * 16, j * 16 - 16, 64, 48, Mod.Find<ModItem>("SnowFeather").Type, 1);
                     }
                 }
                 if (Main.rand.Next(8000) == 1)
                 {
-                    if (!Main.tile[i, j - 1].active())
+                    if (!Main.tile[i, j - 1].HasTile)
                     {
-                        Item.NewItem(i * 16, j * 16 - 16, 64, 48, mod.ItemType("DarkFeather"), 1);
+                        Item.NewItem(i * 16, j * 16 - 16, 64, 48, Mod.Find<ModItem>("DarkFeather").Type, 1);
                     }
                 }
                 if (Main.rand.Next(6000) == 1)
                 {
-                    if (!Main.tile[i, j - 1].active())
+                    if (!Main.tile[i, j - 1].HasTile)
                     {
-                        Item.NewItem(i * 16, j * 16 - 16, 64, 48, mod.ItemType("RedBirdFeather"), 1);
+                        Item.NewItem(i * 16, j * 16 - 16, 64, 48, Mod.Find<ModItem>("RedBirdFeather").Type, 1);
                     }
                 }
                 if (Main.rand.Next(6000) == 1)
                 {
-                    if (!Main.tile[i, j - 1].active())
+                    if (!Main.tile[i, j - 1].HasTile)
                     {
-                        Item.NewItem(i * 16, j * 16 - 16, 64, 48, mod.ItemType("BirdFeather"), 1);
+                        Item.NewItem(i * 16, j * 16 - 16, 64, 48, Mod.Find<ModItem>("BirdFeather").Type, 1);
                     }
                 }
                 if (Main.rand.Next(6000) == 1)
                 {
-                    if (!Main.tile[i, j - 1].active())
+                    if (!Main.tile[i, j - 1].HasTile)
                     {
-                        Item.NewItem(i * 16, j * 16 - 16, 64, 48, mod.ItemType("BlueBirdFeather"), 1);
+                        Item.NewItem(i * 16, j * 16 - 16, 64, 48, Mod.Find<ModItem>("BlueBirdFeather").Type, 1);
                     }
                 }
                 if (Main.rand.Next(120000) == 1)
                 {
-                    if (!Main.tile[i, j - 1].active())
+                    if (!Main.tile[i, j - 1].HasTile)
                     {
-                        Item.NewItem(i * 16, j * 16 - 16, 64, 48, mod.ItemType("GoldBirdFeather"), 1);
+                        Item.NewItem(i * 16, j * 16 - 16, 64, 48, Mod.Find<ModItem>("GoldBirdFeather").Type, 1);
                     }
                 }
                 if (Main.rand.Next(60000) == 1)
                 {
-                    if (!Main.tile[i, j - 1].active())
+                    if (!Main.tile[i, j - 1].HasTile)
                     {
-                        Item.NewItem(i * 16, j * 16 - 16, 64, 48, mod.ItemType("RainbowFeather"), 1);
+                        Item.NewItem(i * 16, j * 16 - 16, 64, 48, Mod.Find<ModItem>("RainbowFeather").Type, 1);
                     }
                 }
                 if (Main.hardMode)
                 {
                     if (Main.rand.Next(40000) == 1)
                     {
-                        if (!Main.tile[i, j - 1].active())
+                        if (!Main.tile[i, j - 1].HasTile)
                         {
-                            Item.NewItem(i * 16, j * 16 - 16, 64, 48, mod.ItemType("GhostFeather"), 1);
+                            Item.NewItem(i * 16, j * 16 - 16, 64, 48, Mod.Find<ModItem>("GhostFeather").Type, 1);
                         }
                     }
                     if (Main.rand.Next(40000) == 1)
                     {
-                        if (!Main.tile[i, j - 1].active())
+                        if (!Main.tile[i, j - 1].HasTile)
                         {
-                            Item.NewItem(i * 16, j * 16 - 16, 64, 48, mod.ItemType("LightingFeather"), 1);
+                            Item.NewItem(i * 16, j * 16 - 16, 64, 48, Mod.Find<ModItem>("LightingFeather").Type, 1);
                         }
                     }
                     if (Main.rand.Next(40000) == 1)
                     {
-                        if (!Main.tile[i, j - 1].active())
+                        if (!Main.tile[i, j - 1].HasTile)
                         {
-                            Item.NewItem(i * 16, j * 16 - 16, 64, 48, mod.ItemType("LeaveFeather"), 1);
+                            Item.NewItem(i * 16, j * 16 - 16, 64, 48, Mod.Find<ModItem>("LeaveFeather").Type, 1);
                         }
                     }
                     if (Main.rand.Next(40000) == 1)
                     {
-                        if (!Main.tile[i, j - 1].active())
+                        if (!Main.tile[i, j - 1].HasTile)
                         {
-                            Item.NewItem(i * 16, j * 16 - 16, 64, 48, mod.ItemType("VoidFeather"), 1);
+                            Item.NewItem(i * 16, j * 16 - 16, 64, 48, Mod.Find<ModItem>("VoidFeather").Type, 1);
                         }
                     }
                     if(Main.eclipse)
                     {
                         if (Main.rand.Next(40000) == 1)
                         {
-                            if (!Main.tile[i, j - 1].active())
+                            if (!Main.tile[i, j - 1].HasTile)
                             {
-                                Item.NewItem(i * 16, j * 16 - 16, 64, 48, mod.ItemType("DarkGoldFeather"), 1);
+                                Item.NewItem(i * 16, j * 16 - 16, 64, 48, Mod.Find<ModItem>("DarkGoldFeather").Type, 1);
                             }
                         }
                     }
                     if (Main.rand.Next(40000) == 1)
                     {
-                        if (!Main.tile[i, j - 1].active())
+                        if (!Main.tile[i, j - 1].HasTile)
                         {
-                            Item.NewItem(i * 16, j * 16 - 16, 64, 48, mod.ItemType("PoisonFeather"), 1);
+                            Item.NewItem(i * 16, j * 16 - 16, 64, 48, Mod.Find<ModItem>("PoisonFeather").Type, 1);
                         }
                     }
                     if (Main.rand.Next(40000) == 1)
                     {
-                        if (!Main.tile[i, j - 1].active())
+                        if (!Main.tile[i, j - 1].HasTile)
                         {
-                            Item.NewItem(i * 16, j * 16 - 16, 64, 48, mod.ItemType("RedSnowFeather"), 1);
+                            Item.NewItem(i * 16, j * 16 - 16, 64, 48, Mod.Find<ModItem>("RedSnowFeather").Type, 1);
                         }
                     }
                     if (Main.rand.Next(40000) == 1)
                     {
-                        if (!Main.tile[i, j - 1].active())
+                        if (!Main.tile[i, j - 1].HasTile)
                         {
-                            Item.NewItem(i * 16, j * 16 - 16, 64, 48, mod.ItemType("StarlightFeather"), 1);
+                            Item.NewItem(i * 16, j * 16 - 16, 64, 48, Mod.Find<ModItem>("StarlightFeather").Type, 1);
                         }
                     }
                 }

@@ -9,14 +9,14 @@ namespace MythMod.Buffs
     public class 愚昧诅咒 : ModBuff
 	{
 		// Token: 0x060000B3 RID: 179 RVA: 0x0002DB34 File Offset: 0x0002BD34
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("愚昧诅咒");
             base.Description.SetDefault("你看不懂咒符上面的咒语了");
 			Main.debuff[base.Type] = true;
 			Main.pvpBuff[base.Type] = true;
 			Main.buffNoSave[base.Type] = true;
-			this.longerExpertDebuff = false;
+			this.longerExpertDebuff/* tModPorter Note: Removed. Use BuffID.Sets.LongerExpertDebuff instead */ = false;
 		}
 
 		// Token: 0x060000B4 RID: 180 RVA: 0x0002DBA8 File Offset: 0x0002BDA8

@@ -13,43 +13,43 @@ namespace MythMod.Projectiles.projectile2
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("机械骷髅爆炸剑气");
-			Main.projFrames[base.projectile.type] = 2;
+			Main.projFrames[base.Projectile.type] = 2;
 		}
 
 		// Token: 0x06001F15 RID: 7957 RVA: 0x0018D09C File Offset: 0x0018B29C
 		public override void SetDefaults()
 		{
-			base.projectile.width = 32;
-			base.projectile.height = 34;
-			base.projectile.hostile = false;
-            base.projectile.friendly = true;
-            base.projectile.ignoreWater = false;
-			base.projectile.tileCollide = true;
-			base.projectile.penetrate = 1;
-			base.projectile.timeLeft = 600;
-			base.projectile.aiStyle = 27;
-            this.cooldownSlot = 1;
+			base.Projectile.width = 32;
+			base.Projectile.height = 34;
+			base.Projectile.hostile = false;
+            base.Projectile.friendly = true;
+            base.Projectile.ignoreWater = false;
+			base.Projectile.tileCollide = true;
+			base.Projectile.penetrate = 1;
+			base.Projectile.timeLeft = 600;
+			base.Projectile.aiStyle = 27;
+            this.CooldownSlot = 1;
 		}
 		// Token: 0x06001F16 RID: 7958 RVA: 0x0018D118 File Offset: 0x0018B318
 		public override void AI()
 		{
-            if(projectile.timeLeft % 30 < 15)
+            if(Projectile.timeLeft % 30 < 15)
             {
-                projectile.frame = 0;
+                Projectile.frame = 0;
             }
             else
             {
-                projectile.frame = 1;
+                Projectile.frame = 1;
             }
             if (Main.rand.Next(0, 150) > 75)
             {
-                int num9 = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) - new Vector2(4, 4) - base.projectile.velocity * 2f, 0, 0, 6, 0f, 0f, 100, default(Color), 1.2f);
+                int num9 = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) - new Vector2(4, 4) - base.Projectile.velocity * 2f, 0, 0, 6, 0f, 0f, 100, default(Color), 1.2f);
                 Main.dust[num9].noGravity = true;
                 Main.dust[num9].velocity *= 0.0f;
             }
             else
             {
-                int num9 = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) - new Vector2(4, 4) - base.projectile.velocity * 2f, 0, 0, 6, 0f, 0f, 100, default(Color), 1.2f);
+                int num9 = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) - new Vector2(4, 4) - base.Projectile.velocity * 2f, 0, 0, 6, 0f, 0f, 100, default(Color), 1.2f);
                 Main.dust[num9].noGravity = true;
                 Main.dust[num9].velocity *= 0.0f;
             }
@@ -58,13 +58,13 @@ namespace MythMod.Projectiles.projectile2
         {
             if (timeLeft != 0)
             {
-                int uo = Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, 0, 0, 164, projectile.damage * 2, 1, Main.myPlayer, 0f, 0f);
+                int uo = Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, 0, 0, 164, Projectile.damage * 2, 1, Main.myPlayer, 0f, 0f);
                 Main.projectile[uo].friendly = true;
                 Main.projectile[uo].hostile = false;
             }
             for (int i = 0; i < 15; i++)
             {
-                int num = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, 6, 0f, 0f, 100, default(Color), 2f);
+                int num = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, 6, 0f, 0f, 100, default(Color), 2f);
                 Main.dust[num].velocity *= 3f;
                 if (Main.rand.Next(2) == 0)
                 {
@@ -74,7 +74,7 @@ namespace MythMod.Projectiles.projectile2
             }
             for (int i = 0; i < 15; i++)
             {
-                int num = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, 6, 0f, 0f, 100, default(Color), 2f);
+                int num = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, 6, 0f, 0f, 100, default(Color), 2f);
                 Main.dust[num].velocity *= 3f;
                 if (Main.rand.Next(2) == 0)
                 {

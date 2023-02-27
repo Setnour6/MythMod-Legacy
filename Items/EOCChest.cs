@@ -8,7 +8,7 @@ using Terraria.GameContent.Generation;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
-using Terraria.World.Generation;
+using Terraria.WorldBuilding;
 
 namespace MythMod.Items
 {
@@ -23,12 +23,12 @@ namespace MythMod.Items
         }
         public override void SetDefaults()
         {
-            base.item.maxStack = 1;
-            base.item.consumable = false;
-            base.item.width = 24;
-            base.item.height = 24;
-            base.item.rare = 9;
-            base.item.expert = true;
+            base.Item.maxStack = 1;
+            base.Item.consumable = false;
+            base.Item.width = 24;
+            base.Item.height = 24;
+            base.Item.rare = 9;
+            base.Item.expert = true;
             //this.bossBagNPC = 4;
         }
         public override bool CanRightClick()
@@ -39,11 +39,11 @@ namespace MythMod.Items
         {
             if (Main.rand.Next(2) == 1)
             {
-                player.QuickSpawnItem(base.mod.ItemType("SwordEOC"), 1);
+                player.QuickSpawnItem(base.Mod.Find<ModItem>("SwordEOC").Type, 1);
             }
             if (Main.rand.Next(6) == 1)
             {
-                player.QuickSpawnItem(base.mod.ItemType("SightEye"), 1);
+                player.QuickSpawnItem(base.Mod.Find<ModItem>("SightEye").Type, 1);
             }
             //player.QuickSpawnItem(56, Main.rand.Next(340, 652));
             //player.QuickSpawnItem(59, Main.rand.Next(16, 40));
@@ -59,8 +59,8 @@ namespace MythMod.Items
             //player.QuickSpawnItem(74, 3);
             //player.QuickSpawnItem(38, Main.rand.Next(12, 23));
             //player.QuickSpawnItem(236, Main.rand.Next(3, 7));
-            player.QuickSpawnItem(base.mod.ItemType("EOCChest2"), 1);
-            player.QuickSpawnItem(base.mod.ItemType("BloodCryst"), Main.rand.Next(1, 3));
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("EOCChest2").Type, 1);
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("BloodCryst").Type, Main.rand.Next(1, 3));
         }
     }
 }

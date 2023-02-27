@@ -16,18 +16,17 @@ namespace MythMod.Items.Gems
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 20;
-			base.item.height = 20;
-			base.item.maxStack = 1;
-			base.item.value = 0;
-			base.item.rare = 1;
+			base.Item.width = 20;
+			base.Item.height = 20;
+			base.Item.maxStack = 1;
+			base.Item.value = 0;
+			base.Item.rare = 1;
 		}
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(null, "Turquoise", 15);
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }
 	}
 }

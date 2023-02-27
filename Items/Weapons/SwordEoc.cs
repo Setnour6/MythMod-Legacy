@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -17,20 +17,20 @@ namespace MythMod.Items.Weapons
         }
         public override void SetDefaults()
         {
-            item.damage = 15;
-            item.melee = true;
-            item.width = 50;
-            item.height = 50;
-            item.useTime = 20;
-            item.rare = 2;
-            item.useAnimation = 20;
-            item.useStyle = 1;
-            item.knockBack = 5.0f ;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 9;
-            item.value = 10000;
-            item.scale = 1f;
+            Item.damage = 15;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 50;
+            Item.height = 50;
+            Item.useTime = 20;
+            Item.rare = 2;
+            Item.useAnimation = 20;
+            Item.useStyle = 1;
+            Item.knockBack = 5.0f ;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 9;
+            Item.value = 10000;
+            Item.scale = 1f;
         }
 		public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
         {
@@ -77,7 +77,7 @@ namespace MythMod.Items.Weapons
                 num4 *= num5;
                 float num7 = num3;
                 float num8 = num4 + (float)Main.rand.Next(-180, 181) * 0.02f;
-                Projectile.NewProjectile(vector.X, vector.Y, num7, num8, base.mod.ProjectileType("EOCPhatom"), damage, knockback, player.whoAmI, 0f, (float)Main.rand.Next(10));
+                Projectile.NewProjectile(vector.X, vector.Y, num7, num8, base.Mod.Find<ModProjectile>("EOCPhatom").Type, damage, knockback, player.whoAmI, 0f, (float)Main.rand.Next(10));
             }
         }        
     }

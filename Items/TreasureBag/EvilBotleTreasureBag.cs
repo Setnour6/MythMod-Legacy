@@ -27,12 +27,12 @@ namespace MythMod.Items.TreasureBag
         //public override int BossBagNPC => mod.NPCType("EvilBotle");
         public override void SetDefaults()
 		{
-            item.maxStack = 999;
-            item.consumable = true;
-            item.width = 24;
-            item.height = 24;
-            item.rare = 9;
-            item.expert = true;
+            Item.maxStack = 999;
+            Item.consumable = true;
+            Item.width = 24;
+            Item.height = 24;
+            Item.rare = 9;
+            Item.expert = true;
             //this.BossBagNPC = mod.NPCType("EvilBotle");
         }
 		public override bool CanRightClick()
@@ -45,28 +45,28 @@ namespace MythMod.Items.TreasureBag
             switch (Main.rand.Next(1, 9))
             {
                 case 1:
-                    type = mod.ItemType("DarkStaff");
+                    type = Mod.Find<ModItem>("DarkStaff").Type;
                     break;
                 case 2:
-                    type = mod.ItemType("EvilBomb");
+                    type = Mod.Find<ModItem>("EvilBomb").Type;
                     break;
                 case 3:
-                    type = mod.ItemType("EvilRing");
+                    type = Mod.Find<ModItem>("EvilRing").Type;
                     break;
                 case 4:
-                    type = mod.ItemType("EvilSlingshot");
+                    type = Mod.Find<ModItem>("EvilSlingshot").Type;
                     break;
                 case 5:
-                    type = mod.ItemType("EvilSword");
+                    type = Mod.Find<ModItem>("EvilSword").Type;
                     break;
                 case 6:
-                    type = mod.ItemType("ShadowYoyo");
+                    type = Mod.Find<ModItem>("ShadowYoyo").Type;
                     break;
                 case 7:
-                    type = mod.ItemType("EvilShadowBlade");
+                    type = Mod.Find<ModItem>("EvilShadowBlade").Type;
                     break;
                 case 8:
-                    type = mod.ItemType("GeometryEvil");
+                    type = Mod.Find<ModItem>("GeometryEvil").Type;
                     break;
             }
             player.QuickSpawnItem(type, 1);

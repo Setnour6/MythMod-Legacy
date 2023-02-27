@@ -13,19 +13,19 @@ namespace MythMod.Projectiles.projectile2
 		}
 		public override void SetDefaults()
 		{
-			base.projectile.width = 0;
-			base.projectile.height = 0;
-			base.projectile.friendly = true;
-			base.projectile.magic = true;
-			base.projectile.penetrate = -1;
-			base.projectile.extraUpdates = 5;
-			base.projectile.timeLeft = 1440;
+			base.Projectile.width = 0;
+			base.Projectile.height = 0;
+			base.Projectile.friendly = true;
+			base.Projectile.DamageType = DamageClass.Magic;
+			base.Projectile.penetrate = -1;
+			base.Projectile.extraUpdates = 5;
+			base.Projectile.timeLeft = 1440;
 		}
 		public override void AI()
 		{
             Player player = Main.player[Main.myPlayer];
-            projectile.velocity.Y += 0.002f;
-            Main.player[Main.myPlayer].GetModPlayer<MythPlayer>().FlyCamPosition = projectile.Center - player.Center;
+            Projectile.velocity.Y += 0.002f;
+            Main.player[Main.myPlayer].GetModPlayer<MythPlayer>().FlyCamPosition = Projectile.Center - player.Center;
         }
 	}
 }

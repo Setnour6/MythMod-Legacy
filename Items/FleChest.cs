@@ -8,7 +8,7 @@ using Terraria.GameContent.Generation;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
-using Terraria.World.Generation;
+using Terraria.WorldBuilding;
 
 namespace MythMod.Items
 {
@@ -23,12 +23,12 @@ namespace MythMod.Items
         }
         public override void SetDefaults()
         {
-            base.item.maxStack = 1;
-            base.item.consumable = false;
-            base.item.width = 24;
-            base.item.height = 24;
-            base.item.rare = 9;
-            base.item.expert = true;
+            base.Item.maxStack = 1;
+            base.Item.consumable = false;
+            base.Item.width = 24;
+            base.Item.height = 24;
+            base.Item.rare = 9;
+            base.Item.expert = true;
             //this.bossBagNPC = 13;
         }
         public override bool CanRightClick()
@@ -40,16 +40,16 @@ namespace MythMod.Items
         {
             if (Main.rand.Next(2) == 1)
             {
-                player.QuickSpawnItem(base.mod.ItemType("SwordWOF"), 1);
+                player.QuickSpawnItem(base.Mod.Find<ModItem>("SwordWOF").Type, 1);
             }
-            player.QuickSpawnItem(base.mod.ItemType("FleChest2"), 1);
-            player.QuickSpawnItem(base.mod.ItemType("BloodHeartStone"), 1);
-            player.QuickSpawnItem(base.mod.ItemType("UnstableTranspStaff"), 1);
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("FleChest2").Type, 1);
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("BloodHeartStone").Type, 1);
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("UnstableTranspStaff").Type, 1);
             if (Main.rand.Next(20) == 1)
             {
-                player.QuickSpawnItem(base.mod.ItemType("BloodGoldBlade"), 1);
+                player.QuickSpawnItem(base.Mod.Find<ModItem>("BloodGoldBlade").Type, 1);
             }
-            item.stack--;
+            Item.stack--;
         }
     }
 }

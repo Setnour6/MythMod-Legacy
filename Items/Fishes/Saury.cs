@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.DataStructures;
@@ -20,11 +20,11 @@ namespace MythMod.Items.Fishes
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 26;
-			base.item.height = 26;
-			base.item.maxStack = 999;
-			base.item.value = Item.sellPrice(0, 0, 5, 0);
-			base.item.rare = 6;
+			base.Item.width = 26;
+			base.Item.height = 26;
+			base.Item.maxStack = 999;
+			base.Item.value = Item.sellPrice(0, 0, 5, 0);
+			base.Item.rare = 6;
 		}
         public override void AddRecipes()
         {

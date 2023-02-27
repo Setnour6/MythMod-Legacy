@@ -16,16 +16,16 @@ namespace MythMod.Items.Walls
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 24;
-			base.item.height = 24;
-			base.item.maxStack = 999;
-			base.item.useTurn = true;
-			base.item.autoReuse = true;
-			base.item.useAnimation = 15;
-			base.item.useTime = 7;
-			base.item.useStyle = 1;
-			base.item.consumable = true;
-            base.item.createWall = base.mod.WallType("青纽扣珊瑚墙");
+			base.Item.width = 24;
+			base.Item.height = 24;
+			base.Item.maxStack = 999;
+			base.Item.useTurn = true;
+			base.Item.autoReuse = true;
+			base.Item.useAnimation = 15;
+			base.Item.useTime = 7;
+			base.Item.useStyle = 1;
+			base.Item.consumable = true;
+            base.Item.createWall = base.Mod.Find<ModWall>("青纽扣珊瑚墙").Type;
 		}
     }
 }

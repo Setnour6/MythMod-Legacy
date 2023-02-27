@@ -17,16 +17,16 @@ namespace MythMod.Projectiles.BloodyTusk
 		// Token: 0x06001C82 RID: 7298 RVA: 0x0016F518 File Offset: 0x0016D718
 		public override void SetDefaults()
 		{
-			base.projectile.width = 26;
-			base.projectile.height = 30;
-			base.projectile.friendly = true;
-			base.projectile.alpha = 65;
-			base.projectile.penetrate = -1;
-			base.projectile.tileCollide = false;
-			base.projectile.timeLeft = 3600;
-            base.projectile.ranged = true;
-            base.projectile.aiStyle = 1;
-            this.aiType = 1;
+			base.Projectile.width = 26;
+			base.Projectile.height = 30;
+			base.Projectile.friendly = true;
+			base.Projectile.alpha = 65;
+			base.Projectile.penetrate = -1;
+			base.Projectile.tileCollide = false;
+			base.Projectile.timeLeft = 3600;
+            base.Projectile.DamageType = DamageClass.Ranged;
+            base.Projectile.aiStyle = 1;
+            this.AIType = 1;
 		}
         private bool stick = false;
         private int u = 0;
@@ -38,32 +38,32 @@ namespace MythMod.Projectiles.BloodyTusk
         // Token: 0x06001E99 RID: 7833 RVA: 0x00188F8C File Offset: 0x0018718C
         public override void AI()
         {
-            projectile.rotation = (float)System.Math.Atan2((double)projectile.velocity.Y, (double)projectile.velocity.X) + (float)Math.PI * 0.5f;//让你的特效正常化
+            Projectile.rotation = (float)System.Math.Atan2((double)Projectile.velocity.Y, (double)Projectile.velocity.X) + (float)Math.PI * 0.5f;//让你的特效正常化
             Player player = Main.player[Main.myPlayer];
-            base.projectile.spriteDirection = 1;
+            base.Projectile.spriteDirection = 1;
             if (stick && m.active)
             {
                 r += 1;
                 float yz = m.Hitbox.Width * m.Hitbox.Width + m.Hitbox.Height * m.Hitbox.Height;
                 yz = (float)(Math.Sqrt(yz)) / 3f;
-                projectile.position = m.Center - v * yz / v.Length();
+                Projectile.position = m.Center - v * yz / v.Length();
                 if (r % 20 == 0)
                 {
-                    Projectile.NewProjectile(m.Center.X, m.Center.Y, 0, 0, mod.ProjectileType("TuskDamage"), projectile.damage / 5, 0f, Main.myPlayer, 0f, 0f);
+                    Projectile.NewProjectile(m.Center.X, m.Center.Y, 0, 0, Mod.Find<ModProjectile>("TuskDamage").Type, Projectile.damage / 5, 0f, Main.myPlayer, 0f, 0f);
                 }
-                projectile.velocity = v;
+                Projectile.velocity = v;
             }
             if (stick && !m.active)
             {
-                projectile.active = false;
+                Projectile.active = false;
             }
         }
         // Token: 0x06001E99 RID: 7833 RVA: 0x00188F8C File Offset: 0x0018718C
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
             stick = true;
-            v = projectile.velocity;
-            projectile.friendly = false;
+            v = Projectile.velocity;
+            Projectile.friendly = false;
             m = target;
             if (!target.boss)
             {

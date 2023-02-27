@@ -12,7 +12,7 @@ namespace MythMod.Tiles.Festivals
 {
     public class Chinalamp3 : ModTile
     {
-        public override void SetDefaults()
+        public override void SetStaticDefaults()
         {
             Main.tileFrameImportant[(int)base.Type] = true;
             Main.tileLavaDeath[(int)base.Type] = true;
@@ -30,8 +30,8 @@ namespace MythMod.Tiles.Festivals
             TileObjectData.newTile.StyleHorizontal = true;
             TileObjectData.newTile.AnchorTop = new AnchorData((Terraria.Enums.AnchorType)1, 1, 1);
             TileObjectData.addTile((int)base.Type);
-            this.dustType = 22;
-            this.disableSmartCursor = true;
+            this.DustType = 22;
+            this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("中国灯");
             base.AddMapEntry(new Color(122, 87, 73), modTranslation);
@@ -39,12 +39,12 @@ namespace MythMod.Tiles.Festivals
         }
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(i * 16, j * 16, 48, 48, mod.ItemType("Chinalamp3"), 1, false, 0, false, false);
+            Item.NewItem(i * 16, j * 16, 48, 48, Mod.Find<ModItem>("Chinalamp3").Type, 1, false, 0, false, false);
         }
         public override void HitWire(int i, int j)
         {
-            int num = i - (int)(Main.tile[i, j].frameX / 18 % 3);
-            int num2 = j - (int)(Main.tile[i, j].frameY / 18 % 3);
+            int num = i - (int)(Main.tile[i, j].TileFrameX / 18 % 3);
+            int num2 = j - (int)(Main.tile[i, j].TileFrameY / 18 % 3);
             for (int k = num; k < num + 3; k++)
             {
                 for (int l = num2 - 1; l < num2 + 3; l++)
@@ -53,17 +53,17 @@ namespace MythMod.Tiles.Festivals
                     {
                         Main.tile[k, l] = new Tile();
                     }
-                    if (Main.tile[k, l].active() && Main.tile[k, l].type == base.Type)
+                    if (Main.tile[k, l].HasTile && Main.tile[k, l].TileType == base.Type)
                     {
-                        if (Main.tile[k, l].frameX < 36)
+                        if (Main.tile[k, l].TileFrameX < 36)
                         {
                             Tile tile = Main.tile[k, l];
-                            tile.frameX += 36;
+                            tile.TileFrameX += 36;
                         }
                         else
                         {
                             Tile tile2 = Main.tile[k, l];
-                            tile2.frameX -= 36;
+                            tile2.TileFrameX -= 36;
                         }
                     }
                 }
@@ -83,7 +83,7 @@ namespace MythMod.Tiles.Festivals
         }
         public override void NearbyEffects(int i, int j, bool closer)
         {
-            if (Main.tile[i, j].frameX < 40)
+            if (Main.tile[i, j].TileFrameX < 40)
             {
                 Lighting.AddLight(new Vector2(i * 16, j * 16), new Vector3(1f, 0.8f, 0.5f));
             }

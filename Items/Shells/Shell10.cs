@@ -21,18 +21,18 @@ namespace MythMod.Items.Shells
 		// Token: 0x060005E4 RID: 1508 RVA: 0x00041780 File Offset: 0x0003F980
 		public override void SetDefaults()
 		{
-			base.item.width = 26;
-			base.item.height = 34;
-            base.item.maxStack = 999;
-            base.item.rare = 3;
-            base.item.value = Item.sellPrice(0, 2, 4, 0);
-            base.item.useAnimation = 15;
-            base.item.useTime = 10;
-            base.item.useStyle = 1;
-            base.item.consumable = true;
-            base.item.useTurn = true;
-            base.item.autoReuse = true;
-            base.item.createTile = base.mod.TileType("鹦鹉螺");
+			base.Item.width = 26;
+			base.Item.height = 34;
+            base.Item.maxStack = 999;
+            base.Item.rare = 3;
+            base.Item.value = Item.sellPrice(0, 2, 4, 0);
+            base.Item.useAnimation = 15;
+            base.Item.useTime = 10;
+            base.Item.useStyle = 1;
+            base.Item.consumable = true;
+            base.Item.useTurn = true;
+            base.Item.autoReuse = true;
+            base.Item.createTile = base.Mod.Find<ModTile>("鹦鹉螺").Type;
         }
 	}
 }

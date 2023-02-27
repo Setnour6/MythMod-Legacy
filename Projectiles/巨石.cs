@@ -26,21 +26,21 @@ namespace MythMod.Projectiles
 		// Token: 0x0600221F RID: 8735 RVA: 0x001B7BC8 File Offset: 0x001B5DC8
 		public override void SetDefaults()
 		{
-			base.projectile.width = 66;
-			base.projectile.height = 60;
-			base.projectile.friendly = false;
-			base.projectile.hostile = true;
-			base.projectile.penetrate = -1;
-			base.projectile.timeLeft = 180;
-            base.projectile.ignoreWater = true;
-            base.projectile.tileCollide = false;
-            base.projectile.alpha = 0;
+			base.Projectile.width = 66;
+			base.Projectile.height = 60;
+			base.Projectile.friendly = false;
+			base.Projectile.hostile = true;
+			base.Projectile.penetrate = -1;
+			base.Projectile.timeLeft = 180;
+            base.Projectile.ignoreWater = true;
+            base.Projectile.tileCollide = false;
+            base.Projectile.alpha = 0;
 		}
 
 		// Token: 0x06002220 RID: 8736 RVA: 0x001B7C54 File Offset: 0x001B5E54
 		public override void AI()
 		{
-			 base.projectile.velocity.Y += 0.15f;
+			 base.Projectile.velocity.Y += 0.15f;
 		}
 		// Token: 0x06002223 RID: 8739 RVA: 0x001B7D7C File Offset: 0x001B5F7C
 		public override void Kill(int timeLeft)
@@ -49,12 +49,12 @@ namespace MythMod.Projectiles
 		// Token: 0x06002224 RID: 8740 RVA: 0x0000D83A File Offset: 0x0000BA3A
 		public override void OnHitPlayer(Player target, int damage, bool crit)
         {
-			target.velocity = projectile.velocity * 0.9f;
+			target.velocity = Projectile.velocity * 0.9f;
         }
         // Token: 0x06002224 RID: 8740 RVA: 0x0000D83A File Offset: 0x0000BA3A
-        public override void PostDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override void PostDraw(Color lightColor)
         {
-            spriteBatch.Draw(base.mod.GetTexture("Projectiles/巨石_Glow"), base.projectile.Center - Main.screenPosition, null, Color.White * 0.7f, base.projectile.rotation, new Vector2(33f, 30f), 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(base.Mod.GetTexture("Projectiles/巨石_Glow"), base.Projectile.Center - Main.screenPosition, null, Color.White * 0.7f, base.Projectile.rotation, new Vector2(33f, 30f), 1f, SpriteEffects.None, 0f);
         }
 	}
 }

@@ -25,27 +25,26 @@ namespace MythMod.Items.Ammos
 		}
 		public override void SetDefaults()
 		{
-			base.item.ranged = true;
-			base.item.width = 32;
-            base.item.damage = 13;
-            base.item.crit = 4;
-            base.item.height = 32;
-			base.item.maxStack = 1;
-			base.item.consumable = false;
-			base.item.knockBack = 1.5f;
-			base.item.value = 50000;
-			base.item.rare = 2;
-            base.item.shoot = base.mod.ProjectileType("HeartArrow");
-            base.item.shootSpeed = 4;
-            base.item.ammo = AmmoID.Arrow;
+			base.Item.DamageType = DamageClass.Ranged;
+			base.Item.width = 32;
+            base.Item.damage = 13;
+            base.Item.crit = 4;
+            base.Item.height = 32;
+			base.Item.maxStack = 1;
+			base.Item.consumable = false;
+			base.Item.knockBack = 1.5f;
+			base.Item.value = 50000;
+			base.Item.rare = 2;
+            base.Item.shoot = base.Mod.Find<ModProjectile>("HeartArrow").Type;
+            base.Item.shootSpeed = 4;
+            base.Item.ammo = AmmoID.Arrow;
 		}
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(mod.ItemType("LoveArrow"), 3996);
-            recipe.SetResult(this, 1);
+            Recipe recipe = CreateRecipe(1);
+            recipe.AddIngredient(Mod.Find<ModItem>("LoveArrow").Type, 3996);
             recipe.requiredTile[0] = 125;
-            recipe.AddRecipe();
+            recipe.Register();
         }
         public override void UpdateInventory(Player player)
         {

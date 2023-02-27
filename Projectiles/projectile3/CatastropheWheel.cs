@@ -1,9 +1,10 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
@@ -23,17 +24,17 @@ namespace MythMod.Projectiles.projectile3
         }
         public override void SetDefaults()
         {
-            projectile.width = 80;
-            projectile.height = 80;
-            projectile.aiStyle = -1;
-            projectile.friendly = true;
-            projectile.hostile = false;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = false;
-            projectile.timeLeft = 400;
-            projectile.alpha = 255;
-            projectile.penetrate = -1;
-            projectile.scale = 1f;
+            Projectile.width = 80;
+            Projectile.height = 80;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = true;
+            Projectile.hostile = false;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
+            Projectile.timeLeft = 400;
+            Projectile.alpha = 255;
+            Projectile.penetrate = -1;
+            Projectile.scale = 1f;
         }
         private bool initialization = true;
         private double X;
@@ -41,16 +42,16 @@ namespace MythMod.Projectiles.projectile3
         private float b;
         public override void AI()
         {
-            if (projectile.timeLeft > 350)
+            if (Projectile.timeLeft > 350)
             {
-                projectile.velocity *= 0.5f;
-                projectile.rotation += Omega;
-                projectile.alpha -= 5;
+                Projectile.velocity *= 0.5f;
+                Projectile.rotation += Omega;
+                Projectile.alpha -= 5;
                 Omega += 0.02f;
             }
             else
             {
-                if(projectile.timeLeft == 350)
+                if(Projectile.timeLeft == 350)
                 {
                     int l = -1;
                     for (int i = 0; i < 200; i++)
@@ -61,7 +62,7 @@ namespace MythMod.Projectiles.projectile3
                             {
                                 l = i;
                             }
-                            else if ((Main.npc[i].Center - projectile.Center).Length() < (Main.npc[l].Center - projectile.Center).Length())
+                            else if ((Main.npc[i].Center - Projectile.Center).Length() < (Main.npc[l].Center - Projectile.Center).Length())
                             {
                                 l = i;
                             }
@@ -69,62 +70,62 @@ namespace MythMod.Projectiles.projectile3
                     }
                     if (l != -1)
                     {
-                        projectile.velocity = ((Main.npc[l].Center - projectile.Center) / (Main.npc[l].Center - projectile.Center).Length() * 45f);
+                        Projectile.velocity = ((Main.npc[l].Center - Projectile.Center) / (Main.npc[l].Center - Projectile.Center).Length() * 45f);
                     }
                     else
                     {
-                        projectile.velocity *= 0;
+                        Projectile.velocity *= 0;
                     }
                 }
-                if(projectile.velocity.Length() > 0)
+                if(Projectile.velocity.Length() > 0)
                 {
-                    projectile.rotation = (float)(Math.Atan2(projectile.velocity.Y * - projectile.spriteDirection, projectile.velocity.X * -projectile.spriteDirection));
+                    Projectile.rotation = (float)(Math.Atan2(Projectile.velocity.Y * - Projectile.spriteDirection, Projectile.velocity.X * -Projectile.spriteDirection));
                 }
                 else
                 {
-                    projectile.rotation += Omega;
+                    Projectile.rotation += Omega;
                 }
-                projectile.velocity *= 0.975f;
-                if (projectile.timeLeft < 52)
+                Projectile.velocity *= 0.975f;
+                if (Projectile.timeLeft < 52)
                 {
-                    projectile.alpha += 5;
-                    projectile.tileCollide = false;
+                    Projectile.alpha += 5;
+                    Projectile.tileCollide = false;
                 }
             }
-            if (projectile.timeLeft < 52)
+            if (Projectile.timeLeft < 52)
             {
-                projectile.alpha += 5;
+                Projectile.alpha += 5;
             }
-            projectile.spriteDirection = (int)projectile.ai[0];
+            Projectile.spriteDirection = (int)Projectile.ai[0];
         }
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-            if (projectile.timeLeft > 55)
+            if (Projectile.timeLeft > 55)
             {
-                projectile.timeLeft = 55;
+                Projectile.timeLeft = 55;
             }
             base.OnHitNPC(target, damage, knockback, crit);
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color drawColor)
+        public override bool PreDraw(ref Color lightColor)
         {
             SpriteEffects effects = SpriteEffects.None;
-            if (projectile.spriteDirection == 1)
+            if (Projectile.spriteDirection == 1)
             {
                 effects = SpriteEffects.FlipHorizontally;
             }
             Mod mod = ModLoader.GetMod("MythMod");
-            Texture2D texture = Main.projectileTexture[projectile.type];
-            float p = (255 - projectile.alpha) / 255f;
-            Main.spriteBatch.Draw(texture, projectile.Center - Main.screenPosition + new Vector2(0f, projectile.gfxOffY), null, new Color(p, p, p, (1 - p) / 255f), projectile.rotation, new Vector2(55, 55), projectile.scale, effects, 0f);
+            Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
+            float p = (255 - Projectile.alpha) / 255f;
+            Main.spriteBatch.Draw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), null, new Color(p, p, p, (1 - p) / 255f), Projectile.rotation, new Vector2(55, 55), Projectile.scale, effects, 0f);
             for (int i = 0; i < 15; i++)
             {
-                Main.spriteBatch.Draw(texture, projectile.Center - Main.screenPosition + new Vector2(0f, projectile.gfxOffY) - projectile.velocity * i / 15f, null, new Color(1 - 1 / 15f * (float)i, 1 - 1 / 15f * (float)i, 1 - 1 / 15f * (float)i, (1 - 1 / 15f * (float)i) * projectile.alpha / 255f), projectile.rotation, new Vector2(55, 55), projectile.scale, effects, 0f);
+                Main.spriteBatch.Draw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY) - Projectile.velocity * i / 15f, null, new Color(1 - 1 / 15f * (float)i, 1 - 1 / 15f * (float)i, 1 - 1 / 15f * (float)i, (1 - 1 / 15f * (float)i) * Projectile.alpha / 255f), Projectile.rotation, new Vector2(55, 55), Projectile.scale, effects, 0f);
             }
-            if(projectile.velocity.Length() < 1 && projectile.timeLeft > 240)
+            if(Projectile.velocity.Length() < 1 && Projectile.timeLeft > 240)
             {
                 for (int i = 0; i < 15; i++)
                 {
-                    Main.spriteBatch.Draw(texture, projectile.Center - Main.screenPosition + new Vector2(0f, projectile.gfxOffY) - projectile.velocity * i / 15f, null, new Color(1 - 1 / 15f * (float)i, 1 - 1 / 15f * (float)i, 1 - 1 / 15f * (float)i, (1 - 1 / 15f * (float)i) * projectile.alpha / 255f), projectile.rotation - Omega * i * 0.1f, new Vector2(55, 55), projectile.scale, effects, 0f);
+                    Main.spriteBatch.Draw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY) - Projectile.velocity * i / 15f, null, new Color(1 - 1 / 15f * (float)i, 1 - 1 / 15f * (float)i, 1 - 1 / 15f * (float)i, (1 - 1 / 15f * (float)i) * Projectile.alpha / 255f), Projectile.rotation - Omega * i * 0.1f, new Vector2(55, 55), Projectile.scale, effects, 0f);
                 }
             }
             return false;

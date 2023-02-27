@@ -1,4 +1,4 @@
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -16,22 +16,22 @@ namespace MythMod.Items.Weapons.FestivalWeapons//������mod����
         public override void SetDefaults()
         {
 
-            item.damage = 22;//�˺�
-            item.melee = true;//�Ƿ��ǽ�ս
-            item.width = 68;//��
-            item.height = 68;//��
-            item.useTime = 42;//ʹ��ʱ�Ӷ����ʱ��
-            item.rare = 2;//Ʒ��
-            item.useAnimation = 14;//�Ӷ�ʱ��������ʱ��
-            item.useStyle = 1;//ʹ�ö����������ǻӶ�
-            item.knockBack = 4;//����
-            item.UseSound = SoundID.Item1;//�Ӷ�����
-            item.autoReuse = true;//�ܷ�����Ӷ�
-            item.crit = 0;//����
-            item.value = 99;//��ֵ��1��ʾһͭ�ң�������100�����
-            item.scale = 1f;//��С
-            item.shoot = base.mod.ProjectileType("CuSwordChi");
-            item.shootSpeed = 10f;
+            Item.damage = 22;//�˺�
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;//�Ƿ��ǽ�ս
+            Item.width = 68;//��
+            Item.height = 68;//��
+            Item.useTime = 42;//ʹ��ʱ�Ӷ����ʱ��
+            Item.rare = 2;//Ʒ��
+            Item.useAnimation = 14;//�Ӷ�ʱ��������ʱ��
+            Item.useStyle = 1;//ʹ�ö����������ǻӶ�
+            Item.knockBack = 4;//����
+            Item.UseSound = SoundID.Item1;//�Ӷ�����
+            Item.autoReuse = true;//�ܷ�����Ӷ�
+            Item.crit = 0;//����
+            Item.value = 99;//��ֵ��1��ʾһͭ�ң�������100�����
+            Item.scale = 1f;//��С
+            Item.shoot = base.Mod.Find<ModProjectile>("CuSwordChi").Type;
+            Item.shootSpeed = 10f;
 
         }
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8

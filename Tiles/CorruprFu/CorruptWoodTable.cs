@@ -10,7 +10,7 @@ namespace MythMod.Tiles.CorruprFu
 {
 	public class CorruptWoodTable : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileSolidTop[(int)base.Type] = true;
 			Main.tileLighted[(int)base.Type] = true;
@@ -25,7 +25,7 @@ namespace MythMod.Tiles.CorruprFu
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
 			modTranslation.SetDefault("朽木桌");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
-			this.adjTiles = new int[]
+			this.AdjTiles = new int[]
 			{
 				14
 			};
@@ -42,7 +42,7 @@ namespace MythMod.Tiles.CorruprFu
 		}
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("CorruptWoodTable"), 1, false, 0, false, false);
+			Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("CorruptWoodTable").Type, 1, false, 0, false, false);
 		}
 	}
 }

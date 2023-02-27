@@ -16,26 +16,25 @@ namespace MythMod.Items.Weapons.Bottle
         }
         public override void SetDefaults()
         {
-            base.item.width = 32;
-            base.item.height = 30;
-            base.item.useAnimation = 45;
-            base.item.useTime = 60;
-            base.item.useStyle = 4;
-            item.maxStack = 20;
-            base.item.consumable = true;
+            base.Item.width = 32;
+            base.Item.height = 30;
+            base.Item.useAnimation = 45;
+            base.Item.useTime = 60;
+            base.Item.useStyle = 4;
+            Item.maxStack = 20;
+            base.Item.consumable = true;
         }
         public override bool CanUseItem(Player player)
         {
-            return !NPC.AnyNPCs(base.mod.NPCType("EvilBotle"));
+            return !NPC.AnyNPCs(base.Mod.Find<ModNPC>("EvilBotle").Type);
         }
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(3081, 50);
             modRecipe.AddIngredient(3001, 1);
             modRecipe.requiredTile[0] = 26;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
     }
 }

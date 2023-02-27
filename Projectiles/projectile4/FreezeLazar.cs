@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 
 namespace MythMod.Projectiles.projectile4
@@ -11,47 +12,47 @@ namespace MythMod.Projectiles.projectile4
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("冷冻射线");
-			Main.projFrames[base.projectile.type] = 1;
+			Main.projFrames[base.Projectile.type] = 1;
 		}
 		public override void SetDefaults()
 		{
-			base.projectile.width = 20;
-			base.projectile.height = 20;
-			base.projectile.hostile = false;
-            base.projectile.friendly = true;
-            base.projectile.ignoreWater = true;
-			base.projectile.tileCollide = true;
-			base.projectile.penetrate = 1;
-			base.projectile.timeLeft = 600;
-			base.projectile.alpha = 0;
-			this.cooldownSlot = 1;
+			base.Projectile.width = 20;
+			base.Projectile.height = 20;
+			base.Projectile.hostile = false;
+            base.Projectile.friendly = true;
+            base.Projectile.ignoreWater = true;
+			base.Projectile.tileCollide = true;
+			base.Projectile.penetrate = 1;
+			base.Projectile.timeLeft = 600;
+			base.Projectile.alpha = 0;
+			this.CooldownSlot = 1;
 		}
 		public override void AI()
 		{
-			base.projectile.spriteDirection = 1;
-            Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 0f / 255f, (float)(255 - base.projectile.alpha) * 0f / 255f, (float)(255 - base.projectile.alpha) * 0.6f / 255f);
-            base.projectile.rotation = (float)Math.Atan2((double)base.projectile.velocity.Y, (double)base.projectile.velocity.X);
-            projectile.ai[1] = 10;
+			base.Projectile.spriteDirection = 1;
+            Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 0f / 255f, (float)(255 - base.Projectile.alpha) * 0f / 255f, (float)(255 - base.Projectile.alpha) * 0.6f / 255f);
+            base.Projectile.rotation = (float)Math.Atan2((double)base.Projectile.velocity.Y, (double)base.Projectile.velocity.X);
+            Projectile.ai[1] = 10;
         }
         public override Color? GetAlpha(Color lightColor)
         {
             return new Color?(new Color(255, 255, 255, 0));
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D texture2D = Main.projectileTexture[base.projectile.type];
-            int num = Main.projectileTexture[base.projectile.type].Height;
-            Main.spriteBatch.Draw(texture2D, base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY), new Rectangle?(new Rectangle(0, 0, texture2D.Width, num)), base.projectile.GetAlpha(lightColor), base.projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.projectile.scale, SpriteEffects.None, 1f);
+            Texture2D texture2D = TextureAssets.Projectile[base.Projectile.type].Value;
+            int num = TextureAssets.Projectile[base.Projectile.type].Value.Height;
+            Main.spriteBatch.Draw(texture2D, base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), new Rectangle?(new Rectangle(0, 0, texture2D.Width, num)), base.Projectile.GetAlpha(lightColor), base.Projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.Projectile.scale, SpriteEffects.None, 1f);
             return false;
         }
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
             target.AddBuff(47, 300);
             target.AddBuff(46, 300);
-            if (target.type != 396 && target.type != 397 && target.type != 398 && target.type != mod.NPCType("AncientTangerineTreeEye"))
+            if (target.type != 396 && target.type != 397 && target.type != 398 && target.type != Mod.Find<ModNPC>("AncientTangerineTreeEye").Type)
             {
-                target.AddBuff(mod.BuffType("Freeze"), (int)projectile.ai[1]);
-                target.AddBuff(mod.BuffType("Freeze2"), (int)projectile.ai[1] + 2);
+                target.AddBuff(Mod.Find<ModBuff>("Freeze").Type, (int)Projectile.ai[1]);
+                target.AddBuff(Mod.Find<ModBuff>("Freeze2").Type, (int)Projectile.ai[1] + 2);
             }
             if (target.type == 113)
             {
@@ -59,8 +60,8 @@ namespace MythMod.Projectiles.projectile4
                 {
                     if (Main.npc[i].type == 113 || Main.npc[i].type == 114)
                     {
-                        Main.npc[i].AddBuff(mod.BuffType("Freeze"), (int)projectile.ai[1]);
-                        Main.npc[i].AddBuff(mod.BuffType("Freeze2"), (int)projectile.ai[1] + 2);
+                        Main.npc[i].AddBuff(Mod.Find<ModBuff>("Freeze").Type, (int)Projectile.ai[1]);
+                        Main.npc[i].AddBuff(Mod.Find<ModBuff>("Freeze2").Type, (int)Projectile.ai[1] + 2);
                     }
                 }
             }
@@ -70,8 +71,8 @@ namespace MythMod.Projectiles.projectile4
                 {
                     if (Main.npc[i].type == 113 || Main.npc[i].type == 114)
                     {
-                        Main.npc[i].AddBuff(mod.BuffType("Freeze"), (int)projectile.ai[1]);
-                        Main.npc[i].AddBuff(mod.BuffType("Freeze2"), (int)projectile.ai[1] + 2);
+                        Main.npc[i].AddBuff(Mod.Find<ModBuff>("Freeze").Type, (int)Projectile.ai[1]);
+                        Main.npc[i].AddBuff(Mod.Find<ModBuff>("Freeze2").Type, (int)Projectile.ai[1] + 2);
                     }
                 }
             }
@@ -80,7 +81,7 @@ namespace MythMod.Projectiles.projectile4
         {
             for (int i = 0; i < 5; i++)
             {
-                int num = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, 88, 0f, 0f, 100, default(Color), 0.6f);
+                int num = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, 88, 0f, 0f, 100, default(Color), 0.6f);
                 Main.dust[num].velocity *= 0.2f;
             }
         }

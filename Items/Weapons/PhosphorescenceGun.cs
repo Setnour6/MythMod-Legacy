@@ -33,34 +33,33 @@ namespace MythMod.Items.Weapons
         public static short GetGlowMask = 0;
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);//����һ������
             recipe.AddIngredient(null, "EvilScaleDust", 5); //��Ҫһ������
             recipe.AddIngredient(null, "BrokenWingOfMoth", 15); //��Ҫһ������
             recipe.requiredTile[0] = 26;
-            recipe.SetResult(this, 1); //����һ������
-            recipe.AddRecipe();
+            recipe.Register();
         }
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            base.item.damage = 22;
-			base.item.width = 66;
-			base.item.height = 48;
-			base.item.useTime = 16;
-			base.item.useAnimation = 16;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.ranged = true;
-			base.item.knockBack = 1f;
-			base.item.value = 3000;
-			base.item.rare = 3;
-			base.item.UseSound = SoundID.Item31;
-			base.item.autoReuse = true;
-            base.item.shoot = 83;
-			base.item.shootSpeed = 10f;
-			base.item.useAmmo = 97;
+            Item.glowMask = GetGlowMask;
+            base.Item.damage = 22;
+			base.Item.width = 66;
+			base.Item.height = 48;
+			base.Item.useTime = 16;
+			base.Item.useAnimation = 16;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.DamageType = DamageClass.Ranged;
+			base.Item.knockBack = 1f;
+			base.Item.value = 3000;
+			base.Item.rare = 3;
+			base.Item.UseSound = SoundID.Item31;
+			base.Item.autoReuse = true;
+            base.Item.shoot = 83;
+			base.Item.shootSpeed = 10f;
+			base.Item.useAmmo = 97;
 		}
-		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
 			float num = speedX + (float)Main.rand.Next(-10, 11) * 0.05f;
 			float num2 = speedY + (float)Main.rand.Next(-10, 11) * 0.05f;

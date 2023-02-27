@@ -17,20 +17,20 @@ namespace MythMod.Items.Weapons
         }
         public override void SetDefaults()
         {
-            item.damage = 49;
-            item.melee = true;
-            item.width = 48;
-            item.height = 48;
-            item.useTime = 26;
-            item.rare = 4;
-            item.useAnimation = 26;
-            item.useStyle = 1;
-            item.knockBack = 5.0f ;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 4;
-            item.value = 27000;
-            item.scale = 1f;
+            Item.damage = 49;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 48;
+            Item.height = 48;
+            Item.useTime = 26;
+            Item.rare = 4;
+            Item.useAnimation = 26;
+            Item.useStyle = 1;
+            Item.knockBack = 5.0f ;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 4;
+            Item.value = 27000;
+            Item.scale = 1f;
         }
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {
@@ -38,12 +38,11 @@ namespace MythMod.Items.Weapons
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(502, 50);
             recipe.AddIngredient(null, "GreenBlueSword", 1);
-            recipe.SetResult(this, 1);
             recipe.requiredTile[0] = 134;
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

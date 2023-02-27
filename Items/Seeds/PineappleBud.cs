@@ -17,18 +17,18 @@ namespace MythMod.Items.Seeds
 		// Token: 0x06000DF0 RID: 3568 RVA: 0x0006CAA8 File Offset: 0x0006ACA8
 		public override void SetDefaults()
 		{
-			base.item.useTurn = true;
-			base.item.autoReuse = true;
-			base.item.useStyle = 1;
-			base.item.useAnimation = 15;
-			base.item.useTime = 10;
-			base.item.maxStack = 99;
-			base.item.consumable = true;
-			base.item.placeStyle = 0;
-			base.item.width = 22;
-			base.item.height = 12;
-			base.item.value = 100;
-            base.item.createTile = base.mod.TileType("菠萝丛");
+			base.Item.useTurn = true;
+			base.Item.autoReuse = true;
+			base.Item.useStyle = 1;
+			base.Item.useAnimation = 15;
+			base.Item.useTime = 10;
+			base.Item.maxStack = 99;
+			base.Item.consumable = true;
+			base.Item.placeStyle = 0;
+			base.Item.width = 22;
+			base.Item.height = 12;
+			base.Item.value = 100;
+            base.Item.createTile = base.Mod.Find<ModTile>("菠萝丛").Type;
 		}
 	}
 }

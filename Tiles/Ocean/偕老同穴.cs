@@ -11,7 +11,7 @@ namespace MythMod.Tiles.Ocean
 	public class 偕老同穴 : ModTile
 	{
 		// Token: 0x0600489C RID: 18588 RVA: 0x003496D4 File Offset: 0x003478D4
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[(int)base.Type] = true;
 			Main.tileNoAttach[(int)base.Type] = true;
@@ -27,17 +27,17 @@ namespace MythMod.Tiles.Ocean
                 16
 			};
 			TileObjectData.addTile((int)base.Type);
-			this.dustType = 253;
+			this.DustType = 253;
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             base.AddMapEntry(new Color(200, 200, 200), modTranslation);
             modTranslation.SetDefault("");
-            this.mineResist = 3f;
-			base.SetDefaults();
+            this.MineResist = 3f;
+			base.SetStaticDefaults();
 			modTranslation.AddTranslation(GameCulture.Chinese, "");
 		}
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("OldTogetherSponge"));
+            Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("OldTogetherSponge").Type);
         }
         // Token: 0x0600489D RID: 18589 RVA: 0x000138D5 File Offset: 0x00011AD5
         public override void NumDust(int i, int j, bool fail, ref int num)

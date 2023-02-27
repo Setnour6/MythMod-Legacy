@@ -1,4 +1,4 @@
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -28,40 +28,40 @@ namespace MythMod.Items.Weapons
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            item.damage = 400;
-            item.melee = true;
-            item.width = 52;
-            item.height = 62;
-            item.useTime = 18;
-            item.rare = 11;
-            item.useAnimation = 18;
-            item.useStyle = 1;
-            item.knockBack = 2;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 22;
-            item.value = 1000000;
-            item.scale = 1f;
-            item.shoot = mod.ProjectileType("MoonPlus");
-            item.shootSpeed = 12f;
+            Item.glowMask = GetGlowMask;
+            Item.damage = 400;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 52;
+            Item.height = 62;
+            Item.useTime = 18;
+            Item.rare = 11;
+            Item.useAnimation = 18;
+            Item.useStyle = 1;
+            Item.knockBack = 2;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 22;
+            Item.value = 1000000;
+            Item.scale = 1f;
+            Item.shoot = Mod.Find<ModProjectile>("MoonPlus").Type;
+            Item.shootSpeed = 12f;
         }
         private int a = 0;
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             if (a % 3 == 0)
             {
-                int u = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, mod.ProjectileType("DeathKnife"), (int)((double)damage * 2.4d), knockBack, player.whoAmI, 0f, 0f);
+                int u = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, Mod.Find<ModProjectile>("DeathKnife").Type, (int)((double)damage * 2.4d), knockBack, player.whoAmI, 0f, 0f);
                 Main.projectile[u].rotation = Main.rand.NextFloat((MathHelper.TwoPi));
             }
             if (a % 3 == 1)
             {
-                int u = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, mod.ProjectileType("MoonPlus"), (int)((double)damage * 2.4d), knockBack, player.whoAmI, 0f, 0f);
+                int u = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, Mod.Find<ModProjectile>("MoonPlus").Type, (int)((double)damage * 2.4d), knockBack, player.whoAmI, 0f, 0f);
                 Main.projectile[u].rotation = Main.rand.NextFloat((MathHelper.TwoPi));
             }
             if (a % 3 == 2)
             {
-                int u = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, mod.ProjectileType("FreezeKnife"), (int)((double)damage * 2.4d), knockBack, player.whoAmI, 0f, 0f);
+                int u = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, Mod.Find<ModProjectile>("FreezeKnife").Type, (int)((double)damage * 2.4d), knockBack, player.whoAmI, 0f, 0f);
                 Main.projectile[u].rotation = Main.rand.NextFloat((MathHelper.TwoPi));
             }
             a += 1;
@@ -69,13 +69,12 @@ namespace MythMod.Items.Weapons
         }
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(1327, 1);
             modRecipe.AddIngredient(1306, 1);
             modRecipe.AddIngredient(null, "CrimsonMoon", 1);
             modRecipe.requiredTile[0] = 412;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
     }
 }

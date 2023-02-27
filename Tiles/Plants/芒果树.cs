@@ -11,7 +11,7 @@ namespace MythMod.Tiles.Plants
 {
     public class 芒果树 : ModTile
     {
-        public override void SetDefaults()
+        public override void SetStaticDefaults()
         {
             Main.tileFrameImportant[(int)base.Type] = true;
             Main.tileNoAttach[(int)base.Type] = true;
@@ -48,13 +48,13 @@ namespace MythMod.Tiles.Plants
             TileObjectData.newTile.Origin = new Point16(0, 17);
             TileObjectData.newTile.UsesCustomCanPlace = true;
             TileObjectData.addTile((int)base.Type);
-            this.dustType = 39;
-            this.soundType = 6;
+            this.DustType = 39;
+            this.HitSound = 6;
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
             base.AddMapEntry(new Color(100, 210, 80), modTranslation);
-            this.mineResist = 3f;
-            base.SetDefaults();
+            this.MineResist = 3f;
+            base.SetStaticDefaults();
             modTranslation.AddTranslation(GameCulture.Chinese, "");
         }
         private int xm = 0;
@@ -69,10 +69,10 @@ namespace MythMod.Tiles.Plants
         {
             if (frameX == 774)
             {
-                Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("芒果"), 15);
-                Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("芒果"), 15);
-                Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("芒果"), 15);
-                Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("芒果"), Main.rand.Next(3, 15));
+                Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("芒果").Type, 15);
+                Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("芒果").Type, 15);
+                Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("芒果").Type, 15);
+                Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("芒果").Type, Main.rand.Next(3, 15));
                 Item.NewItem(i * 16, j * 16, 16, 32, 9, 15);
             }
             Color messageColor = Color.Purple;
@@ -80,17 +80,17 @@ namespace MythMod.Tiles.Plants
         public override void PlaceInWorld(int i, int j, Item item)
         {
             short num = (short)(Main.rand.Next(0, 0));
-            Main.tile[i, j].frameX = 0;
+            Main.tile[i, j].TileFrameX = 0;
         }
         public override void RandomUpdate(int i, int j)
         {
-            if (Main.tile[i, j].frameX < 774 && Main.rand.Next(100) == 1)
+            if (Main.tile[i, j].TileFrameX < 774 && Main.rand.Next(100) == 1)
             {
                 for (int y = j; y < j + 44; y++)
                 {
-                    if (Main.tile[i, y - 22].type == mod.TileType("芒果树"))
+                    if (Main.tile[i, y - 22].TileType == Mod.Find<ModTile>("芒果树").Type)
                     {
-                        Main.tile[i, y - 22].frameX += 256;
+                        Main.tile[i, y - 22].TileFrameX += 256;
                     }
                 }
                 xm += 1;

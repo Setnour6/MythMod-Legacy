@@ -12,7 +12,7 @@ namespace MythMod.Tiles.玄武岩家具
 	public class 玄武岩烛台 : ModTile
 	{
 		// Token: 0x06004151 RID: 16721 RVA: 0x0032B0F4 File Offset: 0x003292F4
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileLighted[(int)base.Type] = true;
 			Main.tileFrameImportant[(int)base.Type] = true;
@@ -24,8 +24,8 @@ namespace MythMod.Tiles.玄武岩家具
 			modTranslation.SetDefault("玄武岩烛台");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
-			this.disableSmartCursor = true;
-			this.adjTiles = new int[]
+			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+			this.AdjTiles = new int[]
 			{
 				4
 			};
@@ -48,7 +48,7 @@ namespace MythMod.Tiles.玄武岩家具
 		// Token: 0x06004154 RID: 16724 RVA: 0x0032B1B0 File Offset: 0x003293B0
 		public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
 		{
-			if (Main.tile[i, j].frameX < 18)
+			if (Main.tile[i, j].TileFrameX < 18)
 			{
 				r = 1f;
 				g = 0.1647058823529412f;
@@ -63,14 +63,14 @@ namespace MythMod.Tiles.玄武岩家具
 		// Token: 0x06004155 RID: 16725 RVA: 0x0032B204 File Offset: 0x00329404
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			Item.NewItem(i * 16, j * 16, 16, 16, base.mod.ItemType("BasaltCandlestick"), 1, false, 0, false, false);
+			Item.NewItem(i * 16, j * 16, 16, 16, base.Mod.Find<ModItem>("BasaltCandlestick").Type, 1, false, 0, false, false);
 		}
 
 		// Token: 0x06004156 RID: 16726 RVA: 0x0032B238 File Offset: 0x00329438
 		public override void HitWire(int i, int j)
 		{
-			int num = i - (int)(Main.tile[i, j].frameX / 18 % 2);
-			int num2 = j - (int)(Main.tile[i, j].frameY / 18 % 2);
+			int num = i - (int)(Main.tile[i, j].TileFrameX / 18 % 2);
+			int num2 = j - (int)(Main.tile[i, j].TileFrameY / 18 % 2);
 			for (int k = num; k < num + 2; k++)
 			{
 				for (int l = num2; l < num2 + 2; l++)
@@ -79,17 +79,17 @@ namespace MythMod.Tiles.玄武岩家具
 					{
 						Main.tile[k, l] = new Tile();
 					}
-					if (Main.tile[k, l].active() && Main.tile[k, l].type == base.Type)
+					if (Main.tile[k, l].HasTile && Main.tile[k, l].TileType == base.Type)
 					{
-						if (Main.tile[k, l].frameX < 36)
+						if (Main.tile[k, l].TileFrameX < 36)
 						{
 							Tile tile = Main.tile[k, l];
-							tile.frameX += 36;
+							tile.TileFrameX += 36;
 						}
 						else
 						{
 							Tile tile2 = Main.tile[k, l];
-							tile2.frameX -= 36;
+							tile2.TileFrameX -= 36;
 						}
 					}
 				}

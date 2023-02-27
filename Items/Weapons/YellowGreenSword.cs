@@ -19,21 +19,21 @@ namespace MythMod.Items.Weapons
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            item.damage = 25;//伤害
-            item.melee = true;//是否是近战
-            item.width = 48;//宽
-            item.height = 48;//高
-            item.useTime = 25;//使用时挥动间隔时间
-            item.rare = 2;//品质
-            item.useAnimation = 25;//挥动时动作持续时间
-            item.useStyle = 1;//使用动画，这里是挥动
-            item.knockBack = 5.0f ;//击退
-            item.UseSound = SoundID.Item1;//挥动声音
-            item.autoReuse = false;
-            item.crit = 4;//暴击
-            item.value = 27000;//价值，1表示一铜币，这里是100铂金币
-            item.scale = 1f;//大小
+            Item.glowMask = GetGlowMask;
+            Item.damage = 25;//伤害
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;//是否是近战
+            Item.width = 48;//宽
+            Item.height = 48;//高
+            Item.useTime = 25;//使用时挥动间隔时间
+            Item.rare = 2;//品质
+            Item.useAnimation = 25;//挥动时动作持续时间
+            Item.useStyle = 1;//使用动画，这里是挥动
+            Item.knockBack = 5.0f ;//击退
+            Item.UseSound = SoundID.Item1;//挥动声音
+            Item.autoReuse = false;
+            Item.crit = 4;//暴击
+            Item.value = 27000;//价值，1表示一铜币，这里是100铂金币
+            Item.scale = 1f;//大小
         }
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {
@@ -41,12 +41,11 @@ namespace MythMod.Items.Weapons
         }
         public override void AddRecipes()
         {//合成表1
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);//制作一个材料
             recipe.AddIngredient(117, 15); //要用一个泥土制作，1是数量，ItemID.DirtBlock是泥土
             recipe.AddIngredient(null, "Olivine", 2); //要用一个泥土制作，1是数量，ItemID.DirtBlock是泥土
-            recipe.SetResult(this, 1);//制作一个材料
             recipe.requiredTile[0] = 16;	//要在工作台旁制作，18是工作台的放置物id
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

@@ -13,15 +13,15 @@ using Terraria.ID;
 using Terraria.IO;
 using Terraria.ModLoader;
 using Terraria.Utilities;
-using Terraria.World.Generation;
+using Terraria.WorldBuilding;
 
 namespace MythMod.Function
 {
     public class StaticFunction
     {
-        #region 获取文件
+        #region »ñÈ¡ÎÄ¼þ
         /// <summary>
-        /// 获取文件(是否选择多个文件,标题,文件格式（如："图片文件(*.jpg,*.png,*.bmp)|*.jpg;*.png;*.bmp"）)
+        /// »ñÈ¡ÎÄ¼þ(ÊÇ·ñÑ¡Ôñ¶à¸öÎÄ¼þ,±êÌâ,ÎÄ¼þ¸ñÊ½£¨Èç£º"Í¼Æ¬ÎÄ¼þ(*.jpg,*.png,*.bmp)|*.jpg;*.png;*.bmp"£©)
         /// </summary>
         /// <param name="Multiselect"></param>
         /// <param name="Title"></param>
@@ -40,9 +40,9 @@ namespace MythMod.Function
             return "";
         }
         #endregion
-        #region 绘制能量条
+        #region »æÖÆÄÜÁ¿Ìõ
         /// <summary>
-        /// 绘制能量条
+        /// »æÖÆÄÜÁ¿Ìõ
         /// </summary>
         /// <param name="sb"></param>
         /// <param name="energyBox"></param>
@@ -64,9 +64,9 @@ namespace MythMod.Function
             }
         }
         #endregion
-        #region 获取文字向量大小
+        #region »ñÈ¡ÎÄ×ÖÏòÁ¿´óÐ¡
         /// <summary>
-        /// 获取文字大小
+        /// »ñÈ¡ÎÄ×Ö´óÐ¡
         /// </summary>
         /// <param name="Text"></param>
         /// <param name="Font"></param>
@@ -78,9 +78,9 @@ namespace MythMod.Function
             return fontSize;
         }
         #endregion
-        #region 储存文件
+        #region ´¢´æÎÄ¼þ
         /// <summary>
-        /// 储存文件
+        /// ´¢´æÎÄ¼þ
         /// </summary>
         /// <param name="Filter"></param>
         /// <param name="input"></param>
@@ -89,25 +89,25 @@ namespace MythMod.Function
             string localFilePath = "";
             //string localFilePath, fileNameExt, newFileName, FilePath; 
             SaveFileDialog sfd = new SaveFileDialog();
-            //设置文件类型 
+            //ÉèÖÃÎÄ¼þÀàÐÍ 
             sfd.Filter = Filter;
-            //设置默认文件类型显示顺序 
+            //ÉèÖÃÄ¬ÈÏÎÄ¼þÀàÐÍÏÔÊ¾Ë³Ðò 
             sfd.FilterIndex = 1;
-            //保存对话框是否记忆上次打开的目录 
+            //±£´æ¶Ô»°¿òÊÇ·ñ¼ÇÒäÉÏ´Î´ò¿ªµÄÄ¿Â¼ 
             sfd.RestoreDirectory = true;
-            //点了保存按钮进入 
+            //µãÁË±£´æ°´Å¥½øÈë 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
-                localFilePath = sfd.FileName.ToString(); //获得文件路径 
-                //获取文件名，不带路径
+                localFilePath = sfd.FileName.ToString(); //»ñµÃÎÄ¼þÂ·¾¶ 
+                //»ñÈ¡ÎÄ¼þÃû£¬²»´øÂ·¾¶
                 //string fileNameExt = localFilePath.Substring(localFilePath.LastIndexOf("\\") + 1); 
-                //获取文件路径，不带文件名 
+                //»ñÈ¡ÎÄ¼þÂ·¾¶£¬²»´øÎÄ¼þÃû 
                 //FilePath = localFilePath.Substring(0, localFilePath.LastIndexOf("\\")); 
-                //给文件名前加上时间 
+                //¸øÎÄ¼þÃûÇ°¼ÓÉÏÊ±¼ä 
                 //newFileName = DateTime.Now.ToString() + fileNameExt; 
-                //在文件名里加字符 
+                //ÔÚÎÄ¼þÃûÀï¼Ó×Ö·û 
                 //saveFileDialog1.FileName.Insert(1,"dameng"); 
-                FileStream fs = (FileStream)sfd.OpenFile();//输出文件 
+                FileStream fs = (FileStream)sfd.OpenFile();//Êä³öÎÄ¼þ 
                 //FileStream fs_1 = new FileStream(localFilePath, FileMode.Append);
                 StreamWriter wr = new StreamWriter(fs);
                 wr.WriteLine(input);

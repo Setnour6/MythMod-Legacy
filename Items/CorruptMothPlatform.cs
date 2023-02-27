@@ -31,24 +31,24 @@ namespace MythMod.Items
 		// Token: 0x060009BB RID: 2491 RVA: 0x000500EC File Offset: 0x0004E2EC
 		public override void SetDefaults()
 		{
-			base.item.width = 32;
-            base.item.height = 32;
-			base.item.maxStack = 99;
-			base.item.useTurn = true;
-			base.item.autoReuse = true;
-			base.item.useAnimation = 15;
-			base.item.useTime = 10;
-			base.item.useStyle = 1;
-			base.item.consumable = true;
-			base.item.value = 50000;
-			base.item.rare = 1;
-			base.item.createTile = base.mod.TileType("BossTrophy");
-			base.item.placeStyle = 1;
+			base.Item.width = 32;
+            base.Item.height = 32;
+			base.Item.maxStack = 99;
+			base.Item.useTurn = true;
+			base.Item.autoReuse = true;
+			base.Item.useAnimation = 15;
+			base.Item.useTime = 10;
+			base.Item.useStyle = 1;
+			base.Item.consumable = true;
+			base.Item.value = 50000;
+			base.Item.rare = 1;
+			base.Item.createTile = base.Mod.Find<ModTile>("BossTrophy").Type;
+			base.Item.placeStyle = 1;
 		}
         public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
         {
             Vector2 origin = new Vector2(16f, 16f);
-            spriteBatch.Draw(base.mod.GetTexture("Items/腐檀巨蛾纪念章发光"), base.item.Center - Main.screenPosition, null, Color.White, rotation, origin, 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(base.Mod.GetTexture("Items/腐檀巨蛾纪念章发光"), base.Item.Center - Main.screenPosition, null, Color.White, rotation, origin, 1f, SpriteEffects.None, 0f);
         }
     }
 }

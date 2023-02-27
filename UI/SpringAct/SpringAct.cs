@@ -1,8 +1,9 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
 //using System.Drawing;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 using Terraria.UI;
 using Terraria.ID;
@@ -139,30 +140,30 @@ namespace MythMod.UI.SpringAct
             }
             if (mplayer.GoldTime > 0)
             {
-                Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, "倒计时：" + (mplayer.GoldTime / 60).ToString(), shopx + 80, shopy - 170, new Color(255, 195, 0), new Color(127, 85, 0), Vector2.Zero, 2);
+                Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, "倒计时：" + (mplayer.GoldTime / 60).ToString(), shopx + 80, shopy - 170, new Color(255, 195, 0), new Color(127, 85, 0), Vector2.Zero, 2);
                 if (mplayer.GoldPoint < 30)
                 {
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, mplayer.GoldPoint.ToString(), shopx + 125, shopy - 125, new Color(40, 40, 40), new Color(5, 5, 5), Vector2.Zero, 2);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, mplayer.GoldPoint.ToString(), shopx + 125, shopy - 125, new Color(40, 40, 40), new Color(5, 5, 5), Vector2.Zero, 2);
                 }
                 if (mplayer.GoldPoint >= 30 && mplayer.GoldPoint < 350)
                 {
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, mplayer.GoldPoint.ToString(), shopx + 125, shopy - 125, new Color(242, 118, 99), new Color(99, 48, 39), Vector2.Zero, 2);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, mplayer.GoldPoint.ToString(), shopx + 125, shopy - 125, new Color(242, 118, 99), new Color(99, 48, 39), Vector2.Zero, 2);
                 }
                 if (mplayer.GoldPoint >= 350 && mplayer.GoldPoint < 2000)
                 {
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, mplayer.GoldPoint.ToString(), shopx + 125, shopy - 125, new Color(190, 190, 190), new Color(87, 87, 87), Vector2.Zero, 2);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, mplayer.GoldPoint.ToString(), shopx + 125, shopy - 125, new Color(190, 190, 190), new Color(87, 87, 87), Vector2.Zero, 2);
                 }
                 if (mplayer.GoldPoint >= 2000 && mplayer.GoldPoint < 10000)
                 {
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, mplayer.GoldPoint.ToString(), shopx + 125, shopy - 125, new Color(255, 195, 0), new Color(127, 85, 0), Vector2.Zero, 2);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, mplayer.GoldPoint.ToString(), shopx + 125, shopy - 125, new Color(255, 195, 0), new Color(127, 85, 0), Vector2.Zero, 2);
                 }
                 if (mplayer.GoldPoint >= 10000 && mplayer.GoldPoint < 50000)
                 {
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, mplayer.GoldPoint.ToString(), shopx + 125, shopy - 125, new Color(255, 239, 248), new Color(57, 72, 81), Vector2.Zero, 2);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, mplayer.GoldPoint.ToString(), shopx + 125, shopy - 125, new Color(255, 239, 248), new Color(57, 72, 81), Vector2.Zero, 2);
                 }
                 if (mplayer.GoldPoint >= 50000)
                 {
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, mplayer.GoldPoint.ToString(), shopx + 125, shopy - 125, new Color(0, 217, 255, 150), new Color(0, 120, 127), Vector2.Zero, 2);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, mplayer.GoldPoint.ToString(), shopx + 125, shopy - 125, new Color(0, 217, 255, 150), new Color(0, 120, 127), Vector2.Zero, 2);
                 }
             }
             if (Main.mouseLeftRelease)
@@ -282,7 +283,7 @@ namespace MythMod.UI.SpringAct
             }
 
 
-            if (NPC.CountNPCS(mod.NPCType("CuYuanbao")) + NPC.CountNPCS(mod.NPCType("AgYuanbao")) + NPC.CountNPCS(mod.NPCType("AuYuanbao")) + NPC.CountNPCS(mod.NPCType("DimondYuanbao") + NPC.CountNPCS(mod.NPCType("PtYuanbao"))) > 0 && Main.time % 60 == 0)
+            if (NPC.CountNPCS(mod.Find<ModNPC>("CuYuanbao").Type) + NPC.CountNPCS(mod.Find<ModNPC>("AgYuanbao").Type) + NPC.CountNPCS(mod.Find<ModNPC>("AuYuanbao").Type) + NPC.CountNPCS(mod.Find<ModNPC>("DimondYuanbao").Type + NPC.CountNPCS(mod.Find<ModNPC>("PtYuanbao").Type)) > 0 && Main.time % 60 == 0)
             {
                 for(int i = 0;i < 200;i++)
                 {
@@ -302,252 +303,252 @@ namespace MythMod.UI.SpringAct
                     }
                 }
             }
-            if (NPC.CountNPCS(mod.NPCType("CuYuanbao")) + NPC.CountNPCS(mod.NPCType("AgYuanbao")) + NPC.CountNPCS(mod.NPCType("AuYuanbao")) + NPC.CountNPCS(mod.NPCType("DimondYuanbao") + NPC.CountNPCS(mod.NPCType("PtYuanbao"))) < 5 + (15 - mplayer.GoldTime / 240) && mplayer.GoldTime > 0 && mplayer.GoldPoint >= 0 && mplayer.GoldPoint <= 10)
+            if (NPC.CountNPCS(mod.Find<ModNPC>("CuYuanbao").Type) + NPC.CountNPCS(mod.Find<ModNPC>("AgYuanbao").Type) + NPC.CountNPCS(mod.Find<ModNPC>("AuYuanbao").Type) + NPC.CountNPCS(mod.Find<ModNPC>("DimondYuanbao").Type + NPC.CountNPCS(mod.Find<ModNPC>("PtYuanbao").Type)) < 5 + (15 - mplayer.GoldTime / 240) && mplayer.GoldTime > 0 && mplayer.GoldPoint >= 0 && mplayer.GoldPoint <= 10)
             {
-                NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("CuYuanbao"), 0, 0, 0, 0, 0, 255);
+                NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("CuYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 if (Main.rand.Next(100) > 90)
                 {
-                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("CuYuanbaoHuge"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("CuYuanbaoHuge").Type, 0, 0, 0, 0, 0, 255);
                 }
             }
-            if (NPC.CountNPCS(mod.NPCType("CuYuanbao")) + NPC.CountNPCS(mod.NPCType("AgYuanbao")) + NPC.CountNPCS(mod.NPCType("AuYuanbao")) + NPC.CountNPCS(mod.NPCType("DimondYuanbao") + NPC.CountNPCS(mod.NPCType("PtYuanbao"))) < 5 + (15 - mplayer.GoldTime / 240) && mplayer.GoldTime > 0 && mplayer.GoldPoint > 10 && mplayer.GoldPoint <= 50)
+            if (NPC.CountNPCS(mod.Find<ModNPC>("CuYuanbao").Type) + NPC.CountNPCS(mod.Find<ModNPC>("AgYuanbao").Type) + NPC.CountNPCS(mod.Find<ModNPC>("AuYuanbao").Type) + NPC.CountNPCS(mod.Find<ModNPC>("DimondYuanbao").Type + NPC.CountNPCS(mod.Find<ModNPC>("PtYuanbao").Type)) < 5 + (15 - mplayer.GoldTime / 240) && mplayer.GoldTime > 0 && mplayer.GoldPoint > 10 && mplayer.GoldPoint <= 50)
             {
                 if (Main.rand.Next(100) > 20)
                 {
-                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("CuYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("CuYuanbao").Type, 0, 0, 0, 0, 0, 255);
                     if (Main.rand.Next(100) > 90)
                     {
-                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("CuYuanbaoHuge"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("CuYuanbaoHuge").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 else
                 {
-                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("AgYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("AgYuanbao").Type, 0, 0, 0, 0, 0, 255);
                     if (Main.rand.Next(100) > 90)
                     {
-                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("AgYuanbaoHuge"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("AgYuanbaoHuge").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (Main.rand.Next(100) >= 98)
                 {
-                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("BoomYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("BoomYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
                 if (Main.rand.Next(100) >= 98)
                 {
-                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("PowerYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("PowerYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
                 if (Main.rand.Next(100) >= 98)
                 {
-                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("DoubleYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("DoubleYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
                 if (Main.rand.Next(100) >= 98)
                 {
-                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("FreezeYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("FreezeYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
                 if (Main.rand.Next(100) >= 98)
                 {
-                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("WeakYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("WeakYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
                 if (Main.rand.Next(100) >= 98)
                 {
-                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("TimeYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("TimeYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
             }
-            if (NPC.CountNPCS(mod.NPCType("CuYuanbao")) + NPC.CountNPCS(mod.NPCType("AgYuanbao")) + NPC.CountNPCS(mod.NPCType("AuYuanbao")) + NPC.CountNPCS(mod.NPCType("DimondYuanbao") + NPC.CountNPCS(mod.NPCType("PtYuanbao"))) < 5 + (15 - mplayer.GoldTime / 240) && mplayer.GoldTime > 0 && mplayer.GoldPoint > 50 && mplayer.GoldPoint <= 1000)
+            if (NPC.CountNPCS(mod.Find<ModNPC>("CuYuanbao").Type) + NPC.CountNPCS(mod.Find<ModNPC>("AgYuanbao").Type) + NPC.CountNPCS(mod.Find<ModNPC>("AuYuanbao").Type) + NPC.CountNPCS(mod.Find<ModNPC>("DimondYuanbao").Type + NPC.CountNPCS(mod.Find<ModNPC>("PtYuanbao").Type)) < 5 + (15 - mplayer.GoldTime / 240) && mplayer.GoldTime > 0 && mplayer.GoldPoint > 50 && mplayer.GoldPoint <= 1000)
             {
                 if (Main.rand.Next(100) > 50)
                 {
-                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("CuYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("CuYuanbao").Type, 0, 0, 0, 0, 0, 255);
                     if (Main.rand.Next(100) > 90)
                     {
-                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("CuYuanbaoHuge"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("CuYuanbaoHuge").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 else
                 {
                     if (Main.rand.Next(100) > 4)
                     {
-                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("AgYuanbao"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("AgYuanbao").Type, 0, 0, 0, 0, 0, 255);
                         if (Main.rand.Next(100) > 90)
                         {
-                            NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("AgYuanbaoHuge"), 0, 0, 0, 0, 0, 255);
+                            NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("AgYuanbaoHuge").Type, 0, 0, 0, 0, 0, 255);
                         }
                     }
                     else
                     {
-                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("AuYuanbao"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("AuYuanbao").Type, 0, 0, 0, 0, 0, 255);
                         if (Main.rand.Next(100) > 90)
                         {
-                            NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("AuYuanbaoHuge"), 0, 0, 0, 0, 0, 255);
+                            NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("AuYuanbaoHuge").Type, 0, 0, 0, 0, 0, 255);
                         }
                     }
                 }
                 if (Main.rand.Next(100) >= 96)
                 {
-                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("BoomYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("BoomYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
                 if (Main.rand.Next(100) >= 98)
                 {
-                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("PowerYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("PowerYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
                 if (Main.rand.Next(100) >= 98)
                 {
-                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("DoubleYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("DoubleYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
                 if (Main.rand.Next(100) >= 95)
                 {
-                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("FreezeYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("FreezeYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
                 if (Main.rand.Next(100) >= 95)
                 {
-                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("WeakYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("WeakYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
                 if (Main.rand.Next(100) >= 95)
                 {
-                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("TimeYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("TimeYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
             }
-            if (NPC.CountNPCS(mod.NPCType("CuYuanbao")) + NPC.CountNPCS(mod.NPCType("AgYuanbao")) + NPC.CountNPCS(mod.NPCType("AuYuanbao")) + NPC.CountNPCS(mod.NPCType("DimondYuanbao") + NPC.CountNPCS(mod.NPCType("PtYuanbao"))) < 5 + (15 - mplayer.GoldTime / 240) && mplayer.GoldTime > 0 && mplayer.GoldPoint > 1000)
+            if (NPC.CountNPCS(mod.Find<ModNPC>("CuYuanbao").Type) + NPC.CountNPCS(mod.Find<ModNPC>("AgYuanbao").Type) + NPC.CountNPCS(mod.Find<ModNPC>("AuYuanbao").Type) + NPC.CountNPCS(mod.Find<ModNPC>("DimondYuanbao").Type + NPC.CountNPCS(mod.Find<ModNPC>("PtYuanbao").Type)) < 5 + (15 - mplayer.GoldTime / 240) && mplayer.GoldTime > 0 && mplayer.GoldPoint > 1000)
             {
                 if (Main.rand.Next(100) > 60)
                 {
-                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("CuYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("CuYuanbao").Type, 0, 0, 0, 0, 0, 255);
                     if (Main.rand.Next(100) > 90)
                     {
-                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("CuYuanbaoHuge"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("CuYuanbaoHuge").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 else
                 {
                     if (Main.rand.Next(100) > 20)
                     {
-                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("AgYuanbao"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("AgYuanbao").Type, 0, 0, 0, 0, 0, 255);
                         if (Main.rand.Next(100) > 90)
                         {
-                            NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("AgYuanbaoHuge"), 0, 0, 0, 0, 0, 255);
+                            NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("AgYuanbaoHuge").Type, 0, 0, 0, 0, 0, 255);
                         }
                     }
                     else
                     {
                         if (Main.rand.Next(100) > 18)
                         {
-                            NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("AuYuanbao"), 0, 0, 0, 0, 0, 255);
+                            NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("AuYuanbao").Type, 0, 0, 0, 0, 0, 255);
                             if (Main.rand.Next(100) > 90)
                             {
-                                NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("AuYuanbaoHuge"), 0, 0, 0, 0, 0, 255);
+                                NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("AuYuanbaoHuge").Type, 0, 0, 0, 0, 0, 255);
                             }
                         }
                         else
                         {
-                            NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("PtYuanbao"), 0, 0, 0, 0, 0, 255);
+                            NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("PtYuanbao").Type, 0, 0, 0, 0, 0, 255);
                         }
                     }
                 }
                 if (Main.rand.Next(100) >= 92)
                 {
-                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("BoomYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("BoomYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
                 if (Main.rand.Next(100) >= 92)
                 {
-                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("PowerYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("PowerYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
                 if (Main.rand.Next(100) >= 92)
                 {
-                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("DoubleYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("DoubleYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
                 if (Main.rand.Next(100) >= 92)
                 {
-                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("FreezeYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("FreezeYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
                 if (Main.rand.Next(100) >= 92)
                 {
-                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("WeakYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("WeakYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
                 if (Main.rand.Next(100) >= 92)
                 {
-                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("TimeYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("TimeYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
             }
-            if (NPC.CountNPCS(mod.NPCType("CuYuanbao")) + NPC.CountNPCS(mod.NPCType("AgYuanbao")) + NPC.CountNPCS(mod.NPCType("AuYuanbao")) + NPC.CountNPCS(mod.NPCType("DimondYuanbao") + NPC.CountNPCS(mod.NPCType("PtYuanbao"))) < 5 + (15 - mplayer.GoldTime / 240) && mplayer.GoldTime > 0 && mplayer.GoldPoint > 3000)
+            if (NPC.CountNPCS(mod.Find<ModNPC>("CuYuanbao").Type) + NPC.CountNPCS(mod.Find<ModNPC>("AgYuanbao").Type) + NPC.CountNPCS(mod.Find<ModNPC>("AuYuanbao").Type) + NPC.CountNPCS(mod.Find<ModNPC>("DimondYuanbao").Type + NPC.CountNPCS(mod.Find<ModNPC>("PtYuanbao").Type)) < 5 + (15 - mplayer.GoldTime / 240) && mplayer.GoldTime > 0 && mplayer.GoldPoint > 3000)
             {
                 if (Main.rand.Next(100) > 60)
                 {
-                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("CuYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("CuYuanbao").Type, 0, 0, 0, 0, 0, 255);
                     if (Main.rand.Next(100) > 90)
                     {
-                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("CuYuanbaoHuge"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("CuYuanbaoHuge").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 else
                 {
                     if (Main.rand.Next(100) > 20)
                     {
-                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("AgYuanbao"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("AgYuanbao").Type, 0, 0, 0, 0, 0, 255);
                         if (Main.rand.Next(100) > 90)
                         {
-                            NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("AgYuanbaoHuge"), 0, 0, 0, 0, 0, 255);
+                            NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("AgYuanbaoHuge").Type, 0, 0, 0, 0, 0, 255);
                         }
                     }
                     else
                     {
                         if (Main.rand.Next(100) > 35)
                         {
-                            NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("AuYuanbao"), 0, 0, 0, 0, 0, 255);
+                            NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("AuYuanbao").Type, 0, 0, 0, 0, 0, 255);
                             if (Main.rand.Next(100) > 90)
                             {
-                                NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("AuYuanbaoHuge"), 0, 0, 0, 0, 0, 255);
+                                NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("AuYuanbaoHuge").Type, 0, 0, 0, 0, 0, 255);
                             }
                         }
                         else
                         {
                             if (Main.rand.Next(100) > 12)
                             {
-                                NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("PtYuanbao"), 0, 0, 0, 0, 0, 255);
+                                NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("PtYuanbao").Type, 0, 0, 0, 0, 0, 255);
                                 if (Main.rand.Next(100) > 90)
                                 {
-                                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("PtYuanbaoHuge"), 0, 0, 0, 0, 0, 255);
+                                    NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("PtYuanbaoHuge").Type, 0, 0, 0, 0, 0, 255);
                                 }
                             }
                             else
                             {
-                                NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("DimondYuanbao"), 0, 0, 0, 0, 0, 255);
+                                NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("DimondYuanbao").Type, 0, 0, 0, 0, 0, 255);
                             }
                         }
                     }
                     if (Main.rand.Next(100) >= 88)
                     {
-                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("BoomYuanbao"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("BoomYuanbao").Type, 0, 0, 0, 0, 0, 255);
                     }
                     if (Main.rand.Next(100) >= 88)
                     {
-                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("PowerYuanbao"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("PowerYuanbao").Type, 0, 0, 0, 0, 0, 255);
                     }
                     if (Main.rand.Next(100) >= 88)
                     {
-                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("DoubleYuanbao"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("DoubleYuanbao").Type, 0, 0, 0, 0, 0, 255);
                     }
                     if (Main.rand.Next(100) >= 98)
                     {
-                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("FreezeYuanbao"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("FreezeYuanbao").Type, 0, 0, 0, 0, 0, 255);
                     }
                     if (Main.rand.Next(100) >= 98)
                     {
-                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("WeakYuanbao"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("WeakYuanbao").Type, 0, 0, 0, 0, 0, 255);
                     }
                     if (Main.rand.Next(100) >= 88)
                     {
-                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("TimeYuanbao"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("TimeYuanbao").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if(Bless8 && mplayer.GoldTime % 3 == 0)
                 {
                     if (Main.rand.Next(100) > 12)
                     {
-                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("PtYuanbao"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("PtYuanbao").Type, 0, 0, 0, 0, 0, 255);
                     }
                     else
                     {
-                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.NPCType("DimondYuanbao"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)player.Center.X + Main.rand.Next(-1000, 1000), (int)player.Center.Y - 1500, mod.Find<ModNPC>("DimondYuanbao").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
             }
@@ -567,13 +568,13 @@ namespace MythMod.UI.SpringAct
             }
             if (false)
             {
-                NPC.NewNPC((int)player.Center.X + Main.rand.Next(-10, 10), (int)player.Center.Y - 1500, mod.NPCType("AuYuanbao"), 0, 0, 0, 0, 0, 255);
+                NPC.NewNPC((int)player.Center.X + Main.rand.Next(-10, 10), (int)player.Center.Y - 1500, mod.Find<ModNPC>("AuYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 Color messageColor = Color.Red;
                 Main.NewText(Language.GetTextValue("财源滚滚"), messageColor);
             }
             if (mplayer.GoldPoint > 333 && Bless9 > 0)
             {
-                NPC.NewNPC((int)player.Center.X - 500 + Bless9 * 100, (int)player.Center.Y - 1500, mod.NPCType("AgYuanbao"), 0, 0, 0, 0, 0, 255);
+                NPC.NewNPC((int)player.Center.X - 500 + Bless9 * 100, (int)player.Center.Y - 1500, mod.Find<ModNPC>("AgYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 Bless9 -= 1;
                 if (Bless9 == 5)
                 {
@@ -585,10 +586,10 @@ namespace MythMod.UI.SpringAct
             {
                 if (Bless10 % 10 == 0)
                 {
-                    NPC.NewNPC((int)player.Center.X - 500, (int)player.Center.Y - 1500, mod.NPCType("AuYuanbao"), 0, 0, 0, 0, 0, 255);
-                    NPC.NewNPC((int)player.Center.X - 167, (int)player.Center.Y - 1650, mod.NPCType("AuYuanbao"), 0, 0, 0, 0, 0, 255);
-                    NPC.NewNPC((int)player.Center.X + 500, (int)player.Center.Y - 1500, mod.NPCType("AuYuanbao"), 0, 0, 0, 0, 0, 255);
-                    NPC.NewNPC((int)player.Center.X + 167, (int)player.Center.Y - 1650, mod.NPCType("AuYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X - 500, (int)player.Center.Y - 1500, mod.Find<ModNPC>("AuYuanbao").Type, 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X - 167, (int)player.Center.Y - 1650, mod.Find<ModNPC>("AuYuanbao").Type, 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + 500, (int)player.Center.Y - 1500, mod.Find<ModNPC>("AuYuanbao").Type, 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + 167, (int)player.Center.Y - 1650, mod.Find<ModNPC>("AuYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
 
                 Bless10 -= 1;
@@ -602,27 +603,27 @@ namespace MythMod.UI.SpringAct
             {
                 if (Bless11 == 50)
                 {
-                    NPC.NewNPC((int)player.Center.X, (int)player.Center.Y - 1500, mod.NPCType("PtYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X, (int)player.Center.Y - 1500, mod.Find<ModNPC>("PtYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
                 if (Bless11 == 40)
                 {
-                    NPC.NewNPC((int)player.Center.X + 150, (int)player.Center.Y - 1500, mod.NPCType("PtYuanbao"), 0, 0, 0, 0, 0, 255);
-                    NPC.NewNPC((int)player.Center.X - 150, (int)player.Center.Y - 1500, mod.NPCType("PtYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + 150, (int)player.Center.Y - 1500, mod.Find<ModNPC>("PtYuanbao").Type, 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X - 150, (int)player.Center.Y - 1500, mod.Find<ModNPC>("PtYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
                 if (Bless11 == 30)
                 {
-                    NPC.NewNPC((int)player.Center.X + 300, (int)player.Center.Y - 1500, mod.NPCType("PtYuanbao"), 0, 0, 0, 0, 0, 255);
-                    NPC.NewNPC((int)player.Center.X, (int)player.Center.Y - 1500, mod.NPCType("PtYuanbao"), 0, 0, 0, 0, 0, 255);
-                    NPC.NewNPC((int)player.Center.X - 300, (int)player.Center.Y - 1500, mod.NPCType("PtYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + 300, (int)player.Center.Y - 1500, mod.Find<ModNPC>("PtYuanbao").Type, 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X, (int)player.Center.Y - 1500, mod.Find<ModNPC>("PtYuanbao").Type, 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X - 300, (int)player.Center.Y - 1500, mod.Find<ModNPC>("PtYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
                 if (Bless11 == 20)
                 {
-                    NPC.NewNPC((int)player.Center.X + 150, (int)player.Center.Y - 1500, mod.NPCType("PtYuanbao"), 0, 0, 0, 0, 0, 255);
-                    NPC.NewNPC((int)player.Center.X - 150, (int)player.Center.Y - 1500, mod.NPCType("PtYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X + 150, (int)player.Center.Y - 1500, mod.Find<ModNPC>("PtYuanbao").Type, 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X - 150, (int)player.Center.Y - 1500, mod.Find<ModNPC>("PtYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
                 if (Bless11 == 10)
                 {
-                    NPC.NewNPC((int)player.Center.X, (int)player.Center.Y - 1500, mod.NPCType("PtYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X, (int)player.Center.Y - 1500, mod.Find<ModNPC>("PtYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
 
                 Bless11 -= 1;
@@ -634,31 +635,31 @@ namespace MythMod.UI.SpringAct
             }
             if (mplayer.GoldPoint > 2666 && Bless2 == false)
             {
-                NPC.NewNPC((int)player.Center.X - 333, (int)player.Center.Y - 1500, mod.NPCType("AuYuanbao"), 0, 0, 0, 0, 0, 255);
-                NPC.NewNPC((int)player.Center.X - 222, (int)player.Center.Y - 1500, mod.NPCType("AuYuanbao"), 0, 0, 0, 0, 0, 255);
-                NPC.NewNPC((int)player.Center.X - 111, (int)player.Center.Y - 1500, mod.NPCType("AuYuanbao"), 0, 0, 0, 0, 0, 255);
-                NPC.NewNPC((int)player.Center.X + 111, (int)player.Center.Y - 1500, mod.NPCType("AuYuanbao"), 0, 0, 0, 0, 0, 255);
-                NPC.NewNPC((int)player.Center.X + 222, (int)player.Center.Y - 1500, mod.NPCType("AuYuanbao"), 0, 0, 0, 0, 0, 255);
-                NPC.NewNPC((int)player.Center.X + 333, (int)player.Center.Y - 1500, mod.NPCType("AuYuanbao"), 0, 0, 0, 0, 0, 255);
+                NPC.NewNPC((int)player.Center.X - 333, (int)player.Center.Y - 1500, mod.Find<ModNPC>("AuYuanbao").Type, 0, 0, 0, 0, 0, 255);
+                NPC.NewNPC((int)player.Center.X - 222, (int)player.Center.Y - 1500, mod.Find<ModNPC>("AuYuanbao").Type, 0, 0, 0, 0, 0, 255);
+                NPC.NewNPC((int)player.Center.X - 111, (int)player.Center.Y - 1500, mod.Find<ModNPC>("AuYuanbao").Type, 0, 0, 0, 0, 0, 255);
+                NPC.NewNPC((int)player.Center.X + 111, (int)player.Center.Y - 1500, mod.Find<ModNPC>("AuYuanbao").Type, 0, 0, 0, 0, 0, 255);
+                NPC.NewNPC((int)player.Center.X + 222, (int)player.Center.Y - 1500, mod.Find<ModNPC>("AuYuanbao").Type, 0, 0, 0, 0, 0, 255);
+                NPC.NewNPC((int)player.Center.X + 333, (int)player.Center.Y - 1500, mod.Find<ModNPC>("AuYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 Bless2 = true;
                 Color messageColor = Color.Red;
                 Main.NewText(Language.GetTextValue("六六大顺"), messageColor);
             }
             if (mplayer.GoldPoint > 100 && Bless1 == false)
             {
-                NPC.NewNPC((int)player.Center.X - 500, (int)player.Center.Y - 1500, mod.NPCType("AgYuanbao"), 0, 0, 0, 0, 0, 255);
-                NPC.NewNPC((int)player.Center.X - 250, (int)player.Center.Y - 1500, mod.NPCType("AgYuanbao"), 0, 0, 0, 0, 0, 255);
-                NPC.NewNPC((int)player.Center.X, (int)player.Center.Y - 1500, mod.NPCType("AgYuanbao"), 0, 0, 0, 0, 0, 255);
-                NPC.NewNPC((int)player.Center.X + 250, (int)player.Center.Y - 1500, mod.NPCType("AgYuanbao"), 0, 0, 0, 0, 0, 255);
-                NPC.NewNPC((int)player.Center.X + 500, (int)player.Center.Y - 1500, mod.NPCType("AgYuanbao"), 0, 0, 0, 0, 0, 255);
+                NPC.NewNPC((int)player.Center.X - 500, (int)player.Center.Y - 1500, mod.Find<ModNPC>("AgYuanbao").Type, 0, 0, 0, 0, 0, 255);
+                NPC.NewNPC((int)player.Center.X - 250, (int)player.Center.Y - 1500, mod.Find<ModNPC>("AgYuanbao").Type, 0, 0, 0, 0, 0, 255);
+                NPC.NewNPC((int)player.Center.X, (int)player.Center.Y - 1500, mod.Find<ModNPC>("AgYuanbao").Type, 0, 0, 0, 0, 0, 255);
+                NPC.NewNPC((int)player.Center.X + 250, (int)player.Center.Y - 1500, mod.Find<ModNPC>("AgYuanbao").Type, 0, 0, 0, 0, 0, 255);
+                NPC.NewNPC((int)player.Center.X + 500, (int)player.Center.Y - 1500, mod.Find<ModNPC>("AgYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 Bless1 = true;
                 Color messageColor = Color.Red;
                 Main.NewText(Language.GetTextValue("五福临门"), messageColor);
             }
             if (mplayer.GoldPoint > 1333 && Bless3 == false)
             {
-                NPC.NewNPC((int)player.Center.X + 300, (int)player.Center.Y - 1500, mod.NPCType("AuYuanbao"), 0, 0, 0, 0, 0, 255);
-                NPC.NewNPC((int)player.Center.X - 300, (int)player.Center.Y - 1500, mod.NPCType("AuYuanbao"), 0, 0, 0, 0, 0, 255);
+                NPC.NewNPC((int)player.Center.X + 300, (int)player.Center.Y - 1500, mod.Find<ModNPC>("AuYuanbao").Type, 0, 0, 0, 0, 0, 255);
+                NPC.NewNPC((int)player.Center.X - 300, (int)player.Center.Y - 1500, mod.Find<ModNPC>("AuYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 Bless3 = true;
                 Color messageColor = Color.Red;
                 Main.NewText(Language.GetTextValue("如日中天"), messageColor);
@@ -668,7 +669,7 @@ namespace MythMod.UI.SpringAct
                 for(float k = 0; k < 25;k += 1)
                 {
                     Vector2 v = new Vector2(0, 200).RotatedBy(MathHelper.TwoPi * k / 25d);
-                    NPC.NewNPC((int)(player.Center.X - 300 + v.X), (int)(player.Center.Y - 1500 + v.Y), mod.NPCType("PtYuanbao"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)(player.Center.X - 300 + v.X), (int)(player.Center.Y - 1500 + v.Y), mod.Find<ModNPC>("PtYuanbao").Type, 0, 0, 0, 0, 0, 255);
                 }
                 Bless7 = true;
             }
@@ -702,22 +703,22 @@ namespace MythMod.UI.SpringAct
                     switch (Main.rand.Next(1, 7))
                     {
                         case 1:
-                            type = mod.ItemType("CuCoinYoyo");
+                            type = mod.Find<ModItem>("CuCoinYoyo").Type;
                             break;
                         case 2:
-                            type = mod.ItemType("CuCoinSword");
+                            type = mod.Find<ModItem>("CuCoinSword").Type;
                             break;
                         case 3:
-                            type = mod.ItemType("CuCoinBomb");
+                            type = mod.Find<ModItem>("CuCoinBomb").Type;
                             break;
                         case 4:
-                            type = mod.ItemType("CuCoinStaff");
+                            type = mod.Find<ModItem>("CuCoinStaff").Type;
                             break;
                         case 5:
-                            type = mod.ItemType("CuCoinGun");
+                            type = mod.Find<ModItem>("CuCoinGun").Type;
                             break;
                         case 6:
-                            type = mod.ItemType("CuCoinBow");
+                            type = mod.Find<ModItem>("CuCoinBow").Type;
                             break;
                     }
                     Item.NewItem((int)player.position.X, (int)player.position.Y, player.width, player.height, type, 1, false, 0, false, false);
@@ -728,22 +729,22 @@ namespace MythMod.UI.SpringAct
                     switch (Main.rand.Next(1, 7))
                     {
                         case 1:
-                            type = mod.ItemType("AgCoinYoyo");
+                            type = mod.Find<ModItem>("AgCoinYoyo").Type;
                             break;
                         case 2:
-                            type = mod.ItemType("AgCoinSword");
+                            type = mod.Find<ModItem>("AgCoinSword").Type;
                             break;
                         case 3:
-                            type = mod.ItemType("AgCoinBomb");
+                            type = mod.Find<ModItem>("AgCoinBomb").Type;
                             break;
                         case 4:
-                            type = mod.ItemType("AgCoinStaff");
+                            type = mod.Find<ModItem>("AgCoinStaff").Type;
                             break;
                         case 5:
-                            type = mod.ItemType("AgCoinBow");
+                            type = mod.Find<ModItem>("AgCoinBow").Type;
                             break;
                         case 6:
-                            type = mod.ItemType("AgCoinGun");
+                            type = mod.Find<ModItem>("AgCoinGun").Type;
                             break;
                     }
                     Item.NewItem((int)player.position.X, (int)player.position.Y, player.width, player.height, type, 1, false, 0, false, false);
@@ -754,25 +755,25 @@ namespace MythMod.UI.SpringAct
                     switch (Main.rand.Next(1, 8))
                     {
                         case 1:
-                            type = mod.ItemType("AuCoinYoyo");
+                            type = mod.Find<ModItem>("AuCoinYoyo").Type;
                             break;
                         case 2:
-                            type = mod.ItemType("AuCoinSword");
+                            type = mod.Find<ModItem>("AuCoinSword").Type;
                             break;
                         case 3:
-                            type = mod.ItemType("AuCoinBomb");
+                            type = mod.Find<ModItem>("AuCoinBomb").Type;
                             break;
                         case 4:
-                            type = mod.ItemType("AuCoinStaff");
+                            type = mod.Find<ModItem>("AuCoinStaff").Type;
                             break;
                         case 5:
-                            type = mod.ItemType("AuCoinGun");
+                            type = mod.Find<ModItem>("AuCoinGun").Type;
                             break;
                         case 6:
-                            type = mod.ItemType("GoldBellD");
+                            type = mod.Find<ModItem>("GoldBellD").Type;
                             break;
                         case 7:
-                            type = mod.ItemType("AuCoinBow");
+                            type = mod.Find<ModItem>("AuCoinBow").Type;
                             break;
                     }
                     Item.NewItem((int)player.position.X, (int)player.position.Y, player.width, player.height, type, 1, false, 0, false, false);
@@ -783,25 +784,25 @@ namespace MythMod.UI.SpringAct
                     switch (Main.rand.Next(1, 8))
                     {
                         case 1:
-                            type = mod.ItemType("PtCoinYoyo");
+                            type = mod.Find<ModItem>("PtCoinYoyo").Type;
                             break;
                         case 2:
-                            type = mod.ItemType("PtCoinSword");
+                            type = mod.Find<ModItem>("PtCoinSword").Type;
                             break;
                         case 3:
-                            type = mod.ItemType("PtCoinBomb");
+                            type = mod.Find<ModItem>("PtCoinBomb").Type;
                             break;
                         case 4:
-                            type = mod.ItemType("PtCoinStaff");
+                            type = mod.Find<ModItem>("PtCoinStaff").Type;
                             break;
                         case 5:
-                            type = mod.ItemType("PtCoinGun");
+                            type = mod.Find<ModItem>("PtCoinGun").Type;
                             break;
                         case 6:
-                            type = mod.ItemType("CoinIV");
+                            type = mod.Find<ModItem>("CoinIV").Type;
                             break;
                         case 7:
-                            type = mod.ItemType("PtCoinBow");
+                            type = mod.Find<ModItem>("PtCoinBow").Type;
                             break;
                     }
                     Item.NewItem((int)player.position.X, (int)player.position.Y, player.width, player.height, type, 1, false, 0, false, false);
@@ -812,25 +813,25 @@ namespace MythMod.UI.SpringAct
                     switch (Main.rand.Next(1, 8))
                     {
                         case 1:
-                            type = mod.ItemType("CCoinYoyo");
+                            type = mod.Find<ModItem>("CCoinYoyo").Type;
                             break;
                         case 2:
-                            type = mod.ItemType("CCoinStaff");
+                            type = mod.Find<ModItem>("CCoinStaff").Type;
                             break;
                         case 3:
-                            type = mod.ItemType("CCoinBomb");
+                            type = mod.Find<ModItem>("CCoinBomb").Type;
                             break;
                         case 4:
-                            type = mod.ItemType("CCoinBow");
+                            type = mod.Find<ModItem>("CCoinBow").Type;
                             break;
                         case 5:
-                            type = mod.ItemType("CCoinGun");
+                            type = mod.Find<ModItem>("CCoinGun").Type;
                             break;
                         case 6:
-                            type = mod.ItemType("CCoinSword");
+                            type = mod.Find<ModItem>("CCoinSword").Type;
                             break;
                         case 7:
-                            type = mod.ItemType("ResplendentMirror");
+                            type = mod.Find<ModItem>("ResplendentMirror").Type;
                             break;
                     }
                     Item.NewItem((int)player.position.X, (int)player.position.Y, player.width, player.height, type, 1, false, 0, false, false);

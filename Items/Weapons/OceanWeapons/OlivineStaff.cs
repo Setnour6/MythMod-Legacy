@@ -19,32 +19,31 @@ namespace MythMod.Items.Weapons.OceanWeapons
 		// Token: 0x060019F3 RID: 6643 RVA: 0x000A88D0 File Offset: 0x000A6AD0
 		public override void SetDefaults()
 		{
-			base.item.damage = 180;
-			base.item.magic = true;
-			base.item.mana = 22;
-			base.item.width = 30;
-			base.item.height = 30;
-			base.item.useTime = 26;
-			base.item.useAnimation = 26;
-			base.item.useStyle = 5;
-			Item.staff[base.item.type] = true;
-			base.item.noMelee = true;
-			base.item.knockBack = 5f;
-			base.item.value = Item.sellPrice(0, 8, 0, 0);
-            base.item.rare = 11;
-            base.item.UseSound = SoundID.Item43;
-			base.item.autoReuse = true;
-            base.item.shoot = base.mod.ProjectileType("OlivineStaffPro");
-			base.item.shootSpeed = 10.8f;
+			base.Item.damage = 180;
+			base.Item.DamageType = DamageClass.Magic;
+			base.Item.mana = 22;
+			base.Item.width = 30;
+			base.Item.height = 30;
+			base.Item.useTime = 26;
+			base.Item.useAnimation = 26;
+			base.Item.useStyle = 5;
+			Item.staff[base.Item.type] = true;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 5f;
+			base.Item.value = Item.sellPrice(0, 8, 0, 0);
+            base.Item.rare = 11;
+            base.Item.UseSound = SoundID.Item43;
+			base.Item.autoReuse = true;
+            base.Item.shoot = base.Mod.Find<ModProjectile>("OlivineStaffPro").Type;
+			base.Item.shootSpeed = 10.8f;
 		}
 		public override void AddRecipes()
 		{
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(null, "Olivine", 8);
             recipe.AddIngredient(null, "GoldGorgonianBranch", 15);
             recipe.requiredTile[0] = 412;
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }
 	}
 }

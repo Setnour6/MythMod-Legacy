@@ -1,9 +1,10 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
@@ -26,17 +27,17 @@ namespace MythMod.Projectiles.projectile2
         //7359668
         public override void SetDefaults()
         {
-            projectile.width = 26;
-            projectile.height = 26;
-            projectile.aiStyle = -1;
-            projectile.friendly = false;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = false;
-            projectile.timeLeft = 400;
-            projectile.hostile = true;
-            projectile.penetrate = 1;
-            projectile.scale = 1f;
-            this.cooldownSlot = 1;
+            Projectile.width = 26;
+            Projectile.height = 26;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = false;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
+            Projectile.timeLeft = 400;
+            Projectile.hostile = true;
+            Projectile.penetrate = 1;
+            Projectile.scale = 1f;
+            this.CooldownSlot = 1;
         }
         //55555
         public override Color? GetAlpha(Color lightColor)
@@ -47,36 +48,36 @@ namespace MythMod.Projectiles.projectile2
         private float b;
         public override void AI()
         {
-            int num5 = (int)Player.FindClosest(base.projectile.Center, 1, 1);
-            float num6 = (float)Math.Sqrt((Main.player[num5].Center.X - base.projectile.Center.X) * (Main.player[num5].Center.X - base.projectile.Center.X) + (Main.player[num5].Center.Y - base.projectile.Center.Y) * (Main.player[num5].Center.Y - base.projectile.Center.Y));
-            if (projectile.timeLeft > 300)
+            int num5 = (int)Player.FindClosest(base.Projectile.Center, 1, 1);
+            float num6 = (float)Math.Sqrt((Main.player[num5].Center.X - base.Projectile.Center.X) * (Main.player[num5].Center.X - base.Projectile.Center.X) + (Main.player[num5].Center.Y - base.Projectile.Center.Y) * (Main.player[num5].Center.Y - base.Projectile.Center.Y));
+            if (Projectile.timeLeft > 300)
             {
-                projectile.scale += 0.007f;
+                Projectile.scale += 0.007f;
             }
-            if (projectile.timeLeft <= 120)
+            if (Projectile.timeLeft <= 120)
             {
-                projectile.scale *= 0.97f;
+                Projectile.scale *= 0.97f;
             }
             if(num6 <= 600f)
             {
-                projectile.velocity += (Main.player[num5].Center - base.projectile.Center) / num6 / 12f;
+                Projectile.velocity += (Main.player[num5].Center - base.Projectile.Center) / num6 / 12f;
             }
-            projectile.velocity *= 0.99f;
-            if (projectile.timeLeft > 120)
+            Projectile.velocity *= 0.99f;
+            if (Projectile.timeLeft > 120)
             {
-                Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 2.25f / 255f * projectile.scale, (float)(255 - base.projectile.alpha) * 1.00f * projectile.scale / 255f, (float)(255 - base.projectile.alpha) * 0.67f / 255f * projectile.scale);
+                Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 2.25f / 255f * Projectile.scale, (float)(255 - base.Projectile.alpha) * 1.00f * Projectile.scale / 255f, (float)(255 - base.Projectile.alpha) * 0.67f / 255f * Projectile.scale);
             }
             else
             {
-                Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 2.25f / 255f * projectile.scale * projectile.timeLeft / 120f, (float)(255 - base.projectile.alpha) * 1.00f * projectile.scale / 255f * projectile.timeLeft / 120f, (float)(255 - base.projectile.alpha) * 0.67f / 255f * projectile.scale * projectile.timeLeft / 120f);
+                Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 2.25f / 255f * Projectile.scale * Projectile.timeLeft / 120f, (float)(255 - base.Projectile.alpha) * 1.00f * Projectile.scale / 255f * Projectile.timeLeft / 120f, (float)(255 - base.Projectile.alpha) * 0.67f / 255f * Projectile.scale * Projectile.timeLeft / 120f);
             }
         }
         //14141414141414
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D texture2D = Main.projectileTexture[base.projectile.type];
-            int num = Main.projectileTexture[base.projectile.type].Height;
-			Main.spriteBatch.Draw(texture2D, base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY), new Rectangle?(new Rectangle(0, 0, texture2D.Width, num)), base.projectile.GetAlpha(lightColor), base.projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.projectile.scale, SpriteEffects.None, 1f);
+			Texture2D texture2D = TextureAssets.Projectile[base.Projectile.type].Value;
+            int num = TextureAssets.Projectile[base.Projectile.type].Value.Height;
+			Main.spriteBatch.Draw(texture2D, base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), new Rectangle?(new Rectangle(0, 0, texture2D.Width, num)), base.Projectile.GetAlpha(lightColor), base.Projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.Projectile.scale, SpriteEffects.None, 1f);
 			return false;
 		}
         public override void Kill(int timeLeft)

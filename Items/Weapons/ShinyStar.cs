@@ -1,7 +1,8 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -19,25 +20,25 @@ namespace MythMod.Items.Weapons
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            item.damage = 37;
-            item.melee = true;
-            item.width = 36;
-            item.height = 36;
-            item.useTime = 60;
-            item.rare = 2;
-            item.useAnimation = 20;
-            item.useStyle = 1;
-            item.knockBack = 5.0f ;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 9;
-            item.value = 10000;
-            item.scale = 1f;
-            item.shoot = mod.ProjectileType("MagicStar");
-            item.shootSpeed = 11f;
+            Item.glowMask = GetGlowMask;
+            Item.damage = 37;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 36;
+            Item.height = 36;
+            Item.useTime = 60;
+            Item.rare = 2;
+            Item.useAnimation = 20;
+            Item.useStyle = 1;
+            Item.knockBack = 5.0f ;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 9;
+            Item.value = 10000;
+            Item.scale = 1f;
+            Item.shoot = Mod.Find<ModProjectile>("MagicStar").Type;
+            Item.shootSpeed = 11f;
         }
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             float X = Main.rand.NextFloat(-250, 250);
             float Y = Main.rand.NextFloat(-250, 250);
@@ -48,12 +49,11 @@ namespace MythMod.Items.Weapons
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(null, "EvilScaleDust", 24);
             recipe.AddIngredient(65, 1);
             recipe.requiredTile[0] = 16;
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

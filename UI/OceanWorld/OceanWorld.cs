@@ -1,11 +1,11 @@
-using Terraria.World.Generation;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Reflection;
 using ReLogic.Graphics;
 using MythMod.MiscImplementation;
 //using System.Drawing;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 using Terraria.UI;
 using Terraria.IO;
@@ -23,6 +23,7 @@ using Terraria.GameContent.Achievements;
 using Terraria.GameContent.UI.Elements;
 using Terraria.GameContent.Liquid;
 using Terraria.Graphics;
+using Terraria.WorldBuilding;
 
 namespace MythMod.UI.OceanWorld
 {
@@ -143,7 +144,7 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "生成矿物…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     ShapeData shapeData101 = new ShapeData();
                     GenAction genAction = new Modifiers.Blotches(2, 0.4);
                     WorldUtils.Gen(origin, new Shapes.Rectangle(1, 1), Actions.Chain(new GenAction[]
@@ -166,7 +167,7 @@ namespace MythMod.UI.OceanWorld
                                             {
                                                 WorldUtils.Gen(new Point(l + ox, m + oy), new ModShapes.All(shapeData101), Actions.Chain(new GenAction[]
                                                 {
-                                                     new Actions.PlaceTile((ushort)mod.TileType("沧流矿"), 0)
+                                                     new Actions.PlaceTile((ushort)mod.Find<ModTile>("沧流矿").Type, 0)
                                                 }));
                                                 ox += 1;
                                             }
@@ -174,7 +175,7 @@ namespace MythMod.UI.OceanWorld
                                             {
                                                 WorldUtils.Gen(new Point(l + ox, m + oy), new ModShapes.All(shapeData101), Actions.Chain(new GenAction[]
                                                  {
-                                                     new Actions.PlaceTile((ushort)mod.TileType("沧流矿"), 0)
+                                                     new Actions.PlaceTile((ushort)mod.Find<ModTile>("沧流矿").Type, 0)
                                                  }));
                                                 ox -= 1;
                                             }
@@ -185,7 +186,7 @@ namespace MythMod.UI.OceanWorld
                                             {
                                                 WorldUtils.Gen(new Point(l + ox, m + oy), new ModShapes.All(shapeData101), Actions.Chain(new GenAction[]
                                                  {
-                                                     new Actions.PlaceTile((ushort)mod.TileType("沧流矿"), 0)
+                                                     new Actions.PlaceTile((ushort)mod.Find<ModTile>("沧流矿").Type, 0)
                                                  }));
                                                 oy += 1;
                                             }
@@ -193,7 +194,7 @@ namespace MythMod.UI.OceanWorld
                                             {
                                                 WorldUtils.Gen(new Point(l + ox, m + oy), new ModShapes.All(shapeData101), Actions.Chain(new GenAction[]
                                                  {
-                                                     new Actions.PlaceTile((ushort)mod.TileType("沧流矿"), 0)
+                                                     new Actions.PlaceTile((ushort)mod.Find<ModTile>("沧流矿").Type, 0)
                                                  }));
                                                 oy -= 1;
                                             }
@@ -221,7 +222,7 @@ namespace MythMod.UI.OceanWorld
                                             {
                                                 WorldUtils.Gen(new Point(l + ox, m + oy), new ModShapes.All(shapeData101), Actions.Chain(new GenAction[]
                                                 {
-                                                     new Actions.PlaceTile((ushort)mod.TileType("沧流矿"), 0)
+                                                     new Actions.PlaceTile((ushort)mod.Find<ModTile>("沧流矿").Type, 0)
                                                 }));
                                                 ox += 1;
                                             }
@@ -229,7 +230,7 @@ namespace MythMod.UI.OceanWorld
                                             {
                                                 WorldUtils.Gen(new Point(l + ox, m + oy), new ModShapes.All(shapeData101), Actions.Chain(new GenAction[]
                                                  {
-                                                     new Actions.PlaceTile((ushort)mod.TileType("沧流矿"), 0)
+                                                     new Actions.PlaceTile((ushort)mod.Find<ModTile>("沧流矿").Type, 0)
                                                  }));
                                                 ox -= 1;
                                             }
@@ -240,7 +241,7 @@ namespace MythMod.UI.OceanWorld
                                             {
                                                 WorldUtils.Gen(new Point(l + ox, m + oy), new ModShapes.All(shapeData101), Actions.Chain(new GenAction[]
                                                  {
-                                                     new Actions.PlaceTile((ushort)mod.TileType("沧流矿"), 0)
+                                                     new Actions.PlaceTile((ushort)mod.Find<ModTile>("沧流矿").Type, 0)
                                                  }));
                                                 oy += 1;
                                             }
@@ -248,7 +249,7 @@ namespace MythMod.UI.OceanWorld
                                             {
                                                 WorldUtils.Gen(new Point(l + ox, m + oy), new ModShapes.All(shapeData101), Actions.Chain(new GenAction[]
                                                  {
-                                                     new Actions.PlaceTile((ushort)mod.TileType("沧流矿"), 0)
+                                                     new Actions.PlaceTile((ushort)mod.Find<ModTile>("沧流矿").Type, 0)
                                                  }));
                                                 oy -= 1;
                                             }
@@ -276,7 +277,7 @@ namespace MythMod.UI.OceanWorld
                                             {
                                                 WorldUtils.Gen(new Point(l + ox, m + oy), new ModShapes.All(shapeData101), Actions.Chain(new GenAction[]
                                                 {
-                                                     new Actions.PlaceTile((ushort)mod.TileType("沧流矿"), 0)
+                                                     new Actions.PlaceTile((ushort)mod.Find<ModTile>("沧流矿").Type, 0)
                                                 }));
                                                 ox += 1;
                                             }
@@ -284,7 +285,7 @@ namespace MythMod.UI.OceanWorld
                                             {
                                                 WorldUtils.Gen(new Point(l + ox, m + oy), new ModShapes.All(shapeData101), Actions.Chain(new GenAction[]
                                                  {
-                                                     new Actions.PlaceTile((ushort)mod.TileType("沧流矿"), 0)
+                                                     new Actions.PlaceTile((ushort)mod.Find<ModTile>("沧流矿").Type, 0)
                                                  }));
                                                 ox -= 1;
                                             }
@@ -295,7 +296,7 @@ namespace MythMod.UI.OceanWorld
                                             {
                                                 WorldUtils.Gen(new Point(l + ox, m + oy), new ModShapes.All(shapeData101), Actions.Chain(new GenAction[]
                                                  {
-                                                     new Actions.PlaceTile((ushort)mod.TileType("沧流矿"), 0)
+                                                     new Actions.PlaceTile((ushort)mod.Find<ModTile>("沧流矿").Type, 0)
                                                  }));
                                                 oy += 1;
                                             }
@@ -303,7 +304,7 @@ namespace MythMod.UI.OceanWorld
                                             {
                                                 WorldUtils.Gen(new Point(l + ox, m + oy), new ModShapes.All(shapeData101), Actions.Chain(new GenAction[]
                                                  {
-                                                     new Actions.PlaceTile((ushort)mod.TileType("沧流矿"), 0)
+                                                     new Actions.PlaceTile((ushort)mod.Find<ModTile>("沧流矿").Type, 0)
                                                  }));
                                                 oy -= 1;
                                             }
@@ -318,7 +319,7 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "生成矿物…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     ShapeData shapeData102 = new ShapeData();
                     GenAction genAction = new Modifiers.Blotches(2, 0.4);
                     WorldUtils.Gen(origin, new Shapes.Rectangle(1, 1), Actions.Chain(new GenAction[]
@@ -341,7 +342,7 @@ namespace MythMod.UI.OceanWorld
                                             {
                                                 WorldUtils.Gen(new Point(l + ox, m + oy), new ModShapes.All(shapeData102), Actions.Chain(new GenAction[]
                                                 {
-                                                     new Actions.PlaceTile((ushort)mod.TileType("渊海矿"), 0)
+                                                     new Actions.PlaceTile((ushort)mod.Find<ModTile>("渊海矿").Type, 0)
                                                 }));
                                                 ox += 1;
                                             }
@@ -349,7 +350,7 @@ namespace MythMod.UI.OceanWorld
                                             {
                                                 WorldUtils.Gen(new Point(l + ox, m + oy), new ModShapes.All(shapeData102), Actions.Chain(new GenAction[]
                                                  {
-                                                     new Actions.PlaceTile((ushort)mod.TileType("渊海矿"), 0)
+                                                     new Actions.PlaceTile((ushort)mod.Find<ModTile>("渊海矿").Type, 0)
                                                  }));
                                                 ox -= 1;
                                             }
@@ -360,7 +361,7 @@ namespace MythMod.UI.OceanWorld
                                             {
                                                 WorldUtils.Gen(new Point(l + ox, m + oy), new ModShapes.All(shapeData102), Actions.Chain(new GenAction[]
                                                  {
-                                                     new Actions.PlaceTile((ushort)mod.TileType("渊海矿"), 0)
+                                                     new Actions.PlaceTile((ushort)mod.Find<ModTile>("渊海矿").Type, 0)
                                                  }));
                                                 oy += 1;
                                             }
@@ -368,7 +369,7 @@ namespace MythMod.UI.OceanWorld
                                             {
                                                 WorldUtils.Gen(new Point(l + ox, m + oy), new ModShapes.All(shapeData102), Actions.Chain(new GenAction[]
                                                  {
-                                                     new Actions.PlaceTile((ushort)mod.TileType("渊海矿"), 0)
+                                                     new Actions.PlaceTile((ushort)mod.Find<ModTile>("渊海矿").Type, 0)
                                                  }));
                                                 oy -= 1;
                                             }
@@ -396,7 +397,7 @@ namespace MythMod.UI.OceanWorld
                                             {
                                                 WorldUtils.Gen(new Point(l + ox, m + oy), new ModShapes.All(shapeData102), Actions.Chain(new GenAction[]
                                                 {
-                                                     new Actions.PlaceTile((ushort)mod.TileType("渊海矿"), 0)
+                                                     new Actions.PlaceTile((ushort)mod.Find<ModTile>("渊海矿").Type, 0)
                                                 }));
                                                 ox += 1;
                                             }
@@ -404,7 +405,7 @@ namespace MythMod.UI.OceanWorld
                                             {
                                                 WorldUtils.Gen(new Point(l + ox, m + oy), new ModShapes.All(shapeData102), Actions.Chain(new GenAction[]
                                                  {
-                                                     new Actions.PlaceTile((ushort)mod.TileType("渊海矿"), 0)
+                                                     new Actions.PlaceTile((ushort)mod.Find<ModTile>("渊海矿").Type, 0)
                                                  }));
                                                 ox -= 1;
                                             }
@@ -415,7 +416,7 @@ namespace MythMod.UI.OceanWorld
                                             {
                                                 WorldUtils.Gen(new Point(l + ox, m + oy), new ModShapes.All(shapeData102), Actions.Chain(new GenAction[]
                                                  {
-                                                     new Actions.PlaceTile((ushort)mod.TileType("渊海矿"), 0)
+                                                     new Actions.PlaceTile((ushort)mod.Find<ModTile>("渊海矿").Type, 0)
                                                  }));
                                                 oy += 1;
                                             }
@@ -423,7 +424,7 @@ namespace MythMod.UI.OceanWorld
                                             {
                                                 WorldUtils.Gen(new Point(l + ox, m + oy), new ModShapes.All(shapeData102), Actions.Chain(new GenAction[]
                                                  {
-                                                     new Actions.PlaceTile((ushort)mod.TileType("渊海矿"), 0)
+                                                     new Actions.PlaceTile((ushort)mod.Find<ModTile>("渊海矿").Type, 0)
                                                  }));
                                                 oy -= 1;
                                             }
@@ -451,7 +452,7 @@ namespace MythMod.UI.OceanWorld
                                             {
                                                 WorldUtils.Gen(new Point(l + ox, m + oy), new ModShapes.All(shapeData102), Actions.Chain(new GenAction[]
                                                 {
-                                                     new Actions.PlaceTile((ushort)mod.TileType("渊海矿"), 0)
+                                                     new Actions.PlaceTile((ushort)mod.Find<ModTile>("渊海矿").Type, 0)
                                                 }));
                                                 ox += 1;
                                             }
@@ -459,7 +460,7 @@ namespace MythMod.UI.OceanWorld
                                             {
                                                 WorldUtils.Gen(new Point(l + ox, m + oy), new ModShapes.All(shapeData102), Actions.Chain(new GenAction[]
                                                  {
-                                                     new Actions.PlaceTile((ushort)mod.TileType("渊海矿"), 0)
+                                                     new Actions.PlaceTile((ushort)mod.Find<ModTile>("渊海矿").Type, 0)
                                                  }));
                                                 ox -= 1;
                                             }
@@ -470,7 +471,7 @@ namespace MythMod.UI.OceanWorld
                                             {
                                                 WorldUtils.Gen(new Point(l + ox, m + oy), new ModShapes.All(shapeData102), Actions.Chain(new GenAction[]
                                                  {
-                                                     new Actions.PlaceTile((ushort)mod.TileType("渊海矿"), 0)
+                                                     new Actions.PlaceTile((ushort)mod.Find<ModTile>("渊海矿").Type, 0)
                                                  }));
                                                 oy += 1;
                                             }
@@ -478,7 +479,7 @@ namespace MythMod.UI.OceanWorld
                                             {
                                                 WorldUtils.Gen(new Point(l + ox, m + oy), new ModShapes.All(shapeData102), Actions.Chain(new GenAction[]
                                                  {
-                                                     new Actions.PlaceTile((ushort)mod.TileType("渊海矿"), 0)
+                                                     new Actions.PlaceTile((ushort)mod.Find<ModTile>("渊海矿").Type, 0)
                                                  }));
                                                 oy -= 1;
                                             }
@@ -493,7 +494,7 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "构建火山框架…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     if (Main.maxTilesX == 4200)
                     {
                         int H = 0;//顶部高度
@@ -541,13 +542,13 @@ namespace MythMod.UI.OceanWorld
                             L = H * 2;
                             for (int m = 0; m < Main.maxTilesY; m++)
                             {
-                                if (m < Main.maxTilesY / 2 - 404 + (int)(Main.maxTilesY * 0.3f) + L && m > Main.maxTilesY / 2 - 404 + (int)(Main.maxTilesY * 0.3f) - H && Main.tile[l, m].type != mod.TileType("沧流矿")
-                                            && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                            && Main.tile[l, m].type != mod.TileType("Basalt")
-                                            && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                            && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                            && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                            && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                if (m < Main.maxTilesY / 2 - 404 + (int)(Main.maxTilesY * 0.3f) + L && m > Main.maxTilesY / 2 - 404 + (int)(Main.maxTilesY * 0.3f) - H && Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                 {
                                     if (Main.rand.Next(4000) == 1)
                                     {
@@ -555,9 +556,9 @@ namespace MythMod.UI.OceanWorld
                                         int j = 0;
                                         for (int n = Main.rand.Next(0, 50); n < 60; n++)
                                         {
-                                            Main.tile[l + i, m + j].type = (ushort)mod.TileType("硫磺矿");
-                                            Main.tile[l + i, m + 2 + j].wall = (ushort)mod.WallType("玄武岩墙");
-                                            Main.tile[l + i, m + j].active(true);
+                                            Main.tile[l + i, m + j].TileType = (ushort)mod.Find<ModTile>("硫磺矿").Type;
+                                            Main.tile[l + i, m + 2 + j].WallType = (ushort)mod.Find<ModWall>("玄武岩墙").Type;
+                                            Main.tile[l + i, m + j].HasTile = true;
                                             if (Main.rand.Next(10) > 5)
                                             {
                                                 if (Main.rand.Next(10) > 5)
@@ -584,9 +585,9 @@ namespace MythMod.UI.OceanWorld
                                     }
                                     else if (Main.rand.Next(7000) != 1)
                                     {
-                                        Main.tile[l, m].type = (ushort)mod.TileType("Basalt");
-                                        Main.tile[l, m + 2].wall = (ushort)mod.WallType("玄武岩墙");
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = (ushort)mod.Find<ModTile>("Basalt").Type;
+                                        Main.tile[l, m + 2].WallType = (ushort)mod.Find<ModWall>("玄武岩墙").Type;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                     else
                                     {
@@ -596,15 +597,15 @@ namespace MythMod.UI.OceanWorld
                                         {
                                             if (Math.Abs(n - 45) < 8)
                                             {
-                                                Main.tile[l + i, m + j].type = (ushort)mod.TileType("橄榄石");
-                                                Main.tile[l + i, m + 2 + j].wall = (ushort)mod.WallType("玄武岩墙");
-                                                Main.tile[l + i, m + j].active(true);
+                                                Main.tile[l + i, m + j].TileType = (ushort)mod.Find<ModTile>("橄榄石").Type;
+                                                Main.tile[l + i, m + 2 + j].WallType = (ushort)mod.Find<ModWall>("玄武岩墙").Type;
+                                                Main.tile[l + i, m + j].HasTile = true;
                                             }
                                             else
                                             {
-                                                Main.tile[l + i, m + j].type = (ushort)mod.TileType("橄榄石矿");
-                                                Main.tile[l + i, m + 2 + j].wall = (ushort)mod.WallType("玄武岩墙");
-                                                Main.tile[l + i, m + j].active(true);
+                                                Main.tile[l + i, m + j].TileType = (ushort)mod.Find<ModTile>("橄榄石矿").Type;
+                                                Main.tile[l + i, m + 2 + j].WallType = (ushort)mod.Find<ModWall>("玄武岩墙").Type;
+                                                Main.tile[l + i, m + j].HasTile = true;
                                             }
                                             if (Main.rand.Next(10) > 5)
                                             {
@@ -681,13 +682,13 @@ namespace MythMod.UI.OceanWorld
                             L = H * 2;
                             for (int m = 0; m < Main.maxTilesY; m++)
                             {
-                                if (m < Main.maxTilesY / 2 - 404 + (int)(Main.maxTilesY * 0.3f) + L && m > Main.maxTilesY / 2 - 404 + (int)(Main.maxTilesY * 0.3f) - H && Main.tile[l, m].type != mod.TileType("沧流矿")
-                                            && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                            && Main.tile[l, m].type != mod.TileType("Basalt")
-                                            && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                            && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                            && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                            && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                if (m < Main.maxTilesY / 2 - 404 + (int)(Main.maxTilesY * 0.3f) + L && m > Main.maxTilesY / 2 - 404 + (int)(Main.maxTilesY * 0.3f) - H && Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                 {
                                     if (Main.rand.Next(4000) == 1)
                                     {
@@ -695,9 +696,9 @@ namespace MythMod.UI.OceanWorld
                                         int j = 0;
                                         for (int n = Main.rand.Next(0, 50); n < 60; n++)
                                         {
-                                            Main.tile[l + i, m + j].type = (ushort)mod.TileType("硫磺矿");
-                                            Main.tile[l + i, m + 2 + j].wall = (ushort)mod.WallType("玄武岩墙");
-                                            Main.tile[l + i, m + j].active(true);
+                                            Main.tile[l + i, m + j].TileType = (ushort)mod.Find<ModTile>("硫磺矿").Type;
+                                            Main.tile[l + i, m + 2 + j].WallType = (ushort)mod.Find<ModWall>("玄武岩墙").Type;
+                                            Main.tile[l + i, m + j].HasTile = true;
                                             if (Main.rand.Next(10) > 5)
                                             {
                                                 if (Main.rand.Next(10) > 5)
@@ -724,9 +725,9 @@ namespace MythMod.UI.OceanWorld
                                     }
                                     else if (Main.rand.Next(7000) != 1)
                                     {
-                                        Main.tile[l, m].type = (ushort)mod.TileType("Basalt");
-                                        Main.tile[l, m + 2].wall = (ushort)mod.WallType("玄武岩墙");
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = (ushort)mod.Find<ModTile>("Basalt").Type;
+                                        Main.tile[l, m + 2].WallType = (ushort)mod.Find<ModWall>("玄武岩墙").Type;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                     else
                                     {
@@ -736,15 +737,15 @@ namespace MythMod.UI.OceanWorld
                                         {
                                             if (Math.Abs(n - 45) < 8)
                                             {
-                                                Main.tile[l + i, m + j].type = (ushort)mod.TileType("橄榄石");
-                                                Main.tile[l + i, m + 2 + j].wall = (ushort)mod.WallType("玄武岩墙");
-                                                Main.tile[l + i, m + j].active(true);
+                                                Main.tile[l + i, m + j].TileType = (ushort)mod.Find<ModTile>("橄榄石").Type;
+                                                Main.tile[l + i, m + 2 + j].WallType = (ushort)mod.Find<ModWall>("玄武岩墙").Type;
+                                                Main.tile[l + i, m + j].HasTile = true;
                                             }
                                             else
                                             {
-                                                Main.tile[l + i, m + j].type = (ushort)mod.TileType("橄榄石矿");
-                                                Main.tile[l + i, m + 2 + j].wall = (ushort)mod.WallType("玄武岩墙");
-                                                Main.tile[l + i, m + j].active(true);
+                                                Main.tile[l + i, m + j].TileType = (ushort)mod.Find<ModTile>("橄榄石矿").Type;
+                                                Main.tile[l + i, m + 2 + j].WallType = (ushort)mod.Find<ModWall>("玄武岩墙").Type;
+                                                Main.tile[l + i, m + j].HasTile = true;
                                             }
                                             if (Main.rand.Next(10) > 5)
                                             {
@@ -821,13 +822,13 @@ namespace MythMod.UI.OceanWorld
                             L = H * 2;
                             for (int m = 0; m < Main.maxTilesY; m++)
                             {
-                                if (m < Main.maxTilesY / 2 - 404 + (int)(Main.maxTilesY * 0.3f) + L && m > Main.maxTilesY / 2 - 404 + (int)(Main.maxTilesY * 0.3f) - H && Main.tile[l, m].type != mod.TileType("沧流矿")
-                                            && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                            && Main.tile[l, m].type != mod.TileType("Basalt")
-                                            && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                            && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                            && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                            && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                if (m < Main.maxTilesY / 2 - 404 + (int)(Main.maxTilesY * 0.3f) + L && m > Main.maxTilesY / 2 - 404 + (int)(Main.maxTilesY * 0.3f) - H && Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                 {
                                     if (Main.rand.Next(4000) == 1)
                                     {
@@ -835,9 +836,9 @@ namespace MythMod.UI.OceanWorld
                                         int j = 0;
                                         for (int n = Main.rand.Next(0, 50); n < 60; n++)
                                         {
-                                            Main.tile[l + i, m + j].type = (ushort)mod.TileType("硫磺矿");
-                                            Main.tile[l + i, m + 2 + j].wall = (ushort)mod.WallType("玄武岩墙");
-                                            Main.tile[l + i, m + j].active(true);
+                                            Main.tile[l + i, m + j].TileType = (ushort)mod.Find<ModTile>("硫磺矿").Type;
+                                            Main.tile[l + i, m + 2 + j].WallType = (ushort)mod.Find<ModWall>("玄武岩墙").Type;
+                                            Main.tile[l + i, m + j].HasTile = true;
                                             if (Main.rand.Next(10) > 5)
                                             {
                                                 if (Main.rand.Next(10) > 5)
@@ -864,9 +865,9 @@ namespace MythMod.UI.OceanWorld
                                     }
                                     else if (Main.rand.Next(7000) != 1)
                                     {
-                                        Main.tile[l, m].type = (ushort)mod.TileType("Basalt");
-                                        Main.tile[l, m + 2].wall = (ushort)mod.WallType("玄武岩墙");
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = (ushort)mod.Find<ModTile>("Basalt").Type;
+                                        Main.tile[l, m + 2].WallType = (ushort)mod.Find<ModWall>("玄武岩墙").Type;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                     else
                                     {
@@ -876,15 +877,15 @@ namespace MythMod.UI.OceanWorld
                                         {
                                             if (Math.Abs(n - 45) < 8)
                                             {
-                                                Main.tile[l + i, m + j].type = (ushort)mod.TileType("橄榄石");
-                                                Main.tile[l + i, m + 2 + j].wall = (ushort)mod.WallType("玄武岩墙");
-                                                Main.tile[l + i, m + j].active(true);
+                                                Main.tile[l + i, m + j].TileType = (ushort)mod.Find<ModTile>("橄榄石").Type;
+                                                Main.tile[l + i, m + 2 + j].WallType = (ushort)mod.Find<ModWall>("玄武岩墙").Type;
+                                                Main.tile[l + i, m + j].HasTile = true;
                                             }
                                             else
                                             {
-                                                Main.tile[l + i, m + j].type = (ushort)mod.TileType("橄榄石矿");
-                                                Main.tile[l + i, m + 2 + j].wall = (ushort)mod.WallType("玄武岩墙");
-                                                Main.tile[l + i, m + j].active(true);
+                                                Main.tile[l + i, m + j].TileType = (ushort)mod.Find<ModTile>("橄榄石矿").Type;
+                                                Main.tile[l + i, m + 2 + j].WallType = (ushort)mod.Find<ModWall>("玄武岩墙").Type;
+                                                Main.tile[l + i, m + j].HasTile = true;
                                             }
                                             if (Main.rand.Next(10) > 5)
                                             {
@@ -919,7 +920,7 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "建造大火山…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     int H = 0;
                     int Xc = 0;
                     for (int l = (int)(Main.maxTilesX * 0.65f); l < (int)(Main.maxTilesX * 0.75f); l++)
@@ -950,13 +951,13 @@ namespace MythMod.UI.OceanWorld
                         int L = H / 3;
                         for (int m = 0; m < Main.maxTilesY * 0.7f; m++)
                         {
-                            if (m < Main.maxTilesY / 2 - 404 + (int)(Main.maxTilesY * 0.3f) + L && m > Main.maxTilesY / 2 - 404 + (int)(Main.maxTilesY * 0.3f) - H / 1.5f && Main.tile[l, m].type != mod.TileType("沧流矿")
-                                        && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                        && Main.tile[l, m].type != mod.TileType("Basalt")
-                                        && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                        && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                        && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                        && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                            if (m < Main.maxTilesY / 2 - 404 + (int)(Main.maxTilesY * 0.3f) + L && m > Main.maxTilesY / 2 - 404 + (int)(Main.maxTilesY * 0.3f) - H / 1.5f && Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                        && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                        && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                        && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                        && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                        && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                        && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                             {
                                 if (Main.rand.Next(4000) == 1)
                                 {
@@ -964,9 +965,9 @@ namespace MythMod.UI.OceanWorld
                                     int j = 0;
                                     for (int n = Main.rand.Next(0, 50); n < 60; n++)
                                     {
-                                        Main.tile[l + i, m + j].type = (ushort)mod.TileType("硫磺矿");
-                                        Main.tile[l + i, m + 2 + j].wall = (ushort)mod.WallType("玄武岩墙");
-                                        Main.tile[l + i, m + j].active(true);
+                                        Main.tile[l + i, m + j].TileType = (ushort)mod.Find<ModTile>("硫磺矿").Type;
+                                        Main.tile[l + i, m + 2 + j].WallType = (ushort)mod.Find<ModWall>("玄武岩墙").Type;
+                                        Main.tile[l + i, m + j].HasTile = true;
                                         if (Main.rand.Next(10) > 5)
                                         {
                                             if (Main.rand.Next(10) > 5)
@@ -993,9 +994,9 @@ namespace MythMod.UI.OceanWorld
                                 }
                                 else
                                 {
-                                    Main.tile[l, m].type = (ushort)mod.TileType("Basalt");
-                                    Main.tile[l, m + 2].wall = (ushort)mod.WallType("玄武岩墙");
-                                    Main.tile[l, m].active(true);
+                                    Main.tile[l, m].TileType = (ushort)mod.Find<ModTile>("Basalt").Type;
+                                    Main.tile[l, m + 2].WallType = (ushort)mod.Find<ModWall>("玄武岩墙").Type;
+                                    Main.tile[l, m].HasTile = true;
                                 }
                             }
                         }
@@ -1013,13 +1014,13 @@ namespace MythMod.UI.OceanWorld
                         int L = H / 3;
                         for (int m = 0; m < Main.maxTilesY * 0.7f; m++)
                         {
-                            if (m < Main.maxTilesY / 2 - 404 + (int)(Main.maxTilesY * 0.3f) + L && m > Main.maxTilesY / 2 - 404 + (int)(Main.maxTilesY * 0.3f) - H / 1.5f && Main.tile[l, m].type != mod.TileType("沧流矿")
-                                        && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                        && Main.tile[l, m].type != mod.TileType("Basalt")
-                                        && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                        && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                        && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                        && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                            if (m < Main.maxTilesY / 2 - 404 + (int)(Main.maxTilesY * 0.3f) + L && m > Main.maxTilesY / 2 - 404 + (int)(Main.maxTilesY * 0.3f) - H / 1.5f && Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                        && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                        && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                        && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                        && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                        && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                        && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                             {
                                 if (Main.rand.Next(4000) == 1)
                                 {
@@ -1027,9 +1028,9 @@ namespace MythMod.UI.OceanWorld
                                     int j = 0;
                                     for (int n = Main.rand.Next(0, 50); n < 60; n++)
                                     {
-                                        Main.tile[l + i, m + j].type = (ushort)mod.TileType("硫磺矿");
-                                        Main.tile[l + i, m + 2 + j].wall = (ushort)mod.WallType("玄武岩墙");
-                                        Main.tile[l + i, m + j].active(true);
+                                        Main.tile[l + i, m + j].TileType = (ushort)mod.Find<ModTile>("硫磺矿").Type;
+                                        Main.tile[l + i, m + 2 + j].WallType = (ushort)mod.Find<ModWall>("玄武岩墙").Type;
+                                        Main.tile[l + i, m + j].HasTile = true;
                                         if (Main.rand.Next(10) > 5)
                                         {
                                             if (Main.rand.Next(10) > 5)
@@ -1056,9 +1057,9 @@ namespace MythMod.UI.OceanWorld
                                 }
                                 else
                                 {
-                                    Main.tile[l, m].type = (ushort)mod.TileType("Basalt");
-                                    Main.tile[l, m + 2].wall = (ushort)mod.WallType("玄武岩墙");
-                                    Main.tile[l, m].active(true);
+                                    Main.tile[l, m].TileType = (ushort)mod.Find<ModTile>("Basalt").Type;
+                                    Main.tile[l, m + 2].WallType = (ushort)mod.Find<ModWall>("玄武岩墙").Type;
+                                    Main.tile[l, m].HasTile = true;
                                 }
                             }
                         }
@@ -1068,7 +1069,7 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "建造别的火山…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     if (Main.maxTilesX != 8400)
                     {
                         for (int count = 0; count < VolC; count++)
@@ -1158,13 +1159,13 @@ namespace MythMod.UI.OceanWorld
                                     int L = (int)(H / 2.4f);
                                     for (int m = 0; m < Main.maxTilesY * 0.7f; m++)
                                     {
-                                        if (m < Main.maxTilesY / 2 - 470 + (int)(Main.maxTilesY * 0.3f) + L && m > Main.maxTilesY / 2 - 470 + (int)(Main.maxTilesY * 0.3f) - H / 1.5f && Main.tile[l, m].type != mod.TileType("沧流矿")
-                                            && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                            && Main.tile[l, m].type != mod.TileType("Basalt")
-                                            && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                            && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                            && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                            && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                        if (m < Main.maxTilesY / 2 - 470 + (int)(Main.maxTilesY * 0.3f) + L && m > Main.maxTilesY / 2 - 470 + (int)(Main.maxTilesY * 0.3f) - H / 1.5f && Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                         {
                                             if (Main.rand.Next(4000) == 1)
                                             {
@@ -1172,9 +1173,9 @@ namespace MythMod.UI.OceanWorld
                                                 int j = 0;
                                                 for (int n = Main.rand.Next(0, 50); n < 60; n++)
                                                 {
-                                                    Main.tile[l + i, m + j].type = (ushort)mod.TileType("硫磺矿");
-                                                    Main.tile[l + i, m + 2 + j].wall = (ushort)mod.WallType("玄武岩墙");
-                                                    Main.tile[l + i, m + j].active(true);
+                                                    Main.tile[l + i, m + j].TileType = (ushort)mod.Find<ModTile>("硫磺矿").Type;
+                                                    Main.tile[l + i, m + 2 + j].WallType = (ushort)mod.Find<ModWall>("玄武岩墙").Type;
+                                                    Main.tile[l + i, m + j].HasTile = true;
                                                     if (Main.rand.Next(10) > 5)
                                                     {
                                                         if (Main.rand.Next(10) > 5)
@@ -1201,9 +1202,9 @@ namespace MythMod.UI.OceanWorld
                                             }
                                             else
                                             {
-                                                Main.tile[l, m].type = (ushort)mod.TileType("Basalt");
-                                                Main.tile[l, m + 2].wall = (ushort)mod.WallType("玄武岩墙");
-                                                Main.tile[l, m].active(true);
+                                                Main.tile[l, m].TileType = (ushort)mod.Find<ModTile>("Basalt").Type;
+                                                Main.tile[l, m + 2].WallType = (ushort)mod.Find<ModWall>("玄武岩墙").Type;
+                                                Main.tile[l, m].HasTile = true;
                                             }
                                         }
                                     }
@@ -1222,17 +1223,17 @@ namespace MythMod.UI.OceanWorld
                                     for (int m = 0; m < Main.maxTilesY * 0.7f; m++)
                                     {
                                         if (m < Main.maxTilesY / 2 - 470 + (int)(Main.maxTilesY * 0.3f) + L && m > Main.maxTilesY / 2 - 470 + (int)(Main.maxTilesY * 0.3f) - H / 1.5f
-                                            && Main.tile[l, m].type != mod.TileType("沧流矿")
-                                            && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                            && Main.tile[l, m].type != mod.TileType("Basalt")
-                                            && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                            && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                            && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                            && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                         {
-                                            Main.tile[l, m].type = (ushort)mod.TileType("Basalt");
-                                            Main.tile[l, m + 2].wall = (ushort)mod.WallType("玄武岩墙");
-                                            Main.tile[l, m].active(true);
+                                            Main.tile[l, m].TileType = (ushort)mod.Find<ModTile>("Basalt").Type;
+                                            Main.tile[l, m + 2].WallType = (ushort)mod.Find<ModWall>("玄武岩墙").Type;
+                                            Main.tile[l, m].HasTile = true;
                                         }
                                     }
                                 }
@@ -1328,13 +1329,13 @@ namespace MythMod.UI.OceanWorld
                                     int L = (int)(H / 2.4f);
                                     for (int m = 0; m < Main.maxTilesY * 0.7f; m++)
                                     {
-                                        if (m < Main.maxTilesY / 2 - 470 + (int)(Main.maxTilesY * 0.3f) + L && m > Main.maxTilesY / 2 - 470 + (int)(Main.maxTilesY * 0.3f) - H / 1.5f && Main.tile[l, m].type != mod.TileType("沧流矿")
-                                            && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                            && Main.tile[l, m].type != mod.TileType("Basalt")
-                                            && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                            && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                            && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                            && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                        if (m < Main.maxTilesY / 2 - 470 + (int)(Main.maxTilesY * 0.3f) + L && m > Main.maxTilesY / 2 - 470 + (int)(Main.maxTilesY * 0.3f) - H / 1.5f && Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                         {
                                             if (Main.rand.Next(4000) == 1)
                                             {
@@ -1342,9 +1343,9 @@ namespace MythMod.UI.OceanWorld
                                                 int j = 0;
                                                 for (int n = Main.rand.Next(0, 50); n < 60; n++)
                                                 {
-                                                    Main.tile[l + i, m + j].type = (ushort)mod.TileType("硫磺矿");
-                                                    Main.tile[l + i, m + 2 + j].wall = (ushort)mod.WallType("玄武岩墙");
-                                                    Main.tile[l + i, m + j].active(true);
+                                                    Main.tile[l + i, m + j].TileType = (ushort)mod.Find<ModTile>("硫磺矿").Type;
+                                                    Main.tile[l + i, m + 2 + j].WallType = (ushort)mod.Find<ModWall>("玄武岩墙").Type;
+                                                    Main.tile[l + i, m + j].HasTile = true;
                                                     if (Main.rand.Next(10) > 5)
                                                     {
                                                         if (Main.rand.Next(10) > 5)
@@ -1371,9 +1372,9 @@ namespace MythMod.UI.OceanWorld
                                             }
                                             else
                                             {
-                                                Main.tile[l, m].type = (ushort)mod.TileType("Basalt");
-                                                Main.tile[l, m + 2].wall = (ushort)mod.WallType("玄武岩墙");
-                                                Main.tile[l, m].active(true);
+                                                Main.tile[l, m].TileType = (ushort)mod.Find<ModTile>("Basalt").Type;
+                                                Main.tile[l, m + 2].WallType = (ushort)mod.Find<ModWall>("玄武岩墙").Type;
+                                                Main.tile[l, m].HasTile = true;
                                             }
                                         }
                                     }
@@ -1392,17 +1393,17 @@ namespace MythMod.UI.OceanWorld
                                     for (int m = 0; m < Main.maxTilesY * 0.7f; m++)
                                     {
                                         if (m < Main.maxTilesY / 2 - 470 + (int)(Main.maxTilesY * 0.3f) + L && m > Main.maxTilesY / 2 - 470 + (int)(Main.maxTilesY * 0.3f) - H / 1.5f
-                                            && Main.tile[l, m].type != mod.TileType("沧流矿")
-                                            && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                            && Main.tile[l, m].type != mod.TileType("Basalt")
-                                            && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                            && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                            && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                            && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                            && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                         {
-                                            Main.tile[l, m].type = (ushort)mod.TileType("Basalt");
-                                            Main.tile[l, m + 2].wall = (ushort)mod.WallType("玄武岩墙");
-                                            Main.tile[l, m].active(true);
+                                            Main.tile[l, m].TileType = (ushort)mod.Find<ModTile>("Basalt").Type;
+                                            Main.tile[l, m + 2].WallType = (ushort)mod.Find<ModWall>("玄武岩墙").Type;
+                                            Main.tile[l, m].HasTile = true;
                                         }
                                     }
                                 }
@@ -1414,7 +1415,7 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "生成火山大陆…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     if (Main.maxTilesX == 4200)
                     {
                         float ym = 0;
@@ -1425,31 +1426,31 @@ namespace MythMod.UI.OceanWorld
                             {
                                 if (m > (Main.maxTilesY / 2 - 395) + (Math.Cos(ym * Math.PI) + 1) * Main.maxTilesY * 0.15f)
                                 {
-                                    if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                    if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                     {
-                                        Main.tile[l, m].type = 397;
-                                        Main.tile[l, m + 1].wall = 187;
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = 397;
+                                        Main.tile[l, m + 1].WallType = 187;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                 }
                                 if (m <= (Main.maxTilesY / 2 - 395) + (Math.Cos(ym * Math.PI) + 1) * Main.maxTilesY * 0.15f && m > (Main.maxTilesY / 2 - 400) + (Math.Cos(ym * Math.PI) + 1) * Main.maxTilesY * 0.15f)
                                 {
-                                    if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                    if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                     {
-                                        Main.tile[l, m].type = 53;
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = 53;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                 }
                             }
@@ -1465,31 +1466,31 @@ namespace MythMod.UI.OceanWorld
                             {
                                 if (m > (Main.maxTilesY / 2 - 395) + (Math.Cos(ym * Math.PI) + 1) * Main.maxTilesY * 0.15f)
                                 {
-                                    if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                    if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                     {
-                                        Main.tile[l, m].type = 397;
-                                        Main.tile[l, m + 1].wall = 187;
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = 397;
+                                        Main.tile[l, m + 1].WallType = 187;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                 }
                                 if (m <= (Main.maxTilesY / 2 - 395) + (Math.Cos(ym * Math.PI) + 1) * Main.maxTilesY * 0.15f && m > (Main.maxTilesY / 2 - 400) + (Math.Cos(ym * Math.PI) + 1) * Main.maxTilesY * 0.15f)
                                 {
-                                    if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                    if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                     {
-                                        Main.tile[l, m].type = 53;
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = 53;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                 }
                             }
@@ -1505,31 +1506,31 @@ namespace MythMod.UI.OceanWorld
                             {
                                 if (m > (Main.maxTilesY / 2 - 465) + (Math.Cos(ym * Math.PI) + 1) * Main.maxTilesY * 0.22f)
                                 {
-                                    if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                    if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                     {
-                                        Main.tile[l, m].type = 397;
-                                        Main.tile[l, m + 1].wall = 187;
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = 397;
+                                        Main.tile[l, m + 1].WallType = 187;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                 }
                                 if (m <= (Main.maxTilesY / 2 - 465) + (Math.Cos(ym * Math.PI) + 1) * Main.maxTilesY * 0.15f && m > (Main.maxTilesY / 2 - 470) + (Math.Cos(ym * Math.PI) + 1) * Main.maxTilesY * 0.22f)
                                 {
-                                    if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                    if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                     {
-                                        Main.tile[l, m].type = 53;
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = 53;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                 }
                             }
@@ -1542,7 +1543,7 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "生成火山大陆…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     if (Main.maxTilesX == 4200)
                     {
                         float ym = 0;
@@ -1553,31 +1554,31 @@ namespace MythMod.UI.OceanWorld
                             {
                                 if (m > (Main.maxTilesY / 2 - 395) - (Math.Cos(ym * Math.PI) - 1) * Main.maxTilesY * 0.15f)
                                 {
-                                    if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                    if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                     {
-                                        Main.tile[l, m].type = 397;
-                                        Main.tile[l, m + 1].wall = 187;
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = 397;
+                                        Main.tile[l, m + 1].WallType = 187;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                 }
                                 if (m <= (Main.maxTilesY / 2 - 395) - (Math.Cos(ym * Math.PI) - 1) * Main.maxTilesY * 0.15f && m > (Main.maxTilesY / 2 - 400) - (Math.Cos(ym * Math.PI) - 1) * Main.maxTilesY * 0.15f)
                                 {
-                                    if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                    if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                     {
-                                        Main.tile[l, m].type = 53;
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = 53;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                 }
                             }
@@ -1593,31 +1594,31 @@ namespace MythMod.UI.OceanWorld
                             {
                                 if (m > (Main.maxTilesY / 2 - 395) - (Math.Cos(ym * Math.PI) - 1) * Main.maxTilesY * 0.15f)
                                 {
-                                    if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                    if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                     {
-                                        Main.tile[l, m].type = 397;
-                                        Main.tile[l, m + 1].wall = 187;
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = 397;
+                                        Main.tile[l, m + 1].WallType = 187;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                 }
                                 if (m <= (Main.maxTilesY / 2 - 395) - (Math.Cos(ym * Math.PI) - 1) * Main.maxTilesY * 0.15f && m > (Main.maxTilesY / 2 - 400) - (Math.Cos(ym * Math.PI) - 1) * Main.maxTilesY * 0.15f)
                                 {
-                                    if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                    if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                     {
-                                        Main.tile[l, m].type = 53;
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = 53;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                 }
                             }
@@ -1633,31 +1634,31 @@ namespace MythMod.UI.OceanWorld
                             {
                                 if (m > (Main.maxTilesY / 2 - 465) - (Math.Cos(ym * Math.PI) - 1) * Main.maxTilesY * 0.22f)
                                 {
-                                    if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                    if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                     {
-                                        Main.tile[l, m].type = 397;
-                                        Main.tile[l, m + 1].wall = 187;
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = 397;
+                                        Main.tile[l, m + 1].WallType = 187;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                 }
                                 if (m <= (Main.maxTilesY / 2 - 465) - (Math.Cos(ym * Math.PI) - 1) * Main.maxTilesY * 0.15f && m > (Main.maxTilesY / 2 - 470) - (Math.Cos(ym * Math.PI) - 1) * Main.maxTilesY * 0.22f)
                                 {
-                                    if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                    if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                     {
-                                        Main.tile[l, m].type = 53;
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = 53;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                 }
                             }
@@ -1669,7 +1670,7 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "生成火山大陆…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     if (Main.maxTilesX == 4200)
                     {
                         float ym = 0;
@@ -1695,31 +1696,31 @@ namespace MythMod.UI.OceanWorld
                             {
                                 if (m > (Main.maxTilesY / 2 - 395) - ym)
                                 {
-                                    if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                    if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                     {
-                                        Main.tile[l, m].type = 397;
-                                        Main.tile[l, m + 2].wall = 187;
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = 397;
+                                        Main.tile[l, m + 2].WallType = 187;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                 }
                                 if (m <= (Main.maxTilesY / 2 - 395) - ym && m > (Main.maxTilesY / 2 - 400) - ym)
                                 {
-                                    if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                    if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                     {
-                                        Main.tile[l, m].type = 53;
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = 53;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                 }
                             }
@@ -1750,31 +1751,31 @@ namespace MythMod.UI.OceanWorld
                             {
                                 if (m > (Main.maxTilesY / 2 - 395) - ym)
                                 {
-                                    if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                    if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                     {
-                                        Main.tile[l, m].type = 397;
-                                        Main.tile[l, m + 2].wall = 187;
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = 397;
+                                        Main.tile[l, m + 2].WallType = 187;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                 }
                                 if (m <= (Main.maxTilesY / 2 - 395) - ym && m > (Main.maxTilesY / 2 - 400) - ym)
                                 {
-                                    if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                    if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                     {
-                                        Main.tile[l, m].type = 53;
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = 53;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                 }
                             }
@@ -1805,31 +1806,31 @@ namespace MythMod.UI.OceanWorld
                             {
                                 if (m > (Main.maxTilesY / 2 - 465) - ym)
                                 {
-                                    if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                    if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                     {
-                                        Main.tile[l, m].type = 397;
-                                        Main.tile[l, m + 1].wall = 187;
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = 397;
+                                        Main.tile[l, m + 1].WallType = 187;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                 }
                                 if (m <= (Main.maxTilesY / 2 - 465) - ym && m > (Main.maxTilesY / 2 - 470) - ym)
                                 {
-                                    if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                    if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                     {
-                                        Main.tile[l, m].type = 53;
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = 53;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                 }
                             }
@@ -1845,7 +1846,7 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "生成大陆斜坡…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     float ym = 0;
                     for (int l = 0; l < Main.maxTilesX / 8; l++)
                     {
@@ -1857,31 +1858,31 @@ namespace MythMod.UI.OceanWorld
                             {
                                 if (m > (Main.maxTilesY / 2 - 395) - (Math.Cos(ym * Math.PI) - 1) * Main.maxTilesY * 0.15f + (int)seabedH)
                                 {
-                                    if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                    if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                     {
-                                        Main.tile[l, m].type = 397;
-                                        Main.tile[l, m + 1].wall = 187;
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = 397;
+                                        Main.tile[l, m + 1].WallType = 187;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                 }
                                 if (m < (Main.maxTilesY / 2 - 395) - (Math.Cos(ym * Math.PI) - 1) * Main.maxTilesY * 0.15f + (int)seabedH && m > (Main.maxTilesY / 2 - 400) - (Math.Cos(ym * Math.PI) - 1) * Main.maxTilesY * 0.15f + (int)seabedH)
                                 {
-                                    if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                    if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                     {
-                                        Main.tile[l, m].type = 53;
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = 53;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                 }
                             }
@@ -1892,31 +1893,31 @@ namespace MythMod.UI.OceanWorld
                             {
                                 if (m > (Main.maxTilesY / 2 - 440) - (Math.Cos(ym * Math.PI) - 1) * Main.maxTilesY * 0.15f + (int)seabedH)
                                 {
-                                    if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                    if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                     {
-                                        Main.tile[l, m].type = 397;
-                                        Main.tile[l, m + 1].wall = 187;
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = 397;
+                                        Main.tile[l, m + 1].WallType = 187;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                 }
                                 if (m < (Main.maxTilesY / 2 - 440) - (Math.Cos(ym * Math.PI) - 1) * Main.maxTilesY * 0.15f + (int)seabedH && m > (Main.maxTilesY / 2 - 445) - (Math.Cos(ym * Math.PI) - 1) * Main.maxTilesY * 0.15f + (int)seabedH)
                                 {
-                                    if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                    if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                     {
-                                        Main.tile[l, m].type = 53;
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = 53;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                 }
                             }
@@ -1927,31 +1928,31 @@ namespace MythMod.UI.OceanWorld
                             {
                                 if (m > (Main.maxTilesY / 2 - 640) - (Math.Cos(ym * Math.PI) - 1) * Main.maxTilesY * 0.15f)
                                 {
-                                    if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                    if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                     {
-                                        Main.tile[l, m].type = 397;
-                                        Main.tile[l, m + 1].wall = 187;
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = 397;
+                                        Main.tile[l, m + 1].WallType = 187;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                 }
                                 if (m < (Main.maxTilesY / 2 - 640) - (Math.Cos(ym * Math.PI) - 1) * Main.maxTilesY * 0.15f + (int)seabedH && m > (Main.maxTilesY / 2 - 645) - (Math.Cos(ym * Math.PI) - 1) * Main.maxTilesY * 0.15f + (int)seabedH)
                                 {
-                                    if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                    if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                     {
-                                        Main.tile[l, m].type = 53;
-                                        Main.tile[l, m].active(true);
+                                        Main.tile[l, m].TileType = 53;
+                                        Main.tile[l, m].HasTile = true;
                                     }
                                 }
                             }
@@ -1962,7 +1963,7 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "创建珊瑚礁…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     for (int l = Main.maxTilesX / 24;l < Main.maxTilesX * 0.35f; l++)
                     {
                         for (int m = Main.maxTilesY / 2 - 404 + (int)(Main.maxTilesY * 0.3f) - 150; m < Main.maxTilesY / 2 - 404 + (int)(Main.maxTilesY * 0.3f); m++)
@@ -1978,12 +1979,12 @@ namespace MythMod.UI.OceanWorld
                                         {
                                             if (new Vector2(xm - l, ym - m).Length() <= r)
                                             {
-                                                Main.tile[(int)(xm), (int)(ym)].type = (ushort)mod.TileType("黄纽扣珊瑚");
+                                                Main.tile[(int)(xm), (int)(ym)].TileType = (ushort)mod.Find<ModTile>("黄纽扣珊瑚").Type;
                                                 if (new Vector2(xm - l, ym - m).Length() <= r - 1)
                                                 {
-                                                    Main.tile[(int)(xm), (int)(ym)].wall = (ushort)mod.WallType("黄纽扣珊瑚墙");
+                                                    Main.tile[(int)(xm), (int)(ym)].WallType = (ushort)mod.Find<ModWall>("黄纽扣珊瑚墙").Type;
                                                 }
-                                                Main.tile[(int)(xm), (int)(ym)].active(true);
+                                                Main.tile[(int)(xm), (int)(ym)].HasTile = true;
                                             }
                                         }
                                     }
@@ -1997,12 +1998,12 @@ namespace MythMod.UI.OceanWorld
                                         {
                                             if (new Vector2(xm - l, ym - m).Length() <= r)
                                             {
-                                                Main.tile[(int)(xm), (int)(ym)].type = (ushort)mod.TileType("青纽扣珊瑚");
+                                                Main.tile[(int)(xm), (int)(ym)].TileType = (ushort)mod.Find<ModTile>("青纽扣珊瑚").Type;
                                                 if (new Vector2(xm - l, ym - m).Length() <= r - 1)
                                                 {
-                                                    Main.tile[(int)(xm), (int)(ym)].wall = (ushort)mod.WallType("青纽扣珊瑚墙");
+                                                    Main.tile[(int)(xm), (int)(ym)].WallType = (ushort)mod.Find<ModWall>("青纽扣珊瑚墙").Type;
                                                 }
-                                                Main.tile[(int)(xm), (int)(ym)].active(true);
+                                                Main.tile[(int)(xm), (int)(ym)].HasTile = true;
                                             }
                                         }
                                     }
@@ -2047,23 +2048,23 @@ namespace MythMod.UI.OceanWorld
                                         {
                                             for (float y = -thick; y < thick; y += 1)
                                             {
-                                                if (Main.tile[(int)(v.X + x), (int)(v.Y + y)].type != mod.TileType("沧流矿")
-                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].type != mod.TileType("渊海矿")
-                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].type != mod.TileType("Basalt")
-                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].type != mod.TileType("橄榄石")
-                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].type != mod.TileType("硫磺矿")
-                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].type != mod.TileType("熔岩石")
-                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].type != mod.TileType("黄纽扣珊瑚")
-                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].type != mod.TileType("青纽扣珊瑚")
-                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].type != mod.TileType("龙息矿") && Main.tile[(int)(v.X + x), (int)(v.Y + y)].type != 53 && Main.tile[(int)(v.X + x), (int)(v.Y + y)].type != 397 && Main.tile[(int)(v.X + x), (int)(v.Y + y)].type != mod.TileType("橄榄石矿"))
+                                                if (Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType != mod.Find<ModTile>("沧流矿").Type
+                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType != mod.Find<ModTile>("渊海矿").Type
+                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType != mod.Find<ModTile>("Basalt").Type
+                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType != mod.Find<ModTile>("橄榄石").Type
+                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType != mod.Find<ModTile>("熔岩石").Type
+                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType != mod.Find<ModTile>("黄纽扣珊瑚").Type
+                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType != mod.Find<ModTile>("青纽扣珊瑚").Type
+                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType != 53 && Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType != 397 && Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                                 {
-                                                    Main.tile[(int)(v.X + x), (int)(v.Y + y)].type = 397;
-                                                    Main.tile[(int)(v.X + x), (int)(v.Y + y) + 1].wall = 187;
-                                                    Main.tile[(int)(v.X + x), (int)(v.Y + y)].active(true);
+                                                    Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType = 397;
+                                                    Main.tile[(int)(v.X + x), (int)(v.Y + y) + 1].WallType = 187;
+                                                    Main.tile[(int)(v.X + x), (int)(v.Y + y)].HasTile = true;
                                                 }
                                                 if (Main.rand.Next(50) == 1)
                                                 {
-                                                    Projectile.NewProjectile((v.X + x) * 16 - 40, (v.Y + y) * 16 - 120, 0, -2, mod.ProjectileType("珊瑚random"), 0, 0, Main.myPlayer, 10, 0f);
+                                                    Projectile.NewProjectile((v.X + x) * 16 - 40, (v.Y + y) * 16 - 120, 0, -2, mod.Find<ModProjectile>("珊瑚random").Type, 0, 0, Main.myPlayer, 10, 0f);
                                                 }
                                             }
                                         }
@@ -2106,26 +2107,26 @@ namespace MythMod.UI.OceanWorld
                                         {
                                             for (float y = -thick; y < thick; y += 1)
                                             {
-                                                if (Main.tile[(int)(v.X + x), (int)(v.Y + y)].type != mod.TileType("沧流矿")
-                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].type != mod.TileType("渊海矿")
-                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].type != mod.TileType("Basalt")
-                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].type != mod.TileType("橄榄石")
-                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].type != mod.TileType("硫磺矿")
-                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].type != mod.TileType("熔岩石")
-                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].type != mod.TileType("黄纽扣珊瑚")
-                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].type != mod.TileType("青纽扣珊瑚")
-                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].type != mod.TileType("龙息矿") && Main.tile[(int)(v.X + x), (int)(v.Y + y)].type != 53 && Main.tile[(int)(v.X + x), (int)(v.Y + y)].type != 397 && Main.tile[(int)(v.X + x), (int)(v.Y + y)].type != mod.TileType("橄榄石矿"))
+                                                if (Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType != mod.Find<ModTile>("沧流矿").Type
+                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType != mod.Find<ModTile>("渊海矿").Type
+                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType != mod.Find<ModTile>("Basalt").Type
+                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType != mod.Find<ModTile>("橄榄石").Type
+                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType != mod.Find<ModTile>("熔岩石").Type
+                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType != mod.Find<ModTile>("黄纽扣珊瑚").Type
+                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType != mod.Find<ModTile>("青纽扣珊瑚").Type
+                                                && Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType != 53 && Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType != 397 && Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                                 {
                                                     if(Main.rand.Next(100) < 90)
                                                     {
-                                                        Main.tile[(int)(v.X + x), (int)(v.Y + y)].type = 315;
-                                                        Main.tile[(int)(v.X + x), (int)(v.Y + y) + 1].wall = 187;
-                                                        Main.tile[(int)(v.X + x), (int)(v.Y + y)].active(true);
+                                                        Main.tile[(int)(v.X + x), (int)(v.Y + y)].TileType = 315;
+                                                        Main.tile[(int)(v.X + x), (int)(v.Y + y) + 1].WallType = 187;
+                                                        Main.tile[(int)(v.X + x), (int)(v.Y + y)].HasTile = true;
                                                     }
                                                 }
                                                 if (Main.rand.Next(500) == 1)
                                                 {
-                                                    Projectile.NewProjectile((v.X + x) * 16 - 40, (v.Y + y) * 16 - 120, 0, -2, mod.ProjectileType("珊瑚random"), 0, 0, Main.myPlayer, 10, 0f);
+                                                    Projectile.NewProjectile((v.X + x) * 16 - 40, (v.Y + y) * 16 - 120, 0, -2, mod.Find<ModProjectile>("珊瑚random").Type, 0, 0, Main.myPlayer, 10, 0f);
                                                 }
                                             }
                                         }
@@ -2139,7 +2140,7 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "铺设海床…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     for (int l = Main.maxTilesX / 8 + (int)(Main.maxTilesX * ((jindu - 300) / 80f)); l < Main.maxTilesX / 8 + (int)(Main.maxTilesX * ((jindu + 1 - 300) / 80f)); l++)
                     {
                         seabedH += Main.rand.NextFloat(-0.5f,0.5f);
@@ -2147,17 +2148,17 @@ namespace MythMod.UI.OceanWorld
                         {
                             for (int m = Main.maxTilesY / 2 - 408 + (int)(Main.maxTilesY * 0.3f) + (int)seabedH; m < Main.maxTilesY - 10; m++)
                             {
-                                if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                 {
-                                    Main.tile[l, m].type = 397;
-                                    Main.tile[l, m + 1].wall = 187;
-                                    Main.tile[l, m].active(true);
+                                    Main.tile[l, m].TileType = 397;
+                                    Main.tile[l, m + 1].WallType = 187;
+                                    Main.tile[l, m].HasTile = true;
                                 }
                             }
                         }
@@ -2165,17 +2166,17 @@ namespace MythMod.UI.OceanWorld
                         {
                             for (int m = Main.maxTilesY / 2 - 453 + (int)(Main.maxTilesY * 0.3f) + (int)seabedH; m < Main.maxTilesY - 10; m++)
                             {
-                                if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                 {
-                                    Main.tile[l, m].type = 397;
-                                    Main.tile[l, m + 1].wall = 187;
-                                    Main.tile[l, m].active(true);
+                                    Main.tile[l, m].TileType = 397;
+                                    Main.tile[l, m + 1].WallType = 187;
+                                    Main.tile[l, m].HasTile = true;
                                 }
                             }
                         }
@@ -2183,17 +2184,17 @@ namespace MythMod.UI.OceanWorld
                         {
                             for (int m = Main.maxTilesY / 2 - 653 + (int)(Main.maxTilesY * 0.3f) + (int)seabedH; m < Main.maxTilesY - 10; m++)
                             {
-                                if (Main.tile[l, m].type != mod.TileType("沧流矿")
-                                    && Main.tile[l, m].type != mod.TileType("渊海矿")
-                                    && Main.tile[l, m].type != mod.TileType("Basalt")
-                                    && Main.tile[l, m].type != mod.TileType("橄榄石")
-                                    && Main.tile[l, m].type != mod.TileType("硫磺矿")
-                                    && Main.tile[l, m].type != mod.TileType("熔岩石")
-                                    && Main.tile[l, m].type != mod.TileType("龙息矿") && Main.tile[l, m].type != 53 && Main.tile[l, m].type != 397 && Main.tile[l, m].type != mod.TileType("橄榄石矿"))
+                                if (Main.tile[l, m].TileType != mod.Find<ModTile>("沧流矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("渊海矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("Basalt").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("硫磺矿").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("熔岩石").Type
+                                    && Main.tile[l, m].TileType != mod.Find<ModTile>("龙息矿").Type && Main.tile[l, m].TileType != 53 && Main.tile[l, m].TileType != 397 && Main.tile[l, m].TileType != mod.Find<ModTile>("橄榄石矿").Type)
                                 {
-                                    Main.tile[l, m].type = 397;
-                                    Main.tile[l, m + 1].wall = 187;
-                                    Main.tile[l, m].active(true);
+                                    Main.tile[l, m].TileType = 397;
+                                    Main.tile[l, m + 1].WallType = 187;
+                                    Main.tile[l, m].HasTile = true;
                                 }
                             }
                         }
@@ -2203,7 +2204,7 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "给火山口挖洞…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     for (int count = 0; count < VolC; count++)
                     {
                         int VCenter = 0;
@@ -2306,7 +2307,7 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "给大火山口挖洞…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     float xh = 0;
                     float Rh = 12;
 
@@ -2354,7 +2355,7 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "创建火山地下…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     if (Main.maxTilesX == 4200)
                     {
                         float Rh = 12;
@@ -2447,7 +2448,7 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "生成熔岩晶石…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     Vector2 vk = new Vector2((int)(Main.maxTilesX * 0.62f), (int)(Main.maxTilesY * 0.67f));
                         for (int i = 0; i < 900; i++)
                         {
@@ -2455,7 +2456,7 @@ namespace MythMod.UI.OceanWorld
                             vk.Y += Main.rand.NextFloat(-0.4f, 0.4f);
                             if (Main.rand.Next(20) == 1)
                             {
-                                Projectile.NewProjectile(vk.X * 16, vk.Y * 16, 0, -2, mod.ProjectileType("火山生成3"), 0, 0, Main.myPlayer, 10, 0f);
+                                Projectile.NewProjectile(vk.X * 16, vk.Y * 16, 0, -2, mod.Find<ModProjectile>("火山生成3").Type, 0, 0, Main.myPlayer, 10, 0f);
                             }
                         }
                 }
@@ -2463,7 +2464,7 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "随机挖洞中…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     if (Main.maxTilesX == 4200)
                     {
                         float Rh = 12;
@@ -2527,8 +2528,8 @@ namespace MythMod.UI.OceanWorld
                                         int rk = Main.rand.Next(4, 27); 
                                         for(int ik = 0;ik < rk;ik++)
                                         {
-                                            Main.tile[x, y].lava(true);
-                                            Main.tile[x, y].liquid = byte.MaxValue;
+                                            Main.tile[x, y].LiquidType = LiquidID.Lava;
+                                            Main.tile[x, y].LiquidAmount = byte.MaxValue;
                                         }
                                     }
                                 }
@@ -2598,8 +2599,8 @@ namespace MythMod.UI.OceanWorld
                                         int rk = Main.rand.Next(4, 27);
                                         for (int ik = 0; ik < rk; ik++)
                                         {
-                                            Main.tile[x, y].lava(true);
-                                            Main.tile[x, y].liquid = byte.MaxValue;
+                                            Main.tile[x, y].LiquidType = LiquidID.Lava;
+                                            Main.tile[x, y].LiquidAmount = byte.MaxValue;
                                         }
                                     }
                                 }
@@ -2669,8 +2670,8 @@ namespace MythMod.UI.OceanWorld
                                         int rk = Main.rand.Next(4, 27);
                                         for (int ik = 0; ik < rk; ik++)
                                         {
-                                            Main.tile[x, y].lava(true);
-                                            Main.tile[x, y].liquid = byte.MaxValue;
+                                            Main.tile[x, y].LiquidType = LiquidID.Lava;
+                                            Main.tile[x, y].LiquidAmount = byte.MaxValue;
                                         }
                                     }
                                 }
@@ -2682,16 +2683,16 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "生成洞穴附着物…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     if (Main.maxTilesX == 4200)
                     {
                         for (int k = (int)(Main.maxTilesX * 0.6f); k < (int)(Main.maxTilesX * 0.75f); k++)
                         {
                             for (int l = (int)(Main.maxTilesY * 0.24f); l < (int)(Main.maxTilesY * 0.88f); l++)
                             {
-                                if (Main.rand.Next(800) == 1 && Main.tile[k, l].type != mod.TileType("Basalt"))
+                                if (Main.rand.Next(800) == 1 && Main.tile[k, l].TileType != mod.Find<ModTile>("Basalt").Type)
                                 {
-                                    Projectile.NewProjectile(k * 16, l * 16, 0, 2, mod.ProjectileType("火山生成2"), 0, 0, Main.myPlayer, 10, 0f);
+                                    Projectile.NewProjectile(k * 16, l * 16, 0, 2, mod.Find<ModProjectile>("火山生成2").Type, 0, 0, Main.myPlayer, 10, 0f);
                                 }
                             }
                         }
@@ -2702,9 +2703,9 @@ namespace MythMod.UI.OceanWorld
                         {
                             for (int l = (int)(Main.maxTilesY * 0.3f); l < (int)(Main.maxTilesY * 0.88f); l++)
                             {
-                                if (Main.rand.Next(800) == 1 && Main.tile[k, l].type != mod.TileType("Basalt"))
+                                if (Main.rand.Next(800) == 1 && Main.tile[k, l].TileType != mod.Find<ModTile>("Basalt").Type)
                                 {
-                                    Projectile.NewProjectile(k * 16, l * 16, 0, 2, mod.ProjectileType("火山生成2"), 0, 0, Main.myPlayer, 10, 0f);
+                                    Projectile.NewProjectile(k * 16, l * 16, 0, 2, mod.Find<ModProjectile>("火山生成2").Type, 0, 0, Main.myPlayer, 10, 0f);
                                 }
                             }
                         }
@@ -2715,9 +2716,9 @@ namespace MythMod.UI.OceanWorld
                         {
                             for (int l = (int)(Main.maxTilesY * 0.36f); l < (int)(Main.maxTilesY * 0.88f); l++)
                             {
-                                if (Main.rand.Next(800) == 1 && Main.tile[k, l].type != mod.TileType("Basalt"))
+                                if (Main.rand.Next(800) == 1 && Main.tile[k, l].TileType != mod.Find<ModTile>("Basalt").Type)
                                 {
-                                    Projectile.NewProjectile(k * 16, l * 16, 0, 2, mod.ProjectileType("火山生成2"), 0, 0, Main.myPlayer, 10, 0f);
+                                    Projectile.NewProjectile(k * 16, l * 16, 0, 2, mod.Find<ModProjectile>("火山生成2").Type, 0, 0, Main.myPlayer, 10, 0f);
                                 }
                             }
                         }
@@ -2727,7 +2728,7 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "种上椰子树…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     if (Main.maxTilesX == 4200)
                     {
                         for (int k = 20; k < Main.maxTilesX / 20 - 50; k++)
@@ -2736,7 +2737,7 @@ namespace MythMod.UI.OceanWorld
                             {
                                 Tile tile = Main.tile[k, l];
                                 Tile tile2 = Main.tile[k, l - 1];
-                                if (!(!tile.active() || tile.halfBrick() || tile.slope() != 0) && !(tile2.wall != 0 || tile2.liquid != 0) && !(!WorldGen.EmptyTileCheck(k - 1, k + 1, l - 30, l - 1, 20)) && Main.rand.Next(4) == 0)
+                                if (!(!tile.HasTile || tile.IsHalfBlock || tile.Slope != 0) && !(tile2.WallType != 0 || tile2.LiquidAmount != 0) && !(!WorldGen.EmptyTileCheck(k - 1, k + 1, l - 30, l - 1, 20)) && Main.rand.Next(4) == 0)
                                 {
                                     int num2 = WorldGen.genRand.Next(10, 21);
                                     int num3 = WorldGen.genRand.Next(-8, 9);
@@ -2747,17 +2748,17 @@ namespace MythMod.UI.OceanWorld
                                         tile = Main.tile[k, l - 1 - j];
                                         if (j == 0)
                                         {
-                                            tile.active(true);
-                                            tile.type = 323;
-                                            tile.frameX = 66;
-                                            tile.frameY = 0;
+                                            tile.HasTile = true;
+                                            tile.TileType = 323;
+                                            tile.TileFrameX = 66;
+                                            tile.TileFrameY = 0;
                                         }
                                         else if (j == num2 - 1)
                                         {
-                                            tile.active(true);
-                                            tile.type = 323;
-                                            tile.frameX = (short)(22 * WorldGen.genRand.Next(4, 7));
-                                            tile.frameY = num4;
+                                            tile.HasTile = true;
+                                            tile.TileType = 323;
+                                            tile.TileFrameX = (short)(22 * WorldGen.genRand.Next(4, 7));
+                                            tile.TileFrameY = num4;
                                         }
                                         else
                                         {
@@ -2771,10 +2772,10 @@ namespace MythMod.UI.OceanWorld
                                                     num4 += (short)(num6 * 2);
                                                 }
                                             }
-                                            tile.active(true);
-                                            tile.type = 323;
-                                            tile.frameX = (short)(22 * WorldGen.genRand.Next(0, 3));
-                                            tile.frameY = num4;
+                                            tile.HasTile = true;
+                                            tile.TileType = 323;
+                                            tile.TileFrameX = (short)(22 * WorldGen.genRand.Next(0, 3));
+                                            tile.TileFrameY = num4;
                                         }
                                     }
                                     WorldGen.RangeFrame(k - 2, l - num2 - 1, k + 2, l + 1);
@@ -2794,7 +2795,7 @@ namespace MythMod.UI.OceanWorld
                             {
                                 Tile tile = Main.tile[k, l];
                                 Tile tile2 = Main.tile[k, l - 1];
-                                if (!(!tile.active() || tile.halfBrick() || tile.slope() != 0) && !(tile2.wall != 0 || tile2.liquid != 0) && !(!WorldGen.EmptyTileCheck(k - 1, k + 1, l - 30, l - 1, 20)) && Main.rand.Next(4) == 0)
+                                if (!(!tile.HasTile || tile.IsHalfBlock || tile.Slope != 0) && !(tile2.WallType != 0 || tile2.LiquidAmount != 0) && !(!WorldGen.EmptyTileCheck(k - 1, k + 1, l - 30, l - 1, 20)) && Main.rand.Next(4) == 0)
                                 {
                                     int num2 = WorldGen.genRand.Next(10, 21);
                                     int num3 = WorldGen.genRand.Next(-8, 9);
@@ -2805,17 +2806,17 @@ namespace MythMod.UI.OceanWorld
                                         tile = Main.tile[k, l - 1 - j];
                                         if (j == 0)
                                         {
-                                            tile.active(true);
-                                            tile.type = 323;
-                                            tile.frameX = 66;
-                                            tile.frameY = 0;
+                                            tile.HasTile = true;
+                                            tile.TileType = 323;
+                                            tile.TileFrameX = 66;
+                                            tile.TileFrameY = 0;
                                         }
                                         else if (j == num2 - 1)
                                         {
-                                            tile.active(true);
-                                            tile.type = 323;
-                                            tile.frameX = (short)(22 * WorldGen.genRand.Next(4, 7));
-                                            tile.frameY = num4;
+                                            tile.HasTile = true;
+                                            tile.TileType = 323;
+                                            tile.TileFrameX = (short)(22 * WorldGen.genRand.Next(4, 7));
+                                            tile.TileFrameY = num4;
                                         }
                                         else
                                         {
@@ -2829,10 +2830,10 @@ namespace MythMod.UI.OceanWorld
                                                     num4 += (short)(num6 * 2);
                                                 }
                                             }
-                                            tile.active(true);
-                                            tile.type = 323;
-                                            tile.frameX = (short)(22 * WorldGen.genRand.Next(0, 3));
-                                            tile.frameY = num4;
+                                            tile.HasTile = true;
+                                            tile.TileType = 323;
+                                            tile.TileFrameX = (short)(22 * WorldGen.genRand.Next(0, 3));
+                                            tile.TileFrameY = num4;
                                         }
                                     }
                                     WorldGen.RangeFrame(k - 2, l - num2 - 1, k + 2, l + 1);
@@ -2849,14 +2850,14 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "种上椰子树…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     for (int k = (int)(Main.maxTilesX * 0.65f); k < (int)(Main.maxTilesX * 0.86f); k++)
                     {
                         for (int l = 20; l < Main.maxTilesY - 20; l++)
                         {
                             Tile tile = Main.tile[k, l];
                             Tile tile2 = Main.tile[k, l - 1];
-                            if (!(!tile.active() || tile.halfBrick() || tile.slope() != 0) && !(tile2.wall != 0 || tile2.liquid != 0) && !(!WorldGen.EmptyTileCheck(k - 1, k + 1, l - 30, l - 1, 20)) && Main.rand.Next(4) == 0)
+                            if (!(!tile.HasTile || tile.IsHalfBlock || tile.Slope != 0) && !(tile2.WallType != 0 || tile2.LiquidAmount != 0) && !(!WorldGen.EmptyTileCheck(k - 1, k + 1, l - 30, l - 1, 20)) && Main.rand.Next(4) == 0)
                             {
                                 int num2 = WorldGen.genRand.Next(10, 21);
                                 int num3 = WorldGen.genRand.Next(-8, 9);
@@ -2867,17 +2868,17 @@ namespace MythMod.UI.OceanWorld
                                     tile = Main.tile[k, l - 1 - j];
                                     if (j == 0)
                                     {
-                                        tile.active(true);
-                                        tile.type = 323;
-                                        tile.frameX = 66;
-                                        tile.frameY = 0;
+                                        tile.HasTile = true;
+                                        tile.TileType = 323;
+                                        tile.TileFrameX = 66;
+                                        tile.TileFrameY = 0;
                                     }
                                     else if (j == num2 - 1)
                                     {
-                                        tile.active(true);
-                                        tile.type = 323;
-                                        tile.frameX = (short)(22 * WorldGen.genRand.Next(4, 7));
-                                        tile.frameY = num4;
+                                        tile.HasTile = true;
+                                        tile.TileType = 323;
+                                        tile.TileFrameX = (short)(22 * WorldGen.genRand.Next(4, 7));
+                                        tile.TileFrameY = num4;
                                     }
                                     else
                                     {
@@ -2891,10 +2892,10 @@ namespace MythMod.UI.OceanWorld
                                                 num4 += (short)(num6 * 2);
                                             }
                                         }
-                                        tile.active(true);
-                                        tile.type = 323;
-                                        tile.frameX = (short)(22 * WorldGen.genRand.Next(0, 3));
-                                        tile.frameY = num4;
+                                        tile.HasTile = true;
+                                        tile.TileType = 323;
+                                        tile.TileFrameX = (short)(22 * WorldGen.genRand.Next(0, 3));
+                                        tile.TileFrameY = num4;
                                     }
                                 }
                                 WorldGen.RangeFrame(k - 2, l - num2 - 1, k + 2, l + 1);
@@ -2910,7 +2911,7 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "给海洋灌水中…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     if (Main.maxTilesX == 4200)
                     {
                         for (int l = (int)(160 + (jindu - 460)); l < 160 + (Main.maxTilesX - 160) / 30f * (jindu - 459); l++)
@@ -2920,7 +2921,7 @@ namespace MythMod.UI.OceanWorld
                                 if (l < Main.maxTilesX * 0.6f || l > Main.maxTilesX * 0.9f)
                                 //if (Math.Abs(Main.maxTilesX * 0.75f - l) > 25 && Math.Abs(VolH1 - l) > 18&& Math.Abs(VolH2 - l) > 18 && Math.Abs(VolH3 - l) > 18&& Math.Abs(VolH4 - l) > 18 && Math.Abs(VolH5 - l) > 18&& Math.Abs(VolH6 - l) > 18 && Math.Abs(VolH7 - l) > 18&& Math.Abs(VolH8 - l) > 18 && Math.Abs(VolH9 - l) > 18&& Math.Abs(VolH10 - l) > 18 && Math.Abs(VolH11 - l) > 18&& Math.Abs(VolH12 - l) > 18)
                                 {
-                                    Main.tile[l, m].liquid = byte.MaxValue;
+                                    Main.tile[l, m].LiquidAmount = byte.MaxValue;
                                 }
                                 else
                                 {
@@ -2939,7 +2940,7 @@ namespace MythMod.UI.OceanWorld
                                 if (l < Main.maxTilesX * 0.6f || l > Main.maxTilesX * 0.9f)
                                 //if (Math.Abs(Main.maxTilesX * 0.75f - l) > 25 && Math.Abs(VolH1 - l) > 18&& Math.Abs(VolH2 - l) > 18 && Math.Abs(VolH3 - l) > 18&& Math.Abs(VolH4 - l) > 18 && Math.Abs(VolH5 - l) > 18&& Math.Abs(VolH6 - l) > 18 && Math.Abs(VolH7 - l) > 18&& Math.Abs(VolH8 - l) > 18 && Math.Abs(VolH9 - l) > 18&& Math.Abs(VolH10 - l) > 18 && Math.Abs(VolH11 - l) > 18&& Math.Abs(VolH12 - l) > 18)
                                 {
-                                    Main.tile[l, m].liquid = byte.MaxValue;
+                                    Main.tile[l, m].LiquidAmount = byte.MaxValue;
                                 }
                                 else
                                 {
@@ -2958,7 +2959,7 @@ namespace MythMod.UI.OceanWorld
                                 if (l < Main.maxTilesX * 0.6f || l > Main.maxTilesX * 0.9f)
                                 //if (Math.Abs(Main.maxTilesX * 0.75f - l) > 25 && Math.Abs(VolH1 - l) > 18&& Math.Abs(VolH2 - l) > 18 && Math.Abs(VolH3 - l) > 18&& Math.Abs(VolH4 - l) > 18 && Math.Abs(VolH5 - l) > 18&& Math.Abs(VolH6 - l) > 18 && Math.Abs(VolH7 - l) > 18&& Math.Abs(VolH8 - l) > 18 && Math.Abs(VolH9 - l) > 18&& Math.Abs(VolH10 - l) > 18 && Math.Abs(VolH11 - l) > 18&& Math.Abs(VolH12 - l) > 18)
                                 {
-                                    Main.tile[l, m].liquid = byte.MaxValue;
+                                    Main.tile[l, m].LiquidAmount = byte.MaxValue;
                                 }
                                 else
                                 {
@@ -2973,16 +2974,16 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "生成洞穴沉积物…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     if (Main.maxTilesX == 4200)
                     {
                         for (int k = (int)(Main.maxTilesX * 0.75f); k < (int)(Main.maxTilesX * 0.9f); k++)
                         {
                             for (int l = (int)(Main.maxTilesY * 0.24f); l < (int)(Main.maxTilesY * 0.88f); l++)
                             {
-                                if (Main.rand.Next(800) == 1 && Main.tile[k, l].type != mod.TileType("Basalt"))
+                                if (Main.rand.Next(800) == 1 && Main.tile[k, l].TileType != mod.Find<ModTile>("Basalt").Type)
                                 {
-                                    Projectile.NewProjectile(k * 16, l * 16, 0, 2, mod.ProjectileType("火山生成2"), 0, 0, Main.myPlayer, 10, 0f);
+                                    Projectile.NewProjectile(k * 16, l * 16, 0, 2, mod.Find<ModProjectile>("火山生成2").Type, 0, 0, Main.myPlayer, 10, 0f);
                                 }
                             }
                         }
@@ -2993,9 +2994,9 @@ namespace MythMod.UI.OceanWorld
                         {
                             for (int l = (int)(Main.maxTilesY * 0.3f); l < (int)(Main.maxTilesY * 0.88f); l++)
                             {
-                                if (Main.rand.Next(800) == 1 && Main.tile[k, l].type != mod.TileType("Basalt"))
+                                if (Main.rand.Next(800) == 1 && Main.tile[k, l].TileType != mod.Find<ModTile>("Basalt").Type)
                                 {
-                                    Projectile.NewProjectile(k * 16, l * 16, 0, 2, mod.ProjectileType("火山生成2"), 0, 0, Main.myPlayer, 10, 0f);
+                                    Projectile.NewProjectile(k * 16, l * 16, 0, 2, mod.Find<ModProjectile>("火山生成2").Type, 0, 0, Main.myPlayer, 10, 0f);
                                 }
                             }
                         }
@@ -3006,9 +3007,9 @@ namespace MythMod.UI.OceanWorld
                         {
                             for (int l = (int)(Main.maxTilesY * 0.36f); l < (int)(Main.maxTilesY * 0.88f); l++)
                             {
-                                if (Main.rand.Next(800) == 1 && Main.tile[k, l].type != mod.TileType("Basalt"))
+                                if (Main.rand.Next(800) == 1 && Main.tile[k, l].TileType != mod.Find<ModTile>("Basalt").Type)
                                 {
-                                    Projectile.NewProjectile(k * 16, l * 16, 0, 2, mod.ProjectileType("火山生成2"), 0, 0, Main.myPlayer, 10, 0f);
+                                    Projectile.NewProjectile(k * 16, l * 16, 0, 2, mod.Find<ModProjectile>("火山生成2").Type, 0, 0, Main.myPlayer, 10, 0f);
                                 }
                             }
                         }
@@ -3018,7 +3019,7 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "生成罐子…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     for (int i = (int)(Main.maxTilesX * 0.6f); i < (int)(Main.maxTilesX * 0.9f); i++)
                     {
                         for (int j = (int)(Main.maxTilesY * 0.67f - 400); j < (int)(Main.maxTilesY * 0.67f + 150); j++)
@@ -3034,16 +3035,16 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "生成洞穴附着物…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     if (Main.maxTilesX == 4200)
                     {
                         for (int k = (int)(Main.maxTilesX * 0.75f); k < (int)(Main.maxTilesX * 0.9f); k++)
                         {
                             for (int l = (int)(Main.maxTilesY * 0.24f); l < (int)(Main.maxTilesY * 0.88f); l++)
                             {
-                                if (Main.rand.Next(1600) == 1 && Main.tile[k, l].type != mod.TileType("Basalt"))
+                                if (Main.rand.Next(1600) == 1 && Main.tile[k, l].TileType != mod.Find<ModTile>("Basalt").Type)
                                 {
-                                    Projectile.NewProjectile(k * 16, l * 16, 0, 2, mod.ProjectileType("火山生成"), 0, 0, Main.myPlayer, 10, 0f);
+                                    Projectile.NewProjectile(k * 16, l * 16, 0, 2, mod.Find<ModProjectile>("火山生成").Type, 0, 0, Main.myPlayer, 10, 0f);
                                 }
                             }
                         }
@@ -3054,9 +3055,9 @@ namespace MythMod.UI.OceanWorld
                         {
                             for (int l = (int)(Main.maxTilesY * 0.3f); l < (int)(Main.maxTilesY * 0.88f); l++)
                             {
-                                if (Main.rand.Next(1600) == 1 && Main.tile[k, l].type != mod.TileType("Basalt"))
+                                if (Main.rand.Next(1600) == 1 && Main.tile[k, l].TileType != mod.Find<ModTile>("Basalt").Type)
                                 {
-                                    Projectile.NewProjectile(k * 16, l * 16, 0, 2, mod.ProjectileType("火山生成"), 0, 0, Main.myPlayer, 10, 0f);
+                                    Projectile.NewProjectile(k * 16, l * 16, 0, 2, mod.Find<ModProjectile>("火山生成").Type, 0, 0, Main.myPlayer, 10, 0f);
                                 }
                             }
                         }
@@ -3067,9 +3068,9 @@ namespace MythMod.UI.OceanWorld
                         {
                             for (int l = (int)(Main.maxTilesY * 0.36f); l < (int)(Main.maxTilesY * 0.88f); l++)
                             {
-                                if (Main.rand.Next(1600) == 1 && Main.tile[k, l].type != mod.TileType("Basalt"))
+                                if (Main.rand.Next(1600) == 1 && Main.tile[k, l].TileType != mod.Find<ModTile>("Basalt").Type)
                                 {
-                                    Projectile.NewProjectile(k * 16, l * 16, 0, 2, mod.ProjectileType("火山生成"), 0, 0, Main.myPlayer, 10, 0f);
+                                    Projectile.NewProjectile(k * 16, l * 16, 0, 2, mod.Find<ModProjectile>("火山生成").Type, 0, 0, Main.myPlayer, 10, 0f);
                                 }
                             }
                         }
@@ -3079,16 +3080,16 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "生成洞穴附着物…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     if (Main.maxTilesX == 4200)
                     {
                         for (int k = (int)(Main.maxTilesX * 0.6f); k < (int)(Main.maxTilesX * 0.75f); k++)
                         {
                             for (int l = (int)(Main.maxTilesY * 0.24f); l < (int)(Main.maxTilesY * 0.88f); l++)
                             {
-                                if (Main.rand.Next(1600) == 1 && Main.tile[k, l].type != mod.TileType("Basalt"))
+                                if (Main.rand.Next(1600) == 1 && Main.tile[k, l].TileType != mod.Find<ModTile>("Basalt").Type)
                                 {
-                                    Projectile.NewProjectile(k * 16, l * 16, 0, 2, mod.ProjectileType("火山生成"), 0, 0, Main.myPlayer, 10, 0f);
+                                    Projectile.NewProjectile(k * 16, l * 16, 0, 2, mod.Find<ModProjectile>("火山生成").Type, 0, 0, Main.myPlayer, 10, 0f);
                                 }
                             }
                         }
@@ -3099,9 +3100,9 @@ namespace MythMod.UI.OceanWorld
                         {
                             for (int l = (int)(Main.maxTilesY * 0.3f); l < (int)(Main.maxTilesY * 0.88f); l++)
                             {
-                                if (Main.rand.Next(1600) == 1 && Main.tile[k, l].type != mod.TileType("Basalt"))
+                                if (Main.rand.Next(1600) == 1 && Main.tile[k, l].TileType != mod.Find<ModTile>("Basalt").Type)
                                 {
-                                    Projectile.NewProjectile(k * 16, l * 16, 0, 2, mod.ProjectileType("火山生成"), 0, 0, Main.myPlayer, 10, 0f);
+                                    Projectile.NewProjectile(k * 16, l * 16, 0, 2, mod.Find<ModProjectile>("火山生成").Type, 0, 0, Main.myPlayer, 10, 0f);
                                 }
                             }
                         }
@@ -3112,9 +3113,9 @@ namespace MythMod.UI.OceanWorld
                         {
                             for (int l = (int)(Main.maxTilesY * 0.36f); l < (int)(Main.maxTilesY * 0.88f); l++)
                             {
-                                if (Main.rand.Next(1600) == 1 && Main.tile[k, l].type != mod.TileType("Basalt"))
+                                if (Main.rand.Next(1600) == 1 && Main.tile[k, l].TileType != mod.Find<ModTile>("Basalt").Type)
                                 {
-                                    Projectile.NewProjectile(k * 16, l * 16, 0, 2, mod.ProjectileType("火山生成"), 0, 0, Main.myPlayer, 10, 0f);
+                                    Projectile.NewProjectile(k * 16, l * 16, 0, 2, mod.Find<ModProjectile>("火山生成").Type, 0, 0, Main.myPlayer, 10, 0f);
                                 }
                             }
                         }
@@ -3134,10 +3135,10 @@ namespace MythMod.UI.OceanWorld
                             {
                                 float Dx = i - Start.X;
                                 float Dy = j - Start.Y;
-                                if (Math.Abs(Dx - K * Dy) / Math.Sqrt(1 + K * K) < Thick && !Main.tile[i, j].active())
+                                if (Math.Abs(Dx - K * Dy) / Math.Sqrt(1 + K * K) < Thick && !Main.tile[i, j].HasTile)
                                 {
-                                    Main.tile[i, j].type = (ushort)(mod.TileType("Gypsum"));
-                                    Main.tile[i, j].active(true);
+                                    Main.tile[i, j].TileType = (ushort)(mod.Find<ModTile>("Gypsum").Type);
+                                    Main.tile[i, j].HasTile = true;
                                 }
                             }
                         }
@@ -3149,7 +3150,7 @@ namespace MythMod.UI.OceanWorld
                     int sY = 0;
                     for (int l = 20; l < Main.maxTilesY - 20; l++)
                     {
-                        if (Main.tile[(int)(Main.maxTilesX * 0.54f), l].liquid == byte.MaxValue)
+                        if (Main.tile[(int)(Main.maxTilesX * 0.54f), l].LiquidAmount == byte.MaxValue)
                         {
                             sY = l;
                             break;
@@ -3182,17 +3183,17 @@ namespace MythMod.UI.OceanWorld
                         }
                         for (int z = 0; z < thick; z++)
                         {
-                            if (!Main.tile[k, (int)(sY + z + Ya)].active())
+                            if (!Main.tile[k, (int)(sY + z + Ya)].HasTile)
                             {
-                                Main.tile[k, (int)(sY + z + Ya)].type = (ushort)(mod.TileType("ShoreMud"));
-                                Main.tile[k, (int)(sY + z + Ya)].active(true);
+                                Main.tile[k, (int)(sY + z + Ya)].TileType = (ushort)(mod.Find<ModTile>("ShoreMud").Type);
+                                Main.tile[k, (int)(sY + z + Ya)].HasTile = true;
                             }
                         }
                         for (int z = 0; z < 300; z++)
                         {
-                            if (Main.tile[k, (int)(sY + z + Ya + 1)].wall == 0)
+                            if (Main.tile[k, (int)(sY + z + Ya + 1)].WallType == 0)
                             {
-                                Main.tile[k, (int)(sY + z + Ya + 1)].wall = (ushort)(mod.WallType("ShoreMudWall"));
+                                Main.tile[k, (int)(sY + z + Ya + 1)].WallType = (ushort)(mod.Find<ModWall>("ShoreMudWall").Type);
                             }
                         }
                         if (Main.rand.Next(34) == 1)
@@ -3221,10 +3222,10 @@ namespace MythMod.UI.OceanWorld
                                 }
                                 for (int z = 0; z < Ya - Yb + 2; z++)
                                 {
-                                    if (!Main.tile[k + k0, (int)(sY + z + Yb)].active())
+                                    if (!Main.tile[k + k0, (int)(sY + z + Yb)].HasTile)
                                     {
-                                        Main.tile[k + k0, (int)(sY + z + Yb)].type = (ushort)(mod.TileType("ShoreMud"));
-                                        Main.tile[k + k0, (int)(sY + z + Yb)].active(true);
+                                        Main.tile[k + k0, (int)(sY + z + Yb)].TileType = (ushort)(mod.Find<ModTile>("ShoreMud").Type);
+                                        Main.tile[k + k0, (int)(sY + z + Yb)].HasTile = true;
                                     }
                                 }
                             }
@@ -3255,10 +3256,10 @@ namespace MythMod.UI.OceanWorld
                                 }
                                 for (int z = 0; z < Ya - Yb + 2; z++)
                                 {
-                                    if (!Main.tile[k + k0, (int)(sY + z + Yb)].active())
+                                    if (!Main.tile[k + k0, (int)(sY + z + Yb)].HasTile)
                                     {
-                                        Main.tile[k + k0, (int)(sY + z + Yb)].type = (ushort)(mod.TileType("Basalt"));
-                                        Main.tile[k + k0, (int)(sY + z + Yb)].active(true);
+                                        Main.tile[k + k0, (int)(sY + z + Yb)].TileType = (ushort)(mod.Find<ModTile>("Basalt").Type);
+                                        Main.tile[k + k0, (int)(sY + z + Yb)].HasTile = true;
                                     }
                                 }
                             }
@@ -3288,16 +3289,16 @@ namespace MythMod.UI.OceanWorld
                         {
                             if (new Color(colorTex[x + y * tex.Width].R, colorTex[x + y * tex.Width].G, colorTex[x + y * tex.Width].B) == new Color(31, 53, 12))
                             {
-                                Main.tile[x + Xd, y + Yd].wall = (ushort)mod.WallType("RedTreeLeavesWall");
-                                Main.tile[x + Xd, y + Yd].active(false);
+                                Main.tile[x + Xd, y + Yd].WallType = (ushort)mod.Find<ModWall>("RedTreeLeavesWall").Type;
+                                Main.tile[x + Xd, y + Yd].HasTile = false;
                             }
                         }
                         for (int x = 0; x < tex.Width; x += 1)
                         {
                             if (new Color(colorTex[x + y * tex.Width].R, colorTex[x + y * tex.Width].G, colorTex[x + y * tex.Width].B) == new Color(36, 38, 22))
                             {
-                                Main.tile[x + Xd, y + Yd].wall = (ushort)mod.WallType("RedTreeWall");
-                                Main.tile[x + Xd, y + Yd].active(false);
+                                Main.tile[x + Xd, y + Yd].WallType = (ushort)mod.Find<ModWall>("RedTreeWall").Type;
+                                Main.tile[x + Xd, y + Yd].HasTile = false;
                             }
                         }
                     }
@@ -3311,16 +3312,16 @@ namespace MythMod.UI.OceanWorld
                         {
                             if (new Color(colorTex2[x + y * tex2.Width].R, colorTex2[x + y * tex2.Width].G, colorTex2[x + y * tex2.Width].B) == new Color(58, 61, 35))
                             {
-                                Main.tile[x + Xd, y + Yd].type = (ushort)mod.TileType("RedTreeLarge");
-                                Main.tile[x + Xd, y + Yd].active(true);
+                                Main.tile[x + Xd, y + Yd].TileType = (ushort)mod.Find<ModTile>("RedTreeLarge").Type;
+                                Main.tile[x + Xd, y + Yd].HasTile = true;
                             }
                         }
                         for (int x = 0; x < tex2.Width; x += 1)
                         {
                             if (new Color(colorTex2[x + y * tex2.Width].R, colorTex2[x + y * tex2.Width].G, colorTex2[x + y * tex2.Width].B) == new Color(48, 82, 19))
                             {
-                                Main.tile[x + Xd, y + Yd].type = (ushort)mod.TileType("RedTreeLeaves");
-                                Main.tile[x + Xd, y + Yd].active(true);
+                                Main.tile[x + Xd, y + Yd].TileType = (ushort)mod.Find<ModTile>("RedTreeLeaves").Type;
+                                Main.tile[x + Xd, y + Yd].HasTile = true;
                             }
                         }
                     }
@@ -3334,8 +3335,8 @@ namespace MythMod.UI.OceanWorld
                         {
                             if (new Color(colorTex3[x + y * tex3.Width].R, colorTex3[x + y * tex3.Width].G, colorTex3[x + y * tex3.Width].B) == new Color(40, 40, 37))
                             {
-                                Main.tile[x + Xd + 54, y + Yd - 22].wall = 5;
-                                Main.tile[x + Xd + 54, y + Yd - 22].active(false);
+                                Main.tile[x + Xd + 54, y + Yd - 22].WallType = 5;
+                                Main.tile[x + Xd + 54, y + Yd - 22].HasTile = false;
                             }
                         }
                     }
@@ -3349,25 +3350,25 @@ namespace MythMod.UI.OceanWorld
                         {
                             if (new Color(colorTex4[x + y * tex4.Width].R, colorTex4[x + y * tex4.Width].G, colorTex4[x + y * tex4.Width].B) == new Color(95, 96, 87))
                             {
-                                Main.tile[x + Xd + 54, y + Yd - 22].type = 38;
-                                Main.tile[x + Xd + 54, y + Yd - 22].active(true);
+                                Main.tile[x + Xd + 54, y + Yd - 22].TileType = 38;
+                                Main.tile[x + Xd + 54, y + Yd - 22].HasTile = true;
                             }
                         }
                         for (int x = 0; x < tex4.Width; x += 1)
                         {
                             if (new Color(colorTex4[x + y * tex4.Width].R, colorTex4[x + y * tex4.Width].G, colorTex4[x + y * tex4.Width].B) == new Color(86, 62, 40))
                             {
-                                Main.tile[x + Xd + 54, y + Yd - 22].type = 214;
-                                Main.tile[x + Xd + 54, y + Yd - 22].active(true);
+                                Main.tile[x + Xd + 54, y + Yd - 22].TileType = 214;
+                                Main.tile[x + Xd + 54, y + Yd - 22].HasTile = true;
                             }
                         }
                         for (int x = 0; x < tex4.Width; x += 1)
                         {
                             if (new Color(colorTex4[x + y * tex4.Width].R, colorTex4[x + y * tex4.Width].G, colorTex4[x + y * tex4.Width].B) == new Color(158, 98, 98))
                             {
-                                Main.tile[x + Xd + 54, y + Yd - 22].type = 19;
-                                Main.tile[x + Xd + 54, y + Yd - 22].frameY = 162;
-                                Main.tile[x + Xd + 54, y + Yd - 22].active(true);
+                                Main.tile[x + Xd + 54, y + Yd - 22].TileType = 19;
+                                Main.tile[x + Xd + 54, y + Yd - 22].TileFrameY = 162;
+                                Main.tile[x + Xd + 54, y + Yd - 22].HasTile = true;
                             }
                         }
                         for (int x = 0; x < tex4.Width; x += 1)
@@ -3388,7 +3389,7 @@ namespace MythMod.UI.OceanWorld
                         {
                             if (new Color(colorTex4[x + y * tex4.Width].R, colorTex4[x + y * tex4.Width].G, colorTex4[x + y * tex4.Width].B) == new Color(139, 104, 255))
                             {
-                                WorldGen.PlaceTile(x + Xd + 54, y + Yd - 22, mod.TileType("Lamp"));
+                                WorldGen.PlaceTile(x + Xd + 54, y + Yd - 22, mod.Find<ModTile>("Lamp").Type);
                             }
                         }
                     }
@@ -3397,7 +3398,7 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "创建宝藏地带…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     if (Main.maxTilesX == 4200)
                     {
                         float Rh = 4;
@@ -3423,24 +3424,24 @@ namespace MythMod.UI.OceanWorld
                                 {
                                     int x = (int)(i + ((Main.maxTilesX * 0.62f + 450) - i) / 12f);
                                     int y = (int)(j + (Main.maxTilesY * 0.67f - j) / 2f);
-                                    Main.tile[x, y].type = (ushort)(mod.TileType("熔岩石"));
-                                    Main.tile[x, y].active(true);
-                                    Main.tile[x, y + 1].type = 374;
-                                    Main.tile[x, y + 1].active(true);
+                                    Main.tile[x, y].TileType = (ushort)(mod.Find<ModTile>("熔岩石").Type);
+                                    Main.tile[x, y].HasTile = true;
+                                    Main.tile[x, y + 1].TileType = 374;
+                                    Main.tile[x, y + 1].HasTile = true;
                                 }
                                 if(Math.Sqrt(k * k + l * l) < 150)
                                 {
                                     int x = (int)(i + ((Main.maxTilesX * 0.62f + 450) - i) / 12f);
                                     int y = (int)(j + (Main.maxTilesY * 0.67f - j) / 2f);
-                                    Main.tile[x, y].wall = (ushort)mod.WallType("熔岩石墙");
-                                    if(Main.tile[x, y].type != mod.TileType("熔岩石") && Main.tile[x, y].type != mod.TileType("熔岩心石") && Main.tile[x, y].type != mod.TileType("地热") && Main.tile[x, y].type != mod.TileType("赤炼魔戒") && Main.tile[x, y].type != mod.TileType("流火之翼") && Main.tile[x, y].type != 374 && Main.tile[x, y].type != mod.TileType("熔火心晶") && Main.tile[x, y].type != mod.TileType("赤月") && Main.tile[x, y].type != mod.TileType("灼烧之怒") && Main.tile[x, y].type != mod.TileType("熔珠"))
+                                    Main.tile[x, y].WallType = (ushort)mod.Find<ModWall>("熔岩石墙").Type;
+                                    if(Main.tile[x, y].TileType != mod.Find<ModTile>("熔岩石").Type && Main.tile[x, y].TileType != mod.Find<ModTile>("熔岩心石").Type && Main.tile[x, y].TileType != mod.Find<ModTile>("地热").Type && Main.tile[x, y].TileType != mod.Find<ModTile>("赤炼魔戒").Type && Main.tile[x, y].TileType != mod.Find<ModTile>("流火之翼").Type && Main.tile[x, y].TileType != 374 && Main.tile[x, y].TileType != mod.Find<ModTile>("熔火心晶").Type && Main.tile[x, y].TileType != mod.Find<ModTile>("赤月").Type && Main.tile[x, y].TileType != mod.Find<ModTile>("灼烧之怒").Type && Main.tile[x, y].TileType != mod.Find<ModTile>("熔珠").Type)
                                     {
                                         WorldGen.KillTile(x, y, false, false, true);
                                     }
                                     if (Main.maxTilesY * 0.67f - j < -50)
                                     {
-                                        Main.tile[x, y].lava(true);
-                                        Main.tile[x, y].liquid = byte.MaxValue;
+                                        Main.tile[x, y].LiquidType = LiquidID.Lava;
+                                        Main.tile[x, y].LiquidAmount = byte.MaxValue;
                                     }
                                     else
                                     {
@@ -3448,58 +3449,58 @@ namespace MythMod.UI.OceanWorld
                                         {
                                             int xi = Main.rand.Next(-5, 5);
                                             int yi = Main.rand.Next(-5, 5);
-                                            Main.tile[x + xi, y + yi].type = (ushort)(mod.TileType("熔岩石"));
-                                            Main.tile[x + xi, y + yi].active(true);
-                                            Main.tile[x + xi + 1, y + yi].type = (ushort)(mod.TileType("熔岩石"));
-                                            Main.tile[x + xi + 1, y + yi].active(true);
-                                            Main.tile[x + xi + 2, y + yi].type = (ushort)(mod.TileType("熔岩石"));
-                                            Main.tile[x + xi + 2, y + yi].active(true);
+                                            Main.tile[x + xi, y + yi].TileType = (ushort)(mod.Find<ModTile>("熔岩石").Type);
+                                            Main.tile[x + xi, y + yi].HasTile = true;
+                                            Main.tile[x + xi + 1, y + yi].TileType = (ushort)(mod.Find<ModTile>("熔岩石").Type);
+                                            Main.tile[x + xi + 1, y + yi].HasTile = true;
+                                            Main.tile[x + xi + 2, y + yi].TileType = (ushort)(mod.Find<ModTile>("熔岩石").Type);
+                                            Main.tile[x + xi + 2, y + yi].HasTile = true;
                                             if (Math.Sqrt(k * k + l * l) < 20)
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.TileType("地热"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.Find<ModTile>("地热").Type, true, false, -1, 0);
                                             }
                                             else if(Math.Sqrt(k2 * k2 + l2 * l2) < 20)
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.TileType("赤炼魔戒"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.Find<ModTile>("赤炼魔戒").Type, true, false, -1, 0);
                                             }
                                             else if (Math.Sqrt(k3 * k3 + l3 * l3) < 20)
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.TileType("流火之翼"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.Find<ModTile>("流火之翼").Type, true, false, -1, 0);
                                             }
                                             else if (Math.Sqrt(k5 * k5 + l5 * l5) < 20)
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.TileType("赤月"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.Find<ModTile>("赤月").Type, true, false, -1, 0);
                                             }
                                             else if (Math.Sqrt(k6 * k6 + l6 * l6) < 20)
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.TileType("熔珠"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.Find<ModTile>("熔珠").Type, true, false, -1, 0);
                                             }
                                             else if (Math.Sqrt(k7 * k7 + l7 * l7) < 20)
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 2), (ushort)mod.TileType("灼烧之怒"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 2), (ushort)mod.Find<ModTile>("灼烧之怒").Type, true, false, -1, 0);
                                             }
                                             else
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi) - 2, (ushort)mod.TileType("熔岩心石"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi) - 2, (ushort)mod.Find<ModTile>("熔岩心石").Type, true, false, -1, 0);
                                             }
                                         }
                                         if (i % 30 == 15 && j % 40 == 20)
                                         {
                                             int xi = Main.rand.Next(-5, 5);
                                             int yi = Main.rand.Next(-5, 5);
-                                            Main.tile[x + xi, y + yi].type = (ushort)(mod.TileType("熔岩石"));
-                                            Main.tile[x + xi, y + yi].active(true);
-                                            Main.tile[x + xi + 1, y + yi].type = (ushort)(mod.TileType("熔岩石"));
-                                            Main.tile[x + xi + 1, y + yi].active(true);
-                                            Main.tile[x + xi + 2, y + yi].type = (ushort)(mod.TileType("熔岩石"));
-                                            Main.tile[x + xi + 2, y + yi].active(true);
+                                            Main.tile[x + xi, y + yi].TileType = (ushort)(mod.Find<ModTile>("熔岩石").Type);
+                                            Main.tile[x + xi, y + yi].HasTile = true;
+                                            Main.tile[x + xi + 1, y + yi].TileType = (ushort)(mod.Find<ModTile>("熔岩石").Type);
+                                            Main.tile[x + xi + 1, y + yi].HasTile = true;
+                                            Main.tile[x + xi + 2, y + yi].TileType = (ushort)(mod.Find<ModTile>("熔岩石").Type);
+                                            Main.tile[x + xi + 2, y + yi].HasTile = true;
                                             if (Math.Sqrt(k4 * k4 + l4 * l4) < 20)
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 5), (ushort)mod.TileType("熔火心晶"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 5), (ushort)mod.Find<ModTile>("熔火心晶").Type, true, false, -1, 0);
                                             }
                                             else
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi) - 2, (ushort)mod.TileType("熔岩心石"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi) - 2, (ushort)mod.Find<ModTile>("熔岩心石").Type, true, false, -1, 0);
                                             }
                                         }
                                     }
@@ -3532,24 +3533,24 @@ namespace MythMod.UI.OceanWorld
                                 {
                                     int x = (int)(i + ((Main.maxTilesX * 0.665f + 450) - i) / 12f);
                                     int y = (int)(j + (Main.maxTilesY * 0.67f - j) / 2f);
-                                    Main.tile[x, y].type = (ushort)(mod.TileType("熔岩石"));
-                                    Main.tile[x, y].active(true);
-                                    Main.tile[x, y + 1].type = 374;
-                                    Main.tile[x, y + 1].active(true);
+                                    Main.tile[x, y].TileType = (ushort)(mod.Find<ModTile>("熔岩石").Type);
+                                    Main.tile[x, y].HasTile = true;
+                                    Main.tile[x, y + 1].TileType = 374;
+                                    Main.tile[x, y + 1].HasTile = true;
                                 }
                                 if (Math.Sqrt(k * k + l * l) < 225)
                                 {
                                     int x = (int)(i + ((Main.maxTilesX * 0.665f + 450) - i) / 12f);
                                     int y = (int)(j + (Main.maxTilesY * 0.67f - j) / 2f);
-                                    Main.tile[x, y].wall = (ushort)mod.WallType("熔岩石墙");
-                                    if (Main.tile[x, y].type != mod.TileType("熔岩石") && Main.tile[x, y].type != mod.TileType("熔岩心石") && Main.tile[x, y].type != mod.TileType("地热") && Main.tile[x, y].type != mod.TileType("赤炼魔戒") && Main.tile[x, y].type != mod.TileType("流火之翼") && Main.tile[x, y].type != 374 && Main.tile[x, y].type != mod.TileType("熔火心晶") && Main.tile[x, y].type != mod.TileType("赤月") && Main.tile[x, y].type != mod.TileType("灼烧之怒") && Main.tile[x, y].type != mod.TileType("熔珠"))
+                                    Main.tile[x, y].WallType = (ushort)mod.Find<ModWall>("熔岩石墙").Type;
+                                    if (Main.tile[x, y].TileType != mod.Find<ModTile>("熔岩石").Type && Main.tile[x, y].TileType != mod.Find<ModTile>("熔岩心石").Type && Main.tile[x, y].TileType != mod.Find<ModTile>("地热").Type && Main.tile[x, y].TileType != mod.Find<ModTile>("赤炼魔戒").Type && Main.tile[x, y].TileType != mod.Find<ModTile>("流火之翼").Type && Main.tile[x, y].TileType != 374 && Main.tile[x, y].TileType != mod.Find<ModTile>("熔火心晶").Type && Main.tile[x, y].TileType != mod.Find<ModTile>("赤月").Type && Main.tile[x, y].TileType != mod.Find<ModTile>("灼烧之怒").Type && Main.tile[x, y].TileType != mod.Find<ModTile>("熔珠").Type)
                                     {
                                         WorldGen.KillTile(x, y, false, false, true);
                                     }
                                     if (Main.maxTilesY * 0.67f - j < -50)
                                     {
-                                        Main.tile[x, y].lava(true);
-                                        Main.tile[x, y].liquid = byte.MaxValue;
+                                        Main.tile[x, y].LiquidType = LiquidID.Lava;
+                                        Main.tile[x, y].LiquidAmount = byte.MaxValue;
                                     }
                                     else
                                     {
@@ -3557,58 +3558,58 @@ namespace MythMod.UI.OceanWorld
                                         {
                                             int xi = Main.rand.Next(-5, 5);
                                             int yi = Main.rand.Next(-5, 5);
-                                            Main.tile[x + xi, y + yi].type = (ushort)(mod.TileType("熔岩石"));
-                                            Main.tile[x + xi, y + yi].active(true);
-                                            Main.tile[x + xi + 1, y + yi].type = (ushort)(mod.TileType("熔岩石"));
-                                            Main.tile[x + xi + 1, y + yi].active(true);
-                                            Main.tile[x + xi + 2, y + yi].type = (ushort)(mod.TileType("熔岩石"));
-                                            Main.tile[x + xi + 2, y + yi].active(true);
+                                            Main.tile[x + xi, y + yi].TileType = (ushort)(mod.Find<ModTile>("熔岩石").Type);
+                                            Main.tile[x + xi, y + yi].HasTile = true;
+                                            Main.tile[x + xi + 1, y + yi].TileType = (ushort)(mod.Find<ModTile>("熔岩石").Type);
+                                            Main.tile[x + xi + 1, y + yi].HasTile = true;
+                                            Main.tile[x + xi + 2, y + yi].TileType = (ushort)(mod.Find<ModTile>("熔岩石").Type);
+                                            Main.tile[x + xi + 2, y + yi].HasTile = true;
                                             if (Math.Sqrt(k * k + l * l) < 20)
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.TileType("地热"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.Find<ModTile>("地热").Type, true, false, -1, 0);
                                             }
                                             else if (Math.Sqrt(k2 * k2 + l2 * l2) < 20)
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.TileType("赤炼魔戒"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.Find<ModTile>("赤炼魔戒").Type, true, false, -1, 0);
                                             }
                                             else if (Math.Sqrt(k3 * k3 + l3 * l3) < 20)
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.TileType("流火之翼"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.Find<ModTile>("流火之翼").Type, true, false, -1, 0);
                                             }
                                             else if (Math.Sqrt(k5 * k5 + l5 * l5) < 20)
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.TileType("赤月"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.Find<ModTile>("赤月").Type, true, false, -1, 0);
                                             }
                                             else if (Math.Sqrt(k6 * k6 + l6 * l6) < 20)
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.TileType("熔珠"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.Find<ModTile>("熔珠").Type, true, false, -1, 0);
                                             }
                                             else if (Math.Sqrt(k7 * k7 + l7 * l7) < 20)
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 2), (ushort)mod.TileType("灼烧之怒"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 2), (ushort)mod.Find<ModTile>("灼烧之怒").Type, true, false, -1, 0);
                                             }
                                             else
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi) - 2, (ushort)mod.TileType("熔岩心石"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi) - 2, (ushort)mod.Find<ModTile>("熔岩心石").Type, true, false, -1, 0);
                                             }
                                         }
                                         if (i % 30 == 15 && j % 40 == 20)
                                         {
                                             int xi = Main.rand.Next(-5, 5);
                                             int yi = Main.rand.Next(-5, 5);
-                                            Main.tile[x + xi, y + yi].type = (ushort)(mod.TileType("熔岩石"));
-                                            Main.tile[x + xi, y + yi].active(true);
-                                            Main.tile[x + xi + 1, y + yi].type = (ushort)(mod.TileType("熔岩石"));
-                                            Main.tile[x + xi + 1, y + yi].active(true);
-                                            Main.tile[x + xi + 2, y + yi].type = (ushort)(mod.TileType("熔岩石"));
-                                            Main.tile[x + xi + 2, y + yi].active(true);
+                                            Main.tile[x + xi, y + yi].TileType = (ushort)(mod.Find<ModTile>("熔岩石").Type);
+                                            Main.tile[x + xi, y + yi].HasTile = true;
+                                            Main.tile[x + xi + 1, y + yi].TileType = (ushort)(mod.Find<ModTile>("熔岩石").Type);
+                                            Main.tile[x + xi + 1, y + yi].HasTile = true;
+                                            Main.tile[x + xi + 2, y + yi].TileType = (ushort)(mod.Find<ModTile>("熔岩石").Type);
+                                            Main.tile[x + xi + 2, y + yi].HasTile = true;
                                             if (Math.Sqrt(k4 * k4 + l4 * l4) < 20)
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 5), (ushort)mod.TileType("熔火心晶"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 5), (ushort)mod.Find<ModTile>("熔火心晶").Type, true, false, -1, 0);
                                             }
                                             else
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi) - 2, (ushort)mod.TileType("熔岩心石"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi) - 2, (ushort)mod.Find<ModTile>("熔岩心石").Type, true, false, -1, 0);
                                             }
                                         }
                                     }
@@ -3641,24 +3642,24 @@ namespace MythMod.UI.OceanWorld
                                 {
                                     int x = (int)(i + ((Main.maxTilesX * 0.69f + 450) - i) / 12f);
                                     int y = (int)(j + (Main.maxTilesY * 0.67f - j) / 2f);
-                                    Main.tile[x, y].type = (ushort)(mod.TileType("熔岩石"));
-                                    Main.tile[x, y].active(true);
-                                    Main.tile[x, y + 1].type = 374;
-                                    Main.tile[x, y + 1].active(true);
+                                    Main.tile[x, y].TileType = (ushort)(mod.Find<ModTile>("熔岩石").Type);
+                                    Main.tile[x, y].HasTile = true;
+                                    Main.tile[x, y + 1].TileType = 374;
+                                    Main.tile[x, y + 1].HasTile = true;
                                 }
                                 if (Math.Sqrt(k * k + l * l) < 300)
                                 {
                                     int x = (int)(i + ((Main.maxTilesX * 0.69f + 450) - i) / 12f);
                                     int y = (int)(j + (Main.maxTilesY * 0.67f - j) / 2f);
-                                    Main.tile[x, y].wall = (ushort)mod.WallType("熔岩石墙");
-                                    if (Main.tile[x, y].type != mod.TileType("熔岩石") && Main.tile[x, y].type != mod.TileType("熔岩心石") && Main.tile[x, y].type != mod.TileType("地热") && Main.tile[x, y].type != mod.TileType("赤炼魔戒") && Main.tile[x, y].type != mod.TileType("流火之翼") && Main.tile[x, y].type != 374 && Main.tile[x, y].type != mod.TileType("熔火心晶") && Main.tile[x, y].type != mod.TileType("赤月") && Main.tile[x, y].type != mod.TileType("灼烧之怒") && Main.tile[x, y].type != mod.TileType("熔珠"))
+                                    Main.tile[x, y].WallType = (ushort)mod.Find<ModWall>("熔岩石墙").Type;
+                                    if (Main.tile[x, y].TileType != mod.Find<ModTile>("熔岩石").Type && Main.tile[x, y].TileType != mod.Find<ModTile>("熔岩心石").Type && Main.tile[x, y].TileType != mod.Find<ModTile>("地热").Type && Main.tile[x, y].TileType != mod.Find<ModTile>("赤炼魔戒").Type && Main.tile[x, y].TileType != mod.Find<ModTile>("流火之翼").Type && Main.tile[x, y].TileType != 374 && Main.tile[x, y].TileType != mod.Find<ModTile>("熔火心晶").Type && Main.tile[x, y].TileType != mod.Find<ModTile>("赤月").Type && Main.tile[x, y].TileType != mod.Find<ModTile>("灼烧之怒").Type && Main.tile[x, y].TileType != mod.Find<ModTile>("熔珠").Type)
                                     {
                                         WorldGen.KillTile(x, y, false, false, true);
                                     }
                                     if (Main.maxTilesY * 0.67f - j < -50)
                                     {
-                                        Main.tile[x, y].lava(true);
-                                        Main.tile[x, y].liquid = byte.MaxValue;
+                                        Main.tile[x, y].LiquidType = LiquidID.Lava;
+                                        Main.tile[x, y].LiquidAmount = byte.MaxValue;
                                     }
                                     else
                                     {
@@ -3666,58 +3667,58 @@ namespace MythMod.UI.OceanWorld
                                         {
                                             int xi = Main.rand.Next(-5, 5);
                                             int yi = Main.rand.Next(-5, 5);
-                                            Main.tile[x + xi, y + yi].type = (ushort)(mod.TileType("熔岩石"));
-                                            Main.tile[x + xi, y + yi].active(true);
-                                            Main.tile[x + xi + 1, y + yi].type = (ushort)(mod.TileType("熔岩石"));
-                                            Main.tile[x + xi + 1, y + yi].active(true);
-                                            Main.tile[x + xi + 2, y + yi].type = (ushort)(mod.TileType("熔岩石"));
-                                            Main.tile[x + xi + 2, y + yi].active(true);
+                                            Main.tile[x + xi, y + yi].TileType = (ushort)(mod.Find<ModTile>("熔岩石").Type);
+                                            Main.tile[x + xi, y + yi].HasTile = true;
+                                            Main.tile[x + xi + 1, y + yi].TileType = (ushort)(mod.Find<ModTile>("熔岩石").Type);
+                                            Main.tile[x + xi + 1, y + yi].HasTile = true;
+                                            Main.tile[x + xi + 2, y + yi].TileType = (ushort)(mod.Find<ModTile>("熔岩石").Type);
+                                            Main.tile[x + xi + 2, y + yi].HasTile = true;
                                             if (Math.Sqrt(k * k + l * l) < 20)
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.TileType("地热"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.Find<ModTile>("地热").Type, true, false, -1, 0);
                                             }
                                             else if (Math.Sqrt(k2 * k2 + l2 * l2) < 20)
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.TileType("赤炼魔戒"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.Find<ModTile>("赤炼魔戒").Type, true, false, -1, 0);
                                             }
                                             else if (Math.Sqrt(k3 * k3 + l3 * l3) < 20)
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.TileType("流火之翼"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.Find<ModTile>("流火之翼").Type, true, false, -1, 0);
                                             }
                                             else if (Math.Sqrt(k5 * k5 + l5 * l5) < 20)
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.TileType("赤月"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.Find<ModTile>("赤月").Type, true, false, -1, 0);
                                             }
                                             else if (Math.Sqrt(k6 * k6 + l6 * l6) < 20)
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.TileType("熔珠"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 3), (ushort)mod.Find<ModTile>("熔珠").Type, true, false, -1, 0);
                                             }
                                             else if (Math.Sqrt(k7 * k7 + l7 * l7) < 20)
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 2), (ushort)mod.TileType("灼烧之怒"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 2), (ushort)mod.Find<ModTile>("灼烧之怒").Type, true, false, -1, 0);
                                             }
                                             else
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi) - 2, (ushort)mod.TileType("熔岩心石"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi) - 2, (ushort)mod.Find<ModTile>("熔岩心石").Type, true, false, -1, 0);
                                             }
                                         }
                                         if (i % 30 == 15 && j % 40 == 20)
                                         {
                                             int xi = Main.rand.Next(-5, 5);
                                             int yi = Main.rand.Next(-5, 5);
-                                            Main.tile[x + xi, y + yi].type = (ushort)(mod.TileType("熔岩石"));
-                                            Main.tile[x + xi, y + yi].active(true);
-                                            Main.tile[x + xi + 1, y + yi].type = (ushort)(mod.TileType("熔岩石"));
-                                            Main.tile[x + xi + 1, y + yi].active(true);
-                                            Main.tile[x + xi + 2, y + yi].type = (ushort)(mod.TileType("熔岩石"));
-                                            Main.tile[x + xi + 2, y + yi].active(true);
+                                            Main.tile[x + xi, y + yi].TileType = (ushort)(mod.Find<ModTile>("熔岩石").Type);
+                                            Main.tile[x + xi, y + yi].HasTile = true;
+                                            Main.tile[x + xi + 1, y + yi].TileType = (ushort)(mod.Find<ModTile>("熔岩石").Type);
+                                            Main.tile[x + xi + 1, y + yi].HasTile = true;
+                                            Main.tile[x + xi + 2, y + yi].TileType = (ushort)(mod.Find<ModTile>("熔岩石").Type);
+                                            Main.tile[x + xi + 2, y + yi].HasTile = true;
                                             if (Math.Sqrt(k4 * k4 + l4 * l4) < 20)
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 5), (ushort)mod.TileType("熔火心晶"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi - 5), (ushort)mod.Find<ModTile>("熔火心晶").Type, true, false, -1, 0);
                                             }
                                             else
                                             {
-                                                WorldGen.PlaceTile((x + xi + 1), (y + yi) - 2, (ushort)mod.TileType("熔岩心石"), true, false, -1, 0);
+                                                WorldGen.PlaceTile((x + xi + 1), (y + yi) - 2, (ushort)mod.Find<ModTile>("熔岩心石").Type, true, false, -1, 0);
                                             }
                                         }
                                     }
@@ -3824,10 +3825,10 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "搭建滨海渔夫小屋…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     for (int m = 0; m < Main.maxTilesY - 10; m++)
                     {
-                        if (Main.tile[60, m].type == 53)
+                        if (Main.tile[60, m].TileType == 53)
                         {
                             shoreHouse = m - 30;
                             break;
@@ -3838,55 +3839,55 @@ namespace MythMod.UI.OceanWorld
                     {
                         if (l <= 60)
                         {
-                            Main.tile[l, shoreHouse - 1].wall = 152;
+                            Main.tile[l, shoreHouse - 1].WallType = 152;
                         }
                         if (l >= 118)
                         {
-                            Main.tile[l, shoreHouse - 1].wall = 152;
+                            Main.tile[l, shoreHouse - 1].WallType = 152;
                         }
                         if (l <= 98 && l >= 82)
                         {
-                            Main.tile[l, shoreHouse - 1].wall = 152;
+                            Main.tile[l, shoreHouse - 1].WallType = 152;
                         }
                         if (l == 97)
                         {
                             for (int i = 0; i < 10; i++)
                             {
-                                Main.tile[l + i, shoreHouse - i - 13].type = 322;
-                                Main.tile[l + i, shoreHouse - i - 13].active(true);
-                                Main.tile[l + i, shoreHouse - i - 12].type = 322;
-                                Main.tile[l + i, shoreHouse - i - 12].active(true);
+                                Main.tile[l + i, shoreHouse - i - 13].TileType = 322;
+                                Main.tile[l + i, shoreHouse - i - 13].HasTile = true;
+                                Main.tile[l + i, shoreHouse - i - 12].TileType = 322;
+                                Main.tile[l + i, shoreHouse - i - 12].HasTile = true;
                                 for (int j = 0; j < i; j++)
                                 {
-                                    Main.tile[l + i, shoreHouse - i - 12 + j + 1].wall = 151;
+                                    Main.tile[l + i, shoreHouse - i - 12 + j + 1].WallType = 151;
                                 }
                                 if (i == 9)
                                 {
-                                    Main.tile[l + i + 1, shoreHouse - i - 13].type = 322;
-                                    Main.tile[l + i + 1, shoreHouse - i - 13].active(true);
-                                    Main.tile[l + i + 2, shoreHouse - i - 13].type = 322;
-                                    Main.tile[l + i + 2, shoreHouse - i - 13].active(true);
+                                    Main.tile[l + i + 1, shoreHouse - i - 13].TileType = 322;
+                                    Main.tile[l + i + 1, shoreHouse - i - 13].HasTile = true;
+                                    Main.tile[l + i + 2, shoreHouse - i - 13].TileType = 322;
+                                    Main.tile[l + i + 2, shoreHouse - i - 13].HasTile = true;
                                     for (int j = 0; j < i + 1; j++)
                                     {
-                                        Main.tile[l + i + 1, shoreHouse - i - 12 + j].wall = 151;
+                                        Main.tile[l + i + 1, shoreHouse - i - 12 + j].WallType = 151;
                                     }
-                                    WorldGen.PlaceTile(l + i + 1, shoreHouse - i - 15, mod.TileType("棕榈木风向标"));//14X
+                                    WorldGen.PlaceTile(l + i + 1, shoreHouse - i - 15, mod.Find<ModTile>("棕榈木风向标").Type);//14X
                                     NPC.NewNPC(16 * (l + i + 1), 16 * (shoreHouse - i - 4), 369);
                                     for (int j = 0; j < i + 1; j++)
                                     {
-                                        Main.tile[l + i + 2, shoreHouse - i - 12 + j].wall = 151;
+                                        Main.tile[l + i + 2, shoreHouse - i - 12 + j].WallType = 151;
                                     }
                                 }
                             }
                             for (int i = 10; i > 0; i--)
                             {
-                                Main.tile[l + i + 11, shoreHouse + i - 23].type = 322;
-                                Main.tile[l + i + 11, shoreHouse + i - 23].active(true);
-                                Main.tile[l + i + 11, shoreHouse + i - 22].type = 322;
-                                Main.tile[l + i + 11, shoreHouse + i - 22].active(true);
+                                Main.tile[l + i + 11, shoreHouse + i - 23].TileType = 322;
+                                Main.tile[l + i + 11, shoreHouse + i - 23].HasTile = true;
+                                Main.tile[l + i + 11, shoreHouse + i - 22].TileType = 322;
+                                Main.tile[l + i + 11, shoreHouse + i - 22].HasTile = true;
                                 for (int j = 10; j > i - 1; j--)
                                 {
-                                    Main.tile[l + i + 10, shoreHouse + i - 11 - j - 1].wall = 151;
+                                    Main.tile[l + i + 10, shoreHouse + i - 11 - j - 1].WallType = 151;
                                 }
                             }
                         }
@@ -3894,61 +3895,61 @@ namespace MythMod.UI.OceanWorld
                         {
                             for (int i = shoreHouse - 1; i > shoreHouse - 11; i--)
                             {
-                                Main.tile[l, i].type = 322;
-                                Main.tile[l, i].active(true);
+                                Main.tile[l, i].TileType = 322;
+                                Main.tile[l, i].HasTile = true;
                                 if (i == shoreHouse - 10)
                                 {
                                     for (int x = 62; x < 82; x++)
                                     {
                                         if (x != 72)
                                         {
-                                            Main.tile[x, i].type = 19;
-                                            Main.tile[x, i].frameY = 17 * 18;
-                                            Main.tile[x, i].active(true);
+                                            Main.tile[x, i].TileType = 19;
+                                            Main.tile[x, i].TileFrameY = 17 * 18;
+                                            Main.tile[x, i].HasTile = true;
                                         }
                                         else
                                         {
-                                            Main.tile[x, i].type = 322;
-                                            Main.tile[x, i].active(true);
+                                            Main.tile[x, i].TileType = 322;
+                                            Main.tile[x, i].HasTile = true;
                                             WorldGen.PlaceTile(x, i + 1, 34, false, false, -1, 21);
-                                            Main.tile[x, i + 1].frameX += 54;
-                                            Main.tile[x + 1, i + 1].frameX += 54;
-                                            Main.tile[x - 1, i + 1].frameX += 54;
-                                            Main.tile[x, i + 2].frameX += 54;
-                                            Main.tile[x + 1, i + 2].frameX += 54;
-                                            Main.tile[x - 1, i + 2].frameX += 54;
-                                            Main.tile[x, i + 3].frameX += 54;
-                                            Main.tile[x + 1, i + 3].frameX += 54;
-                                            Main.tile[x - 1, i + 3].frameX += 54;
+                                            Main.tile[x, i + 1].TileFrameX += 54;
+                                            Main.tile[x + 1, i + 1].TileFrameX += 54;
+                                            Main.tile[x - 1, i + 1].TileFrameX += 54;
+                                            Main.tile[x, i + 2].TileFrameX += 54;
+                                            Main.tile[x + 1, i + 2].TileFrameX += 54;
+                                            Main.tile[x - 1, i + 2].TileFrameX += 54;
+                                            Main.tile[x, i + 3].TileFrameX += 54;
+                                            Main.tile[x + 1, i + 3].TileFrameX += 54;
+                                            Main.tile[x - 1, i + 3].TileFrameX += 54;
                                         }
                                         if (x == 64)
                                         {
                                             WorldGen.PlaceTile(x, i - 1, 94, false, false, -1, 0);
                                         }
                                     }
-                                    Main.tile[81, i - 1].type = 332;
-                                    Main.tile[81, i - 1].active(true);
-                                    Main.tile[80, i - 1].type = 332;
-                                    Main.tile[80, i - 1].active(true);
-                                    Main.tile[79, i - 1].type = 332;
-                                    Main.tile[79, i - 1].active(true);
-                                    Main.tile[79, i - 2].type = 332;
-                                    Main.tile[79, i - 2].active(true);
-                                    Main.tile[78, i - 1].type = 332;
-                                    Main.tile[78, i - 1].active(true);
+                                    Main.tile[81, i - 1].TileType = 332;
+                                    Main.tile[81, i - 1].HasTile = true;
+                                    Main.tile[80, i - 1].TileType = 332;
+                                    Main.tile[80, i - 1].HasTile = true;
+                                    Main.tile[79, i - 1].TileType = 332;
+                                    Main.tile[79, i - 1].HasTile = true;
+                                    Main.tile[79, i - 2].TileType = 332;
+                                    Main.tile[79, i - 2].HasTile = true;
+                                    Main.tile[78, i - 1].TileType = 332;
+                                    Main.tile[78, i - 1].HasTile = true;
                                     for (int x = 68; x < 76; x++)
                                     {
-                                        Main.tile[x, i - 9].type = 19;
-                                        Main.tile[x, i - 9].frameY = 17 * 18;
-                                        Main.tile[x, i - 9].active(true);
+                                        Main.tile[x, i - 9].TileType = 19;
+                                        Main.tile[x, i - 9].TileFrameY = 17 * 18;
+                                        Main.tile[x, i - 9].HasTile = true;
                                         if (x == 69)
                                         {
-                                            Main.tile[x + 1, i - 13].type = 19;
-                                            Main.tile[x + 1, i - 13].frameY = 17 * 18;
-                                            Main.tile[x + 1, i - 13].active(true);
-                                            Main.tile[x + 2, i - 13].type = 19;
-                                            Main.tile[x + 2, i - 13].frameY = 17 * 18;
-                                            Main.tile[x + 2, i - 13].active(true);
+                                            Main.tile[x + 1, i - 13].TileType = 19;
+                                            Main.tile[x + 1, i - 13].TileFrameY = 17 * 18;
+                                            Main.tile[x + 1, i - 13].HasTile = true;
+                                            Main.tile[x + 2, i - 13].TileType = 19;
+                                            Main.tile[x + 2, i - 13].TileFrameY = 17 * 18;
+                                            Main.tile[x + 2, i - 13].HasTile = true;
                                             WorldGen.PlaceTile(x + 2, i - 14, 319, false, false, -1, 0);
                                         }
                                     }
@@ -3956,281 +3957,281 @@ namespace MythMod.UI.OceanWorld
                             }
                             for (int i = shoreHouse - 4; i > shoreHouse - 11; i--)
                             {
-                                Main.tile[82, i].type = 322;
-                                Main.tile[82, i].active(true);
+                                Main.tile[82, i].TileType = 322;
+                                Main.tile[82, i].HasTile = true;
                             }
                             for (int i = shoreHouse - 11; i > shoreHouse - 35; i--)
                             {
                                 if (i == shoreHouse - 11)
                                 {
-                                    Main.tile[59, i].type = 322;
-                                    Main.tile[59, i].active(true);
-                                    Main.tile[60, i].type = 322;
-                                    Main.tile[60, i].active(true);
-                                    Main.tile[83, i].type = 322;
-                                    Main.tile[83, i].active(true);
-                                    Main.tile[84, i].type = 322;
-                                    Main.tile[84, i].active(true);
+                                    Main.tile[59, i].TileType = 322;
+                                    Main.tile[59, i].HasTile = true;
+                                    Main.tile[60, i].TileType = 322;
+                                    Main.tile[60, i].HasTile = true;
+                                    Main.tile[83, i].TileType = 322;
+                                    Main.tile[83, i].HasTile = true;
+                                    Main.tile[84, i].TileType = 322;
+                                    Main.tile[84, i].HasTile = true;
                                     WorldGen.PlaceTile(83, i + 1, 55, false, false, -1, 1);
                                 }
                                 if (i == shoreHouse - 12)
                                 {
-                                    Main.tile[58, i].type = 322;
-                                    Main.tile[58, i].active(true);
-                                    Main.tile[59, i].type = 322;
-                                    Main.tile[59, i].active(true);
-                                    Main.tile[60, i].type = 322;
-                                    Main.tile[60, i].active(true);
-                                    Main.tile[61, i].type = 322;
-                                    Main.tile[61, i].active(true);
-                                    Main.tile[82, i].type = 322;
-                                    Main.tile[82, i].active(true);
-                                    Main.tile[83, i].type = 322;
-                                    Main.tile[83, i].active(true);
-                                    Main.tile[84, i].type = 322;
-                                    Main.tile[84, i].active(true);
-                                    Main.tile[85, i].type = 322;
-                                    Main.tile[85, i].active(true);
+                                    Main.tile[58, i].TileType = 322;
+                                    Main.tile[58, i].HasTile = true;
+                                    Main.tile[59, i].TileType = 322;
+                                    Main.tile[59, i].HasTile = true;
+                                    Main.tile[60, i].TileType = 322;
+                                    Main.tile[60, i].HasTile = true;
+                                    Main.tile[61, i].TileType = 322;
+                                    Main.tile[61, i].HasTile = true;
+                                    Main.tile[82, i].TileType = 322;
+                                    Main.tile[82, i].HasTile = true;
+                                    Main.tile[83, i].TileType = 322;
+                                    Main.tile[83, i].HasTile = true;
+                                    Main.tile[84, i].TileType = 322;
+                                    Main.tile[84, i].HasTile = true;
+                                    Main.tile[85, i].TileType = 322;
+                                    Main.tile[85, i].HasTile = true;
                                 }
                                 if (i == shoreHouse - 13)
                                 {
-                                    Main.tile[58, i].type = 322;
-                                    Main.tile[58, i].active(true);
-                                    Main.tile[62, i].type = 322;
-                                    Main.tile[62, i].active(true);
-                                    Main.tile[61, i].type = 322;
-                                    Main.tile[61, i].active(true);
-                                    Main.tile[82, i].type = 322;
-                                    Main.tile[82, i].active(true);
-                                    Main.tile[81, i].type = 322;
-                                    Main.tile[81, i].active(true);
-                                    Main.tile[85, i].type = 322;
-                                    Main.tile[85, i].active(true);
+                                    Main.tile[58, i].TileType = 322;
+                                    Main.tile[58, i].HasTile = true;
+                                    Main.tile[62, i].TileType = 322;
+                                    Main.tile[62, i].HasTile = true;
+                                    Main.tile[61, i].TileType = 322;
+                                    Main.tile[61, i].HasTile = true;
+                                    Main.tile[82, i].TileType = 322;
+                                    Main.tile[82, i].HasTile = true;
+                                    Main.tile[81, i].TileType = 322;
+                                    Main.tile[81, i].HasTile = true;
+                                    Main.tile[85, i].TileType = 322;
+                                    Main.tile[85, i].HasTile = true;
                                     for (int k = i; k < shoreHouse - 1; k++)
                                     {
-                                        Main.tile[81, k + 1].wall = 151;
-                                        Main.tile[62, k + 1].wall = 151;
+                                        Main.tile[81, k + 1].WallType = 151;
+                                        Main.tile[62, k + 1].WallType = 151;
                                     }
                                 }
                                 if (i == shoreHouse - 14)
                                 {
-                                    Main.tile[63, i].type = 322;
-                                    Main.tile[63, i].active(true);
-                                    Main.tile[62, i].type = 322;
-                                    Main.tile[62, i].active(true);
-                                    Main.tile[80, i].type = 322;
-                                    Main.tile[80, i].active(true);
-                                    Main.tile[81, i].type = 322;
-                                    Main.tile[81, i].active(true);
+                                    Main.tile[63, i].TileType = 322;
+                                    Main.tile[63, i].HasTile = true;
+                                    Main.tile[62, i].TileType = 322;
+                                    Main.tile[62, i].HasTile = true;
+                                    Main.tile[80, i].TileType = 322;
+                                    Main.tile[80, i].HasTile = true;
+                                    Main.tile[81, i].TileType = 322;
+                                    Main.tile[81, i].HasTile = true;
                                     for (int k = i; k < shoreHouse - 1; k++)
                                     {
-                                        Main.tile[80, k + 1].wall = 151;
-                                        Main.tile[63, k + 1].wall = 151;
+                                        Main.tile[80, k + 1].WallType = 151;
+                                        Main.tile[63, k + 1].WallType = 151;
                                     }
                                 }
                                 if (i == shoreHouse - 15)
                                 {
-                                    Main.tile[63, i].type = 322;
-                                    Main.tile[63, i].active(true);
-                                    Main.tile[64, i].type = 322;
-                                    Main.tile[64, i].active(true);
-                                    Main.tile[80, i].type = 322;
-                                    Main.tile[80, i].active(true);
-                                    Main.tile[79, i].type = 322;
-                                    Main.tile[79, i].active(true);
+                                    Main.tile[63, i].TileType = 322;
+                                    Main.tile[63, i].HasTile = true;
+                                    Main.tile[64, i].TileType = 322;
+                                    Main.tile[64, i].HasTile = true;
+                                    Main.tile[80, i].TileType = 322;
+                                    Main.tile[80, i].HasTile = true;
+                                    Main.tile[79, i].TileType = 322;
+                                    Main.tile[79, i].HasTile = true;
                                     for (int k = i; k < shoreHouse - 1; k++)
                                     {
-                                        Main.tile[79, k + 1].wall = 151;
-                                        Main.tile[64, k + 1].wall = 151;
+                                        Main.tile[79, k + 1].WallType = 151;
+                                        Main.tile[64, k + 1].WallType = 151;
                                     }
                                     WorldGen.PlaceTile(64, i + 1, 42, false, false, -1, 6);
                                     WorldGen.PlaceTile(79, i + 1, 42, false, false, -1, 6);
-                                    Main.tile[64, i + 1].frameX = 18;
-                                    Main.tile[79, i + 1].frameX = 18;
-                                    Main.tile[64, i + 2].frameX = 18;
-                                    Main.tile[79, i + 2].frameX = 18;
+                                    Main.tile[64, i + 1].TileFrameX = 18;
+                                    Main.tile[79, i + 1].TileFrameX = 18;
+                                    Main.tile[64, i + 2].TileFrameX = 18;
+                                    Main.tile[79, i + 2].TileFrameX = 18;
                                 }
                                 if (i == shoreHouse - 16)
                                 {
-                                    Main.tile[65, i].type = 322;
-                                    Main.tile[65, i].active(true);
-                                    Main.tile[64, i].type = 322;
-                                    Main.tile[64, i].active(true);
-                                    Main.tile[78, i].type = 322;
-                                    Main.tile[78, i].active(true);
-                                    Main.tile[79, i].type = 322;
-                                    Main.tile[79, i].active(true);
+                                    Main.tile[65, i].TileType = 322;
+                                    Main.tile[65, i].HasTile = true;
+                                    Main.tile[64, i].TileType = 322;
+                                    Main.tile[64, i].HasTile = true;
+                                    Main.tile[78, i].TileType = 322;
+                                    Main.tile[78, i].HasTile = true;
+                                    Main.tile[79, i].TileType = 322;
+                                    Main.tile[79, i].HasTile = true;
                                     for (int k = i; k < shoreHouse - 1; k++)
                                     {
-                                        Main.tile[78, k + 1].wall = 151;
-                                        Main.tile[65, k + 1].wall = 151;
+                                        Main.tile[78, k + 1].WallType = 151;
+                                        Main.tile[65, k + 1].WallType = 151;
                                     }
                                 }
                                 if (i == shoreHouse - 17)
                                 {
-                                    Main.tile[65, i].type = 322;
-                                    Main.tile[65, i].active(true);
-                                    Main.tile[66, i].type = 322;
-                                    Main.tile[66, i].active(true);
-                                    Main.tile[78, i].type = 322;
-                                    Main.tile[78, i].active(true);
-                                    Main.tile[77, i].type = 322;
-                                    Main.tile[77, i].active(true);
+                                    Main.tile[65, i].TileType = 322;
+                                    Main.tile[65, i].HasTile = true;
+                                    Main.tile[66, i].TileType = 322;
+                                    Main.tile[66, i].HasTile = true;
+                                    Main.tile[78, i].TileType = 322;
+                                    Main.tile[78, i].HasTile = true;
+                                    Main.tile[77, i].TileType = 322;
+                                    Main.tile[77, i].HasTile = true;
                                     for (int k = i; k < shoreHouse - 1; k++)
                                     {
-                                        Main.tile[77, k + 1].wall = 151;
-                                        Main.tile[66, k + 1].wall = 151;
+                                        Main.tile[77, k + 1].WallType = 151;
+                                        Main.tile[66, k + 1].WallType = 151;
                                     }
                                     for (int k = i - 1; k < shoreHouse - 1; k++)
                                     {
-                                        Main.tile[76, k + 1].wall = 151;
-                                        Main.tile[67, k + 1].wall = 151;
+                                        Main.tile[76, k + 1].WallType = 151;
+                                        Main.tile[67, k + 1].WallType = 151;
                                     }
                                 }
                                 if (i == shoreHouse - 18)
                                 {
-                                    Main.tile[67, i].type = 322;
-                                    Main.tile[67, i].active(true);
-                                    Main.tile[66, i].type = 322;
-                                    Main.tile[66, i].active(true);
-                                    Main.tile[76, i].type = 322;
-                                    Main.tile[76, i].active(true);
-                                    Main.tile[77, i].type = 322;
-                                    Main.tile[77, i].active(true);
+                                    Main.tile[67, i].TileType = 322;
+                                    Main.tile[67, i].HasTile = true;
+                                    Main.tile[66, i].TileType = 322;
+                                    Main.tile[66, i].HasTile = true;
+                                    Main.tile[76, i].TileType = 322;
+                                    Main.tile[76, i].HasTile = true;
+                                    Main.tile[77, i].TileType = 322;
+                                    Main.tile[77, i].HasTile = true;
                                     for (int j = 1; j < 7; j++)
                                     {
-                                        Main.tile[67, i - j].type = 322;
-                                        Main.tile[67, i - j].active(true);
-                                        Main.tile[76, i - j].type = 322;
-                                        Main.tile[76, i - j].active(true);
+                                        Main.tile[67, i - j].TileType = 322;
+                                        Main.tile[67, i - j].HasTile = true;
+                                        Main.tile[76, i - j].TileType = 322;
+                                        Main.tile[76, i - j].HasTile = true;
                                     }
                                 }
                                 if (i == shoreHouse - 24)
                                 {
-                                    Main.tile[64, i].type = 322;
-                                    Main.tile[64, i].active(true);
-                                    Main.tile[77, i].type = 322;
-                                    Main.tile[77, i].active(true);
-                                    Main.tile[66, i].type = 322;
-                                    Main.tile[66, i].active(true);
-                                    Main.tile[78, i].type = 322;
-                                    Main.tile[78, i].active(true);
-                                    Main.tile[65, i].type = 322;
-                                    Main.tile[65, i].active(true);
-                                    Main.tile[79, i].type = 322;
-                                    Main.tile[79, i].active(true);
-                                    WorldGen.PlaceTile(78, i + 1, mod.TileType("海盗船旗帜"));
-                                    WorldGen.PlaceTile(65, i + 1, mod.TileType("海盗船旗帜"));
+                                    Main.tile[64, i].TileType = 322;
+                                    Main.tile[64, i].HasTile = true;
+                                    Main.tile[77, i].TileType = 322;
+                                    Main.tile[77, i].HasTile = true;
+                                    Main.tile[66, i].TileType = 322;
+                                    Main.tile[66, i].HasTile = true;
+                                    Main.tile[78, i].TileType = 322;
+                                    Main.tile[78, i].HasTile = true;
+                                    Main.tile[65, i].TileType = 322;
+                                    Main.tile[65, i].HasTile = true;
+                                    Main.tile[79, i].TileType = 322;
+                                    Main.tile[79, i].HasTile = true;
+                                    WorldGen.PlaceTile(78, i + 1, mod.Find<ModTile>("海盗船旗帜").Type);
+                                    WorldGen.PlaceTile(65, i + 1, mod.Find<ModTile>("海盗船旗帜").Type);
                                 }
                                 if (i == shoreHouse - 25)
                                 {
-                                    Main.tile[64, i].type = 322;
-                                    Main.tile[64, i].active(true);
-                                    Main.tile[77, i].type = 322;
-                                    Main.tile[77, i].active(true);
-                                    Main.tile[66, i].type = 322;
-                                    Main.tile[66, i].active(true);
-                                    Main.tile[78, i].type = 322;
-                                    Main.tile[78, i].active(true);
-                                    Main.tile[65, i].type = 322;
-                                    Main.tile[65, i].active(true);
-                                    Main.tile[79, i].type = 322;
-                                    Main.tile[79, i].active(true);
-                                    Main.tile[76, i].wall = 151;
-                                    Main.tile[67, i].wall = 151;
-                                    Main.tile[82, i + 14].wall = 151;
-                                    Main.tile[61, i + 14].wall = 151;
+                                    Main.tile[64, i].TileType = 322;
+                                    Main.tile[64, i].HasTile = true;
+                                    Main.tile[77, i].TileType = 322;
+                                    Main.tile[77, i].HasTile = true;
+                                    Main.tile[66, i].TileType = 322;
+                                    Main.tile[66, i].HasTile = true;
+                                    Main.tile[78, i].TileType = 322;
+                                    Main.tile[78, i].HasTile = true;
+                                    Main.tile[65, i].TileType = 322;
+                                    Main.tile[65, i].HasTile = true;
+                                    Main.tile[79, i].TileType = 322;
+                                    Main.tile[79, i].HasTile = true;
+                                    Main.tile[76, i].WallType = 151;
+                                    Main.tile[67, i].WallType = 151;
+                                    Main.tile[82, i + 14].WallType = 151;
+                                    Main.tile[61, i + 14].WallType = 151;
                                 }
                                 if (i == shoreHouse - 26)
                                 {
-                                    Main.tile[67, i].type = 322;
-                                    Main.tile[67, i].active(true);
-                                    Main.tile[76, i].type = 322;
-                                    Main.tile[76, i].active(true);
-                                    Main.tile[77, i].type = 322;
-                                    Main.tile[77, i].active(true);
-                                    Main.tile[66, i].type = 322;
-                                    Main.tile[66, i].active(true);
-                                    Main.tile[64, i].type = 322;
-                                    Main.tile[64, i].active(true);
-                                    Main.tile[79, i].type = 322;
-                                    Main.tile[79, i].active(true);
+                                    Main.tile[67, i].TileType = 322;
+                                    Main.tile[67, i].HasTile = true;
+                                    Main.tile[76, i].TileType = 322;
+                                    Main.tile[76, i].HasTile = true;
+                                    Main.tile[77, i].TileType = 322;
+                                    Main.tile[77, i].HasTile = true;
+                                    Main.tile[66, i].TileType = 322;
+                                    Main.tile[66, i].HasTile = true;
+                                    Main.tile[64, i].TileType = 322;
+                                    Main.tile[64, i].HasTile = true;
+                                    Main.tile[79, i].TileType = 322;
+                                    Main.tile[79, i].HasTile = true;
                                 }
                                 if (i == shoreHouse - 27)
                                 {
-                                    Main.tile[75, i].type = 322;
-                                    Main.tile[75, i].active(true);
-                                    Main.tile[76, i].type = 322;
-                                    Main.tile[76, i].active(true);
-                                    Main.tile[68, i].type = 322;
-                                    Main.tile[68, i].active(true);
-                                    Main.tile[67, i].type = 322;
-                                    Main.tile[67, i].active(true);
+                                    Main.tile[75, i].TileType = 322;
+                                    Main.tile[75, i].HasTile = true;
+                                    Main.tile[76, i].TileType = 322;
+                                    Main.tile[76, i].HasTile = true;
+                                    Main.tile[68, i].TileType = 322;
+                                    Main.tile[68, i].HasTile = true;
+                                    Main.tile[67, i].TileType = 322;
+                                    Main.tile[67, i].HasTile = true;
                                     for (int k = i; k < shoreHouse - 1; k++)
                                     {
-                                        Main.tile[75, k + 1].wall = 151;
-                                        Main.tile[68, k + 1].wall = 151;
+                                        Main.tile[75, k + 1].WallType = 151;
+                                        Main.tile[68, k + 1].WallType = 151;
                                     }
                                 }
                                 if (i == shoreHouse - 28)
                                 {
-                                    Main.tile[75, i].type = 322;
-                                    Main.tile[75, i].active(true);
-                                    Main.tile[74, i].type = 322;
-                                    Main.tile[74, i].active(true);
-                                    Main.tile[68, i].type = 322;
-                                    Main.tile[68, i].active(true);
-                                    Main.tile[69, i].type = 322;
-                                    Main.tile[69, i].active(true);
+                                    Main.tile[75, i].TileType = 322;
+                                    Main.tile[75, i].HasTile = true;
+                                    Main.tile[74, i].TileType = 322;
+                                    Main.tile[74, i].HasTile = true;
+                                    Main.tile[68, i].TileType = 322;
+                                    Main.tile[68, i].HasTile = true;
+                                    Main.tile[69, i].TileType = 322;
+                                    Main.tile[69, i].HasTile = true;
                                     for (int k = i; k < shoreHouse - 1; k++)
                                     {
-                                        Main.tile[74, k + 1].wall = 151;
-                                        Main.tile[69, k + 1].wall = 151;
+                                        Main.tile[74, k + 1].WallType = 151;
+                                        Main.tile[69, k + 1].WallType = 151;
                                     }
                                 }
                                 if (i == shoreHouse - 29)
                                 {
-                                    Main.tile[73, i].type = 322;
-                                    Main.tile[73, i].active(true);
-                                    Main.tile[74, i].type = 322;
-                                    Main.tile[74, i].active(true);
-                                    Main.tile[70, i].type = 322;
-                                    Main.tile[70, i].active(true);
-                                    Main.tile[69, i].type = 322;
-                                    Main.tile[69, i].active(true);
+                                    Main.tile[73, i].TileType = 322;
+                                    Main.tile[73, i].HasTile = true;
+                                    Main.tile[74, i].TileType = 322;
+                                    Main.tile[74, i].HasTile = true;
+                                    Main.tile[70, i].TileType = 322;
+                                    Main.tile[70, i].HasTile = true;
+                                    Main.tile[69, i].TileType = 322;
+                                    Main.tile[69, i].HasTile = true;
                                     for (int k = i; k < shoreHouse - 1; k++)
                                     {
-                                        Main.tile[73, k + 1].wall = 151;
-                                        Main.tile[70, k + 1].wall = 151;
+                                        Main.tile[73, k + 1].WallType = 151;
+                                        Main.tile[70, k + 1].WallType = 151;
                                     }
                                 }
                                 if (i == shoreHouse - 30)
                                 {
-                                    Main.tile[73, i].type = 322;
-                                    Main.tile[73, i].active(true);
-                                    Main.tile[72, i].type = 322;
-                                    Main.tile[72, i].active(true);
-                                    Main.tile[70, i].type = 322;
-                                    Main.tile[70, i].active(true);
-                                    Main.tile[71, i].type = 322;
-                                    Main.tile[71, i].active(true);
+                                    Main.tile[73, i].TileType = 322;
+                                    Main.tile[73, i].HasTile = true;
+                                    Main.tile[72, i].TileType = 322;
+                                    Main.tile[72, i].HasTile = true;
+                                    Main.tile[70, i].TileType = 322;
+                                    Main.tile[70, i].HasTile = true;
+                                    Main.tile[71, i].TileType = 322;
+                                    Main.tile[71, i].HasTile = true;
                                     for (int k = i; k < shoreHouse - 1; k++)
                                     {
-                                        Main.tile[72, k + 1].wall = 151;
-                                        Main.tile[71, k + 1].wall = 151;
+                                        Main.tile[72, k + 1].WallType = 151;
+                                        Main.tile[71, k + 1].WallType = 151;
                                     }
                                 }
                                 if (i == shoreHouse - 31)
                                 {
-                                    Main.tile[72, i].type = 322;
-                                    Main.tile[72, i].active(true);
-                                    Main.tile[71, i].type = 322;
-                                    Main.tile[71, i].active(true);
+                                    Main.tile[72, i].TileType = 322;
+                                    Main.tile[72, i].HasTile = true;
+                                    Main.tile[71, i].TileType = 322;
+                                    Main.tile[71, i].HasTile = true;
                                     for (int x = 72; x < 77; x++)
                                     {
                                         for (int y = shoreHouse - 17; y < shoreHouse - 12; y++)
                                         {
-                                            Main.tile[x, y].wall = 21;
+                                            Main.tile[x, y].WallType = 21;
                                         }
                                     }
                                 }
@@ -4240,35 +4241,35 @@ namespace MythMod.UI.OceanWorld
                         {
                             for (int i = shoreHouse - 1; i > shoreHouse - 12; i--)
                             {
-                                Main.tile[l, i].type = 322;
-                                Main.tile[l, i].active(true);
+                                Main.tile[l, i].TileType = 322;
+                                Main.tile[l, i].HasTile = true;
                             }
                             for (int i = 0; i < 20; i++)
                             {
                                 if (117 - i == 108 || 117 - i == 101)
                                 {
-                                    Main.tile[117 - i, shoreHouse - 12].type = 322;
-                                    Main.tile[117 - i, shoreHouse - 12].active(true);
+                                    Main.tile[117 - i, shoreHouse - 12].TileType = 322;
+                                    Main.tile[117 - i, shoreHouse - 12].HasTile = true;
                                 }
                                 else
                                 {
-                                    Main.tile[117 - i, shoreHouse - 12].type = 19;
-                                    Main.tile[117 - i, shoreHouse - 12].frameY = 17 * 18;
-                                    Main.tile[117 - i, shoreHouse - 12].active(true);
+                                    Main.tile[117 - i, shoreHouse - 12].TileType = 19;
+                                    Main.tile[117 - i, shoreHouse - 12].TileFrameY = 17 * 18;
+                                    Main.tile[117 - i, shoreHouse - 12].HasTile = true;
                                 }
                                 if (i > 1)
                                 {
                                     for (int j = 0; j < 11; j++)
                                     {
-                                        Main.tile[117 - i + 1, shoreHouse - 11 + j].wall = 151;
+                                        Main.tile[117 - i + 1, shoreHouse - 11 + j].WallType = 151;
                                     }
                                 }
                                 if (i == 19)
                                 {
                                     for (int j = 0; j < 8; j++)
                                     {
-                                        Main.tile[117 - i, shoreHouse - 11 + j].type = 322;
-                                        Main.tile[117 - i, shoreHouse - 11 + j].active(true);
+                                        Main.tile[117 - i, shoreHouse - 11 + j].TileType = 322;
+                                        Main.tile[117 - i, shoreHouse - 11 + j].HasTile = true;
                                     }
                                     WorldGen.PlaceDoor(117 - i, shoreHouse - 2, 10, 29);
                                 }
@@ -4276,9 +4277,9 @@ namespace MythMod.UI.OceanWorld
                                 {
                                     for (int j = 0; j < 6; j++)
                                     {
-                                        Main.tile[117 - i + j, shoreHouse - 6].type = 19;
-                                        Main.tile[117 - i + j, shoreHouse - 6].frameY = 17 * 18;
-                                        Main.tile[117 - i + j, shoreHouse - 6].active(true);
+                                        Main.tile[117 - i + j, shoreHouse - 6].TileType = 19;
+                                        Main.tile[117 - i + j, shoreHouse - 6].TileFrameY = 17 * 18;
+                                        Main.tile[117 - i + j, shoreHouse - 6].HasTile = true;
                                     }
                                 }
                             }
@@ -4288,7 +4289,7 @@ namespace MythMod.UI.OceanWorld
                             WorldGen.PlaceTile(108, shoreHouse - 1, 14, true, false, -1, 26);//桌子
                             WorldGen.PlaceTile(110, shoreHouse - 1, 15, true, false, -1, 29);//椅子
                             WorldGen.PlaceTile(106, shoreHouse - 1, 15, true, false, -1, 29);//椅子
-                            WorldGen.PlaceTile(108, shoreHouse - 3, mod.TileType("鱼子酱寿司"));
+                            WorldGen.PlaceTile(108, shoreHouse - 3, mod.Find<ModTile>("鱼子酱寿司").Type);
                             WorldGen.Place6x4Wall(108, shoreHouse - 6, 242, 25);//地图
                             WorldGen.PlaceTile(108, shoreHouse - 11, 34, true, false, -1, 23);//大吊灯
                             WorldGen.PlaceTile(101, shoreHouse - 11, 42, true, false, -1, 27);//吊灯
@@ -4296,19 +4297,19 @@ namespace MythMod.UI.OceanWorld
                             WorldGen.PlaceTile(115, shoreHouse - 13, 100, true, false, -1, 18);//地灯
                             WorldGen.PlaceTile(104, shoreHouse - 13, 89, true, false, -1, 22);//沙发
                             WorldGen.PlaceTile(107, shoreHouse - 13, 101, true, false, -1, 23);//书架
-                            WorldGen.PlaceTile(106, shoreHouse - 18, mod.TileType("鲨鱼骸骨"));//鲨鱼骸骨
+                            WorldGen.PlaceTile(106, shoreHouse - 18, mod.Find<ModTile>("鲨鱼骸骨").Type);//鲨鱼骸骨
                             WorldGen.PlaceTile(109, shoreHouse - 13, 104, true, false, -1, 18);//时钟
                             WorldGen.PlaceTile(112, shoreHouse - 13, 89, true, false, -1, 21);//长凳
                             WorldGen.Place3x3Wall(113, shoreHouse - 8, 240, 46);//9X,8√救生圈
-                            WorldGen.Place3x3Wall(115, shoreHouse - 5, (ushort)mod.TileType("大橙色海星"), 0);//海星
+                            WorldGen.Place3x3Wall(115, shoreHouse - 5, (ushort)mod.Find<ModTile>("大橙色海星").Type, 0);//海星
                             WorldGen.Place3x3Wall(102, shoreHouse - 4, 240, 47);//9X,8√船舵
                             WorldGen.Place3x3Wall(78, shoreHouse - 6, 240, 49);//9X,8√船舵
                             WorldGen.PlaceTile(100, shoreHouse - 7, 21, false, false, -1, 31);
-                            Main.chest[0].item[0].SetDefaults(mod.ItemType("Pearl"), false);
+                            Main.chest[0].item[0].SetDefaults(mod.Find<ModItem>("Pearl").Type, false);
                             Main.chest[0].item[0].stack = Main.rand.Next(40, 60);
-                            WorldGen.PlaceTile(99, shoreHouse - 8, mod.TileType("花鹿角珊瑚"));
-                            WorldGen.PlaceTile(102, shoreHouse - 8, mod.TileType("鹦鹉螺"));
-                            WorldGen.PlaceTile(104, shoreHouse - 9, mod.TileType("大理石芋螺"));
+                            WorldGen.PlaceTile(99, shoreHouse - 8, mod.Find<ModTile>("花鹿角珊瑚").Type);
+                            WorldGen.PlaceTile(102, shoreHouse - 8, mod.Find<ModTile>("鹦鹉螺").Type);
+                            WorldGen.PlaceTile(104, shoreHouse - 9, mod.Find<ModTile>("大理石芋螺").Type);
                             WorldGen.PlaceDoor(82, shoreHouse - 2, 10, 29);
                             WorldGen.PlaceTile(104, shoreHouse - 10, 213);
                             WorldGen.PlaceTile(104, shoreHouse - 11, 213);
@@ -4335,80 +4336,80 @@ namespace MythMod.UI.OceanWorld
                             WorldGen.PlaceTile(68, shoreHouse + 1, 270);//灯瓶
                             WorldGen.PlaceTile(74, shoreHouse + 1, 271);//灯瓶
                             WorldGen.PlaceTile(113, shoreHouse + 1, 270);//灯瓶
-                            WorldGen.PlaceTile(110, shoreHouse + 1, mod.TileType("贝壳风铃"));//风铃
+                            WorldGen.PlaceTile(110, shoreHouse + 1, mod.Find<ModTile>("贝壳风铃").Type);//风铃
                             WorldGen.PlaceTile(107, shoreHouse + 1, 271);//灯瓶
                             WorldGen.PlaceTile(72, shoreHouse - 1, 376);//箱子
                             WorldGen.PlaceTile(70, shoreHouse - 1, 376);//箱子
                             WorldGen.PlaceTile(74, shoreHouse - 2, 209);//大炮1X2X
-                            WorldGen.PlaceTile(90, shoreHouse + 1, mod.TileType("礁鲨标本"));
+                            WorldGen.PlaceTile(90, shoreHouse + 1, mod.Find<ModTile>("礁鲨标本").Type);
                         }
                         if ((l < 76 || l > 80) && (l < 100 || l > 104))
                         {
                             if (l < 76)
                             {
-                                if (labble && !Main.tile[l, shoreHouse + 20].active() && !Main.tile[l + 1, shoreHouse + 20].active() && !Main.tile[l + 2, shoreHouse + 20].active() && l > 62)
+                                if (labble && !Main.tile[l, shoreHouse + 20].HasTile && !Main.tile[l + 1, shoreHouse + 20].HasTile && !Main.tile[l + 2, shoreHouse + 20].HasTile && l > 62)
                                 {
                                     labble = false;
-                                    Main.tile[l, shoreHouse].type = 19;
-                                    Main.tile[l, shoreHouse].frameY = 17 * 18;
-                                    Main.tile[l, shoreHouse].active(true);
-                                    Main.tile[l + 1, shoreHouse].type = 19;
-                                    Main.tile[l + 1, shoreHouse].frameY = 17 * 18;
-                                    Main.tile[l + 1, shoreHouse].active(true);
-                                    Main.tile[l + 2, shoreHouse].type = 19;
-                                    Main.tile[l + 2, shoreHouse].frameY = 17 * 18;
-                                    Main.tile[l + 2, shoreHouse].active(true);
+                                    Main.tile[l, shoreHouse].TileType = 19;
+                                    Main.tile[l, shoreHouse].TileFrameY = 17 * 18;
+                                    Main.tile[l, shoreHouse].HasTile = true;
+                                    Main.tile[l + 1, shoreHouse].TileType = 19;
+                                    Main.tile[l + 1, shoreHouse].TileFrameY = 17 * 18;
+                                    Main.tile[l + 1, shoreHouse].HasTile = true;
+                                    Main.tile[l + 2, shoreHouse].TileType = 19;
+                                    Main.tile[l + 2, shoreHouse].TileFrameY = 17 * 18;
+                                    Main.tile[l + 2, shoreHouse].HasTile = true;
                                     for (int o = 1; o < 150; o++)
                                     {
-                                        if (Main.tile[l, shoreHouse + o].type == 53)
+                                        if (Main.tile[l, shoreHouse + o].TileType == 53)
                                         {
                                             break;
                                         }
-                                        Main.tile[l, shoreHouse + o].type = 213;
-                                        Main.tile[l, shoreHouse + o].active(true);
+                                        Main.tile[l, shoreHouse + o].TileType = 213;
+                                        Main.tile[l, shoreHouse + o].HasTile = true;
                                     }
                                     for (int o = 1; o < 150; o++)
                                     {
-                                        if (Main.tile[l + 2, shoreHouse + o].type == 53)
+                                        if (Main.tile[l + 2, shoreHouse + o].TileType == 53)
                                         {
                                             break;
                                         }
-                                        Main.tile[l + 2, shoreHouse + o].type = 213;
-                                        Main.tile[l + 2, shoreHouse + o].active(true);
+                                        Main.tile[l + 2, shoreHouse + o].TileType = 213;
+                                        Main.tile[l + 2, shoreHouse + o].HasTile = true;
                                     }
                                     for (int o = 1; o < 150; o++)
                                     {
-                                        if (Main.tile[l + 1, shoreHouse + o].type == 53)
+                                        if (Main.tile[l + 1, shoreHouse + o].TileType == 53)
                                         {
                                             break;
                                         }
                                         if (o % 2 == 1)
                                         {
-                                            Main.tile[l + 1, shoreHouse + o].type = 213;
-                                            Main.tile[l + 1, shoreHouse + o].active(true);
+                                            Main.tile[l + 1, shoreHouse + o].TileType = 213;
+                                            Main.tile[l + 1, shoreHouse + o].HasTile = true;
                                         }
                                     }
                                 }
                                 else
                                 {
-                                    if (!Main.tile[l, shoreHouse].active())
+                                    if (!Main.tile[l, shoreHouse].HasTile)
                                     {
-                                        Main.tile[l, shoreHouse].type = 322;
-                                        Main.tile[l, shoreHouse].active(true);
+                                        Main.tile[l, shoreHouse].TileType = 322;
+                                        Main.tile[l, shoreHouse].HasTile = true;
                                     }
                                 }
                             }
                             else
                             {
-                                Main.tile[l, shoreHouse].type = 322;
-                                Main.tile[l, shoreHouse].active(true);
+                                Main.tile[l, shoreHouse].TileType = 322;
+                                Main.tile[l, shoreHouse].HasTile = true;
                             }
                         }
                         else
                         {
-                            Main.tile[l, shoreHouse].type = 19;
-                            Main.tile[l, shoreHouse].frameY = 17 * 18;
-                            Main.tile[l, shoreHouse].active(true);
+                            Main.tile[l, shoreHouse].TileType = 19;
+                            Main.tile[l, shoreHouse].TileFrameY = 17 * 18;
+                            Main.tile[l, shoreHouse].HasTile = true;
                             if (l == 76)
                             {
                                 WorldGen.SlopeTile(l, shoreHouse, 1);
@@ -4421,23 +4422,23 @@ namespace MythMod.UI.OceanWorld
                             {
                                 for (int j = l; j < l + 10; j++)
                                 {
-                                    Main.tile[j, shoreHouse + j - l].type = 19;
-                                    Main.tile[j, shoreHouse + j - l].frameY = 17 * 18;
-                                    Main.tile[j, shoreHouse + j - l].active(true);
+                                    Main.tile[j, shoreHouse + j - l].TileType = 19;
+                                    Main.tile[j, shoreHouse + j - l].TileFrameY = 17 * 18;
+                                    Main.tile[j, shoreHouse + j - l].HasTile = true;
                                     WorldGen.SlopeTile(j, shoreHouse + j - l, 1);
                                 }
                                 for (int j = 104; j > 94; j--)
                                 {
-                                    Main.tile[j, shoreHouse + 104 - j].type = 19;
-                                    Main.tile[j, shoreHouse + 104 - j].frameY = 17 * 18;
-                                    Main.tile[j, shoreHouse + 104 - j].active(true);
+                                    Main.tile[j, shoreHouse + 104 - j].TileType = 19;
+                                    Main.tile[j, shoreHouse + 104 - j].TileFrameY = 17 * 18;
+                                    Main.tile[j, shoreHouse + 104 - j].HasTile = true;
                                     WorldGen.SlopeTile(j, shoreHouse + 104 - j, 2);
                                 }
                                 for (int j = 94; j > 85; j--)
                                 {
-                                    Main.tile[j, shoreHouse + 10].type = 19;
-                                    Main.tile[j, shoreHouse + 10].frameY = 17 * 18;
-                                    Main.tile[j, shoreHouse + 10].active(true);
+                                    Main.tile[j, shoreHouse + 10].TileType = 19;
+                                    Main.tile[j, shoreHouse + 10].TileFrameY = 17 * 18;
+                                    Main.tile[j, shoreHouse + 10].HasTile = true;
                                 }
                                 int direc1 = 1;
                                 int j2 = 92;
@@ -4448,26 +4449,26 @@ namespace MythMod.UI.OceanWorld
                                         direc1 = -1;
                                         if (z > shoreHouse + 15)
                                         {
-                                            Main.tile[j2, z].type = 19;
-                                            Main.tile[j2, z].frameY = 17 * 18;
-                                            Main.tile[j2, z].active(true);
+                                            Main.tile[j2, z].TileType = 19;
+                                            Main.tile[j2, z].TileFrameY = 17 * 18;
+                                            Main.tile[j2, z].HasTile = true;
                                         }
                                     }
                                     if (j2 <= 94)
                                     {
                                         direc1 = 1;
-                                        Main.tile[j2, z].type = 19;
-                                        Main.tile[j2, z].frameY = 17 * 18;
-                                        Main.tile[j2, z].active(true);
+                                        Main.tile[j2, z].TileType = 19;
+                                        Main.tile[j2, z].TileFrameY = 17 * 18;
+                                        Main.tile[j2, z].HasTile = true;
                                     }
-                                    if (Main.tile[j2 + direc1, z + 1].active() && Main.tile[j2 + direc1, z + 1].type != 53)
+                                    if (Main.tile[j2 + direc1, z + 1].HasTile && Main.tile[j2 + direc1, z + 1].TileType != 53)
                                     {
                                         direc1 *= -1;
-                                        if (Main.tile[j2, z].type != 53)
+                                        if (Main.tile[j2, z].TileType != 53)
                                         {
-                                            Main.tile[j2, z].type = 19;
-                                            Main.tile[j2, z].frameY = 17 * 18;
-                                            Main.tile[j2, z].active(true);
+                                            Main.tile[j2, z].TileType = 19;
+                                            Main.tile[j2, z].TileFrameY = 17 * 18;
+                                            Main.tile[j2, z].HasTile = true;
                                         }
                                         else
                                         {
@@ -4475,15 +4476,15 @@ namespace MythMod.UI.OceanWorld
                                         }
                                     }
                                     j2 += direc1;
-                                    if (Main.tile[j2, z].type == 53)
+                                    if (Main.tile[j2, z].TileType == 53)
                                     {
                                         break;
                                     }
-                                    if (!Main.tile[j2, z].active())
+                                    if (!Main.tile[j2, z].HasTile)
                                     {
-                                        Main.tile[j2, z].type = 19;
-                                        Main.tile[j2, z].frameY = 17 * 18;
-                                        Main.tile[j2, z].active(true);
+                                        Main.tile[j2, z].TileType = 19;
+                                        Main.tile[j2, z].TileFrameY = 17 * 18;
+                                        Main.tile[j2, z].HasTile = true;
                                         WorldGen.SlopeTile(j2, z, (3 - direc1) / 2);
                                         if (z == shoreHouse + 11)
                                         {
@@ -4499,26 +4500,26 @@ namespace MythMod.UI.OceanWorld
                                         direc1 = -1;
                                         if (z > shoreHouse + 15)
                                         {
-                                            Main.tile[j3, z].type = 19;
-                                            Main.tile[j3, z].frameY = 17 * 18;
-                                            Main.tile[j3, z].active(true);
+                                            Main.tile[j3, z].TileType = 19;
+                                            Main.tile[j3, z].TileFrameY = 17 * 18;
+                                            Main.tile[j3, z].HasTile = true;
                                         }
                                     }
                                     if (j3 <= 76)
                                     {
                                         direc1 = 1;
-                                        Main.tile[j3, z].type = 19;
-                                        Main.tile[j3, z].frameY = 17 * 18;
-                                        Main.tile[j3, z].active(true);
+                                        Main.tile[j3, z].TileType = 19;
+                                        Main.tile[j3, z].TileFrameY = 17 * 18;
+                                        Main.tile[j3, z].HasTile = true;
                                     }
-                                    if (Main.tile[j3 + direc1, z + 1].active() && Main.tile[j3 + direc1, z + 1].type != 53)
+                                    if (Main.tile[j3 + direc1, z + 1].HasTile && Main.tile[j3 + direc1, z + 1].TileType != 53)
                                     {
                                         direc1 *= -1;
-                                        if (Main.tile[j3, z].type != 53)
+                                        if (Main.tile[j3, z].TileType != 53)
                                         {
-                                            Main.tile[j3, z].type = 19;
-                                            Main.tile[j3, z].frameY = 17 * 18;
-                                            Main.tile[j3, z].active(true);
+                                            Main.tile[j3, z].TileType = 19;
+                                            Main.tile[j3, z].TileFrameY = 17 * 18;
+                                            Main.tile[j3, z].HasTile = true;
                                         }
                                         else
                                         {
@@ -4526,15 +4527,15 @@ namespace MythMod.UI.OceanWorld
                                         }
                                     }
                                     j3 += direc1;
-                                    if (Main.tile[j3, z].type == 53)
+                                    if (Main.tile[j3, z].TileType == 53)
                                     {
                                         break;
                                     }
-                                    if (!Main.tile[j3, z].active())
+                                    if (!Main.tile[j3, z].HasTile)
                                     {
-                                        Main.tile[j3, z].type = 19;
-                                        Main.tile[j3, z].frameY = 17 * 18;
-                                        Main.tile[j3, z].active(true);
+                                        Main.tile[j3, z].TileType = 19;
+                                        Main.tile[j3, z].TileFrameY = 17 * 18;
+                                        Main.tile[j3, z].HasTile = true;
                                         WorldGen.SlopeTile(j3, z, (3 - direc1) / 2);
                                         if (z == shoreHouse + 11)
                                         {
@@ -4548,16 +4549,16 @@ namespace MythMod.UI.OceanWorld
                         {
                             for (int m = shoreHouse; m < shoreHouse + 48; m++)
                             {
-                                Main.tile[l, m].wall = 151;
-                                if(m - 1 > shoreHouse + 18 && m - 1 < shoreHouse + 22 && !Main.tile[l, m - 1].active())
+                                Main.tile[l, m].WallType = 151;
+                                if(m - 1 > shoreHouse + 18 && m - 1 < shoreHouse + 22 && !Main.tile[l, m - 1].HasTile)
                                 {
-                                    Main.tile[l, m - 1].type = (ushort)mod.TileType("稀疏藤壶" + (Main.rand.Next(3) + 1).ToString());
-                                    Main.tile[l, m - 1].active(true);
+                                    Main.tile[l, m - 1].TileType = (ushort)mod.Find<ModTile>("稀疏藤壶" + (Main.rand.Next(3) + 1).ToString()).Type;
+                                    Main.tile[l, m - 1].HasTile = true;
                                 }
-                                if (m - 1 > shoreHouse + 22 && !Main.tile[l, m - 1].active())
+                                if (m - 1 > shoreHouse + 22 && !Main.tile[l, m - 1].HasTile)
                                 {
-                                    Main.tile[l, m - 1].type = (ushort)mod.TileType("藤壶" + (Main.rand.Next(3) + 1).ToString());
-                                    Main.tile[l, m - 1].active(true);
+                                    Main.tile[l, m - 1].TileType = (ushort)mod.Find<ModTile>("藤壶" + (Main.rand.Next(3) + 1).ToString()).Type;
+                                    Main.tile[l, m - 1].HasTile = true;
                                 }
                             }
                         }
@@ -4565,7 +4566,7 @@ namespace MythMod.UI.OceanWorld
                         {
                             for (int m = shoreHouse - 30; m < shoreHouse + 50; m++)
                             {
-                                if (Main.tile[k, m].type == 19 || Main.tile[k, m].type == 322)
+                                if (Main.tile[k, m].TileType == 19 || Main.tile[k, m].TileType == 322)
                                 {
                                     //WorldGen.PoundPlatform(k, m);
                                     //WorldGen.PoundPlatform(k, m);
@@ -4575,25 +4576,25 @@ namespace MythMod.UI.OceanWorld
                             }
                         }
                     }
-                    WorldGen.PlaceTile(70, shoreHouse - 20, mod.TileType("炸药桶"), false, false, -1, 0);//24X
-                    WorldGen.PlaceTile(71, shoreHouse - 20, mod.TileType("荧光虾酱"), false, false, -1, 0);//24X
+                    WorldGen.PlaceTile(70, shoreHouse - 20, mod.Find<ModTile>("炸药桶").Type, false, false, -1, 0);//24X
+                    WorldGen.PlaceTile(71, shoreHouse - 20, mod.Find<ModTile>("荧光虾酱").Type, false, false, -1, 0);//24X
                     WorldGen.PlaceTile(73, shoreHouse - 20, 318, false, false, -1, 0);//24X
-                    WorldGen.PlaceTile(75, shoreHouse - 23, mod.TileType("唐冠螺"), false, false, -1, 0);//26X
+                    WorldGen.PlaceTile(75, shoreHouse - 23, mod.Find<ModTile>("唐冠螺").Type, false, false, -1, 0);//26X
                     WorldGen.PlaceTile(76, shoreHouse - 11, 185, false, false, -1, 4);
                     WorldGen.PlaceTile(93, shoreHouse - 1, 92);//1X3X4X2X
                     WorldGen.PlaceTile(86, shoreHouse - 1, 92);//1X3X4X2X
                     WorldGen.PlaceTile(71, shoreHouse - 4, 376);//箱子3X
-                    WorldGen.PlaceTile(65, shoreHouse - 11, mod.TileType("红酒"), false, false, -1, 0);//1X2X0X
+                    WorldGen.PlaceTile(65, shoreHouse - 11, mod.Find<ModTile>("红酒").Type, false, false, -1, 0);//1X2X0X
                     for (int i = 60; i < 82; i++)
                     {
                         for (int j = shoreHouse; j > shoreHouse - 32; j--)
                         {
-                            if (Main.tile[i, j].wall == 151)
+                            if (Main.tile[i, j].WallType == 151)
                             {
-                                if (!Main.tile[i, j].active() && Main.rand.Next(2) == 1)
+                                if (!Main.tile[i, j].HasTile && Main.rand.Next(2) == 1)
                                 {
-                                    Main.tile[i, j].type = 51;
-                                    Main.tile[i, j].active(true);
+                                    Main.tile[i, j].TileType = 51;
+                                    Main.tile[i, j].HasTile = true;
                                 }
                             }
                         }
@@ -4603,12 +4604,12 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "让火山熔化…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     for (int k = 0; k < Main.maxTilesX / 25; k++)
                     {
                         int i = (int)(Main.maxTilesX * 0.75f) + Main.rand.Next(-(Main.maxTilesX / 9) - 29, Main.maxTilesX / 9 - 29);
                         int j = Main.rand.Next(0, Main.maxTilesY - 50);
-                        if (Main.tile[i, j].type == (ushort)mod.TileType("Basalt"))
+                        if (Main.tile[i, j].TileType == (ushort)mod.Find<ModTile>("Basalt").Type)
                         {
                             int FTimes = Main.rand.Next(15, 90);
                             float DeltaH = 0;
@@ -4630,7 +4631,7 @@ namespace MythMod.UI.OceanWorld
                                 }
                                 if (r <= 1)
                                 {
-                                    Main.tile[i, j].type = (ushort)mod.TileType("MeltingLava");
+                                    Main.tile[i, j].TileType = (ushort)mod.Find<ModTile>("MeltingLava").Type;
                                 }
                                 else
                                 {
@@ -4638,9 +4639,9 @@ namespace MythMod.UI.OceanWorld
                                     {
                                         for (int w = -(int)(r / 2f); w < (int)(r / 2f); w++)
                                         {
-                                            if (Main.tile[i + v + u, (int)(j + w + DeltaH)].type == (ushort)mod.TileType("Basalt"))
+                                            if (Main.tile[i + v + u, (int)(j + w + DeltaH)].TileType == (ushort)mod.Find<ModTile>("Basalt").Type)
                                             {
-                                                Main.tile[i + v + u, (int)(j + w + DeltaH)].type = (ushort)mod.TileType("MeltingLava");
+                                                Main.tile[i + v + u, (int)(j + w + DeltaH)].TileType = (ushort)mod.Find<ModTile>("MeltingLava").Type;
                                             }
                                         }
                                     }
@@ -4652,7 +4653,7 @@ namespace MythMod.UI.OceanWorld
                     {
                         int i = (int)(Main.maxTilesX * 0.75f) + Main.rand.Next(-(Main.maxTilesX / 9) - 29, Main.maxTilesX / 9 - 29);
                         int j = Main.rand.Next(0, Main.maxTilesY - 50);
-                        if (Main.tile[i, j].type == (ushort)mod.TileType("Basalt"))
+                        if (Main.tile[i, j].TileType == (ushort)mod.Find<ModTile>("Basalt").Type)
                         {
                             int FTimes = Main.rand.Next(15, 45);
                             float DeltaH = 0;
@@ -4674,7 +4675,7 @@ namespace MythMod.UI.OceanWorld
                                 }
                                 if (r <= 1)
                                 {
-                                    Main.tile[i, j].type = (ushort)mod.TileType("MeltingLava");
+                                    Main.tile[i, j].TileType = (ushort)mod.Find<ModTile>("MeltingLava").Type;
                                 }
                                 else
                                 {
@@ -4682,9 +4683,9 @@ namespace MythMod.UI.OceanWorld
                                     {
                                         for (int w = -(int)(r / 2f); w < (int)(r / 2f); w++)
                                         {
-                                            if (Main.tile[i + v + u, (int)(j + w + DeltaH)].type == (ushort)mod.TileType("Basalt"))
+                                            if (Main.tile[i + v + u, (int)(j + w + DeltaH)].TileType == (ushort)mod.Find<ModTile>("Basalt").Type)
                                             {
-                                                Main.tile[i + v + u, (int)(j + w + DeltaH)].type = (ushort)mod.TileType("MeltingLava");
+                                                Main.tile[i + v + u, (int)(j + w + DeltaH)].TileType = (ushort)mod.Find<ModTile>("MeltingLava").Type;
                                             }
                                         }
                                     }
@@ -4697,7 +4698,7 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "一场风暴掀翻了一艘船…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     int Xd = 2000;
                     int Yd = 455;
                     if (Main.maxTilesX == 6400)
@@ -4723,13 +4724,13 @@ namespace MythMod.UI.OceanWorld
                             if (new Color(colorTex[x + y * tex.Width].R, colorTex[x + y * tex.Width].G, colorTex[x + y * tex.Width].B) == new Color(89, 43, 27))
                             {
                                 //WorldGen.PlaceTile(x + 2000, y + 100, mod.TileType("朽木"));
-                                Main.tile[x + Xd, y + Yd].type = (ushort)mod.TileType("朽木");
-                                Main.tile[x + Xd, y + Yd].active(true);
+                                Main.tile[x + Xd, y + Yd].TileType = (ushort)mod.Find<ModTile>("朽木").Type;
+                                Main.tile[x + Xd, y + Yd].HasTile = true;
                             }
                             if (new Color(colorTex[x + y * tex.Width].R, colorTex[x + y * tex.Width].G, colorTex[x + y * tex.Width].B) == new Color(37, 25, 16))
                             {
-                                Main.tile[x + Xd, y + Yd].wall = (ushort)mod.WallType("朽木墙");
-                                Main.tile[x + Xd, y + Yd].active(false);
+                                Main.tile[x + Xd, y + Yd].WallType = (ushort)mod.Find<ModWall>("朽木墙").Type;
+                                Main.tile[x + Xd, y + Yd].HasTile = false;
                             }
                         }
                     }
@@ -4743,8 +4744,8 @@ namespace MythMod.UI.OceanWorld
                             if (new Color(colorTex2[x + y * tex2.Width].R, colorTex2[x + y * tex2.Width].G, colorTex2[x + y * tex2.Width].B) == new Color(89, 43, 27))
                             {
                                 //WorldGen.PlaceTile(x + Xd, y + Yd, mod.TileType("朽木"));
-                                Main.tile[x + Xd, y + Yd].type = (ushort)mod.TileType("朽木");
-                                Main.tile[x + Xd, y + Yd].active(true);
+                                Main.tile[x + Xd, y + Yd].TileType = (ushort)mod.Find<ModTile>("朽木").Type;
+                                Main.tile[x + Xd, y + Yd].HasTile = true;
                             }
                         }
                     }
@@ -4755,80 +4756,80 @@ namespace MythMod.UI.OceanWorld
                             Color color = new Color(colorTex2[x + y * tex2.Width].R, colorTex2[x + y * tex2.Width].G, colorTex2[x + y * tex2.Width].B);
                             if (color == new Color(6, 6, 7))
                             {
-                                WorldGen.PlaceTile(x + Xd, y + Yd, mod.TileType("海盗船旗帜"));
+                                WorldGen.PlaceTile(x + Xd, y + Yd, mod.Find<ModTile>("海盗船旗帜").Type);
                                 short num = (short)(Main.rand.Next(0, 4));
-                                Main.tile[x + Xd, y + Yd].frameX = (short)(num * 72);
-                                Main.tile[x + Xd, y + Yd + 1].frameX = (short)(num * 72);
-                                Main.tile[x + Xd, y + Yd + 2].frameX = (short)(num * 72);
-                                Main.tile[x + Xd, y + Yd + 3].frameX = (short)(num * 72);
-                                Main.tile[x + Xd, y + Yd + 4].frameX = (short)(num * 72);
+                                Main.tile[x + Xd, y + Yd].TileFrameX = (short)(num * 72);
+                                Main.tile[x + Xd, y + Yd + 1].TileFrameX = (short)(num * 72);
+                                Main.tile[x + Xd, y + Yd + 2].TileFrameX = (short)(num * 72);
+                                Main.tile[x + Xd, y + Yd + 3].TileFrameX = (short)(num * 72);
+                                Main.tile[x + Xd, y + Yd + 4].TileFrameX = (short)(num * 72);
                             }
                             if (color == new Color(216, 104, 67))
                             {
-                                WorldGen.PlaceTile(x + Xd, y + Yd, mod.TileType("CorruptDoorClosed"));
+                                WorldGen.PlaceTile(x + Xd, y + Yd, mod.Find<ModTile>("CorruptDoorClosed").Type);
                             }
                             if (color == new Color(226, 109, 70))
                             {
-                                Main.tile[x + Xd, y + Yd].type = (ushort)mod.TileType("CorruptPlatform");
-                                Main.tile[x + Xd, y + Yd].active(true);
+                                Main.tile[x + Xd, y + Yd].TileType = (ushort)mod.Find<ModTile>("CorruptPlatform").Type;
+                                Main.tile[x + Xd, y + Yd].HasTile = true;
                                 WorldGen.SlopeTile(x + Xd, y + Yd, 2);
                             }
                             if (color == new Color(226, 109, 140))
                             {
-                                Main.tile[x + Xd, y + Yd].type = (ushort)mod.TileType("CorruptPlatform");
-                                Main.tile[x + Xd, y + Yd].active(true);
+                                Main.tile[x + Xd, y + Yd].TileType = (ushort)mod.Find<ModTile>("CorruptPlatform").Type;
+                                Main.tile[x + Xd, y + Yd].HasTile = true;
                                 WorldGen.SlopeTile(x + Xd, y + Yd, 1);
                             }
                             if (color == new Color(226, 109, 105))
                             {
-                                Main.tile[x + Xd, y + Yd].type = (ushort)mod.TileType("CorruptPlatform");
-                                Main.tile[x + Xd, y + Yd].active(true);
+                                Main.tile[x + Xd, y + Yd].TileType = (ushort)mod.Find<ModTile>("CorruptPlatform").Type;
+                                Main.tile[x + Xd, y + Yd].HasTile = true;
                             }
                             if (color == new Color(14, 37, 38))
                             {
-                                WorldGen.PlaceTile(x + Xd, y + Yd, mod.TileType("藻华"), false, true, -1, 0);
+                                WorldGen.PlaceTile(x + Xd, y + Yd, mod.Find<ModTile>("藻华").Type, false, true, -1, 0);
                             }
                             if (color == new Color(216, 18, 0))
                             {
-                                WorldGen.PlaceTile(x + Xd, y + Yd, mod.TileType("CorruptWoodChandelier"), false, true, -1, 0);
-                                Main.tile[x + Xd, y + Yd].frameX += 54;
-                                Main.tile[x + Xd, y + Yd + 1].frameX += 54;
-                                Main.tile[x + Xd, y + Yd + 2].frameX += 54;
-                                Main.tile[x + Xd + 1, y + Yd].frameX += 54;
-                                Main.tile[x + Xd + 1, y + Yd + 1].frameX += 54;
-                                Main.tile[x + Xd + 1, y + Yd + 2].frameX += 54;
-                                Main.tile[x + Xd - 1, y + Yd].frameX += 54;
-                                Main.tile[x + Xd - 1, y + Yd + 1].frameX += 54;
-                                Main.tile[x + Xd - 1, y + Yd + 2].frameX += 54;
+                                WorldGen.PlaceTile(x + Xd, y + Yd, mod.Find<ModTile>("CorruptWoodChandelier").Type, false, true, -1, 0);
+                                Main.tile[x + Xd, y + Yd].TileFrameX += 54;
+                                Main.tile[x + Xd, y + Yd + 1].TileFrameX += 54;
+                                Main.tile[x + Xd, y + Yd + 2].TileFrameX += 54;
+                                Main.tile[x + Xd + 1, y + Yd].TileFrameX += 54;
+                                Main.tile[x + Xd + 1, y + Yd + 1].TileFrameX += 54;
+                                Main.tile[x + Xd + 1, y + Yd + 2].TileFrameX += 54;
+                                Main.tile[x + Xd - 1, y + Yd].TileFrameX += 54;
+                                Main.tile[x + Xd - 1, y + Yd + 1].TileFrameX += 54;
+                                Main.tile[x + Xd - 1, y + Yd + 2].TileFrameX += 54;
                             }
                             if (color == new Color(216, 20, 0))
                             {
-                                WorldGen.PlaceTile(x + Xd, y + Yd, mod.TileType("CorruptWoodChair"), false, true, -1, 0);
-                                Main.tile[x + Xd, y + Yd].frameX = 18;
-                                Main.tile[x + Xd, y + Yd - 1].frameX = 18;
+                                WorldGen.PlaceTile(x + Xd, y + Yd, mod.Find<ModTile>("CorruptWoodChair").Type, false, true, -1, 0);
+                                Main.tile[x + Xd, y + Yd].TileFrameX = 18;
+                                Main.tile[x + Xd, y + Yd - 1].TileFrameX = 18;
                             }
                             if (color == new Color(216, 22, 0))
                             {
-                                WorldGen.PlaceTile(x + Xd, y + Yd, mod.TileType("CorruptWoodChair"), false, true, -1, 0);
+                                WorldGen.PlaceTile(x + Xd, y + Yd, mod.Find<ModTile>("CorruptWoodChair").Type, false, true, -1, 0);
                             }
                             if (color == new Color(216, 24, 0))
                             {
-                                WorldGen.PlaceTile(x + Xd, y + Yd, mod.TileType("CorruptWoodTable"), false, true, -1, 0);
+                                WorldGen.PlaceTile(x + Xd, y + Yd, mod.Find<ModTile>("CorruptWoodTable").Type, false, true, -1, 0);
                             }
                             if (color == new Color(216, 26, 0))
                             {
-                                WorldGen.PlaceTile(x + Xd, y + Yd, mod.TileType("CorruptWoodLamp"), false, true, -1, 0);
-                                Main.tile[x + Xd, y + Yd].frameX = 18;
-                                Main.tile[x + Xd, y + Yd - 1].frameX = 18;
-                                Main.tile[x + Xd, y + Yd - 2].frameX = 18;
+                                WorldGen.PlaceTile(x + Xd, y + Yd, mod.Find<ModTile>("CorruptWoodLamp").Type, false, true, -1, 0);
+                                Main.tile[x + Xd, y + Yd].TileFrameX = 18;
+                                Main.tile[x + Xd, y + Yd - 1].TileFrameX = 18;
+                                Main.tile[x + Xd, y + Yd - 2].TileFrameX = 18;
                             }
                             if (color == new Color(255, 148, 0))
                             {
-                                WorldGen.PlaceTile(x + Xd, y + Yd, mod.TileType("大橙色海星"), false, true, -1, 0);
+                                WorldGen.PlaceTile(x + Xd, y + Yd, mod.Find<ModTile>("大橙色海星").Type, false, true, -1, 0);
                             }
                             if (color == new Color(145, 176, 255))
                             {
-                                WorldGen.PlaceTile(x + Xd, y + Yd, mod.TileType("大蓝色海星"), false, true, -1, 0);
+                                WorldGen.PlaceTile(x + Xd, y + Yd, mod.Find<ModTile>("大蓝色海星").Type, false, true, -1, 0);
                             }
                             if (color == new Color(109, 83, 50))
                             {
@@ -4840,7 +4841,7 @@ namespace MythMod.UI.OceanWorld
                             }
                             if (color == new Color(95, 95, 95))
                             {
-                                WorldGen.PlaceTile(x + Xd, y + Yd, mod.TileType("CorruptWoodChest"), false, false, -1, 0);
+                                WorldGen.PlaceTile(x + Xd, y + Yd, mod.Find<ModTile>("CorruptWoodChest").Type, false, false, -1, 0);
                             }
                         }
                     }
@@ -4902,8 +4903,8 @@ namespace MythMod.UI.OceanWorld
                                 double strength = (double)WorldGen.genRand.Next(10, 20);
                                 int steps = WorldGen.genRand.Next(5, 10);
                                 Vector2 vector2 = WorldGen.digTunnel(vector4.X, vector4.Y, num5, num6, Steps, Size, false);
-                                WorldGen.TileRunner((int)vector2.X, (int)vector2.Y, strength + 2, steps, mod.TileType("Crystal"), false, 0f, 0f, false, true);
-                                WorldGen.TileRunner((int)vector2.X, (int)vector2.Y, strength - 2, steps, mod.TileType("Crystal2"), false, 0f, 0f, false, true);
+                                WorldGen.TileRunner((int)vector2.X, (int)vector2.Y, strength + 2, steps, mod.Find<ModTile>("Crystal").Type, false, 0f, 0f, false, true);
+                                WorldGen.TileRunner((int)vector2.X, (int)vector2.Y, strength - 2, steps, mod.Find<ModTile>("Crystal2").Type, false, 0f, 0f, false, true);
                             }
                         }
                     }
@@ -4911,10 +4912,10 @@ namespace MythMod.UI.OceanWorld
                     {
                         for (int j = (int)(Main.maxTilesY * 0.13f); j < (int)(Main.maxTilesY * 0.58f); j++)
                         {
-                            if (Main.tile[i, j].type == mod.TileType("Crystal2"))
+                            if (Main.tile[i, j].TileType == mod.Find<ModTile>("Crystal2").Type)
                             {
-                                Main.tile[i, j].wall = (ushort)mod.WallType("CrystalWall");
-                                Main.tile[i, j].active(false);
+                                Main.tile[i, j].WallType = (ushort)mod.Find<ModWall>("CrystalWall").Type;
+                                Main.tile[i, j].HasTile = false;
                             }
                         }
                     }
@@ -4993,7 +4994,7 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "正在令世界平坦…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     float m = (Main.maxTilesX - 40) / 50f;
                     for (int k = (int)(20 + m * (jindu - 900)); k < 20 + (m) * (jindu - 899); k++)
                     {
@@ -5001,7 +5002,7 @@ namespace MythMod.UI.OceanWorld
                         for (int l = 20; l < Main.maxTilesY - 20; l++)
                         {
                             //WorldGen.PoundTile(k, l);
-                            if (Main.tile[k, l].type != 322)
+                            if (Main.tile[k, l].TileType != 322)
                             {
                                 Tile.SmoothSlope(k, l, false);
                             }
@@ -5014,7 +5015,7 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "等待开始游戏…";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     Player localPlayer = Main.LocalPlayer;
                     Tile tile = Main.tile[(int)(localPlayer.Center.X / 16f), (int)(localPlayer.Center.Y / 16f)];
                     int num = (int)(localPlayer.Center.X / 16f);
@@ -5034,7 +5035,7 @@ namespace MythMod.UI.OceanWorld
                 {
                     string text0 = "我们开始吧！";
                     int Sscale = 3;
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, text0, shopx + 246 - text0.Length * Sscale, shopy + 180, Color.White, Color.Black, Vector2.Zero, Sscale);
                     OceanWorld.Open = false;
                     player.noFallDmg = false;
                 }

@@ -14,32 +14,32 @@ namespace MythMod.Items.Weapons.Weapon2
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("金乌");
-			Item.staff[base.item.type] = true;
+			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "金乌");
         }
         public override void SetDefaults()
         {
-            base.item.damage = 90;
-            base.item.mana = 17;
-            base.item.width = 46;
-            base.item.height = 46;
-            base.item.useTime = 36;
-            base.item.useAnimation = 36;
-            base.item.useStyle = 1;
-            base.item.noMelee = true;
-            base.item.knockBack = 2.25f;
-            base.item.value = 55000;
-            base.item.rare = 7;
-            base.item.UseSound = SoundID.Item44;
-            base.item.shoot = base.mod.ProjectileType("GoldBird");
-            base.item.autoReuse = true;
-            base.item.shootSpeed = 10f;
-            base.item.summon = true;
+            base.Item.damage = 90;
+            base.Item.mana = 17;
+            base.Item.width = 46;
+            base.Item.height = 46;
+            base.Item.useTime = 36;
+            base.Item.useAnimation = 36;
+            base.Item.useStyle = 1;
+            base.Item.noMelee = true;
+            base.Item.knockBack = 2.25f;
+            base.Item.value = 55000;
+            base.Item.rare = 7;
+            base.Item.UseSound = SoundID.Item44;
+            base.Item.shoot = base.Mod.Find<ModProjectile>("GoldBird").Type;
+            base.Item.autoReuse = true;
+            base.Item.shootSpeed = 10f;
+            base.Item.DamageType = DamageClass.Summon;
         }
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            player.AddBuff(mod.BuffType("GoldBird"), 3600, true);
-            float shootSpeed = base.item.shootSpeed;
+            player.AddBuff(Mod.Find<ModBuff>("GoldBird").Type, 3600, true);
+            float shootSpeed = base.Item.shootSpeed;
             Vector2 vector = player.RotatedRelativePoint(player.MountedCenter, true);
             float num = (float)Main.mouseX + Main.screenPosition.X - vector.X;
             float num2 = (float)Main.mouseY + Main.screenPosition.Y - vector.Y;
@@ -60,18 +60,17 @@ namespace MythMod.Items.Weapons.Weapon2
             num2 = 0f;
             vector.X = (float)Main.mouseX + Main.screenPosition.X;
             vector.Y = (float)Main.mouseY + Main.screenPosition.Y;
-            Projectile.NewProjectile(vector.X, vector.Y, num, num2, base.mod.ProjectileType("GoldBird"), damage, knockBack, player.whoAmI, 0f, 0f);
+            Projectile.NewProjectile(vector.X, vector.Y, num, num2, base.Mod.Find<ModProjectile>("GoldBird").Type, damage, knockBack, player.whoAmI, 0f, 0f);
             return false;
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(1518, 3);//火羽
-            recipe.AddIngredient(mod.ItemType("GoldBirdFeather"), 3);//手枪
-            recipe.AddIngredient(mod.ItemType("GoldFeather"), 3);//闪亮石
-            recipe.SetResult(this, 1);
+            recipe.AddIngredient(Mod.Find<ModItem>("GoldBirdFeather").Type, 3);//手枪
+            recipe.AddIngredient(Mod.Find<ModItem>("GoldFeather").Type, 3);//闪亮石
             recipe.requiredTile[0] = 134;
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

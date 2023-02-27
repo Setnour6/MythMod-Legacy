@@ -17,28 +17,28 @@ namespace MythMod.Projectiles
 		// Token: 0x06002BA1 RID: 11169 RVA: 0x00185D40 File Offset: 0x00183F40
 		public override void SetDefaults()
 		{
-			base.projectile.width = 3;
-			base.projectile.height = 3;
-			base.projectile.friendly = true;
-			base.projectile.magic = true;
-			base.projectile.penetrate = 4;
-			base.projectile.extraUpdates = 420;
-			base.projectile.timeLeft = 12000;
+			base.Projectile.width = 3;
+			base.Projectile.height = 3;
+			base.Projectile.friendly = true;
+			base.Projectile.DamageType = DamageClass.Magic;
+			base.Projectile.penetrate = 4;
+			base.Projectile.extraUpdates = 420;
+			base.Projectile.timeLeft = 12000;
 		}
 
 		// Token: 0x06002BA2 RID: 11170 RVA: 0x00229C74 File Offset: 0x00227E74
         public override void AI()
         {
-            if (base.projectile.timeLeft <= 10960)
+            if (base.Projectile.timeLeft <= 10960)
             {
-                base.projectile.localAI[0] += 1f;
-                if (base.projectile.localAI[0] > 25f)
+                base.Projectile.localAI[0] += 1f;
+                if (base.Projectile.localAI[0] > 25f)
                 {
                     for (int i = 0; i < 3; i++)
                     {
-                        Vector2 vector = base.projectile.position;
-                        vector -= base.projectile.velocity * ((float)i * 0.25f);
-                        base.projectile.alpha = 255;
+                        Vector2 vector = base.Projectile.position;
+                        vector -= base.Projectile.velocity * ((float)i * 0.25f);
+                        base.Projectile.alpha = 255;
                         int num = Dust.NewDust(vector, 5, 5, 240, 0f, 0f, 0, default(Color), 2.2f);
                         Main.dust[num].position = vector;
                         Main.dust[num].scale = (float)Main.rand.Next(100, 160) * 0.013f;
@@ -49,7 +49,7 @@ namespace MythMod.Projectiles
                         Main.dust[num1].scale = (float)Main.rand.Next(70, 110) * 0.013f;
                         Main.dust[num1].velocity *= 0.15f;
                         Main.dust[num1].noGravity = true;
-                        base.projectile.localAI[0] = 0f;
+                        base.Projectile.localAI[0] = 0f;
                     }
                 }
             }
@@ -59,11 +59,11 @@ namespace MythMod.Projectiles
         {
             for (int i = 0; i < 45; i++)
             {
-                int num = Dust.NewDust(base.projectile.position, base.projectile.width, base.projectile.height, 240, base.projectile.velocity.X * 0.999f, base.projectile.velocity.Y * 0.999f, 150, new Color(Main.DiscoR, 100, 255), 2.5f);
+                int num = Dust.NewDust(base.Projectile.position, base.Projectile.width, base.Projectile.height, 240, base.Projectile.velocity.X * 0.999f, base.Projectile.velocity.Y * 0.999f, 150, new Color(Main.DiscoR, 100, 255), 2.5f);
                 Main.dust[num].noGravity = true;
-                int num1 = Dust.NewDust(base.projectile.position, base.projectile.width, base.projectile.height, 259, base.projectile.velocity.X * 0.985f, base.projectile.velocity.Y * 0.985f, 150, default(Color), 1.2f);
+                int num1 = Dust.NewDust(base.Projectile.position, base.Projectile.width, base.Projectile.height, 259, base.Projectile.velocity.X * 0.985f, base.Projectile.velocity.Y * 0.985f, 150, default(Color), 1.2f);
                 Main.dust[num1].noGravity = true;
-                int num2 = Dust.NewDust(base.projectile.position, base.projectile.width, base.projectile.height, 262, (float)Math.Cos((2 * (float)i / 45) * 3.14159265358979f) * 7, (float)Math.Sin((2 * (float)i / 45) * 3.14159265358979f) * 7, 150, default(Color), 2.5f);
+                int num2 = Dust.NewDust(base.Projectile.position, base.Projectile.width, base.Projectile.height, 262, (float)Math.Cos((2 * (float)i / 45) * 3.14159265358979f) * 7, (float)Math.Sin((2 * (float)i / 45) * 3.14159265358979f) * 7, 150, default(Color), 2.5f);
                 Main.dust[num2].noGravity = true;
             }
         }
@@ -72,11 +72,11 @@ namespace MythMod.Projectiles
         {
             for (int i = 0; i < 45; i++)
             {
-                int num = Dust.NewDust(base.projectile.position, base.projectile.width, base.projectile.height, 240, base.projectile.velocity.X * 0.999f, base.projectile.velocity.Y * 0.999f, 150, new Color(Main.DiscoR, 100, 255), 2.5f);
+                int num = Dust.NewDust(base.Projectile.position, base.Projectile.width, base.Projectile.height, 240, base.Projectile.velocity.X * 0.999f, base.Projectile.velocity.Y * 0.999f, 150, new Color(Main.DiscoR, 100, 255), 2.5f);
                 Main.dust[num].noGravity = true;
-                int num1 = Dust.NewDust(base.projectile.position, base.projectile.width, base.projectile.height, 259, base.projectile.velocity.X * 0.985f, base.projectile.velocity.Y * 0.985f, 150, default(Color), 1.2f);
+                int num1 = Dust.NewDust(base.Projectile.position, base.Projectile.width, base.Projectile.height, 259, base.Projectile.velocity.X * 0.985f, base.Projectile.velocity.Y * 0.985f, 150, default(Color), 1.2f);
                 Main.dust[num1].noGravity = true;
-                int num2 = Dust.NewDust(base.projectile.position, base.projectile.width, base.projectile.height, 262, (float)Math.Cos((2 * (float)i / 45) * 3.14159265358979f) * 7, (float)Math.Sin((2 * (float)i / 45) * 3.14159265358979f) * 7, 150, default(Color), 2.5f);
+                int num2 = Dust.NewDust(base.Projectile.position, base.Projectile.width, base.Projectile.height, 262, (float)Math.Cos((2 * (float)i / 45) * 3.14159265358979f) * 7, (float)Math.Sin((2 * (float)i / 45) * 3.14159265358979f) * 7, 150, default(Color), 2.5f);
                 Main.dust[num2].noGravity = true;
             }
         }

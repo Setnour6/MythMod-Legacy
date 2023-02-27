@@ -23,12 +23,12 @@ namespace MythMod.Items.TreasureBag
 		}
 		public override void SetDefaults()
 		{
-            base.item.maxStack = 999;
-            base.item.consumable = true;
-            base.item.width = 24;
-            base.item.height = 24;
-            base.item.rare = 9;
-            base.item.expert = true;
+            base.Item.maxStack = 999;
+            base.Item.consumable = true;
+            base.Item.width = 24;
+            base.Item.height = 24;
+            base.Item.rare = 9;
+            base.Item.expert = true;
 		}
 		public override bool CanRightClick()
 		{
@@ -40,30 +40,30 @@ namespace MythMod.Items.TreasureBag
             switch (Main.rand.Next(1, 8))
             {
                 case 1:
-                    type = base.mod.ItemType("LanternYoyo");
+                    type = base.Mod.Find<ModItem>("LanternYoyo").Type;
                     break;
                 case 2:
-                    type = base.mod.ItemType("RedLanternGun");
+                    type = base.Mod.Find<ModItem>("RedLanternGun").Type;
                     break;
                 case 3:
-                    type = base.mod.ItemType("IlluminatedNight");
+                    type = base.Mod.Find<ModItem>("IlluminatedNight").Type;
                     break;
                 case 4:
-                    type = base.mod.ItemType("LanternHairpin");
+                    type = base.Mod.Find<ModItem>("LanternHairpin").Type;
                     break;
                 case 5:
-                    type = base.mod.ItemType("LampFire");
+                    type = base.Mod.Find<ModItem>("LampFire").Type;
                     break;
                 case 6:
-                    type = base.mod.ItemType("SpringFesWing");
+                    type = base.Mod.Find<ModItem>("SpringFesWing").Type;
                     break;
                 case 7:
-                    type = base.mod.ItemType("Wick");
+                    type = base.Mod.Find<ModItem>("Wick").Type;
                     break;
             }
             player.QuickSpawnItem(type, 1);
-            player.QuickSpawnItem(base.mod.ItemType("RedLantern"), 2);
-            player.QuickSpawnItem(base.mod.ItemType("LongRedLantern"), 2);
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("RedLantern").Type, 2);
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("LongRedLantern").Type, 2);
         }
     }
 }

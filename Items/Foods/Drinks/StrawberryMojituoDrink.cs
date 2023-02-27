@@ -17,29 +17,29 @@ namespace MythMod.Items.Foods.Drinks
 		}
 		public override void SetDefaults()
 		{
-			item.width = 18;
-            item.height = 38;
-            item.rare = 5;
-            item.value = 50000;
-            item.useTurn = true;
-			item.consumable = true;
-            item.maxStack = 30;
-            base.item.useAnimation = 17;
-            base.item.useTime = 17;
-            base.item.useStyle = 2;
-            base.item.UseSound = SoundID.Item3;
-            item.buffType = mod.BuffType("StrawberryMojituo");
-            item.buffTime = 14400;
+			Item.width = 18;
+            Item.height = 38;
+            Item.rare = 5;
+            Item.value = 50000;
+            Item.useTurn = true;
+			Item.consumable = true;
+            Item.maxStack = 30;
+            base.Item.useAnimation = 17;
+            base.Item.useTime = 17;
+            base.Item.useStyle = 2;
+            base.Item.UseSound = SoundID.Item3;
+            Item.buffType = Mod.Find<ModBuff>("StrawberryMojituo").Type;
+            Item.buffTime = 14400;
         }
         public override bool CanUseItem(Player player)
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
-            if (!player.HasBuff(mod.BuffType("StrawberryMojituo")))
+            if (!player.HasBuff(Mod.Find<ModBuff>("StrawberryMojituo").Type))
             {
-                player.AddBuff(base.mod.BuffType("StrawberryMojituo"), 14400, true);
-                item.stack--;
+                player.AddBuff(base.Mod.Find<ModBuff>("StrawberryMojituo").Type, 14400, true);
+                Item.stack--;
             }
-            return player.HasBuff(mod.BuffType("StrawberryMojituo"));
+            return player.HasBuff(Mod.Find<ModBuff>("StrawberryMojituo").Type);
         }
     }
 }

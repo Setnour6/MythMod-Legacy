@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class BlueHawaii : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("蓝色夏威夷");
             base.Description.SetDefault("生命回复增加5");

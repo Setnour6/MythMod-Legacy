@@ -1,6 +1,5 @@
 ﻿using MythMod.NPCs;
 using Terraria.GameContent.Generation;
-using Terraria.World.Generation;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -16,6 +15,7 @@ using Terraria.Graphics.Shaders;
 using Terraria.ModLoader.IO;
 using Terraria.GameContent.Achievements;
 using Terraria.Graphics.Shaders;
+using Terraria.WorldBuilding;
 
 namespace MythMod.Items
 {
@@ -34,19 +34,19 @@ namespace MythMod.Items
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            base.item.width = 30;
-            base.item.height = 24;
-            base.item.maxStack = 999;
-            base.item.value = Item.sellPrice(0, 4, 80, 00);
-            base.item.rare = 11;
-            base.item.autoReuse = true;
-            base.item.useAnimation = 15;
-            base.item.useTime = 10;
-            base.item.useStyle = 1;
-            base.item.consumable = true;
-            base.item.createTile = base.mod.TileType("Bars");
-            base.item.placeStyle = 1;
+            Item.glowMask = GetGlowMask;
+            base.Item.width = 30;
+            base.Item.height = 24;
+            base.Item.maxStack = 999;
+            base.Item.value = Item.sellPrice(0, 4, 80, 00);
+            base.Item.rare = 11;
+            base.Item.autoReuse = true;
+            base.Item.useAnimation = 15;
+            base.Item.useTime = 10;
+            base.Item.useStyle = 1;
+            base.Item.consumable = true;
+            base.Item.createTile = base.Mod.Find<ModTile>("Bars").Type;
+            base.Item.placeStyle = 1;
         }
     }
 }

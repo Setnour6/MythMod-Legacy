@@ -10,28 +10,28 @@ namespace MythMod.Items.Weapons.YoyoNoTheme
         public override void SetStaticDefaults()
         {
             DisplayName.AddTranslation(GameCulture.Chinese, "热带气旋");
-            ItemID.Sets.Yoyo[item.type] = true;
-            ItemID.Sets.GamepadExtraRange[item.type] = 15;
-            ItemID.Sets.GamepadSmartQuickReach[item.type] = true;
+            ItemID.Sets.Yoyo[Item.type] = true;
+            ItemID.Sets.GamepadExtraRange[Item.type] = 15;
+            ItemID.Sets.GamepadSmartQuickReach[Item.type] = true;
         }
         public override void SetDefaults()
         {
-            item.useStyle = 5;
-            item.width = 24;
-            item.height = 24;
-            item.noUseGraphic = true;
-            item.UseSound = SoundID.Item1;
-            item.melee = true;
-            item.channel = true;
-            item.shoot = mod.ProjectileType("Cyclone");
-            item.useAnimation = 5;
-            item.useTime = 14;
-            item.shootSpeed = 0f;
-            item.noMelee = true;
-            item.knockBack = 2.5f;
-            item.damage = 368;
-            item.value = Item.sellPrice(0, 10, 0, 0);
-            item.rare = 14;
+            Item.useStyle = 5;
+            Item.width = 24;
+            Item.height = 24;
+            Item.noUseGraphic = true;
+            Item.UseSound = SoundID.Item1;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.channel = true;
+            Item.shoot = Mod.Find<ModProjectile>("Cyclone").Type;
+            Item.useAnimation = 5;
+            Item.useTime = 14;
+            Item.shootSpeed = 0f;
+            Item.noMelee = true;
+            Item.knockBack = 2.5f;
+            Item.damage = 368;
+            Item.value = Item.sellPrice(0, 10, 0, 0);
+            Item.rare = 14;
         }
     }
 }

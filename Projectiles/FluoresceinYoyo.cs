@@ -15,22 +15,22 @@ namespace MythMod.Projectiles
 		// Token: 0x06003182 RID: 12674 RVA: 0x0000EF18 File Offset: 0x0000D118
 		public override void SetDefaults()
 		{
-			base.projectile.CloneDefaults(547);
-			base.projectile.width = 16;
-			base.projectile.height = 16;
-			base.projectile.scale = 1f;
-			base.projectile.alpha = 90;
-            ProjectileID.Sets.YoyosMaximumRange[projectile.type] = 420f;
+			base.Projectile.CloneDefaults(547);
+			base.Projectile.width = 16;
+			base.Projectile.height = 16;
+			base.Projectile.scale = 1f;
+			base.Projectile.alpha = 90;
+            ProjectileID.Sets.YoyosMaximumRange[Projectile.type] = 420f;
         }
 		// Token: 0x06002220 RID: 8736 RVA: 0x001B7C54 File Offset: 0x001B5E54
 		public override void AI()
 		{
-            ProjectileExtras.YoyoAI(base.projectile.whoAmI, 60f, 420f, 16f);
+            ProjectileExtras.YoyoAI(base.Projectile.whoAmI, 60f, 420f, 16f);
             X += 1;
             Vector2 V = new Vector2(0, 25).RotatedBy(Main.rand.Next(0,2000) / 1000f * Math.PI);
             if (X % 5 == 0)
             {
-                int num34 = Projectile.NewProjectile(base.projectile.Center.X, base.projectile.Center.Y, V.X, V.Y, base.mod.ProjectileType("FluoresceinYoyo2"), base.projectile.damage, 0.2f, Main.myPlayer, 0f, 0f);
+                int num34 = Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, V.X, V.Y, base.Mod.Find<ModProjectile>("FluoresceinYoyo2").Type, base.Projectile.damage, 0.2f, Main.myPlayer, 0f, 0f);
             }
         }
 		// Token: 0x06003183 RID: 12675 RVA: 0x001AA8C0 File Offset: 0x001A8AC0
@@ -44,9 +44,9 @@ namespace MythMod.Projectiles
 		{
 			return false;
 		}
-		public override void PostDraw(SpriteBatch spriteBatch, Color lightColor)
+		public override void PostDraw(Color lightColor)
         {
-            spriteBatch.Draw(base.mod.GetTexture("Projectiles/荧光素球_Glow"), base.projectile.Center - Main.screenPosition, null, Color.White * 0.7f, base.projectile.rotation, new Vector2(8f, 8f), 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(base.Mod.GetTexture("Projectiles/荧光素球_Glow"), base.Projectile.Center - Main.screenPosition, null, Color.White * 0.7f, base.Projectile.rotation, new Vector2(8f, 8f), 1f, SpriteEffects.None, 0f);
         }
 	}
 }

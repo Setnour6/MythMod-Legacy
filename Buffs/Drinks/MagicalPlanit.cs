@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class MagicalPlanit : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("魔幻星球");
             base.Description.SetDefault("伤害增加2%,闪避增加2%,暴击增加2%,生命回复增加2,防御增加4");

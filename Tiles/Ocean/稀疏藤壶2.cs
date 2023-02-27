@@ -10,7 +10,7 @@ namespace MythMod.Tiles.Ocean
 {
 	public class 稀疏藤壶2 : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[(int)base.Type] = true;
 			Main.tileLavaDeath[(int)base.Type] = true;
@@ -24,9 +24,9 @@ namespace MythMod.Tiles.Ocean
             TileObjectData.newTile.StyleHorizontal = true;
             TileObjectData.newTile.CoordinateWidth = 36;
             TileObjectData.addTile((int)base.Type);
-			this.dustType = 7;
-			this.disableSmartCursor = true;
-            this.drop = mod.ItemType("Barnacle");
+			this.DustType = 7;
+			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+            this.ItemDrop = Mod.Find<ModItem>("Barnacle").Type;
             ModTranslation modTranslation = base.CreateMapEntryName(null);
 			modTranslation.SetDefault("藤壶");
 			base.AddMapEntry(new Color(178, 178 ,138), modTranslation);
@@ -34,14 +34,14 @@ namespace MythMod.Tiles.Ocean
 		}
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			Item.NewItem(i * 16, j * 16, 48, 48, mod.ItemType("Barnacle"), 1, false, 0, false, false);
+			Item.NewItem(i * 16, j * 16, 48, 48, Mod.Find<ModItem>("Barnacle").Type, 1, false, 0, false, false);
 		}
         public override void PlaceInWorld(int i, int j, Item item)
         {
             int num = Main.rand.Next(0, 18) * 2;
             int num2 = Main.rand.Next(0, 18) * 2;
-            Main.tile[i, j].frameX = (short)num;
-            Main.tile[i, j].frameY = (short)num2;
+            Main.tile[i, j].TileFrameX = (short)num;
+            Main.tile[i, j].TileFrameY = (short)num2;
         }
     }
 }

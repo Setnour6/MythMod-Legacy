@@ -17,25 +17,25 @@ namespace MythMod.Items.Weapons
         }
         public override void SetDefaults()
         {
-            item.damage = 270;
-            item.melee = true;
-            item.width = 74;
-            item.height = 80;
-            item.useTime = 20;
-            item.rare = 8;
-            item.useAnimation = 20;
-            item.useStyle = 1;
-            item.knockBack = 5.0f ;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 4;
-            item.value = 27000;
-            item.scale = 1f;
+            Item.damage = 270;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 74;
+            Item.height = 80;
+            Item.useTime = 20;
+            Item.rare = 8;
+            Item.useAnimation = 20;
+            Item.useStyle = 1;
+            Item.knockBack = 5.0f ;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 4;
+            Item.value = 27000;
+            Item.scale = 1f;
         }
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {
             //Lighting.AddLight(new Vector2((float)hitbox.X, (float)hitbox.Y), 0 / 255f, 12 / 255f, 220 / 255f);
-            Dust.NewDust(new Vector2((float)hitbox.X, (float)hitbox.Y), hitbox.Width, hitbox.Height, mod.DustType("Aquamarine"), 0f, 0f, 0, default(Color), 1.8f);
+            Dust.NewDust(new Vector2((float)hitbox.X, (float)hitbox.Y), hitbox.Width, hitbox.Height, Mod.Find<ModDust>("Aquamarine").Type, 0f, 0f, 0, default(Color), 1.8f);
         }
     }
 }

@@ -15,30 +15,29 @@ namespace MythMod.Items.Weapons
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(null, "BoneLiquid", 8);
             recipe.AddIngredient(null, "BrokenTooth", 12);
             recipe.requiredTile[0] = 26;
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }
         public override void SetDefaults()
         {
 
-            item.damage = 42;
-            item.melee = true;
-            item.width = 40;
-            item.height = 48;
-            item.useTime = 22;
-            item.rare = 3;
-            item.useAnimation = 22;
-            item.useStyle = 1;
-            item.knockBack = 2;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = false;
-            item.crit = 4;
-            item.value = 3000;
-            item.scale = 1f;
+            Item.damage = 42;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 40;
+            Item.height = 48;
+            Item.useTime = 22;
+            Item.rare = 3;
+            Item.useAnimation = 22;
+            Item.useStyle = 1;
+            Item.knockBack = 2;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = false;
+            Item.crit = 4;
+            Item.value = 3000;
+            Item.scale = 1f;
         }
         private bool k = false;
         private bool m = true;
@@ -67,7 +66,7 @@ namespace MythMod.Items.Weapons
         {
             if(k && m && Main.rand.Next(5) == 0)
             {
-                int y = Projectile.NewProjectile(target.Center.X, target.Center.Y, 0, 0, base.mod.ProjectileType("ToothBlade"), damage, knockback, player.whoAmI, 0f, 0f);
+                int y = Projectile.NewProjectile(target.Center.X, target.Center.Y, 0, 0, base.Mod.Find<ModProjectile>("ToothBlade").Type, damage, knockback, player.whoAmI, 0f, 0f);
                 Main.projectile[y].spriteDirection = player.direction;
                 Main.projectile[y].rotation = Main.rand.NextFloat((float)MathHelper.Pi * -0.4f, (float)MathHelper.Pi * 0.5f);
                 k = false;

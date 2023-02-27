@@ -1,3 +1,4 @@
+﻿using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
@@ -13,33 +14,32 @@ namespace MythMod.Items.Weapons
         }
         public override void SetDefaults()
         {
-            item.damage = 18;
-            item.melee = true;
-            item.width = 40;
-            item.height = 40;
-            item.useTime = 42;
-            item.rare = 2;
-            item.useAnimation = 14;
-            item.useStyle = 1;
-            item.knockBack = 4;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 8;
-            item.value = 10000;
-            item.scale = 1f;
-            item.shoot = base.mod.ProjectileType("MagicTusk");
-            item.shootSpeed = 7f;
+            Item.damage = 18;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 40;
+            Item.height = 40;
+            Item.useTime = 42;
+            Item.rare = 2;
+            Item.useAnimation = 14;
+            Item.useStyle = 1;
+            Item.knockBack = 4;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 8;
+            Item.value = 10000;
+            Item.scale = 1f;
+            Item.shoot = base.Mod.Find<ModProjectile>("MagicTusk").Type;
+            Item.shootSpeed = 7f;
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(null, "BoneLiquid", 24);
             recipe.AddIngredient(989, 1); 
             recipe.requiredTile[0] = 16;
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Vector2 v = new Vector2(speedX, speedY);
             for (int k = -3; k < 3; k++)

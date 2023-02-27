@@ -11,7 +11,7 @@ namespace MythMod.Tiles.Volcano
 {
 	public class RedTreeSapling : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[Type] = true;
 			Main.tileNoAttach[Type] = true;
@@ -24,19 +24,19 @@ namespace MythMod.Tiles.Volcano
 			TileObjectData.newTile.CoordinateHeights = new int[]{ 16, 18 };
 			TileObjectData.newTile.CoordinateWidth = 16;
 			TileObjectData.newTile.CoordinatePadding = 2;
-			TileObjectData.newTile.AnchorValidTiles = new int[]{ mod.TileType("ShoreMud") };
+			TileObjectData.newTile.AnchorValidTiles = new int[]{ Mod.Find<ModTile>("ShoreMud").Type };
 			TileObjectData.newTile.StyleHorizontal = true;
 			TileObjectData.newTile.DrawFlipHorizontal = true;
 			TileObjectData.newTile.WaterPlacement = LiquidPlacement.Allowed;
 			TileObjectData.newTile.LavaDeath = true;
 			TileObjectData.newTile.RandomStyleRange = 3;
 			TileObjectData.addTile(Type);
-			sapling = true;
+			sapling/* tModPorter Note: Removed. Use TileID.Sets.TreeSapling and TileID.Sets.CommonSapling instead */ = true;
 			ModTranslation name = CreateMapEntryName();
 			name.SetDefault("Sapling");
 			AddMapEntry(new Color(68, 65, 48), name);
 			//dustType = mod.DustType("Sparkle");
-			adjTiles = new int[]{ TileID.Saplings };
+			AdjTiles = new int[]{ TileID.Saplings };
 		}
 
 		public override void NumDust(int i, int j, bool fail, ref int num)
@@ -61,7 +61,7 @@ namespace MythMod.Tiles.Volcano
                 bool success = WorldGen.GrowTree(i, j);
                 if (success && isPlayerNear)
                 {
-                    WorldGen.PlaceTile(i + Main.rand.Next(-5,6),j,mod.TileType("GasRoot"));
+                    WorldGen.PlaceTile(i + Main.rand.Next(-5,6),j,Mod.Find<ModTile>("GasRoot").Type);
                 }
             }
         }

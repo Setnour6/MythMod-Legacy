@@ -11,7 +11,7 @@ namespace MythMod.Tiles.玄武岩家具
 	public class 玄武岩浴缸 : ModTile
 	{
 		// Token: 0x0600413F RID: 16703 RVA: 0x0032ACC8 File Offset: 0x00328EC8
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileLighted[(int)base.Type] = true;
 			Main.tileFrameImportant[(int)base.Type] = true;
@@ -22,7 +22,7 @@ namespace MythMod.Tiles.玄武岩家具
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
 			modTranslation.SetDefault("玄武岩浴缸");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
-			this.animationFrameHeight = 54;
+			this.AnimationFrameHeight = 54;
 			modTranslation.AddTranslation(GameCulture.Chinese, "玄武岩浴缸");
 		}
 
@@ -42,7 +42,7 @@ namespace MythMod.Tiles.玄武岩家具
 		// Token: 0x06004142 RID: 16706 RVA: 0x0032ADB8 File Offset: 0x00328FB8
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("BasaltBathtub"), 1, false, 0, false, false);
+			Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("BasaltBathtub").Type, 1, false, 0, false, false);
 		}
 	}
 }

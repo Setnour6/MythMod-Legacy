@@ -20,21 +20,21 @@ namespace MythMod.Projectiles.Shields
         public override void SetStaticDefaults()
         {
             base.DisplayName.SetDefault("魔晶甲壳");
-            Main.projFrames[projectile.type] = 1;
+            Main.projFrames[Projectile.type] = 1;
         }
 
         public override void SetDefaults()
         {
-            base.projectile.width = 30;
-            base.projectile.height = 30;
-            base.projectile.friendly = false;
-            base.projectile.hostile = false;
-            base.projectile.ignoreWater = true;
-            base.projectile.penetrate = -1;
-            base.projectile.timeLeft = 2;
-            base.projectile.usesLocalNPCImmunity = true;
-            base.projectile.localNPCHitCooldown = 1;
-            base.projectile.tileCollide = false;
+            base.Projectile.width = 30;
+            base.Projectile.height = 30;
+            base.Projectile.friendly = false;
+            base.Projectile.hostile = false;
+            base.Projectile.ignoreWater = true;
+            base.Projectile.penetrate = -1;
+            base.Projectile.timeLeft = 2;
+            base.Projectile.usesLocalNPCImmunity = true;
+            base.Projectile.localNPCHitCooldown = 1;
+            base.Projectile.tileCollide = false;
         }
         private int D = 0;
         private int lazarCo = 0;
@@ -45,25 +45,25 @@ namespace MythMod.Projectiles.Shields
         {
             Player p = Main.player[Main.myPlayer];
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
-            projectile.frame = (int)((24 - projectile.timeLeft) / 2f);
+            Projectile.frame = (int)((24 - Projectile.timeLeft) / 2f);
             Vector2 v = Main.screenPosition + new Vector2(Main.mouseX, Main.mouseY) - p.Center;
             v = v / v.Length();
-            projectile.velocity = v * 15f;
-            projectile.position = p.Center + v - new Vector2(15, 15);
-            projectile.spriteDirection = p.direction;
-            base.projectile.rotation = (float)Math.Atan2((double)base.projectile.velocity.Y * p.direction, (double)base.projectile.velocity.X * p.direction) + (float)Math.PI / 4f * projectile.spriteDirection;
+            Projectile.velocity = v * 15f;
+            Projectile.position = p.Center + v - new Vector2(15, 15);
+            Projectile.spriteDirection = p.direction;
+            base.Projectile.rotation = (float)Math.Atan2((double)base.Projectile.velocity.Y * p.direction, (double)base.Projectile.velocity.X * p.direction) + (float)Math.PI / 4f * Projectile.spriteDirection;
             if(mplayer.SD2 > 0 && mplayer.SD == 5)
             {
-                base.projectile.timeLeft = 2;
+                base.Projectile.timeLeft = 2;
             }
-            p.ChangeDir(base.projectile.direction);
-            p.heldProj = base.projectile.whoAmI;
+            p.ChangeDir(base.Projectile.direction);
+            p.heldProj = base.Projectile.whoAmI;
             //p.direction = projectile.spriteDirection;
             for(int i = 0;i < 1000;i++)
             {
                 if(Main.projectile[i].hostile)
                 {
-                    if(Math.Abs(Math.Atan2((Main.projectile[i].Center - p.Center).X, (Main.projectile[i].Center - p.Center).Y) - Math.Atan2((projectile.Center - p.Center).X, (projectile.Center - p.Center).Y)) < 0.8)
+                    if(Math.Abs(Math.Atan2((Main.projectile[i].Center - p.Center).X, (Main.projectile[i].Center - p.Center).Y) - Math.Atan2((Projectile.Center - p.Center).X, (Projectile.Center - p.Center).Y)) < 0.8)
                     {
                         if ((Main.projectile[i].Center + Main.projectile[i].velocity - p.Center).Length() > 0 && (Main.projectile[i].Center + Main.projectile[i].velocity - p.Center).Length() <= 48)
                         {
@@ -76,7 +76,7 @@ namespace MythMod.Projectiles.Shields
             if(Main.mouseLeft && lazarCo == 0)
             {
                 lazarCo = 240;
-                int num = Projectile.NewProjectile(player.Center.X + projectile.velocity.X * 4f, player.Center.Y + projectile.velocity.Y * 4f, projectile.velocity.X, projectile.velocity.Y, mod.ProjectileType("OceanRay"), 150, 2, player.whoAmI, 0f, 0f);
+                int num = Projectile.NewProjectile(player.Center.X + Projectile.velocity.X * 4f, player.Center.Y + Projectile.velocity.Y * 4f, Projectile.velocity.X, Projectile.velocity.Y, Mod.Find<ModProjectile>("OceanRay").Type, 150, 2, player.whoAmI, 0f, 0f);
                 Main.projectile[num].hostile = false;
                 Main.projectile[num].friendly = true;
             }
@@ -89,14 +89,14 @@ namespace MythMod.Projectiles.Shields
                 lazarCo = 0;
             }
         }
-        public override void PostDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override void PostDraw(Color lightColor)
         {
             SpriteEffects effects = SpriteEffects.None;
-            if (projectile.spriteDirection == -1)
+            if (Projectile.spriteDirection == -1)
             {
                 effects = SpriteEffects.FlipHorizontally;
             }
-            spriteBatch.Draw(base.mod.GetTexture("Projectiles/Shields/OceanCrystalShieldGlow"), base.projectile.Center - Main.screenPosition, null, new Color((240 - lazarCo) / 240f, (240 - lazarCo) / 240f, (240 - lazarCo) / 240f, 0), projectile.rotation, new Vector2(15f, 15f), 1f, effects, 0f);
+            spriteBatch.Draw(base.Mod.GetTexture("Projectiles/Shields/OceanCrystalShieldGlow"), base.Projectile.Center - Main.screenPosition, null, new Color((240 - lazarCo) / 240f, (240 - lazarCo) / 240f, (240 - lazarCo) / 240f, 0), Projectile.rotation, new Vector2(15f, 15f), 1f, effects, 0f);
         }
     }
 }

@@ -16,22 +16,21 @@ namespace MythMod.Items.Gems
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 20;
-			base.item.height = 20;
-			base.item.maxStack = 1;
-			base.item.value = 0;
-			base.item.rare = 1;
+			base.Item.width = 20;
+			base.Item.height = 20;
+			base.Item.maxStack = 1;
+			base.Item.value = 0;
+			base.Item.rare = 1;
 		}
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(null, "Aquamarine", 15);
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }
         public override void UpdateInventory(Player player)
         {
-            ((MythPlayer)player.GetModPlayer(base.mod, "MythPlayer")).LargeAquamarine = true;
+            ((MythPlayer)player.GetModPlayer(base.Mod, "MythPlayer")).LargeAquamarine = true;
         }
     }
 }

@@ -14,39 +14,38 @@ namespace MythMod.Items.Weapons.Weapon2
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("血月棱镜");
-			Item.staff[base.item.type] = true;
+			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "血月棱镜");
         }
         public override void SetDefaults()
         {
-            base.item.damage = 70;
-			base.item.magic = true;
-			base.item.mana = 24;
-			base.item.width = 18;
-			base.item.height = 22;
-			base.item.useTime = 15;
-			base.item.useAnimation = 15;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.knockBack = 0.5f;
-			base.item.value = 12000;
-			base.item.rare = 3;
-			base.item.UseSound = SoundID.Item60;
-			base.item.autoReuse = true;
-            base.item.shoot = base.mod.ProjectileType("BloodMoonLight");
-			base.item.shootSpeed = 14f;
+            base.Item.damage = 70;
+			base.Item.DamageType = DamageClass.Magic;
+			base.Item.mana = 24;
+			base.Item.width = 18;
+			base.Item.height = 22;
+			base.Item.useTime = 15;
+			base.Item.useAnimation = 15;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 0.5f;
+			base.Item.value = 12000;
+			base.Item.rare = 3;
+			base.Item.UseSound = SoundID.Item60;
+			base.Item.autoReuse = true;
+            base.Item.shoot = base.Mod.Find<ModProjectile>("BloodMoonLight").Type;
+			base.Item.shootSpeed = 14f;
 		}
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(170, 50);
-            recipe.AddIngredient(mod.ItemType("BloodCryst"), 8);
-            recipe.AddIngredient(mod.ItemType("PureJelly"), 8);
-            recipe.SetResult(this, 1);
+            recipe.AddIngredient(Mod.Find<ModItem>("BloodCryst").Type, 8);
+            recipe.AddIngredient(Mod.Find<ModItem>("PureJelly").Type, 8);
             recipe.requiredTile[0] = 16;
-            recipe.AddRecipe();
+            recipe.Register();
         }
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Projectile.NewProjectile(position.X + speedX * 2f, position.Y + speedY * 2f, speedX, speedY, type, damage, knockBack, Main.myPlayer, 0f, 0f);
             return false;

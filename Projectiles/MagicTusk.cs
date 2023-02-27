@@ -22,21 +22,21 @@ namespace MythMod.Projectiles
         }
         public override void SetDefaults()
         {
-            base.projectile.width = 26;
-            base.projectile.height = 26;
-            base.projectile.aiStyle = 27;
-            base.projectile.friendly = true;
-            base.projectile.melee = true;
-            base.projectile.ignoreWater = true;
-            base.projectile.penetrate = 1;
-            base.projectile.extraUpdates = 1;
-            base.projectile.timeLeft = 600;
-            base.projectile.usesLocalNPCImmunity = true;
-            base.projectile.localNPCHitCooldown = 1;
+            base.Projectile.width = 26;
+            base.Projectile.height = 26;
+            base.Projectile.aiStyle = 27;
+            base.Projectile.friendly = true;
+            base.Projectile.DamageType = DamageClass.Melee;
+            base.Projectile.ignoreWater = true;
+            base.Projectile.penetrate = 1;
+            base.Projectile.extraUpdates = 1;
+            base.Projectile.timeLeft = 600;
+            base.Projectile.usesLocalNPCImmunity = true;
+            base.Projectile.localNPCHitCooldown = 1;
         }
         public override void AI()
         {
-            int num9 = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) - new Vector2(4, 4) - base.projectile.velocity * 6f, 0, 0, 90, 0f, 0f, 100, default(Color), 1.2f);
+            int num9 = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) - new Vector2(4, 4) - base.Projectile.velocity * 6f, 0, 0, 90, 0f, 0f, 100, default(Color), 1.2f);
             Main.dust[num9].noGravity = true;
             Main.dust[num9].velocity *= 0.0f;
         }
@@ -49,13 +49,13 @@ namespace MythMod.Projectiles
             for (int i = 0; i < 20; i++)
             {
                 Vector2 v = new Vector2(0, Main.rand.NextFloat(0, 2.5f)).RotatedByRandom(Math.PI * 2);
-                Dust.NewDust(projectile.Center, 2, 2, 90, v.X,v.Y, 0, default(Color), (float)projectile.scale * 1.2f);
+                Dust.NewDust(Projectile.Center, 2, 2, 90, v.X,v.Y, 0, default(Color), (float)Projectile.scale * 1.2f);
             }
             for (int y = 0; y < 4; y++)
             {
                 Vector2 v = new Vector2(0, Main.rand.NextFloat(200, 600)).RotatedByRandom(MathHelper.TwoPi);
                 Vector2 v2 = new Vector2(-v.X / 7500f, -v.Y / 7500f).RotatedBy(Main.rand.NextFloat(-0.05f, 0.05f));
-                Projectile.NewProjectile(projectile.Center.X + v.X, projectile.Center.Y + v.Y, v2.X, v2.Y, mod.ProjectileType("RedCrack2"), projectile.damage / 3, projectile.knockBack, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(Projectile.Center.X + v.X, Projectile.Center.Y + v.Y, v2.X, v2.Y, Mod.Find<ModProjectile>("RedCrack2").Type, Projectile.damage / 3, Projectile.knockBack, Main.myPlayer, 0f, 0f);
             }
         }
     }

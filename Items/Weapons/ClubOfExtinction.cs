@@ -1,4 +1,4 @@
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -28,24 +28,24 @@ namespace MythMod.Items.Weapons
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            item.damage = 1960000;
-            item.melee = true;
-            item.width = 106;
-            item.height = 106;
-            item.useTime = 1;
-            item.rare = 11;
-            item.noMelee = true;
-            item.noUseGraphic = true;
-            item.useAnimation = 4;
-            item.useStyle = 1;
-            item.knockBack = 30;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 10000;
-            item.value = 9000000;
-            item.shoot = mod.ProjectileType("ClubOfExtinction");
-            item.shootSpeed = 0;
+            Item.glowMask = GetGlowMask;
+            Item.damage = 1960000;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 106;
+            Item.height = 106;
+            Item.useTime = 1;
+            Item.rare = 11;
+            Item.noMelee = true;
+            Item.noUseGraphic = true;
+            Item.useAnimation = 4;
+            Item.useStyle = 1;
+            Item.knockBack = 30;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 10000;
+            Item.value = 9000000;
+            Item.shoot = Mod.Find<ModProjectile>("ClubOfExtinction").Type;
+            Item.shootSpeed = 0;
         }
         private bool St = false;
         public override void HoldItem(Player player)
@@ -55,7 +55,7 @@ namespace MythMod.Items.Weapons
                 St = false;
             }
         }
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             if (!St && Main.mouseLeft)
             {

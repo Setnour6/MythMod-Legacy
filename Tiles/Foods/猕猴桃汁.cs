@@ -10,7 +10,7 @@ namespace MythMod.Tiles.Foods
 {
 	public class 猕猴桃汁 : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileLighted[(int)base.Type] = true;
 			Main.tileFrameImportant[(int)base.Type] = true;
@@ -29,8 +29,8 @@ namespace MythMod.Tiles.Foods
 			modTranslation.SetDefault("猕猴桃汁");
             base.AddMapEntry(new Color(242, 141, 0), modTranslation);
             base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
-			this.disableSmartCursor = true;
-			this.adjTiles = new int[]
+			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+			this.AdjTiles = new int[]
 			{
 				4
 			};
@@ -39,8 +39,8 @@ namespace MythMod.Tiles.Foods
         public override void NearbyEffects(int i, int j, bool closer)
         {
             Player player = Main.player[Main.myPlayer];
-            player.AddBuff(mod.BuffType("鲜果I"), 20);
-            player.AddBuff(mod.BuffType("甜蜜I"), 20);
+            player.AddBuff(Mod.Find<ModBuff>("鲜果I").Type, 20);
+            player.AddBuff(Mod.Find<ModBuff>("甜蜜I").Type, 20);
         }
         public override bool CreateDust(int i, int j, ref int type)
 		{
@@ -53,7 +53,7 @@ namespace MythMod.Tiles.Foods
 		}
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("猕猴桃汁"));
+            Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("猕猴桃汁").Type);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace MythMod.Buffs
 {
     public class 冰爽II : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("冰爽II");
             base.Description.SetDefault("附近有解暑的东西,让你状态良好\n提升7%攻速");
@@ -18,7 +18,7 @@ namespace MythMod.Buffs
         }
         public override void Update(Player player, ref int buffIndex)
         {
-            player.meleeSpeed *= 1.07f; ;
+            player.GetAttackSpeed(DamageClass.Melee) *= 1.07f; ;
         }
 	}
 }

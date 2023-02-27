@@ -19,16 +19,16 @@ namespace MythMod.NPCs.Yasitaya
         }
         public override void SetDefaults()
         {
-            projectile.width = 1;
-            projectile.height = 1;
-            projectile.aiStyle = -1;
-            projectile.friendly = false;
-            projectile.hostile = false;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = false;
-            projectile.timeLeft = 480;
-            projectile.penetrate = -1;
-            projectile.scale = 1;
+            Projectile.width = 1;
+            Projectile.height = 1;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = false;
+            Projectile.hostile = false;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
+            Projectile.timeLeft = 480;
+            Projectile.penetrate = -1;
+            Projectile.scale = 1;
         }
         private bool initialization = true;
         private double X;
@@ -39,11 +39,11 @@ namespace MythMod.NPCs.Yasitaya
 
         public override void AI()
         {
-            WavCent = projectile.Bottom - Main.screenPosition;
+            WavCent = Projectile.Bottom - Main.screenPosition;
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
         {
-            WavCent = projectile.Bottom - Main.screenPosition;
+            WavCent = Projectile.Bottom - Main.screenPosition;
             return false;
         }
         public static Vector2 WavCent = new Vector2(0);

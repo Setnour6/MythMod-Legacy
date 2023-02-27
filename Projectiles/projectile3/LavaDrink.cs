@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -15,15 +17,15 @@ namespace MythMod.Projectiles.projectile3
         private float num = 0;
         public override void SetDefaults()
 		{
-			base.projectile.width = 36;
-			base.projectile.height = 36;
-			base.projectile.friendly = true;
-			base.projectile.alpha = 0;
-			base.projectile.penetrate = 1;
-			base.projectile.tileCollide = true;
-			base.projectile.timeLeft = 300;
-            base.projectile.thrown = true;
-            base.projectile.aiStyle = -1;
+			base.Projectile.width = 36;
+			base.Projectile.height = 36;
+			base.Projectile.friendly = true;
+			base.Projectile.alpha = 0;
+			base.Projectile.penetrate = 1;
+			base.Projectile.tileCollide = true;
+			base.Projectile.timeLeft = 300;
+            base.Projectile.DamageType = DamageClass.Throwing;
+            base.Projectile.aiStyle = -1;
 		}
         float timer = 0;
         static float j = 0;
@@ -33,28 +35,28 @@ namespace MythMod.Projectiles.projectile3
         Vector2 pc2 = Vector2.Zero;
         public override void AI()
         {
-            if(projectile.velocity.Length() < 15f)
+            if(Projectile.velocity.Length() < 15f)
             {
-                projectile.rotation += 0.15f;
+                Projectile.rotation += 0.15f;
             }
             else
             {
-                projectile.rotation = (float)(Math.Atan2(projectile.velocity.Y, projectile.velocity.X)) + (float)Math.PI * 0.25f;
+                Projectile.rotation = (float)(Math.Atan2(Projectile.velocity.Y, Projectile.velocity.X)) + (float)Math.PI * 0.25f;
             }
-            projectile.velocity *= 0.98f;
-            if (projectile.velocity.Y < 15f && !x)
+            Projectile.velocity *= 0.98f;
+            if (Projectile.velocity.Y < 15f && !x)
             {
-                projectile.velocity.Y += 0.2f;
+                Projectile.velocity.Y += 0.2f;
             }
-            int num = Dust.NewDust(projectile.Center - new Vector2(6,6) + new Vector2(0,-8).RotatedBy(projectile.rotation), 12, 12, mod.DustType("Flame2"), 0f, 0f, 0, default(Color), 3f);
+            int num = Dust.NewDust(Projectile.Center - new Vector2(6,6) + new Vector2(0,-8).RotatedBy(Projectile.rotation), 12, 12, Mod.Find<ModDust>("Flame2").Type, 0f, 0f, 0, default(Color), 3f);
             Main.dust[num].noGravity = false;
         }
         public override void Kill(int timeLeft)
         {
-            Main.PlaySound(2, (int)base.projectile.position.X, (int)base.projectile.position.Y, 27, 1f, 0f);
+            SoundEngine.PlaySound(SoundID.Item27, new Vector2(base.Projectile.position.X, base.Projectile.position.Y));
             for (int i = 0; i < 42; i++)
             {
-                int num = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, mod.DustType("Flame2"), 0f, 0f, 0, default(Color), 4f);
+                int num = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, Mod.Find<ModDust>("Flame2").Type, 0f, 0f, 0, default(Color), 4f);
                 Main.dust[num].noGravity = true;
             }
             for (int k = 0; k <= 10; k++)
@@ -62,14 +64,14 @@ namespace MythMod.Projectiles.projectile3
                 float a = (float)Main.rand.Next(0, 720) / 360 * 3.141592653589793238f;
                 float m = (float)Main.rand.Next(0, 50000);
                 float l = (float)Main.rand.Next((int)m, 50000) / 1800f;
-                int num4 = Projectile.NewProjectile(base.projectile.Center.X, base.projectile.Center.Y, (float)((float)l * Math.Cos((float)a)) * 0.36f, (float)((float)l * Math.Sin((float)a)) * 0.36f, base.mod.ProjectileType("火山溅射"), base.projectile.damage / 2, base.projectile.knockBack, base.projectile.owner, 0f, 0f);
+                int num4 = Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, (float)((float)l * Math.Cos((float)a)) * 0.36f, (float)((float)l * Math.Sin((float)a)) * 0.36f, base.Mod.Find<ModProjectile>("火山溅射").Type, base.Projectile.damage / 2, base.Projectile.knockBack, base.Projectile.owner, 0f, 0f);
                 Main.projectile[num4].scale = (float)Main.rand.Next(7000, 13000) / 10000f;
             }
             for (int i = 0; i < 200; i++)
             {
-                if ((Main.npc[i].Center - projectile.position).Length() < 150)
+                if ((Main.npc[i].Center - Projectile.position).Length() < 150)
                 {
-                    Main.npc[i].StrikeNPC((int)(projectile.damage / 6f * Main.rand.NextFloat(0.85f, 1.15f)), 0, 1);
+                    Main.npc[i].StrikeNPC((int)(Projectile.damage / 6f * Main.rand.NextFloat(0.85f, 1.15f)), 0, 1);
                     Main.npc[i].AddBuff(24, 600);
                 }
             }
@@ -78,9 +80,9 @@ namespace MythMod.Projectiles.projectile3
 		{
             target.AddBuff(24, 600); 
         }
-        public override void PostDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override void PostDraw(Color lightColor)
         {
-            spriteBatch.Draw(base.mod.GetTexture("Projectiles/projectile3/LavaDrinkGlow"), base.projectile.Center - Main.screenPosition, null, new Color(1f, 0.4f, 0.2f, 0), base.projectile.rotation, new Vector2(19f, 15f), 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(base.Mod.GetTexture("Projectiles/projectile3/LavaDrinkGlow"), base.Projectile.Center - Main.screenPosition, null, new Color(1f, 0.4f, 0.2f, 0), base.Projectile.rotation, new Vector2(19f, 15f), 1f, SpriteEffects.None, 0f);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace MythMod.NPCs.LanternMoon
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("剪纸蝙蝠");
-			Main.npcFrameCount[base.npc.type] = 5;
+			Main.npcFrameCount[base.NPC.type] = 5;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "剪纸蝙蝠");
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -24,31 +24,31 @@ namespace MythMod.NPCs.LanternMoon
 		// Token: 0x06001B18 RID: 6936 RVA: 0x0014B828 File Offset: 0x00149A28
 		public override void SetDefaults()
 		{
-			base.npc.aiStyle = 14;
-			base.npc.damage = 90;
-			base.npc.width = 44;
-			base.npc.height = 32;
-			base.npc.defense = 5;
-			base.npc.lifeMax = 70;
-			base.npc.knockBackResist = 0.8f;
-			this.animationType = 121;
-			base.npc.lavaImmune = false;
-			base.npc.noGravity = false;
-			base.npc.noTileCollide = false;
-			base.npc.HitSound = SoundID.NPCHit1;
-			base.npc.DeathSound = SoundID.NPCDeath1;
-			base.npc.buffImmune[24] = true;
-            base.npc.value = 2000;
-            this.banner = base.npc.type;
-            this.bannerItem = base.mod.ItemType("PaperBatBanner");
+			base.NPC.aiStyle = 14;
+			base.NPC.damage = 90;
+			base.NPC.width = 44;
+			base.NPC.height = 32;
+			base.NPC.defense = 5;
+			base.NPC.lifeMax = 70;
+			base.NPC.knockBackResist = 0.8f;
+			this.AnimationType = 121;
+			base.NPC.lavaImmune = false;
+			base.NPC.noGravity = false;
+			base.NPC.noTileCollide = false;
+			base.NPC.HitSound = SoundID.NPCHit1;
+			base.NPC.DeathSound = SoundID.NPCDeath1;
+			base.NPC.buffImmune[24] = true;
+            base.NPC.value = 2000;
+            this.Banner = base.NPC.type;
+            this.BannerItem = base.Mod.Find<ModItem>("PaperBatBanner").Type;
         }
 
 		// Token: 0x06001B19 RID: 6937 RVA: 0x0014B900 File Offset: 0x00149B00
 		public override void AI()
 		{
 			float num = 1.0025f;
-			NPC npc = base.npc;
-			NPC npc2 = base.npc;
+			NPC npc = base.NPC;
+			NPC npc2 = base.NPC;
 			if(Math.Abs(npc.velocity.X) <= 1.5f)
 			{
 				npc.velocity.X = npc.velocity.X * num;
@@ -73,7 +73,7 @@ namespace MythMod.NPCs.LanternMoon
         }
 
 		// Token: 0x06001B1A RID: 6938 RVA: 0x000037AF File Offset: 0x000019AF
-		public override bool PreNPCLoot()
+		public override bool PreKill()
 		{
 			return false;
 		}
@@ -82,10 +82,10 @@ namespace MythMod.NPCs.LanternMoon
 		public override void HitEffect(int hitDirection, double damage)
 		{
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
-            if (base.npc.life <= 0)
+            if (base.NPC.life <= 0)
 			{
                 float scaleFactor = (float)(Main.rand.Next(-200, 200) / 100);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/剪纸蝙蝠碎块"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/剪纸蝙蝠碎块"), 1f);
                 if (mplayer.LanternMoonWave != 15)
                 {
                     if (Main.expertMode)

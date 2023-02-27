@@ -20,15 +20,15 @@ namespace MythMod.Items.Armors
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 18;
-			base.item.height = 18;
-			base.item.value = Item.buyPrice(0, 0, 0, 0);
-			base.item.rare = 7;
-			base.item.defense = 23;
+			base.Item.width = 18;
+			base.Item.height = 18;
+			base.Item.value = Item.buyPrice(0, 0, 0, 0);
+			base.Item.rare = 7;
+			base.Item.defense = 23;
 		}
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
-            return body.type == base.mod.ItemType("OK的胸甲") && legs.type == base.mod.ItemType("OK的腿甲");
+            return body.type == base.Mod.Find<ModItem>("OK的胸甲").Type && legs.type == base.Mod.Find<ModItem>("OK的腿甲").Type;
         }
         public override void ArmorSetShadows(Player player)
         {

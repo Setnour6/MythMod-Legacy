@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace MythMod.Projectiles
@@ -17,39 +19,39 @@ namespace MythMod.Projectiles
 		// Token: 0x060020B4 RID: 8372 RVA: 0x001A5BBC File Offset: 0x001A3DBC
 		public override void SetDefaults()
 		{
-			base.projectile.width = 10;
-			base.projectile.height = 20;
-			base.projectile.hostile = true;
-			base.projectile.alpha = 250;
-			base.projectile.aiStyle = 1;
-			base.projectile.penetrate = -1;
+			base.Projectile.width = 10;
+			base.Projectile.height = 20;
+			base.Projectile.hostile = true;
+			base.Projectile.alpha = 250;
+			base.Projectile.aiStyle = 1;
+			base.Projectile.penetrate = -1;
 		}
 
 		// Token: 0x060020B5 RID: 8373 RVA: 0x001A5C18 File Offset: 0x001A3E18
 		public override void AI()
 		{
-			projectile.rotation = (float)System.Math.Atan2((double)projectile.velocity.Y,(double)projectile.velocity.X) + 1.57f;
-            if (projectile.timeLeft % 3 == 0)
+			Projectile.rotation = (float)System.Math.Atan2((double)Projectile.velocity.Y,(double)Projectile.velocity.X) + 1.57f;
+            if (Projectile.timeLeft % 3 == 0)
             {
-                int dustID = Dust.NewDust(projectile.position, projectile.width, projectile.height, 19, projectile.velocity.X * 0.1f, projectile.velocity.Y * 0.1f, 201, Color.Orange, 1.2f);/*粉尘效果不用管*/
-                int dustID2 = Dust.NewDust(projectile.position, projectile.width, projectile.height, 6, projectile.velocity.X * 0.1f, projectile.velocity.Y * 0.1f, 201, Color.Black, 1.8f);/*粉尘效果不用管*/
+                int dustID = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, 19, Projectile.velocity.X * 0.1f, Projectile.velocity.Y * 0.1f, 201, Color.Orange, 1.2f);/*粉尘效果不用管*/
+                int dustID2 = Dust.NewDust(Projectile.position, Projectile.width, Projectile.height, 6, Projectile.velocity.X * 0.1f, Projectile.velocity.Y * 0.1f, 201, Color.Black, 1.8f);/*粉尘效果不用管*/
                 Main.dust[dustID].noGravity = true;
             }
-			base.projectile.alpha -= 50;
-			if (base.projectile.alpha < 0)
+			base.Projectile.alpha -= 50;
+			if (base.Projectile.alpha < 0)
 			{
-				base.projectile.alpha = 0;
+				base.Projectile.alpha = 0;
 			}
-			if (base.projectile.ai[1] == 0f)
+			if (base.Projectile.ai[1] == 0f)
 			{
-				base.projectile.ai[1] = 1f;
-				Main.PlaySound(2, (int)base.projectile.position.X, (int)base.projectile.position.Y, 17, 1f, 0f);
+				base.Projectile.ai[1] = 1f;
+				SoundEngine.PlaySound(SoundID.Item17, new Vector2(base.Projectile.position.X, base.Projectile.position.Y));
 			}
-			base.projectile.ai[0] += 1f;
-			if (base.projectile.ai[0] >= 5f)
+			base.Projectile.ai[0] += 1f;
+			if (base.Projectile.ai[0] >= 5f)
 			{
-				base.projectile.ai[0] = 5f;
-				base.projectile.velocity.Y = base.projectile.velocity.Y + 0.15f;
+				base.Projectile.ai[0] = 5f;
+				base.Projectile.velocity.Y = base.Projectile.velocity.Y + 0.15f;
 			}
 		}
 
@@ -64,7 +66,7 @@ namespace MythMod.Projectiles
 		{
 			for (int i = 0; i < 5; i++)
 			{
-				Dust.NewDust(base.projectile.position + base.projectile.velocity, base.projectile.width, base.projectile.height, 260, base.projectile.oldVelocity.X * 0.5f, base.projectile.oldVelocity.Y * 0.5f, 0, default(Color), 1f);
+				Dust.NewDust(base.Projectile.position + base.Projectile.velocity, base.Projectile.width, base.Projectile.height, 260, base.Projectile.oldVelocity.X * 0.5f, base.Projectile.oldVelocity.Y * 0.5f, 0, default(Color), 1f);
 			}
 		}
 	}

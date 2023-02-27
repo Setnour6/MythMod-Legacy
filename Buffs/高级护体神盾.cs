@@ -9,7 +9,7 @@ namespace MythMod.Buffs
     public class 高级护体神盾 : ModBuff
 	{
 		// Token: 0x060000B3 RID: 179 RVA: 0x0002DB34 File Offset: 0x0002BD34
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("高级护体神盾");
             base.Description.SetDefault("你铜皮铁骨");

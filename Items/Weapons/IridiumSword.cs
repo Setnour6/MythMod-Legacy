@@ -2,35 +2,35 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria;
-namespace MythMod.Items.Weapons//制作是mod名字
+namespace MythMod.Items.Weapons//ÖÆ×÷ÊÇmodÃû×Ö
 {
     public class IridiumSword : ModItem
     {
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("黑芒破空");//教程 是物品介绍
+            Tooltip.SetDefault("ºÚÃ¢ÆÆ¿Õ");//½Ì³Ì ÊÇÎïÆ·½éÉÜ
         }
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetDefaults()
         {
 
-            item.damage = 541;//伤害
-            item.melee = true;//是否是近战
-            item.width = 20;//宽
-            item.height = 20;//高
-            item.useTime = 24;//使用时挥动间隔时间
-            item.rare = 9;//品质
-            item.useAnimation = 24;//挥动时动作持续时间
-            item.useStyle = 1;//使用动画，这里是挥动
-            item.knockBack = 12;//击退
-            item.UseSound = SoundID.Item1;//挥动声音
-            item.autoReuse = true;//能否持续挥动
-            item.crit = 25;//暴击
-            item.shoot = mod.ProjectileType("铱金剑剑气");
-            item.shootSpeed = 10f;
-            item.value = 14000000;//价值，1表示一铜币，这里是100铂金币
-            item.scale = 1f;//大小
+            Item.damage = 541;//ÉËº¦
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;//ÊÇ·ñÊÇ½üÕ½
+            Item.width = 20;//¿í
+            Item.height = 20;//¸ß
+            Item.useTime = 24;//Ê¹ÓÃÊ±»Ó¶¯¼ä¸ôÊ±¼ä
+            Item.rare = 9;//Æ·ÖÊ
+            Item.useAnimation = 24;//»Ó¶¯Ê±¶¯×÷³ÖÐøÊ±¼ä
+            Item.useStyle = 1;//Ê¹ÓÃ¶¯»­£¬ÕâÀïÊÇ»Ó¶¯
+            Item.knockBack = 12;//»÷ÍË
+            Item.UseSound = SoundID.Item1;//»Ó¶¯ÉùÒô
+            Item.autoReuse = true;//ÄÜ·ñ³ÖÐø»Ó¶¯
+            Item.crit = 25;//±©»÷
+            Item.shoot = Mod.Find<ModProjectile>("Ò¿½ð½£½£Æø").Type;
+            Item.shootSpeed = 10f;
+            Item.value = 14000000;//¼ÛÖµ£¬1±íÊ¾Ò»Í­±Ò£¬ÕâÀïÊÇ100²¬½ð±Ò
+            Item.scale = 1f;//´óÐ¡
 
         }
     }

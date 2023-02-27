@@ -1,9 +1,10 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ModLoader;
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
@@ -20,49 +21,49 @@ namespace MythMod.Projectiles.projectile3
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("爆炸鞭炮");
-            Main.projFrames[base.projectile.type] = 5;
+            Main.projFrames[base.Projectile.type] = 5;
         }
         public override void SetDefaults()
         {
-            projectile.width = 32;
-            projectile.height = 32;
-            projectile.aiStyle = -1;
-            projectile.hostile = true;
-            projectile.friendly = false;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = false;
-            projectile.timeLeft = 44;
-            projectile.penetrate = -1;
-            projectile.scale = 1f;
-            projectile.extraUpdates = 2;
+            Projectile.width = 32;
+            Projectile.height = 32;
+            Projectile.aiStyle = -1;
+            Projectile.hostile = true;
+            Projectile.friendly = false;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
+            Projectile.timeLeft = 44;
+            Projectile.penetrate = -1;
+            Projectile.scale = 1f;
+            Projectile.extraUpdates = 2;
         }
         public override Color? GetAlpha(Color lightColor)
 		{
-            if(projectile.timeLeft > 20)
+            if(Projectile.timeLeft > 20)
             {
                 return new Color?(new Color(255, 255, 255, 0));
             }
             else
             {
-                return new Color?(new Color(1 * projectile.timeLeft / 20f, 1 * projectile.timeLeft / 20f, 1 * projectile.timeLeft / 20f, 0));
+                return new Color?(new Color(1 * Projectile.timeLeft / 20f, 1 * Projectile.timeLeft / 20f, 1 * Projectile.timeLeft / 20f, 0));
             }
         }
         private bool initialization = true;
         private float b;
         public override void AI()
         {
-            base.projectile.frame = (int)(4 - (projectile.timeLeft / 10));
-            if (projectile.timeLeft > 120)
+            base.Projectile.frame = (int)(4 - (Projectile.timeLeft / 10));
+            if (Projectile.timeLeft > 120)
             {
-                Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 2f / 255f * projectile.scale, (float)(255 - base.projectile.alpha) * 2f * projectile.scale / 255f, (float)(255 - base.projectile.alpha) * 2f / 255f * projectile.scale);
+                Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 2f / 255f * Projectile.scale, (float)(255 - base.Projectile.alpha) * 2f * Projectile.scale / 255f, (float)(255 - base.Projectile.alpha) * 2f / 255f * Projectile.scale);
             }
             else
             {
-                Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 2f / 255f * projectile.scale * projectile.timeLeft / 120f, (float)(255 - base.projectile.alpha) * 2f * projectile.scale / 255f * projectile.timeLeft / 120f, (float)(255 - base.projectile.alpha) * 2f / 255f * projectile.scale * projectile.timeLeft / 120f);
+                Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 2f / 255f * Projectile.scale * Projectile.timeLeft / 120f, (float)(255 - base.Projectile.alpha) * 2f * Projectile.scale / 255f * Projectile.timeLeft / 120f, (float)(255 - base.Projectile.alpha) * 2f / 255f * Projectile.scale * Projectile.timeLeft / 120f);
             }
-            if (projectile.timeLeft == 40)
+            if (Projectile.timeLeft == 40)
             {
-                Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Item, "Sounds/Item/鞭炮"), (int)projectile.Center.X, (int)projectile.Center.Y);
+                SoundEngine.PlaySound(Mod.GetLegacySoundSlot(SoundType.Item, "Sounds/Item/鞭炮"), (int)Projectile.Center.X, (int)Projectile.Center.Y);
             }
         }
         public override void Kill(int timeLeft)

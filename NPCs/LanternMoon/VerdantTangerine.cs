@@ -14,7 +14,7 @@ namespace MythMod.NPCs.LanternMoon
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("青翠年桔木");
-			Main.npcFrameCount[base.npc.type] = 4;
+			Main.npcFrameCount[base.NPC.type] = 4;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "青翠年桔木");
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -23,20 +23,20 @@ namespace MythMod.NPCs.LanternMoon
 		}
 		public override void SetDefaults()
 		{
-			base.npc.aiStyle = -1;
-			base.npc.damage = 100;
-			base.npc.width = 182;
-			base.npc.height = 262;
-			base.npc.defense = 150;
-			base.npc.lifeMax = 10000;
-			base.npc.knockBackResist = 0;
-			base.npc.lavaImmune = false;
-			base.npc.noGravity = true;
-			base.npc.noTileCollide = true;
-			base.npc.HitSound = SoundID.NPCHit1;
-			base.npc.DeathSound = SoundID.NPCDeath1;
-			base.npc.buffImmune[24] = true;
-            base.npc.value = 20000;
+			base.NPC.aiStyle = -1;
+			base.NPC.damage = 100;
+			base.NPC.width = 182;
+			base.NPC.height = 262;
+			base.NPC.defense = 150;
+			base.NPC.lifeMax = 10000;
+			base.NPC.knockBackResist = 0;
+			base.NPC.lavaImmune = false;
+			base.NPC.noGravity = true;
+			base.NPC.noTileCollide = true;
+			base.NPC.HitSound = SoundID.NPCHit1;
+			base.NPC.DeathSound = SoundID.NPCDeath1;
+			base.NPC.buffImmune[24] = true;
+            base.NPC.value = 20000;
         }
         private int y = 0;
         private int U = 0;
@@ -48,31 +48,31 @@ namespace MythMod.NPCs.LanternMoon
             if(X == 0)
             {
                 X = Main.rand.Next(200, 500);
-                npc.localAI[0] = 0;
+                NPC.localAI[0] = 0;
             }
-            npc.localAI[0] += 1;
-            if (Math.Abs(npc.velocity.X) > 0.05f)
+            NPC.localAI[0] += 1;
+            if (Math.Abs(NPC.velocity.X) > 0.05f)
             {
                 if(y % 40 < 10)
                 {
-                    npc.frame.Y = 0;
+                    NPC.frame.Y = 0;
                 }
                 if (y % 40 >= 10 && y % 40 < 20)
                 {
-                    npc.frame.Y = 262;
+                    NPC.frame.Y = 262;
                 }
                 if (y % 40 >= 20 && y % 40 < 30)
                 {
-                    npc.frame.Y = 524;
+                    NPC.frame.Y = 524;
                 }
                 if (y % 40 >= 30 && y % 40 < 40)
                 {
-                    npc.frame.Y = 786;
+                    NPC.frame.Y = 786;
                 }
             }
             else
             {
-                npc.frame.Y = 0;
+                NPC.frame.Y = 0;
             }
             if (y % 60 < 15)
             {
@@ -90,83 +90,83 @@ namespace MythMod.NPCs.LanternMoon
             {
                 U = 768;
             }
-            if(npc.collideX && npc.collideY && (player.Center - npc.Center).Length() > 300f)
+            if(NPC.collideX && NPC.collideY && (player.Center - NPC.Center).Length() > 300f)
             {
-                npc.noGravity = true;
-                npc.noTileCollide = true;
-                if(npc.velocity.Length() < 8)
+                NPC.noGravity = true;
+                NPC.noTileCollide = true;
+                if(NPC.velocity.Length() < 8)
                 {
-                    npc.velocity += (player.Center - npc.Center) / (player.Center - npc.Center).Length() * 0.25f;
+                    NPC.velocity += (player.Center - NPC.Center) / (player.Center - NPC.Center).Length() * 0.25f;
                 }
-                npc.velocity *= 0.96f;
+                NPC.velocity *= 0.96f;
             }
             else
             {
-                if (Math.Abs(npc.Center.X - player.Center.X) > X)
+                if (Math.Abs(NPC.Center.X - player.Center.X) > X)
                 {
-                    npc.velocity.X += (player.Center.X - npc.Center.X) / Math.Abs(npc.Center.X - player.Center.X) * 0.3f;
+                    NPC.velocity.X += (player.Center.X - NPC.Center.X) / Math.Abs(NPC.Center.X - player.Center.X) * 0.3f;
                 }
-                if (Math.Abs(npc.Center.X - player.Center.X) > X && base.npc.collideX && npc.velocity.Y >= -4f && Math.Abs(npc.velocity.X) <= 8)
+                if (Math.Abs(NPC.Center.X - player.Center.X) > X && base.NPC.collideX && NPC.velocity.Y >= -4f && Math.Abs(NPC.velocity.X) <= 8)
                 {
-                    npc.velocity.Y -= 3f;
-                    npc.velocity.X += (player.Center.X - npc.Center.X) / Math.Abs(npc.Center.X - player.Center.X) * 2f;
+                    NPC.velocity.Y -= 3f;
+                    NPC.velocity.X += (player.Center.X - NPC.Center.X) / Math.Abs(NPC.Center.X - player.Center.X) * 2f;
                 }
-                if (Math.Abs(npc.velocity.Y) <= 0.3f && Math.Abs(npc.velocity.X) <= 8f && npc.velocity.Y != 0)
+                if (Math.Abs(NPC.velocity.Y) <= 0.3f && Math.Abs(NPC.velocity.X) <= 8f && NPC.velocity.Y != 0)
                 {
-                    npc.velocity.X += (player.Center.X - npc.Center.X) / Math.Abs(npc.Center.X - player.Center.X) * 0.5f;
+                    NPC.velocity.X += (player.Center.X - NPC.Center.X) / Math.Abs(NPC.Center.X - player.Center.X) * 0.5f;
                 }
-                if (Math.Abs(npc.Center.X - player.Center.X) <= X)
+                if (Math.Abs(NPC.Center.X - player.Center.X) <= X)
                 {
-                    npc.velocity.X *= 0.95f;
+                    NPC.velocity.X *= 0.95f;
                 }
-                if (npc.Center.Y - player.Center.Y > -50 && npc.velocity.Y > -6f && npc.noGravity)
+                if (NPC.Center.Y - player.Center.Y > -50 && NPC.velocity.Y > -6f && NPC.noGravity)
                 {
-                    npc.velocity.Y -= 0.15f;
+                    NPC.velocity.Y -= 0.15f;
                 }
-                if (npc.Center.Y - player.Center.Y <= -50)
+                if (NPC.Center.Y - player.Center.Y <= -50)
                 {
-                    npc.velocity.Y += 0.15f;
+                    NPC.velocity.Y += 0.15f;
                 }
-                if (npc.Center.Y > player.Center.Y - 50f || !npc.collideX)
+                if (NPC.Center.Y > player.Center.Y - 50f || !NPC.collideX)
                 {
-                    npc.noGravity = false;
-                    npc.noTileCollide = false;
+                    NPC.noGravity = false;
+                    NPC.noTileCollide = false;
                 }
                 else
                 {
-                    npc.noTileCollide = true;
-                    npc.noGravity = true;
+                    NPC.noTileCollide = true;
+                    NPC.noGravity = true;
                 }
                 if (Main.dayTime)
                 {
-                    npc.noTileCollide = true;
-                    npc.velocity.Y += 1;
+                    NPC.noTileCollide = true;
+                    NPC.velocity.Y += 1;
                 }
             }
             
-            if((player.Center - npc.Center).Length() < 500)
+            if((player.Center - NPC.Center).Length() < 500)
             {
-                if (npc.localAI[0] % 900 < 300 && npc.localAI[0] % 80 == 0)
+                if (NPC.localAI[0] % 900 < 300 && NPC.localAI[0] % 80 == 0)
                 {
-                    Projectile.NewProjectile(npc.Center.X - 13f, npc.Center.Y + 24f, (player.Center.X - npc.Center.X + 13f) / 10f + Main.rand.Next(-2000, 2000) / 1000f, (player.Center.Y - npc.Center.Y - 24f) / 9f + Main.rand.Next(1800, 2400) / 200f, mod.ProjectileType("GreenFlame"), 100, 0f, Main.myPlayer, 0f, 0f);
+                    Projectile.NewProjectile(NPC.Center.X - 13f, NPC.Center.Y + 24f, (player.Center.X - NPC.Center.X + 13f) / 10f + Main.rand.Next(-2000, 2000) / 1000f, (player.Center.Y - NPC.Center.Y - 24f) / 9f + Main.rand.Next(1800, 2400) / 200f, Mod.Find<ModProjectile>("GreenFlame").Type, 100, 0f, Main.myPlayer, 0f, 0f);
                 }
-                if (npc.localAI[0] % 900 < 300 && npc.localAI[0] % 80 == 40)
+                if (NPC.localAI[0] % 900 < 300 && NPC.localAI[0] % 80 == 40)
                 {
-                    Projectile.NewProjectile(npc.Center.X + 13f, npc.Center.Y + 24f, (player.Center.X - npc.Center.X - 13f) / 10f + Main.rand.Next(-2000, 2000) / 1000f, (player.Center.Y - npc.Center.Y - 24f) / 9f + Main.rand.Next(1800, 2400) / 200f, mod.ProjectileType("GreenFlame"), 100, 0f, Main.myPlayer, 0f, 0f);
+                    Projectile.NewProjectile(NPC.Center.X + 13f, NPC.Center.Y + 24f, (player.Center.X - NPC.Center.X - 13f) / 10f + Main.rand.Next(-2000, 2000) / 1000f, (player.Center.Y - NPC.Center.Y - 24f) / 9f + Main.rand.Next(1800, 2400) / 200f, Mod.Find<ModProjectile>("GreenFlame").Type, 100, 0f, Main.myPlayer, 0f, 0f);
                 }
-                if (npc.localAI[0] % 900 >= 300 && npc.localAI[0] % 10 == 0)
+                if (NPC.localAI[0] % 900 >= 300 && NPC.localAI[0] % 10 == 0)
                 {
-                    Projectile.NewProjectile(npc.Center.X + Main.rand.Next(-80, 80), npc.Center.Y + Main.rand.Next(-100, 100), (player.Center.X - npc.Center.X) / 24f + Main.rand.Next(-2000, 2000) / 1000f, (player.Center.Y - npc.Center.Y) / 10f + Main.rand.Next(1800, 2400) / 200f, mod.ProjectileType("桔子2"), 100, 0f, Main.myPlayer, 0f, 0f);
+                    Projectile.NewProjectile(NPC.Center.X + Main.rand.Next(-80, 80), NPC.Center.Y + Main.rand.Next(-100, 100), (player.Center.X - NPC.Center.X) / 24f + Main.rand.Next(-2000, 2000) / 1000f, (player.Center.Y - NPC.Center.Y) / 10f + Main.rand.Next(1800, 2400) / 200f, Mod.Find<ModProjectile>("桔子2").Type, 100, 0f, Main.myPlayer, 0f, 0f);
                 }
             }
         }
-        public override void NPCLoot()
+        public override void OnKill()
         {
             bool expertMode = Main.expertMode;
-            Item.NewItem((int)base.npc.position.X, (int)base.npc.position.Y, base.npc.width, base.npc.height, 58, 25, false, 0, false, false);
-            Item.NewItem((int)base.npc.position.X, (int)base.npc.position.Y, base.npc.width, base.npc.height, mod.ItemType("OrangeBullet"), 33, false, 0, false, false);
+            Item.NewItem((int)base.NPC.position.X, (int)base.NPC.position.Y, base.NPC.width, base.NPC.height, 58, 25, false, 0, false, false);
+            Item.NewItem((int)base.NPC.position.X, (int)base.NPC.position.Y, base.NPC.width, base.NPC.height, Mod.Find<ModItem>("OrangeBullet").Type, 33, false, 0, false, false);
         }
-        public override bool PreNPCLoot()
+        public override bool PreKill()
 		{
 			return false;
 		}
@@ -189,18 +189,18 @@ namespace MythMod.NPCs.LanternMoon
         public override void HitEffect(int hitDirection, double damage)
 		{
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
-            if (base.npc.life <= 0)
+            if (base.NPC.life <= 0)
             {
                 float scaleFactor = (float)(Main.rand.Next(-200, 200) / 100);
-                Gore.NewGore(new Vector2(base.npc.position.X, base.npc.position.Y + 150), base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/青翠年桔木碎块1"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/青翠年桔木碎块2"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/青翠年桔木碎块2"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/青翠年桔木碎块2"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/青翠年桔木碎块3"), 1f);
+                Gore.NewGore(new Vector2(base.NPC.position.X, base.NPC.position.Y + 150), base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/青翠年桔木碎块1"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/青翠年桔木碎块2"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/青翠年桔木碎块2"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/青翠年桔木碎块2"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/青翠年桔木碎块3"), 1f);
                 for(int v = 0; v < 10;v++)
                 {
-                    Gore.NewGore(base.npc.position + new Vector2(Main.rand.Next(0, 180), Main.rand.Next(0, 240)), base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/青翠年桔木碎块4"), 1f);
-                    Gore.NewGore(base.npc.position + new Vector2(Main.rand.Next(0, 180), Main.rand.Next(0, 240)), base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/青翠年桔木碎块5"), 1f);
+                    Gore.NewGore(base.NPC.position + new Vector2(Main.rand.Next(0, 180), Main.rand.Next(0, 240)), base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/青翠年桔木碎块4"), 1f);
+                    Gore.NewGore(base.NPC.position + new Vector2(Main.rand.Next(0, 180), Main.rand.Next(0, 240)), base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/青翠年桔木碎块5"), 1f);
                 }
                 if (mplayer.LanternMoonWave != 25)
                 {
@@ -221,12 +221,12 @@ namespace MythMod.NPCs.LanternMoon
             if(Main.rand.Next(15) == 1)
             {
                 float scaleFactor = (float)(Main.rand.Next(-200, 200) / 100);
-                Gore.NewGore(base.npc.position + new Vector2(Main.rand.Next(0, 180), Main.rand.Next(0, 240)), base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/青翠年桔木碎块4"), 1f);
+                Gore.NewGore(base.NPC.position + new Vector2(Main.rand.Next(0, 180), Main.rand.Next(0, 240)), base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/青翠年桔木碎块4"), 1f);
             }
             if (Main.rand.Next(15) == 1)
             {
                 float scaleFactor = (float)(Main.rand.Next(-200, 200) / 100);
-                Gore.NewGore(base.npc.position + new Vector2(Main.rand.Next(0, 180), Main.rand.Next(0, 240)), base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/青翠年桔木碎块5"), 1f);
+                Gore.NewGore(base.NPC.position + new Vector2(Main.rand.Next(0, 180), Main.rand.Next(0, 240)), base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/青翠年桔木碎块5"), 1f);
             }
         }
 

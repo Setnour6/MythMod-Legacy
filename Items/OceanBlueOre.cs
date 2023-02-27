@@ -13,29 +13,28 @@ namespace MythMod.Items
         }
         public override void SetDefaults()
         {
-            base.item.width = 40;
-            base.item.height = 40;
-            base.item.rare = 8;
-            base.item.scale = 1f;
-            base.item.createTile = base.mod.TileType("沧流矿");
-            base.item.useStyle = 1;
-            base.item.useTurn = true;
-            base.item.useAnimation = 15;
-            base.item.useTime = 10;
-            base.item.autoReuse = true;
-            base.item.consumable = true;
-            base.item.width = 13;
-            base.item.height = 10;
-            base.item.maxStack = 999;
-            base.item.value = 3750;
+            base.Item.width = 40;
+            base.Item.height = 40;
+            base.Item.rare = 8;
+            base.Item.scale = 1f;
+            base.Item.createTile = base.Mod.Find<ModTile>("沧流矿").Type;
+            base.Item.useStyle = 1;
+            base.Item.useTurn = true;
+            base.Item.useAnimation = 15;
+            base.Item.useTime = 10;
+            base.Item.autoReuse = true;
+            base.Item.consumable = true;
+            base.Item.width = 13;
+            base.Item.height = 10;
+            base.Item.maxStack = 999;
+            base.Item.value = 3750;
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = Recipe.Create(Mod.Find<ModItem>("OceanBlueBar").Type, 1);
             recipe.AddIngredient(null, "OceanBlueOre", 3);
             recipe.requiredTile[0] = 412;
-            recipe.SetResult(mod.ItemType("OceanBlueBar"), 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

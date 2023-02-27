@@ -31,20 +31,20 @@ namespace MythMod.Items
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            base.item.width = 30;
-			base.item.height = 30;
-			base.item.maxStack = 99;
-			base.item.useTurn = true;
-			base.item.autoReuse = true;
-			base.item.useAnimation = 15;
-			base.item.useTime = 10;
-			base.item.useStyle = 1;
-			base.item.consumable = true;
-			base.item.value = 50000;
-			base.item.rare = 1;
-			base.item.createTile = base.mod.TileType("BossTrophy");
-			base.item.placeStyle = 0;
+            Item.glowMask = GetGlowMask;
+            base.Item.width = 30;
+			base.Item.height = 30;
+			base.Item.maxStack = 99;
+			base.Item.useTurn = true;
+			base.Item.autoReuse = true;
+			base.Item.useAnimation = 15;
+			base.Item.useTime = 10;
+			base.Item.useStyle = 1;
+			base.Item.consumable = true;
+			base.Item.value = 50000;
+			base.Item.rare = 1;
+			base.Item.createTile = base.Mod.Find<ModTile>("BossTrophy").Type;
+			base.Item.placeStyle = 0;
 		}
 	}
 }

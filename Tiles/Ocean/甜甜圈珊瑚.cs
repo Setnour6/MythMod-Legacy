@@ -10,7 +10,7 @@ namespace MythMod.Tiles.Ocean
 	public class 甜甜圈珊瑚 : ModTile
 	{
 		// Token: 0x0600400B RID: 16395 RVA: 0x0032258C File Offset: 0x0032078C
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[(int)base.Type] = true;
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
@@ -24,7 +24,7 @@ namespace MythMod.Tiles.Ocean
             TileObjectData.newTile.StyleHorizontal = true;
 			TileObjectData.newTile.LavaDeath = false;
 			TileObjectData.addTile((int)base.Type);
-            this.drop = base.mod.ItemType("AnnularCoral");
+            this.ItemDrop = base.Mod.Find<ModItem>("AnnularCoral").Type;
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
             base.AddMapEntry(new Color(63, 187, 161), modTranslation);
@@ -45,8 +45,8 @@ namespace MythMod.Tiles.Ocean
         // Token: 0x0600400E RID: 16398 RVA: 0x00013956 File Offset: 0x00011B56
         public override void PlaceInWorld(int i, int j, Item item)
 		{
-			Main.tile[i, j].frameX = 0;
-			Main.tile[i, j].frameY = 0;
+			Main.tile[i, j].TileFrameX = 0;
+			Main.tile[i, j].TileFrameY = 0;
 		}
 	}
 }

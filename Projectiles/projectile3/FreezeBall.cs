@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace MythMod.Projectiles.projectile3
@@ -13,49 +15,49 @@ namespace MythMod.Projectiles.projectile3
 		}
 		public override void SetDefaults()
 		{
-			base.projectile.width = 32;
-			base.projectile.height = 32;
-			base.projectile.friendly = true;
-			base.projectile.melee = true;
-			base.projectile.aiStyle = -1;
-            base.projectile.penetrate = 1;
-            base.projectile.timeLeft = 3600;
-            base.projectile.hostile = false;
+			base.Projectile.width = 32;
+			base.Projectile.height = 32;
+			base.Projectile.friendly = true;
+			base.Projectile.DamageType = DamageClass.Melee;
+			base.Projectile.aiStyle = -1;
+            base.Projectile.penetrate = 1;
+            base.Projectile.timeLeft = 3600;
+            base.Projectile.hostile = false;
 		}
 
         public override Color? GetAlpha(Color lightColor)
         {
-            if (projectile.timeLeft < 3584)
+            if (Projectile.timeLeft < 3584)
             {
                 return new Color?(new Color(255, 255, 255, 0));
             }
             else
             {
-                return new Color?(new Color((3600 - projectile.timeLeft) / 14f, (3600 - projectile.timeLeft) / 14f, (3600 - projectile.timeLeft) / 14f, 0));
+                return new Color?(new Color((3600 - Projectile.timeLeft) / 14f, (3600 - Projectile.timeLeft) / 14f, (3600 - Projectile.timeLeft) / 14f, 0));
             }
         }
         public override void AI()
 		{
             Player player = Main.player[Main.myPlayer];
-            base.projectile.rotation = (float)Math.Atan2((double)base.projectile.velocity.Y, (double)base.projectile.velocity.X) + 1.57f;
-            if(projectile.timeLeft < 3584)
+            base.Projectile.rotation = (float)Math.Atan2((double)base.Projectile.velocity.Y, (double)base.Projectile.velocity.X) + 1.57f;
+            if(Projectile.timeLeft < 3584)
             {
-                int r = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) - base.projectile.velocity * 1.2f - new Vector2(4, 4), 0, 0, 88, 0, 0, 0, default(Color), 4f);
+                int r = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) - base.Projectile.velocity * 1.2f - new Vector2(4, 4), 0, 0, 88, 0, 0, 0, default(Color), 4f);
                 Main.dust[r].velocity.X = 0;
                 Main.dust[r].velocity.Y = 0;
                 Main.dust[r].noGravity = true;
-                int r2 = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) - base.projectile.velocity.RotatedBy(Main.rand.NextFloat(-0.25f,0.25f)) * 1.5f - new Vector2(4, 4), 0, 0, 88, 0, 0, 0, default(Color), 2f);
+                int r2 = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) - base.Projectile.velocity.RotatedBy(Main.rand.NextFloat(-0.25f,0.25f)) * 1.5f - new Vector2(4, 4), 0, 0, 88, 0, 0, 0, default(Color), 2f);
                 Main.dust[r2].velocity.X = 0;
                 Main.dust[r2].velocity.Y = 0;
                 Main.dust[r2].noGravity = true;
             }
-            if((player.Center - projectile.Center).Length() < 600 && projectile.Center.Y > player.Center.Y - 100)
+            if((player.Center - Projectile.Center).Length() < 600 && Projectile.Center.Y > player.Center.Y - 100)
             {
-                projectile.tileCollide = true;
+                Projectile.tileCollide = true;
             }
             else
             {
-                projectile.tileCollide = false;
+                Projectile.tileCollide = false;
             }
         }
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
@@ -63,10 +65,10 @@ namespace MythMod.Projectiles.projectile3
             target.AddBuff(44, 300);
             target.AddBuff(47, 300);
             target.AddBuff(46, 300);
-            if (target.type != 396 && target.type != 397 && target.type != 398 && target.type != mod.NPCType("AncientTangerineTreeEye"))
+            if (target.type != 396 && target.type != 397 && target.type != 398 && target.type != Mod.Find<ModNPC>("AncientTangerineTreeEye").Type)
             {
-                target.AddBuff(mod.BuffType("Freeze"), (int)projectile.ai[1]);
-                target.AddBuff(mod.BuffType("Freeze2"), (int)projectile.ai[1] + 2);
+                target.AddBuff(Mod.Find<ModBuff>("Freeze").Type, (int)Projectile.ai[1]);
+                target.AddBuff(Mod.Find<ModBuff>("Freeze2").Type, (int)Projectile.ai[1] + 2);
             }
             if(target.type == 113)
             {
@@ -74,8 +76,8 @@ namespace MythMod.Projectiles.projectile3
                 {
                     if (Main.npc[i].type == 113 || Main.npc[i].type == 114)
                     {
-                        Main.npc[i].AddBuff(mod.BuffType("Freeze"), (int)projectile.ai[1]);
-                        Main.npc[i].AddBuff(mod.BuffType("Freeze2"), (int)projectile.ai[1] + 2);
+                        Main.npc[i].AddBuff(Mod.Find<ModBuff>("Freeze").Type, (int)Projectile.ai[1]);
+                        Main.npc[i].AddBuff(Mod.Find<ModBuff>("Freeze2").Type, (int)Projectile.ai[1] + 2);
                     }
                 }
             }
@@ -85,23 +87,23 @@ namespace MythMod.Projectiles.projectile3
                 {
                     if (Main.npc[i].type == 113 || Main.npc[i].type == 114)
                     {
-                        Main.npc[i].AddBuff(mod.BuffType("Freeze"), (int)projectile.ai[1]);
-                        Main.npc[i].AddBuff(mod.BuffType("Freeze2"), (int)projectile.ai[1] + 2);
+                        Main.npc[i].AddBuff(Mod.Find<ModBuff>("Freeze").Type, (int)Projectile.ai[1]);
+                        Main.npc[i].AddBuff(Mod.Find<ModBuff>("Freeze2").Type, (int)Projectile.ai[1] + 2);
                     }
                 }
             }
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
 		{
-		    base.projectile.Kill();
+		    base.Projectile.Kill();
 			return false;
 		}
         public override void Kill(int timeLeft)
         {
-            Main.PlaySound(2, (int)base.projectile.position.X, (int)base.projectile.position.Y, 27, 1f, 0f);
+            SoundEngine.PlaySound(SoundID.Item27, new Vector2(base.Projectile.position.X, base.Projectile.position.Y));
             for (int i = 0; i < 30; i++)
             {
-                int num = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, 88, 0f, 0f, 100, default(Color), 2f);
+                int num = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, 88, 0f, 0f, 100, default(Color), 2f);
                 Main.dust[num].velocity *= 3f;
                 if (Main.rand.Next(2) == 0)
                 {
@@ -114,8 +116,8 @@ namespace MythMod.Projectiles.projectile3
                 float a = (float)Main.rand.Next(0, 720) / 360 * 3.141592653589793238f;
                 float m = (float)Main.rand.Next(0, 50000);
                 float l = (float)Main.rand.Next((int)m, 50000) / 1800f;
-                int num4 = Projectile.NewProjectile(base.projectile.Center.X, base.projectile.Center.Y, (float)((float)l * Math.Cos((float)a)) * 0.06f, (float)((float)l * Math.Sin((float)a)) * 0.06f, base.mod.ProjectileType("FreezeBallBrake"), base.projectile.damage / 5, base.projectile.knockBack, base.projectile.owner, 0f, projectile.ai[1] / 2f);
-                Main.projectile[num4].timeLeft = (int)(projectile.damage * Main.rand.NextFloat(0.2f, 0.7f));
+                int num4 = Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, (float)((float)l * Math.Cos((float)a)) * 0.06f, (float)((float)l * Math.Sin((float)a)) * 0.06f, base.Mod.Find<ModProjectile>("FreezeBallBrake").Type, base.Projectile.damage / 5, base.Projectile.knockBack, base.Projectile.owner, 0f, Projectile.ai[1] / 2f);
+                Main.projectile[num4].timeLeft = (int)(Projectile.damage * Main.rand.NextFloat(0.2f, 0.7f));
             }
         }
         public int projTime = 15;

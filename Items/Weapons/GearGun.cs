@@ -26,24 +26,24 @@ namespace MythMod.Items.Weapons
 		}
 		public override void SetDefaults()
 		{
-			base.item.damage = 470;
-			base.item.width = 62;
-			base.item.height = 44;
-			base.item.useTime = 4;
-			base.item.useAnimation = 4;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.ranged = true;
-			base.item.knockBack = 1f;
-			base.item.value = 50000;
-			base.item.rare = 11;
-			base.item.UseSound = SoundID.Item31;
-			base.item.autoReuse = true;
-            base.item.shoot = 14;
-			base.item.shootSpeed = 20f;
-			base.item.useAmmo = AmmoID.Bullet;
+			base.Item.damage = 470;
+			base.Item.width = 62;
+			base.Item.height = 44;
+			base.Item.useTime = 4;
+			base.Item.useAnimation = 4;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.DamageType = DamageClass.Ranged;
+			base.Item.knockBack = 1f;
+			base.Item.value = 50000;
+			base.Item.rare = 11;
+			base.Item.UseSound = SoundID.Item31;
+			base.Item.autoReuse = true;
+            base.Item.shoot = 14;
+			base.Item.shootSpeed = 20f;
+			base.Item.useAmmo = AmmoID.Bullet;
 		}
-		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
             Projectile.NewProjectile(position.X, position.Y + Main.rand.Next(-1, 2) * 6f, speedX, speedY, type, damage, knockBack, player.whoAmI, 0f, 0f);
             if((int)(Main.time / 5f) % 5 == 0)
@@ -54,7 +54,7 @@ namespace MythMod.Items.Weapons
             }
             return false;
 		}
-		public override bool ConsumeAmmo(Player player)
+		public override bool CanConsumeAmmo(Item ammo, Player player)
 		{
 			return Main.rand.Next(0, 100) > 66;
 		}
@@ -65,16 +65,15 @@ namespace MythMod.Items.Weapons
 		public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
 		{
 			Vector2 origin = new Vector2(31f, 22f);
-			spriteBatch.Draw(base.mod.GetTexture("Items/Weapons/齿轮链条枪Glow"), base.item.Center - Main.screenPosition, null, Color.White, rotation, origin, 1f, SpriteEffects.None, 0f);
+			spriteBatch.Draw(base.Mod.GetTexture("Items/Weapons/齿轮链条枪Glow"), base.Item.Center - Main.screenPosition, null, Color.White, rotation, origin, 1f, SpriteEffects.None, 0f);
 		}
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(1929, 5);
             modRecipe.AddIngredient(null, "MaChineSoul", 100);
             modRecipe.requiredTile[0] = 412;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
     }
 }

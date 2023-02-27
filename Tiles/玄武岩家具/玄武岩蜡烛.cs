@@ -10,7 +10,7 @@ namespace MythMod.Tiles.玄武岩家具
 {
 	public class 玄武岩蜡烛 : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileLighted[(int)base.Type] = true;
 			Main.tileFrameImportant[(int)base.Type] = true;
@@ -26,12 +26,12 @@ namespace MythMod.Tiles.玄武岩家具
 			modTranslation.SetDefault("玄武岩蜡烛");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
-			this.disableSmartCursor = true;
-			this.adjTiles = new int[]
+			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+			this.AdjTiles = new int[]
 			{
 				4
 			};
-			this.drop = base.mod.ItemType("BasaltCandle");
+			this.ItemDrop = base.Mod.Find<ModItem>("BasaltCandle").Type;
 			modTranslation.AddTranslation(GameCulture.Chinese, "玄武岩蜡烛");
 		}
 		public override bool CreateDust(int i, int j, ref int type)
@@ -45,7 +45,7 @@ namespace MythMod.Tiles.玄武岩家具
 		}
 		public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
 		{
-			if (Main.tile[i, j].frameX < 18)
+			if (Main.tile[i, j].TileFrameX < 18)
 			{
 				r = 1f;
 				g = 0.16f;
@@ -58,8 +58,8 @@ namespace MythMod.Tiles.玄武岩家具
 		}
 		public override void HitWire(int i, int j)
 		{
-			int num = i - (int)(Main.tile[i, j].frameX / 18 % 1);
-			int num2 = j - (int)(Main.tile[i, j].frameY / 18 % 1);
+			int num = i - (int)(Main.tile[i, j].TileFrameX / 18 % 1);
+			int num2 = j - (int)(Main.tile[i, j].TileFrameY / 18 % 1);
 			for (int k = num; k < num + 1; k++)
 			{
 				for (int l = num2; l < num2 + 1; l++)
@@ -68,17 +68,17 @@ namespace MythMod.Tiles.玄武岩家具
 					{
 						Main.tile[k, l] = new Tile();
 					}
-					if (Main.tile[k, l].active() && Main.tile[k, l].type == base.Type)
+					if (Main.tile[k, l].HasTile && Main.tile[k, l].TileType == base.Type)
 					{
-						if (Main.tile[k, l].frameX < 18)
+						if (Main.tile[k, l].TileFrameX < 18)
 						{
 							Tile tile = Main.tile[k, l];
-							tile.frameX += 18;
+							tile.TileFrameX += 18;
 						}
 						else
 						{
 							Tile tile2 = Main.tile[k, l];
-							tile2.frameX -= 18;
+							tile2.TileFrameX -= 18;
 						}
 					}
 				}

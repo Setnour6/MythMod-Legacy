@@ -15,19 +15,19 @@ namespace MythMod.Items.Corals//制作是mod名字
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetDefaults()
         {
-            base.item.width = 20;//宽
-            base.item.height = 14;//高
-            base.item.rare = 2;//品质
-            base.item.scale = 1f;//大小
-            base.item.createTile = base.mod.TileType("小脑珊瑚");
-            base.item.useStyle = 1;
-            base.item.useTurn = true;
-            base.item.useAnimation = 15;
-            base.item.useTime = 10;
-            base.item.autoReuse = true;
-            base.item.consumable = true;
-            base.item.maxStack = 999;
-            base.item.value = 3000;
+            base.Item.width = 20;//宽
+            base.Item.height = 14;//高
+            base.Item.rare = 2;//品质
+            base.Item.scale = 1f;//大小
+            base.Item.createTile = base.Mod.Find<ModTile>("小脑珊瑚").Type;
+            base.Item.useStyle = 1;
+            base.Item.useTurn = true;
+            base.Item.useAnimation = 15;
+            base.Item.useTime = 10;
+            base.Item.autoReuse = true;
+            base.Item.consumable = true;
+            base.Item.maxStack = 999;
+            base.Item.value = 3000;
         }
     }
 }

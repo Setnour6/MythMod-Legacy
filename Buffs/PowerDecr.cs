@@ -7,7 +7,7 @@ namespace MythMod.Buffs
 {
     public class PowerDecr : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("力量丧失");
             base.Description.SetDefault("攻击力丧失");

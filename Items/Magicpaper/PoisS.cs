@@ -19,26 +19,26 @@ namespace MythMod.Items.Magicpaper//在虚无mod的Items文件夹里
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetDefaults()
         {
-            item.width = 26;//长度
-            item.height = 40;//高度
-            item.maxStack = 999;//最大叠加
-            item.damage = 600;
-            item.value = 400000;//价值
-            item.rare = 4;//稀有度
-            base.item.useStyle = 1;
-            item.consumable = false;
-            base.item.useAnimation = 17;
-            base.item.useTime = 17;
-            item.noMelee = true;
+            Item.width = 26;//长度
+            Item.height = 40;//高度
+            Item.maxStack = 999;//最大叠加
+            Item.damage = 600;
+            Item.value = 400000;//价值
+            Item.rare = 4;//稀有度
+            base.Item.useStyle = 1;
+            Item.consumable = false;
+            base.Item.useAnimation = 17;
+            base.Item.useTime = 17;
+            Item.noMelee = true;
         }
         public override bool CanUseItem(Player player)
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             if (mplayer.MagicCool == 0)
             {
-                Projectile.NewProjectile(player.Center.X, player.Center.Y, 0, 25, mod.ProjectileType("PoisonSummon"), 0, 0.5f, Main.myPlayer, 600, 21);
+                Projectile.NewProjectile(player.Center.X, player.Center.Y, 0, 25, Mod.Find<ModProjectile>("PoisonSummon").Type, 0, 0.5f, Main.myPlayer, 600, 21);
                 mplayer.MagicCool += 600;
-                player.AddBuff(mod.BuffType("愚昧诅咒"), 600, true);
+                player.AddBuff(Mod.Find<ModBuff>("愚昧诅咒").Type, 600, true);
             }
             return mplayer.MagicCool > 0;
         }
@@ -48,12 +48,11 @@ namespace MythMod.Items.Magicpaper//在虚无mod的Items文件夹里
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(null, "PoisIII", 1);
             recipe.AddIngredient(null, "MagicStone", 1);
             recipe.requiredTile[0] = 26;
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

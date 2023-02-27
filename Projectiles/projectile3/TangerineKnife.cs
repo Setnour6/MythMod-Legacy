@@ -13,19 +13,19 @@ namespace MythMod.Projectiles.projectile3
 	{
         public override void SetDefaults()
 		{
-			projectile.width = 38;
-			projectile.height = 36;
-			projectile.friendly = true;
-            projectile.hostile = false;
-            projectile.penetrate = -1;
-			projectile.timeLeft = 3000;
+			Projectile.width = 38;
+			Projectile.height = 36;
+			Projectile.friendly = true;
+            Projectile.hostile = false;
+            Projectile.penetrate = -1;
+			Projectile.timeLeft = 3000;
 		}
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
             for (int u = 0; u < 5; u++)
             {
                 Vector2 v = new Vector2(0, Main.rand.NextFloat(8f, 14f)).RotatedByRandom(Math.PI * 2f);
-                int t = Projectile.NewProjectile(base.projectile.Center.X, base.projectile.Center.Y, v.X, v.Y, mod.ProjectileType("Tangerine2"), (int)((double)base.projectile.damage), base.projectile.knockBack, base.projectile.owner, 0f, 0f);
+                int t = Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, v.X, v.Y, Mod.Find<ModProjectile>("Tangerine2").Type, (int)((double)base.Projectile.damage), base.Projectile.knockBack, base.Projectile.owner, 0f, 0f);
                 Main.projectile[t].hostile = false;
                 Main.projectile[t].friendly = true;
                 Main.projectile[t].timeLeft = 180;
@@ -33,20 +33,20 @@ namespace MythMod.Projectiles.projectile3
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
 		{
-			if(projectile.timeLeft > 2850)
+			if(Projectile.timeLeft > 2850)
             {
-                if (projectile.ai[1] != 0)
+                if (Projectile.ai[1] != 0)
                 {
                     return true;
                 }
-                projectile.soundDelay = 10;
-                if (projectile.velocity.X != oldVelocity.X && Math.Abs(oldVelocity.X) > 1f)
+                Projectile.soundDelay = 10;
+                if (Projectile.velocity.X != oldVelocity.X && Math.Abs(oldVelocity.X) > 1f)
                 {
-                    projectile.velocity.X = oldVelocity.X * -0.9f;
+                    Projectile.velocity.X = oldVelocity.X * -0.9f;
                 }
-                if (projectile.velocity.Y != oldVelocity.Y && Math.Abs(oldVelocity.Y) > 1f)
+                if (Projectile.velocity.Y != oldVelocity.Y && Math.Abs(oldVelocity.Y) > 1f)
                 {
-                    projectile.velocity.Y = oldVelocity.Y * -0.9f;
+                    Projectile.velocity.Y = oldVelocity.Y * -0.9f;
                 }
             }
 			return false;
@@ -54,35 +54,35 @@ namespace MythMod.Projectiles.projectile3
 
 		public override void AI()
 		{
-            float num7 = (float)Math.Sqrt(projectile.velocity.X * projectile.velocity.X + base.projectile.velocity.Y * base.projectile.velocity.Y);
-            int num5 = (int)Player.FindClosest(base.projectile.Center, 1, 1);
-            projectile.rotation += 0.05f * num7;
-            float num6 = (float)Math.Sqrt((Main.player[num5].Center.X - base.projectile.Center.X) * (Main.player[num5].Center.X - base.projectile.Center.X) + (Main.player[num5].Center.Y - base.projectile.Center.Y) * (Main.player[num5].Center.Y - base.projectile.Center.Y));
-            if (projectile.timeLeft <= 2850)
+            float num7 = (float)Math.Sqrt(Projectile.velocity.X * Projectile.velocity.X + base.Projectile.velocity.Y * base.Projectile.velocity.Y);
+            int num5 = (int)Player.FindClosest(base.Projectile.Center, 1, 1);
+            Projectile.rotation += 0.05f * num7;
+            float num6 = (float)Math.Sqrt((Main.player[num5].Center.X - base.Projectile.Center.X) * (Main.player[num5].Center.X - base.Projectile.Center.X) + (Main.player[num5].Center.Y - base.Projectile.Center.Y) * (Main.player[num5].Center.Y - base.Projectile.Center.Y));
+            if (Projectile.timeLeft <= 2850)
             {
                 if (num7 < 5f)
                 {
-                    base.projectile.velocity *= 1.2f;
+                    base.Projectile.velocity *= 1.2f;
                 }
                 if (num7 > 6f)
                 {
-                    base.projectile.velocity *= 0.86f;
+                    base.Projectile.velocity *= 0.86f;
                 }
-                int num3 = (int)Player.FindClosest(base.projectile.Center, 1, 1);
-                projectile.velocity = projectile.velocity * 0.98f + (Main.player[num5].Center - base.projectile.Center) / num6 * 3.5f;
-                base.projectile.tileCollide = false;
+                int num3 = (int)Player.FindClosest(base.Projectile.Center, 1, 1);
+                Projectile.velocity = Projectile.velocity * 0.98f + (Main.player[num5].Center - base.Projectile.Center) / num6 * 3.5f;
+                base.Projectile.tileCollide = false;
             }
-            if(projectile.timeLeft % 30 == 0)
+            if(Projectile.timeLeft % 30 == 0)
             {
                 Vector2 v = new Vector2(0, Main.rand.NextFloat(8f, 14f)).RotatedByRandom(Math.PI * 2f);
-                int t = Projectile.NewProjectile(base.projectile.Center.X, base.projectile.Center.Y, v.X, v.Y, mod.ProjectileType("Tangerine2"), (int)((double)base.projectile.damage), base.projectile.knockBack, base.projectile.owner, 0f, 0f);
+                int t = Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, v.X, v.Y, Mod.Find<ModProjectile>("Tangerine2").Type, (int)((double)base.Projectile.damage), base.Projectile.knockBack, base.Projectile.owner, 0f, 0f);
                 Main.projectile[t].hostile = false;
                 Main.projectile[t].friendly = true;
             }
-            if (projectile.timeLeft % 30 == 15)
+            if (Projectile.timeLeft % 30 == 15)
             {
                 Vector2 v = new Vector2(0, Main.rand.NextFloat(2f, 3.5f)).RotatedByRandom(Math.PI * 2f);
-                int t = Projectile.NewProjectile(base.projectile.Center.X, base.projectile.Center.Y, v.X, v.Y, mod.ProjectileType("TangerineLeaf"), (int)((double)base.projectile.damage), base.projectile.knockBack, base.projectile.owner, 0f, 0f);
+                int t = Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, v.X, v.Y, Mod.Find<ModProjectile>("TangerineLeaf").Type, (int)((double)base.Projectile.damage), base.Projectile.knockBack, base.Projectile.owner, 0f, 0f);
                 Main.projectile[t].hostile = false;
                 Main.projectile[t].friendly = true;
             }
@@ -90,16 +90,16 @@ namespace MythMod.Projectiles.projectile3
             {
                 if (num7 < 16f)
                 {
-                    base.projectile.velocity *= 1.2f;
+                    base.Projectile.velocity *= 1.2f;
                 }
                 if (num7 > 17f)
                 {
-                    base.projectile.velocity *= 0.96f;
+                    base.Projectile.velocity *= 0.96f;
                 }
             }
-            if (num6 < 60 && projectile.timeLeft < 2950)
+            if (num6 < 60 && Projectile.timeLeft < 2950)
             {
-                base.projectile.timeLeft = 0;
+                base.Projectile.timeLeft = 0;
             }
         }
     }

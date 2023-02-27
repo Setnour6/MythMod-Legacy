@@ -19,17 +19,17 @@ namespace MythMod.Items.Magicpaper//在虚无mod的Items文件夹里
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetDefaults()
         {
-            item.width = 26;//长度
-            item.height = 40;//高度
-            item.maxStack = 999;//最大叠加
-            item.damage = 132;
-            item.value = 25000;//价值
-            item.rare = 3;//稀有度
-            base.item.useStyle = 3;
-            item.consumable = true;
-            base.item.useAnimation = 17;
-            base.item.useTime = 17;
-            base.item.consumable = true;
+            Item.width = 26;//长度
+            Item.height = 40;//高度
+            Item.maxStack = 999;//最大叠加
+            Item.damage = 132;
+            Item.value = 25000;//价值
+            Item.rare = 3;//稀有度
+            base.Item.useStyle = 3;
+            Item.consumable = true;
+            base.Item.useAnimation = 17;
+            base.Item.useTime = 17;
+            base.Item.consumable = true;
         }
         public override void HoldItem(Player player)
         {
@@ -49,7 +49,7 @@ namespace MythMod.Items.Magicpaper//在虚无mod的Items文件夹里
                         Vector2 speed = (v1 - player.position) / (v1 - player.position).Length();
                         Vector2 v2 = player.position + new Vector2(speed.X, speed.Y) * 14f;
                         Vector2 v = new Vector2(speed.X * 14f, speed.Y * 14f).RotatedBy((float)Math.PI * Main.rand.NextFloat(-0.3f, 0.3f)) * (0.3f + j / 8f) * Main.rand.Next(25, 40) / 15f;
-                        int u = Projectile.NewProjectile(v2.X, v2.Y - 4, v.X, v.Y, 81, item.damage, 3, player.whoAmI, 0f, 0f);
+                        int u = Projectile.NewProjectile(v2.X, v2.Y - 4, v.X, v.Y, 81, Item.damage, 3, player.whoAmI, 0f, 0f);
                         Main.projectile[u].friendly = true;
                         Main.projectile[u].hostile = false;
                     }
@@ -59,7 +59,7 @@ namespace MythMod.Items.Magicpaper//在虚无mod的Items文件夹里
                         Vector2 speed = (v1 - player.position) / (v1 - player.position).Length();
                         Vector2 v2 = player.position + new Vector2(speed.X, speed.Y) * 14f;
                         Vector2 v = new Vector2(speed.X * 14f, speed.Y * 14f).RotatedBy((float)Math.PI * Main.rand.NextFloat(-0.3f, 0.3f)) * (0.3f + j / 8f) * Main.rand.Next(25, 40) / 15f;
-                        int u = Projectile.NewProjectile(v2.X, v2.Y - 4, v.X, v.Y, 81, item.damage, 3, player.whoAmI, 0f, 0f);
+                        int u = Projectile.NewProjectile(v2.X, v2.Y - 4, v.X, v.Y, 81, Item.damage, 3, player.whoAmI, 0f, 0f);
                         Main.projectile[u].friendly = true;
                         Main.projectile[u].hostile = false;
                     }
@@ -69,7 +69,7 @@ namespace MythMod.Items.Magicpaper//在虚无mod的Items文件夹里
                         Vector2 speed = (v1 - player.position) / (v1 - player.position).Length();
                         Vector2 v2 = player.position + new Vector2(speed.X, speed.Y) * 12f;
                         Vector2 v = new Vector2(speed.X * 12f, speed.Y * 12f).RotatedBy((float)Math.PI * Main.rand.NextFloat(-0.3f, 0.3f)) * (0.3f + j / 8f) * Main.rand.Next(25, 40) / 15f;
-                        int u = Projectile.NewProjectile(v2.X, v2.Y - 4, v.X, v.Y, 82, item.damage, 3, player.whoAmI, 0f, 0f);
+                        int u = Projectile.NewProjectile(v2.X, v2.Y - 4, v.X, v.Y, 82, Item.damage, 3, player.whoAmI, 0f, 0f);
                         Main.projectile[u].friendly = true;
                         Main.projectile[u].hostile = false;
                     }
@@ -79,14 +79,14 @@ namespace MythMod.Items.Magicpaper//在虚无mod的Items文件夹里
                         Vector2 speed = (v1 - player.position) / (v1 - player.position).Length();
                         Vector2 v2 = player.position + new Vector2(speed.X, speed.Y) * 12f;
                         Vector2 v = new Vector2(speed.X * 12f, speed.Y * 12f).RotatedBy((float)Math.PI * Main.rand.NextFloat(-0.3f, 0.3f)) * (0.3f + j / 8f) * Main.rand.Next(25, 40) / 15f;
-                        int u = Projectile.NewProjectile(v2.X, v2.Y - 4, v.X, v.Y, 82, item.damage, 3, player.whoAmI, 0f, 0f);
+                        int u = Projectile.NewProjectile(v2.X, v2.Y - 4, v.X, v.Y, 82, Item.damage, 3, player.whoAmI, 0f, 0f);
                         Main.projectile[u].friendly = true;
                         Main.projectile[u].hostile = false;
                     }
                 }
                 mplayer.MagicCool += 600;
-                item.stack--;
-                player.AddBuff(mod.BuffType("愚昧诅咒"), 600, true);
+                Item.stack--;
+                player.AddBuff(Mod.Find<ModBuff>("愚昧诅咒").Type, 600, true);
             }
             return mplayer.MagicCool > 0;
         }

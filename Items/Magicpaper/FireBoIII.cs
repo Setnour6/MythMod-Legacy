@@ -16,17 +16,17 @@ namespace MythMod.Items.Magicpaper
         }
         public override void SetDefaults()
         {
-            item.width = 26;
-            item.height = 40;
-            item.maxStack = 999;
-            item.damage = 1680;
-            item.value = 1000;
-            item.rare = 2;
-            base.item.useStyle = 1;
-            item.consumable = true;
-            base.item.useAnimation = 17;
-            base.item.useTime = 17;
-            base.item.consumable = true;
+            Item.width = 26;
+            Item.height = 40;
+            Item.maxStack = 999;
+            Item.damage = 1680;
+            Item.value = 1000;
+            Item.rare = 2;
+            base.Item.useStyle = 1;
+            Item.consumable = true;
+            base.Item.useAnimation = 17;
+            base.Item.useTime = 17;
+            base.Item.consumable = true;
         }
         public override void HoldItem(Player player)
         {
@@ -40,17 +40,17 @@ namespace MythMod.Items.Magicpaper
             {
                 Vector2 v1 = Main.screenPosition + new Vector2(Main.mouseX, Main.mouseY);
                 Vector2 v2 = (v1 - player.Center) / (v1 - player.Center).Length() * 10f;
-                Projectile.NewProjectile(player.Center.X, player.Center.Y, 0, 0, mod.ProjectileType("FireBomb3"), item.damage, 0.5f, Main.myPlayer, 10f, 25f);
+                Projectile.NewProjectile(player.Center.X, player.Center.Y, 0, 0, Mod.Find<ModProjectile>("FireBomb3").Type, Item.damage, 0.5f, Main.myPlayer, 10f, 25f);
                 double m = Main.rand.NextFloat(0,3f);
                 for(int i = 0; i < 8; i++)
                 {
                     Vector2 v = new Vector2(0, 300).RotatedBy(MathHelper.Pi * i / 4d + m);
-                    int y = Projectile.NewProjectile(player.Center.X + v.X, player.Center.Y + v.Y, 0, 0, mod.ProjectileType("FireBomb"), 420, 0.5f, Main.myPlayer, 10f, 25f);
+                    int y = Projectile.NewProjectile(player.Center.X + v.X, player.Center.Y + v.Y, 0, 0, Mod.Find<ModProjectile>("FireBomb").Type, 420, 0.5f, Main.myPlayer, 10f, 25f);
                     Main.projectile[y].timeLeft = Main.rand.Next(35900, 36100);
                 }
                 mplayer.MagicCool += 600;
-                item.stack--;
-                player.AddBuff(mod.BuffType("愚昧诅咒"), 600, true);
+                Item.stack--;
+                player.AddBuff(Mod.Find<ModBuff>("愚昧诅咒").Type, 600, true);
             }
             return mplayer.MagicCool > 0;
         }

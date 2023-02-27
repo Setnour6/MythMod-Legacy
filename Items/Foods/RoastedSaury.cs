@@ -17,19 +17,19 @@ namespace MythMod.Items.Foods
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 50;
-            base.item.height = 52;
-            base.item.rare = 5;
-			base.item.useAnimation = 30;
-			base.item.useTime = 20;
-			base.item.useStyle = 1;
-			base.item.UseSound = SoundID.Item8;
-			base.item.consumable = true;
-            base.item.maxStack = 200;
-            base.item.consumable = true;
-            base.item.useTurn = true;
-            base.item.autoReuse = true;
-            base.item.createTile = base.mod.TileType("烤秋刀鱼");
+			base.Item.width = 50;
+            base.Item.height = 52;
+            base.Item.rare = 5;
+			base.Item.useAnimation = 30;
+			base.Item.useTime = 20;
+			base.Item.useStyle = 1;
+			base.Item.UseSound = SoundID.Item8;
+			base.Item.consumable = true;
+            base.Item.maxStack = 200;
+            base.Item.consumable = true;
+            base.Item.useTurn = true;
+            base.Item.autoReuse = true;
+            base.Item.createTile = base.Mod.Find<ModTile>("烤秋刀鱼").Type;
         }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent.ObjectInteractions;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -11,14 +12,14 @@ namespace MythMod.Tiles.TangerineFuniture
 {
 	public class TangerineClock : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[(int)base.Type] = true;
 			Main.tileNoAttach[(int)base.Type] = true;
 			Main.tileLavaDeath[(int)base.Type] = true;
 			Main.tileWaterDeath[(int)base.Type] = false;
 			TileID.Sets.HasOutlines[(int)base.Type] = true;
-			this.animationFrameHeight = 90;
+			this.AnimationFrameHeight = 90;
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style2xX);
 			TileObjectData.newTile.Height = 5;
 			TileObjectData.newTile.CoordinateHeights = new int[]
@@ -35,13 +36,13 @@ namespace MythMod.Tiles.TangerineFuniture
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
 			modTranslation.SetDefault("年桔木时钟");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
-			this.adjTiles = new int[]
+			this.AdjTiles = new int[]
 			{
 				104
 			};
 			modTranslation.AddTranslation(GameCulture.Chinese, "年桔木时钟");
 		}
-		public override bool HasSmartInteract()
+		public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings)
 		{
 			return true;
 		}
@@ -103,12 +104,12 @@ namespace MythMod.Tiles.TangerineFuniture
 		{
 			if (closer)
 			{
-				Main.clock = true;
+				Main.SceneMetrics.HasClock = true;
 			}
 		}
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			Item.NewItem(i * 16, j * 16, 48, 32, base.mod.ItemType("TangerineClock"), 1, false, 0, false, false);
+			Item.NewItem(i * 16, j * 16, 48, 32, base.Mod.Find<ModItem>("TangerineClock").Type, 1, false, 0, false, false);
 		}
 	}
 }

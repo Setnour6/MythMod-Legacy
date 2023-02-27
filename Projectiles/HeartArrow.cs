@@ -13,16 +13,16 @@ namespace MythMod.Projectiles
 		}
 		public override void SetDefaults()
 		{
-			base.projectile.width = 26;
-			base.projectile.height = 30;
-			base.projectile.friendly = true;
-			base.projectile.alpha = 65;
-			base.projectile.penetrate = 1;
-			base.projectile.tileCollide = true;
-			base.projectile.timeLeft = 300;
-            base.projectile.ranged = true;
-            base.projectile.aiStyle = 1;
-            this.aiType = 1;
+			base.Projectile.width = 26;
+			base.Projectile.height = 30;
+			base.Projectile.friendly = true;
+			base.Projectile.alpha = 65;
+			base.Projectile.penetrate = 1;
+			base.Projectile.tileCollide = true;
+			base.Projectile.timeLeft = 300;
+            base.Projectile.DamageType = DamageClass.Ranged;
+            base.Projectile.aiStyle = 1;
+            this.AIType = 1;
 		}
         float timer = 0;
         static float j = 0;
@@ -31,17 +31,17 @@ namespace MythMod.Projectiles
         Vector2 pc2 = Vector2.Zero;
         public override void AI()
         {
-            if (projectile.timeLeft == 71) { projectile.tileCollide = true; }
-            projectile.rotation = (float)System.Math.Atan2((double)projectile.velocity.Y, (double)projectile.velocity.X) + 1.57f;
-            projectile.light = 0.1f;
+            if (Projectile.timeLeft == 71) { Projectile.tileCollide = true; }
+            Projectile.rotation = (float)System.Math.Atan2((double)Projectile.velocity.Y, (double)Projectile.velocity.X) + 1.57f;
+            Projectile.light = 0.1f;
         }
 		public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
 		{
             if (Main.rand.Next(3) == 1)
             {
-                if (target.type != 113 && target.type != 396 && target.type != 397 && target.type != 398 && target.type != mod.NPCType("AncientTangerineTreeEye"))
+                if (target.type != 113 && target.type != 396 && target.type != 397 && target.type != 398 && target.type != Mod.Find<ModNPC>("AncientTangerineTreeEye").Type)
                 {
-                    target.AddBuff(mod.BuffType("Stunned"), 20, false);
+                    target.AddBuff(Mod.Find<ModBuff>("Stunned").Type, 20, false);
                 }
             }
 		}
@@ -52,7 +52,7 @@ namespace MythMod.Projectiles
                 for (int a = 0; a < 90; a++)
                 {
                     Vector2 v = new Vector2(0, Main.rand.Next(25, 50) / 50f).RotatedByRandom(Math.PI * 2);
-                    int num25 = Dust.NewDust(projectile.Center, 0, 0, 12, v.X, v.Y, 150, default(Color), 1.2f);
+                    int num25 = Dust.NewDust(Projectile.Center, 0, 0, 12, v.X, v.Y, 150, default(Color), 1.2f);
                     Main.dust[num25].noGravity = false;
                 }
             }

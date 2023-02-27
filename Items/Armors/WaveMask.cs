@@ -20,32 +20,31 @@ namespace MythMod.Items.Armors
         }
         public override void SetDefaults()
         {
-            base.item.width = 18;
-            base.item.height = 18;
-            base.item.value = Item.buyPrice(0, 21, 0, 0);
-            base.item.rare = 11;
-            base.item.defense = 36;
+            base.Item.width = 18;
+            base.Item.height = 18;
+            base.Item.value = Item.buyPrice(0, 21, 0, 0);
+            base.Item.rare = 11;
+            base.Item.defense = 36;
         }
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(null, "OceanBlueBar", 12);
             modRecipe.AddIngredient(null, "VoidBubble", 6);
             modRecipe.AddIngredient(null, "OceanDustCore", 6);
             modRecipe.AddIngredient(null, "BladeScale", 6);
             modRecipe.requiredTile[0] = 412;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
         public override void UpdateEquip(Player player)
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
-            player.meleeCrit += 10;
-            player.meleeDamage *= 1.1f;
+            player.GetCritChance(DamageClass.Generic) += 10;
+            player.GetDamage(DamageClass.Melee) *= 1.1f;
         }
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
-            return body.type == base.mod.ItemType("WaveBreastplate") && legs.type == base.mod.ItemType("WaveLegging");
+            return body.type == base.Mod.Find<ModItem>("WaveBreastplate").Type && legs.type == base.Mod.Find<ModItem>("WaveLegging").Type;
         }
         public override void ArmorSetShadows(Player player)
         {
@@ -56,8 +55,8 @@ namespace MythMod.Items.Armors
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             player.setBonus = "敌人靠近时放出有追踪效果的爆炸泡泡\n敌人越多效果越强\n近战伤害提高10%,近战暴击提高10%";
             mplayer.bubble = 2;
-            player.meleeCrit += 10;
-            player.meleeDamage *= 1.1f;
+            player.GetCritChance(DamageClass.Generic) += 10;
+            player.GetDamage(DamageClass.Melee) *= 1.1f;
         }
     }
 }

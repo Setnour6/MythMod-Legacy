@@ -7,7 +7,7 @@ namespace MythMod.Buffs
 {
     public class NJFZ : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("蜜桔");
             base.Description.SetDefault("蜜桔为你而战");
@@ -17,7 +17,7 @@ namespace MythMod.Buffs
 		public override void Update(Player player, ref int buffIndex)
 		{
 			MythPlayer modPlayer = player.GetModPlayer<MythPlayer>();
-            if (player.ownedProjectileCounts[base.mod.ProjectileType("桔子Zh")] > 0)
+            if (player.ownedProjectileCounts[base.Mod.Find<ModProjectile>("桔子Zh").Type] > 0)
 			{
 				modPlayer.NJFZ = true;
 			}

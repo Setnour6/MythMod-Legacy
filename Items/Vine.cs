@@ -15,21 +15,21 @@ namespace MythMod.Items
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 40;
-			base.item.height = 40;
-			base.item.value = Item.sellPrice(0, 4, 0, 0);
-			base.item.rare = 1;
-			base.item.noUseGraphic = true;
-			base.item.useStyle = 5;
-			base.item.shootSpeed = 15f;
-			base.item.shoot = base.mod.ProjectileType("VinePro");
-			base.item.UseSound = SoundID.Item1;
-			base.item.useAnimation = 20;
-			base.item.useTime = 20;
-			base.item.noMelee = false;
-            base.item.damage = 23;
-            base.item.knockBack = 4f;//击退
-            base.item.crit = 12;//暴击
+			base.Item.width = 40;
+			base.Item.height = 40;
+			base.Item.value = Item.sellPrice(0, 4, 0, 0);
+			base.Item.rare = 1;
+			base.Item.noUseGraphic = true;
+			base.Item.useStyle = 5;
+			base.Item.shootSpeed = 15f;
+			base.Item.shoot = base.Mod.Find<ModProjectile>("VinePro").Type;
+			base.Item.UseSound = SoundID.Item1;
+			base.Item.useAnimation = 20;
+			base.Item.useTime = 20;
+			base.Item.noMelee = false;
+            base.Item.damage = 23;
+            base.Item.knockBack = 4f;//击退
+            base.Item.crit = 12;//暴击
 		}
 	}
 }

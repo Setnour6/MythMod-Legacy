@@ -13,19 +13,18 @@ namespace MythMod.Items.Corals
         }
         public override void SetDefaults()
         {
-            base.item.width = 40;
-            base.item.height = 24;
-            base.item.rare = 2;
-            base.item.scale = 1f;
-            base.item.maxStack = 999;
-            base.item.value = 3000;
+            base.Item.width = 40;
+            base.Item.height = 24;
+            base.Item.rare = 2;
+            base.Item.scale = 1f;
+            base.Item.maxStack = 999;
+            base.Item.value = 3000;
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe2 = new ModRecipe(mod);
+            Recipe recipe2 = CreateRecipe(5);
             recipe2.AddIngredient(null, "WhiteSponge", 1);
-            recipe2.SetResult(this, 5);
-            recipe2.AddRecipe();
+            recipe2.Register();
         }
     }
 }

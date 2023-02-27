@@ -13,7 +13,7 @@ namespace MythMod.Tiles.Festivals
 	{
 		private float num5 = 0;
 		private int num6 = 0;
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileShine[(int)base.Type] = 800;
 			Main.tileSolid[(int)base.Type] = false;
@@ -32,7 +32,7 @@ namespace MythMod.Tiles.Festivals
 		}
 		public override bool CreateDust(int i, int j, ref int type)
 		{
-			switch (Main.tile[i, j].frameX / 18)
+			switch (Main.tile[i, j].TileFrameX / 18)
 			{
 			case 0:
 				type = 12;
@@ -57,7 +57,7 @@ namespace MythMod.Tiles.Festivals
 		public override bool Drop(int i, int j)
 		{
 			string text;
-			switch (Main.tile[i, j].frameX / 18)
+			switch (Main.tile[i, j].TileFrameX / 18)
 			{
 			case 0:
                 text = "CuYuanbao";
@@ -77,7 +77,7 @@ namespace MythMod.Tiles.Festivals
 			default:
 				return false;
 			}
-			Item.NewItem(i * 16, j * 16, 16, 48, base.mod.ItemType(text), 1, false, 0, false, false);
+			Item.NewItem(i * 16, j * 16, 16, 48, base.Mod.Find<ModItem>(text).Type, 1, false, 0, false, false);
 			return false;
 		}
 		public override void NearbyEffects(int i, int j, bool closer)

@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class Lavender : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("薰衣草菲仕");
             base.Description.SetDefault("攻击力增加11%,闪避增加9%");

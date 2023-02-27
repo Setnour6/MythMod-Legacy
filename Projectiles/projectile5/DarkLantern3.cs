@@ -1,9 +1,10 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
@@ -24,19 +25,19 @@ namespace MythMod.Projectiles.projectile5
         }
         public override void SetDefaults()
         {
-            projectile.width = 20;
-            projectile.height = 20;
-            projectile.aiStyle = -1;
-            projectile.friendly = false;
-            projectile.hostile = false;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = false;
-            projectile.extraUpdates = 3;
-            projectile.timeLeft = 3600;
-            projectile.alpha = 0;
-            projectile.penetrate = -1;
-            projectile.scale = 1.5f;
-            this.cooldownSlot = 1;
+            Projectile.width = 20;
+            Projectile.height = 20;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = false;
+            Projectile.hostile = false;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
+            Projectile.extraUpdates = 3;
+            Projectile.timeLeft = 3600;
+            Projectile.alpha = 0;
+            Projectile.penetrate = -1;
+            Projectile.scale = 1.5f;
+            this.CooldownSlot = 1;
         }
         //55555
         public override Color? GetAlpha(Color lightColor)
@@ -53,8 +54,8 @@ namespace MythMod.Projectiles.projectile5
                 num3 = Main.rand.NextFloat(0.3f, 1.8f);
                 num4 = Main.rand.NextFloat(0.3f, 1800f);
                 num5 = Main.rand.NextFloat(2.85f, 3.15f);
-                projectile.timeLeft = 5280;
-                num6 = projectile.timeLeft;
+                Projectile.timeLeft = 5280;
+                num6 = Projectile.timeLeft;
                 Fy = Main.rand.Next(4);
                 initialization = false;
             }
@@ -67,14 +68,14 @@ namespace MythMod.Projectiles.projectile5
             }
             if(num1 >= 1)
             {
-                projectile.hostile = true;
+                Projectile.hostile = true;
             }
             rot += LanternGhostKing.Adc;
-            if(projectile.timeLeft < 240)
+            if(Projectile.timeLeft < 240)
             {
-                projectile.scale *= 0.99f;
+                Projectile.scale *= 0.99f;
             }
-            projectile.position =  LanternGhostKing.Cirposi + new Vector2(0,projectile.ai[1]).RotatedBy(projectile.ai[0] / 15d * Math.PI + rot);
+            Projectile.position =  LanternGhostKing.Cirposi + new Vector2(0,Projectile.ai[1]).RotatedBy(Projectile.ai[0] / 15d * Math.PI + rot);
             //Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 0.8f / 255f * projectile.scale * num1, (float)(255 - base.projectile.alpha) * 0.2f / 255f * projectile.scale * num1, (float)(255 - base.projectile.alpha) * 0f / 255f * projectile.scale * num1);
         }
         private float rot = 0;
@@ -89,10 +90,10 @@ namespace MythMod.Projectiles.projectile5
         private float y = 0;
         private int Fy = 0;
         private int fyc = 0;
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D texture2D = Main.projectileTexture[base.projectile.type];
-            int nuM = Main.projectileTexture[base.projectile.type].Height;
+			Texture2D texture2D = TextureAssets.Projectile[base.Projectile.type].Value;
+            int nuM = TextureAssets.Projectile[base.Projectile.type].Value.Height;
             fyc += 1;
             if(fyc == 8)
             {
@@ -104,8 +105,8 @@ namespace MythMod.Projectiles.projectile5
                 Fy = 0;
             }
             Color colorT = new Color(1f * num * (float)(Math.Sin(num4) + 2) / 3f, 1f * num * (float)(Math.Sin(num4) + 2) / 3f, 1f * num * (float)(Math.Sin(num4) + 2) / 3f, 0.5f * num * (float)(Math.Sin(num4) + 2) / 3f);
-            Main.spriteBatch.Draw(texture2D, base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY), new Rectangle?(new Rectangle(0, 0, texture2D.Width, nuM)), colorT, base.projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)nuM / 2f), base.projectile.scale, SpriteEffects.None, 1f);
-            Main.spriteBatch.Draw(mod.GetTexture("Projectiles/projectile5/LanternFire"), base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY), new Rectangle?(new Rectangle(0, 30 * Fy, 20, 30)), colorT, 0, new Vector2(10, 15), base.projectile.scale * 0.5f, SpriteEffects.None, 1f);
+            Main.spriteBatch.Draw(texture2D, base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), new Rectangle?(new Rectangle(0, 0, texture2D.Width, nuM)), colorT, base.Projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)nuM / 2f), base.Projectile.scale, SpriteEffects.None, 1f);
+            Main.spriteBatch.Draw(Mod.GetTexture("Projectiles/projectile5/LanternFire"), base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), new Rectangle?(new Rectangle(0, 30 * Fy, 20, 30)), colorT, 0, new Vector2(10, 15), base.Projectile.scale * 0.5f, SpriteEffects.None, 1f);
             return false;
 		}
     }

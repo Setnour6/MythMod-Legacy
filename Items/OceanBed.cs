@@ -1,4 +1,5 @@
 ﻿using System;
+using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
@@ -17,28 +18,27 @@ namespace MythMod.Items
 		// Token: 0x06001CA5 RID: 7333 RVA: 0x000B5C5C File Offset: 0x000B3E5C
 		public override void SetDefaults()
 		{
-			base.item.width = 28;
-			base.item.height = 14;
-			base.item.maxStack = 99;
-			base.item.useTurn = true;
-			base.item.autoReuse = true;
-			base.item.useAnimation = 15;
-			base.item.useTime = 10;
-			base.item.useStyle = 1;
-			base.item.consumable = true;
-			base.item.value = 0;
-            base.item.createTile = base.mod.TileType("海洋床");
+			base.Item.width = 28;
+			base.Item.height = 14;
+			base.Item.maxStack = 99;
+			base.Item.useTurn = true;
+			base.Item.autoReuse = true;
+			base.Item.useAnimation = 15;
+			base.Item.useTime = 10;
+			base.Item.useStyle = 1;
+			base.Item.consumable = true;
+			base.Item.value = 0;
+            base.Item.createTile = base.Mod.Find<ModTile>("海洋床").Type;
 		}
 
 		// Token: 0x06001CA6 RID: 7334 RVA: 0x000B5D04 File Offset: 0x000B3F04
 		public override void AddRecipes()
 		{
-			ModRecipe modRecipe = new ModRecipe(base.mod);
+			Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
 			modRecipe.AddIngredient(null, "OceanBlueBar", 15);
 			modRecipe.AddIngredient(225, 5);
 			modRecipe.AddTile(18);
-			modRecipe.SetResult(this, 1);
-			modRecipe.AddRecipe();
+			modRecipe.Register();
 		}
 	}
 }

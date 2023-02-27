@@ -11,7 +11,7 @@ namespace MythMod.Tiles.Foods
 {
 	public class B25 : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileLighted[(int)base.Type] = true;
 			Main.tileFrameImportant[(int)base.Type] = true;
@@ -31,8 +31,8 @@ namespace MythMod.Tiles.Foods
 			modTranslation.SetDefault("B25");
             base.AddMapEntry(new Color(242, 141, 0), modTranslation);
             base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
-			this.disableSmartCursor = true;
-			this.adjTiles = new int[]
+			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+			this.AdjTiles = new int[]
 			{
 				4
 			};
@@ -56,14 +56,14 @@ namespace MythMod.Tiles.Foods
 		}
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("B25Drink"));
+            Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("B25Drink").Type);
         }
         public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
         {
             ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
             Color color = new Color(100, 100, 100, 0);
-            int frameX = Main.tile[i, j].frameX;
-            int frameY = Main.tile[i, j].frameY;
+            int frameX = Main.tile[i, j].TileFrameX;
+            int frameY = Main.tile[i, j].TileFrameY;
             int width = 20;
             int offsetY = 0;
             int height = 20;
@@ -84,7 +84,7 @@ namespace MythMod.Tiles.Foods
             {
                 float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
                 float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-                Main.spriteBatch.Draw(mod.GetTexture("Tiles/Foods/B25-Flame"), new Vector2((float)(i * 16 - (int)Main.screenPosition.X) - (width - 32f) / 2f + x - 14, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y + 0) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+                Main.spriteBatch.Draw(Mod.GetTexture("Tiles/Foods/B25-Flame"), new Vector2((float)(i * 16 - (int)Main.screenPosition.X) - (width - 32f) / 2f + x - 14, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y + 0) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
             }
         }
     }

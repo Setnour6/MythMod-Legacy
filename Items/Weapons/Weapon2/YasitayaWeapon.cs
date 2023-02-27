@@ -1,4 +1,4 @@
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria.Localization;
@@ -15,24 +15,24 @@ namespace MythMod.Items.Weapons.Weapon2
         }
         public override void SetDefaults()
         {
-            item.damage = 230;
-            item.melee = true;
-            item.width = 110;
-            item.height = 122;
-            item.useTime = 21;
-            item.rare = 8;
-            item.noMelee = true;
-            item.noUseGraphic = true;
-            item.useAnimation = 21;
-            item.useStyle = 1;
-            item.knockBack = 1.1f;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 6;
-            item.value = 800;
-            item.scale = 1f;
-            item.shoot = mod.ProjectileType("GoldBlood");
-            item.shootSpeed = 0;
+            Item.damage = 230;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 110;
+            Item.height = 122;
+            Item.useTime = 21;
+            Item.rare = 8;
+            Item.noMelee = true;
+            Item.noUseGraphic = true;
+            Item.useAnimation = 21;
+            Item.useStyle = 1;
+            Item.knockBack = 1.1f;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 6;
+            Item.value = 800;
+            Item.scale = 1f;
+            Item.shoot = Mod.Find<ModProjectile>("GoldBlood").Type;
+            Item.shootSpeed = 0;
         }
         private bool St = false;
         public override void HoldItem(Player player)

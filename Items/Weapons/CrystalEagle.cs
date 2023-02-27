@@ -27,29 +27,29 @@ namespace MythMod.Items.Weapons
         }
 		public override void SetDefaults()
 		{
-			base.item.damage = 270;
-			base.item.width = 62;
-			base.item.height = 36;
-			base.item.useTime = 6;
-			base.item.useAnimation = 6;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.ranged = true;
-			base.item.knockBack = 1f;
-			base.item.value = 20000;
-			base.item.rare = 11;
-			base.item.UseSound = SoundID.Item31;
-			base.item.autoReuse = true;
-            base.item.shoot = 14;
-			base.item.shootSpeed = 10f;
-			base.item.useAmmo = 97;
+			base.Item.damage = 270;
+			base.Item.width = 62;
+			base.Item.height = 36;
+			base.Item.useTime = 6;
+			base.Item.useAnimation = 6;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.DamageType = DamageClass.Ranged;
+			base.Item.knockBack = 1f;
+			base.Item.value = 20000;
+			base.Item.rare = 11;
+			base.Item.UseSound = SoundID.Item31;
+			base.Item.autoReuse = true;
+            base.Item.shoot = 14;
+			base.Item.shootSpeed = 10f;
+			base.Item.useAmmo = 97;
 		}
-		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
             Projectile.NewProjectile(position.X, position.Y + Main.rand.Next(-1, 2) * 6f, speedX, speedY, type, damage, knockBack, player.whoAmI, 0f, 0f);
             if ((int)(Main.time / 5f) % 5 == 0)
             {
-                int k = Projectile.NewProjectile(position.X, position.Y + Main.rand.Next(-2, 2), speedX * 2f, speedY * 2f, mod.ProjectileType("CrystalBullet"), (int)(damage * 2.5f), knockBack, player.whoAmI, 0f, 0f);
+                int k = Projectile.NewProjectile(position.X, position.Y + Main.rand.Next(-2, 2), speedX * 2f, speedY * 2f, Mod.Find<ModProjectile>("CrystalBullet").Type, (int)(damage * 2.5f), knockBack, player.whoAmI, 0f, 0f);
             }
             return false;
         }

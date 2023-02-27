@@ -20,24 +20,24 @@ namespace MythMod.Items.Banners
         // Token: 0x06000FC6 RID: 4038 RVA: 0x00088C14 File Offset: 0x00086E14
         public override void SetDefaults()
         {
-            base.item.width = 12;
-            base.item.height = 28;
-            base.item.maxStack = 99;
-            base.item.useTurn = true;
-            base.item.autoReuse = true;
-            base.item.useAnimation = 15;
-            base.item.useTime = 10;
-            base.item.useStyle = 1;
-            base.item.consumable = true;
-            base.item.rare = 1;
-            base.item.value = Item.buyPrice(0, 0, 10, 0);
-            base.item.createTile = base.mod.TileType("MonsterBanner");
-            base.item.placeStyle = 24;
+            base.Item.width = 12;
+            base.Item.height = 28;
+            base.Item.maxStack = 99;
+            base.Item.useTurn = true;
+            base.Item.autoReuse = true;
+            base.Item.useAnimation = 15;
+            base.Item.useTime = 10;
+            base.Item.useStyle = 1;
+            base.Item.consumable = true;
+            base.Item.rare = 1;
+            base.Item.value = Item.buyPrice(0, 0, 10, 0);
+            base.Item.createTile = base.Mod.Find<ModTile>("MonsterBanner").Type;
+            base.Item.placeStyle = 24;
         }
         public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
         {
             Vector2 origin = new Vector2(6f, 14f);
-            spriteBatch.Draw(base.mod.GetTexture("Items/Banners/熔岩陆龟BannerGlow"), base.item.Center - Main.screenPosition, null, Color.White, rotation, origin, 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(base.Mod.GetTexture("Items/Banners/熔岩陆龟BannerGlow"), base.Item.Center - Main.screenPosition, null, Color.White, rotation, origin, 1f, SpriteEffects.None, 0f);
         }
     }
 }

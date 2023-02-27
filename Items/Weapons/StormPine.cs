@@ -21,29 +21,29 @@ namespace MythMod.Items.Weapons
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("冰凌雪松");
-			Item.staff[base.item.type] = true;
+			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "冰凌雪松");
 		}
 		public override void SetDefaults()
 		{
-			base.item.damage = 275;
-			base.item.magic = true;
-			base.item.mana = 5;
-			base.item.width = 56;
-			base.item.height = 56;
-			base.item.useTime = 3;
-			base.item.useAnimation = 3;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.knockBack = 2.4f;
-			base.item.value = 50000;
-			base.item.rare = 11;
-			base.item.UseSound = SoundID.Item60;
-			base.item.autoReuse = true;
-            base.item.shoot = 336;
-			base.item.shootSpeed = 11f;
+			base.Item.damage = 275;
+			base.Item.DamageType = DamageClass.Magic;
+			base.Item.mana = 5;
+			base.Item.width = 56;
+			base.Item.height = 56;
+			base.Item.useTime = 3;
+			base.Item.useAnimation = 3;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 2.4f;
+			base.Item.value = 50000;
+			base.Item.rare = 11;
+			base.Item.UseSound = SoundID.Item60;
+			base.Item.autoReuse = true;
+            base.Item.shoot = 336;
+			base.Item.shootSpeed = 11f;
 		}
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Vector2 v = new Vector2(speedX, speedY).RotatedBy(Main.rand.Next(-100, 100) / 1000f * Math.PI) * Main.rand.Next(800, 1200) / 1000f;
             Projectile.NewProjectile(position.X + speedX, position.Y + speedY, v.X, v.Y, 336, damage, knockBack, player.whoAmI, 1f);
@@ -59,12 +59,11 @@ namespace MythMod.Items.Weapons
         }
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(1930, 5);
             modRecipe.AddIngredient(null, "SoulOfPine", 100);
             modRecipe.requiredTile[0] = 412;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
     }
 }

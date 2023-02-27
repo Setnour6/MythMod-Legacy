@@ -27,7 +27,7 @@ namespace MythMod.NPCs.LanternMoon
 		public override void SetStaticDefaults()
 		{
 			base.DisplayName.SetDefault("Milk Sweat Slime");
-			Main.npcFrameCount[base.npc.type] = 2;
+			Main.npcFrameCount[base.NPC.type] = 2;
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "奶糖史莱姆");
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -36,29 +36,29 @@ namespace MythMod.NPCs.LanternMoon
 		}
 		public override void SetDefaults()
 		{
-			base.npc.aiStyle = 1;
-			base.npc.damage = 182;
-			base.npc.width = 40;
-			base.npc.height = 30;
-			base.npc.defense = 90;
-			base.npc.lifeMax = 600;
-			base.npc.knockBackResist = 0f;
-			this.animationType = 81;
-			base.npc.value = (float)Item.buyPrice(0, 2, 0, 0);
-			base.npc.alpha = 0;
-            base.npc.scale = 0.85f;
-            base.npc.lavaImmune = false;
-			base.npc.noGravity = false;
-			base.npc.noTileCollide = false;
-			base.npc.HitSound = SoundID.NPCHit1;
-			base.npc.DeathSound = SoundID.NPCDeath1;
-            this.banner = base.npc.type;
-            this.bannerItem = base.mod.ItemType("MilkSlimeBanner");
+			base.NPC.aiStyle = 1;
+			base.NPC.damage = 182;
+			base.NPC.width = 40;
+			base.NPC.height = 30;
+			base.NPC.defense = 90;
+			base.NPC.lifeMax = 600;
+			base.NPC.knockBackResist = 0f;
+			this.AnimationType = 81;
+			base.NPC.value = (float)Item.buyPrice(0, 2, 0, 0);
+			base.NPC.alpha = 0;
+            base.NPC.scale = 0.85f;
+            base.NPC.lavaImmune = false;
+			base.NPC.noGravity = false;
+			base.NPC.noTileCollide = false;
+			base.NPC.HitSound = SoundID.NPCHit1;
+			base.NPC.DeathSound = SoundID.NPCDeath1;
+            this.Banner = base.NPC.type;
+            this.BannerItem = base.Mod.Find<ModItem>("MilkSlimeBanner").Type;
         }
 		public override void HitEffect(int hitDirection, double damage)
 		{
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
-            if (base.npc.life <= 0)
+            if (base.NPC.life <= 0)
             {
                 if (mplayer.LanternMoonWave != 25)
                 {
@@ -80,12 +80,12 @@ namespace MythMod.NPCs.LanternMoon
         private int Ene = 0;
         public override void AI()
         {
-            npc.ai[0] += 0.05f;
-            if (base.npc.collideX && base.npc.collideY)
+            NPC.ai[0] += 0.05f;
+            if (base.NPC.collideX && base.NPC.collideY)
             {
-                npc.active = false;
+                NPC.active = false;
             }
-            if (npc.velocity.Length() < 0.05f)
+            if (NPC.velocity.Length() < 0.05f)
             {
                 Ene += 1;
             }
@@ -94,12 +94,12 @@ namespace MythMod.NPCs.LanternMoon
                 for (int g = 0; g < 6; g++)
                 {
                     Vector2 v = new Vector2(0, -9 * Main.rand.NextFloat(0.5f, 1f)).RotatedBy(Main.rand.NextFloat(-0.5f, 0.5f));
-                    Projectile.NewProjectile(npc.Center.X + v.X, npc.Center.Y + v.Y, v.X, v.Y, base.mod.ProjectileType("MilkProj"), npc.damage, 0, Main.myPlayer, 0, 0f);
+                    Projectile.NewProjectile(NPC.Center.X + v.X, NPC.Center.Y + v.Y, v.X, v.Y, base.Mod.Find<ModProjectile>("MilkProj").Type, NPC.damage, 0, Main.myPlayer, 0, 0f);
                 }
                 Ene = 0;
             }
         }
-        public override void NPCLoot()
+        public override void OnKill()
 		{
 		}
     }

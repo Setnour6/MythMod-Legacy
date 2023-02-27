@@ -7,7 +7,7 @@ namespace MythMod.Buffs
 {
     public class 冰饮II : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("冰饮II");
             base.Description.SetDefault("附近有解暑的饮料,让你状态良好\n提升7%移速");

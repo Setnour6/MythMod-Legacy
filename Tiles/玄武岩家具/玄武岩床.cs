@@ -10,7 +10,7 @@ namespace MythMod.Tiles.玄武岩家具
 {
     public class 玄武岩床 : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[(int)base.Type] = true;
 			Main.tileLavaDeath[(int)base.Type] = true;
@@ -25,13 +25,13 @@ namespace MythMod.Tiles.玄武岩家具
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("玄武岩床");
 			base.AddMapEntry(new Color(80, 200, 200), modTranslation);
-			this.dustType = 15;
-			this.disableSmartCursor = true;
-			this.adjTiles = new int[]
+			this.DustType = 15;
+			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+			this.AdjTiles = new int[]
 			{
 				79
 			};
-			this.bed = true;
+			this.bed/* tModPorter Note: Removed. Use TileID.Sets.CanBeSleptIn instead */ = true;
             modTranslation.AddTranslation(GameCulture.Chinese, "玄武岩床");
 		}
 		public override void NumDust(int i, int j, bool fail, ref int num)
@@ -40,16 +40,16 @@ namespace MythMod.Tiles.玄武岩家具
 		}
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-            Item.NewItem(i * 16, j * 16, 64, 32, base.mod.ItemType("BasaltBed"), 1, false, 0, false, false);
+            Item.NewItem(i * 16, j * 16, 64, 32, base.Mod.Find<ModItem>("BasaltBed").Type, 1, false, 0, false, false);
 		}
 		public override void RightClick(int i, int j)
 		{
 			Player localPlayer = Main.LocalPlayer;
 			Tile tile = Main.tile[i, j];
-			int num = i - (int)(tile.frameX / 18);
+			int num = i - (int)(tile.TileFrameX / 18);
 			int num2 = j + 2;
-			num += ((tile.frameX >= 72) ? 5 : 2);
-			if (tile.frameY % 38 != 0)
+			num += ((tile.TileFrameX >= 72) ? 5 : 2);
+			if (tile.TileFrameY % 38 != 0)
 			{
 				num2--;
 			}
@@ -70,8 +70,8 @@ namespace MythMod.Tiles.玄武岩家具
 		{
 			Player localPlayer = Main.LocalPlayer;
 			localPlayer.noThrow = 2;
-			localPlayer.showItemIcon = true;
-            localPlayer.showItemIcon2 = base.mod.ItemType("BasaltBed");
+			localPlayer.cursorItemIconEnabled = true;
+            localPlayer.cursorItemIconID = base.Mod.Find<ModItem>("BasaltBed").Type;
 		}
 	}
 }

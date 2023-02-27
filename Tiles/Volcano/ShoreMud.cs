@@ -10,51 +10,51 @@ namespace MythMod.Tiles.Volcano
 {
     public class ShoreMud : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileSolid[(int)base.Type] = true;
 			Main.tileMergeDirt[(int)base.Type] = true;
 			Main.tileBlendAll[(int)base.Type] = true;
 			Main.tileBlockLight[(int)base.Type] = true;
 			Main.tileShine2[(int)base.Type] = false;
-			Main.tileValue[(int)base.Type] = 0;
-			this.dustType = 6;
-			this.minPick = 0;
-			this.soundType = 21;
-			this.soundStyle = 2;
-            this.drop = base.mod.ItemType("ShoreMud");
+			Main.tileOreFinderPriority[(int)base.Type] = 0;
+			this.DustType = 6;
+			this.MinPick = 0;
+			this.HitSound = 21;
+			this.soundStyle/* tModPorter Note: Removed. Integrate into HitSound */ = 2;
+            this.ItemDrop = base.Mod.Find<ModItem>("ShoreMud").Type;
 			Main.tileSpelunker[(int)base.Type] = true;
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
 			base.AddMapEntry(new Color(127, 30, 49), modTranslation);
             modTranslation.AddTranslation(GameCulture.Chinese, "");
-            SetModTree(new RedTree());
+            SetModTree(new RedTree())/* tModPorter Note: Removed. Assign GrowsOnTileId to this tile type in ModTree.SetStaticDefaults instead */;
         }
-        public override int SaplingGrowthType(ref int style)
+        public override int SaplingGrowthType(ref int style)/* tModPorter Note: Removed. Use ModTree.SaplingGrowthType */
         {
             style = 0;
-            return mod.TileType("RedTreeSapling");
+            return Mod.Find<ModTile>("RedTreeSapling").Type;
         }
         public override void RandomUpdate(int i, int j)
         {
-            if(!Main.tile[i, j - 1].active())
+            if(!Main.tile[i, j - 1].HasTile)
             {
                 switch (Main.rand.Next(1, 4))
                 {
                     case 1:
-                        WorldGen.PlaceTile(i, j - 1, mod.TileType("RedTreeSapling"));
+                        WorldGen.PlaceTile(i, j - 1, Mod.Find<ModTile>("RedTreeSapling").Type);
                         break;
                     case 2:
-                        WorldGen.PlaceTile(i, j - 1, mod.TileType("GasRoot"));
+                        WorldGen.PlaceTile(i, j - 1, Mod.Find<ModTile>("GasRoot").Type);
                         short num = (short)(Main.rand.Next(0, 6) * 18);
-                        Main.tile[i, j - 2].frameX = num;
-                        Main.tile[i, j - 1].frameX = num;
+                        Main.tile[i, j - 2].TileFrameX = num;
+                        Main.tile[i, j - 1].TileFrameX = num;
                         break;
                     case 3:
-                        WorldGen.PlaceTile(i, j - 2, mod.TileType("Shoregrass1"));
+                        WorldGen.PlaceTile(i, j - 2, Mod.Find<ModTile>("Shoregrass1").Type);
                         short num1 = (short)(Main.rand.Next(0, 6) * 36);
-                        Main.tile[i, j - 2].frameX = num1;
-                        Main.tile[i, j - 1].frameX = num1;
+                        Main.tile[i, j - 2].TileFrameX = num1;
+                        Main.tile[i, j - 1].TileFrameX = num1;
                         break;
                 }
             }

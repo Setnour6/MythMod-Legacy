@@ -10,6 +10,7 @@ using MythMod.UI.OceanWorld;
 using MythMod.Dusts;
 using MythMod.NPCs;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -214,7 +215,7 @@ namespace MythMod
             this.LowDisorder = false;
             this.Starfishes = false;
         }
-        public override void DrawEffects(PlayerDrawInfo drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
+        public override void DrawEffects(PlayerDrawSet drawInfo, ref float r, ref float g, ref float b, ref float a, ref bool fullBright)
         {
             //Texture2D texture = base.mod.GetTexture("UIImages/Life");
             //Main.heartTexture = texture;
@@ -224,21 +225,21 @@ namespace MythMod
         {
             if (YinYangLife.IMFlDmg > 5)
             {
-                if (player.statLifeMax2 <= 200)
+                if (Player.statLifeMax2 <= 200)
                 {
-                    player.statLife = 100;
+                    Player.statLife = 100;
                 }
                 else
                 {
-                    player.statLife = player.statLifeMax2 / 2;
+                    Player.statLife = Player.statLifeMax2 / 2;
                 }
                 return false;
             }
-            if (player.name == "万象元素")
+            if (Player.name == "万象元素")
             {
-                player.active = true;
-                player.dead = false;
-                player.statLife = player.statLifeMax2;
+                Player.active = true;
+                Player.dead = false;
+                Player.statLife = Player.statLifeMax2;
                 return false;
             }
             else
@@ -248,7 +249,7 @@ namespace MythMod
             }
         }
         public int IMMUNE = 0;
-        public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource)
+        public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource, ref int cooldownCounter)
         {
             if (DONTTAKEDAMDGE)
             {
@@ -256,7 +257,7 @@ namespace MythMod
             }
             else if (Main.rand.Next(0, 100) <= Misspossibility && IMMUNE == 0)
             {
-                Projectile.NewProjectile((float)player.Center.X, (float)player.Center.Y, 0, 0, mod.ProjectileType("Miss"), 0, 0, player.whoAmI, 0f, 0f);
+                Projectile.NewProjectile((float)Player.Center.X, (float)Player.Center.Y, 0, 0, Mod.Find<ModProjectile>("Miss").Type, 0, 0, Player.whoAmI, 0f, 0f);
                 IMMUNE += 30;
                 return false;
             }
@@ -264,16 +265,16 @@ namespace MythMod
             {
                 return false;
             }
-            else if (GreenBlood > 2 && Main.rand.Next(100) <= (player.wet ? 20 : 10))
+            else if (GreenBlood > 2 && Main.rand.Next(100) <= (Player.wet ? 20 : 10))
             {
                 if (!Main.player[Main.myPlayer].moonLeech)
                 {
                     int num6 = damage;
-                    player.HealEffect(num6, false);
-                    player.statLife += num6;
-                    if (player.statLife > player.statLifeMax2)
+                    Player.HealEffect(num6, false);
+                    Player.statLife += num6;
+                    if (Player.statLife > Player.statLifeMax2)
                     {
-                        player.statLife = player.statLifeMax2;
+                        Player.statLife = Player.statLifeMax2;
                     }
                     NetMessage.SendData(66, -1, -1, null, 0, (float)num6, 0f, 0f, 0, 0, 0);
                 }
@@ -285,11 +286,11 @@ namespace MythMod
                 if (CatastropheWheel >= 1)
                 {
                     int num6 = damage / 2;
-                    player.HealEffect(num6, false);
-                    player.statLife += num6;
-                    if (player.statLife > player.statLifeMax2)
+                    Player.HealEffect(num6, false);
+                    Player.statLife += num6;
+                    if (Player.statLife > Player.statLifeMax2)
                     {
-                        player.statLife = player.statLifeMax2;
+                        Player.statLife = Player.statLifeMax2;
                     }
                     NetMessage.SendData(66, -1, -1, null, 0, (float)num6, 0f, 0f, 0, 0, 0);
                     return true;
@@ -302,14 +303,14 @@ namespace MythMod
                 {
                     NightR = false;
                 }
-                if (ab > 0 && player.wet)
+                if (ab > 0 && Player.wet)
                 {
                     damage /= 2;
                 }
                 damage = (int)(damage * (100 - DisHurt) / 100f);
                 if (FlameShield > 0 && FlameShieldCool == 0)
                 {
-                    int h = Projectile.NewProjectile(player.Center, new Vector2(0, 0), 296, 50, 10, Main.myPlayer, 0, 0);
+                    int h = Projectile.NewProjectile(Player.Center, new Vector2(0, 0), 296, 50, 10, Main.myPlayer, 0, 0);
                     Main.projectile[h].friendly = true;
                     Main.projectile[h].hostile = false;
                     FlameShieldCool = 120;
@@ -360,7 +361,7 @@ namespace MythMod
             if (KiBo > 0)
             {
                 KiBo -= 1;
-                player.statDefense *= 0;
+                Player.statDefense *= 0;
             }
             else
             {
@@ -618,20 +619,18 @@ namespace MythMod
             if(FoodExp > FoodLecelUpNeed[1] && FoodLevel < 2)
             {
                 FoodLevel = 2;
-                ModRecipe recipe = new ModRecipe(mod);
+                Recipe recipe = Recipe.Create(Mod.Find<ModItem>("LittleCantaloupeJelly").Type, 3);
                 recipe.AddIngredient(null, "CantaloupeJuice", 1);
                 recipe.AddIngredient(23, 10);
                 recipe.AddIngredient(126, 4);
                 recipe.requiredTile[0] = 220;
-                recipe.SetResult(mod.ItemType("LittleCantaloupeJelly"), 3);
-                recipe.AddRecipe();
-                ModRecipe recipe2 = new ModRecipe(mod);
+                recipe.Register();
+                Recipe recipe2 = Recipe.Create(Mod.Find<ModItem>("littleWatermelonJelly").Type, 3);
                 recipe2.AddIngredient(null, "WaterMelonJuice", 1);
                 recipe2.AddIngredient(23, 10);
                 recipe2.AddIngredient(126, 4);
                 recipe2.requiredTile[0] = 220;
-                recipe2.SetResult(mod.ItemType("littleWatermelonJelly"), 3);
-                recipe2.AddRecipe();
+                recipe2.Register();
             }
             if (FoodExp > FoodLecelUpNeed[2] && FoodLevel < 3)
             {
@@ -642,36 +641,31 @@ namespace MythMod
                 //recipe.requiredTile[0] = 306;
                 //recipe.SetResult(mod.ItemType("草莓雪糕"), 1);
                 //recipe.AddRecipe();
-                ModRecipe recipe2 = new ModRecipe(mod);
-                recipe2.AddIngredient(mod.ItemType("UnroastedSaury"), 1);
+                Recipe recipe2 = Recipe.Create(Mod.Find<ModItem>("RoastedSaury").Type, 1);
+                recipe2.AddIngredient(Mod.Find<ModItem>("UnroastedSaury").Type, 1);
                 recipe2.AddIngredient(31, 1);
                 recipe2.requiredTile[0] = 215;
-                recipe2.SetResult(mod.ItemType("RoastedSaury"), 1);
-                recipe2.AddRecipe();
-                ModRecipe recipe3 = new ModRecipe(mod);
+                recipe2.Register();
+                Recipe recipe3 = Recipe.Create(Mod.Find<ModItem>("WatermelonJelly").Type, 1);
                 recipe3.AddIngredient(null, "WaterMelonJuice", 1);
                 recipe3.AddIngredient(23, 10);
                 recipe3.AddIngredient(126, 4);
                 recipe3.requiredTile[0] = 220;
-                recipe3.SetResult(mod.ItemType("WatermelonJelly"), 1);
-                recipe3.AddRecipe();
-                ModRecipe recipe4 = new ModRecipe(mod);
+                recipe3.Register();
+                Recipe recipe4 = Recipe.Create(Mod.Find<ModItem>("CantaloupeJelly").Type, 1);
                 recipe4.AddIngredient(null, "CantaloupeJuice", 1);
                 recipe4.AddIngredient(23, 10);
                 recipe4.AddIngredient(126, 4);
                 recipe4.requiredTile[0] = 220;
-                recipe4.SetResult(mod.ItemType("CantaloupeJelly"), 1);
-                ModRecipe recipe5 = new ModRecipe(mod);
+                Recipe recipe5 = Recipe.Create(Mod.Find<ModItem>("Curst").Type, 10);
                 recipe5.AddIngredient(null, "Flour", 1);
                 recipe5.AddIngredient(null, "Egg", 3);
-                recipe5.requiredTile[0] = mod.TileType("榨汁机");
-                recipe5.SetResult(mod.ItemType("Curst"), 10);
-                recipe5.AddRecipe();
-                ModRecipe recipe7 = new ModRecipe(mod);
+                recipe5.requiredTile[0] = Mod.Find<ModTile>("榨汁机").Type;
+                recipe5.Register();
+                Recipe recipe7 = Recipe.Create(Mod.Find<ModItem>("RoastedSquid").Type, 1);
                 recipe7.AddIngredient(null, "freshSquid", 1);
                 recipe7.requiredTile[0] = 215;
-                recipe7.SetResult(mod.ItemType("RoastedSquid"), 1);
-                recipe7.AddRecipe();
+                recipe7.Register();
             }
             if (FoodExp > FoodLecelUpNeed[3] && FoodLevel < 4)
             {
@@ -785,7 +779,7 @@ namespace MythMod
             {
                 ab = 0;
             }
-            if (player.HasBuff(mod.BuffType("嗜血狂暴")))
+            if (Player.HasBuff(Mod.Find<ModBuff>("嗜血狂暴").Type))
             {
                 if(Crazyindex < 6)
                 {
@@ -830,13 +824,13 @@ namespace MythMod
                                     Main.npc[r].damage = 65;
                                     NPCs.AIs.Eoc = false;
                                     Vector2 vector = Main.npc[r].Center + new Vector2(0f, (float)Main.npc[r].height / 2f);
-                                    NPC.NewNPC((int)vector.X, (int)vector.Y, mod.NPCType("克苏鲁之眼幻影"), 0, 0f, 0f, 0f, 0f, 255);
+                                    NPC.NewNPC((int)vector.X, (int)vector.Y, Mod.Find<ModNPC>("克苏鲁之眼幻影").Type, 0, 0f, 0f, 0f, 0f, 255);
                                 }
                                 if (Main.npc[r].life < 2000 && NPCs.AIs.Eoc2 == true)
                                 {
                                     NPCs.AIs.Eoc2 = false;
                                     Vector2 vector = Main.npc[r].Center + new Vector2(0f, (float)Main.npc[r].height / 2f);
-                                    NPC.NewNPC((int)vector.X, (int)vector.Y, mod.NPCType("克苏鲁之眼幻影"), 0, 0f, 0f, 0f, 0f, 255);
+                                    NPC.NewNPC((int)vector.X, (int)vector.Y, Mod.Find<ModNPC>("克苏鲁之眼幻影").Type, 0, 0f, 0f, 0f, 0f, 255);
                                 }
                                 if (Main.npc[r].life < 500 && NPCs.AIs.Eoc3 == true)
                                 {
@@ -845,18 +839,18 @@ namespace MythMod
                                     Vector2 vector3 = Main.npc[r].Center + new Vector2(0f, (float)Main.npc[r].height / 2f);
                                     Vector2 vector2 = Main.npc[r].Center + new Vector2(-200f, (float)Main.npc[r].height / 2f);
                                     NPCs.AIs.vector19 = new Vector2(0, 50);
-                                    NPCs.AIs.num71 = NPC.NewNPC((int)vector.X, (int)vector.Y, mod.NPCType("克苏鲁之眼幻影"), 0, 0f, 0f, 0f, 0f, 255);
-                                    NPCs.AIs.num72 = NPC.NewNPC((int)vector.X, (int)vector.Y, mod.NPCType("克苏鲁之眼幻影"), 0, 0f, 0f, 0f, 0f, 255);
+                                    NPCs.AIs.num71 = NPC.NewNPC((int)vector.X, (int)vector.Y, Mod.Find<ModNPC>("克苏鲁之眼幻影").Type, 0, 0f, 0f, 0f, 0f, 255);
+                                    NPCs.AIs.num72 = NPC.NewNPC((int)vector.X, (int)vector.Y, Mod.Find<ModNPC>("克苏鲁之眼幻影").Type, 0, 0f, 0f, 0f, 0f, 255);
                                     if (MythWorld.MythIndex >= 3)
                                     {
                                         for (int i = 0; i < 5; i++)
                                         {
                                             Vector2 v = new Vector2(0, 800).RotatedByRandom(Math.PI * 2);
-                                            NPC.NewNPC((int)vector3.X + (int)v.X, (int)vector3.Y + (int)v.Y, mod.NPCType("克苏鲁之眼幻影"), 0, 0f, 0f, 0f, 0f, 255);
+                                            NPC.NewNPC((int)vector3.X + (int)v.X, (int)vector3.Y + (int)v.Y, Mod.Find<ModNPC>("克苏鲁之眼幻影").Type, 0, 0f, 0f, 0f, 0f, 255);
                                         }
                                     }
                                 }
-                                if (NPC.CountNPCS(mod.NPCType("克苏鲁之眼幻影")) > 0)
+                                if (NPC.CountNPCS(Mod.Find<ModNPC>("克苏鲁之眼幻影").Type) > 0)
                                 {
                                     Main.npc[r].dontTakeDamage = true;
                                 }
@@ -868,9 +862,9 @@ namespace MythMod
                                 {
                                     if (Main.npc[r].velocity.Length() > 3f && (int)Main.time % 25 == 0)
                                     {
-                                        Vector2 C = player.Center;
-                                        Vector2 V = player.velocity.RotatedBy(Main.rand.NextFloat((float)Math.PI * 0.5f, (float)Math.PI * 1.5f)) / player.velocity.Length() * 350f;
-                                        NPCs.AIs.num71 = NPC.NewNPC((int)(V + C).X, (int)(V + C).Y, mod.NPCType("克苏鲁之眼残影"), 0, 0f, 0f, 0f, 0f, 255);
+                                        Vector2 C = Player.Center;
+                                        Vector2 V = Player.velocity.RotatedBy(Main.rand.NextFloat((float)Math.PI * 0.5f, (float)Math.PI * 1.5f)) / Player.velocity.Length() * 350f;
+                                        NPCs.AIs.num71 = NPC.NewNPC((int)(V + C).X, (int)(V + C).Y, Mod.Find<ModNPC>("克苏鲁之眼残影").Type, 0, 0f, 0f, 0f, 0f, 255);
                                     }
                                 }
                             }
@@ -920,8 +914,8 @@ namespace MythMod
                                                     if (num == 1)
                                                     {
                                                         Vector2 vector = Main.npc[r].Center + new Vector2(0f, (float)Main.npc[r].height / 2f);
-                                                        NPC.NewNPC((int)vector.X - 25, (int)vector.Y, mod.NPCType("飞行史莱姆"), 0, 0f, 0f, 0f, 0f, 255);
-                                                        NPC.NewNPC((int)vector.X + 25, (int)vector.Y - 10, mod.NPCType("飞行尖刺史莱姆"), 0, 0f, 0f, 0f, 0f, 255);
+                                                        NPC.NewNPC((int)vector.X - 25, (int)vector.Y, Mod.Find<ModNPC>("飞行史莱姆").Type, 0, 0f, 0f, 0f, 0f, 255);
+                                                        NPC.NewNPC((int)vector.X + 25, (int)vector.Y - 10, Mod.Find<ModNPC>("飞行尖刺史莱姆").Type, 0, 0f, 0f, 0f, 0f, 255);
                                                         Main.npc[r].ai[2] += 12f;
                                                         Main.npc[r].ai[0] += 700f;
                                                     }
@@ -937,8 +931,8 @@ namespace MythMod
                                                     if (num4002 == 1)
                                                     {
                                                         Vector2 vector = Main.npc[r].Center + new Vector2(0f, (float)Main.npc[r].height / 2f);
-                                                        NPC.NewNPC((int)vector.X - 25, (int)vector.Y, mod.NPCType("飞行史莱姆"), 0, 0f, 0f, 0f, 0f, 255);
-                                                        NPC.NewNPC((int)vector.X + 25, (int)vector.Y + 10, mod.NPCType("飞行尖刺史莱姆"), 0, 0f, 0f, 0f, 0f, 255);
+                                                        NPC.NewNPC((int)vector.X - 25, (int)vector.Y, Mod.Find<ModNPC>("飞行史莱姆").Type, 0, 0f, 0f, 0f, 0f, 255);
+                                                        NPC.NewNPC((int)vector.X + 25, (int)vector.Y + 10, Mod.Find<ModNPC>("飞行尖刺史莱姆").Type, 0, 0f, 0f, 0f, 0f, 255);
                                                         Main.npc[r].ai[2] += 5f;
                                                         Main.npc[r].ai[0] += 110f;
                                                         if (Main.npc[r].velocity.Y > 0)
@@ -954,7 +948,7 @@ namespace MythMod
                                                 if (num1 == 1)
                                                 {
                                                     Vector2 vector = Main.npc[r].Center + new Vector2(0f, (float)Main.npc[r].height / 2f);
-                                                    NPC.NewNPC((int)vector.X, (int)vector.Y, mod.NPCType("飞行史莱姆"), 0, 0f, 0f, 0f, 0f, 255);
+                                                    NPC.NewNPC((int)vector.X, (int)vector.Y, Mod.Find<ModNPC>("飞行史莱姆").Type, 0, 0f, 0f, 0f, 0f, 255);
                                                     Main.npc[r].ai[2] += 2f;
                                                     Main.npc[r].ai[0] += 35f;
                                                     if (Main.npc[r].velocity.Y > 0)
@@ -977,8 +971,8 @@ namespace MythMod
                                                     if (num == 1)
                                                     {
                                                         Vector2 vector = Main.npc[r].Center + new Vector2(0f, (float)Main.npc[r].height / 2f);
-                                                        NPC.NewNPC((int)vector.X - 25, (int)vector.Y, mod.NPCType("飞行史莱姆"), 0, 0f, 0f, 0f, 0f, 255);
-                                                        NPC.NewNPC((int)vector.X + 25, (int)vector.Y - 10, mod.NPCType("飞行尖刺史莱姆"), 0, 0f, 0f, 0f, 0f, 255);
+                                                        NPC.NewNPC((int)vector.X - 25, (int)vector.Y, Mod.Find<ModNPC>("飞行史莱姆").Type, 0, 0f, 0f, 0f, 0f, 255);
+                                                        NPC.NewNPC((int)vector.X + 25, (int)vector.Y - 10, Mod.Find<ModNPC>("飞行尖刺史莱姆").Type, 0, 0f, 0f, 0f, 0f, 255);
                                                         Main.npc[r].ai[2] += 4f;
                                                         Main.npc[r].ai[0] += 200f;
                                                     }
@@ -994,10 +988,10 @@ namespace MythMod
                                                     if (num4002 == 1)
                                                     {
                                                         Vector2 vector = Main.npc[r].Center + new Vector2(0f, (float)Main.npc[r].height / 2f);
-                                                        NPC.NewNPC((int)vector.X - 25, (int)vector.Y, mod.NPCType("飞行史莱姆"), 0, 0f, 0f, 0f, 0f, 255);
+                                                        NPC.NewNPC((int)vector.X - 25, (int)vector.Y, Mod.Find<ModNPC>("飞行史莱姆").Type, 0, 0f, 0f, 0f, 0f, 255);
                                                         if (Main.rand.Next(20) >= 15 && MythWorld.MythIndex >= 2)
                                                         {
-                                                            NPC.NewNPC((int)vector.X + 25, (int)vector.Y + 10, mod.NPCType("飞行尖刺史莱姆"), 0, 0f, 0f, 0f, 0f, 255);
+                                                            NPC.NewNPC((int)vector.X + 25, (int)vector.Y + 10, Mod.Find<ModNPC>("飞行尖刺史莱姆").Type, 0, 0f, 0f, 0f, 0f, 255);
                                                         }
                                                         Main.npc[r].ai[2] += 1.5f;
                                                         Main.npc[r].ai[0] += 40f;
@@ -1014,7 +1008,7 @@ namespace MythMod
                                                 if (num1 == 1)
                                                 {
                                                     Vector2 vector = Main.npc[r].Center + new Vector2(0f, (float)Main.npc[r].height / 2f);
-                                                    NPC.NewNPC((int)vector.X, (int)vector.Y, mod.NPCType("飞行史莱姆"), 0, 0f, 0f, 0f, 0f, 255);
+                                                    NPC.NewNPC((int)vector.X, (int)vector.Y, Mod.Find<ModNPC>("飞行史莱姆").Type, 0, 0f, 0f, 0f, 0f, 255);
                                                     Main.npc[r].ai[2] += 0.8f;
                                                     Main.npc[r].ai[0] += 10f;
                                                     if (Main.npc[r].velocity.Y > 0)
@@ -1062,83 +1056,83 @@ namespace MythMod
                     }
                 }
             }*/
-            if (player.behindBackWall && Main.tile[(int)(player.Center.X / 16), (int)(player.Center.Y / 16)].wall == mod.WallType("熔岩石墙") && ZoneVolcano)
+            if (Player.behindBackWall && Main.tile[(int)(Player.Center.X / 16), (int)(Player.Center.Y / 16)].WallType == Mod.Find<ModWall>("熔岩石墙").Type && ZoneVolcano)
             {
                 if(Main.rand.Next(10) == 1)
                 {
                     Vector2 v = new Vector2(0, Main.rand.Next(0, 6)).RotatedByRandom(Math.PI * 2);
-                    Projectile.NewProjectile(player.Center.X + Main.rand.Next(-Main.screenWidth / 2 - 20, Main.screenWidth / 2 + 20), player.Center.Y + Main.screenWidth / 2 + 15 + Main.rand.Next(-100, 100), 0 + v.X, -22 + v.Y, base.mod.ProjectileType("熔岩团"), 200, 0, Main.myPlayer, 0, 0f);
+                    Projectile.NewProjectile(Player.Center.X + Main.rand.Next(-Main.screenWidth / 2 - 20, Main.screenWidth / 2 + 20), Player.Center.Y + Main.screenWidth / 2 + 15 + Main.rand.Next(-100, 100), 0 + v.X, -22 + v.Y, base.Mod.Find<ModProjectile>("熔岩团").Type, 200, 0, Main.myPlayer, 0, 0f);
                 }
-                if(NPC.CountNPCS(mod.NPCType("诅咒熔岩巨石怪")) < 1)
+                if(NPC.CountNPCS(Mod.Find<ModNPC>("诅咒熔岩巨石怪").Type) < 1)
                 {
-                    NPC.NewNPC((int)player.Center.X, (int)player.Center.Y + 2000, mod.NPCType("诅咒熔岩巨石怪"), 0, 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)Player.Center.X, (int)Player.Center.Y + 2000, Mod.Find<ModNPC>("诅咒熔岩巨石怪").Type, 0, 0, 0, 0, 0, 255);
                 }
                 if(!MythWorld.downedVol)
                 {
-                    player.lastDeathPostion = player.Center;
-                    player.lastDeathTime = DateTime.Now;
-                    player.showLastDeath = true;
-                    if (Main.myPlayer == player.whoAmI)
+                    Player.lastDeathPostion = Player.Center;
+                    Player.lastDeathTime = DateTime.Now;
+                    Player.showLastDeath = true;
+                    if (Main.myPlayer == Player.whoAmI)
                     {
-                        player.lostCoinString = Main.ValueToCoins(player.lostCoins);
+                        Player.lostCoinString = Main.ValueToCoins(Player.lostCoins);
                     }
-                    Main.PlaySound(5, (int)player.position.X, (int)player.position.Y, 1, 1f, 0f);
-                    player.headVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
-                    player.bodyVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
-                    player.legVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
-                    player.headVelocity.X = (float)Main.rand.Next(-20, 21) * 0.1f + 0f;
-                    player.bodyVelocity.X = (float)Main.rand.Next(-20, 21) * 0.1f + 0f;
-                    player.legVelocity.X = (float)Main.rand.Next(-20, 21) * 0.1f + 0f;
-                    if (player.stoned)
+                    SoundEngine.PlaySound(SoundID.PlayerKilled, Player.position);
+                    Player.headVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
+                    Player.bodyVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
+                    Player.legVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
+                    Player.headVelocity.X = (float)Main.rand.Next(-20, 21) * 0.1f + 0f;
+                    Player.bodyVelocity.X = (float)Main.rand.Next(-20, 21) * 0.1f + 0f;
+                    Player.legVelocity.X = (float)Main.rand.Next(-20, 21) * 0.1f + 0f;
+                    if (Player.stoned)
                     {
-                        player.headPosition = Vector2.Zero;
-                        player.bodyPosition = Vector2.Zero;
-                        player.legPosition = Vector2.Zero;
+                        Player.headPosition = Vector2.Zero;
+                        Player.bodyPosition = Vector2.Zero;
+                        Player.legPosition = Vector2.Zero;
                     }
                     for (int j = 0; j < 100; j++)
                     {
-                        Dust.NewDust(player.position, player.width, player.height, 205, 0f, -2f, 0, default(Color), 1f);
+                        Dust.NewDust(Player.position, Player.width, Player.height, 205, 0f, -2f, 0, default(Color), 1f);
                     }
-                    player.statLife = 0;
-                    player.dead = true;
-                    player.respawnTimer = 600;
-                    player.head = -1;
-                    player.body = -1;
-                    player.legs = -1;
-                    player.handon = -1;
-                    player.handoff = -1;
-                    player.back = -1;
-                    player.front = -1;
-                    player.shoe = -1;
-                    player.waist = -1;
-                    player.shield = -1;
-                    player.neck = -1;
-                    player.face = -1;
-                    player.balloon = -1;
-                    player.mount.Dismount(player);
+                    Player.statLife = 0;
+                    Player.dead = true;
+                    Player.respawnTimer = 600;
+                    Player.head = -1;
+                    Player.body = -1;
+                    Player.legs = -1;
+                    Player.handon = -1;
+                    Player.handoff = -1;
+                    Player.back = -1;
+                    Player.front = -1;
+                    Player.shoe = -1;
+                    Player.waist = -1;
+                    Player.shield = -1;
+                    Player.neck = -1;
+                    Player.face = -1;
+                    Player.balloon = -1;
+                    Player.mount.Dismount(Player);
                     if (Main.expertMode)
                     {
-                        player.respawnTimer = (int)((double)player.respawnTimer * 1.5);
+                        Player.respawnTimer = (int)((double)Player.respawnTimer * 1.5);
                     }
-                    player.immuneAlpha = 0;
-                    player.palladiumRegen = false;
-                    player.iceBarrier = false;
-                    player.crystalLeaf = false;
-                    if (player.whoAmI == Main.myPlayer && player.difficulty == 0)
+                    Player.immuneAlpha = 0;
+                    Player.palladiumRegen = false;
+                    Player.iceBarrier = false;
+                    Player.crystalLeaf = false;
+                    if (Player.whoAmI == Main.myPlayer && Player.difficulty == 0)
                     {
-                        player.DropCoins();
+                        Player.DropCoins();
                     }
-                    else if (player.difficulty == 1)
+                    else if (Player.difficulty == 1)
                     {
-                        player.DropItems();
+                        Player.DropItems();
                     }
-                    else if (player.difficulty == 2)
+                    else if (Player.difficulty == 2)
                     {
-                        player.DropItems();
-                        player.KillMeForGood();
+                        Player.DropItems();
+                        Player.KillMeForGood();
                     }
                     Color messageColor2 = Color.Red;
-                    Main.NewText(Language.GetTextValue(player.name + "尝试闯入禁区"), messageColor2);
+                    Main.NewText(Language.GetTextValue(Player.name + "尝试闯入禁区"), messageColor2);
                 }
             }
             SD2 -= 1;
@@ -1149,13 +1143,13 @@ namespace MythMod
             }
             else
             {
-                if(Main.screenPosition.X + Main.mouseX - player.Center.X > 0)
+                if(Main.screenPosition.X + Main.mouseX - Player.Center.X > 0)
                 {
-                    player.direction = 1;
+                    Player.direction = 1;
                 }
                 else
                 {
-                    player.direction = -1;
+                    Player.direction = -1;
                 }
             }
             //int num = CombatText.NewText(new Rectangle((int)player.position.X, (int)player.position.Y, player.width, player.height), CombatText.HealLife, 999, false, false);
@@ -1214,15 +1208,15 @@ namespace MythMod
             {
                 if (Main.maxTilesX == 4200)
                 {
-                    player.position = new Vector2(20, Main.maxTilesY / 10f + 60) * 16f;
+                    Player.position = new Vector2(20, Main.maxTilesY / 10f + 60) * 16f;
                 }
                 if (Main.maxTilesX == 6400)
                 {
-                    player.position = new Vector2(20, Main.maxTilesY / 10f + 180) * 16f;
+                    Player.position = new Vector2(20, Main.maxTilesY / 10f + 180) * 16f;
                 }
                 if (Main.maxTilesX == 8400)
                 {
-                    player.position = new Vector2(20, Main.maxTilesY / 10f + 300) * 16f;
+                    Player.position = new Vector2(20, Main.maxTilesY / 10f + 300) * 16f;
                 }
                 trans = true;
             }
@@ -1241,7 +1235,7 @@ namespace MythMod
                 YangLife = YangLifeMax;
             YinBar = (float)YinLife / (float)YinLifeMax;
             YangBar = (float)YangLife / (float)YangLifeMax;
-            if (player.statLife > 0 && num2 > 120)
+            if (Player.statLife > 0 && num2 > 120)
             {
                 num2 += 1;
                 num1 = true;
@@ -1253,7 +1247,7 @@ namespace MythMod
             if (IMMUNE > 0)
             {
                 IMMUNE -= 1;
-                player.immune = true;
+                Player.immune = true;
             }
             if (Stones.Open == false && movieTime > 0)
             {
@@ -1263,13 +1257,13 @@ namespace MythMod
             {
                 Cloud = 0;
             }
-            if (player.active || !player.dead)
+            if (Player.active || !Player.dead)
             {
                 v1 = Main.screenPosition + new Vector2(Main.screenWidth / 2 - 16, Main.screenHeight / 2 - 24);
             }
-            if (ZTMSY && NPC.CountNPCS(mod.NPCType("终天灭世眼")) < 1)
+            if (ZTMSY && NPC.CountNPCS(Mod.Find<ModNPC>("终天灭世眼").Type) < 1)
             {
-                NPC.NewNPC((int)player.Center.X, (int)player.Center.Y, mod.NPCType("终天灭世眼"), 0, 0f, 0f, 0f, 0f, 255);
+                NPC.NewNPC((int)Player.Center.X, (int)Player.Center.Y, Mod.Find<ModNPC>("终天灭世眼").Type, 0, 0f, 0f, 0f, 0f, 255);
             }
             else
             {
@@ -1283,7 +1277,7 @@ namespace MythMod
             {
                 if (Starfish.Open)
                 {
-                    Projectile.NewProjectile(player.Center.X + player.direction * 25, player.Center.Y, player.direction * 4, 0, base.mod.ProjectileType("海星1"), 0, 0.2f, Main.myPlayer, 0f, 0f);
+                    Projectile.NewProjectile(Player.Center.X + Player.direction * 25, Player.Center.Y, Player.direction * 4, 0, base.Mod.Find<ModProjectile>("海星1").Type, 0, 0.2f, Main.myPlayer, 0f, 0f);
                 }
                 Starfish.Open = false;
             }
@@ -1314,14 +1308,14 @@ namespace MythMod
                 if (firstClick)
                 {
                     Maxfloor = 0;
-                    for (int k = (int)(player.position.X / 16f - 5); k < (int)(player.position.X / 16f + 5); k++)
+                    for (int k = (int)(Player.position.X / 16f - 5); k < (int)(Player.position.X / 16f + 5); k++)
                     {
-                        if (Main.tile[k, (int)(player.position.Y / 16f)].type == mod.TileType("电梯门"))
+                        if (Main.tile[k, (int)(Player.position.Y / 16f)].TileType == Mod.Find<ModTile>("电梯门").Type)
                         {
                             m = k;
-                            for (int l = (int)(player.position.Y / 16f); l < Main.maxTilesY; l += 4)
+                            for (int l = (int)(Player.position.Y / 16f); l < Main.maxTilesY; l += 4)
                             {
-                                if (Main.tile[m, l].type == mod.TileType("电梯门"))
+                                if (Main.tile[m, l].TileType == Mod.Find<ModTile>("电梯门").Type)
                                 {
                                     Zonefloor += 1;
                                 }
@@ -1329,7 +1323,7 @@ namespace MythMod
                             m3 = k;
                             for (int l = 0; l < Main.maxTilesY; l += 4)
                             {
-                                if (Main.tile[m, l].type == mod.TileType("电梯门"))
+                                if (Main.tile[m, l].TileType == Mod.Find<ModTile>("电梯门").Type)
                                 {
                                     Maxfloor += 1;
                                 }
@@ -1361,14 +1355,14 @@ namespace MythMod
                 if (firstClick)
                 {
                     Maxfloor = 0;
-                    for (int k = (int)(player.position.X / 16f - 5); k < (int)(player.position.X / 16f + 5); k++)
+                    for (int k = (int)(Player.position.X / 16f - 5); k < (int)(Player.position.X / 16f + 5); k++)
                     {
-                        if (Main.tile[k, (int)(player.position.Y / 16f)].type == mod.TileType("电梯门"))
+                        if (Main.tile[k, (int)(Player.position.Y / 16f)].TileType == Mod.Find<ModTile>("电梯门").Type)
                         {
                             m = k;
-                            for (int l = (int)(player.position.Y / 16f); l < Main.maxTilesY; l += 4)
+                            for (int l = (int)(Player.position.Y / 16f); l < Main.maxTilesY; l += 4)
                             {
-                                if (Main.tile[m, l].type == mod.TileType("电梯门"))
+                                if (Main.tile[m, l].TileType == Mod.Find<ModTile>("电梯门").Type)
                                 {
                                     Zonefloor += 1;
                                 }
@@ -1376,7 +1370,7 @@ namespace MythMod
                             m3 = k;
                             for (int l = 0; l < Main.maxTilesY; l += 4)
                             {
-                                if (Main.tile[m, l].type == mod.TileType("电梯门"))
+                                if (Main.tile[m, l].TileType == Mod.Find<ModTile>("电梯门").Type)
                                 {
                                     Maxfloor += 1;
                                 }
@@ -1406,17 +1400,17 @@ namespace MythMod
             if (TransD)
             {
                 FlyCamPosition = new Vector2(0, 2 * num3);
-                player.velocity *= 0;
+                Player.velocity *= 0;
                 num3 += 2f;
                 int p = 0;
-                for (int k = (int)(player.position.X / 16f - 5); k < (int)(player.position.X / 16f + 5); k++)
+                for (int k = (int)(Player.position.X / 16f - 5); k < (int)(Player.position.X / 16f + 5); k++)
                 {
-                    if (Main.tile[k, (int)((player.position.Y + FlyCamPosition.Y) / 16f)].type == mod.TileType("电梯门"))
+                    if (Main.tile[k, (int)((Player.position.Y + FlyCamPosition.Y) / 16f)].TileType == Mod.Find<ModTile>("电梯门").Type)
                     {
                         m2 = k;
-                        for (int l = (int)((player.position.Y + FlyCamPosition.Y) / 16f); l < Main.maxTilesY; l += 4)
+                        for (int l = (int)((Player.position.Y + FlyCamPosition.Y) / 16f); l < Main.maxTilesY; l += 4)
                         {
-                            if (Main.tile[m2, l].type == mod.TileType("电梯门"))
+                            if (Main.tile[m2, l].TileType == Mod.Find<ModTile>("电梯门").Type)
                             {
                                 p += 1;
                             }
@@ -1431,7 +1425,7 @@ namespace MythMod
                 {
                     num3 = 0;
                     LiftDontTake = true;
-                    player.position += FlyCamPosition;
+                    Player.position += FlyCamPosition;
                     OpenLift = true;
                     TransD = false;
                 }
@@ -1446,23 +1440,23 @@ namespace MythMod
                     {
                         LiftDontTake = false;
                     }
-                    player.noFallDmg = true;
+                    Player.noFallDmg = true;
                 }
             }
             if (TransU)
             {
                 FlyCamPosition = new Vector2(0, -2 * num3);
-                player.velocity *= 0;
+                Player.velocity *= 0;
                 num3 += 2f;
                 int p = 0;
-                for (int k = (int)(player.position.X / 16f - 5); k < (int)(player.position.X / 16f + 5); k++)
+                for (int k = (int)(Player.position.X / 16f - 5); k < (int)(Player.position.X / 16f + 5); k++)
                 {
-                    if (Main.tile[k, (int)((player.position.Y + FlyCamPosition.Y) / 16f)].type == mod.TileType("电梯门"))
+                    if (Main.tile[k, (int)((Player.position.Y + FlyCamPosition.Y) / 16f)].TileType == Mod.Find<ModTile>("电梯门").Type)
                     {
                         m2 = k;
-                        for (int l = (int)((player.position.Y + FlyCamPosition.Y) / 16f); l < Main.maxTilesY; l += 4)
+                        for (int l = (int)((Player.position.Y + FlyCamPosition.Y) / 16f); l < Main.maxTilesY; l += 4)
                         {
-                            if (Main.tile[m2, l].type == mod.TileType("电梯门"))
+                            if (Main.tile[m2, l].TileType == Mod.Find<ModTile>("电梯门").Type)
                             {
                                 p += 1;
                             }
@@ -1477,7 +1471,7 @@ namespace MythMod
                 {
                     num3 = 0;
                     LiftDontTake = true;
-                    player.position += FlyCamPosition + new Vector2(0, -64);
+                    Player.position += FlyCamPosition + new Vector2(0, -64);
                     OpenLift = true;
                     TransU = false;
                 }
@@ -1492,10 +1486,10 @@ namespace MythMod
                     {
                         LiftDontTake = false;
                     }
-                    player.noFallDmg = true;
+                    Player.noFallDmg = true;
                 }
             }
-            if (Main.mouseMiddle && player.name == "万象元素")
+            if (Main.mouseMiddle && Player.name == "万象元素")
             {
                 if (Main.mouseMiddleRelease)
                 {
@@ -1670,7 +1664,7 @@ namespace MythMod
             {
                 MagicCool = 0;
             }
-            if(player.name == ("万象元素"))
+            if(Player.name == ("万象元素"))
             {
                 MagicCool = 0;
             }
@@ -1679,9 +1673,9 @@ namespace MythMod
                 LanternMoon = false;
                 LanternMoonPoint = 0;
             }
-            if (player.ZoneCorrupt && NPC.CountNPCS(mod.NPCType("魔茧")) <= 0 && Main.rand.Next(10000) == 1)
+            if (Player.ZoneCorrupt && NPC.CountNPCS(Mod.Find<ModNPC>("魔茧").Type) <= 0 && Main.rand.Next(10000) == 1)
             {
-                Projectile.NewProjectile(player.Center.X + player.direction * 1000, player.Center.Y, 0, 0, base.mod.ProjectileType("茧"), 0, 0, Main.myPlayer, 0f, 0);
+                Projectile.NewProjectile(Player.Center.X + Player.direction * 1000, Player.Center.Y, 0, 0, base.Mod.Find<ModProjectile>("茧").Type, 0, 0, Main.myPlayer, 0f, 0);
             }
 
 
@@ -1843,7 +1837,7 @@ namespace MythMod
                     {
                         Color messageColor = Color.MediumPurple;
                         Main.NewText(Language.GetTextValue("波数: 15:灯笼鬼王"), messageColor);
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("LanternGhostKing"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("LanternGhostKing").Type, 0, 0, 0, 0, 0, 255);
                         LanternMoonWave = 15;
                     }
                     PerWavePoint = 10000;
@@ -1954,10 +1948,10 @@ namespace MythMod
                     {
                         Color messageColor = Color.MediumPurple;
                         Main.NewText(Language.GetTextValue("波数: 25:千年桔树妖"), messageColor);
-                        NPC.NewNPC((int)player.Center.X, (int)player.Center.Y - 500, mod.NPCType("AncientTangerineTreeHat"), 0, 0, 0, 0, 0, 255);
-                        NPC.NewNPC((int)player.Center.X, (int)player.Center.Y - 495, mod.NPCType("AncientTangerineTreeHatSHadow"), 0, 0, 0, 0, 0, 255);
-                        NPC.NewNPC((int)player.Center.X, (int)player.Center.Y, mod.NPCType("AncientTangerineTree"), 0, 0, 0, 0, 0, 255);
-                        NPC.NewNPC((int)player.Center.X, (int)player.Center.Y - 145, mod.NPCType("AncientTangerineTreeEye"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X, (int)Player.Center.Y - 500, Mod.Find<ModNPC>("AncientTangerineTreeHat").Type, 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X, (int)Player.Center.Y - 495, Mod.Find<ModNPC>("AncientTangerineTreeHatSHadow").Type, 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X, (int)Player.Center.Y, Mod.Find<ModNPC>("AncientTangerineTree").Type, 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X, (int)Player.Center.Y - 145, Mod.Find<ModNPC>("AncientTangerineTreeEye").Type, 0, 0, 0, 0, 0, 255);
                         LanternMoonWave = 25;
                     }
                     PerWavePoint = 10000;
@@ -2009,1033 +2003,1033 @@ namespace MythMod
                 }
                 if (LanternMoonWave == 1)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("HappinessZombie")) < 30 && Main.rand.Next(28) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("HappinessZombie").Type) < 30 && Main.rand.Next(28) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("HappinessZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("HappinessZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("HappinessZombie")) < 30 && Main.rand.Next(28) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("HappinessZombie").Type) < 30 && Main.rand.Next(28) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("HappinessZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("HappinessZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 2)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("HappinessZombie")) < 30 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("HappinessZombie").Type) < 30 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("HappinessZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("HappinessZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("HappinessZombie")) < 30 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("HappinessZombie").Type) < 30 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("HappinessZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("HappinessZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 3)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("PaperCuttingBat")) < 15 && Main.rand.Next(15) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("PaperCuttingBat").Type) < 15 && Main.rand.Next(15) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("PaperCuttingBat"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("PaperCuttingBat").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("PaperCuttingBat")) < 15 && Main.rand.Next(15) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("PaperCuttingBat").Type) < 15 && Main.rand.Next(15) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("PaperCuttingBat"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("PaperCuttingBat").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("HappinessZombie")) < 15 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("HappinessZombie").Type) < 15 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("HappinessZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("HappinessZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("HappinessZombie")) < 15 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("HappinessZombie").Type) < 15 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("HappinessZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("HappinessZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 4)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("PaperCuttingBat")) < 20 && Main.rand.Next(10) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("PaperCuttingBat").Type) < 20 && Main.rand.Next(10) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("PaperCuttingBat"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("PaperCuttingBat").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("PaperCuttingBat")) < 20 && Main.rand.Next(10) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("PaperCuttingBat").Type) < 20 && Main.rand.Next(10) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("PaperCuttingBat"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("PaperCuttingBat").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("HappinessZombie")) < 20 && Main.rand.Next(15) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("HappinessZombie").Type) < 20 && Main.rand.Next(15) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("HappinessZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("HappinessZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("HappinessZombie")) < 20 && Main.rand.Next(15) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("HappinessZombie").Type) < 20 && Main.rand.Next(15) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("HappinessZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("HappinessZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 5)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("FloatLantern")) < 2 && Main.rand.Next(60) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("FloatLantern").Type) < 2 && Main.rand.Next(60) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("FloatLantern"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("FloatLantern").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("PaperCuttingBat")) < 20 && Main.rand.Next(15) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("PaperCuttingBat").Type) < 20 && Main.rand.Next(15) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("PaperCuttingBat"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("PaperCuttingBat").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("HappinessZombie")) < 20 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("HappinessZombie").Type) < 20 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("HappinessZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("HappinessZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("HappinessZombie")) < 20 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("HappinessZombie").Type) < 20 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("HappinessZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("HappinessZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 6)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("FloatLantern")) < 4 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("FloatLantern").Type) < 4 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("FloatLantern"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("FloatLantern").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("PaperCuttingBat")) < 20 && Main.rand.Next(15) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("PaperCuttingBat").Type) < 20 && Main.rand.Next(15) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("PaperCuttingBat"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("PaperCuttingBat").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("PaperCuttingBat")) < 20 && Main.rand.Next(15) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("PaperCuttingBat").Type) < 20 && Main.rand.Next(15) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("PaperCuttingBat"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("PaperCuttingBat").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("HappinessZombie")) < 20 && Main.rand.Next(15) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("HappinessZombie").Type) < 20 && Main.rand.Next(15) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("HappinessZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("HappinessZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("HappinessZombie")) < 20 && Main.rand.Next(15) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("HappinessZombie").Type) < 20 && Main.rand.Next(15) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("HappinessZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("HappinessZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 7)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("PaperCuttingBat")) < 50 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("PaperCuttingBat").Type) < 50 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("PaperCuttingBat"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("PaperCuttingBat").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("PaperCuttingBat")) < 50 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("PaperCuttingBat").Type) < 50 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("PaperCuttingBat"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("PaperCuttingBat").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 8)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("FloatLantern")) < 20 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("FloatLantern").Type) < 20 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("FloatLantern"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("FloatLantern").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("FloatLantern")) < 20 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("FloatLantern").Type) < 20 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("FloatLantern"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("FloatLantern").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 9)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("RedPackBomber")) < 6 && Main.rand.Next(120) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("RedPackBomber").Type) < 6 && Main.rand.Next(120) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("RedPackBomber"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("RedPackBomber").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("FloatLantern")) < 6 && Main.rand.Next(60) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("FloatLantern").Type) < 6 && Main.rand.Next(60) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("FloatLantern"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("FloatLantern").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("RedPackBomber")) < 6 && Main.rand.Next(120) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("RedPackBomber").Type) < 6 && Main.rand.Next(120) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("RedPackBomber"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("RedPackBomber").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("FloatLantern")) < 6 && Main.rand.Next(60) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("FloatLantern").Type) < 6 && Main.rand.Next(60) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("FloatLantern"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("FloatLantern").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("PaperCuttingBat")) < 20 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("PaperCuttingBat").Type) < 20 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("PaperCuttingBat"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("PaperCuttingBat").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("HappinessZombie")) < 20 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("HappinessZombie").Type) < 20 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("HappinessZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("HappinessZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("HappinessZombie")) < 20 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("HappinessZombie").Type) < 20 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("HappinessZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("HappinessZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 10)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("RedPackBomber")) < 8 && Main.rand.Next(80) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("RedPackBomber").Type) < 8 && Main.rand.Next(80) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("RedPackBomber"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("RedPackBomber").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("FloatLantern")) < 8 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("FloatLantern").Type) < 8 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("FloatLantern"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("FloatLantern").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("RedPackBomber")) < 8 && Main.rand.Next(80) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("RedPackBomber").Type) < 8 && Main.rand.Next(80) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("RedPackBomber"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("RedPackBomber").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("FloatLantern")) < 8 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("FloatLantern").Type) < 8 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("FloatLantern"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("FloatLantern").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("PaperCuttingBat")) < 20 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("PaperCuttingBat").Type) < 20 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("PaperCuttingBat"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("PaperCuttingBat").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("PaperCuttingBat")) < 20 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("PaperCuttingBat").Type) < 20 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("PaperCuttingBat"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("PaperCuttingBat").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("HappinessZombie")) < 14 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("HappinessZombie").Type) < 14 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("HappinessZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("HappinessZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("HappinessZombie")) < 14 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("HappinessZombie").Type) < 14 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("HappinessZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("HappinessZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 11)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("RedPackBomber")) < 10 && Main.rand.Next(80) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("RedPackBomber").Type) < 10 && Main.rand.Next(80) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("RedPackBomber"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("RedPackBomber").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("FloatLantern")) < 10 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("FloatLantern").Type) < 10 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("FloatLantern"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("FloatLantern").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("RedPackBomber")) < 10 && Main.rand.Next(80) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("RedPackBomber").Type) < 10 && Main.rand.Next(80) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("RedPackBomber"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("RedPackBomber").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("FloatLantern")) < 10 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("FloatLantern").Type) < 10 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("FloatLantern"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("FloatLantern").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("PaperCuttingBat")) < 20 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("PaperCuttingBat").Type) < 20 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("PaperCuttingBat"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("PaperCuttingBat").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("PaperCuttingBat")) < 20 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("PaperCuttingBat").Type) < 20 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("PaperCuttingBat"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("PaperCuttingBat").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 12)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("RedPackBomber")) < 10 && Main.rand.Next(80) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("RedPackBomber").Type) < 10 && Main.rand.Next(80) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("RedPackBomber"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("RedPackBomber").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("FloatLantern")) < 10 && Main.rand.Next(60) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("FloatLantern").Type) < 10 && Main.rand.Next(60) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("FloatLantern"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("FloatLantern").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("RedPackBomber")) < 10 && Main.rand.Next(80) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("RedPackBomber").Type) < 10 && Main.rand.Next(80) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("RedPackBomber"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("RedPackBomber").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("FloatLantern")) < 10 && Main.rand.Next(60) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("FloatLantern").Type) < 10 && Main.rand.Next(60) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("FloatLantern"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("FloatLantern").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("PaperCuttingBat")) < 20 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("PaperCuttingBat").Type) < 20 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("PaperCuttingBat"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("PaperCuttingBat").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("PaperCuttingBat")) < 20 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("PaperCuttingBat").Type) < 20 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("PaperCuttingBat"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("PaperCuttingBat").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LanternSprite")) < 10 && Main.rand.Next(80) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LanternSprite").Type) < 10 && Main.rand.Next(80) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("LanternSprite"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("LanternSprite").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LanternSprite")) < 10 && Main.rand.Next(80) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LanternSprite").Type) < 10 && Main.rand.Next(80) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("LanternSprite"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("LanternSprite").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 13)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("RedPackBomber")) < 10 && Main.rand.Next(80) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("RedPackBomber").Type) < 10 && Main.rand.Next(80) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("RedPackBomber"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("RedPackBomber").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("FloatLantern")) < 10 && Main.rand.Next(60) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("FloatLantern").Type) < 10 && Main.rand.Next(60) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("FloatLantern"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("FloatLantern").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("RedPackBomber")) < 10 && Main.rand.Next(80) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("RedPackBomber").Type) < 10 && Main.rand.Next(80) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("RedPackBomber"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("RedPackBomber").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("FloatLantern")) < 10 && Main.rand.Next(60) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("FloatLantern").Type) < 10 && Main.rand.Next(60) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("FloatLantern"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("FloatLantern").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("PaperCuttingBat")) < 20 && Main.rand.Next(60) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("PaperCuttingBat").Type) < 20 && Main.rand.Next(60) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("PaperCuttingBat"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("PaperCuttingBat").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("PaperCuttingBat")) < 20 && Main.rand.Next(60) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("PaperCuttingBat").Type) < 20 && Main.rand.Next(60) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("PaperCuttingBat"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("PaperCuttingBat").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LanternSprite")) < 10 && Main.rand.Next(80) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LanternSprite").Type) < 10 && Main.rand.Next(80) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("LanternSprite"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("LanternSprite").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LanternSprite")) < 10 && Main.rand.Next(80) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LanternSprite").Type) < 10 && Main.rand.Next(80) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("LanternSprite"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("LanternSprite").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("HappinessZombie")) < 14 && Main.rand.Next(60) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("HappinessZombie").Type) < 14 && Main.rand.Next(60) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("HappinessZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("HappinessZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("HappinessZombie")) < 14 && Main.rand.Next(60) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("HappinessZombie").Type) < 14 && Main.rand.Next(60) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("HappinessZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("HappinessZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 14)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("RedPackBomber")) < 24 && Main.rand.Next(60) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("RedPackBomber").Type) < 24 && Main.rand.Next(60) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("RedPackBomber"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("RedPackBomber").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("FloatLantern")) < 24 && Main.rand.Next(60) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("FloatLantern").Type) < 24 && Main.rand.Next(60) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("FloatLantern"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("FloatLantern").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LanternSprite")) < 24 && Main.rand.Next(60) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LanternSprite").Type) < 24 && Main.rand.Next(60) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("LanternSprite"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("LanternSprite").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("RedPackBomber")) < 24 && Main.rand.Next(60) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("RedPackBomber").Type) < 24 && Main.rand.Next(60) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("RedPackBomber"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("RedPackBomber").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("FloatLantern")) < 24 && Main.rand.Next(60) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("FloatLantern").Type) < 24 && Main.rand.Next(60) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("FloatLantern"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("FloatLantern").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LanternSprite")) < 24 && Main.rand.Next(60) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LanternSprite").Type) < 24 && Main.rand.Next(60) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("LanternSprite"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("LanternSprite").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 16)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("MilkSlime1")) < 6 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("MilkSlime1").Type) < 6 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("MilkSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("MilkSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("MilkSlime1")) < 6 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("MilkSlime1").Type) < 6 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("MilkSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("MilkSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StrawberrySlime1")) < 6 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StrawberrySlime1").Type) < 6 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("StrawberrySlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("StrawberrySlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StrawberrySlime1")) < 6 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StrawberrySlime1").Type) < 6 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("StrawberrySlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("StrawberrySlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 17)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("MilkSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("MilkSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("MilkSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("MilkSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("MilkSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("MilkSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("MilkSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("MilkSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StrawberrySlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StrawberrySlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("StrawberrySlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("StrawberrySlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StrawberrySlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StrawberrySlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("StrawberrySlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("StrawberrySlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("AppleSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("AppleSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("AppleSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("AppleSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("AppleSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("AppleSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("AppleSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("AppleSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("OrangeSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("OrangeSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("OrangeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("OrangeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("OrangeSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("OrangeSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("OrangeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("OrangeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 18)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("MilkSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("MilkSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("MilkSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("MilkSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("MilkSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("MilkSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("MilkSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("MilkSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StrawberrySlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StrawberrySlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("StrawberrySlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("StrawberrySlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StrawberrySlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StrawberrySlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("StrawberrySlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("StrawberrySlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("AppleSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("AppleSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("AppleSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("AppleSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("AppleSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("AppleSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("AppleSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("AppleSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("OrangeSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("OrangeSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("OrangeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("OrangeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("OrangeSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("OrangeSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("OrangeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("OrangeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("ChocolateSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("ChocolateSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("ChocolateSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("ChocolateSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("ChocolateSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("ChocolateSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("ChocolateSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("ChocolateSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("GrapeSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("GrapeSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("GrapeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("GrapeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("GrapeSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("GrapeSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("GrapeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("GrapeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LemonSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LemonSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("LemonSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("LemonSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LemonSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LemonSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("LemonSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("LemonSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 19)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("MilkSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("MilkSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("MilkSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("MilkSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("MilkSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("MilkSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("MilkSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("MilkSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StrawberrySlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StrawberrySlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("StrawberrySlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("StrawberrySlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StrawberrySlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StrawberrySlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("StrawberrySlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("StrawberrySlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("AppleSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("AppleSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("AppleSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("AppleSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("AppleSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("AppleSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("AppleSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("AppleSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("OrangeSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("OrangeSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("OrangeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("OrangeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("OrangeSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("OrangeSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("OrangeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("OrangeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("ChocolateSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("ChocolateSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("ChocolateSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("ChocolateSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("ChocolateSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("ChocolateSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("ChocolateSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("ChocolateSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("GrapeSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("GrapeSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("GrapeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("GrapeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("GrapeSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("GrapeSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("GrapeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("GrapeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LemonSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LemonSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("LemonSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("LemonSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LemonSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LemonSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("LemonSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("LemonSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("VerdantTangerine")) < 5 && Main.rand.Next(120) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("VerdantTangerine").Type) < 5 && Main.rand.Next(120) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y + Main.rand.Next(100, 400), mod.NPCType("VerdantTangerine"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y + Main.rand.Next(100, 400), Mod.Find<ModNPC>("VerdantTangerine").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("VerdantTangerine")) < 5 && Main.rand.Next(120) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("VerdantTangerine").Type) < 5 && Main.rand.Next(120) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y + Main.rand.Next(100, 400), mod.NPCType("VerdantTangerine"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y + Main.rand.Next(100, 400), Mod.Find<ModNPC>("VerdantTangerine").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 20)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("MilkSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("MilkSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("MilkSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("MilkSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("MilkSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("MilkSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("MilkSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("MilkSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StrawberrySlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StrawberrySlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("StrawberrySlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("StrawberrySlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StrawberrySlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StrawberrySlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("StrawberrySlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("StrawberrySlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("AppleSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("AppleSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("AppleSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("AppleSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("AppleSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("AppleSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("AppleSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("AppleSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("OrangeSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("OrangeSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("OrangeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("OrangeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("OrangeSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("OrangeSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("OrangeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("OrangeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("ChocolateSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("ChocolateSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("ChocolateSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("ChocolateSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("ChocolateSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("ChocolateSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("ChocolateSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("ChocolateSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("GrapeSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("GrapeSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("GrapeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("GrapeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("GrapeSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("GrapeSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("GrapeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("GrapeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LemonSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LemonSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("LemonSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("LemonSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LemonSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LemonSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("LemonSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("LemonSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("VerdantTangerine")) < 8 && Main.rand.Next(90) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("VerdantTangerine").Type) < 8 && Main.rand.Next(90) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y + Main.rand.Next(100, 400), mod.NPCType("VerdantTangerine"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y + Main.rand.Next(100, 400), Mod.Find<ModNPC>("VerdantTangerine").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("VerdantTangerine")) < 8 && Main.rand.Next(90) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("VerdantTangerine").Type) < 8 && Main.rand.Next(90) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y + Main.rand.Next(100, 400), mod.NPCType("VerdantTangerine"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y + Main.rand.Next(100, 400), Mod.Find<ModNPC>("VerdantTangerine").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 21)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("MilkSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("MilkSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("MilkSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("MilkSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("MilkSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("MilkSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("MilkSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("MilkSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StrawberrySlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StrawberrySlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("StrawberrySlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("StrawberrySlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StrawberrySlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StrawberrySlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("StrawberrySlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("StrawberrySlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("AppleSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("AppleSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("AppleSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("AppleSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("AppleSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("AppleSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("AppleSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("AppleSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("OrangeSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("OrangeSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("OrangeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("OrangeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("OrangeSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("OrangeSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("OrangeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("OrangeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("ChocolateSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("ChocolateSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("ChocolateSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("ChocolateSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("ChocolateSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("ChocolateSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("ChocolateSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("ChocolateSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("GrapeSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("GrapeSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("GrapeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("GrapeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("GrapeSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("GrapeSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("GrapeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("GrapeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LemonSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LemonSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("LemonSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("LemonSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LemonSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LemonSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("LemonSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("LemonSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("VerdantTangerine")) < 3 && Main.rand.Next(60) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("VerdantTangerine").Type) < 3 && Main.rand.Next(60) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y + Main.rand.Next(100, 400), mod.NPCType("VerdantTangerine"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y + Main.rand.Next(100, 400), Mod.Find<ModNPC>("VerdantTangerine").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("VerdantTangerine")) < 3 && Main.rand.Next(60) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("VerdantTangerine").Type) < 3 && Main.rand.Next(60) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y + Main.rand.Next(100, 400), mod.NPCType("VerdantTangerine"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y + Main.rand.Next(100, 400), Mod.Find<ModNPC>("VerdantTangerine").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LachangGhost")) < 3 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LachangGhost").Type) < 3 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y + Main.rand.Next(100, 400), mod.NPCType("LachangGhost"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y + Main.rand.Next(100, 400), Mod.Find<ModNPC>("LachangGhost").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LachangGhost")) < 3 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LachangGhost").Type) < 3 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y + Main.rand.Next(100, 400), mod.NPCType("LachangGhost"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y + Main.rand.Next(100, 400), Mod.Find<ModNPC>("LachangGhost").Type, 0, 0, 0, 0, 0, 255);
                     }
 
                 }
                 if (LanternMoonWave == 22)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("MilkSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("MilkSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("MilkSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("MilkSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("MilkSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("MilkSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("MilkSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("MilkSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StrawberrySlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StrawberrySlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("StrawberrySlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("StrawberrySlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StrawberrySlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StrawberrySlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("StrawberrySlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("StrawberrySlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("AppleSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("AppleSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("AppleSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("AppleSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("AppleSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("AppleSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("AppleSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("AppleSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("OrangeSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("OrangeSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("OrangeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("OrangeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("OrangeSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("OrangeSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("OrangeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("OrangeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("ChocolateSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("ChocolateSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("ChocolateSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("ChocolateSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("ChocolateSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("ChocolateSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("ChocolateSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("ChocolateSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("GrapeSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("GrapeSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("GrapeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("GrapeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("GrapeSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("GrapeSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("GrapeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("GrapeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LemonSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LemonSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("LemonSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("LemonSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LemonSlime1")) < 2 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LemonSlime1").Type) < 2 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("LemonSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("LemonSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("VerdantTangerine")) < 3 && Main.rand.Next(60) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("VerdantTangerine").Type) < 3 && Main.rand.Next(60) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y + Main.rand.Next(100, 400), mod.NPCType("VerdantTangerine"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y + Main.rand.Next(100, 400), Mod.Find<ModNPC>("VerdantTangerine").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("VerdantTangerine")) < 3 && Main.rand.Next(60) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("VerdantTangerine").Type) < 3 && Main.rand.Next(60) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y + Main.rand.Next(100, 400), mod.NPCType("VerdantTangerine"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y + Main.rand.Next(100, 400), Mod.Find<ModNPC>("VerdantTangerine").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LachangGhost")) < 6 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LachangGhost").Type) < 6 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y + Main.rand.Next(100, 400), mod.NPCType("LachangGhost"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y + Main.rand.Next(100, 400), Mod.Find<ModNPC>("LachangGhost").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LachangGhost")) < 6 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LachangGhost").Type) < 6 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y + Main.rand.Next(100, 400), mod.NPCType("LachangGhost"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y + Main.rand.Next(100, 400), Mod.Find<ModNPC>("LachangGhost").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("BumpTangyuan")) < 6 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("BumpTangyuan").Type) < 6 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("BumpTangyuan"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("BumpTangyuan").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("BumpTangyuan")) < 6 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("BumpTangyuan").Type) < 6 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("BumpTangyuan"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("BumpTangyuan").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 23)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("MilkSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("MilkSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("MilkSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("MilkSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("MilkSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("MilkSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("MilkSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("MilkSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StrawberrySlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StrawberrySlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("StrawberrySlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("StrawberrySlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StrawberrySlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StrawberrySlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("StrawberrySlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("StrawberrySlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("AppleSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("AppleSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("AppleSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("AppleSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("AppleSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("AppleSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("AppleSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("AppleSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("OrangeSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("OrangeSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("OrangeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("OrangeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("OrangeSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("OrangeSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("OrangeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("OrangeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("ChocolateSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("ChocolateSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("ChocolateSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("ChocolateSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("ChocolateSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("ChocolateSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("ChocolateSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("ChocolateSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("GrapeSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("GrapeSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("GrapeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("GrapeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("GrapeSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("GrapeSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("GrapeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("GrapeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LemonSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LemonSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("LemonSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("LemonSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LemonSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LemonSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("LemonSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("LemonSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("VerdantTangerine")) < 3 && Main.rand.Next(60) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("VerdantTangerine").Type) < 3 && Main.rand.Next(60) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y + Main.rand.Next(100, 400), mod.NPCType("VerdantTangerine"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y + Main.rand.Next(100, 400), Mod.Find<ModNPC>("VerdantTangerine").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("VerdantTangerine")) < 3 && Main.rand.Next(60) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("VerdantTangerine").Type) < 3 && Main.rand.Next(60) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y + Main.rand.Next(100, 400), mod.NPCType("VerdantTangerine"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y + Main.rand.Next(100, 400), Mod.Find<ModNPC>("VerdantTangerine").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LachangGhost")) < 7 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LachangGhost").Type) < 7 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y + Main.rand.Next(100, 400), mod.NPCType("LachangGhost"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y + Main.rand.Next(100, 400), Mod.Find<ModNPC>("LachangGhost").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LachangGhost")) < 7 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LachangGhost").Type) < 7 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y + Main.rand.Next(100, 400), mod.NPCType("LachangGhost"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y + Main.rand.Next(100, 400), Mod.Find<ModNPC>("LachangGhost").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("BumpTangyuan")) < 8 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("BumpTangyuan").Type) < 8 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("BumpTangyuan"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("BumpTangyuan").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("BumpTangyuan")) < 8 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("BumpTangyuan").Type) < 8 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("BumpTangyuan"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("BumpTangyuan").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("OrchidSprite")) < 3 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("OrchidSprite").Type) < 3 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("OrchidSprite"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("OrchidSprite").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("OrchidSprite")) < 3 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("OrchidSprite").Type) < 3 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("OrchidSprite"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("OrchidSprite").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 24)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("MilkSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("MilkSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("MilkSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("MilkSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("MilkSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("MilkSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("MilkSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("MilkSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StrawberrySlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StrawberrySlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("StrawberrySlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("StrawberrySlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StrawberrySlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StrawberrySlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("StrawberrySlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("StrawberrySlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("AppleSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("AppleSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("AppleSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("AppleSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("AppleSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("AppleSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("AppleSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("AppleSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("OrangeSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("OrangeSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("OrangeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("OrangeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("OrangeSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("OrangeSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("OrangeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("OrangeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("ChocolateSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("ChocolateSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("ChocolateSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("ChocolateSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("ChocolateSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("ChocolateSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("ChocolateSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("ChocolateSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("GrapeSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("GrapeSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("GrapeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("GrapeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("GrapeSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("GrapeSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("GrapeSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("GrapeSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LemonSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LemonSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("LemonSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("LemonSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LemonSlime1")) < 1 && Main.rand.Next(40) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LemonSlime1").Type) < 1 && Main.rand.Next(40) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("LemonSlime1"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("LemonSlime1").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("VerdantTangerine")) < 5 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("VerdantTangerine").Type) < 5 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y + Main.rand.Next(100, 400), mod.NPCType("VerdantTangerine"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y + Main.rand.Next(100, 400), Mod.Find<ModNPC>("VerdantTangerine").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("VerdantTangerine")) < 5 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("VerdantTangerine").Type) < 5 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y + Main.rand.Next(100, 400), mod.NPCType("VerdantTangerine"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y + Main.rand.Next(100, 400), Mod.Find<ModNPC>("VerdantTangerine").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LachangGhost")) < 9 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LachangGhost").Type) < 9 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y + Main.rand.Next(100, 400), mod.NPCType("LachangGhost"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y + Main.rand.Next(100, 400), Mod.Find<ModNPC>("LachangGhost").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("LachangGhost")) < 9 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("LachangGhost").Type) < 9 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y + Main.rand.Next(100, 400), mod.NPCType("LachangGhost"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y + Main.rand.Next(100, 400), Mod.Find<ModNPC>("LachangGhost").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("BumpTangyuan")) < 10 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("BumpTangyuan").Type) < 10 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("BumpTangyuan"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("BumpTangyuan").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("BumpTangyuan")) < 10 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("BumpTangyuan").Type) < 10 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("BumpTangyuan"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("BumpTangyuan").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("OrchidSprite")) < 5 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("OrchidSprite").Type) < 5 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("OrchidSprite"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("OrchidSprite").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("OrchidSprite")) < 5 && Main.rand.Next(30) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("OrchidSprite").Type) < 5 && Main.rand.Next(30) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("OrchidSprite"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("OrchidSprite").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 26)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("DiggingErrupt")) < 15 && Main.rand.Next(65) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("DiggingErrupt").Type) < 15 && Main.rand.Next(65) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("DiggingErrupt"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("DiggingErrupt").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("DiggingErrupt")) < 15 && Main.rand.Next(65) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("DiggingErrupt").Type) < 15 && Main.rand.Next(65) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("DiggingErrupt"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("DiggingErrupt").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StubbronChildZombie")) < 15 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StubbronChildZombie").Type) < 15 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("StubbronChildZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("StubbronChildZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StubbronChildZombie")) < 15 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StubbronChildZombie").Type) < 15 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("StubbronChildZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("StubbronChildZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 27)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("DiggingErrupt")) < 18 && Main.rand.Next(50) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("DiggingErrupt").Type) < 18 && Main.rand.Next(50) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("DiggingErrupt"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("DiggingErrupt").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("DiggingErrupt")) < 18 && Main.rand.Next(50) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("DiggingErrupt").Type) < 18 && Main.rand.Next(50) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("DiggingErrupt"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("DiggingErrupt").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StubbronChildZombie")) < 18 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StubbronChildZombie").Type) < 18 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("StubbronChildZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("StubbronChildZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StubbronChildZombie")) < 18 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StubbronChildZombie").Type) < 18 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("StubbronChildZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("StubbronChildZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 28)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("DiggingErrupt")) < 15 && Main.rand.Next(50) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("DiggingErrupt").Type) < 15 && Main.rand.Next(50) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("DiggingErrupt"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("DiggingErrupt").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("DiggingErrupt")) < 15 && Main.rand.Next(50) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("DiggingErrupt").Type) < 15 && Main.rand.Next(50) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("DiggingErrupt"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("DiggingErrupt").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StubbronChildZombie")) < 15 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StubbronChildZombie").Type) < 15 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("StubbronChildZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("StubbronChildZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StubbronChildZombie")) < 15 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StubbronChildZombie").Type) < 15 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("StubbronChildZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("StubbronChildZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("FireFly")) < 5 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("FireFly").Type) < 5 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("FireFly"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("FireFly").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("FireFly")) < 5 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("FireFly").Type) < 5 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("FireFly"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("FireFly").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("FireFlyGreen")) < 5 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("FireFlyGreen").Type) < 5 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("FireFlyGreen"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("FireFlyGreen").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("FireFlyGreen")) < 5 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("FireFlyGreen").Type) < 5 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("FireFlyGreen"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("FireFlyGreen").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
                 if (LanternMoonWave == 29)
                 {
-                    if (NPC.CountNPCS(mod.NPCType("DiggingErrupt")) < 15 && Main.rand.Next(50) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("DiggingErrupt").Type) < 15 && Main.rand.Next(50) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("DiggingErrupt"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("DiggingErrupt").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("DiggingErrupt")) < 15 && Main.rand.Next(50) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("DiggingErrupt").Type) < 15 && Main.rand.Next(50) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - Main.rand.Next(100, 400), mod.NPCType("DiggingErrupt"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - Main.rand.Next(100, 400), Mod.Find<ModNPC>("DiggingErrupt").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StubbronChildZombie")) < 15 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StubbronChildZombie").Type) < 15 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("StubbronChildZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("StubbronChildZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("StubbronChildZombie")) < 15 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("StubbronChildZombie").Type) < 15 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("StubbronChildZombie"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("StubbronChildZombie").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("FireFly")) < 7 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("FireFly").Type) < 7 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("FireFly"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("FireFly").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("FireFly")) < 7 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("FireFly").Type) < 7 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("FireFly"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("FireFly").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("FireFlyGreen")) < 7 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("FireFlyGreen").Type) < 7 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("FireFlyGreen"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("FireFlyGreen").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("FireFlyGreen")) < 7 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("FireFlyGreen").Type) < 7 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("FireFlyGreen"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("FireFlyGreen").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("BurningWindmill")) < 4 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("BurningWindmill").Type) < 4 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X - 1000, (int)player.Center.Y - 300, mod.NPCType("BurningWindmill"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X - 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("BurningWindmill").Type, 0, 0, 0, 0, 0, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("BurningWindmill")) < 4 && Main.rand.Next(20) == 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("BurningWindmill").Type) < 4 && Main.rand.Next(20) == 1)
                     {
-                        NPC.NewNPC((int)player.Center.X + 1000, (int)player.Center.Y - 300, mod.NPCType("BurningWindmill"), 0, 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)Player.Center.X + 1000, (int)Player.Center.Y - 300, Mod.Find<ModNPC>("BurningWindmill").Type, 0, 0, 0, 0, 0, 255);
                     }
                 }
-                Main.moonTexture[0] = (mod.GetTexture("UIImages/LanternMoon"));
-                Main.moonTexture[1] = (mod.GetTexture("UIImages/LanternMoon"));
-                Main.moonTexture[2] = (mod.GetTexture("UIImages/LanternMoon"));               
+                Main.moonTexture[0] = (Mod.GetTexture("UIImages/LanternMoon"));
+                Main.moonTexture[1] = (Mod.GetTexture("UIImages/LanternMoon"));
+                Main.moonTexture[2] = (Mod.GetTexture("UIImages/LanternMoon"));               
             }
             if (MythWorld.Myth)
             {
@@ -3092,7 +3086,7 @@ namespace MythMod
                 if(BanTraBall)
                 {
                     BanTra = true;
-                    player.AddBuff(mod.BuffType("秩序之锁"), 2);
+                    Player.AddBuff(Mod.Find<ModBuff>("秩序之锁").Type, 2);
                 }
                 else
                 {
@@ -3108,81 +3102,81 @@ namespace MythMod
                 }
                 if (false)
                 {
-                    player.lastDeathPostion = player.Center;
-                    player.lastDeathTime = DateTime.Now;
-                    player.showLastDeath = true;
-                    if (Main.myPlayer == player.whoAmI)
+                    Player.lastDeathPostion = Player.Center;
+                    Player.lastDeathTime = DateTime.Now;
+                    Player.showLastDeath = true;
+                    if (Main.myPlayer == Player.whoAmI)
                     {
-                        player.lostCoinString = Main.ValueToCoins(player.lostCoins);
+                        Player.lostCoinString = Main.ValueToCoins(Player.lostCoins);
                     }
-                    Main.PlaySound(5, (int)player.position.X, (int)player.position.Y, 1, 1f, 0f);
-                    player.headVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
-                    player.bodyVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
-                    player.legVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
-                    player.headVelocity.X = (float)Main.rand.Next(-20, 21) * 0.1f + 0f;
-                    player.bodyVelocity.X = (float)Main.rand.Next(-20, 21) * 0.1f + 0f;
-                    player.legVelocity.X = (float)Main.rand.Next(-20, 21) * 0.1f + 0f;
-                    if (player.stoned)
+                    SoundEngine.PlaySound(SoundID.PlayerKilled, Player.position);
+                    Player.headVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
+                    Player.bodyVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
+                    Player.legVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
+                    Player.headVelocity.X = (float)Main.rand.Next(-20, 21) * 0.1f + 0f;
+                    Player.bodyVelocity.X = (float)Main.rand.Next(-20, 21) * 0.1f + 0f;
+                    Player.legVelocity.X = (float)Main.rand.Next(-20, 21) * 0.1f + 0f;
+                    if (Player.stoned)
                     {
-                        player.headPosition = Vector2.Zero;
-                        player.bodyPosition = Vector2.Zero;
-                        player.legPosition = Vector2.Zero;
+                        Player.headPosition = Vector2.Zero;
+                        Player.bodyPosition = Vector2.Zero;
+                        Player.legPosition = Vector2.Zero;
                     }
                     for (int j = 0; j < 100; j++)
                     {
-                        Dust.NewDust(player.position, player.width, player.height, 205, 0f, -2f, 0, default(Color), 1f);
+                        Dust.NewDust(Player.position, Player.width, Player.height, 205, 0f, -2f, 0, default(Color), 1f);
                     }
-                    player.statLife = 0;
-                    player.dead = true;
-                    player.respawnTimer = 600;
-                    player.head = -1;
-                    player.body = -1;
-                    player.legs = -1;
-                    player.handon = -1;
-                    player.handoff = -1;
-                    player.back = -1;
-                    player.front = -1;
-                    player.shoe = -1;
-                    player.waist = -1;
-                    player.shield = -1;
-                    player.neck = -1;
-                    player.face = -1;
-                    player.balloon = -1;
-                    player.mount.Dismount(player);
+                    Player.statLife = 0;
+                    Player.dead = true;
+                    Player.respawnTimer = 600;
+                    Player.head = -1;
+                    Player.body = -1;
+                    Player.legs = -1;
+                    Player.handon = -1;
+                    Player.handoff = -1;
+                    Player.back = -1;
+                    Player.front = -1;
+                    Player.shoe = -1;
+                    Player.waist = -1;
+                    Player.shield = -1;
+                    Player.neck = -1;
+                    Player.face = -1;
+                    Player.balloon = -1;
+                    Player.mount.Dismount(Player);
                     if (Main.expertMode)
                     {
-                        player.respawnTimer = (int)((double)player.respawnTimer * 1.5);
+                        Player.respawnTimer = (int)((double)Player.respawnTimer * 1.5);
                     }
-                    player.immuneAlpha = 0;
-                    player.palladiumRegen = false;
-                    player.iceBarrier = false;
-                    player.crystalLeaf = false;
-                    if (player.whoAmI == Main.myPlayer && player.difficulty == 0)
+                    Player.immuneAlpha = 0;
+                    Player.palladiumRegen = false;
+                    Player.iceBarrier = false;
+                    Player.crystalLeaf = false;
+                    if (Player.whoAmI == Main.myPlayer && Player.difficulty == 0)
                     {
-                        player.DropCoins();
+                        Player.DropCoins();
                     }
-                    else if (player.difficulty == 1)
+                    else if (Player.difficulty == 1)
                     {
-                        player.DropItems();
+                        Player.DropItems();
                     }
-                    else if (player.difficulty == 2)
+                    else if (Player.difficulty == 2)
                     {
-                        player.DropItems();
-                        player.KillMeForGood();
+                        Player.DropItems();
+                        Player.KillMeForGood();
                     }
                 }
                 if (ZoneVolcano)
                 {
-                    if (Main.rand.Next(1500) == 142 && Main.tile[(int)(player.position.X / 16), (int)(player.position.Y / 16)].wall == mod.WallType("玄武岩墙"))
+                    if (Main.rand.Next(1500) == 142 && Main.tile[(int)(Player.position.X / 16), (int)(Player.position.Y / 16)].WallType == Mod.Find<ModWall>("玄武岩墙").Type)
                     {
-                        Projectile.NewProjectile(Main.screenPosition.X + Main.rand.NextFloat(Main.screenWidth), Main.screenPosition.Y - Main.rand.Next(150, 400), 0, 1, base.mod.ProjectileType("熔岩滚石"), 300, 8, Main.myPlayer, 10, 0f);
+                        Projectile.NewProjectile(Main.screenPosition.X + Main.rand.NextFloat(Main.screenWidth), Main.screenPosition.Y - Main.rand.Next(150, 400), 0, 1, base.Mod.Find<ModProjectile>("熔岩滚石").Type, 300, 8, Main.myPlayer, 10, 0f);
                     }
                 }
                 if (ZoneVolcano && VIm == 0)
                 {
-                    player.mount.Dismount(player);
-                    player.wingTime = 0;
-                    player.AddBuff(mod.BuffType("高温窒息"), 2);
+                    Player.mount.Dismount(Player);
+                    Player.wingTime = 0;
+                    Player.AddBuff(Mod.Find<ModBuff>("高温窒息").Type, 2);
                     //player.AddBuff(199, 2);
                 }
                 if (ZoneCoral)
@@ -3197,13 +3191,13 @@ namespace MythMod
                         //Projectile.NewProjectile(Main.screenPosition.X - 36, Main.screenPosition.Y + Main.screenHeight / 2, 0, 2, base.mod.ProjectileType("珊瑚1"), 0, 0, Main.myPlayer, 10, 0f);
                         //Projectile.NewProjectile(Main.screenPosition.X + Main.screenWidth + 36, Main.screenPosition.Y + Main.screenHeight / 2, 0, 2, base.mod.ProjectileType("珊瑚1"), 0, 0, Main.myPlayer, 10, 0f);
                     }
-                    if (Main.rand.Next(0, 4) == 1 && !ZoneVolcano && player.position.X / 16f < Main.maxTilesX / 4)
+                    if (Main.rand.Next(0, 4) == 1 && !ZoneVolcano && Player.position.X / 16f < Main.maxTilesX / 4)
                     {
-                        Projectile.NewProjectile(Main.screenPosition.X - 36, Main.screenPosition.Y + Main.screenHeight / 2, 0, 2, base.mod.ProjectileType("珊瑚random"), 0, 0, Main.myPlayer, 10, 0f);
-                        Projectile.NewProjectile(Main.screenPosition.X + Main.screenWidth + 36, Main.screenPosition.Y + Main.screenHeight / 2, 0, 2, base.mod.ProjectileType("珊瑚random"), 0, 0, Main.myPlayer, 10, 0f);
+                        Projectile.NewProjectile(Main.screenPosition.X - 36, Main.screenPosition.Y + Main.screenHeight / 2, 0, 2, base.Mod.Find<ModProjectile>("珊瑚random").Type, 0, 0, Main.myPlayer, 10, 0f);
+                        Projectile.NewProjectile(Main.screenPosition.X + Main.screenWidth + 36, Main.screenPosition.Y + Main.screenHeight / 2, 0, 2, base.Mod.Find<ModProjectile>("珊瑚random").Type, 0, 0, Main.myPlayer, 10, 0f);
                     }
                 }
-                if (player.Center.X / 16f > Main.maxTilesX * 0.6f && player.Center.X / 16f < Main.maxTilesX * 0.9f)
+                if (Player.Center.X / 16f > Main.maxTilesX * 0.6f && Player.Center.X / 16f < Main.maxTilesX * 0.9f)
                 {
                     ZoneVolcano = true;
                 }
@@ -3211,7 +3205,7 @@ namespace MythMod
                 {
                     ZoneVolcano = false;
                 }
-                if (player.Center.X / 16f > Main.maxTilesX * 0.56f && player.Center.X / 16f < Main.maxTilesX * 0.6f)
+                if (Player.Center.X / 16f > Main.maxTilesX * 0.56f && Player.Center.X / 16f < Main.maxTilesX * 0.6f)
                 {
                     ZoneRedTree = true;
                 }
@@ -3219,7 +3213,7 @@ namespace MythMod
                 {
                     ZoneRedTree = false;
                 }
-                if (player.Center.X / 16f > Main.maxTilesX * 0.9f)
+                if (Player.Center.X / 16f > Main.maxTilesX * 0.9f)
                 {
                     ZoneTown = true;
                 }
@@ -3227,7 +3221,7 @@ namespace MythMod
                 {
                     ZoneTown = false;
                 }
-                if (player.wet)
+                if (Player.wet)
                 {
                     ZoneCoral = true;
                 }
@@ -3240,7 +3234,7 @@ namespace MythMod
                     ZoneOcean = true;
                     if(Main.maxTilesX == 4200)
                     {
-                        if (player.Center.Y / 16f > Main.maxTilesY * 0.27f)
+                        if (Player.Center.Y / 16f > Main.maxTilesY * 0.27f)
                         {
                             ZoneDeepocean = true;
                         }
@@ -3251,7 +3245,7 @@ namespace MythMod
                     }
                     if (Main.maxTilesX == 6400)
                     {
-                        if (player.Center.Y / 16f > Main.maxTilesY * 0.35f)
+                        if (Player.Center.Y / 16f > Main.maxTilesY * 0.35f)
                         {
                             ZoneDeepocean = true;
                         }
@@ -3310,23 +3304,23 @@ namespace MythMod
         {
             if (ZoneVolcano)
             {
-                return mod.GetTexture("VolcanoBG");
+                return Mod.GetTexture("VolcanoBG");
             }
             if (ZoneRedTree)
             {
-                return mod.GetTexture("RedTreeBG");
+                return Mod.GetTexture("RedTreeBG");
             }
-            if (ZoneOcean && !player.wet)
+            if (ZoneOcean && !Player.wet)
             {
-                return mod.GetTexture("OceanBG");
+                return Mod.GetTexture("OceanBG");
             }
-            if (ZoneOcean && player.wet)
+            if (ZoneOcean && Player.wet)
             {
-                return mod.GetTexture("CoralBG");
+                return Mod.GetTexture("CoralBG");
             }
             if (ZoneTown)
             {
-                return mod.GetTexture("CoralBG");/*Need Change*/
+                return Mod.GetTexture("CoralBG");/*Need Change*/
             }
             return null;
         }
@@ -3334,33 +3328,33 @@ namespace MythMod
         {
             if (this.ExPoi)
             {
-                if (base.player.lifeRegen > 0)
+                if (base.Player.lifeRegen > 0)
                 {
-                    base.player.lifeRegen = 0;
+                    base.Player.lifeRegen = 0;
                 }
-                base.player.lifeRegenTime = 0;
-                base.player.lifeRegen -= 150;
+                base.Player.lifeRegenTime = 0;
+                base.Player.lifeRegen -= 150;
             }
             if (this.StarPoi2)
             {
-                if (base.player.lifeRegen > 0)
+                if (base.Player.lifeRegen > 0)
                 {
-                    base.player.lifeRegen = 0;
+                    base.Player.lifeRegen = 0;
                 }
-                base.player.lifeRegenTime = 0;
-                base.player.lifeRegen -= 40;
+                base.Player.lifeRegenTime = 0;
+                base.Player.lifeRegen -= 40;
             }
             if (this.StarPoi3)
             {
-                if (base.player.lifeRegen > 0)
+                if (base.Player.lifeRegen > 0)
                 {
-                    base.player.lifeRegen = 0;
+                    base.Player.lifeRegen = 0;
                 }
-                base.player.lifeRegenTime = 0;
-                base.player.lifeRegen -= 150;
+                base.Player.lifeRegenTime = 0;
+                base.Player.lifeRegen -= 150;
             }
         }
-        public override void CatchFish(Item fishingRod, Item bait, int power, int liquidType, int poolSize, int worldLayer, int questFish, ref int caughtType, ref bool junk)
+        public override void CatchFish(FishingAttempt attempt, ref int itemDrop, ref int npcSpawn, ref AdvancedPopupRequest sonar, ref Vector2 sonarPosition)
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             bool flag = false;
@@ -3380,13 +3374,13 @@ namespace MythMod
                     switch (Main.rand.Next(3))
                     {
                         case 0:
-                            caughtType = base.mod.ItemType("锈铁剑");
+                            caughtType = base.Mod.Find<ModItem>("锈铁剑").Type;
                             break;
                         case 1:
-                            caughtType = base.mod.ItemType("马尾藻");
+                            caughtType = base.Mod.Find<ModItem>("马尾藻").Type;
                             break;
                         case 2:
-                            caughtType = base.mod.ItemType("空瓶");
+                            caughtType = base.Mod.Find<ModItem>("空瓶").Type;
                             break;
                     }
                 }
@@ -3399,28 +3393,28 @@ namespace MythMod
                     switch (Main.rand.Next(3))
                     {
                         case 0:
-                            caughtType = base.mod.ItemType("锈铁剑");
+                            caughtType = base.Mod.Find<ModItem>("锈铁剑").Type;
                             break;
                         case 1:
-                            caughtType = base.mod.ItemType("马尾藻");
+                            caughtType = base.Mod.Find<ModItem>("马尾藻").Type;
                             break;
                         case 2:
-                            caughtType = base.mod.ItemType("空瓶");
+                            caughtType = base.Mod.Find<ModItem>("空瓶").Type;
                             break;
                     }
                 }
-                if (power >= 60 && poolSize >= 150 && questFish == base.mod.ItemType("鱿鱼"))
+                if (power >= 60 && poolSize >= 150 && questFish == base.Mod.Find<ModItem>("鱿鱼").Type)
                 {
-                    caughtType = base.mod.ItemType("鱿鱼");
+                    caughtType = base.Mod.Find<ModItem>("鱿鱼").Type;
                     if (power >= 70 && Main.rand.Next(25) == 0 && power < 440)
                     {
-                        caughtType = base.mod.ItemType("发光磷虾");
+                        caughtType = base.Mod.Find<ModItem>("发光磷虾").Type;
                     }
                     if (power >= 80)
                     {
                         if (power >= 70 && Main.rand.Next(25) == 0 && power < 240)
                         {
-                            caughtType = base.mod.ItemType("电鳐");
+                            caughtType = base.Mod.Find<ModItem>("电鳐").Type;
                         }
                     }
                 }
@@ -3439,24 +3433,24 @@ namespace MythMod
         {
             if (ZoneOcean || ZoneVolcano || ZoneDeepocean || ZoneCoral)
             {
-                player.SpawnX = 160;
-                player.SpawnY = (int)((Main.maxTilesY / 10f + 60) * 16f);
-                player.FindSpawn();
+                Player.SpawnX = 160;
+                Player.SpawnY = (int)((Main.maxTilesY / 10f + 60) * 16f);
+                Player.FindSpawn();
             }
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
-            if (player.name == "万象元素")
+            if (Player.name == "万象元素")
             {
-                player.Spawn();
-                player.respawnTimer = 0;
-                if (player.statLifeMax2 <= 200)
+                Player.Spawn();
+                Player.respawnTimer = 0;
+                if (Player.statLifeMax2 <= 200)
                 {
-                    player.statLife = 100;
+                    Player.statLife = 100;
                 }
                 else
                 {
-                    player.statLife = player.statLifeMax2 / 2;
+                    Player.statLife = Player.statLifeMax2 / 2;
                 }
-                player.immuneTime = 120;
+                Player.immuneTime = 120;
                 mplayer.YinLife = 30;
                 mplayer.YangLife = 30;
             }
@@ -3469,22 +3463,22 @@ namespace MythMod
             {
                 if (LavaCryst <= 60)
                 {
-                    player.statLifeMax2 += LavaCryst * 5;
+                    Player.statLifeMax2 += LavaCryst * 5;
                 }
                 else
                 {
-                    player.statLifeMax2 += 300;
+                    Player.statLifeMax2 += 300;
                 }
             }
             if (FinalLava)
             {
                 if (LavaCryst <= 60)
                 {
-                    player.statLifeMax2 += LavaCryst * 5;
+                    Player.statLifeMax2 += LavaCryst * 5;
                 }
                 else
                 {
-                    player.statLifeMax2 += 300;
+                    Player.statLifeMax2 += 300;
                 }
             }
             for(int i = 0;i < 40;i++)
@@ -3494,275 +3488,275 @@ namespace MythMod
                     if (CrystalEffectMain.fea[i] == 320)
                     {
                         Misspossibility += 1;
-                        player.moveSpeed += 0.25f;
-                        player.wingTimeMax += 30;
-                        player.jumpSpeedBoost += 0.75f;
+                        Player.moveSpeed += 0.25f;
+                        Player.wingTimeMax += 30;
+                        Player.jumpSpeedBoost += 0.75f;
                     }
-                    if (CrystalEffectMain.fea[i] == mod.ItemType("BirdFeather"))
+                    if (CrystalEffectMain.fea[i] == Mod.Find<ModItem>("BirdFeather").Type)
                     {
-                        player.moveSpeed += 0.1f;
-                        player.wingTimeMax += 20;
-                        player.jumpSpeedBoost += 0.3f;
+                        Player.moveSpeed += 0.1f;
+                        Player.wingTimeMax += 20;
+                        Player.jumpSpeedBoost += 0.3f;
                     }
-                    if (CrystalEffectMain.fea[i] == mod.ItemType("BlueBirdFeather"))
+                    if (CrystalEffectMain.fea[i] == Mod.Find<ModItem>("BlueBirdFeather").Type)
                     {
-                        player.moveSpeed += 0.1f;
-                        player.wingTimeMax += 20;
-                        player.statManaMax2 += 20;
-                        player.jumpSpeedBoost += 0.3f;
+                        Player.moveSpeed += 0.1f;
+                        Player.wingTimeMax += 20;
+                        Player.statManaMax2 += 20;
+                        Player.jumpSpeedBoost += 0.3f;
                     }
-                    if (CrystalEffectMain.fea[i] == mod.ItemType("RedBirdFeather"))
+                    if (CrystalEffectMain.fea[i] == Mod.Find<ModItem>("RedBirdFeather").Type)
                     {
-                        player.moveSpeed += 0.1f;
-                        player.wingTimeMax += 20;
-                        player.statLifeMax2 += 10;
-                        player.jumpSpeedBoost += 0.3f;
+                        Player.moveSpeed += 0.1f;
+                        Player.wingTimeMax += 20;
+                        Player.statLifeMax2 += 10;
+                        Player.jumpSpeedBoost += 0.3f;
                     }
-                    if (CrystalEffectMain.fea[i] == mod.ItemType("GoldBirdFeather"))
+                    if (CrystalEffectMain.fea[i] == Mod.Find<ModItem>("GoldBirdFeather").Type)
                     {
                         Misspossibility += 1;
-                        player.moveSpeed += 0.15f;
-                        player.wingTimeMax += 40;
-                        player.statLifeMax2 += 10;
-                        player.statManaMax2 += 20;
-                        player.jumpSpeedBoost += 0.45f;
+                        Player.moveSpeed += 0.15f;
+                        Player.wingTimeMax += 40;
+                        Player.statLifeMax2 += 10;
+                        Player.statManaMax2 += 20;
+                        Player.jumpSpeedBoost += 0.45f;
                     }
-                    if (CrystalEffectMain.fea[i] == mod.ItemType("BeeFeather"))
+                    if (CrystalEffectMain.fea[i] == Mod.Find<ModItem>("BeeFeather").Type)
                     {
                         Misspossibility += 3;
-                        player.moveSpeed += 0.24f;
-                        player.wingTimeMax += 40;
-                        player.jumpSpeedBoost += 0.72f;
+                        Player.moveSpeed += 0.24f;
+                        Player.wingTimeMax += 40;
+                        Player.jumpSpeedBoost += 0.72f;
                     }
                     if (CrystalEffectMain.fea[i] == 1516)
                     {
                         Misspossibility += 3;
-                        player.moveSpeed += 0.6f;
-                        player.wingTimeMax += 60;
-                        player.jumpSpeedBoost += 1.8f;
+                        Player.moveSpeed += 0.6f;
+                        Player.wingTimeMax += 60;
+                        Player.jumpSpeedBoost += 1.8f;
                     }
                     if (CrystalEffectMain.fea[i] == 1517)
                     {
                         Misspossibility += 2;
-                        player.moveSpeed += 0.6f;
-                        player.wingTimeMax += 60;
-                        player.jumpSpeedBoost += 1.8f;
+                        Player.moveSpeed += 0.6f;
+                        Player.wingTimeMax += 60;
+                        Player.jumpSpeedBoost += 1.8f;
                     }
                     if (CrystalEffectMain.fea[i] == 1518)
                     {
                         Misspossibility += 2;
-                        player.moveSpeed += 0.6f;
-                        player.wingTimeMax += 60;
-                        player.jumpSpeedBoost += 1.8f;
+                        Player.moveSpeed += 0.6f;
+                        Player.wingTimeMax += 60;
+                        Player.jumpSpeedBoost += 1.8f;
                     }
                     if (CrystalEffectMain.fea[i] == 1519)
                     {
                         Misspossibility += 2;
-                        player.moveSpeed += 0.6f;
-                        player.wingTimeMax += 60;
-                        player.jumpSpeedBoost += 1.8f;
+                        Player.moveSpeed += 0.6f;
+                        Player.wingTimeMax += 60;
+                        Player.jumpSpeedBoost += 1.8f;
                     }
-                    if (CrystalEffectMain.fea[i] == mod.ItemType("SnowFeather"))
+                    if (CrystalEffectMain.fea[i] == Mod.Find<ModItem>("SnowFeather").Type)
                     {
                         Misspossibility += 1;
-                        player.moveSpeed += 0.16f;
-                        player.wingTimeMax += 30;
-                        player.jumpSpeedBoost += 0.48f;
-                        player.statLifeMax2 += 10;
+                        Player.moveSpeed += 0.16f;
+                        Player.wingTimeMax += 30;
+                        Player.jumpSpeedBoost += 0.48f;
+                        Player.statLifeMax2 += 10;
                     }
-                    if (CrystalEffectMain.fea[i] == mod.ItemType("TwilightFeather"))
+                    if (CrystalEffectMain.fea[i] == Mod.Find<ModItem>("TwilightFeather").Type)
                     {
                         Misspossibility += 1;
-                        player.moveSpeed += 0.4f;
-                        player.wingTimeMax += 54;
-                        player.jumpSpeedBoost += 1.20f;
-                        player.statLifeMax2 += 30;
-                        player.lifeRegen += 3;
-                        player.manaRegen += 3;
+                        Player.moveSpeed += 0.4f;
+                        Player.wingTimeMax += 54;
+                        Player.jumpSpeedBoost += 1.20f;
+                        Player.statLifeMax2 += 30;
+                        Player.lifeRegen += 3;
+                        Player.manaRegen += 3;
                     }
-                    if (CrystalEffectMain.fea[i] == mod.ItemType("VoidFeather"))
+                    if (CrystalEffectMain.fea[i] == Mod.Find<ModItem>("VoidFeather").Type)
                     {
                         Misspossibility += 10;
-                        player.moveSpeed += 1.1f;
-                        player.wingTimeMax += 144;
-                        player.jumpSpeedBoost += 3.3f;
+                        Player.moveSpeed += 1.1f;
+                        Player.wingTimeMax += 144;
+                        Player.jumpSpeedBoost += 3.3f;
                     }
-                    if (CrystalEffectMain.fea[i] == mod.ItemType("SolarFeather"))
+                    if (CrystalEffectMain.fea[i] == Mod.Find<ModItem>("SolarFeather").Type)
                     {
                         Misspossibility += 12;
-                        player.moveSpeed += 2f;
-                        player.wingTimeMax += 180;
-                        player.jumpSpeedBoost += 6f;
-                        player.statLifeMax2 += 100;
-                        player.statDefense += 15;
+                        Player.moveSpeed += 2f;
+                        Player.wingTimeMax += 180;
+                        Player.jumpSpeedBoost += 6f;
+                        Player.statLifeMax2 += 100;
+                        Player.statDefense += 15;
                     }
-                    if (CrystalEffectMain.fea[i] == mod.ItemType("StardustFeather"))
+                    if (CrystalEffectMain.fea[i] == Mod.Find<ModItem>("StardustFeather").Type)
                     {
                         Misspossibility += 12;
-                        player.moveSpeed += 2f;
-                        player.wingTimeMax += 180;
-                        player.jumpSpeedBoost += 6f;
-                        player.maxMinions += 5;
-                        player.statManaMax2 += 100;
+                        Player.moveSpeed += 2f;
+                        Player.wingTimeMax += 180;
+                        Player.jumpSpeedBoost += 6f;
+                        Player.maxMinions += 5;
+                        Player.statManaMax2 += 100;
                     }
-                    if (CrystalEffectMain.fea[i] == mod.ItemType("DarkFeather"))
+                    if (CrystalEffectMain.fea[i] == Mod.Find<ModItem>("DarkFeather").Type)
                     {
                         Misspossibility += 2;
-                        player.moveSpeed += 0.16f;
-                        player.wingTimeMax += 30;
-                        player.jumpSpeedBoost += 0.48f;
-                        player.meleeCrit += 3;
-                        player.magicCrit += 3;
-                        player.thrownCrit += 3;
-                        player.rangedCrit += 3;
+                        Player.moveSpeed += 0.16f;
+                        Player.wingTimeMax += 30;
+                        Player.jumpSpeedBoost += 0.48f;
+                        Player.GetCritChance(DamageClass.Generic) += 3;
+                        Player.GetCritChance(DamageClass.Magic) += 3;
+                        Player.GetCritChance(DamageClass.Throwing) += 3;
+                        Player.GetCritChance(DamageClass.Ranged) += 3;
                     }
-                    if (CrystalEffectMain.fea[i] == mod.ItemType("CrimsonFeather"))
+                    if (CrystalEffectMain.fea[i] == Mod.Find<ModItem>("CrimsonFeather").Type)
                     {
                         Misspossibility += 2;
-                        player.moveSpeed += 0.34f;
-                        player.wingTimeMax += 48;
-                        player.jumpSpeedBoost += 1.02f;
-                        player.meleeCrit += 3;
-                        player.magicCrit += 3;
-                        player.thrownCrit += 3;
-                        player.rangedCrit += 3;
-                        player.lifeRegen += 3;
-                        if (player.ZoneCrimson)
+                        Player.moveSpeed += 0.34f;
+                        Player.wingTimeMax += 48;
+                        Player.jumpSpeedBoost += 1.02f;
+                        Player.GetCritChance(DamageClass.Generic) += 3;
+                        Player.GetCritChance(DamageClass.Magic) += 3;
+                        Player.GetCritChance(DamageClass.Throwing) += 3;
+                        Player.GetCritChance(DamageClass.Ranged) += 3;
+                        Player.lifeRegen += 3;
+                        if (Player.ZoneCrimson)
                         {
                             Misspossibility += 2;
-                            player.moveSpeed += 0.34f;
-                            player.wingTimeMax += 48;
-                            player.jumpSpeedBoost += 1.02f;
-                            player.meleeCrit += 3;
-                            player.magicCrit += 3;
-                            player.thrownCrit += 3;
-                            player.rangedCrit += 3;
-                            player.lifeRegen += 3;
+                            Player.moveSpeed += 0.34f;
+                            Player.wingTimeMax += 48;
+                            Player.jumpSpeedBoost += 1.02f;
+                            Player.GetCritChance(DamageClass.Generic) += 3;
+                            Player.GetCritChance(DamageClass.Magic) += 3;
+                            Player.GetCritChance(DamageClass.Throwing) += 3;
+                            Player.GetCritChance(DamageClass.Ranged) += 3;
+                            Player.lifeRegen += 3;
                         }
                     }
-                    if (CrystalEffectMain.fea[i] == mod.ItemType("CorruptFeather"))
+                    if (CrystalEffectMain.fea[i] == Mod.Find<ModItem>("CorruptFeather").Type)
                     {
                         Misspossibility += 3;
-                        player.moveSpeed += 0.34f;
-                        player.wingTimeMax += 48;
-                        player.jumpSpeedBoost += 1.02f;
-                        player.meleeCrit += 2;
-                        player.magicCrit += 2;
-                        player.thrownCrit += 2;
-                        player.rangedCrit += 2;
-                        player.statDefense += 4;
-                        if (player.ZoneCrimson)
+                        Player.moveSpeed += 0.34f;
+                        Player.wingTimeMax += 48;
+                        Player.jumpSpeedBoost += 1.02f;
+                        Player.GetCritChance(DamageClass.Generic) += 2;
+                        Player.GetCritChance(DamageClass.Magic) += 2;
+                        Player.GetCritChance(DamageClass.Throwing) += 2;
+                        Player.GetCritChance(DamageClass.Ranged) += 2;
+                        Player.statDefense += 4;
+                        if (Player.ZoneCrimson)
                         {
                             Misspossibility += 3;
-                            player.moveSpeed += 0.34f;
-                            player.wingTimeMax += 48;
-                            player.jumpSpeedBoost += 1.02f;
-                            player.meleeCrit += 2;
-                            player.magicCrit += 2;
-                            player.thrownCrit += 2;
-                            player.rangedCrit += 2;
-                            player.statDefense += 4;
+                            Player.moveSpeed += 0.34f;
+                            Player.wingTimeMax += 48;
+                            Player.jumpSpeedBoost += 1.02f;
+                            Player.GetCritChance(DamageClass.Generic) += 2;
+                            Player.GetCritChance(DamageClass.Magic) += 2;
+                            Player.GetCritChance(DamageClass.Throwing) += 2;
+                            Player.GetCritChance(DamageClass.Ranged) += 2;
+                            Player.statDefense += 4;
                         }
                     }
-                    if (CrystalEffectMain.fea[i] == mod.ItemType("GhostFeather"))
+                    if (CrystalEffectMain.fea[i] == Mod.Find<ModItem>("GhostFeather").Type)
                     {
                         Misspossibility += 5;
-                        player.moveSpeed += 1f;
-                        player.wingTimeMax += 108;
-                        player.jumpSpeedBoost += 3f;
-                        player.meleeCrit += 7;
-                        player.magicCrit += 7;
-                        player.thrownCrit += 7;
-                        player.rangedCrit += 7;
+                        Player.moveSpeed += 1f;
+                        Player.wingTimeMax += 108;
+                        Player.jumpSpeedBoost += 3f;
+                        Player.GetCritChance(DamageClass.Generic) += 7;
+                        Player.GetCritChance(DamageClass.Magic) += 7;
+                        Player.GetCritChance(DamageClass.Throwing) += 7;
+                        Player.GetCritChance(DamageClass.Ranged) += 7;
                     }
-                    if (CrystalEffectMain.fea[i] == mod.ItemType("GoldFeather"))
+                    if (CrystalEffectMain.fea[i] == Mod.Find<ModItem>("GoldFeather").Type)
                     {
                         Misspossibility += 3;
-                        player.moveSpeed += 0.27f;
-                        player.wingTimeMax += 48;
-                        player.jumpSpeedBoost += 0.81f;
-                        player.statLifeMax2 += 30;
-                        player.statManaMax2 += 30;
+                        Player.moveSpeed += 0.27f;
+                        Player.wingTimeMax += 48;
+                        Player.jumpSpeedBoost += 0.81f;
+                        Player.statLifeMax2 += 30;
+                        Player.statManaMax2 += 30;
                     }
-                    if (CrystalEffectMain.fea[i] == mod.ItemType("LeaveFeather"))
+                    if (CrystalEffectMain.fea[i] == Mod.Find<ModItem>("LeaveFeather").Type)
                     {
                         Misspossibility += 2;
-                        player.moveSpeed += 0.6f;
-                        player.wingTimeMax += 60;
-                        player.jumpSpeedBoost += 1.8f;
-                        player.lifeRegen += 3;
+                        Player.moveSpeed += 0.6f;
+                        Player.wingTimeMax += 60;
+                        Player.jumpSpeedBoost += 1.8f;
+                        Player.lifeRegen += 3;
                     }
-                    if (CrystalEffectMain.fea[i] == mod.ItemType("LeaveFeather"))
+                    if (CrystalEffectMain.fea[i] == Mod.Find<ModItem>("LeaveFeather").Type)
                     {
                         Misspossibility += 2;
-                        player.moveSpeed += 0.6f;
-                        player.wingTimeMax += 60;
-                        player.jumpSpeedBoost += 1.8f;
-                        player.lifeRegen += 3;
+                        Player.moveSpeed += 0.6f;
+                        Player.wingTimeMax += 60;
+                        Player.jumpSpeedBoost += 1.8f;
+                        Player.lifeRegen += 3;
                     }
-                    if (CrystalEffectMain.fea[i] == mod.ItemType("LightingFeather"))
+                    if (CrystalEffectMain.fea[i] == Mod.Find<ModItem>("LightingFeather").Type)
                     {
                         Misspossibility += 3;
-                        player.moveSpeed += 0.84f;
-                        player.wingTimeMax += 78;
-                        player.jumpSpeedBoost += 2.52f;
+                        Player.moveSpeed += 0.84f;
+                        Player.wingTimeMax += 78;
+                        Player.jumpSpeedBoost += 2.52f;
                     }
-                    if (CrystalEffectMain.fea[i] == mod.ItemType("DarkGoldFeather"))
+                    if (CrystalEffectMain.fea[i] == Mod.Find<ModItem>("DarkGoldFeather").Type)
                     {
                         Misspossibility += 4;
-                        player.moveSpeed += 1.3f;
-                        player.wingTimeMax += 180;
-                        player.jumpSpeedBoost += 3.9f;
-                        player.meleeCrit += 4;
-                        player.magicCrit += 4;
-                        player.thrownCrit += 4;
-                        player.rangedCrit += 4;
+                        Player.moveSpeed += 1.3f;
+                        Player.wingTimeMax += 180;
+                        Player.jumpSpeedBoost += 3.9f;
+                        Player.GetCritChance(DamageClass.Generic) += 4;
+                        Player.GetCritChance(DamageClass.Magic) += 4;
+                        Player.GetCritChance(DamageClass.Throwing) += 4;
+                        Player.GetCritChance(DamageClass.Ranged) += 4;
                     }
-                    if (CrystalEffectMain.fea[i] == mod.ItemType("PoisonFeather"))
+                    if (CrystalEffectMain.fea[i] == Mod.Find<ModItem>("PoisonFeather").Type)
                     {
                         Misspossibility += 2;
-                        player.moveSpeed += 0.5f;
-                        player.wingTimeMax += 30;
-                        player.jumpSpeedBoost += 1.5f;
+                        Player.moveSpeed += 0.5f;
+                        Player.wingTimeMax += 30;
+                        Player.jumpSpeedBoost += 1.5f;
                     }
-                    if (CrystalEffectMain.fea[i] == mod.ItemType("RainbowFeather"))
+                    if (CrystalEffectMain.fea[i] == Mod.Find<ModItem>("RainbowFeather").Type)
                     {
                         Misspossibility += 1;
-                        player.moveSpeed += 0.7f;
-                        player.wingTimeMax += 48;
-                        player.jumpSpeedBoost += 2.1f;
-                        player.meleeCrit += 1;
-                        player.magicCrit += 1;
-                        player.thrownCrit += 1;
-                        player.rangedCrit += 1;
-                        player.meleeDamage += 0.01f;
-                        player.rangedDamage += 0.01f;
-                        player.magicDamage += 0.01f;
-                        player.minionDamage += 0.01f;
-                        player.thrownDamage += 0.01f;
-                        player.statLifeMax2 += 10;
-                        player.statManaMax2 += 10;
-                        player.lifeRegen += 1;
-                        player.manaRegen += 1;
-                        player.statDefense += 2;
+                        Player.moveSpeed += 0.7f;
+                        Player.wingTimeMax += 48;
+                        Player.jumpSpeedBoost += 2.1f;
+                        Player.GetCritChance(DamageClass.Generic) += 1;
+                        Player.GetCritChance(DamageClass.Magic) += 1;
+                        Player.GetCritChance(DamageClass.Throwing) += 1;
+                        Player.GetCritChance(DamageClass.Ranged) += 1;
+                        Player.GetDamage(DamageClass.Melee) += 0.01f;
+                        Player.GetDamage(DamageClass.Ranged) += 0.01f;
+                        Player.GetDamage(DamageClass.Magic) += 0.01f;
+                        Player.GetDamage(DamageClass.Summon) += 0.01f;
+                        Player.GetDamage(DamageClass.Throwing) += 0.01f;
+                        Player.statLifeMax2 += 10;
+                        Player.statManaMax2 += 10;
+                        Player.lifeRegen += 1;
+                        Player.manaRegen += 1;
+                        Player.statDefense += 2;
                     }
-                    if (CrystalEffectMain.fea[i] == mod.ItemType("RedSnowFeather"))
+                    if (CrystalEffectMain.fea[i] == Mod.Find<ModItem>("RedSnowFeather").Type)
                     {
                         Misspossibility += 2;
-                        player.moveSpeed += 0.86f;
-                        player.wingTimeMax += 60;
-                        player.jumpSpeedBoost += 2.58f;
-                        player.statLifeMax2 += 40;
-                        player.lifeRegen += 3;
+                        Player.moveSpeed += 0.86f;
+                        Player.wingTimeMax += 60;
+                        Player.jumpSpeedBoost += 2.58f;
+                        Player.statLifeMax2 += 40;
+                        Player.lifeRegen += 3;
                     }
-                    if (CrystalEffectMain.fea[i] == mod.ItemType("StarlightFeather"))
+                    if (CrystalEffectMain.fea[i] == Mod.Find<ModItem>("StarlightFeather").Type)
                     {
                         Misspossibility += 2;
-                        player.moveSpeed += 0.4f;
-                        player.wingTimeMax += 54;
-                        player.jumpSpeedBoost += 1.2f;
-                        player.statLifeMax2 += 50;
-                        player.manaRegen += 4;
+                        Player.moveSpeed += 0.4f;
+                        Player.wingTimeMax += 54;
+                        Player.jumpSpeedBoost += 1.2f;
+                        Player.statLifeMax2 += 50;
+                        Player.manaRegen += 4;
                     }
                 }
             }
@@ -3809,36 +3803,36 @@ namespace MythMod
             //Main.inventoryBack15Texture = texture21;
             //Texture2D texture22 = base.mod.GetTexture("UIImages/皮肤1/Inventory_Back16");
             //Main.inventoryBack16Texture = texture22;
-            if (MythWorld.Myth && base.player.whoAmI == Main.myPlayer)
+            if (MythWorld.Myth && base.Player.whoAmI == Main.myPlayer)
             {
-                base.player.thrownDamage += 0.2f;
-                base.player.rangedDamage += 0.2f;
-                base.player.meleeDamage += 0.2f;
-                base.player.magicDamage += 0.2f;
-                base.player.minionDamage += 0.2f;
+                base.Player.GetDamage(DamageClass.Throwing) += 0.2f;
+                base.Player.GetDamage(DamageClass.Ranged) += 0.2f;
+                base.Player.GetDamage(DamageClass.Melee) += 0.2f;
+                base.Player.GetDamage(DamageClass.Magic) += 0.2f;
+                base.Player.GetDamage(DamageClass.Summon) += 0.2f;
             }
-            if (player.HasBuff(mod.BuffType("雨露")))
+            if (Player.HasBuff(Mod.Find<ModBuff>("雨露").Type))
             {
-                player.magicDamage *= 1 + Main.maxRaining / 3f;
-                player.meleeDamage *= 1 + Main.maxRaining / 3f;
-                player.thrownDamage *= 1 + Main.maxRaining / 3f;
-                player.minionDamage *= 1 + Main.maxRaining / 3f;
-                player.rangedDamage *= 1 + Main.maxRaining / 3f;
-                player.lifeRegen += (int)(Main.maxRaining * 5f);
+                Player.GetDamage(DamageClass.Magic) *= 1 + Main.maxRaining / 3f;
+                Player.GetDamage(DamageClass.Melee) *= 1 + Main.maxRaining / 3f;
+                Player.GetDamage(DamageClass.Throwing) *= 1 + Main.maxRaining / 3f;
+                Player.GetDamage(DamageClass.Summon) *= 1 + Main.maxRaining / 3f;
+                Player.GetDamage(DamageClass.Ranged) *= 1 + Main.maxRaining / 3f;
+                Player.lifeRegen += (int)(Main.maxRaining * 5f);
             }
-            if (player.HasBuff(mod.BuffType("嗜血狂暴")))
+            if (Player.HasBuff(Mod.Find<ModBuff>("嗜血狂暴").Type))
             {
-                player.magicDamage *= 1 + Crazyindex * 0.02f;
-                player.meleeDamage *= 1 + Crazyindex * 0.02f;
-                player.thrownDamage *= 1 + Crazyindex * 0.02f;
-                player.minionDamage *= 1 + Crazyindex * 0.02f;
-                player.rangedDamage *= 1 + Crazyindex * 0.02f;
+                Player.GetDamage(DamageClass.Magic) *= 1 + Crazyindex * 0.02f;
+                Player.GetDamage(DamageClass.Melee) *= 1 + Crazyindex * 0.02f;
+                Player.GetDamage(DamageClass.Throwing) *= 1 + Crazyindex * 0.02f;
+                Player.GetDamage(DamageClass.Summon) *= 1 + Crazyindex * 0.02f;
+                Player.GetDamage(DamageClass.Ranged) *= 1 + Crazyindex * 0.02f;
             }
             if (Duke > 0)
             {
                 Misspossibility += 12;
             }
-            if (player.HasBuff(mod.BuffType("Missable")))
+            if (Player.HasBuff(Mod.Find<ModBuff>("Missable").Type))
             {
                 Misspossibility += 6;
             }
@@ -3848,60 +3842,60 @@ namespace MythMod
             }
             if (GreenHat)
             {
-                player.magicDamage *= 1.06f;
-                player.meleeDamage *= 1.06f;
-                player.thrownDamage *= 1.06f;
-                player.minionDamage *= 1.06f;
-                player.rangedDamage *= 1.06f;
-                player.meleeCrit += 4;
-                player.rangedCrit += 4;
-                player.magicCrit += 4;
-                player.thrownCrit += 4;
+                Player.GetDamage(DamageClass.Magic) *= 1.06f;
+                Player.GetDamage(DamageClass.Melee) *= 1.06f;
+                Player.GetDamage(DamageClass.Throwing) *= 1.06f;
+                Player.GetDamage(DamageClass.Summon) *= 1.06f;
+                Player.GetDamage(DamageClass.Ranged) *= 1.06f;
+                Player.GetCritChance(DamageClass.Generic) += 4;
+                Player.GetCritChance(DamageClass.Ranged) += 4;
+                Player.GetCritChance(DamageClass.Magic) += 4;
+                Player.GetCritChance(DamageClass.Throwing) += 4;
             }
             if (LonelyJelly)
             {
-                player.lifeRegen += 5;
+                Player.lifeRegen += 5;
             }
             if (BayBerryBubble)
             {
-                player.magicDamage *= 1.13f;
-                player.meleeDamage *= 1.13f;
-                player.thrownDamage *= 1.13f;
-                player.minionDamage *= 1.13f;
-                player.rangedDamage *= 1.13f;
+                Player.GetDamage(DamageClass.Magic) *= 1.13f;
+                Player.GetDamage(DamageClass.Melee) *= 1.13f;
+                Player.GetDamage(DamageClass.Throwing) *= 1.13f;
+                Player.GetDamage(DamageClass.Summon) *= 1.13f;
+                Player.GetDamage(DamageClass.Ranged) *= 1.13f;
             }
             if (B25)
             {
-                player.magicDamage *= 1.19f;
-                player.meleeDamage *= 1.19f;
-                player.thrownDamage *= 1.19f;
-                player.minionDamage *= 1.19f;
-                player.rangedDamage *= 1.19f;
+                Player.GetDamage(DamageClass.Magic) *= 1.19f;
+                Player.GetDamage(DamageClass.Melee) *= 1.19f;
+                Player.GetDamage(DamageClass.Throwing) *= 1.19f;
+                Player.GetDamage(DamageClass.Summon) *= 1.19f;
+                Player.GetDamage(DamageClass.Ranged) *= 1.19f;
             }
             if (BloodyMarie)
             {
-                player.meleeCrit += 11;
-                player.rangedCrit += 11;
-                player.magicCrit += 11;
-                player.thrownCrit += 11;
+                Player.GetCritChance(DamageClass.Generic) += 11;
+                Player.GetCritChance(DamageClass.Ranged) += 11;
+                Player.GetCritChance(DamageClass.Magic) += 11;
+                Player.GetCritChance(DamageClass.Throwing) += 11;
             }
             if (BlueHawaii)
             {
-                player.lifeRegen += 5;
+                Player.lifeRegen += 5;
             }
             if (Boluolita)
             {
-                player.lifeRegen += 3;
-                player.manaRegen += 4;
+                Player.lifeRegen += 3;
+                Player.manaRegen += 4;
             }
             if (BurningHell)
             {
-                player.statDefense -= 18;
-                player.lifeRegen += 25;
+                Player.statDefense -= 18;
+                Player.lifeRegen += 25;
             }
             if (CubaLibre)
             {
-                player.maxRunSpeed *= 1.07f;
+                Player.maxRunSpeed *= 1.07f;
             }
             if (DaturaImpression)
             {
@@ -3913,74 +3907,74 @@ namespace MythMod
             }
             if (FirstLove)
             {
-                player.meleeCrit += 8;
-                player.rangedCrit += 8;
-                player.magicCrit += 8;
-                player.thrownCrit += 8;
+                Player.GetCritChance(DamageClass.Generic) += 8;
+                Player.GetCritChance(DamageClass.Ranged) += 8;
+                Player.GetCritChance(DamageClass.Magic) += 8;
+                Player.GetCritChance(DamageClass.Throwing) += 8;
             }
             if (GoldFeishi)
             {
-                player.statDefense += 9;
+                Player.statDefense += 9;
             }
             if (JinglingFeishi)
             {
-                player.magicDamage *= 1.04f;
-                player.meleeDamage *= 1.04f;
-                player.thrownDamage *= 1.04f;
-                player.minionDamage *= 1.04f;
-                player.rangedDamage *= 1.04f;
-                player.meleeCrit += 6;
-                player.rangedCrit += 6;
-                player.magicCrit += 6;
-                player.thrownCrit += 6;
+                Player.GetDamage(DamageClass.Magic) *= 1.04f;
+                Player.GetDamage(DamageClass.Melee) *= 1.04f;
+                Player.GetDamage(DamageClass.Throwing) *= 1.04f;
+                Player.GetDamage(DamageClass.Summon) *= 1.04f;
+                Player.GetDamage(DamageClass.Ranged) *= 1.04f;
+                Player.GetCritChance(DamageClass.Generic) += 6;
+                Player.GetCritChance(DamageClass.Ranged) += 6;
+                Player.GetCritChance(DamageClass.Magic) += 6;
+                Player.GetCritChance(DamageClass.Throwing) += 6;
             }
             if (JinglingMojituo)
             {
-                player.magicDamage *= 1.07f;
-                player.meleeDamage *= 1.07f;
-                player.thrownDamage *= 1.07f;
-                player.minionDamage *= 1.07f;
-                player.rangedDamage *= 1.07f;
-                player.meleeCrit += 3;
-                player.rangedCrit += 3;
-                player.magicCrit += 3;
-                player.thrownCrit += 3;
+                Player.GetDamage(DamageClass.Magic) *= 1.07f;
+                Player.GetDamage(DamageClass.Melee) *= 1.07f;
+                Player.GetDamage(DamageClass.Throwing) *= 1.07f;
+                Player.GetDamage(DamageClass.Summon) *= 1.07f;
+                Player.GetDamage(DamageClass.Ranged) *= 1.07f;
+                Player.GetCritChance(DamageClass.Generic) += 3;
+                Player.GetCritChance(DamageClass.Ranged) += 3;
+                Player.GetCritChance(DamageClass.Magic) += 3;
+                Player.GetCritChance(DamageClass.Throwing) += 3;
                 Misspossibility += 2;
             }
             if (Lavender)
             {
-                player.magicDamage *= 1.11f;
-                player.meleeDamage *= 1.11f;
-                player.thrownDamage *= 1.11f;
-                player.minionDamage *= 1.11f;
-                player.rangedDamage *= 1.11f;
+                Player.GetDamage(DamageClass.Magic) *= 1.11f;
+                Player.GetDamage(DamageClass.Melee) *= 1.11f;
+                Player.GetDamage(DamageClass.Throwing) *= 1.11f;
+                Player.GetDamage(DamageClass.Summon) *= 1.11f;
+                Player.GetDamage(DamageClass.Ranged) *= 1.11f;
                 Misspossibility += 9;
             }
             if (Mexican)
             {
-                player.statDefense += 10;
+                Player.statDefense += 10;
             }
             if (NorthLandSpring)
             {
-                player.lifeRegen += 5;
+                Player.lifeRegen += 5;
             }
             if (MoonTonight)
             {
-                player.manaRegen += 8;
+                Player.manaRegen += 8;
             }
             if (OrangeD)
             {
-                player.magicDamage *= 1.05f;
-                player.meleeDamage *= 1.05f;
-                player.thrownDamage *= 1.05f;
-                player.minionDamage *= 1.05f;
-                player.rangedDamage *= 1.05f;
-                player.statDefense += 5;
+                Player.GetDamage(DamageClass.Magic) *= 1.05f;
+                Player.GetDamage(DamageClass.Melee) *= 1.05f;
+                Player.GetDamage(DamageClass.Throwing) *= 1.05f;
+                Player.GetDamage(DamageClass.Summon) *= 1.05f;
+                Player.GetDamage(DamageClass.Ranged) *= 1.05f;
+                Player.statDefense += 5;
             }
             if (PinaColada)
             {
                 Misspossibility += 4;
-                player.statDefense += 9;
+                Player.statDefense += 9;
             }
             if (PurpleCrystal)
             {
@@ -3989,89 +3983,89 @@ namespace MythMod
             if (PinkLady)
             {
                 Misspossibility += 5;
-                player.meleeCrit += 10;
-                player.rangedCrit += 10;
-                player.magicCrit += 10;
-                player.thrownCrit += 10;
+                Player.GetCritChance(DamageClass.Generic) += 10;
+                Player.GetCritChance(DamageClass.Ranged) += 10;
+                Player.GetCritChance(DamageClass.Magic) += 10;
+                Player.GetCritChance(DamageClass.Throwing) += 10;
             }
             if (Screwdriver)
             {
-                player.statDefense -= 20;
-                player.magicDamage *= 1.2f;
-                player.meleeDamage *= 1.2f;
-                player.thrownDamage *= 1.2f;
-                player.minionDamage *= 1.2f;
-                player.rangedDamage *= 1.2f;
+                Player.statDefense -= 20;
+                Player.GetDamage(DamageClass.Magic) *= 1.2f;
+                Player.GetDamage(DamageClass.Melee) *= 1.2f;
+                Player.GetDamage(DamageClass.Throwing) *= 1.2f;
+                Player.GetDamage(DamageClass.Summon) *= 1.2f;
+                Player.GetDamage(DamageClass.Ranged) *= 1.2f;
             }
             if (SeaFlower)
             {
-                player.magicDamage *= 1.07f;
-                player.meleeDamage *= 1.07f;
-                player.thrownDamage *= 1.07f;
-                player.minionDamage *= 1.07f;
-                player.rangedDamage *= 1.07f;
+                Player.GetDamage(DamageClass.Magic) *= 1.07f;
+                Player.GetDamage(DamageClass.Melee) *= 1.07f;
+                Player.GetDamage(DamageClass.Throwing) *= 1.07f;
+                Player.GetDamage(DamageClass.Summon) *= 1.07f;
+                Player.GetDamage(DamageClass.Ranged) *= 1.07f;
             }
             if (SexOnTheBeach)
             {
-                player.magicDamage *= 1.08f;
-                player.meleeDamage *= 1.08f;
-                player.thrownDamage *= 1.08f;
-                player.minionDamage *= 1.08f;
-                player.rangedDamage *= 1.08f;
+                Player.GetDamage(DamageClass.Magic) *= 1.08f;
+                Player.GetDamage(DamageClass.Melee) *= 1.08f;
+                Player.GetDamage(DamageClass.Throwing) *= 1.08f;
+                Player.GetDamage(DamageClass.Summon) *= 1.08f;
+                Player.GetDamage(DamageClass.Ranged) *= 1.08f;
             }
             if (SglyBeer)
             {
-                player.magicDamage *= 1.09f;
-                player.meleeDamage *= 1.09f;
-                player.thrownDamage *= 1.09f;
-                player.minionDamage *= 1.09f;
-                player.rangedDamage *= 1.09f;
+                Player.GetDamage(DamageClass.Magic) *= 1.09f;
+                Player.GetDamage(DamageClass.Melee) *= 1.09f;
+                Player.GetDamage(DamageClass.Throwing) *= 1.09f;
+                Player.GetDamage(DamageClass.Summon) *= 1.09f;
+                Player.GetDamage(DamageClass.Ranged) *= 1.09f;
             }
             if (SingaporeSling)
             {
-                player.lifeRegen += 6;
+                Player.lifeRegen += 6;
             }
             if (StrawberryMojituo)
             {
-                player.lifeRegen += 7;
+                Player.lifeRegen += 7;
             }
             if (SummerStarrySky)
             {
-                player.manaRegen += 4;
+                Player.manaRegen += 4;
             }
             if (SunsetGlow)
             {
-                player.manaRegen += 5;
+                Player.manaRegen += 5;
             }
             if (TequilaSunrise)
             {
-                player.manaRegen += 6;
+                Player.manaRegen += 6;
             }
             if (U8Grapefruit)
             {
-                player.magicDamage *= 1.04f;
-                player.meleeDamage *= 1.04f;
-                player.thrownDamage *= 1.04f;
-                player.minionDamage *= 1.04f;
-                player.rangedDamage *= 1.04f;
-                player.lifeRegen += 3;
+                Player.GetDamage(DamageClass.Magic) *= 1.04f;
+                Player.GetDamage(DamageClass.Melee) *= 1.04f;
+                Player.GetDamage(DamageClass.Throwing) *= 1.04f;
+                Player.GetDamage(DamageClass.Summon) *= 1.04f;
+                Player.GetDamage(DamageClass.Ranged) *= 1.04f;
+                Player.lifeRegen += 3;
             }
             if (WithOutBerry)
             {
-                player.magicDamage *= 1.09f;
-                player.meleeDamage *= 1.09f;
-                player.thrownDamage *= 1.09f;
-                player.minionDamage *= 1.09f;
-                player.rangedDamage *= 1.09f;
-                player.lifeRegen += 1;
+                Player.GetDamage(DamageClass.Magic) *= 1.09f;
+                Player.GetDamage(DamageClass.Melee) *= 1.09f;
+                Player.GetDamage(DamageClass.Throwing) *= 1.09f;
+                Player.GetDamage(DamageClass.Summon) *= 1.09f;
+                Player.GetDamage(DamageClass.Ranged) *= 1.09f;
+                Player.lifeRegen += 1;
             }
             if (YoghurtCaribbean)
             {
-                player.magicDamage *= 1.1f;
-                player.meleeDamage *= 1.1f;
-                player.thrownDamage *= 1.1f;
-                player.minionDamage *= 1.1f;
-                player.rangedDamage *= 1.1f;
+                Player.GetDamage(DamageClass.Magic) *= 1.1f;
+                Player.GetDamage(DamageClass.Melee) *= 1.1f;
+                Player.GetDamage(DamageClass.Throwing) *= 1.1f;
+                Player.GetDamage(DamageClass.Summon) *= 1.1f;
+                Player.GetDamage(DamageClass.Ranged) *= 1.1f;
             }
             if (Magelite)
             {
@@ -4079,44 +4073,44 @@ namespace MythMod
             }
             if (MagicalPlanit)
             {
-                player.magicDamage *= 1.02f;
-                player.meleeDamage *= 1.02f;
-                player.thrownDamage *= 1.02f;
-                player.minionDamage *= 1.02f;
-                player.rangedDamage *= 1.02f;
-                player.meleeCrit += 2;
-                player.rangedCrit += 2;
-                player.magicCrit += 2;
-                player.thrownCrit += 2;
+                Player.GetDamage(DamageClass.Magic) *= 1.02f;
+                Player.GetDamage(DamageClass.Melee) *= 1.02f;
+                Player.GetDamage(DamageClass.Throwing) *= 1.02f;
+                Player.GetDamage(DamageClass.Summon) *= 1.02f;
+                Player.GetDamage(DamageClass.Ranged) *= 1.02f;
+                Player.GetCritChance(DamageClass.Generic) += 2;
+                Player.GetCritChance(DamageClass.Ranged) += 2;
+                Player.GetCritChance(DamageClass.Magic) += 2;
+                Player.GetCritChance(DamageClass.Throwing) += 2;
                 Misspossibility += 2;
-                player.lifeRegen += 2;
-                player.statDefense += 4;
+                Player.lifeRegen += 2;
+                Player.statDefense += 4;
             }
             if (OceanCatch)
             {
-                player.statDefense += 14;
+                Player.statDefense += 14;
             }
             if (PurpleFreeze)
             {
-                player.meleeCrit += 12;
-                player.rangedCrit += 12;
-                player.magicCrit += 12;
-                player.thrownCrit += 12;
+                Player.GetCritChance(DamageClass.Generic) += 12;
+                Player.GetCritChance(DamageClass.Ranged) += 12;
+                Player.GetCritChance(DamageClass.Magic) += 12;
+                Player.GetCritChance(DamageClass.Throwing) += 12;
             }
             if (SouthAmMitNight)
             {
-                player.moveSpeed *= 1.1f;
-                player.wingTimeMax = (int)(player.wingTimeMax * 1.2f);
+                Player.moveSpeed *= 1.1f;
+                Player.wingTimeMax = (int)(Player.wingTimeMax * 1.2f);
             }
             if (TrafficLight)
             {
                 Misspossibility += 6;
-                player.magicDamage *= 1.08f;
-                player.meleeDamage *= 1.08f;
-                player.thrownDamage *= 1.08f;
-                player.minionDamage *= 1.08f;
-                player.rangedDamage *= 1.08f;
-                player.statDefense -= 7;
+                Player.GetDamage(DamageClass.Magic) *= 1.08f;
+                Player.GetDamage(DamageClass.Melee) *= 1.08f;
+                Player.GetDamage(DamageClass.Throwing) *= 1.08f;
+                Player.GetDamage(DamageClass.Summon) *= 1.08f;
+                Player.GetDamage(DamageClass.Ranged) *= 1.08f;
+                Player.statDefense -= 7;
             }
             if (MoonHeart > 0)
             {
@@ -4132,15 +4126,15 @@ namespace MythMod
             }
             if(AddDef > 8)
             {
-                player.statDefense += AddDef + 7;
+                Player.statDefense += AddDef + 7;
             }
             if (PowerIncr > 0)
             {
-                player.magicDamage += 3;
-                player.meleeDamage += 3;
-                player.minionDamage += 3;
-                player.rangedDamage += 3;
-                player.thrownDamage += 3;
+                Player.GetDamage(DamageClass.Magic) += 3;
+                Player.GetDamage(DamageClass.Melee) += 3;
+                Player.GetDamage(DamageClass.Summon) += 3;
+                Player.GetDamage(DamageClass.Ranged) += 3;
+                Player.GetDamage(DamageClass.Throwing) += 3;
                 PowerIncr -= 1;
                 PowerIncr2 = true;
             }
@@ -4151,11 +4145,11 @@ namespace MythMod
             }
             if (PowerDecr > 0)
             {
-                player.magicDamage *= 0.01f;
-                player.meleeDamage *= 0.01f;
-                player.minionDamage *= 0.01f;
-                player.rangedDamage *= 0.01f;
-                player.thrownDamage *= 0.01f;
+                Player.GetDamage(DamageClass.Magic) *= 0.01f;
+                Player.GetDamage(DamageClass.Melee) *= 0.01f;
+                Player.GetDamage(DamageClass.Summon) *= 0.01f;
+                Player.GetDamage(DamageClass.Ranged) *= 0.01f;
+                Player.GetDamage(DamageClass.Throwing) *= 0.01f;
                 PowerDecr -= 1;
                 PowerDecr2 = true;
             }
@@ -4179,7 +4173,7 @@ namespace MythMod
                 /*player.statLifeMax2 = 20;*/
             }
         }
-        public override TagCompound Save()
+        public override void SaveData(TagCompound tag)/* tModPorter Suggestion: Edit tag parameter instead of returning new TagCompound */
         {
             List<string> list = new List<string>();
             TagCompound tagCompound = new TagCompound();
@@ -4212,7 +4206,7 @@ namespace MythMod
             }
             return tagCompound;
         }
-        public override void Load(TagCompound tag)
+        public override void LoadData(TagCompound tag)
         {
             for (int x = 1; x < 15; x++)
             {
@@ -4232,83 +4226,83 @@ namespace MythMod
                 }
                 if(S[i] == "鸟毛")
                 {
-                    I[i] = mod.ItemType("BirdFeather");
+                    I[i] = Mod.Find<ModItem>("BirdFeather").Type;
                 }
                 if (S[i] == "冠蓝鸦毛")
                 {
-                    I[i] = mod.ItemType("BlueBirdFeather");
+                    I[i] = Mod.Find<ModItem>("BlueBirdFeather").Type;
                 }
                 if (S[i] == "腐化魔羽")
                 {
-                    I[i] = mod.ItemType("CorruptFeather");
+                    I[i] = Mod.Find<ModItem>("CorruptFeather").Type;
                 }
                 if (S[i] == "猩红血羽")
                 {
-                    I[i] = mod.ItemType("CrimsonFeather");
+                    I[i] = Mod.Find<ModItem>("CrimsonFeather").Type;
                 }
                 if (S[i] == "暗夜幽羽")
                 {
-                    I[i] = mod.ItemType("DarkFeather");
+                    I[i] = Mod.Find<ModItem>("DarkFeather").Type;
                 }
                 if (S[i] == "幽冥羽")
                 {
-                    I[i] = mod.ItemType("GhostFeather");
+                    I[i] = Mod.Find<ModItem>("GhostFeather").Type;
                 }
                 if (S[i] == "金鸟毛")
                 {
-                    I[i] = mod.ItemType("GoldBirdFeather");
+                    I[i] = Mod.Find<ModItem>("GoldBirdFeather").Type;
                 }
                 if (S[i] == "灿金之羽")
                 {
-                    I[i] = mod.ItemType("GoldFeather");
+                    I[i] = Mod.Find<ModItem>("GoldFeather").Type;
                 }
                 if (S[i] == "叶之羽")
                 {
-                    I[i] = mod.ItemType("LeaveFeather");
+                    I[i] = Mod.Find<ModItem>("LeaveFeather").Type;
                 }
                 if (S[i] == "雷霆羽")
                 {
-                    I[i] = mod.ItemType("LightingFeather");
+                    I[i] = Mod.Find<ModItem>("LightingFeather").Type;
                 }
                 if (S[i] == "毒羽")
                 {
-                    I[i] = mod.ItemType("PoisonFeather");
+                    I[i] = Mod.Find<ModItem>("PoisonFeather").Type;
                 }
                 if (S[i] == "彩虹之羽")
                 {
-                    I[i] = mod.ItemType("RainbowFeather");
+                    I[i] = Mod.Find<ModItem>("RainbowFeather").Type;
                 }
                 if (S[i] == "红雀毛")
                 {
-                    I[i] = mod.ItemType("RedBirdFeather");
+                    I[i] = Mod.Find<ModItem>("RedBirdFeather").Type;
                 }
                 if (S[i] == "雪里红羽")
                 {
-                    I[i] = mod.ItemType("RedSnowFeather");
+                    I[i] = Mod.Find<ModItem>("RedSnowFeather").Type;
                 }
                 if (S[i] == "纯白雪羽")
                 {
-                    I[i] = mod.ItemType("SnowFeather");
+                    I[i] = Mod.Find<ModItem>("SnowFeather").Type;
                 }
                 if (S[i] == "星尘羽")
                 {
-                    I[i] = mod.ItemType("StardustFeather");
+                    I[i] = Mod.Find<ModItem>("StardustFeather").Type;
                 }
                 if (S[i] == "日耀羽")
                 {
-                    I[i] = mod.ItemType("SolarFeather");
+                    I[i] = Mod.Find<ModItem>("SolarFeather").Type;
                 }
                 if (S[i] == "荧星之羽")
                 {
-                    I[i] = mod.ItemType("StarlightFeather");
+                    I[i] = Mod.Find<ModItem>("StarlightFeather").Type;
                 }
                 if (S[i] == "暮光羽")
                 {
-                    I[i] = mod.ItemType("TwilightFeather");
+                    I[i] = Mod.Find<ModItem>("TwilightFeather").Type;
                 }
                 if (S[i] == "虚空幻羽")
                 {
-                    I[i] = mod.ItemType("VoidFeather");
+                    I[i] = Mod.Find<ModItem>("VoidFeather").Type;
                 }
                 if (tag.GetInt("Feather" + i.ToString()) != 0)
                 {
@@ -4348,48 +4342,48 @@ namespace MythMod
         {
             if (this.LargeTurquoise)
             {
-                int num = base.player.FindItem(base.mod.ItemType("LargeTurquoise"));
+                int num = base.Player.FindItem(base.Mod.Find<ModItem>("LargeTurquoise").Type);
                 if (num >= 0)
                 {
-                    base.player.inventory[num].stack--;
-                    Item.NewItem((int)base.player.position.X, (int)base.player.position.Y, base.player.width, base.player.height, base.mod.ItemType("LargeTurquoise"), 1, false, 0, false, false);
-                    if (base.player.inventory[num].stack <= 0)
+                    base.Player.inventory[num].stack--;
+                    Item.NewItem((int)base.Player.position.X, (int)base.Player.position.Y, base.Player.width, base.Player.height, base.Mod.Find<ModItem>("LargeTurquoise").Type, 1, false, 0, false, false);
+                    if (base.Player.inventory[num].stack <= 0)
                     {
-                        base.player.inventory[num] = new Item();
+                        base.Player.inventory[num] = new Item();
                     }
                 }
             }
             if (this.LargeAquamarine)
             {
-                int num = base.player.FindItem(base.mod.ItemType("LargeAquamarine"));
+                int num = base.Player.FindItem(base.Mod.Find<ModItem>("LargeAquamarine").Type);
                 if (num >= 0)
                 {
-                    base.player.inventory[num].stack--;
-                    Item.NewItem((int)base.player.position.X, (int)base.player.position.Y, base.player.width, base.player.height, base.mod.ItemType("LargeAquamarine"), 1, false, 0, false, false);
-                    if (base.player.inventory[num].stack <= 0)
+                    base.Player.inventory[num].stack--;
+                    Item.NewItem((int)base.Player.position.X, (int)base.Player.position.Y, base.Player.width, base.Player.height, base.Mod.Find<ModItem>("LargeAquamarine").Type, 1, false, 0, false, false);
+                    if (base.Player.inventory[num].stack <= 0)
                     {
-                        base.player.inventory[num] = new Item();
+                        base.Player.inventory[num] = new Item();
                     }
                 }
             }
             if (this.LargeOlivine)
             {
-                int num = base.player.FindItem(base.mod.ItemType("LargeOlivine"));
+                int num = base.Player.FindItem(base.Mod.Find<ModItem>("LargeOlivine").Type);
                 if (num >= 0)
                 {
-                    base.player.inventory[num].stack--;
-                    Item.NewItem((int)base.player.position.X, (int)base.player.position.Y, base.player.width, base.player.height, base.mod.ItemType("LargeOlivine"), 1, false, 0, false, false);
-                    if (base.player.inventory[num].stack <= 0)
+                    base.Player.inventory[num].stack--;
+                    Item.NewItem((int)base.Player.position.X, (int)base.Player.position.Y, base.Player.width, base.Player.height, base.Mod.Find<ModItem>("LargeOlivine").Type, 1, false, 0, false, false);
+                    if (base.Player.inventory[num].stack <= 0)
                     {
-                        base.player.inventory[num] = new Item();
+                        base.Player.inventory[num] = new Item();
                     }
                 }
             }
-            if (player.name == "万象元素")
+            if (Player.name == "万象元素")
             {
-                player.active = true;
-                player.dead = false;
-                player.statLife = player.statLifeMax2;
+                Player.active = true;
+                Player.dead = false;
+                Player.statLife = Player.statLifeMax2;
             }
         }
         public float Misspossibility = 0;
@@ -4425,13 +4419,13 @@ namespace MythMod
         public float num3 = 0;
         public float num4 = 0;
 
-        public override void SetupStartInventory(IList<Item> items)
+        public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)/* tModPorter Suggestion: Return an Item array to add to the players starting items. Use ModifyStartingInventory for modifying them if needed */
         {
             if (Main.expertMode == true)
             {
                 {
                     Item item = new Item();
-                    item.SetDefaults(mod.ItemType("神话卷轴"));
+                    item.SetDefaults(Mod.Find<ModItem>("神话卷轴").Type);
                     item.stack = 1;
                     items.Add(item);
                 }

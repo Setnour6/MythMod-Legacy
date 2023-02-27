@@ -13,26 +13,26 @@ namespace MythMod.Items.Corals
         }
         public override void SetDefaults()
         {
-            base.item.width = 48;
-            base.item.height = 14;
-            base.item.rare = 0;
-            base.item.scale = 1f;
-            base.item.createTile = 0;
-            base.item.useStyle = 1;
-            base.item.useTurn = true;
-            base.item.useAnimation = 15;
-            base.item.useTime = 10;
-            base.item.autoReuse = true;
-            base.item.consumable = true;
-            base.item.maxStack = 999;
-            base.item.value = 400;
+            base.Item.width = 48;
+            base.Item.height = 14;
+            base.Item.rare = 0;
+            base.Item.scale = 1f;
+            base.Item.createTile = 0;
+            base.Item.useStyle = 1;
+            base.Item.useTurn = true;
+            base.Item.useAnimation = 15;
+            base.Item.useTime = 10;
+            base.Item.autoReuse = true;
+            base.Item.consumable = true;
+            base.Item.maxStack = 999;
+            base.Item.value = 400;
         }
         public override void AddRecipes()
         {
         }
         public override void UpdateInventory(Player player)
         {
-            base.item.createTile = base.mod.TileType("稀疏藤壶" + (Main.rand.Next(3) + 1).ToString());
+            base.Item.createTile = base.Mod.Find<ModTile>("稀疏藤壶" + (Main.rand.Next(3) + 1).ToString()).Type;
             base.UpdateInventory(player);
         }
     }

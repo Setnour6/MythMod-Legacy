@@ -1,4 +1,4 @@
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -25,31 +25,31 @@ namespace MythMod.Items.Weapons.FestivalWeapons
         }
         public override void SetDefaults()
         {
-            item.ranged = true;
-            item.width = 36;
-            item.height = 96;
-            item.useTime = 9;
-            item.useAnimation = 9;
-            item.damage = 260;
-            item.UseSound = SoundID.Item11;
-            item.autoReuse = true;
-            item.crit = 4;
-            item.value = 30000;
-            item.scale = 1f;
-            item.rare = 11;
-            item.useStyle = 5;
-            item.knockBack = 1;
-            item.shoot = 1;
-            item.useAmmo = 40;
-            item.noMelee = true;
-            item.shootSpeed = 7f;
-            item.reuseDelay = 9;
+            Item.DamageType = DamageClass.Ranged;
+            Item.width = 36;
+            Item.height = 96;
+            Item.useTime = 9;
+            Item.useAnimation = 9;
+            Item.damage = 260;
+            Item.UseSound = SoundID.Item11;
+            Item.autoReuse = true;
+            Item.crit = 4;
+            Item.value = 30000;
+            Item.scale = 1f;
+            Item.rare = 11;
+            Item.useStyle = 5;
+            Item.knockBack = 1;
+            Item.shoot = 1;
+            Item.useAmmo = 40;
+            Item.noMelee = true;
+            Item.shootSpeed = 7f;
+            Item.reuseDelay = 9;
         }
         public override Vector2? HoldoutOffset()
         {
             return new Vector2(-12.0f, 0.0f);
         }
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Vector2 v = new Vector2(speedX, speedY);
             int num = Main.rand.Next(4, 8);

@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.DataStructures;
@@ -24,17 +25,17 @@ namespace MythMod.Items
         }
         public override void SetDefaults()
         {
-            base.item.melee = false;
-            base.item.width = 32;
-            base.item.height = 32;
-            base.item.useTime = 25;
-            base.item.useAnimation = 25;
-            base.item.useTurn = true;
-            base.item.useStyle = 1;
-            base.item.value = 5000;
-            base.item.UseSound = SoundID.Item1;
-            base.item.autoReuse = true;
-            base.item.rare = 6;
+            base.Item.melee = false/* tModPorter Suggestion: Remove. See Item.DamageType */;
+            base.Item.width = 32;
+            base.Item.height = 32;
+            base.Item.useTime = 25;
+            base.Item.useAnimation = 25;
+            base.Item.useTurn = true;
+            base.Item.useStyle = 1;
+            base.Item.value = 5000;
+            base.Item.UseSound = SoundID.Item1;
+            base.Item.autoReuse = true;
+            base.Item.rare = 6;
         }
         public override void AddRecipes()
         {
@@ -71,7 +72,7 @@ namespace MythMod.Items
                         {
                             player.lostCoinString = Main.ValueToCoins(player.lostCoins);
                         }
-                        Main.PlaySound(5, (int)player.position.X, (int)player.position.Y, 1, 1f, 0f);
+                        SoundEngine.PlaySound(SoundID.PlayerKilled, player.position);
                         player.headVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
                         player.bodyVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
                         player.legVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
@@ -130,7 +131,7 @@ namespace MythMod.Items
                         }
                     }
                 }
-                player.AddBuff(base.mod.BuffType("LowDisorder"), 300, true);
+                player.AddBuff(base.Mod.Find<ModBuff>("LowDisorder").Type, 300, true);
             }
             //string key = new Vector2(Main.mouseX, Main.mouseY).ToString();
             //Color messageColor = Color.Purple;

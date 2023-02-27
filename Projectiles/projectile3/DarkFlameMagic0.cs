@@ -16,15 +16,15 @@ namespace MythMod.Projectiles.projectile3
 		}
 		public override void SetDefaults()
 		{
-			projectile.width = 32;
-			projectile.height = 32;
-			projectile.friendly = false;
-            projectile.hostile = true;
-            projectile.aiStyle = -1;
-            projectile.penetrate = -1;
-            projectile.timeLeft = 8000;
-            projectile.extraUpdates = 10;
-            projectile.tileCollide = false;
+			Projectile.width = 32;
+			Projectile.height = 32;
+			Projectile.friendly = false;
+            Projectile.hostile = true;
+            Projectile.aiStyle = -1;
+            Projectile.penetrate = -1;
+            Projectile.timeLeft = 8000;
+            Projectile.extraUpdates = 10;
+            Projectile.tileCollide = false;
         }
         float r = 0;
         private Vector2 v0;
@@ -32,18 +32,18 @@ namespace MythMod.Projectiles.projectile3
         private float b = 0;
         public override void AI()
         {
-            if (projectile.timeLeft == 7999)
+            if (Projectile.timeLeft == 7999)
             {
-                projectile.timeLeft = Main.rand.Next(1100, 1300);
+                Projectile.timeLeft = Main.rand.Next(1100, 1300);
                 Rot = Main.rand.NextFloat(0, (float)(Math.PI * 2));
                 b = Main.rand.NextFloat(0, 100f);
-                v0 = projectile.Center;
+                v0 = Projectile.Center;
             }
-            if (projectile.timeLeft > 1000)
+            if (Projectile.timeLeft > 1000)
             {
                 r += 0.5f;
             }
-            if (projectile.timeLeft < 200 && r > 0.5f)
+            if (Projectile.timeLeft < 200 && r > 0.5f)
             {
                 r -= 0.5f;
             }
@@ -52,11 +52,11 @@ namespace MythMod.Projectiles.projectile3
 
             if (v0 != Vector2.Zero)
             {
-                projectile.position = v0 - new Vector2(Dx, Dy) / 2f;
+                Projectile.position = v0 - new Vector2(Dx, Dy) / 2f;
             }
 
-            projectile.width = Dx;
-            projectile.height = Dy;
+            Projectile.width = Dx;
+            Projectile.height = Dy;
             /* if(projectile.timeLeft >= 200 && projectile.timeLeft <= 1000 && projectile.timeLeft % 100 == 0)
              {
                  double io = Main.rand.NextFloat(0, 10f);
@@ -77,7 +77,7 @@ namespace MythMod.Projectiles.projectile3
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
 		{
-		    projectile.Kill();
+		    Projectile.Kill();
 			return false;
 		}
         /*public override void Kill(int timeLeft)
@@ -101,7 +101,7 @@ namespace MythMod.Projectiles.projectile3
         {
             target.AddBuff(153, 900);
         }
-        public override void PostDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override void PostDraw(Color lightColor)
         {
             List<CustomVertexInfo> bars = new List<CustomVertexInfo>();
 
@@ -125,8 +125,8 @@ namespace MythMod.Projectiles.projectile3
                 var color = Color.Lerp(Color.White, Color.Blue, 0.2f);
                 var w = MathHelper.Lerp(1f, 0.05f, alpha);
 
-                bars.Add(new CustomVertexInfo(projectile.Center + new Vector2(0, r + 40).RotatedBy(i / 2d * Math.PI + Rot), color, new Vector3((float)Math.Sqrt(factor), 1, w)));
-                bars.Add(new CustomVertexInfo(projectile.Center + new Vector2(0, r).RotatedBy(i / 2d * Math.PI + Rot), color, new Vector3((float)Math.Sqrt(factor), 0, w)));
+                bars.Add(new CustomVertexInfo(Projectile.Center + new Vector2(0, r + 40).RotatedBy(i / 2d * Math.PI + Rot), color, new Vector3((float)Math.Sqrt(factor), 1, w)));
+                bars.Add(new CustomVertexInfo(Projectile.Center + new Vector2(0, r).RotatedBy(i / 2d * Math.PI + Rot), color, new Vector3((float)Math.Sqrt(factor), 0, w)));
             }
 
             List<CustomVertexInfo> triangleList = new List<CustomVertexInfo>();

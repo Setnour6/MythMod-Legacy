@@ -29,23 +29,23 @@ namespace MythMod.Items
 		// Token: 0x06001302 RID: 4866 RVA: 0x0008B3E8 File Offset: 0x000895E8
 		public override void SetDefaults()
 		{
-			base.item.damage = 0;
-			base.item.mana = 0;
-			base.item.width = 32;
-			base.item.height = 32;
-			base.item.useTime = 36;
-			base.item.useAnimation = 36;
-			base.item.useStyle = 1;
-			base.item.noMelee = true;
-			base.item.knockBack = 2.25f;
-			base.item.value = 55000;
-			base.item.rare = 3;
-			base.item.UseSound = SoundID.Item44;
-			base.item.autoReuse = false;
-			base.item.summon = true;
+			base.Item.damage = 0;
+			base.Item.mana = 0;
+			base.Item.width = 32;
+			base.Item.height = 32;
+			base.Item.useTime = 36;
+			base.Item.useAnimation = 36;
+			base.Item.useStyle = 1;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 2.25f;
+			base.Item.value = 55000;
+			base.Item.rare = 3;
+			base.Item.UseSound = SoundID.Item44;
+			base.Item.autoReuse = false;
+			base.Item.DamageType = DamageClass.Summon;
 		}
 		// Token: 0x06001304 RID: 4868 RVA: 0x0008B534 File Offset: 0x00089734
-		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
 			return false;
 		}

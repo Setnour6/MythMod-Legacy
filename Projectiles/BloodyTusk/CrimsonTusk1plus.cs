@@ -18,15 +18,15 @@ namespace MythMod.Projectiles.BloodyTusk
         }
         public override void SetDefaults()
         {
-            base.projectile.width = 8;
-            base.projectile.height = 100;
-            base.projectile.hostile = false;
-            base.projectile.friendly = false;
-            base.projectile.ignoreWater = true;
-            base.projectile.penetrate = -1;
-            base.projectile.timeLeft = 100;
-            projectile.alpha = 255;
-            base.projectile.tileCollide = true;
+            base.Projectile.width = 8;
+            base.Projectile.height = 100;
+            base.Projectile.hostile = false;
+            base.Projectile.friendly = false;
+            base.Projectile.ignoreWater = true;
+            base.Projectile.penetrate = -1;
+            base.Projectile.timeLeft = 100;
+            Projectile.alpha = 255;
+            base.Projectile.tileCollide = true;
         }
         public Texture2D[] T = new Texture2D[8];
         public int n = 0;
@@ -37,18 +37,18 @@ namespace MythMod.Projectiles.BloodyTusk
             {
                 X = 0;
                 initialization2 = false;
-                Y = base.projectile.Center.Y;
+                Y = base.Projectile.Center.Y;
                 n = Main.rand.Next(8);
             }
 
-            if (projectile.velocity.Y == 0 && X == 0)
+            if (Projectile.velocity.Y == 0 && X == 0)
             {
                 for (int u = 0; u < 15; u++)
                 {
-                    int r = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y + 44f) + base.projectile.velocity * 3f, 0, 0, 117, (float)Main.rand.Next(-2000, 2000) / 6000f, -6f, 0, default(Color), 1.1f);
+                    int r = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y + 44f) + base.Projectile.velocity * 3f, 0, 0, 117, (float)Main.rand.Next(-2000, 2000) / 6000f, -6f, 0, default(Color), 1.1f);
                     Main.dust[r].noGravity = false;
                 }
-                base.projectile.hostile = true;
+                base.Projectile.hostile = true;
                 X = 1;
             }
             if (X == 1 && drawPos.Y < 0.05f)
@@ -64,23 +64,23 @@ namespace MythMod.Projectiles.BloodyTusk
                 drawPos.Y += 0.5f;
                 if (drawPos.Y > 52)
                 {
-                    projectile.active = false;
+                    Projectile.active = false;
                 }
             }
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            if (base.projectile.velocity.X != oldVelocity.X)
+            if (base.Projectile.velocity.X != oldVelocity.X)
             {
-                base.projectile.velocity.X = 0f;
+                base.Projectile.velocity.X = 0f;
             }
-            if (base.projectile.velocity.Y != oldVelocity.Y)
+            if (base.Projectile.velocity.Y != oldVelocity.Y)
             {
-                base.projectile.velocity.Y = 0f;
+                base.Projectile.velocity.Y = 0f;
             }
             return false;
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
         {
             return false;
         }

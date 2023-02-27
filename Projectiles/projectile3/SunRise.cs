@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.GameInput;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
@@ -25,38 +26,38 @@ namespace MythMod.Projectiles.projectile3
 
         public override void SetDefaults()
         {
-            base.projectile.width = 15;
-            base.projectile.height = 15;
-            base.projectile.aiStyle = 27;
-            base.projectile.friendly = true;
-            projectile.tileCollide = false;
-            base.projectile.melee = true;
-            base.projectile.ignoreWater = false;
-            base.projectile.penetrate = -1;
-            projectile.alpha = 255;
-            base.projectile.extraUpdates = 2;
-            base.projectile.timeLeft = 600;
-            base.projectile.usesLocalNPCImmunity = true;
-            base.projectile.localNPCHitCooldown = 1;
+            base.Projectile.width = 15;
+            base.Projectile.height = 15;
+            base.Projectile.aiStyle = 27;
+            base.Projectile.friendly = true;
+            Projectile.tileCollide = false;
+            base.Projectile.DamageType = DamageClass.Melee;
+            base.Projectile.ignoreWater = false;
+            base.Projectile.penetrate = -1;
+            Projectile.alpha = 255;
+            base.Projectile.extraUpdates = 2;
+            base.Projectile.timeLeft = 600;
+            base.Projectile.usesLocalNPCImmunity = true;
+            base.Projectile.localNPCHitCooldown = 1;
         }
 
         public override void AI()
         {
-            if(projectile.alpha > 5)
+            if(Projectile.alpha > 5)
             {
-                projectile.alpha -= 5;
+                Projectile.alpha -= 5;
             }
-            float num2 = base.projectile.Center.X;
-            float num3 = base.projectile.Center.Y;
+            float num2 = base.Projectile.Center.X;
+            float num3 = base.Projectile.Center.Y;
             float num4 = 400f;
             bool flag = false;
             for (int j = 0; j < 200; j++)
             {
-                if (Main.npc[j].CanBeChasedBy(base.projectile, false) && Collision.CanHit(base.projectile.Center, 1, 1, Main.npc[j].Center, 1, 1))
+                if (Main.npc[j].CanBeChasedBy(base.Projectile, false) && Collision.CanHit(base.Projectile.Center, 1, 1, Main.npc[j].Center, 1, 1))
                 {
                     float num5 = Main.npc[j].position.X + (float)(Main.npc[j].width / 2);
                     float num6 = Main.npc[j].position.Y + (float)(Main.npc[j].height / 2);
-                    float num7 = Math.Abs(base.projectile.position.X + (float)(base.projectile.width / 2) - num5) + Math.Abs(base.projectile.position.Y + (float)(base.projectile.height / 2) - num6);
+                    float num7 = Math.Abs(base.Projectile.position.X + (float)(base.Projectile.width / 2) - num5) + Math.Abs(base.Projectile.position.Y + (float)(base.Projectile.height / 2) - num6);
                     if (num7 < num4)
                     {
                         num4 = num7;
@@ -66,91 +67,91 @@ namespace MythMod.Projectiles.projectile3
                     }
                     if (num7 < 50)
                     {
-                        Main.npc[j].StrikeNPC((int)(projectile.damage * Main.rand.NextFloat(0.85f,1.15f)), projectile.knockBack, projectile.direction, Main.rand.Next(200) > 150 ? true : false);
-                        projectile.penetrate--;
+                        Main.npc[j].StrikeNPC((int)(Projectile.damage * Main.rand.NextFloat(0.85f,1.15f)), Projectile.knockBack, Projectile.direction, Main.rand.Next(200) > 150 ? true : false);
+                        Projectile.penetrate--;
                     }
                 }
             }
             if (flag)
             {
                 float num8 = 20f;
-                Vector2 vector1 = new Vector2(base.projectile.position.X + (float)base.projectile.width * 0.5f, base.projectile.position.Y + (float)base.projectile.height * 0.5f);
+                Vector2 vector1 = new Vector2(base.Projectile.position.X + (float)base.Projectile.width * 0.5f, base.Projectile.position.Y + (float)base.Projectile.height * 0.5f);
                 float num9 = num2 - vector1.X;
                 float num10 = num3 - vector1.Y;
                 float num11 = (float)Math.Sqrt((double)(num9 * num9 + num10 * num10));
                 num11 = num8 / num11;
                 num9 *= num11;
                 num10 *= num11;
-                base.projectile.velocity.X = (base.projectile.velocity.X * 480f + num9) / 481f;
-                base.projectile.velocity.Y = (base.projectile.velocity.Y * 480f + num10) / 481f;
-                projectile.velocity *= 0.99f;
-                if(projectile.velocity.Length() > 4)
+                base.Projectile.velocity.X = (base.Projectile.velocity.X * 480f + num9) / 481f;
+                base.Projectile.velocity.Y = (base.Projectile.velocity.Y * 480f + num10) / 481f;
+                Projectile.velocity *= 0.99f;
+                if(Projectile.velocity.Length() > 4)
                 {
-                    projectile.velocity *= 0.95f;
+                    Projectile.velocity *= 0.95f;
                 }
             }
-            Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 0.6f / 255f, (float)(255 - base.projectile.alpha) * 0.1f / 255f, (float)(255 - base.projectile.alpha) * 0.0f / 255f);
+            Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 0.6f / 255f, (float)(255 - base.Projectile.alpha) * 0.1f / 255f, (float)(255 - base.Projectile.alpha) * 0.0f / 255f);
         }
         public override Color? GetAlpha(Color lightColor)
         {
-            return new Color?(new Color(255, 255, 255, base.projectile.alpha));
+            return new Color?(new Color(255, 255, 255, base.Projectile.alpha));
         }
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-            int k = Projectile.NewProjectile(projectile.position.X, projectile.position.Y, 0, 0, 612, projectile.damage, projectile.knockBack, Main.myPlayer, 0f, 0f);
+            int k = Projectile.NewProjectile(Projectile.position.X, Projectile.position.Y, 0, 0, 612, Projectile.damage, Projectile.knockBack, Main.myPlayer, 0f, 0f);
             for (int i = 0; i < 200; i++)
             {
-                if ((Main.npc[i].Center - projectile.position).Length() < Main.npc[i].Hitbox.Width / 2f + 10)
+                if ((Main.npc[i].Center - Projectile.position).Length() < Main.npc[i].Hitbox.Width / 2f + 10)
                 {
-                    Main.npc[i].StrikeNPC((int)(projectile.damage / 6f), 0, 1);
+                    Main.npc[i].StrikeNPC((int)(Projectile.damage / 6f), 0, 1);
                 }
             }
             Main.projectile[k].timeLeft = 30;
             target.AddBuff(189, 900, false);
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color drawColor)
+        public override bool PreDraw(ref Color lightColor)
         {
             Mod mod = ModLoader.GetMod("MythMod");
-            Texture2D texture = Main.projectileTexture[projectile.type];
-            Main.spriteBatch.Draw(texture, projectile.Center - Main.screenPosition + new Vector2(0f, projectile.gfxOffY), null, base.projectile.GetAlpha(drawColor), projectile.rotation, new Vector2(15, 15), projectile.scale, SpriteEffects.None, 0f);
-            if (projectile.timeLeft > 590)
+            Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
+            Main.spriteBatch.Draw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), null, base.Projectile.GetAlpha(drawColor), Projectile.rotation, new Vector2(15, 15), Projectile.scale, SpriteEffects.None, 0f);
+            if (Projectile.timeLeft > 590)
             {
-                float k = (600 - projectile.timeLeft) / 10f;
+                float k = (600 - Projectile.timeLeft) / 10f;
                 for (int i = 0; i < 60; i++)
                 {
-                    Main.spriteBatch.Draw(mod.GetTexture("Projectiles/projectile3/SunLight"), projectile.Center - Main.screenPosition + new Vector2(0f, projectile.gfxOffY), new Rectangle((int)(384 + Math.Sin(Main.time / 100d) * 234), (int)(384 + Math.Cos(Main.time / 100d) * 234), 150, 150), new Color(k - k / 20f * (float)i, 0f - 0f / 20f * (float)i, 0 - 0 / 20f * (float)i, (0.2f - 0.2f / 20f * (float)i)), projectile.rotation + (float)Main.time / 50f + i / 12f, new Vector2(75, 75), (0.6f + i / 120f), SpriteEffects.None, 0f);
+                    Main.spriteBatch.Draw(mod.GetTexture("Projectiles/projectile3/SunLight"), Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Rectangle((int)(384 + Math.Sin(Main.time / 100d) * 234), (int)(384 + Math.Cos(Main.time / 100d) * 234), 150, 150), new Color(k - k / 20f * (float)i, 0f - 0f / 20f * (float)i, 0 - 0 / 20f * (float)i, (0.2f - 0.2f / 20f * (float)i)), Projectile.rotation + (float)Main.time / 50f + i / 12f, new Vector2(75, 75), (0.6f + i / 120f), SpriteEffects.None, 0f);
                 }
             }
-            if (projectile.timeLeft <= 590 && projectile.timeLeft > 550)
+            if (Projectile.timeLeft <= 590 && Projectile.timeLeft > 550)
             {
                 for (int i = 0; i < 60; i++)
                 {
-                    Main.spriteBatch.Draw(mod.GetTexture("Projectiles/projectile3/SunLight"), projectile.Center - Main.screenPosition + new Vector2(0f, projectile.gfxOffY), new Rectangle((int)(384 + Math.Sin(Main.time / 100d) * 234), (int)(384 + Math.Cos(Main.time / 100d) * 234), 150, 150), new Color(1 - 1 / 20f * (float)i, 0f - 0f / 20f * (float)i, 0 - 0 / 20f * (float)i, (0.2f - 0.2f / 20f * (float)i)), projectile.rotation + (float)Main.time / 50f + i / 12f, new Vector2(75, 75), (0.6f + i / 120f), SpriteEffects.None, 0f);
+                    Main.spriteBatch.Draw(mod.GetTexture("Projectiles/projectile3/SunLight"), Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Rectangle((int)(384 + Math.Sin(Main.time / 100d) * 234), (int)(384 + Math.Cos(Main.time / 100d) * 234), 150, 150), new Color(1 - 1 / 20f * (float)i, 0f - 0f / 20f * (float)i, 0 - 0 / 20f * (float)i, (0.2f - 0.2f / 20f * (float)i)), Projectile.rotation + (float)Main.time / 50f + i / 12f, new Vector2(75, 75), (0.6f + i / 120f), SpriteEffects.None, 0f);
                 }
             }
-            if (projectile.timeLeft <= 550 && projectile.timeLeft > 100)
+            if (Projectile.timeLeft <= 550 && Projectile.timeLeft > 100)
             {
-                float k = 0.3f - (projectile.timeLeft - 100) / 1500f;
+                float k = 0.3f - (Projectile.timeLeft - 100) / 1500f;
                 for (int i = 0; i < 60; i++)
                 {
-                    Main.spriteBatch.Draw(mod.GetTexture("Projectiles/projectile3/SunLight"), projectile.Center - Main.screenPosition + new Vector2(0f, projectile.gfxOffY), new Rectangle((int)(384 + Math.Sin(Main.time / 100d) * 234), (int)(384 + Math.Cos(Main.time / 100d) * 234), 150, 150), new Color(1 - 1 / 20f * (float)i, k - k / 20f * (float)i, 0 - 0 / 20f * (float)i, (0.2f - 0.2f / 20f * (float)i)), projectile.rotation + (float)Main.time / 50f + i / 12f, new Vector2(75, 75), (0.6f + i / 120f), SpriteEffects.None, 0f);
+                    Main.spriteBatch.Draw(mod.GetTexture("Projectiles/projectile3/SunLight"), Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Rectangle((int)(384 + Math.Sin(Main.time / 100d) * 234), (int)(384 + Math.Cos(Main.time / 100d) * 234), 150, 150), new Color(1 - 1 / 20f * (float)i, k - k / 20f * (float)i, 0 - 0 / 20f * (float)i, (0.2f - 0.2f / 20f * (float)i)), Projectile.rotation + (float)Main.time / 50f + i / 12f, new Vector2(75, 75), (0.6f + i / 120f), SpriteEffects.None, 0f);
                 }
             }
-            if (projectile.timeLeft <= 100 && projectile.timeLeft > 50)
+            if (Projectile.timeLeft <= 100 && Projectile.timeLeft > 50)
             {
-                float k = 1f - (projectile.timeLeft - 50) / 50f;
-                float l = 1f - (projectile.timeLeft - 50) / 50f * 0.7f;
+                float k = 1f - (Projectile.timeLeft - 50) / 50f;
+                float l = 1f - (Projectile.timeLeft - 50) / 50f * 0.7f;
                 for (int i = 0; i < 60; i++)
                 {
-                    Main.spriteBatch.Draw(mod.GetTexture("Projectiles/projectile3/SunLight"), projectile.Center - Main.screenPosition + new Vector2(0f, projectile.gfxOffY), new Rectangle((int)(384 + Math.Sin(Main.time / 100d) * 234), (int)(384 + Math.Cos(Main.time / 100d) * 234), 150, 150), new Color(1 - 1 / 20f * (float)i, l - l / 20f * (float)i, k * 0.6f - k * 0.6f / 20f * (float)i, (0.2f - 0.2f / 20f * (float)i)), projectile.rotation + (float)Main.time / 50f + i / 12f, new Vector2(75, 75), (0.6f + i / 120f), SpriteEffects.None, 0f);
+                    Main.spriteBatch.Draw(mod.GetTexture("Projectiles/projectile3/SunLight"), Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Rectangle((int)(384 + Math.Sin(Main.time / 100d) * 234), (int)(384 + Math.Cos(Main.time / 100d) * 234), 150, 150), new Color(1 - 1 / 20f * (float)i, l - l / 20f * (float)i, k * 0.6f - k * 0.6f / 20f * (float)i, (0.2f - 0.2f / 20f * (float)i)), Projectile.rotation + (float)Main.time / 50f + i / 12f, new Vector2(75, 75), (0.6f + i / 120f), SpriteEffects.None, 0f);
                 }
             }
-            if (projectile.timeLeft <= 50)
+            if (Projectile.timeLeft <= 50)
             {
-                float k = projectile.timeLeft / 50f;
+                float k = Projectile.timeLeft / 50f;
                 for (int i = 0; i < 60; i++)
                 {
-                    Main.spriteBatch.Draw(mod.GetTexture("Projectiles/projectile3/SunLight"), projectile.Center - Main.screenPosition + new Vector2(0f, projectile.gfxOffY), new Rectangle((int)(384 + Math.Sin(Main.time / 100d) * 234), (int)(384 + Math.Cos(Main.time / 100d) * 234), 150, 150), new Color(k - k / 20f * (float)i, k - k / 20f * (float)i, k * 0.6f - k * 0.6f / 20f * (float)i, (0.2f - 0.2f / 20f * (float)i)), projectile.rotation + (float)Main.time / 50f + i / 12f, new Vector2(75, 75), (0.6f + i / 120f), SpriteEffects.None, 0f);
+                    Main.spriteBatch.Draw(mod.GetTexture("Projectiles/projectile3/SunLight"), Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Rectangle((int)(384 + Math.Sin(Main.time / 100d) * 234), (int)(384 + Math.Cos(Main.time / 100d) * 234), 150, 150), new Color(k - k / 20f * (float)i, k - k / 20f * (float)i, k * 0.6f - k * 0.6f / 20f * (float)i, (0.2f - 0.2f / 20f * (float)i)), Projectile.rotation + (float)Main.time / 50f + i / 12f, new Vector2(75, 75), (0.6f + i / 120f), SpriteEffects.None, 0f);
                 }
             }
             return false;

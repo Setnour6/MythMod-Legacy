@@ -14,11 +14,11 @@ namespace MythMod.Items.UnderSea
         public override void SetDefaults()
         {
             Item refItem = new Item();
-            item.width = refItem.width;
-            item.height = refItem.height;
-            item.maxStack = 999;
-            item.value = 2000;
-            item.rare = 8;
+            Item.width = refItem.width;
+            Item.height = refItem.height;
+            Item.maxStack = 999;
+            Item.value = 2000;
+            Item.rare = 8;
         }
     }
 }

@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 using MythMod;
@@ -40,10 +41,10 @@ namespace MythMod.Projectiles
                 for (int i = 0; i < 170; i++)
                 {
                     Vector2 v = new Vector2(0, Main.rand.NextFloat(2.9f, (float)(2.4 * Math.Log10(projectile.damage)))).RotatedByRandom(Math.PI * 2);
-                    int num5 = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, mod.DustType("Flame"), 0f, 0f, 100, Color.White, (float)(4f * Math.Log10(projectile.damage)));
+                    int num5 = Dust.NewDust(new Vector2(projectile.position.X, projectile.position.Y), projectile.width, projectile.height, Mod.Find<ModDust>("Flame").Type, 0f, 0f, 100, Color.White, (float)(4f * Math.Log10(projectile.damage)));
                     Main.dust[num5].velocity = v;
                 }
-                Main.PlaySound(SoundID.Item14, (int)projectile.Center.X, (int)projectile.Center.Y);
+                SoundEngine.PlaySound(SoundID.Item14, projectile.Center);
                 for (int i = 0; i < 200; i++)
                 {
                     if ((Main.npc[i].Center - projectile.position).Length() < Main.npc[i].Hitbox.Width / 2f + 30)
@@ -67,14 +68,14 @@ namespace MythMod.Projectiles
                 Vector2 v1 = target.Center;
                 Vector2 v2 = (v1 - new Vector2(v1.X, v1.Y - 1000)) / (v1 - new Vector2(v1.X, v1.Y - 1000)).Length() * 12f + new Vector2(0, 3).RotatedByRandom(MathHelper.Pi * 2);
                 v2 = v2 / v2.Length() * 2;
-                Projectile.NewProjectile(v1.X + Main.rand.Next(-200, 200), v1.Y - 1500 + Main.rand.Next(-200, 600), v2.X, v2.Y, mod.ProjectileType("LightingBolt"), damage * 20, 0.5f, Main.myPlayer, v1.X, v1.Y);
+                Projectile.NewProjectile(v1.X + Main.rand.Next(-200, 200), v1.Y - 1500 + Main.rand.Next(-200, 600), v2.X, v2.Y, Mod.Find<ModProjectile>("LightingBolt").Type, damage * 20, 0.5f, Main.myPlayer, v1.X, v1.Y);
             }
-            if (Main.rand.Next(10000) < mplayer.FreezingPoint && projectile.type != mod.ProjectileType("FreezeBallBrake"))
+            if (Main.rand.Next(10000) < mplayer.FreezingPoint && projectile.type != Mod.Find<ModProjectile>("FreezeBallBrake").Type)
             {
-                if (target.type != 396 && target.type != 397 && target.type != 398 && target.type != mod.NPCType("AncientTangerineTreeEye"))
+                if (target.type != 396 && target.type != 397 && target.type != 398 && target.type != Mod.Find<ModNPC>("AncientTangerineTreeEye").Type)
                 {
-                    target.AddBuff(mod.BuffType("Freeze"), 240);
-                    target.AddBuff(mod.BuffType("Freeze2"), 242);
+                    target.AddBuff(Mod.Find<ModBuff>("Freeze").Type, 240);
+                    target.AddBuff(Mod.Find<ModBuff>("Freeze2").Type, 242);
                 }
                 if (target.type == 113)
                 {
@@ -82,8 +83,8 @@ namespace MythMod.Projectiles
                     {
                         if (Main.npc[i].type == 113 || Main.npc[i].type == 114)
                         {
-                            Main.npc[i].AddBuff(mod.BuffType("Freeze"), 240);
-                            Main.npc[i].AddBuff(mod.BuffType("Freeze2"), 242);
+                            Main.npc[i].AddBuff(Mod.Find<ModBuff>("Freeze").Type, 240);
+                            Main.npc[i].AddBuff(Mod.Find<ModBuff>("Freeze2").Type, 242);
                         }
                     }
                 }
@@ -93,12 +94,12 @@ namespace MythMod.Projectiles
                     {
                         if (Main.npc[i].type == 113 || Main.npc[i].type == 114)
                         {
-                            Main.npc[i].AddBuff(mod.BuffType("Freeze"), 240);
-                            Main.npc[i].AddBuff(mod.BuffType("Freeze2"), 242);
+                            Main.npc[i].AddBuff(Mod.Find<ModBuff>("Freeze").Type, 240);
+                            Main.npc[i].AddBuff(Mod.Find<ModBuff>("Freeze2").Type, 242);
                         }
                     }
                 }
-                Main.PlaySound(2, (int)target.position.X, (int)target.position.Y, 27, 1f, 0f);
+                SoundEngine.PlaySound(SoundID.Item27, target.position);
                 for (int i = 0; i < 30; i++)
                 {
                     int num = Dust.NewDust(new Vector2(target.position.X, target.position.Y), target.width, target.height, 88, 0f, 0f, 100, default(Color), 0.8f);
@@ -109,10 +110,10 @@ namespace MythMod.Projectiles
                     float a = (float)Main.rand.Next(0, 720) / 360 * 3.141592653589793238f;
                     float m = (float)Main.rand.Next(0, 50000);
                     float l = (float)Main.rand.Next((int)m, 50000) / 1800f;
-                    int num4 = Projectile.NewProjectile(target.Center.X, target.Center.Y, (float)((float)l * Math.Cos((float)a)) * 0.06f, (float)((float)l * Math.Sin((float)a)) * 0.06f, base.mod.ProjectileType("FreezeBallBrake"), 25, projectile.knockBack, projectile.owner, 0f, 30);
+                    int num4 = Projectile.NewProjectile(target.Center.X, target.Center.Y, (float)((float)l * Math.Cos((float)a)) * 0.06f, (float)((float)l * Math.Sin((float)a)) * 0.06f, base.Mod.Find<ModProjectile>("FreezeBallBrake").Type, 25, projectile.knockBack, projectile.owner, 0f, 30);
                     Main.projectile[num4].timeLeft = (int)(40 * Main.rand.NextFloat(0.2f, 0.7f));
                 }
-                Projectile.NewProjectile(target.Center.X, target.Center.Y - 199, 0, 0, base.mod.ProjectileType("IceKill"), 0, 0, projectile.owner, 0f, 0);
+                Projectile.NewProjectile(target.Center.X, target.Center.Y - 199, 0, 0, base.Mod.Find<ModProjectile>("IceKill").Type, 0, 0, projectile.owner, 0f, 0);
             }
         }
     }

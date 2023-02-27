@@ -1,3 +1,4 @@
+﻿using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
@@ -12,22 +13,22 @@ namespace MythMod.Items.Weapons.Bottle
         }
         public override void SetDefaults()
         {
-            item.damage = 42;
-            item.melee = true;
-            item.width = 68;
-            item.height = 68;
-            item.useTime = 28;
-            item.rare = 3;
-            item.useAnimation = 14;
-            item.useStyle = 1;
-            item.knockBack = 4;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 8;
-            item.value = 6000;
-            item.scale = 1f;
-            item.shoot = base.mod.ProjectileType("EvilSword");
-            item.shootSpeed = 4f;
+            Item.damage = 42;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 68;
+            Item.height = 68;
+            Item.useTime = 28;
+            Item.rare = 3;
+            Item.useAnimation = 14;
+            Item.useStyle = 1;
+            Item.knockBack = 4;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 8;
+            Item.value = 6000;
+            Item.scale = 1f;
+            Item.shoot = base.Mod.Find<ModProjectile>("EvilSword").Type;
+            Item.shootSpeed = 4f;
 
         }
         public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
@@ -39,7 +40,7 @@ namespace MythMod.Items.Weapons.Bottle
             Dust.NewDust(new Vector2((float)hitbox.X, (float)hitbox.Y), hitbox.Width, hitbox.Height, 27, 0f, 0f, 0, default(Color), 1.3f);
         }
         private int Cou = 0;
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             /*Cou += 1;
             if(Cou % 5 == 0)

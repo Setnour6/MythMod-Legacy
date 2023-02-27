@@ -1,4 +1,4 @@
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -15,23 +15,23 @@ namespace MythMod.Items.Weapons
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            item.damage = 120;
-            item.melee = true;
-            item.width = 48;
-            item.height = 48;
-            item.useTime = 32;
-            item.rare = 10;
-            item.useAnimation = 16;
-            item.useStyle = 1;
-            item.knockBack = 4;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 8;
-            item.value = 60000;
-            item.scale = 1f;
-            item.shoot = base.mod.ProjectileType("SolarSword");
-            item.shootSpeed = 9f;
+            Item.glowMask = GetGlowMask;
+            Item.damage = 120;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 48;
+            Item.height = 48;
+            Item.useTime = 32;
+            Item.rare = 10;
+            Item.useAnimation = 16;
+            Item.useStyle = 1;
+            Item.knockBack = 4;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 8;
+            Item.value = 60000;
+            Item.scale = 1f;
+            Item.shoot = base.Mod.Find<ModProjectile>("SolarSword").Type;
+            Item.shootSpeed = 9f;
 
         }
         public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
@@ -69,12 +69,11 @@ namespace MythMod.Items.Weapons
         }
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(3458, 18);
             modRecipe.AddIngredient(3467, 6);
             modRecipe.requiredTile[0] = 125;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
     }
 }

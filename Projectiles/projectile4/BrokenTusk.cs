@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 
 namespace MythMod.Projectiles.projectile4
@@ -11,79 +12,79 @@ namespace MythMod.Projectiles.projectile4
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("碎齿片");
-            Main.projFrames[projectile.type] = 8;
+            Main.projFrames[Projectile.type] = 8;
 		}
 		public override void SetDefaults()
 		{
-			base.projectile.width = 24;
-			base.projectile.height = 28;
-			base.projectile.friendly = true;
-			base.projectile.alpha = 0;
-			base.projectile.penetrate = 1;
-			base.projectile.tileCollide = true;
-			base.projectile.timeLeft = 9000;
-            projectile.damage = 0;
+			base.Projectile.width = 24;
+			base.Projectile.height = 28;
+			base.Projectile.friendly = true;
+			base.Projectile.alpha = 0;
+			base.Projectile.penetrate = 1;
+			base.Projectile.tileCollide = true;
+			base.Projectile.timeLeft = 9000;
+            Projectile.damage = 0;
 
         }
         public float num2 = 0;
         public override void AI()
         {
-            if(projectile.timeLeft == 8999)
+            if(Projectile.timeLeft == 8999)
             {
-                projectile.timeLeft = Main.rand.Next(600, 1000);
-                projectile.frame = Main.rand.Next(7);
+                Projectile.timeLeft = Main.rand.Next(600, 1000);
+                Projectile.frame = Main.rand.Next(7);
             }
             if(num2 == 0)
             {
                 num2 = Main.rand.Next(-100, 100) / 1000f;
             }
-            if(projectile.velocity.Length() > 0.1f)
+            if(Projectile.velocity.Length() > 0.1f)
             {
-                base.projectile.frameCounter++;
-                if (base.projectile.frameCounter > 6)
+                base.Projectile.frameCounter++;
+                if (base.Projectile.frameCounter > 6)
                 {
-                    base.projectile.frame++;
-                    base.projectile.frameCounter = 0;
+                    base.Projectile.frame++;
+                    base.Projectile.frameCounter = 0;
                 }
-                if (base.projectile.frame > 7)
+                if (base.Projectile.frame > 7)
                 {
-                    base.projectile.frame = 0;
+                    base.Projectile.frame = 0;
                 }
             }
-            projectile.rotation += num2;
+            Projectile.rotation += num2;
 
 
 
-            if (projectile.timeLeft > 60)
+            if (Projectile.timeLeft > 60)
             {
-                projectile.velocity.Y += 0.25f;
-                projectile.velocity.X += (float)(Math.Sin(projectile.timeLeft / 30f)) * 0.035f;
+                Projectile.velocity.Y += 0.25f;
+                Projectile.velocity.X += (float)(Math.Sin(Projectile.timeLeft / 30f)) * 0.035f;
             }
-            if (projectile.timeLeft >= 60)
+            if (Projectile.timeLeft >= 60)
             {
-                projectile.alpha = 0;
+                Projectile.alpha = 0;
             }
             else
             {
-                projectile.alpha = (int)((60 - projectile.timeLeft) / 60f * 255f);
+                Projectile.alpha = (int)((60 - Projectile.timeLeft) / 60f * 255f);
             }
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            if(projectile.velocity.Length() < 2f)
+            if(Projectile.velocity.Length() < 2f)
             {
-                projectile.timeLeft = 60;
-                projectile.velocity *= 0;
+                Projectile.timeLeft = 60;
+                Projectile.velocity *= 0;
             }
             else
             {
-                if (base.projectile.velocity.X != oldVelocity.X)
+                if (base.Projectile.velocity.X != oldVelocity.X)
                 {
-                    base.projectile.velocity.X = oldVelocity.X * 0.4f;
+                    base.Projectile.velocity.X = oldVelocity.X * 0.4f;
                 }
-                if (base.projectile.velocity.Y != oldVelocity.Y)
+                if (base.Projectile.velocity.Y != oldVelocity.Y)
                 {
-                    base.projectile.velocity.Y = -oldVelocity.Y * 0.4f;
+                    base.Projectile.velocity.Y = -oldVelocity.Y * 0.4f;
                 }
             }
             return false;
@@ -106,14 +107,14 @@ namespace MythMod.Projectiles.projectile4
 		public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
 		{
 		}
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D texture2D = Main.projectileTexture[base.projectile.type];
-            Color color = Lighting.GetColor((int)(projectile.Center.X / 16d), (int)(projectile.Center.Y / 16d));
-            color = projectile.GetAlpha(color) * ((255 - projectile.alpha) / 255f);
-            int num = Main.projectileTexture[base.projectile.type].Height / Main.projFrames[base.projectile.type];
-            int y = num * base.projectile.frame;
-            Main.spriteBatch.Draw(texture2D, base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY + projectile.height / 2f), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), color, base.projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.projectile.scale, SpriteEffects.None, 0f);
+            Texture2D texture2D = TextureAssets.Projectile[base.Projectile.type].Value;
+            Color color = Lighting.GetColor((int)(Projectile.Center.X / 16d), (int)(Projectile.Center.Y / 16d));
+            color = Projectile.GetAlpha(color) * ((255 - Projectile.alpha) / 255f);
+            int num = TextureAssets.Projectile[base.Projectile.type].Value.Height / Main.projFrames[base.Projectile.type];
+            int y = num * base.Projectile.frame;
+            Main.spriteBatch.Draw(texture2D, base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY + Projectile.height / 2f), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), color, base.Projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.Projectile.scale, SpriteEffects.None, 0f);
             return false;
         }
     }

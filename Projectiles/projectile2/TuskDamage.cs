@@ -23,16 +23,16 @@ namespace MythMod.Projectiles.projectile2
 
 		public override void SetDefaults()
 		{
-            base.projectile.width = 40;
-            base.projectile.height = 40;
-            base.projectile.friendly = true;
-            base.projectile.ignoreWater = true;
-            base.projectile.penetrate = 1;
-            base.projectile.timeLeft = 6;
+            base.Projectile.width = 40;
+            base.Projectile.height = 40;
+            base.Projectile.friendly = true;
+            base.Projectile.ignoreWater = true;
+            base.Projectile.penetrate = 1;
+            base.Projectile.timeLeft = 6;
 		}
 		public override void AI()
 		{
-            projectile.velocity.Y += 0.51f;
+            Projectile.velocity.Y += 0.51f;
 		}
 	}
 }

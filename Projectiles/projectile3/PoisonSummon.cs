@@ -12,43 +12,43 @@ namespace MythMod.Projectiles.projectile3
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("毒气弹");
-			Main.projFrames[base.projectile.type] = 1;
+			Main.projFrames[base.Projectile.type] = 1;
 		}
         public override void SetDefaults()
 		{
-			base.projectile.width = 34;
-			base.projectile.height = 34;
-			base.projectile.hostile = false;
-            base.projectile.friendly = false;
-            base.projectile.ignoreWater = true;
-			base.projectile.tileCollide = true;
-			base.projectile.penetrate = 1;
-			base.projectile.timeLeft = 600;
-			base.projectile.alpha = 0;
-			this.cooldownSlot = 1;
-            ProjectileID.Sets.TrailCacheLength[base.projectile.type] = 50;
-            ProjectileID.Sets.TrailingMode[base.projectile.type] = 0;
+			base.Projectile.width = 34;
+			base.Projectile.height = 34;
+			base.Projectile.hostile = false;
+            base.Projectile.friendly = false;
+            base.Projectile.ignoreWater = true;
+			base.Projectile.tileCollide = true;
+			base.Projectile.penetrate = 1;
+			base.Projectile.timeLeft = 600;
+			base.Projectile.alpha = 0;
+			this.CooldownSlot = 1;
+            ProjectileID.Sets.TrailCacheLength[base.Projectile.type] = 50;
+            ProjectileID.Sets.TrailingMode[base.Projectile.type] = 0;
         }
 		public override void Kill(int timeLeft)
 		{
             for(int g = 0; g < 30;g++)
             {
                 Vector2 v = new Vector2(0, 30).RotatedBy(Math.PI / 15f * g);
-                Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, v.X, v.Y, mod.ProjectileType("PoisonGasF"), (int)(projectile.ai[0]), 0f, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, v.X, v.Y, Mod.Find<ModProjectile>("PoisonGasF").Type, (int)(Projectile.ai[0]), 0f, Main.myPlayer, 0f, 0f);
             }
-            if(projectile.ai[1] > 10)
+            if(Projectile.ai[1] > 10)
             {
-                Projectile.NewProjectile(projectile.Center.X - 15, projectile.Center.Y - 25, 0, 9, mod.ProjectileType("PoisonGasF"), (int)(projectile.ai[0]), 0f, Main.myPlayer, 0f, 0f);
-                Projectile.NewProjectile(projectile.Center.X + 15, projectile.Center.Y - 25, 0, 9, mod.ProjectileType("PoisonGasF"), (int)(projectile.ai[0]), 0f, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(Projectile.Center.X - 15, Projectile.Center.Y - 25, 0, 9, Mod.Find<ModProjectile>("PoisonGasF").Type, (int)(Projectile.ai[0]), 0f, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(Projectile.Center.X + 15, Projectile.Center.Y - 25, 0, 9, Mod.Find<ModProjectile>("PoisonGasF").Type, (int)(Projectile.ai[0]), 0f, Main.myPlayer, 0f, 0f);
             }
-            if (projectile.ai[1] > 20)
+            if (Projectile.ai[1] > 20)
             {
-                Projectile.NewProjectile(projectile.Center.X - 30, projectile.Center.Y - 25, 0, 9, mod.ProjectileType("PoisonGasF"), (int)(projectile.ai[0]), 0f, Main.myPlayer, 0f, 0f);
-                Projectile.NewProjectile(projectile.Center.X + 30, projectile.Center.Y - 25, 0, 9, mod.ProjectileType("PoisonGasF"), (int)(projectile.ai[0]), 0f, Main.myPlayer, 0f, 0f);
-                Projectile.NewProjectile(projectile.Center.X - 45, projectile.Center.Y - 25, 0, 9, mod.ProjectileType("PoisonGasF"), (int)(projectile.ai[0]), 0f, Main.myPlayer, 0f, 0f);
-                Projectile.NewProjectile(projectile.Center.X + 45, projectile.Center.Y - 25, 0, 9, mod.ProjectileType("PoisonGasF"), (int)(projectile.ai[0]), 0f, Main.myPlayer, 0f, 0f);
-                Projectile.NewProjectile(projectile.Center.X - 60, projectile.Center.Y - 25, 0, 9, mod.ProjectileType("PoisonGasF"), (int)(projectile.ai[0]), 0f, Main.myPlayer, 0f, 0f);
-                Projectile.NewProjectile(projectile.Center.X + 60, projectile.Center.Y - 25, 0, 9, mod.ProjectileType("PoisonGasF"), (int)(projectile.ai[0]), 0f, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(Projectile.Center.X - 30, Projectile.Center.Y - 25, 0, 9, Mod.Find<ModProjectile>("PoisonGasF").Type, (int)(Projectile.ai[0]), 0f, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(Projectile.Center.X + 30, Projectile.Center.Y - 25, 0, 9, Mod.Find<ModProjectile>("PoisonGasF").Type, (int)(Projectile.ai[0]), 0f, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(Projectile.Center.X - 45, Projectile.Center.Y - 25, 0, 9, Mod.Find<ModProjectile>("PoisonGasF").Type, (int)(Projectile.ai[0]), 0f, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(Projectile.Center.X + 45, Projectile.Center.Y - 25, 0, 9, Mod.Find<ModProjectile>("PoisonGasF").Type, (int)(Projectile.ai[0]), 0f, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(Projectile.Center.X - 60, Projectile.Center.Y - 25, 0, 9, Mod.Find<ModProjectile>("PoisonGasF").Type, (int)(Projectile.ai[0]), 0f, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(Projectile.Center.X + 60, Projectile.Center.Y - 25, 0, 9, Mod.Find<ModProjectile>("PoisonGasF").Type, (int)(Projectile.ai[0]), 0f, Main.myPlayer, 0f, 0f);
             }
         }
 	}

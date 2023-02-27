@@ -1,4 +1,4 @@
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria.Localization;
@@ -15,31 +15,31 @@ namespace MythMod.Items.Weapons.Weapon2
         }
         public override void SetDefaults()
         {
-            item.damage = 220;
-            item.melee = true;
-            item.width = 20;
-            item.height = 20;
-            item.useTime = 21;
-            item.rare = 9;
-            item.noMelee = true;
-            item.noUseGraphic = true;
-            item.useAnimation = 21;
-            item.useStyle = 1;
-            item.knockBack = 1.1f;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 6;
-            item.value = 800;
-            item.scale = 1f;
-            item.noMelee = true;
-            item.noUseGraphic = true;
+            Item.damage = 220;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 20;
+            Item.height = 20;
+            Item.useTime = 21;
+            Item.rare = 9;
+            Item.noMelee = true;
+            Item.noUseGraphic = true;
+            Item.useAnimation = 21;
+            Item.useStyle = 1;
+            Item.knockBack = 1.1f;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 6;
+            Item.value = 800;
+            Item.scale = 1f;
+            Item.noMelee = true;
+            Item.noUseGraphic = true;
         }
         private int o = 0;
-        public override bool UseItem(Player player)
+        public override bool? UseItem(Player player)/* tModPorter Suggestion: Return null instead of false */
         {
             if (o == 0)
             {
-                Projectile.NewProjectile(player.Center.X, player.Center.Y, 0, 0, mod.ProjectileType("DrownSun"), (int)(item.damage * player.meleeDamage), item.knockBack, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(player.Center.X, player.Center.Y, 0, 0, Mod.Find<ModProjectile>("DrownSun").Type, (int)(Item.damage * player.GetDamage(DamageClass.Melee)), Item.knockBack, Main.myPlayer, 0f, 0f);
                 o += 1;
             }
             if (!Main.mouseLeft)

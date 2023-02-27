@@ -1,9 +1,10 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
@@ -23,18 +24,18 @@ namespace MythMod.Projectiles.projectile5
         }
         public override void SetDefaults()
         {
-            projectile.width = 20;
-            projectile.height = 20;
-            projectile.aiStyle = -1;
-            projectile.friendly = false;
-            projectile.hostile = true;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = false;
-            projectile.timeLeft = 600;
-            projectile.alpha = 0;
-            projectile.penetrate = -1;
-            projectile.scale = 1f;
-            this.cooldownSlot = 1;
+            Projectile.width = 20;
+            Projectile.height = 20;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = false;
+            Projectile.hostile = true;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
+            Projectile.timeLeft = 600;
+            Projectile.alpha = 0;
+            Projectile.penetrate = -1;
+            Projectile.scale = 1f;
+            this.CooldownSlot = 1;
         }
         //55555
         public override Color? GetAlpha(Color lightColor)
@@ -49,7 +50,7 @@ namespace MythMod.Projectiles.projectile5
             if (initialization)
             {
                 num1 = Main.rand.Next(-120, 0);
-                num2 = (int)projectile.ai[0] * 4;
+                num2 = (int)Projectile.ai[0] * 4;
                 num3 = Main.rand.NextFloat(0.3f, 1.8f);
                 num4 = Main.rand.NextFloat(0.3f, 1800f);
                 num5 = Main.rand.NextFloat(2.85f, 3.15f);
@@ -59,22 +60,22 @@ namespace MythMod.Projectiles.projectile5
             num1 += 1;
             num2 -= 1;
             num4 += 0.01f;
-            if(projectile.timeLeft > 510)
+            if(Projectile.timeLeft > 510)
             {
-                projectile.velocity *= 0.8f;
-                projectile.velocity = projectile.velocity.RotatedBy(1 / 105d * Math.PI);
-                projectile.rotation = (float)Math.Atan2((double)base.projectile.velocity.Y, (double)base.projectile.velocity.X) - (float)Math.PI * 0.5f;
+                Projectile.velocity *= 0.8f;
+                Projectile.velocity = Projectile.velocity.RotatedBy(1 / 105d * Math.PI);
+                Projectile.rotation = (float)Math.Atan2((double)base.Projectile.velocity.Y, (double)base.Projectile.velocity.X) - (float)Math.PI * 0.5f;
                 Sca += 0.01111111f;
             }
             else
             {
-                projectile.velocity *= 0;
-                if (projectile.timeLeft == 510)
+                Projectile.velocity *= 0;
+                if (Projectile.timeLeft == 510)
                 {
-                    Vector2 v1 = new Vector2(0, -36).RotatedBy(projectile.rotation + 1);
-                    Vector2 v2 = new Vector2(0, -36).RotatedBy(projectile.rotation - 1);
-                    Projectile.NewProjectile(projectile.Center.X + v1.X + 20, projectile.Center.Y + v1.Y + 20, projectile.velocity.X, projectile.velocity.Y, mod.ProjectileType("GoldLanternRay"), 0, 0, Main.myPlayer, projectile.rotation + 1, projectile.rotation);
-                    Projectile.NewProjectile(projectile.Center.X + v2.X + 20, projectile.Center.Y + v2.Y + 20, projectile.velocity.X, projectile.velocity.Y, mod.ProjectileType("GoldLanternRay"), 0, 0, Main.myPlayer, projectile.rotation - 1, projectile.rotation);
+                    Vector2 v1 = new Vector2(0, -36).RotatedBy(Projectile.rotation + 1);
+                    Vector2 v2 = new Vector2(0, -36).RotatedBy(Projectile.rotation - 1);
+                    Projectile.NewProjectile(Projectile.Center.X + v1.X + 20, Projectile.Center.Y + v1.Y + 20, Projectile.velocity.X, Projectile.velocity.Y, Mod.Find<ModProjectile>("GoldLanternRay").Type, 0, 0, Main.myPlayer, Projectile.rotation + 1, Projectile.rotation);
+                    Projectile.NewProjectile(Projectile.Center.X + v2.X + 20, Projectile.Center.Y + v2.Y + 20, Projectile.velocity.X, Projectile.velocity.Y, Mod.Find<ModProjectile>("GoldLanternRay").Type, 0, 0, Main.myPlayer, Projectile.rotation - 1, Projectile.rotation);
                 }
             }
             /*if (projectile.timeLeft < 995)
@@ -90,9 +91,9 @@ namespace MythMod.Projectiles.projectile5
             {
                 num = num1 / 120f;
             }
-            if(projectile.timeLeft < 120)
+            if(Projectile.timeLeft < 120)
             {
-                num = projectile.timeLeft / 120f;
+                num = Projectile.timeLeft / 120f;
                 Sca -= 0.01f;
             }
             //Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 0.8f / 255f * projectile.scale * num1, (float)(255 - base.projectile.alpha) * 0.2f / 255f * projectile.scale * num1, (float)(255 - base.projectile.alpha) * 0f / 255f * projectile.scale * num1);
@@ -107,10 +108,10 @@ namespace MythMod.Projectiles.projectile5
         private float y = 0;
         private int Fy = 0;
         private int fyc = 0;
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D texture2D = Main.projectileTexture[base.projectile.type];
-            int nuM = Main.projectileTexture[base.projectile.type].Height;
+			Texture2D texture2D = TextureAssets.Projectile[base.Projectile.type].Value;
+            int nuM = TextureAssets.Projectile[base.Projectile.type].Value.Height;
             fyc += 1;
             if(fyc == 8)
             {
@@ -122,17 +123,17 @@ namespace MythMod.Projectiles.projectile5
                 Fy = 0;
             }
             Color colorT = new Color(1f * num * (float)(Math.Sin(num4) + 2) / 3f, 1f * num * (float)(Math.Sin(num4) + 2) / 3f, 1f * num * (float)(Math.Sin(num4) + 2) / 3f, 0.5f * num * (float)(Math.Sin(num4) + 2) / 3f);
-            Main.spriteBatch.Draw(texture2D, base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY), new Rectangle?(new Rectangle(0, 0, texture2D.Width, nuM)), colorT, base.projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)nuM / 2f), base.projectile.scale, SpriteEffects.None, 1f);
-            Main.spriteBatch.Draw(mod.GetTexture("Projectiles/projectile5/LanternFire"), base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY), new Rectangle?(new Rectangle(0, 30 * Fy, 20, 30)), colorT, 0, new Vector2(10, 15), base.projectile.scale * 0.5f, SpriteEffects.None, 1f);
+            Main.spriteBatch.Draw(texture2D, base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), new Rectangle?(new Rectangle(0, 0, texture2D.Width, nuM)), colorT, base.Projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)nuM / 2f), base.Projectile.scale, SpriteEffects.None, 1f);
+            Main.spriteBatch.Draw(Mod.GetTexture("Projectiles/projectile5/LanternFire"), base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), new Rectangle?(new Rectangle(0, 30 * Fy, 20, 30)), colorT, 0, new Vector2(10, 15), base.Projectile.scale * 0.5f, SpriteEffects.None, 1f);
             x += 0.01f;
             float K = (float)(Math.Sin(x + Math.Sin(x) * 6) * (0.95 + Math.Sin(x + 0.24 + Math.Sin(x))) + 3) / 30f;
             float M = (float)(Math.Sin(x + Math.Tan(x) * 6) * (0.95 + Math.Cos(x + 0.24 + Math.Sin(x))) + 3) / 30f;
-            spriteBatch.Draw(base.mod.GetTexture("UIImages/StarEffect"), base.projectile.Center - Main.screenPosition, null, new Color(1f, 0.8f, 0f, 0) * 0.4f, 0, new Vector2(512f, 512f), K * 2.8f , SpriteEffects.None, 0f);
-            spriteBatch.Draw(base.mod.GetTexture("UIImages/StarEffect"), base.projectile.Center - Main.screenPosition, null, new Color(1f, 0.8f, 0f, 0) * 0.4f, (float)(Math.PI * 0.5), new Vector2(512f, 512f), K * 2.8f * Sca, SpriteEffects.None, 0f);
-            spriteBatch.Draw(base.mod.GetTexture("UIImages/StarEffect"), base.projectile.Center - Main.screenPosition, null, new Color(1f, 0.6f, 0f, 0) * 0.4f, (float)(Math.PI * 0.75), new Vector2(512f, 512f), M * 2.8f * Sca, SpriteEffects.None, 0f);
-            spriteBatch.Draw(base.mod.GetTexture("UIImages/StarEffect"), base.projectile.Center - Main.screenPosition, null, new Color(1f, 0.6f, 0f, 0) * 0.4f, (float)(Math.PI * 0.25), new Vector2(512f, 512f), M * 2.8f * Sca, SpriteEffects.None, 0f);
-            spriteBatch.Draw(base.mod.GetTexture("UIImages/StarEffect"), base.projectile.Center - Main.screenPosition, null, new Color(0.8f, 0.4f, 0f, 0) * 0.4f, x * 6f, new Vector2(512f, 512f), (M + K) * 2.8f * Sca, SpriteEffects.None, 0f);
-            spriteBatch.Draw(base.mod.GetTexture("UIImages/StarEffect"), base.projectile.Center - Main.screenPosition, null, new Color(0.8f, 0.4f, 0f, 0) * 0.4f, -x * 6f, new Vector2(512f, 512f), (float)Math.Sqrt(M * M + K * K) * 2.8f * Sca, SpriteEffects.None, 0f);
+            spriteBatch.Draw(base.Mod.GetTexture("UIImages/StarEffect"), base.Projectile.Center - Main.screenPosition, null, new Color(1f, 0.8f, 0f, 0) * 0.4f, 0, new Vector2(512f, 512f), K * 2.8f , SpriteEffects.None, 0f);
+            spriteBatch.Draw(base.Mod.GetTexture("UIImages/StarEffect"), base.Projectile.Center - Main.screenPosition, null, new Color(1f, 0.8f, 0f, 0) * 0.4f, (float)(Math.PI * 0.5), new Vector2(512f, 512f), K * 2.8f * Sca, SpriteEffects.None, 0f);
+            spriteBatch.Draw(base.Mod.GetTexture("UIImages/StarEffect"), base.Projectile.Center - Main.screenPosition, null, new Color(1f, 0.6f, 0f, 0) * 0.4f, (float)(Math.PI * 0.75), new Vector2(512f, 512f), M * 2.8f * Sca, SpriteEffects.None, 0f);
+            spriteBatch.Draw(base.Mod.GetTexture("UIImages/StarEffect"), base.Projectile.Center - Main.screenPosition, null, new Color(1f, 0.6f, 0f, 0) * 0.4f, (float)(Math.PI * 0.25), new Vector2(512f, 512f), M * 2.8f * Sca, SpriteEffects.None, 0f);
+            spriteBatch.Draw(base.Mod.GetTexture("UIImages/StarEffect"), base.Projectile.Center - Main.screenPosition, null, new Color(0.8f, 0.4f, 0f, 0) * 0.4f, x * 6f, new Vector2(512f, 512f), (M + K) * 2.8f * Sca, SpriteEffects.None, 0f);
+            spriteBatch.Draw(base.Mod.GetTexture("UIImages/StarEffect"), base.Projectile.Center - Main.screenPosition, null, new Color(0.8f, 0.4f, 0f, 0) * 0.4f, -x * 6f, new Vector2(512f, 512f), (float)Math.Sqrt(M * M + K * K) * 2.8f * Sca, SpriteEffects.None, 0f);
             return false;
 		}
     }

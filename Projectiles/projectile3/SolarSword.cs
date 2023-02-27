@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.GameInput;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
@@ -23,62 +24,62 @@ namespace MythMod.Projectiles.projectile3
 
         public override void SetDefaults()
         {
-            base.projectile.width = 34;
-            base.projectile.height = 34;
-            base.projectile.aiStyle = 27;
-            base.projectile.friendly = true;
-            base.projectile.melee = true;
-            base.projectile.ignoreWater = true;
-            base.projectile.penetrate = -1;
-            projectile.alpha = 255;
-            base.projectile.extraUpdates = 2;
-            base.projectile.timeLeft = 600;
-            base.projectile.usesLocalNPCImmunity = true;
-            base.projectile.localNPCHitCooldown = 1;
+            base.Projectile.width = 34;
+            base.Projectile.height = 34;
+            base.Projectile.aiStyle = 27;
+            base.Projectile.friendly = true;
+            base.Projectile.DamageType = DamageClass.Melee;
+            base.Projectile.ignoreWater = true;
+            base.Projectile.penetrate = -1;
+            Projectile.alpha = 255;
+            base.Projectile.extraUpdates = 2;
+            base.Projectile.timeLeft = 600;
+            base.Projectile.usesLocalNPCImmunity = true;
+            base.Projectile.localNPCHitCooldown = 1;
         }
 
         public override void AI()
         {
-            if(projectile.alpha > 5)
+            if(Projectile.alpha > 5)
             {
-                projectile.alpha -= 5;
+                Projectile.alpha -= 5;
             }
-            int num9 = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) - new Vector2(4, 4) - base.projectile.velocity, 4, 4, 6, 0f, 0f, 100, default(Color), 2f);
+            int num9 = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) - new Vector2(4, 4) - base.Projectile.velocity, 4, 4, 6, 0f, 0f, 100, default(Color), 2f);
             Main.dust[num9].noGravity = true;
             Main.dust[num9].velocity *= 0.2f;
-            int num10 = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) - new Vector2(4, 4) - base.projectile.velocity + base.projectile.velocity.RotatedBy(Math.PI / 2d), 4, 4, 6, 0f, 0f, 100, default(Color), 1.5f);
+            int num10 = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) - new Vector2(4, 4) - base.Projectile.velocity + base.Projectile.velocity.RotatedBy(Math.PI / 2d), 4, 4, 6, 0f, 0f, 100, default(Color), 1.5f);
             Main.dust[num10].noGravity = true;
             Main.dust[num10].velocity *= 0.2f;
-            int num11 = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) - new Vector2(4, 4) - base.projectile.velocity + base.projectile.velocity.RotatedBy(-Math.PI / 2d), 4, 4, 6, 0f, 0f, 100, default(Color), 1.5f);
+            int num11 = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) - new Vector2(4, 4) - base.Projectile.velocity + base.Projectile.velocity.RotatedBy(-Math.PI / 2d), 4, 4, 6, 0f, 0f, 100, default(Color), 1.5f);
             Main.dust[num11].noGravity = true;
             Main.dust[num11].velocity *= 0.2f;
-            Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 0.6f / 255f, (float)(255 - base.projectile.alpha) * 0.1f / 255f, (float)(255 - base.projectile.alpha) * 0.0f / 255f);
+            Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 0.6f / 255f, (float)(255 - base.Projectile.alpha) * 0.1f / 255f, (float)(255 - base.Projectile.alpha) * 0.0f / 255f);
         }
         public override Color? GetAlpha(Color lightColor)
         {
-            return new Color?(new Color(255, 255, 255, base.projectile.alpha));
+            return new Color?(new Color(255, 255, 255, base.Projectile.alpha));
         }
         public override void Kill(int timeLeft)
         {
-            int k = Projectile.NewProjectile(projectile.position.X, projectile.position.Y, 0, 0, 612, projectile.damage, projectile.knockBack, Main.myPlayer, 0f, 0f);
+            int k = Projectile.NewProjectile(Projectile.position.X, Projectile.position.Y, 0, 0, 612, Projectile.damage, Projectile.knockBack, Main.myPlayer, 0f, 0f);
             Main.projectile[k].timeLeft = 30;
             if (timeLeft != 0 && timeLeft < 1050)
             {
-                int uo = Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, 0, 0, 164, 0, 1, Main.myPlayer, 0f, 0f);
+                int uo = Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, 0, 0, 164, 0, 1, Main.myPlayer, 0f, 0f);
                 Main.projectile[uo].friendly = true;
                 Main.projectile[uo].hostile = false;
             }
             for (int i = 0;i < 15;i++)
             {
                 Vector2 v = new Vector2(0, Main.rand.NextFloat(0, 7f)).RotatedByRandom(Math.PI * 2f);
-                int num9 = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) - new Vector2(4, 4), 0, 0, 6, v.X, v.Y, 100, default(Color), 2.4f);
+                int num9 = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) - new Vector2(4, 4), 0, 0, 6, v.X, v.Y, 100, default(Color), 2.4f);
                 Main.dust[num9].noGravity = true;
                 Main.dust[num9].velocity *= 0.0f;
             }
             for (int i = 0; i < 9; i++)
             {
                 Vector2 v = new Vector2(0, Main.rand.NextFloat(0, 7f)).RotatedByRandom(Math.PI * 2f);
-                int num9 = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) - new Vector2(4, 4), 0, 0, 259, v.X, v.Y, 100, default(Color), 1.8f);
+                int num9 = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) - new Vector2(4, 4), 0, 0, 259, v.X, v.Y, 100, default(Color), 1.8f);
                 Main.dust[num9].noGravity = true;
                 Main.dust[num9].velocity *= 0.0f;
             }
@@ -94,40 +95,40 @@ namespace MythMod.Projectiles.projectile3
             {
                 v1 = v1.RotatedBy(Math.PI / 125f);
                 Vector2 v2 = new Vector2(v1.X * (float)num60 / 10000, v1.Y);
-                int p = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, mod.DustType("Solar"), 0, 0, 0, default(Color), 1.8f);
+                int p = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, Mod.Find<ModDust>("Solar").Type, 0, 0, 0, default(Color), 1.8f);
                 Main.dust[p].velocity = v2.RotatedBy(Math.Atan2((float)num80, (float)num90)) * 0.5f;
                 Main.dust[p].scale = 1.4f + Math.Abs((float)Math.Atan2(-v1.Y, -v1.X) / (1 + (float)num60 / 2000));
                 Main.dust[p].noGravity = true;
             }
             for (int i = 0; i < 200; i++)
             {
-                if ((Main.npc[i].Center - projectile.position).Length() < Main.npc[i].Hitbox.Width / 2f + 20)
+                if ((Main.npc[i].Center - Projectile.position).Length() < Main.npc[i].Hitbox.Width / 2f + 20)
                 {
-                    Main.npc[i].StrikeNPC((int)(projectile.damage / 2f), 0, 1);
+                    Main.npc[i].StrikeNPC((int)(Projectile.damage / 2f), 0, 1);
                 }
             }
         }
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-            int k = Projectile.NewProjectile(projectile.position.X, projectile.position.Y, 0, 0, 612, projectile.damage, projectile.knockBack, Main.myPlayer, 0f, 0f);
+            int k = Projectile.NewProjectile(Projectile.position.X, Projectile.position.Y, 0, 0, 612, Projectile.damage, Projectile.knockBack, Main.myPlayer, 0f, 0f);
             for (int i = 0; i < 200; i++)
             {
-                if ((Main.npc[i].Center - projectile.position).Length() < Main.npc[i].Hitbox.Width / 2f + 10)
+                if ((Main.npc[i].Center - Projectile.position).Length() < Main.npc[i].Hitbox.Width / 2f + 10)
                 {
-                    Main.npc[i].StrikeNPC((int)(projectile.damage / 6f), 0, 1);
+                    Main.npc[i].StrikeNPC((int)(Projectile.damage / 6f), 0, 1);
                 }
             }
             Main.projectile[k].timeLeft = 30;
             target.AddBuff(189, 900, false);
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color drawColor)
+        public override bool PreDraw(ref Color lightColor)
         {
             Mod mod = ModLoader.GetMod("MythMod");
-            Texture2D texture = Main.projectileTexture[projectile.type];
-            Main.spriteBatch.Draw(texture, projectile.Center - Main.screenPosition + new Vector2(0f, projectile.gfxOffY), null, base.projectile.GetAlpha(drawColor), projectile.rotation, new Vector2(17, 17), projectile.scale, SpriteEffects.None, 0f);
+            Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
+            Main.spriteBatch.Draw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), null, base.Projectile.GetAlpha(drawColor), Projectile.rotation, new Vector2(17, 17), Projectile.scale, SpriteEffects.None, 0f);
             for(int i =0;i < 4;i++)
             {
-                Main.spriteBatch.Draw(texture, projectile.Center - Main.screenPosition + new Vector2(0f, projectile.gfxOffY) - projectile.velocity * i * 3f, null, new Color(1 - 1 / 4f * (float)i, 1 - 1 / 4f * (float)i, 1 - 1 / 4f * (float)i, (1 - 1 / 4f * (float)i) * projectile.alpha / 255f), projectile.rotation, new Vector2(17, 17), projectile.scale, SpriteEffects.None, 0f);
+                Main.spriteBatch.Draw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY) - Projectile.velocity * i * 3f, null, new Color(1 - 1 / 4f * (float)i, 1 - 1 / 4f * (float)i, 1 - 1 / 4f * (float)i, (1 - 1 / 4f * (float)i) * Projectile.alpha / 255f), Projectile.rotation, new Vector2(17, 17), Projectile.scale, SpriteEffects.None, 0f);
             }
             return false;
         }

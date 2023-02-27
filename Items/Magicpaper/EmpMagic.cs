@@ -19,11 +19,11 @@ namespace MythMod.Items.Magicpaper//在虚无mod的Items文件夹里
         public override void SetDefaults()
         {
             Item refItem = new Item();
-            item.width = refItem.width;//长度
-            item.height = refItem.height;//高度
-            item.maxStack = 999;//最大叠加
-            item.value = 100;//价值
-            item.rare = 0;//稀有度
+            Item.width = refItem.width;//长度
+            Item.height = refItem.height;//高度
+            Item.maxStack = 999;//最大叠加
+            Item.value = 100;//价值
+            Item.rare = 0;//稀有度
         }
     }
 }

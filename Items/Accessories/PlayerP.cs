@@ -16,20 +16,20 @@ namespace MythMod.Items.Accessories
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 46;
-			base.item.height = 28;
-			base.item.value = 0;
-			base.item.accessory = true;
+			base.Item.width = 46;
+			base.Item.height = 28;
+			base.Item.value = 0;
+			base.Item.accessory = true;
 			
 		}
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
 			player.maxMinions++;
 			player.lifeRegen += 4000000;
-			player.meleeDamage += 0.4f;
-			player.rangedDamage += 0.4f;
-			player.magicDamage += 0.4f;
-			player.meleeSpeed += 0.4f;
+			player.GetDamage(DamageClass.Melee) += 0.4f;
+			player.GetDamage(DamageClass.Ranged) += 0.4f;
+			player.GetDamage(DamageClass.Magic) += 0.4f;
+			player.GetAttackSpeed(DamageClass.Melee) += 0.4f;
 			player.endurance += 0.4f;
 			player.accRunSpeed = 14f;
 			player.rocketBoots = 17;
@@ -38,13 +38,13 @@ namespace MythMod.Items.Accessories
 			player.waterWalk = true;
 			player.fireWalk = true;
 			player.lavaMax += 99999;
-			player.meleeCrit += 25;
-			player.rangedCrit += 25;
-			player.magicCrit += 25;
-			player.minionDamage += 0.4f;
-			player.minionKB += 10f;
-			player.thrownDamage += 0.4f;
-			player.thrownCrit += 25;
+			player.GetCritChance(DamageClass.Generic) += 25;
+			player.GetCritChance(DamageClass.Ranged) += 25;
+			player.GetCritChance(DamageClass.Magic) += 25;
+			player.GetDamage(DamageClass.Summon) += 0.4f;
+			player.GetKnockback(DamageClass.Summon).Base += 10f;
+			player.GetDamage(DamageClass.Throwing) += 0.4f;
+			player.GetCritChance(DamageClass.Throwing) += 25;
 			player.statDefense += 500;
 			player.statLifeMax2 += 10000000;
 			player.statManaMax2 += 1000;

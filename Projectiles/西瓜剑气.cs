@@ -26,26 +26,26 @@ namespace MythMod.Projectiles
         // Token: 0x0600221F RID: 8735 RVA: 0x001B7BC8 File Offset: 0x001B5DC8
         public override void SetDefaults()
         {
-            base.projectile.width = 32;
-            base.projectile.height = 32;
-            base.projectile.aiStyle = 27;
-            base.projectile.friendly = true;
-            base.projectile.melee = true;
-            base.projectile.ignoreWater = true;
-            base.projectile.penetrate = 1;
-            base.projectile.extraUpdates = 1;
-            base.projectile.timeLeft = 600;
-            base.projectile.usesLocalNPCImmunity = true;
-            base.projectile.localNPCHitCooldown = 1;
+            base.Projectile.width = 32;
+            base.Projectile.height = 32;
+            base.Projectile.aiStyle = 27;
+            base.Projectile.friendly = true;
+            base.Projectile.DamageType = DamageClass.Melee;
+            base.Projectile.ignoreWater = true;
+            base.Projectile.penetrate = 1;
+            base.Projectile.extraUpdates = 1;
+            base.Projectile.timeLeft = 600;
+            base.Projectile.usesLocalNPCImmunity = true;
+            base.Projectile.localNPCHitCooldown = 1;
         }
 
         // Token: 0x06002220 RID: 8736 RVA: 0x001B7C54 File Offset: 0x001B5E54
         public override void AI()
         {
-            int num9 = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) - new Vector2(4, 4) - base.projectile.velocity * 6f, 0, 0, 183, 0f, 0f, 100, default(Color), 1.5f);
+            int num9 = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) - new Vector2(4, 4) - base.Projectile.velocity * 6f, 0, 0, 183, 0f, 0f, 100, default(Color), 1.5f);
             Main.dust[num9].noGravity = true;
             Main.dust[num9].velocity *= 0.0f;
-            Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 0.4f / 255f, (float)(255 - base.projectile.alpha) * 0.0f / 255f, (float)(255 - base.projectile.alpha) * 0.0f / 255f);
+            Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 0.4f / 255f, (float)(255 - base.Projectile.alpha) * 0.0f / 255f, (float)(255 - base.Projectile.alpha) * 0.0f / 255f);
         }
         // Token: 0x06001E99 RID: 7833 RVA: 0x00188F8C File Offset: 0x0018718C
         public override void Kill(int timeLeft)
@@ -63,7 +63,7 @@ namespace MythMod.Projectiles
                 {
                     v1 = v1.RotatedBy(Math.PI / 125f);
                     Vector2 v2 = new Vector2(v1.X * (float)num60 / 10000, v1.Y);
-                    int p = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, 61, (float)num80, (float)num90, 150, Color.Black, 1.4f);
+                    int p = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, 61, (float)num80, (float)num90, 150, Color.Black, 1.4f);
                     Main.dust[p].velocity = v2.RotatedBy(Math.Atan2((float)num80, (float)num90)) * 2.5f;
                     Main.dust[p].scale = 1.4f + Math.Abs((float)Math.Atan2(-v1.Y, -v1.X) / (1 + (float)num60 / 2000));
                     Main.dust[p].noGravity = true;
@@ -72,7 +72,7 @@ namespace MythMod.Projectiles
                 {
                     v1 = v1.RotatedBy(Math.PI / 125f);
                     Vector2 v2 = new Vector2(v1.X * (float)num60 / 10000, v1.Y);
-                    int p = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, 61, (float)num80, (float)num90, 150, default(Color), 1.8f);
+                    int p = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, 61, (float)num80, (float)num90, 150, default(Color), 1.8f);
                     Main.dust[p].velocity = v2.RotatedBy(Math.Atan2((float)num80, (float)num90)) * 2.5f;
                     Main.dust[p].scale = 1.4f + Math.Abs((float)Math.Atan2(-v1.Y, -v1.X) / (1 + (float)num60 / 2000));
                     Main.dust[p].noGravity = true;
@@ -81,7 +81,7 @@ namespace MythMod.Projectiles
                 {
                     v1 = v1.RotatedBy(Math.PI / 125f);
                     Vector2 v2 = new Vector2(v1.X * (float)num60 / 10000, v1.Y);
-                    int p = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, 61, (float)num80, (float)num90, 150, Color.Black, 1.4f);
+                    int p = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, 61, (float)num80, (float)num90, 150, Color.Black, 1.4f);
                     Main.dust[p].velocity = v2.RotatedBy(Math.Atan2((float)num80, (float)num90)) * 2.5f;
                     Main.dust[p].scale = 1.4f + Math.Abs((float)Math.Atan2(-v1.Y, -v1.X) / (1 + (float)num60 / 2000));
                     Main.dust[p].noGravity = true;
@@ -90,7 +90,7 @@ namespace MythMod.Projectiles
                 {
                     v1 = v1.RotatedBy(Math.PI / 125f);
                     Vector2 v2 = new Vector2(v1.X * (float)num60 / 10000, v1.Y);
-                    int p = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, 61, (float)num80, (float)num90, 150, default(Color), 1.8f);
+                    int p = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, 61, (float)num80, (float)num90, 150, default(Color), 1.8f);
                     Main.dust[p].velocity = v2.RotatedBy(Math.Atan2((float)num80, (float)num90)) * 2.5f;
                     Main.dust[p].scale = 1.4f + Math.Abs((float)Math.Atan2(-v1.Y, -v1.X) / (1 + (float)num60 / 2000));
                     Main.dust[p].noGravity = true;
@@ -99,7 +99,7 @@ namespace MythMod.Projectiles
                 {
                     v1 = v1.RotatedBy(Math.PI / 125f);
                     Vector2 v2 = new Vector2(v1.X * (float)num60 / 10000, v1.Y);
-                    int p = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, 61, (float)num80, (float)num90, 150, Color.Black, 1.4f);
+                    int p = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, 61, (float)num80, (float)num90, 150, Color.Black, 1.4f);
                     Main.dust[p].velocity = v2.RotatedBy(Math.Atan2((float)num80, (float)num90)) * 2.5f;
                     Main.dust[p].scale = 1.4f + Math.Abs((float)Math.Atan2(-v1.Y, -v1.X) / (1 + (float)num60 / 2000));
                     Main.dust[p].noGravity = true;
@@ -108,7 +108,7 @@ namespace MythMod.Projectiles
                 {
                     v1 = v1.RotatedBy(Math.PI / 125f);
                     Vector2 v2 = new Vector2(v1.X * (float)num60 / 10000, v1.Y);
-                    int p = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, 61, (float)num80, (float)num90, 150, default(Color), 1.8f);
+                    int p = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, 61, (float)num80, (float)num90, 150, default(Color), 1.8f);
                     Main.dust[p].velocity = v2.RotatedBy(Math.Atan2((float)num80, (float)num90)) * 2.5f;
                     Main.dust[p].scale = 1.4f + Math.Abs((float)Math.Atan2(-v1.Y, -v1.X) / (1 + (float)num60 / 2000));
                     Main.dust[p].noGravity = true;
@@ -117,7 +117,7 @@ namespace MythMod.Projectiles
                 {
                     v1 = v1.RotatedBy(Math.PI / 125f);
                     Vector2 v2 = new Vector2(v1.X * (float)num60 / 10000, v1.Y);
-                    int p = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, 61, (float)num80, (float)num90, 150, Color.Black, 1.4f);
+                    int p = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, 61, (float)num80, (float)num90, 150, Color.Black, 1.4f);
                     Main.dust[p].velocity = v2.RotatedBy(Math.Atan2((float)num80, (float)num90)) * 2.5f;
                     Main.dust[p].scale = 1.4f + Math.Abs((float)Math.Atan2(-v1.Y, -v1.X) / (1 + (float)num60 / 2000));
                     Main.dust[p].noGravity = true;
@@ -126,7 +126,7 @@ namespace MythMod.Projectiles
                 {
                     v1 = v1.RotatedBy(Math.PI / 125f);
                     Vector2 v2 = new Vector2(v1.X * (float)num60 / 10000, v1.Y);
-                    int p = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, 61, (float)num80, (float)num90, 150, default(Color), 1.8f);
+                    int p = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, 61, (float)num80, (float)num90, 150, default(Color), 1.8f);
                     Main.dust[p].velocity = v2.RotatedBy(Math.Atan2((float)num80, (float)num90)) * 2.5f;
                     Main.dust[p].scale = 1.4f + Math.Abs((float)Math.Atan2(-v1.Y, -v1.X) / (1 + (float)num60 / 2000));
                     Main.dust[p].noGravity = true;
@@ -135,7 +135,7 @@ namespace MythMod.Projectiles
                 {
                     v1 = v1.RotatedBy(Math.PI / 125f);
                     Vector2 v2 = new Vector2(v1.X * (float)num60 / 10000, v1.Y);
-                    int p = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, 61, (float)num80, (float)num90, 150, Color.Black, 1.4f);
+                    int p = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, 61, (float)num80, (float)num90, 150, Color.Black, 1.4f);
                     Main.dust[p].velocity = v2.RotatedBy(Math.Atan2((float)num80, (float)num90)) * 2.5f;
                     Main.dust[p].scale = 1.4f + Math.Abs((float)Math.Atan2(-v1.Y, -v1.X) / (1 + (float)num60 / 2000));
                     Main.dust[p].noGravity = true;
@@ -144,7 +144,7 @@ namespace MythMod.Projectiles
                 {
                     v1 = v1.RotatedBy(Math.PI / 125f);
                     Vector2 v2 = new Vector2(v1.X * (float)num60 / 10000, v1.Y);
-                    int p = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, 61, (float)num80, (float)num90, 150, default(Color), 1.8f);
+                    int p = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, 61, (float)num80, (float)num90, 150, default(Color), 1.8f);
                     Main.dust[p].velocity = v2.RotatedBy(Math.Atan2((float)num80, (float)num90)) * 2.5f;
                     Main.dust[p].scale = 1.4f + Math.Abs((float)Math.Atan2(-v1.Y, -v1.X) / (1 + (float)num60 / 2000));
                     Main.dust[p].noGravity = true;
@@ -173,10 +173,10 @@ namespace MythMod.Projectiles
                 {
                     num8 = 183;
                 }
-                int num9 = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, num8, 0f, 0f, 100, default(Color), 2f);
+                int num9 = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, num8, 0f, 0f, 100, default(Color), 2f);
                 Main.dust[num9].noGravity = true;
-                Main.dust[num9].position.X = base.projectile.Center.X;
-                Main.dust[num9].position.Y = base.projectile.Center.Y;
+                Main.dust[num9].position.X = base.Projectile.Center.X;
+                Main.dust[num9].position.Y = base.Projectile.Center.Y;
                 Dust dust = Main.dust[num9];
                 dust.position.X = dust.position.X + (float)Main.rand.Next(-10, 11);
                 Dust dust2 = Main.dust[num9];

@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -18,31 +19,30 @@ namespace MythMod.Items.Weapons
 		}
 		public override void SetDefaults()
 		{
-			base.item.useStyle = 3;
-			base.item.useTurn = false;
-			base.item.useAnimation = 5;
-			base.item.useTime = 5;
-			base.item.width = 42;
-			base.item.height = 42;
-			base.item.damage = 125;
-			base.item.melee = true;
-			base.item.knockBack = 6.5f;
-			base.item.UseSound = SoundID.Item1;
-			base.item.useTurn = true;
-			base.item.autoReuse = true;
-            item.shoot = mod.ProjectileType("WaveBallMini");
+			base.Item.useStyle = 3;
+			base.Item.useTurn = false;
+			base.Item.useAnimation = 5;
+			base.Item.useTime = 5;
+			base.Item.width = 42;
+			base.Item.height = 42;
+			base.Item.damage = 125;
+			base.Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+			base.Item.knockBack = 6.5f;
+			base.Item.UseSound = SoundID.Item1;
+			base.Item.useTurn = true;
+			base.Item.autoReuse = true;
+            Item.shoot = Mod.Find<ModProjectile>("WaveBallMini").Type;
 
-            base.item.shootSpeed = 12f;
-			base.item.value = Item.buyPrice(0, 80, 0, 0);
-			base.item.rare = 11;
+            base.Item.shootSpeed = 12f;
+			base.Item.value = Item.buyPrice(0, 80, 0, 0);
+			base.Item.rare = 11;
 		}
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(null, "OceanBlueBar", 8);
             modRecipe.requiredTile[0] = 412;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
         public override void MeleeEffects(Player player, Rectangle hitbox)
 		{
@@ -52,7 +52,7 @@ namespace MythMod.Items.Weapons
 			}
 		}
         private int r = 0;
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             r += 1;
             if(r % 4 == 0)

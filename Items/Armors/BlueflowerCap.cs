@@ -20,17 +20,17 @@ namespace MythMod.Items.Armors
 		}
         public override void SetDefaults()
         {
-            base.item.width = 18;
-            base.item.height = 18;
-            base.item.value = Item.buyPrice(0, 1, 0, 0);
-            base.item.rare = 11;
+            base.Item.width = 18;
+            base.Item.height = 18;
+            base.Item.value = Item.buyPrice(0, 1, 0, 0);
+            base.Item.rare = 11;
         }
         public override void ArmorSetShadows(Player player)
         {
             //player.armorEffectDrawShadow = true;
             player.armorEffectDrawOutlines = true;
         }
-        public override void DrawHair(ref bool drawHair, ref bool drawAltHair)
+        public override void DrawHair(ref bool drawHair, ref bool drawAltHair)/* tModPorter Note: Removed. In SetStaticDefaults, use ArmorIDs.Head.Sets.DrawFullHair[Item.headSlot] = true if you had drawHair set to true, and ArmorIDs.Head.Sets.DrawHatHair[Item.headSlot] = true if you had drawAltHair set to true */
         {
             base.DrawHair(ref drawHair, ref drawAltHair);
             drawHair = true;

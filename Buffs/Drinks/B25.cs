@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class B25 : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("B25轰炸机");
             base.Description.SetDefault("攻击力增加19%");

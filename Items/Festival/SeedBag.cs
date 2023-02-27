@@ -25,11 +25,11 @@ namespace MythMod.Items.Festival
 		// Token: 0x06000910 RID: 2320 RVA: 0x0004C6BC File Offset: 0x0004A8BC
 		public override void SetDefaults()
 		{
-            base.item.maxStack = 999;
-            base.item.consumable = true;
-            base.item.width = 38;
-            base.item.height = 50;
-            base.item.rare = 4;
+            base.Item.maxStack = 999;
+            base.Item.consumable = true;
+            base.Item.width = 38;
+            base.Item.height = 50;
+            base.Item.rare = 4;
             //this.bossBagNPC = mod.NPCType("千年桔树妖");
         }
 
@@ -46,16 +46,16 @@ namespace MythMod.Items.Festival
 			switch (Main.rand.Next(1 , 5))
 			{
 			case 1:
-                type = base.mod.ItemType("PineappleBud");
+                type = base.Mod.Find<ModItem>("PineappleBud").Type;
 			    break;
 			case 2:
-                type = base.mod.ItemType("WatermelonSeed");
+                type = base.Mod.Find<ModItem>("WatermelonSeed").Type;
 			    break;
 			case 3:
-                type = base.mod.ItemType("StrawberrySeed");
+                type = base.Mod.Find<ModItem>("StrawberrySeed").Type;
 			    break;
             case 4:
-                type = base.mod.ItemType("GrapeSeed");
+                type = base.Mod.Find<ModItem>("GrapeSeed").Type;
 			    break;
 			}
             player.QuickSpawnItem(type, Main.rand.Next(1, 7));
@@ -63,7 +63,7 @@ namespace MythMod.Items.Festival
         public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
         {
             Vector2 origin = new Vector2(19f, 25f);
-            spriteBatch.Draw(base.mod.GetTexture("Items/Festival/种子秘宝袋Glow"), base.item.Center - Main.screenPosition, null, Color.White, rotation, origin, 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(base.Mod.GetTexture("Items/Festival/种子秘宝袋Glow"), base.Item.Center - Main.screenPosition, null, Color.White, rotation, origin, 1f, SpriteEffects.None, 0f);
         }
     }
 }

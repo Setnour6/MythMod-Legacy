@@ -4,6 +4,7 @@ using ReLogic.Graphics;
 using System;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 
 namespace Terraria
 {
@@ -21,12 +22,12 @@ namespace Terraria
         public static void QuickSword( this Item item , int rare )
         {
             item.QuickSetDefault( rare );
-            item.useStyle = ItemUseStyleID.SwingThrow;
+            item.useStyle = ItemUseStyleID.Swing;
             item.useTime = 12;
             item.useAnimation = 12;
             item.UseSound = SoundID.Item1;
             item.rare = rare;
-            item.melee = true;
+            item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
             item.damage = item.rare * 8;
             item.knockBack = 1.2f + item.rare * 0.7f;
             item.crit = 4 + item.rare;
@@ -47,10 +48,10 @@ namespace Terraria
         public static void QuickBow( this Item item , int rare )
         {
             item.QuickSword( rare );
-            item.melee = false;
-            item.ranged = true;
+            item.melee = false/* tModPorter Suggestion: Remove. See Item.DamageType */;
+            item.DamageType = DamageClass.Ranged;
             item.noMelee = true;
-            item.useStyle = ItemUseStyleID.HoldingOut;
+            item.useStyle = ItemUseStyleID.Shoot;
             item.shoot = ProjectileID.WoodenArrowFriendly;
             item.shootSpeed = 10 + item.rare;
             item.useAmmo = AmmoID.Arrow;
@@ -67,7 +68,7 @@ namespace Terraria
         public static void QuickBow( this Item item , int rare , int shoot , int useAmmo )
         {
             item.QuickBow( rare , shoot );
-            item.useStyle = ItemUseStyleID.HoldingOut;
+            item.useStyle = ItemUseStyleID.Shoot;
             item.shoot = shoot;
             item.useAmmo = useAmmo;
         }
@@ -76,7 +77,7 @@ namespace Terraria
         {
             item.QuickSword( rare );
             item.noMelee = true;
-            item.useStyle = ItemUseStyleID.HoldingOut;
+            item.useStyle = ItemUseStyleID.Shoot;
             item.mana = item.rare;
             item.shoot = ProjectileID.DiamondBolt;
             item.shootSpeed = 10 + item.rare;
@@ -87,12 +88,12 @@ namespace Terraria
         public static void QuickPick( this Item item , int rare )
         {
             item.QuickSetDefault( rare );
-            item.melee = true;
+            item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
             item.rare = rare;
             item.damage = item.rare + 2;
             item.knockBack = 1.2f;
             item.crit = 4;
-            item.useStyle = ItemUseStyleID.SwingThrow;
+            item.useStyle = ItemUseStyleID.Swing;
             item.useTime = 10 - item.rare;
             item.useAnimation = 24 - item.rare;
             item.pick = rare * 20;
@@ -103,12 +104,12 @@ namespace Terraria
         public static void QuickAxe( this Item item , int rare )
         {
             item.QuickSetDefault( rare );
-            item.melee = true;
+            item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
             item.rare = rare;
             item.damage = item.rare + 2;
             item.knockBack = 1.2f;
             item.crit = 4;
-            item.useStyle = ItemUseStyleID.SwingThrow;
+            item.useStyle = ItemUseStyleID.Swing;
             item.useTime = 10 - item.rare;
             item.useAnimation = 24 - item.rare;
             item.axe = rare * 4;
@@ -122,7 +123,7 @@ namespace Terraria
             projectile.aiStyle = -1;
             projectile.penetrate = 1;
             projectile.timeLeft = 600;
-            projectile.ranged = true;
+            projectile.DamageType = DamageClass.Ranged;
             projectile.friendly = true;
             projectile.tileCollide = true;
             projectile.ownerHitCheck = true;
@@ -135,7 +136,7 @@ namespace Terraria
             projectile.aiStyle = -1;
             projectile.penetrate = 30;
             projectile.timeLeft = 600;
-            projectile.melee = true;
+            projectile.DamageType = DamageClass.Melee;
             projectile.friendly = true;
             projectile.tileCollide = false;
             projectile.ownerHitCheck = true;

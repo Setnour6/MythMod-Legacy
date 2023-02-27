@@ -27,18 +27,18 @@ namespace MythMod.Items.Accessories
         }
         public override void SetDefaults()
         {
-            base.item.width = 44;
-            base.item.height = 32;
-            base.item.value = 50000;
-            base.item.accessory = true;
+            base.Item.width = 44;
+            base.Item.height = 32;
+            base.Item.value = 50000;
+            base.Item.accessory = true;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
             player.arrowDamage *= 1.17f;
-            player.meleeDamage *= 1.17f;
+            player.GetDamage(DamageClass.Melee) *= 1.17f;
             player.bulletDamage *= 1.17f;
-            player.magicDamage *= 1.17f;
-            player.minionDamage *= 1.17f;
+            player.GetDamage(DamageClass.Magic) *= 1.17f;
+            player.GetDamage(DamageClass.Summon) *= 1.17f;
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             mplayer.MoonHeart = 2;
         }

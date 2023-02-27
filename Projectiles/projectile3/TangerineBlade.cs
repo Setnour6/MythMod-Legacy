@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,19 +23,19 @@ namespace MythMod.Projectiles.projectile3
         }
         public override void SetDefaults()
         {
-            projectile.width = 16;
-            projectile.height = 16;
-            projectile.aiStyle = -1;
-            projectile.hostile = false;
-            projectile.friendly = true;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = true;
-            projectile.extraUpdates = 3;
-            projectile.timeLeft = 1000;
-            projectile.alpha = 0;
-            projectile.penetrate = 1;
-            projectile.scale = 1f;
-            this.cooldownSlot = 1;
+            Projectile.width = 16;
+            Projectile.height = 16;
+            Projectile.aiStyle = -1;
+            Projectile.hostile = false;
+            Projectile.friendly = true;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = true;
+            Projectile.extraUpdates = 3;
+            Projectile.timeLeft = 1000;
+            Projectile.alpha = 0;
+            Projectile.penetrate = 1;
+            Projectile.scale = 1f;
+            this.CooldownSlot = 1;
         }
         private bool initialization = true;
         private double X;
@@ -45,7 +45,7 @@ namespace MythMod.Projectiles.projectile3
         {
             if (initialization)
             {
-                X = (float)Math.Sqrt((double)projectile.velocity.X * (double)projectile.velocity.X + (double)projectile.velocity.Y * (double)projectile.velocity.Y);
+                X = (float)Math.Sqrt((double)Projectile.velocity.X * (double)Projectile.velocity.X + (double)Projectile.velocity.Y * (double)Projectile.velocity.Y);
                 b = Main.rand.Next(-50, 50);
                 initialization = false;
                 if(Main.rand.Next(0,2) == 1)
@@ -57,18 +57,18 @@ namespace MythMod.Projectiles.projectile3
                     Y = (float)Math.Sin(-(double)X / 5f * 3.1415926535f / 1f) / 1000 + 1;
                 }
             }
-            base.projectile.rotation = (float)Math.Atan2((double)base.projectile.velocity.Y, (double)base.projectile.velocity.X) - (float)Math.PI * 0.5f;
-            if (projectile.timeLeft < 580 && projectile.timeLeft >= 100 + (float)b)
+            base.Projectile.rotation = (float)Math.Atan2((double)base.Projectile.velocity.Y, (double)base.Projectile.velocity.X) - (float)Math.PI * 0.5f;
+            if (Projectile.timeLeft < 580 && Projectile.timeLeft >= 100 + (float)b)
             {
-                projectile.scale *= (float)Y;
+                Projectile.scale *= (float)Y;
             }
-            if (projectile.timeLeft < 100+ (float)b)
+            if (Projectile.timeLeft < 100+ (float)b)
             {
-                projectile.scale *= 0.95f;
+                Projectile.scale *= 0.95f;
             }
-            if (projectile.timeLeft < 800)
+            if (Projectile.timeLeft < 800)
             {
-                projectile.velocity.Y += 0.01f;
+                Projectile.velocity.Y += 0.01f;
             }
         }
         public override void Kill(int timeLeft)
@@ -76,19 +76,19 @@ namespace MythMod.Projectiles.projectile3
             for (int u = 0; u < 8; u++)
             {
                 Vector2 v = new Vector2(0, Main.rand.NextFloat(8f, 14f)).RotatedByRandom(Math.PI * 2f);
-                int t = Projectile.NewProjectile(base.projectile.Center.X, base.projectile.Center.Y, v.X, v.Y, mod.ProjectileType("Tangerine2"), (int)((double)base.projectile.damage), base.projectile.knockBack, base.projectile.owner, 0f, 0f);
+                int t = Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, v.X, v.Y, Mod.Find<ModProjectile>("Tangerine2").Type, (int)((double)base.Projectile.damage), base.Projectile.knockBack, base.Projectile.owner, 0f, 0f);
                 Main.projectile[t].hostile = false;
                 Main.projectile[t].friendly = true;
                 Main.projectile[t].timeLeft = 180;
                 v = new Vector2(0, Main.rand.NextFloat(2f, 3.5f)).RotatedByRandom(Math.PI * 2f);
-                int tg = Projectile.NewProjectile(base.projectile.Center.X, base.projectile.Center.Y, v.X, v.Y, mod.ProjectileType("TangerineLeaf"), (int)((double)base.projectile.damage), base.projectile.knockBack, base.projectile.owner, 0f, 0f);
+                int tg = Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, v.X, v.Y, Mod.Find<ModProjectile>("TangerineLeaf").Type, (int)((double)base.Projectile.damage), base.Projectile.knockBack, base.Projectile.owner, 0f, 0f);
                 Main.projectile[tg].hostile = false;
                 Main.projectile[tg].friendly = true;
             }
             for (int u = 0; u < 5; u++)
             {
                 Vector2 v = new Vector2(0, Main.rand.NextFloat(8f, 14f)).RotatedByRandom(Math.PI * 2f);
-                int t = Projectile.NewProjectile(base.projectile.Center.X, base.projectile.Center.Y, v.X, v.Y, mod.ProjectileType("TangerineRay"), (int)((double)base.projectile.damage), base.projectile.knockBack, base.projectile.owner, 0f, 0f);
+                int t = Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, v.X, v.Y, Mod.Find<ModProjectile>("TangerineRay").Type, (int)((double)base.Projectile.damage), base.Projectile.knockBack, base.Projectile.owner, 0f, 0f);
                 Main.projectile[t].hostile = false;
                 Main.projectile[t].friendly = true;
                 Main.projectile[t].timeLeft = 60;
@@ -96,7 +96,7 @@ namespace MythMod.Projectiles.projectile3
             for (int u = 0; u < 5; u++)
             {
                 Vector2 v = new Vector2(0, Main.rand.NextFloat(8f, 14f)).RotatedByRandom(Math.PI * 2f);
-                int t = Projectile.NewProjectile(base.projectile.Center.X, base.projectile.Center.Y, v.X, v.Y, mod.ProjectileType("TenderGreenRay"), (int)((double)base.projectile.damage), base.projectile.knockBack, base.projectile.owner, 0f, 0f);
+                int t = Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, v.X, v.Y, Mod.Find<ModProjectile>("TenderGreenRay").Type, (int)((double)base.Projectile.damage), base.Projectile.knockBack, base.Projectile.owner, 0f, 0f);
                 Main.projectile[t].hostile = false;
                 Main.projectile[t].friendly = true;
                 Main.projectile[t].timeLeft = 60;

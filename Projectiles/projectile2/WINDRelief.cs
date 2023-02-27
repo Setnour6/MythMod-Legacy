@@ -9,32 +9,32 @@ namespace MythMod.Projectiles.projectile2
 	{
 		public override void SetDefaults()
 		{
-			base.projectile.width = 16;
-			base.projectile.height = 16;
-			base.projectile.alpha = 255;
-			base.projectile.scale = 1f;
-			base.projectile.friendly = false;
-			base.projectile.magic = true;
-			base.projectile.penetrate = 1;
-			base.projectile.timeLeft = 3600;
-            base.projectile.ignoreWater = false;
-            base.projectile.tileCollide = true;
+			base.Projectile.width = 16;
+			base.Projectile.height = 16;
+			base.Projectile.alpha = 255;
+			base.Projectile.scale = 1f;
+			base.Projectile.friendly = false;
+			base.Projectile.DamageType = DamageClass.Magic;
+			base.Projectile.penetrate = 1;
+			base.Projectile.timeLeft = 3600;
+            base.Projectile.ignoreWater = false;
+            base.Projectile.tileCollide = true;
         }
 		public override void AI()
 		{
-            projectile.velocity.Y += 1f;
-            if(projectile.wet)
+            Projectile.velocity.Y += 1f;
+            if(Projectile.wet)
             {
-                projectile.timeLeft = 0;
+                Projectile.timeLeft = 0;
             }
 		}
 		public override void Kill(int timeLeft)
 		{
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
-            Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, 0, 0, 386, 100, 0.5f, Main.myPlayer, 10f, 25f);
+            Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, 0, 0, 386, 100, 0.5f, Main.myPlayer, 10f, 25f);
             if(mplayer.Cloud == 0)
             {
-                mplayer.Cloud = projectile.Center.Y;
+                mplayer.Cloud = Projectile.Center.Y;
             }
         }
 	}

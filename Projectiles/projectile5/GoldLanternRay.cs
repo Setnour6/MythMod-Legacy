@@ -16,31 +16,31 @@ namespace MythMod.Projectiles.projectile5
 		}
 		public override void SetDefaults()
 		{
-			projectile.width = 32;
-			projectile.height = 32;
-            projectile.friendly = false;
-            projectile.hostile = false;
-            projectile.aiStyle = -1;
-            projectile.penetrate = -1;
-            projectile.timeLeft = 8000;
-            projectile.tileCollide = false;
+			Projectile.width = 32;
+			Projectile.height = 32;
+            Projectile.friendly = false;
+            Projectile.hostile = false;
+            Projectile.aiStyle = -1;
+            Projectile.penetrate = -1;
+            Projectile.timeLeft = 8000;
+            Projectile.tileCollide = false;
         }
         float r = 0;
         private Vector2 v0;
         private float b = 0;
         public override void AI()
         {
-            if (projectile.timeLeft == 7999)
+            if (Projectile.timeLeft == 7999)
             {
-                projectile.timeLeft = 500;
+                Projectile.timeLeft = 500;
                 b = Main.rand.NextFloat(0, 100f);
-                v0 = projectile.Center;
+                v0 = Projectile.Center;
             }
-            if (projectile.timeLeft > 300 && r < 30)
+            if (Projectile.timeLeft > 300 && r < 30)
             {
                 r += 1f;
             }
-            if (projectile.timeLeft < 32 && r > 1f)
+            if (Projectile.timeLeft < 32 && r > 1f)
             {
                 r -= 1f;
             }
@@ -49,23 +49,23 @@ namespace MythMod.Projectiles.projectile5
 
             if(v0 != Vector2.Zero)
             {
-                projectile.position = v0 - new Vector2(Dx, Dy) / 2f;
+                Projectile.position = v0 - new Vector2(Dx, Dy) / 2f;
             }
-            if (projectile.timeLeft == 30)
+            if (Projectile.timeLeft == 30)
             {
                 for (int k = 1; k < 10; k++)
                 {
-                    Vector2 v2 = new Vector2(0, -100 * k).RotatedBy(projectile.ai[0]);
-                    Vector2 v3 = new Vector2(0, 0.01f).RotatedBy(projectile.ai[0] + Math.PI / 2d) * (0.5f - k % 2) * 2;
-                    Projectile.NewProjectile(projectile.Center.X + v2.X, projectile.Center.Y + v2.Y, v3.X, v3.Y, mod.ProjectileType("GoldLanternStar"), 20, 0, Main.myPlayer, k * 10, 0);
+                    Vector2 v2 = new Vector2(0, -100 * k).RotatedBy(Projectile.ai[0]);
+                    Vector2 v3 = new Vector2(0, 0.01f).RotatedBy(Projectile.ai[0] + Math.PI / 2d) * (0.5f - k % 2) * 2;
+                    Projectile.NewProjectile(Projectile.Center.X + v2.X, Projectile.Center.Y + v2.Y, v3.X, v3.Y, Mod.Find<ModProjectile>("GoldLanternStar").Type, 20, 0, Main.myPlayer, k * 10, 0);
                 }
             }
-            if (projectile.timeLeft >= 30)
+            if (Projectile.timeLeft >= 30)
             {
-                projectile.ai[0] = projectile.ai[0] * 0.995f + projectile.ai[1] * 0.005f;
+                Projectile.ai[0] = Projectile.ai[0] * 0.995f + Projectile.ai[1] * 0.005f;
             }
-            projectile.width = Dx;
-            projectile.height = Dy;
+            Projectile.width = Dx;
+            Projectile.height = Dy;
             /* if(projectile.timeLeft >= 200 && projectile.timeLeft <= 1000 && projectile.timeLeft % 100 == 0)
              {
                  double io = Main.rand.NextFloat(0, 10f);
@@ -86,7 +86,7 @@ namespace MythMod.Projectiles.projectile5
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
 		{
-		    projectile.Kill();
+		    Projectile.Kill();
 			return false;
 		}
         /*public override void Kill(int timeLeft)
@@ -110,11 +110,11 @@ namespace MythMod.Projectiles.projectile5
         {
             target.AddBuff(153, 900);
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
         {
             return false;
         }
-        public override void PostDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override void PostDraw(Color lightColor)
         {
             List<CustomVertexInfo> bars = new List<CustomVertexInfo>();
 
@@ -136,13 +136,13 @@ namespace MythMod.Projectiles.projectile5
                 var w = MathHelper.Lerp(1f, 0.05f, alpha);
                 if(!Main.gamePaused)
                 {
-                    if ((player.Center - (projectile.Center - new Vector2(0, 20 * k).RotatedBy(projectile.ai[0]))).Length() < 20)
+                    if ((player.Center - (Projectile.Center - new Vector2(0, 20 * k).RotatedBy(Projectile.ai[0]))).Length() < 20)
                     {
-                        Projectile.NewProjectile(player.Center.X, player.Center.Y, 0, 0, mod.ProjectileType("Hit"), 40, 0, Main.myPlayer, k * 10, 0);
+                        Projectile.NewProjectile(player.Center.X, player.Center.Y, 0, 0, Mod.Find<ModProjectile>("Hit").Type, 40, 0, Main.myPlayer, k * 10, 0);
                     }
                 }
-                bars.Add(new CustomVertexInfo(projectile.Center - new Vector2(0, 20 * k).RotatedBy(projectile.ai[0]) + new Vector2(0, (120 - 180 / (float)(k + 3)) * r / 90f).RotatedBy(projectile.ai[0] + Math.PI / 2d), color, new Vector3((float)Math.Sqrt(factor), 1, w)));
-                bars.Add(new CustomVertexInfo(projectile.Center - new Vector2(0, 20 * k).RotatedBy(projectile.ai[0]) - new Vector2(0, (120 - 180 / (float)(k + 3)) * r / 90f).RotatedBy(projectile.ai[0] + Math.PI / 2d), color, new Vector3((float)Math.Sqrt(factor), 0, w)));
+                bars.Add(new CustomVertexInfo(Projectile.Center - new Vector2(0, 20 * k).RotatedBy(Projectile.ai[0]) + new Vector2(0, (120 - 180 / (float)(k + 3)) * r / 90f).RotatedBy(Projectile.ai[0] + Math.PI / 2d), color, new Vector3((float)Math.Sqrt(factor), 1, w)));
+                bars.Add(new CustomVertexInfo(Projectile.Center - new Vector2(0, 20 * k).RotatedBy(Projectile.ai[0]) - new Vector2(0, (120 - 180 / (float)(k + 3)) * r / 90f).RotatedBy(Projectile.ai[0] + Math.PI / 2d), color, new Vector3((float)Math.Sqrt(factor), 0, w)));
             }
 
 
@@ -153,7 +153,7 @@ namespace MythMod.Projectiles.projectile5
 
                 // 按照顺序连接三角形
                 triangleList.Add(bars[0]);
-                var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + new Vector2(0, 20).RotatedBy(projectile.ai[0]), Color.White, new Vector3(0, 0.5f, 1));
+                var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + new Vector2(0, 20).RotatedBy(Projectile.ai[0]), Color.White, new Vector3(0, 0.5f, 1));
                 triangleList.Add(bars[1]);
                 triangleList.Add(vertex);
                 for (int i = 0; i < bars.Count - 2; i += 2)
@@ -185,7 +185,7 @@ namespace MythMod.Projectiles.projectile5
                 MythMod.DefaultEffect2.Parameters["uTime"].SetValue(-(float)Main.time * 0.03f + b);
                 Main.graphics.GraphicsDevice.Textures[0] = MythMod.MainColorGoldYellow;
                 Main.graphics.GraphicsDevice.Textures[1] = MythMod.MainShape;
-                Main.graphics.GraphicsDevice.Textures[2] = mod.GetTexture("UIImages/FogTraceBeta");
+                Main.graphics.GraphicsDevice.Textures[2] = Mod.GetTexture("UIImages/FogTraceBeta");
                 Main.graphics.GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[1] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[2] = SamplerState.PointWrap;
@@ -239,7 +239,7 @@ namespace MythMod.Projectiles.projectile5
                 MythMod.DefaultEffect2.Parameters["uTime"].SetValue(-(float)Main.time * 0.03f + b);
                 Main.graphics.GraphicsDevice.Textures[0] = MythMod.MainColorGoldYellow;
                 Main.graphics.GraphicsDevice.Textures[1] = MythMod.MainShape;
-                Main.graphics.GraphicsDevice.Textures[2] = mod.GetTexture("UIImages/FogTracGama");
+                Main.graphics.GraphicsDevice.Textures[2] = Mod.GetTexture("UIImages/FogTracGama");
                 Main.graphics.GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[1] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[2] = SamplerState.PointWrap;

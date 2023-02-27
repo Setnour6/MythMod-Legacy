@@ -1,5 +1,6 @@
 ﻿using System;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -20,27 +21,27 @@ namespace MythMod.Items.Weapons
 		// Token: 0x060019F3 RID: 6643 RVA: 0x000A88D0 File Offset: 0x000A6AD0
 		public override void SetDefaults()
 		{
-			base.item.damage = 70;
-			base.item.magic = true;
-			base.item.mana = 15;
-			base.item.width = 58;
-			base.item.height = 68;
-			base.item.useTime = 26;
-			base.item.useAnimation = 26;
-			base.item.useStyle = 5;
-			Item.staff[base.item.type] = true;
-			base.item.noMelee = true;
-			base.item.knockBack = 5f;
-			base.item.value = Item.sellPrice(0, 2, 0, 0);
-			base.item.rare = 6;
-			base.item.UseSound = SoundID.Item43;
-			base.item.autoReuse = true;
-            base.item.shoot = base.mod.ProjectileType("ThunderBall");
-			base.item.shootSpeed = 3f;
+			base.Item.damage = 70;
+			base.Item.DamageType = DamageClass.Magic;
+			base.Item.mana = 15;
+			base.Item.width = 58;
+			base.Item.height = 68;
+			base.Item.useTime = 26;
+			base.Item.useAnimation = 26;
+			base.Item.useStyle = 5;
+			Item.staff[base.Item.type] = true;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 5f;
+			base.Item.value = Item.sellPrice(0, 2, 0, 0);
+			base.Item.rare = 6;
+			base.Item.UseSound = SoundID.Item43;
+			base.Item.autoReuse = true;
+            base.Item.shoot = base.Mod.Find<ModProjectile>("ThunderBall").Type;
+			base.Item.shootSpeed = 3f;
 		}
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            float shootSpeed = base.item.shootSpeed;
+            float shootSpeed = base.Item.shootSpeed;
             Projectile.NewProjectile((float)position.X + speedX * 4, (float)position.Y + speedY * 4, (float)speedX, (float)speedY, (int)type, (int)damage, (float)knockBack, player.whoAmI, 0f, 0f);
             return false;
         }

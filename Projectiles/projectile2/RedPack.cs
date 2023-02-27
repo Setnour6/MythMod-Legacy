@@ -12,20 +12,20 @@ namespace MythMod.Projectiles.projectile2
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("红包");
-            Main.projFrames[projectile.type] = 4; /*【帧数为6】对应的贴图也要画6帧哦*/
+            Main.projFrames[Projectile.type] = 4; /*【帧数为6】对应的贴图也要画6帧哦*/
 		}
 
 		// Token: 0x06001C82 RID: 7298 RVA: 0x0016F518 File Offset: 0x0016D718
 		public override void SetDefaults()
 		{
-			base.projectile.width = 20;
-			base.projectile.height = 24;
-			base.projectile.friendly = false;
-            projectile.hostile = true;
-			base.projectile.alpha = 0;
-			base.projectile.penetrate = -1;
-			base.projectile.tileCollide = true;
-			base.projectile.timeLeft = 300;
+			base.Projectile.width = 20;
+			base.Projectile.height = 24;
+			base.Projectile.friendly = false;
+            Projectile.hostile = true;
+			base.Projectile.alpha = 0;
+			base.Projectile.penetrate = -1;
+			base.Projectile.tileCollide = true;
+			base.Projectile.timeLeft = 300;
 		}
         private float num2 = 0;
         private float num3 = 0;
@@ -41,32 +41,32 @@ namespace MythMod.Projectiles.projectile2
                 num4 = Main.rand.Next(-10000, 10000) / 3000f;
                 num5 = Main.rand.Next(8000, 13000) / 1000f;
             }
-            base.projectile.frameCounter++;
-            if (base.projectile.frameCounter > 3)
+            base.Projectile.frameCounter++;
+            if (base.Projectile.frameCounter > 3)
             {
-                base.projectile.frame++;
-                base.projectile.frameCounter = 0;
+                base.Projectile.frame++;
+                base.Projectile.frameCounter = 0;
             }
-            if (base.projectile.frame > 3)
+            if (base.Projectile.frame > 3)
             {
-                base.projectile.frame = 0;
+                base.Projectile.frame = 0;
             }
-            projectile.rotation += num2;
-            if(projectile.velocity.Y < 3f)
+            Projectile.rotation += num2;
+            if(Projectile.velocity.Y < 3f)
             {
-                projectile.velocity.Y += 0.05f;
+                Projectile.velocity.Y += 0.05f;
             }
             num3 += 1;
-            projectile.velocity.X = (float)Math.Sin(num3 / num5) * num4;
+            Projectile.velocity.X = (float)Math.Sin(num3 / num5) * num4;
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
             for (int i = 0; i < 3; i++)
             {
-                int num = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, 218, 0, 0, 0, default(Color), 1);
+                int num = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, 218, 0, 0, 0, default(Color), 1);
             }
-            base.projectile.Kill();
-            projectile.timeLeft = 0;
+            base.Projectile.Kill();
+            Projectile.timeLeft = 0;
             return false;
         }
         // Token: 0x06001C84 RID: 7300 RVA: 0x0016F648 File Offset: 0x0016D848

@@ -10,7 +10,7 @@ namespace MythMod.Tiles.Foods
 {
 	public class 榨汁机 : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileLighted[(int)base.Type] = true;
 			Main.tileFrameImportant[(int)base.Type] = true;
@@ -29,8 +29,8 @@ namespace MythMod.Tiles.Foods
 			modTranslation.SetDefault("榨汁机");
 			base.AddMapEntry(new Color(0, 17, 6), modTranslation);
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
-			this.disableSmartCursor = true;
-			this.adjTiles = new int[]
+			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+			this.AdjTiles = new int[]
 			{
 				4
 			};
@@ -48,12 +48,12 @@ namespace MythMod.Tiles.Foods
         public override void PlaceInWorld(int i, int j, Item item)
         {
             short num = (short)(Main.rand.Next(0, 2));
-            Main.tile[i, j].frameX = (short)(num * 36);
-            Main.tile[i, j + 1].frameX = (short)(num * 36);
+            Main.tile[i, j].TileFrameX = (short)(num * 36);
+            Main.tile[i, j + 1].TileFrameX = (short)(num * 36);
         }
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(i * 16, j * 16, 16, 32, mod.ItemType("榨汁机"));
+            Item.NewItem(i * 16, j * 16, 16, 32, Mod.Find<ModItem>("榨汁机").Type);
         }
     }
 }

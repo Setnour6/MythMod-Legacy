@@ -15,17 +15,17 @@ namespace MythMod.Projectiles.projectile4
 		}
 		public override void SetDefaults()
 		{
-			projectile.width = 12;
-			projectile.height = 12;
-            projectile.hostile = true;
-            projectile.friendly = false;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = true;
-            projectile.alpha = 0;
-			projectile.penetrate = -1;
-			projectile.timeLeft = 900;
-            projectile.extraUpdates = 12;
-            projectile.tileCollide = true;
+			Projectile.width = 12;
+			Projectile.height = 12;
+            Projectile.hostile = true;
+            Projectile.friendly = false;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = true;
+            Projectile.alpha = 0;
+			Projectile.penetrate = -1;
+			Projectile.timeLeft = 900;
+            Projectile.extraUpdates = 12;
+            Projectile.tileCollide = true;
         }
         private float Y = 0;
         private float X = 0;
@@ -33,12 +33,12 @@ namespace MythMod.Projectiles.projectile4
         private bool Orbit = false;
         public override void AI()
 		{
-            if(projectile.timeLeft >= 899)
+            if(Projectile.timeLeft >= 899)
             {
-                Y = projectile.Center.Y - 380;
-                X = projectile.Center.X;
+                Y = Projectile.Center.Y - 380;
+                X = Projectile.Center.X;
             }
-            if(projectile.Center.Y > Y)
+            if(Projectile.Center.Y > Y)
             {
                 if(!Orbit)
                 {
@@ -50,14 +50,14 @@ namespace MythMod.Projectiles.projectile4
                     {
                         ω *= 0.96f;
                     }
-                    if (projectile.velocity.Y < 0.5f)
+                    if (Projectile.velocity.Y < 0.5f)
                     {
-                        projectile.velocity = projectile.velocity.RotatedBy(ω);
+                        Projectile.velocity = Projectile.velocity.RotatedBy(ω);
                     }
                     else
                     {
-                        projectile.velocity.Y -= 0.05f;
-                        projectile.velocity.X *= 0.96f;
+                        Projectile.velocity.Y -= 0.05f;
+                        Projectile.velocity.X *= 0.96f;
                     }
                 }
             }
@@ -67,16 +67,16 @@ namespace MythMod.Projectiles.projectile4
             }
             if(Orbit)
             {
-                float x = projectile.Center.X - X;
-                float y = projectile.Center.Y - Y;
+                float x = Projectile.Center.X - X;
+                float y = Projectile.Center.Y - Y;
                 if (x * x / 40000 + y * y / 2500 > 1)
                 {
-                    projectile.velocity *= 0.99f;
-                    projectile.velocity += (new Vector2(X, Y) - projectile.Center) / 2000f;
+                    Projectile.velocity *= 0.99f;
+                    Projectile.velocity += (new Vector2(X, Y) - Projectile.Center) / 2000f;
                 }
                 else
                 {
-                    projectile.velocity = projectile.velocity.RotatedBy(ω);
+                    Projectile.velocity = Projectile.velocity.RotatedBy(ω);
                     if (Math.Abs(ω) < 0.03f)
                     {
                         ω += Main.rand.NextFloat(-0.005f, 0.005f);
@@ -85,38 +85,38 @@ namespace MythMod.Projectiles.projectile4
                     {
                         ω *= 0.96f;
                     }
-                    if(projectile.velocity.Y > 0.5f)
+                    if(Projectile.velocity.Y > 0.5f)
                     {
-                        projectile.velocity.Y *= 0.98f;
+                        Projectile.velocity.Y *= 0.98f;
                     }
-                    if (projectile.velocity.Length() < 2f)
+                    if (Projectile.velocity.Length() < 2f)
                     {
-                        projectile.velocity *= 1.05f;
+                        Projectile.velocity *= 1.05f;
                     }
                 }
             }
-            if(projectile.timeLeft == 60)
+            if(Projectile.timeLeft == 60)
             {
-                Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, 0, 0, mod.ProjectileType("EvilLightingbolt"), 30, 0f, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, 0, 0, Mod.Find<ModProjectile>("EvilLightingbolt").Type, 30, 0f, Main.myPlayer, 0f, 0f);
             }
             if(Main.rand.Next(100) < 3)
             {
-                Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, 0, 0, mod.ProjectileType("EvilLightingbolt2"), 0, 0f, Main.myPlayer, Main.rand.Next(8, 60), 0f);
+                Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, 0, 0, Mod.Find<ModProjectile>("EvilLightingbolt2").Type, 0, 0f, Main.myPlayer, Main.rand.Next(8, 60), 0f);
             }
-            int num = Dust.NewDust(projectile.Center - new Vector2(4, 4) + new Vector2(0, 12).RotatedBy(projectile.timeLeft / 4f), 2, 2, 109, 0, 0, 0, default(Color), Main.rand.NextFloat(2.5f, 5f));
+            int num = Dust.NewDust(Projectile.Center - new Vector2(4, 4) + new Vector2(0, 12).RotatedBy(Projectile.timeLeft / 4f), 2, 2, 109, 0, 0, 0, default(Color), Main.rand.NextFloat(2.5f, 5f));
             Main.dust[num].noGravity = true;
-            Main.dust[num].velocity = projectile.velocity;
+            Main.dust[num].velocity = Projectile.velocity;
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            base.projectile.ai[0] += 0.1f;
-            if (base.projectile.velocity.X != oldVelocity.X)
+            base.Projectile.ai[0] += 0.1f;
+            if (base.Projectile.velocity.X != oldVelocity.X)
             {
-                base.projectile.velocity.X = -oldVelocity.X;
+                base.Projectile.velocity.X = -oldVelocity.X;
             }
-            if (base.projectile.velocity.Y != oldVelocity.Y)
+            if (base.Projectile.velocity.Y != oldVelocity.Y)
             {
-                base.projectile.velocity.Y = -oldVelocity.Y;
+                base.Projectile.velocity.Y = -oldVelocity.Y;
             }
             return false;
         }
@@ -124,7 +124,7 @@ namespace MythMod.Projectiles.projectile4
         {
             if (timeLeft > 60)
             {
-                Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, 0, 0, mod.ProjectileType("EvilLightingbolt"), 30, 0f, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, 0, 0, Mod.Find<ModProjectile>("EvilLightingbolt").Type, 30, 0f, Main.myPlayer, 0f, 0f);
             }
         }
     }

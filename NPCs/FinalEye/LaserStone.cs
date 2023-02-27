@@ -19,16 +19,16 @@ namespace MythMod.NPCs.FinalEye
 		}
 		public override void SetDefaults()
 		{
-			base.npc.knockBackResist = 0f;
-			base.npc.noGravity = true;
-			base.npc.damage = 60;
-			base.npc.width = 32;
-			base.npc.height = 32;
-			base.npc.defense = 5;
-			base.npc.lifeMax = 2000000;
-			base.npc.aiStyle = -1;
-			this.aiType = -1;
-			base.npc.HitSound = SoundID.NPCHit2;
+			base.NPC.knockBackResist = 0f;
+			base.NPC.noGravity = true;
+			base.NPC.damage = 60;
+			base.NPC.width = 32;
+			base.NPC.height = 32;
+			base.NPC.defense = 5;
+			base.NPC.lifeMax = 2000000;
+			base.NPC.aiStyle = -1;
+			this.AIType = -1;
+			base.NPC.HitSound = SoundID.NPCHit2;
 		}
 
 		// Token: 0x06001477 RID: 5239 RVA: 0x000B3A6C File Offset: 0x000B1C6C
@@ -45,7 +45,7 @@ namespace MythMod.NPCs.FinalEye
 		{
 		}
         // Token: 0x02000413 RID: 1043
-        public override void NPCLoot()
+        public override void OnKill()
         {
         }
 	}

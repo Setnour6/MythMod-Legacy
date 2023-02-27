@@ -26,31 +26,31 @@ namespace MythMod.Items.Weapons
 		}
 		public override void SetDefaults()
 		{
-			base.item.damage = 140;
-			base.item.mana = 30;
-			base.item.width = 34;
-			base.item.height = 34;
-			base.item.useTime = 36;
-			base.item.useAnimation = 36;
-			base.item.useStyle = 1;
-			base.item.noMelee = true;
-			base.item.knockBack = 2.25f;
-			base.item.value = 50000;
-			base.item.rare = 3;
-			base.item.UseSound = SoundID.Item44;
-			base.item.shoot = base.mod.ProjectileType("StarDustMark");
-			base.item.autoReuse = true;
-			base.item.shootSpeed = 10f;
-			base.item.summon = true;
+			base.Item.damage = 140;
+			base.Item.mana = 30;
+			base.Item.width = 34;
+			base.Item.height = 34;
+			base.Item.useTime = 36;
+			base.Item.useAnimation = 36;
+			base.Item.useStyle = 1;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 2.25f;
+			base.Item.value = 50000;
+			base.Item.rare = 3;
+			base.Item.UseSound = SoundID.Item44;
+			base.Item.shoot = base.Mod.Find<ModProjectile>("StarDustMark").Type;
+			base.Item.autoReuse = true;
+			base.Item.shootSpeed = 10f;
+			base.Item.DamageType = DamageClass.Summon;
 		}
         public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
         {
-            Vector2 origin = new Vector2(item.width / 2f, item.height / 2f);
-            spriteBatch.Draw(base.mod.GetTexture("Items/Weapons/裂星源Glow"), base.item.Center - Main.screenPosition, null, new Color(255, 255, 255, 0), rotation, origin, 1f, SpriteEffects.None, 0f);
+            Vector2 origin = new Vector2(Item.width / 2f, Item.height / 2f);
+            spriteBatch.Draw(base.Mod.GetTexture("Items/Weapons/裂星源Glow"), base.Item.Center - Main.screenPosition, null, new Color(255, 255, 255, 0), rotation, origin, 1f, SpriteEffects.None, 0f);
         }
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
-			float shootSpeed = base.item.shootSpeed;
+			float shootSpeed = base.Item.shootSpeed;
 			Vector2 vector = player.RotatedRelativePoint(player.MountedCenter, true);
 			float num = (float)Main.mouseX + Main.screenPosition.X - vector.X;
 			float num2 = (float)Main.mouseY + Main.screenPosition.Y - vector.Y;
@@ -71,7 +71,7 @@ namespace MythMod.Items.Weapons
 			num2 = 0f;
 			vector.X = (float)Main.mouseX + Main.screenPosition.X;
 			vector.Y = (float)Main.mouseY + Main.screenPosition.Y;
-			Projectile.NewProjectile(vector.X, vector.Y, num, num2, base.mod.ProjectileType("StarDustMark"), damage, knockBack, player.whoAmI, 0f, 0f);
+			Projectile.NewProjectile(vector.X, vector.Y, num, num2, base.Mod.Find<ModProjectile>("StarDustMark").Type, damage, knockBack, player.whoAmI, 0f, 0f);
 			return false;
 		}
 	}

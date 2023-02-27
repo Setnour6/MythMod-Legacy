@@ -28,7 +28,7 @@ namespace MythMod.NPCs.LanternMoon
 		public override void SetStaticDefaults()
 		{
 			base.DisplayName.SetDefault("FireCore");
-			Main.npcFrameCount[base.npc.type] = 1;
+			Main.npcFrameCount[base.NPC.type] = 1;
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "焰火幻之心");
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -37,35 +37,35 @@ namespace MythMod.NPCs.LanternMoon
 		}
 		public override void SetDefaults()
 		{
-			base.npc.aiStyle = -1;
-			base.npc.damage = 0;
-			base.npc.width = 200;
-			base.npc.height = 200;
-			base.npc.defense = 90;
+			base.NPC.aiStyle = -1;
+			base.NPC.damage = 0;
+			base.NPC.width = 200;
+			base.NPC.height = 200;
+			base.NPC.defense = 90;
             if (Main.expertMode)
             {
-                base.npc.lifeMax = 750000;
+                base.NPC.lifeMax = 750000;
                 if (MythWorld.Myth)
                 {
-                    base.npc.lifeMax = 500000;
+                    base.NPC.lifeMax = 500000;
                 }
             }
             else
             {
-                base.npc.lifeMax = 1000000;
+                base.NPC.lifeMax = 1000000;
             }
-            base.npc.dontTakeDamage = false;
-            base.npc.knockBackResist = 0f;
-			base.npc.value = (float)Item.buyPrice(0, 50, 0, 0);
-			base.npc.alpha = 0;
-            base.npc.scale = 1;
-            base.npc.lavaImmune = true;
-			base.npc.noGravity = true;
-			base.npc.noTileCollide = true;
-			base.npc.HitSound = SoundID.NPCHit1;
-			base.npc.DeathSound = SoundID.NPCDeath1;
-            base.npc.boss = true;
-            this.music = mod.GetSoundSlot((Terraria.ModLoader.SoundType)51, "Sounds/Music/Powerless-Eclipse橘子树");
+            base.NPC.dontTakeDamage = false;
+            base.NPC.knockBackResist = 0f;
+			base.NPC.value = (float)Item.buyPrice(0, 50, 0, 0);
+			base.NPC.alpha = 0;
+            base.NPC.scale = 1;
+            base.NPC.lavaImmune = true;
+			base.NPC.noGravity = true;
+			base.NPC.noTileCollide = true;
+			base.NPC.HitSound = SoundID.NPCHit1;
+			base.NPC.DeathSound = SoundID.NPCDeath1;
+            base.NPC.boss = true;
+            this.Music = Mod.GetSoundSlot((Terraria.ModLoader.SoundType)51, "Sounds/Music/Powerless-Eclipse橘子树");
         }
         private int i0 = 0;
         public static bool canai = false;
@@ -93,7 +93,7 @@ namespace MythMod.NPCs.LanternMoon
         private int K0 = -1;
         private int K1 = -1;
         private int[] M = new int[6];
-        public override void NPCLoot()
+        public override void OnKill()
 		{
             
         }

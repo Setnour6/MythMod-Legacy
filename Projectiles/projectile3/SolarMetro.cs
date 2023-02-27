@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,19 +23,19 @@ namespace MythMod.Projectiles.projectile3
         }
         public override void SetDefaults()
         {
-            projectile.width = 16;
-            projectile.height = 16;
-            projectile.aiStyle = -1;
-            projectile.friendly = true;
-            projectile.hostile = false;
-            projectile.ignoreWater = true;
-            projectile.extraUpdates = 4;
-            projectile.tileCollide = true;
-            projectile.timeLeft = 100;
-            projectile.alpha = 255;
-            projectile.penetrate = -1;
-            projectile.scale = 1f;
-            this.cooldownSlot = 1;
+            Projectile.width = 16;
+            Projectile.height = 16;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = true;
+            Projectile.hostile = false;
+            Projectile.ignoreWater = true;
+            Projectile.extraUpdates = 4;
+            Projectile.tileCollide = true;
+            Projectile.timeLeft = 100;
+            Projectile.alpha = 255;
+            Projectile.penetrate = -1;
+            Projectile.scale = 1f;
+            this.CooldownSlot = 1;
         }
         private bool initialization = true;
         private double X;
@@ -44,20 +44,20 @@ namespace MythMod.Projectiles.projectile3
         private float rg = 0;
         public override void AI()
         {
-            if (projectile.timeLeft < 99)
+            if (Projectile.timeLeft < 99)
             {
-                Vector2 vector = base.projectile.Center;
-                int num = Dust.NewDust(vector - new Vector2(4, 4), 0, 0, mod.DustType("Solar"), 0, 0, 0, default(Color), (float)projectile.scale);
+                Vector2 vector = base.Projectile.Center;
+                int num = Dust.NewDust(vector - new Vector2(4, 4), 0, 0, Mod.Find<ModDust>("Solar").Type, 0, 0, 0, default(Color), (float)Projectile.scale);
                 Main.dust[num].velocity *= 0.0f;
                 Main.dust[num].noGravity = true;
             }
-            if(projectile.velocity.Y < 15)
+            if(Projectile.velocity.Y < 15)
             {
-                projectile.velocity.Y += 0.008f;
+                Projectile.velocity.Y += 0.008f;
             }
-            if (projectile.timeLeft < 50)
+            if (Projectile.timeLeft < 50)
             {
-                projectile.scale *= 0.95f;
+                Projectile.scale *= 0.95f;
             }
         }
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)

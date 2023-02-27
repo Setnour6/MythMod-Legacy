@@ -17,16 +17,16 @@ namespace MythMod.Items.Foods
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 38;
-            base.item.height = 28;
-            base.item.rare = 0;
-			base.item.useAnimation = 30;
-			base.item.useTime = 20;
-			base.item.useStyle = 1;
-			base.item.UseSound = SoundID.Item8;
-			base.item.consumable = true;
-            base.item.maxStack = 200;
-            base.item.createTile = base.mod.TileType("炭烧生蚝");
+			base.Item.width = 38;
+            base.Item.height = 28;
+            base.Item.rare = 0;
+			base.Item.useAnimation = 30;
+			base.Item.useTime = 20;
+			base.Item.useStyle = 1;
+			base.Item.UseSound = SoundID.Item8;
+			base.Item.consumable = true;
+            base.Item.maxStack = 200;
+            base.Item.createTile = base.Mod.Find<ModTile>("炭烧生蚝").Type;
         }
         public override void AddRecipes()
         {

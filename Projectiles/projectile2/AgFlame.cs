@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 
 namespace MythMod.Projectiles.projectile2
@@ -18,17 +19,17 @@ namespace MythMod.Projectiles.projectile2
 		// Token: 0x06001F15 RID: 7957 RVA: 0x0018D09C File Offset: 0x0018B29C
 		public override void SetDefaults()
 		{
-			base.projectile.width = 210;
-			base.projectile.height = 210;
-			base.projectile.hostile = false;
-			base.projectile.ignoreWater = true;
-			base.projectile.tileCollide = false;
-			base.projectile.penetrate = -1;
-            base.projectile.tileCollide = false;
-            base.projectile.timeLeft = 50;
-            base.projectile.friendly = true;
-			this.cooldownSlot = 1;
-            base.projectile.scale = 0;
+			base.Projectile.width = 210;
+			base.Projectile.height = 210;
+			base.Projectile.hostile = false;
+			base.Projectile.ignoreWater = true;
+			base.Projectile.tileCollide = false;
+			base.Projectile.penetrate = -1;
+            base.Projectile.tileCollide = false;
+            base.Projectile.timeLeft = 50;
+            base.Projectile.friendly = true;
+			this.CooldownSlot = 1;
+            base.Projectile.scale = 0;
 
         }
         private bool boom = false;
@@ -39,34 +40,34 @@ namespace MythMod.Projectiles.projectile2
             {
                 boom = true;
             }
-            if(boom && base.projectile.scale <= 0.7f)
+            if(boom && base.Projectile.scale <= 0.7f)
             {
-                base.projectile.scale += 0.05f;
+                base.Projectile.scale += 0.05f;
             }
             else
             {
-                base.projectile.scale += (float)(1.1667 - base.projectile.scale) / 8f;
+                base.Projectile.scale += (float)(1.1667 - base.Projectile.scale) / 8f;
             }
 		}
 		// Token: 0x06001F17 RID: 7959 RVA: 0x0000C841 File Offset: 0x0000AA41
 		public override Color? GetAlpha(Color lightColor)
 		{
-            if(base.projectile.timeLeft > 30)
+            if(base.Projectile.timeLeft > 30)
             {
                 return new Color?(new Color(95, 95, 95, 0));
             }
             else
             {
-                return new Color?(new Color(base.projectile.timeLeft / 30f * (95 / 255f), base.projectile.timeLeft / 30f * (95 / 255f), base.projectile.timeLeft / 30f * (95 / 255f), 0));
+                return new Color?(new Color(base.Projectile.timeLeft / 30f * (95 / 255f), base.Projectile.timeLeft / 30f * (95 / 255f), base.Projectile.timeLeft / 30f * (95 / 255f), 0));
             }
 		}
         // Token: 0x0600298B RID: 10635 RVA: 0x00213848 File Offset: 0x00211A48
-		public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D texture2D = Main.projectileTexture[base.projectile.type];
-			int num = Main.projectileTexture[base.projectile.type].Height / Main.projFrames[base.projectile.type];
-			int y = num * base.projectile.frame;
-			Main.spriteBatch.Draw(texture2D, base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), base.projectile.GetAlpha(lightColor), base.projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.projectile.scale, SpriteEffects.None, 0f);
+			Texture2D texture2D = TextureAssets.Projectile[base.Projectile.type].Value;
+			int num = TextureAssets.Projectile[base.Projectile.type].Value.Height / Main.projFrames[base.Projectile.type];
+			int y = num * base.Projectile.frame;
+			Main.spriteBatch.Draw(texture2D, base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), base.Projectile.GetAlpha(lightColor), base.Projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.Projectile.scale, SpriteEffects.None, 0f);
 			return false;
 		}
 	}

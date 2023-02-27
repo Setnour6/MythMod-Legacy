@@ -17,19 +17,19 @@ namespace MythMod.Items.Foods
 		}
         public override void SetDefaults()
         {
-            base.item.width = 74;
-            base.item.height = 32;
-            base.item.rare = 0;
-            base.item.useAnimation = 20;
-            base.item.useTime = 20;
-            base.item.useStyle = 1;
-            base.item.UseSound = SoundID.Item8;
-            base.item.consumable = true;
-            base.item.maxStack = 200;
-            base.item.autoReuse = true;
-            base.item.createTile = base.mod.TileType("椰子果冻");
+            base.Item.width = 74;
+            base.Item.height = 32;
+            base.Item.rare = 0;
+            base.Item.useAnimation = 20;
+            base.Item.useTime = 20;
+            base.Item.useStyle = 1;
+            base.Item.UseSound = SoundID.Item8;
+            base.Item.consumable = true;
+            base.Item.maxStack = 200;
+            base.Item.autoReuse = true;
+            base.Item.createTile = base.Mod.Find<ModTile>("椰子果冻").Type;
         }
-        public override bool UseItem(Player player)
+        public override bool? UseItem(Player player)/* tModPorter Suggestion: Return null instead of false */
         {
             //MythPlayer modPlayer = player.GetModPlayer<MythPlayer>(base.mod);
             //if (player.itemAnimation > 0 && player.itemTime == 0)

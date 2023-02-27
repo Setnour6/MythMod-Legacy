@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class GoldFeishi : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("金菲仕");
             base.Description.SetDefault("防御增加9");

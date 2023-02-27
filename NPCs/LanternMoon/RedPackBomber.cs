@@ -36,34 +36,34 @@ namespace MythMod.NPCs.LanternMoon
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("封包轰炸机");
-			Main.npcFrameCount[base.npc.type] = 1;
+			Main.npcFrameCount[base.NPC.type] = 1;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "封包轰炸机");
 
         }
-        public override void NPCLoot()
+        public override void OnKill()
         {
             bool expertMode = Main.expertMode;
-            Item.NewItem((int)base.npc.position.X, (int)base.npc.position.Y, base.npc.width, base.npc.height, 58, 2, false, 0, false, false);
+            Item.NewItem((int)base.NPC.position.X, (int)base.NPC.position.Y, base.NPC.width, base.NPC.height, 58, 2, false, 0, false, false);
         }
         // Token: 0x06001640 RID: 5696 RVA: 0x000E2920 File Offset: 0x000E0B20
         public override void SetDefaults()
 		{
-			base.npc.damage = 100;
-            base.npc.lifeMax = 300;
-			base.npc.npcSlots = 14f;
-			base.npc.width = 62;
-			base.npc.height = 74;
-			base.npc.defense = 0;
-			base.npc.value = 4000;
-			base.npc.aiStyle = -1;
-			this.aiType = -1;
-			base.npc.knockBackResist = 0.6f;
-            base.npc.dontTakeDamage = false;
-            base.npc.noGravity = true;
-			base.npc.noTileCollide = true;
-			base.npc.HitSound = SoundID.NPCHit3;
-            this.banner = base.npc.type;
-            this.bannerItem = base.mod.ItemType("RedpackBanner");
+			base.NPC.damage = 100;
+            base.NPC.lifeMax = 300;
+			base.NPC.npcSlots = 14f;
+			base.NPC.width = 62;
+			base.NPC.height = 74;
+			base.NPC.defense = 0;
+			base.NPC.value = 4000;
+			base.NPC.aiStyle = -1;
+			this.AIType = -1;
+			base.NPC.knockBackResist = 0.6f;
+            base.NPC.dontTakeDamage = false;
+            base.NPC.noGravity = true;
+			base.NPC.noTileCollide = true;
+			base.NPC.HitSound = SoundID.NPCHit3;
+            this.Banner = base.NPC.type;
+            this.BannerItem = base.Mod.Find<ModItem>("RedpackBanner").Type;
         }
         private int A2 = 0;
         // Token: 0x02000413 RID: 1043
@@ -72,23 +72,23 @@ namespace MythMod.NPCs.LanternMoon
         public override void AI()
         {
             Player player = Main.player[Main.myPlayer];
-            npc.rotation = npc.velocity.X / 30f;
+            NPC.rotation = NPC.velocity.X / 30f;
             A2 += 1;
-            Vector2 v = player.Center + new Vector2((float)Math.Sin(A2 / 60f) * 1000f, (float)Math.Sin((A2 + 200) / 60f) * 50f - 300) - npc.Center;
-            if (npc.velocity.Length() < 14f)
+            Vector2 v = player.Center + new Vector2((float)Math.Sin(A2 / 60f) * 1000f, (float)Math.Sin((A2 + 200) / 60f) * 50f - 300) - NPC.Center;
+            if (NPC.velocity.Length() < 14f)
             {
-                npc.velocity += v / v.Length() * 0.5f;
+                NPC.velocity += v / v.Length() * 0.5f;
             }
-            npc.velocity *= 0.96f;
-            npc.spriteDirection = npc.velocity.X > 0 ? -1 : 1;
-            if(Math.Abs(npc.velocity.X) > 5 && A2 % 32 == 1)
+            NPC.velocity *= 0.96f;
+            NPC.spriteDirection = NPC.velocity.X > 0 ? -1 : 1;
+            if(Math.Abs(NPC.velocity.X) > 5 && A2 % 32 == 1)
             {
-                Projectile.NewProjectile(npc.Center.X, npc.Center.Y + 30f, npc.velocity.X / 3f, npc.velocity.Y * 0.25f + 1.5f, mod.ProjectileType("红包"), 45, 0f, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(NPC.Center.X, NPC.Center.Y + 30f, NPC.velocity.X / 3f, NPC.velocity.Y * 0.25f + 1.5f, Mod.Find<ModProjectile>("红包").Type, 45, 0f, Main.myPlayer, 0f, 0f);
             }
             if (Main.dayTime)
             {
-                npc.noTileCollide = true;
-                npc.velocity.Y += 1;
+                NPC.noTileCollide = true;
+                NPC.velocity.Y += 1;
             }
         }
         // Token: 0x02000413 RID: 1043
@@ -98,11 +98,11 @@ namespace MythMod.NPCs.LanternMoon
         public override void HitEffect(int hitDirection, double damage)
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
-            if (base.npc.life <= 0)
+            if (base.NPC.life <= 0)
             {
                 float scaleFactor = (float)(Main.rand.Next(-200, 200) / 100);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/封包轰炸机碎块1"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/封包轰炸机碎块2"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/封包轰炸机碎块1"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/封包轰炸机碎块2"), 1f);
                 if (mplayer.LanternMoonWave != 15)
                 {
                     if (Main.expertMode)

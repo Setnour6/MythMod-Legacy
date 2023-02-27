@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class NorthLandSpring : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("北国之春");
             base.Description.SetDefault("生命回复增加5");

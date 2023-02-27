@@ -13,21 +13,21 @@ namespace MythMod.Projectiles
         private float X;
 		public override void SetDefaults()
 		{
-			base.projectile.CloneDefaults(547);
-			base.projectile.width = 16;
-			base.projectile.height = 16;
-			base.projectile.scale = 1f;
-			base.projectile.alpha = 90;
-            ProjectileID.Sets.YoyosMaximumRange[projectile.type] = 420f;
+			base.Projectile.CloneDefaults(547);
+			base.Projectile.width = 16;
+			base.Projectile.height = 16;
+			base.Projectile.scale = 1f;
+			base.Projectile.alpha = 90;
+            ProjectileID.Sets.YoyosMaximumRange[Projectile.type] = 420f;
         }
 		public override void AI()
 		{
-            ProjectileExtras.YoyoAI(base.projectile.whoAmI, 60f, 420f, 16f);
+            ProjectileExtras.YoyoAI(base.Projectile.whoAmI, 60f, 420f, 16f);
             X += 1;
             if (X % 3 == 0)
             {
                 Vector2 V = new Vector2(0, 2.5f).RotatedBy(X / 4f);
-                int num34 = Projectile.NewProjectile(base.projectile.Center.X, base.projectile.Center.Y, V.X, V.Y, base.mod.ProjectileType("FireworkRed2"), base.projectile.damage, 0.2f, Main.myPlayer, 0f, 0f);
+                int num34 = Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, V.X, V.Y, base.Mod.Find<ModProjectile>("FireworkRed2").Type, base.Projectile.damage, 0.2f, Main.myPlayer, 0f, 0f);
             }
         }
 		public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
@@ -38,9 +38,9 @@ namespace MythMod.Projectiles
 		{
 			return false;
 		}
-		public override void PostDraw(SpriteBatch spriteBatch, Color lightColor)
+		public override void PostDraw(Color lightColor)
         {
-            spriteBatch.Draw(base.mod.GetTexture("Projectiles/花开富贵Glow"), base.projectile.Center - Main.screenPosition, null, new Color(255,255,255,0), base.projectile.rotation, new Vector2(8f, 8f), 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(base.Mod.GetTexture("Projectiles/花开富贵Glow"), base.Projectile.Center - Main.screenPosition, null, new Color(255,255,255,0), base.Projectile.rotation, new Vector2(8f, 8f), 1f, SpriteEffects.None, 0f);
         }
 	}
 }

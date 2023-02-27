@@ -1,8 +1,10 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 using Terraria.ID;
 using Terraria.Enums;
@@ -24,43 +26,43 @@ namespace MythMod.Projectiles
 
 		public override void SetDefaults()
 		{
-			projectile.width = 10;
-			projectile.height = 2;
-			projectile.timeLeft = 120;
-			projectile.penetrate = -1;
-			projectile.hostile = true;
-			projectile.magic = true;
-			projectile.tileCollide = false;
-			projectile.ignoreWater = true;
-			projectile.alpha = 0;
+			Projectile.width = 10;
+			Projectile.height = 2;
+			Projectile.timeLeft = 120;
+			Projectile.penetrate = -1;
+			Projectile.hostile = true;
+			Projectile.DamageType = DamageClass.Magic;
+			Projectile.tileCollide = false;
+			Projectile.ignoreWater = true;
+			Projectile.alpha = 0;
 		}
 
 		public override void AI()
 		{
-			NPC npc = Main.npc[(int)projectile.ai[0]];
-			if (projectile.localAI[0] == 0f)
+			NPC npc = Main.npc[(int)Projectile.ai[0]];
+			if (Projectile.localAI[0] == 0f)
 			{
-				if (npc.type == mod.NPCType("监测之眼") && npc.ai[1] == 2f && Main.expertMode)
+				if (npc.type == Mod.Find<ModNPC>("监测之眼").Type && npc.ai[1] == 2f && Main.expertMode)
 				{
-					cooldownSlot = 1;
+					CooldownSlot = 1;
 				}
 			}
-			projectile.Center = npc.Center;
-			projectile.localAI[0] += 1f;
-			if (projectile.localAI[0] > 120f)
+			Projectile.Center = npc.Center;
+			Projectile.localAI[0] += 1f;
+			if (Projectile.localAI[0] > 120f)
 			{
-				projectile.alpha = (int)((int)projectile.localAI[0] + 100f);
-				projectile.damage = 0;
+				Projectile.alpha = (int)((int)Projectile.localAI[0] + 100f);
+				Projectile.damage = 0;
 			}
-			if (projectile.localAI[0] > 120f)
+			if (Projectile.localAI[0] > 120f)
 			{
-				projectile.Kill();
+				Projectile.Kill();
 			}
 		}
 
 		public override void OnHitPlayer(Player player, int damage, bool crit)
 		{
-			if (projectile.localAI[0] > 200f)
+			if (Projectile.localAI[0] > 200f)
 			{
             player.lastDeathPostion = player.Center;
             player.lastDeathTime = DateTime.Now;
@@ -69,7 +71,7 @@ namespace MythMod.Projectiles
             {
                 player.lostCoinString = Main.ValueToCoins(player.lostCoins);
             }
-            Main.PlaySound(5, (int)player.position.X, (int)player.position.Y, 1, 1f, 0f);
+            SoundEngine.PlaySound(SoundID.PlayerKilled, player.position);
             player.headVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
             player.bodyVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
             player.legVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
@@ -131,26 +133,26 @@ namespace MythMod.Projectiles
 		public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
 		{
 			float point = 0f;
-			Vector2 endPoint = Main.npc[(int)projectile.ai[1]].Center;
-			return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), projectile.Center, endPoint, 4f, ref point);
+			Vector2 endPoint = Main.npc[(int)Projectile.ai[1]].Center;
+			return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), Projectile.Center, endPoint, 4f, ref point);
 		}
-		public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+		public override bool PreDraw(ref Color lightColor)
 		{
-			Vector2 endPoint = Main.npc[(int)projectile.ai[1]].Center;
-			Vector2 unit = endPoint - projectile.Center;
+			Vector2 endPoint = Main.npc[(int)Projectile.ai[1]].Center;
+			Vector2 unit = endPoint - Projectile.Center;
 			float length = unit.Length();
 			unit.Normalize();
 			if(Math.Abs(length) < 500)
 			{
 			    for (float k = 0; k <= length; k += 1f)
 			    {
-			    	Vector2 drawPos = projectile.Center + unit * k - Main.screenPosition;
-			    	spriteBatch.Draw(Main.projectileTexture[projectile.type], drawPos, null, Color.White, (float)Math.Atan2(unit.X, unit.Y), new Vector2(2, 2), 1f, SpriteEffects.None, 0f);
+			    	Vector2 drawPos = Projectile.Center + unit * k - Main.screenPosition;
+			    	spriteBatch.Draw(TextureAssets.Projectile[Projectile.type].Value, drawPos, null, Color.White, (float)Math.Atan2(unit.X, unit.Y), new Vector2(2, 2), 1f, SpriteEffects.None, 0f);
 		    	}
 			}
-			Texture2D texture2D = Main.projectileTexture[base.projectile.type];
-            int num = Main.projectileTexture[base.projectile.type].Height;
-			Main.spriteBatch.Draw(texture2D, base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY), new Rectangle?(new Rectangle(0, 0, texture2D.Width, num)), base.projectile.GetAlpha(lightColor), base.projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.projectile.scale, SpriteEffects.None, 1f);
+			Texture2D texture2D = TextureAssets.Projectile[base.Projectile.type].Value;
+            int num = TextureAssets.Projectile[base.Projectile.type].Value.Height;
+			Main.spriteBatch.Draw(texture2D, base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), new Rectangle?(new Rectangle(0, 0, texture2D.Width, num)), base.Projectile.GetAlpha(lightColor), base.Projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.Projectile.scale, SpriteEffects.None, 1f);
 			return false;
 		}
 	}

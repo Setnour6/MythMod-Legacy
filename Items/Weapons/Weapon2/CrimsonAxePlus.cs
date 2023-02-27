@@ -15,23 +15,23 @@ namespace MythMod.Items.Weapons.Weapon2
         }
         public override void SetDefaults()
         {
-            item.damage = 90;
-            item.melee = true;
-            item.width = 64;
-            item.height = 64;
-            item.useTime = 30;
-            item.rare = 4;
-            item.useAnimation = 15;
-            item.useStyle = 1;
-            item.knockBack = 12;
-            item.UseSound = SoundID.Item1;
-            item.axe = 28;
-            item.autoReuse = true;
-            item.crit = 25;
-            item.value = 10000;
-            item.scale = 1f;
-            item.shoot = base.mod.ProjectileType("BloodAxe");
-            item.shootSpeed = 13f;
+            Item.damage = 90;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 64;
+            Item.height = 64;
+            Item.useTime = 30;
+            Item.rare = 4;
+            Item.useAnimation = 15;
+            Item.useStyle = 1;
+            Item.knockBack = 12;
+            Item.UseSound = SoundID.Item1;
+            Item.axe = 28;
+            Item.autoReuse = true;
+            Item.crit = 25;
+            Item.value = 10000;
+            Item.scale = 1f;
+            Item.shoot = base.Mod.Find<ModProjectile>("BloodAxe").Type;
+            Item.shootSpeed = 13f;
         }
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {

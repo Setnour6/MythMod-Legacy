@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class OceanCatch : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("海底捞");
             base.Description.SetDefault("防御增加14");

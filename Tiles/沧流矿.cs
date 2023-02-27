@@ -8,20 +8,20 @@ namespace MythMod.Tiles
 {
     public class 沧流矿 : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileSolid[(int)base.Type] = true;
 			Main.tileMergeDirt[(int)base.Type] = false;
 			Main.tileBlockLight[(int)base.Type] = true;
-			Main.tileValue[(int)base.Type] = 700;
-			this.minPick = 234;
-			this.dustType = 91;
-            this.drop = base.mod.ItemType("OceanBlueOre");
+			Main.tileOreFinderPriority[(int)base.Type] = 700;
+			this.MinPick = 234;
+			this.DustType = 91;
+            this.ItemDrop = base.Mod.Find<ModItem>("OceanBlueOre").Type;
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("沧流矿");
 			base.AddMapEntry(new Color(30, 144, 255), modTranslation);
-			this.mineResist = 5f;
-			this.soundType = 21;
+			this.MineResist = 5f;
+			this.HitSound = 21;
 			Main.tileSpelunker[(int)base.Type] = true;
             modTranslation.AddTranslation(GameCulture.Chinese, "沧流矿");
 		}

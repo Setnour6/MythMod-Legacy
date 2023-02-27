@@ -26,11 +26,11 @@ namespace MythMod.Items.Feathers
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 14;
-			base.item.height = 30;
-			base.item.value = 1;
-            base.item.rare = 0;
-            item.maxStack = 99;
+			base.Item.width = 14;
+			base.Item.height = 30;
+			base.Item.value = 1;
+            base.Item.rare = 0;
+            Item.maxStack = 99;
         }
     }
 }

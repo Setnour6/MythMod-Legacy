@@ -11,7 +11,7 @@ namespace MythMod.Tiles.TangerineFuniture
 {
 	public class TangerineChandelier : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileLighted[(int)base.Type] = true;
 			Main.tileFrameImportant[(int)base.Type] = true;
@@ -36,7 +36,7 @@ namespace MythMod.Tiles.TangerineFuniture
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
 			modTranslation.SetDefault("年桔木吊灯");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
-			this.adjTiles = new int[]
+			this.AdjTiles = new int[]
 			{
 				4
 			};
@@ -53,7 +53,7 @@ namespace MythMod.Tiles.TangerineFuniture
 		}
 		public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
 		{
-			if (Main.tile[i, j].frameX < 18)
+			if (Main.tile[i, j].TileFrameX < 18)
 			{
 				r = 2.1f;
 				g = 0.3f;
@@ -66,12 +66,12 @@ namespace MythMod.Tiles.TangerineFuniture
 		}
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			Item.NewItem(i * 16, j * 16, 48, 48, base.mod.ItemType("TangerineChandelier"), 1, false, 0, false, false);
+			Item.NewItem(i * 16, j * 16, 48, 48, base.Mod.Find<ModItem>("TangerineChandelier").Type, 1, false, 0, false, false);
 		}
 		public override void HitWire(int i, int j)
 		{
-			int num = i - (int)(Main.tile[i, j].frameX / 18 % 3);
-			int num2 = j - (int)(Main.tile[i, j].frameY / 18 % 3);
+			int num = i - (int)(Main.tile[i, j].TileFrameX / 18 % 3);
+			int num2 = j - (int)(Main.tile[i, j].TileFrameY / 18 % 3);
 			for (int k = num; k < num + 3; k++)
 			{
 				for (int l = num2; l < num2 + 3; l++)
@@ -80,17 +80,17 @@ namespace MythMod.Tiles.TangerineFuniture
 					{
 						Main.tile[k, l] = new Tile();
 					}
-					if (Main.tile[k, l].active() && Main.tile[k, l].type == base.Type)
+					if (Main.tile[k, l].HasTile && Main.tile[k, l].TileType == base.Type)
 					{
-						if (Main.tile[k, l].frameX < 54)
+						if (Main.tile[k, l].TileFrameX < 54)
 						{
 							Tile tile = Main.tile[k, l];
-							tile.frameX += 54;
+							tile.TileFrameX += 54;
 						}
 						else
 						{
 							Tile tile2 = Main.tile[k, l];
-							tile2.frameX -= 54;
+							tile2.TileFrameX -= 54;
 						}
 					}
 				}

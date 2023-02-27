@@ -1,4 +1,4 @@
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -28,32 +28,32 @@ namespace MythMod.Items.Volcano
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            item.damage = 200;
-            item.melee = true;
-            item.width = 52;
-            item.height = 62;
-            item.useTime = 24;
-            item.rare = 11;
-            item.useAnimation = 12;
-            item.useStyle = 1;
-            item.knockBack = 2;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 22;
-            item.value = 10000;
-            item.scale = 1f;
-            item.shoot = mod.ProjectileType("CrisomMoon");
-            item.shootSpeed = 8f;
+            Item.glowMask = GetGlowMask;
+            Item.damage = 200;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 52;
+            Item.height = 62;
+            Item.useTime = 24;
+            Item.rare = 11;
+            Item.useAnimation = 12;
+            Item.useStyle = 1;
+            Item.knockBack = 2;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 22;
+            Item.value = 10000;
+            Item.scale = 1f;
+            Item.shoot = Mod.Find<ModProjectile>("CrisomMoon").Type;
+            Item.shootSpeed = 8f;
         }
         private int a = 0;
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             if (a % 10 == 1)
             {
                 for(int y =0;y < 12;y++)
                 {
-                    int u = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, mod.ProjectileType("CrisomMoon2"), damage, knockBack, player.whoAmI, 0f, 0f);
+                    int u = Projectile.NewProjectile(position.X, position.Y, speedX, speedY, Mod.Find<ModProjectile>("CrisomMoon2").Type, damage, knockBack, player.whoAmI, 0f, 0f);
                     Main.projectile[u].rotation = Main.rand.NextFloat((MathHelper.TwoPi));
                 }
             }

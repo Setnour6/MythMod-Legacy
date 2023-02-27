@@ -21,9 +21,9 @@ namespace MythMod.Items.Weapons.FestivalWeapons//教程是你的mod文件夹的�
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetStaticDefaults()
         {
-            ItemID.Sets.Yoyo[item.type] = true;//这是一个yoyo球
-            ItemID.Sets.GamepadExtraRange[item.type] = 15;
-            ItemID.Sets.GamepadSmartQuickReach[item.type] = true;//这两个不用做变动
+            ItemID.Sets.Yoyo[Item.type] = true;//这是一个yoyo球
+            ItemID.Sets.GamepadExtraRange[Item.type] = 15;
+            ItemID.Sets.GamepadSmartQuickReach[Item.type] = true;//这两个不用做变动
             base.DisplayName.SetDefault("金钟罩");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "释放一个免疫所有攻击的绝对安全区域,冷却时间60s");
         }
@@ -31,22 +31,22 @@ namespace MythMod.Items.Weapons.FestivalWeapons//教程是你的mod文件夹的�
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetDefaults()
         {
-            item.useStyle = 4;//使用方式
-            item.width = 42;//长
-            item.height = 48;//高
+            Item.useStyle = 4;//使用方式
+            Item.width = 42;//长
+            Item.height = 48;//高
 
-            item.useAnimation = 14;//使用动画 调的越小发射频率越快
-            item.useTime = 14;//使用时间 
-            item.value = Item.sellPrice(0, 9, 99, 99);//价值
-            item.rare = 6;//品质
+            Item.useAnimation = 14;//使用动画 调的越小发射频率越快
+            Item.useTime = 14;//使用时间 
+            Item.value = Item.sellPrice(0, 9, 99, 99);//价值
+            Item.rare = 6;//品质
         }
-        public override bool UseItem(Player player)
+        public override bool? UseItem(Player player)/* tModPorter Suggestion: Return null instead of false */
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             Player pl = Main.player[Main.myPlayer];
             if(mplayer.Cooling == 0)
             {
-                NPC.NewNPC((int)pl.Center.X, (int)pl.Center.Y, mod.NPCType("GoldBellShield"), 0, 0, 0, 0, 0, 255);
+                NPC.NewNPC((int)pl.Center.X, (int)pl.Center.Y, Mod.Find<ModNPC>("GoldBellShield").Type, 0, 0, 0, 0, 0, 255);
                 mplayer.Cooling = 3600;
             }
             return mplayer.Cooling == 0;

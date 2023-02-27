@@ -27,9 +27,9 @@ namespace MythMod.Items
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            item.value = 50000;
-            item.maxStack = 30;
+            Item.glowMask = GetGlowMask;
+            Item.value = 50000;
+            Item.maxStack = 30;
         }
     }
 }

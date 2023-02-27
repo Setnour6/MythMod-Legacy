@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class YoghurtCaribbean : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("酸奶加勒比");
             base.Description.SetDefault("增加10%攻击");

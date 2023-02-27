@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class Screwdriver : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("螺丝刀鸡尾酒");
             base.Description.SetDefault("伤害增加20%,防御减少20");

@@ -21,16 +21,16 @@ namespace MythMod.Items.Foods
 		// Token: 0x060005E4 RID: 1508 RVA: 0x00041780 File Offset: 0x0003F980
 		public override void SetDefaults()
 		{
-			base.item.width = 34;
-            base.item.height = 30;
-            base.item.rare = 0;
-			base.item.useAnimation = 30;
-			base.item.useTime = 20;
-			base.item.useStyle = 2;
-			base.item.UseSound = SoundID.Item8;
-			base.item.consumable = true;
-            base.item.maxStack = 200;
-            item.value = 2000;
+			base.Item.width = 34;
+            base.Item.height = 30;
+            base.Item.rare = 0;
+			base.Item.useAnimation = 30;
+			base.Item.useTime = 20;
+			base.Item.useStyle = 2;
+			base.Item.UseSound = SoundID.Item8;
+			base.Item.consumable = true;
+            base.Item.maxStack = 200;
+            Item.value = 2000;
         }
 
 		// Token: 0x060005E5 RID: 1509 RVA: 0x000043CB File Offset: 0x000025CB

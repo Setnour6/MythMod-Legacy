@@ -14,11 +14,11 @@ using Terraria.ModLoader.IO;
 
 namespace MythMod.Backgrounds
 {
-	public class MythSurfaceBgStyle : ModSurfaceBgStyle
+	public class MythSurfaceBgStyle : ModSurfaceBackgroundStyle
 	{
-		public override bool ChooseBgStyle()
+		public override bool ChooseBgStyle()/* tModPorter Note: Removed. Create a ModBiome (or ModSceneEffect) class and override SurfaceBackgroundStyle property to return this object through Mod/ModContent.Find, then move this code into IsBiomeActive (or IsSceneEffectActive) */
 		{
-			return !Main.gameMenu && ((MythPlayer)Main.player[Main.myPlayer].GetModPlayer(mod, "MythPlayer")).ZoneVolcano;
+			return !Main.gameMenu && ((MythPlayer)Main.player[Main.myPlayer].GetModPlayer(Mod, "MythPlayer")).ZoneVolcano;
 		}
         // Use this to keep far Backgrounds like the mountains.
         public override void ModifyFarFades(float[] fades, float transitionSpeed)
@@ -46,24 +46,24 @@ namespace MythMod.Backgrounds
 
 		public override int ChooseFarTexture()
 		{
-			return mod.GetBackgroundSlot("Backgrounds/VolcanoSurfaceFar");
+			return BackgroundTextureLoader.GetBackgroundSlot(Mod, "Backgrounds/VolcanoSurfaceFar");
 		}
 
 		static int SurfaceFrameCounter = 0;
 		static int SurfaceFrame = 0;
 		public override int ChooseMiddleTexture()
 		{
-			return mod.GetBackgroundSlot("Backgrounds/VolcanoSurfaceMiddle");
+			return BackgroundTextureLoader.GetBackgroundSlot(Mod, "Backgrounds/VolcanoSurfaceMiddle");
 		}
 
 		public override int ChooseCloseTexture(ref float scale, ref double parallax, ref float a, ref float b)
 		{
             b = 900f;
-			return mod.GetBackgroundSlot("Backgrounds/VolcanoSurfaceClose");
+			return BackgroundTextureLoader.GetBackgroundSlot(Mod, "Backgrounds/VolcanoSurfaceClose");
 		}
         public override bool PreDrawCloseBackground(SpriteBatch spriteBatch)
         {
-            Main.spriteBatch.Draw(mod.GetTexture("Backgrounds/VolcanoSurfaceCloseLava"), Main.screenPosition, null, new Color(255,255,255,0), 0, new Vector2(0, 0), 1, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(Mod.GetTexture("Backgrounds/VolcanoSurfaceCloseLava"), Main.screenPosition, null, new Color(255,255,255,0), 0, new Vector2(0, 0), 1, SpriteEffects.None, 0f);
             return base.PreDrawCloseBackground(spriteBatch);
         }
     }

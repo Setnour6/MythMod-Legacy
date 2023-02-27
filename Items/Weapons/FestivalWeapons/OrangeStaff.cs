@@ -20,39 +20,39 @@ namespace MythMod.Items.Weapons.FestivalWeapons
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("年桔法杖");
-			Item.staff[base.item.type] = true;
+			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "年桔法杖");
 		}
         public override void SetDefaults()
 		{
-			base.item.damage = 300;
-			base.item.magic = true;
-			base.item.mana = 14;
-			base.item.width = 54;
-			base.item.height = 54;
-			base.item.useTime = 4;
-			base.item.useAnimation = 4;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.knockBack = 0.5f;
-			base.item.value = 16000;
-			base.item.rare = 11;
-			base.item.UseSound = SoundID.Item60;
-			base.item.autoReuse = true;
-            base.item.shoot = base.mod.ProjectileType("HighPowerTangerine");
-			base.item.shootSpeed = 15f;
+			base.Item.damage = 300;
+			base.Item.DamageType = DamageClass.Magic;
+			base.Item.mana = 14;
+			base.Item.width = 54;
+			base.Item.height = 54;
+			base.Item.useTime = 4;
+			base.Item.useAnimation = 4;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 0.5f;
+			base.Item.value = 16000;
+			base.Item.rare = 11;
+			base.Item.UseSound = SoundID.Item60;
+			base.Item.autoReuse = true;
+            base.Item.shoot = base.Mod.Find<ModProjectile>("HighPowerTangerine").Type;
+			base.Item.shootSpeed = 15f;
 		}
         public override bool CanUseItem(Player player)
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             if (mplayer.Ost && Main.mouseLeft)
             {
-                Projectile.NewProjectile(player.Center.X, player.Center.Y, 0, 0, mod.ProjectileType("OrangeVortex"), 0, 0, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(player.Center.X, player.Center.Y, 0, 0, Mod.Find<ModProjectile>("OrangeVortex").Type, 0, 0, Main.myPlayer, 0f, 0f);
                 mplayer.Ost = false;
             }
             return true;
         }
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Vector2 v = new Vector2(speedX, speedY);
             Vector2 v2 = v.RotatedBy(Math.PI / 2d) * Main.rand.NextFloat(-1.5f, 1.5f) + v * Main.rand.NextFloat(2.5f, 3f);

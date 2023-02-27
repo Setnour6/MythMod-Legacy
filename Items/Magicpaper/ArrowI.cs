@@ -17,17 +17,17 @@ namespace MythMod.Items.Magicpaper
         }
         public override void SetDefaults()
         {
-            item.width = 26;//长度
-            item.height = 40;//高度
-            item.maxStack = 999;//最大叠加
-            item.damage = 30;
-            item.value = 2000;//价值
-            item.rare = 0;//稀有度
-            base.item.useStyle = 2;
-            item.consumable = true;
-            base.item.useAnimation = 17;
-            base.item.useTime = 17;
-            base.item.consumable = true;
+            Item.width = 26;//长度
+            Item.height = 40;//高度
+            Item.maxStack = 999;//最大叠加
+            Item.damage = 30;
+            Item.value = 2000;//价值
+            Item.rare = 0;//稀有度
+            base.Item.useStyle = 2;
+            Item.consumable = true;
+            base.Item.useAnimation = 17;
+            base.Item.useTime = 17;
+            base.Item.consumable = true;
         }
         public override void HoldItem(Player player)
         {
@@ -53,8 +53,8 @@ namespace MythMod.Items.Magicpaper
                     }
                 }
                 mplayer.MagicCool += 600;
-                item.stack--;
-                player.AddBuff(mod.BuffType("愚昧诅咒"), 600, true);
+                Item.stack--;
+                player.AddBuff(Mod.Find<ModBuff>("愚昧诅咒").Type, 600, true);
             }
             return mplayer.MagicCool > 0;
         }
@@ -64,12 +64,11 @@ namespace MythMod.Items.Magicpaper
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(null, "EmpMagic", 1);
             recipe.AddIngredient(40, 25);
             recipe.requiredTile[0] = 26;
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

@@ -18,26 +18,26 @@ namespace MythMod.Projectiles
 		// Token: 0x0600221F RID: 8735 RVA: 0x001B7BC8 File Offset: 0x001B5DC8
 		public override void SetDefaults()
 		{
-            base.projectile.width = 20;
-            base.projectile.height = 20;
-            base.projectile.aiStyle = 27;
-            base.projectile.friendly = true;
-            base.projectile.melee = true;
-            base.projectile.ignoreWater = true;
-            base.projectile.penetrate = 100;
-            base.projectile.extraUpdates = 1;
-            base.projectile.timeLeft = 600;
-            base.projectile.usesLocalNPCImmunity = true;
-            base.projectile.localNPCHitCooldown = 1;
+            base.Projectile.width = 20;
+            base.Projectile.height = 20;
+            base.Projectile.aiStyle = 27;
+            base.Projectile.friendly = true;
+            base.Projectile.DamageType = DamageClass.Melee;
+            base.Projectile.ignoreWater = true;
+            base.Projectile.penetrate = 100;
+            base.Projectile.extraUpdates = 1;
+            base.Projectile.timeLeft = 600;
+            base.Projectile.usesLocalNPCImmunity = true;
+            base.Projectile.localNPCHitCooldown = 1;
 		}
 
 		// Token: 0x06002220 RID: 8736 RVA: 0x001B7C54 File Offset: 0x001B5E54
 		public override void AI()
 		{
-			Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 0.055f / 255f, (float)(255 - base.projectile.alpha) * 0.64f / 255f, (float)(255 - base.projectile.alpha) * 0.945f / 255f);
-			if (base.projectile.localAI[1] > 7f)
+			Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 0.055f / 255f, (float)(255 - base.Projectile.alpha) * 0.64f / 255f, (float)(255 - base.Projectile.alpha) * 0.945f / 255f);
+			if (base.Projectile.localAI[1] > 7f)
 			{
-				int num25 = Dust.NewDust(base.projectile.position, base.projectile.width, base.projectile.height, 33, base.projectile.velocity.X * 0.5f, base.projectile.velocity.Y * 0.5f, 150, new Color(Main.DiscoR, 100, 255), 1.2f);
+				int num25 = Dust.NewDust(base.Projectile.position, base.Projectile.width, base.Projectile.height, 33, base.Projectile.velocity.X * 0.5f, base.Projectile.velocity.Y * 0.5f, 150, new Color(Main.DiscoR, 100, 255), 1.2f);
 				Main.dust[num25].velocity *= 0.5f;
 				Main.dust[num25].noGravity = true;
 			}
@@ -47,7 +47,7 @@ namespace MythMod.Projectiles
         {
             for (int i = 0; i < 8; i++)
             {
-                int num = Dust.NewDust(base.projectile.position, base.projectile.width, base.projectile.height, 33, base.projectile.velocity.X * 0f, base.projectile.velocity.Y * 0f, 150, new Color(Main.DiscoR, 100, 255), 1.2f);
+                int num = Dust.NewDust(base.Projectile.position, base.Projectile.width, base.Projectile.height, 33, base.Projectile.velocity.X * 0f, base.Projectile.velocity.Y * 0f, 150, new Color(Main.DiscoR, 100, 255), 1.2f);
                 Main.dust[num].noGravity = true;
             }
         }

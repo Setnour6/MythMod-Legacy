@@ -1,7 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.GameContent.ObjectInteractions;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -11,7 +13,7 @@ namespace MythMod.Tiles.CorruprFu
 {
 	public class CorruptWoodChest : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileSpelunker[(int)base.Type] = true;
 			Main.tileContainer[(int)base.Type] = true;
@@ -19,7 +21,7 @@ namespace MythMod.Tiles.CorruprFu
 			Main.tileShine[(int)base.Type] = 1200;
 			Main.tileFrameImportant[(int)base.Type] = true;
 			Main.tileNoAttach[(int)base.Type] = true;
-			Main.tileValue[(int)base.Type] = 500;
+			Main.tileOreFinderPriority[(int)base.Type] = 500;
 			TileID.Sets.HasOutlines[(int)base.Type] = true;
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
 			TileObjectData.newTile.Origin = new Point16(0, 1);
@@ -28,7 +30,7 @@ namespace MythMod.Tiles.CorruprFu
 				16,
 				18
 			};
-			TileObjectData.newTile.HookCheck = new PlacementHook(new Func<int, int, int, int, int, int>(Chest.FindEmptyChest), -1, 0, true);
+			TileObjectData.newTile.HookCheckIfCanPlace = new PlacementHook(new Func<int, int, int, int, int, int>(Chest.FindEmptyChest), -1, 0, true);
 			TileObjectData.newTile.HookPostPlaceMyPlayer = new PlacementHook(new Func<int, int, int, int, int, int>(Chest.AfterPlacement_Hook), -1, 0, false);
 			TileObjectData.newTile.AnchorInvalidTiles = new int[]
 			{
@@ -41,13 +43,13 @@ namespace MythMod.Tiles.CorruprFu
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
 			modTranslation.SetDefault("缠藻箱");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation, new Func<string, int, int, string>(this.MapChestName));
-			this.disableSmartCursor = true;
-			this.adjTiles = new int[]
+			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+			this.AdjTiles = new int[]
 			{
 				21
 			};
-			this.chest = "缠藻箱";
-			this.chestDrop = base.mod.ItemType("CorruptWoodChest");
+			this.chest/* tModPorter Note: Removed. Use ContainerName.SetDefault() and TileID.Sets.BasicChest instead */ = "缠藻箱";
+			this.ChestDrop = base.Mod.Find<ModItem>("CorruptWoodChest").Type;
 			modTranslation.AddTranslation(GameCulture.Chinese, "缠藻箱");
 		}
 		public override bool CreateDust(int i, int j, ref int type)
@@ -59,7 +61,7 @@ namespace MythMod.Tiles.CorruprFu
 		{
 			num = (fail ? 1 : 3);
 		}
-		public override bool HasSmartInteract()
+		public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings)
 		{
 			return true;
 		}
@@ -68,11 +70,11 @@ namespace MythMod.Tiles.CorruprFu
 			int num = i;
 			int num2 = j;
 			Tile tile = Main.tile[i, j];
-			if (tile.frameX % 36 != 0)
+			if (tile.TileFrameX % 36 != 0)
 			{
 				num--;
 			}
-			if (tile.frameY != 0)
+			if (tile.TileFrameY != 0)
 			{
 				num2--;
 			}
@@ -85,7 +87,7 @@ namespace MythMod.Tiles.CorruprFu
 		}
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			Item.NewItem(i * 16, j * 16, 32, 32, this.chestDrop, 1, false, 0, false, false);
+			Item.NewItem(i * 16, j * 16, 32, 32, this.ChestDrop, 1, false, 0, false, false);
 			Chest.DestroyChest(i, j);
 		}
 		public override void RightClick(int i, int j)
@@ -95,24 +97,24 @@ namespace MythMod.Tiles.CorruprFu
 			Main.mouseRightRelease = false;
 			int num = i;
 			int num2 = j;
-			if (tile.frameX % 36 != 0)
+			if (tile.TileFrameX % 36 != 0)
 			{
 				num--;
 			}
-			if (tile.frameY != 0)
+			if (tile.TileFrameY != 0)
 			{
 				num2--;
 			}
 			if (localPlayer.sign >= 0)
 			{
-				Main.PlaySound(11, -1, -1, 1, 1f, 0f);
+				SoundEngine.PlaySound(SoundID.MenuClose);
 				localPlayer.sign = -1;
 				Main.editSign = false;
 				Main.npcChatText = "";
 			}
 			if (Main.editChest)
 			{
-				Main.PlaySound(12, -1, -1, 1, 1f, 0f);
+				SoundEngine.PlaySound(SoundID.MenuTick);
 				Main.editChest = false;
 				Main.npcChatText = "";
 			}
@@ -130,7 +132,7 @@ namespace MythMod.Tiles.CorruprFu
 					if (num3 == localPlayer.chest)
 					{
 						localPlayer.chest = -1;
-						Main.PlaySound(11, -1, -1, 1, 1f, 0f);
+						SoundEngine.PlaySound(SoundID.MenuClose);
 					}
 					else
 					{
@@ -139,7 +141,7 @@ namespace MythMod.Tiles.CorruprFu
 						Main.recBigList = false;
 						localPlayer.chestX = num;
 						localPlayer.chestY = num2;
-						Main.PlaySound((localPlayer.chest < 0) ? 10 : 12, -1, -1, 1, 1f, 0f);
+						SoundEngine.PlaySound((localPlayer.chest < 0) ? 10 : 12, -1, -1, 1, 1f, 0f);
 					}
 					Recipe.FindRecipes();
 				}
@@ -149,7 +151,7 @@ namespace MythMod.Tiles.CorruprFu
 			{
 				localPlayer.chest = -1;
 				Recipe.FindRecipes();
-				Main.PlaySound(11, -1, -1, 1, 1f, 0f);
+				SoundEngine.PlaySound(SoundID.MenuClose);
 				return;
 			}
 			NetMessage.SendData(31, -1, -1, null, num, (float)num2, 0f, 0f, 0, 0, 0);
@@ -161,40 +163,40 @@ namespace MythMod.Tiles.CorruprFu
 			Tile tile = Main.tile[i, j];
 			int num = i;
 			int num2 = j;
-			if (tile.frameX % 36 != 0)
+			if (tile.TileFrameX % 36 != 0)
 			{
 				num--;
 			}
-			if (tile.frameY != 0)
+			if (tile.TileFrameY != 0)
 			{
 				num2--;
 			}
 			int num3 = Chest.FindChest(num, num2);
-			localPlayer.showItemIcon2 = -1;
+			localPlayer.cursorItemIconID = -1;
 			if (num3 < 0)
 			{
-				localPlayer.showItemIconText = Language.GetTextValue("LegacyChestType.0");
+				localPlayer.cursorItemIconText = Language.GetTextValue("LegacyChestType.0");
 			}
 			else
 			{
-				localPlayer.showItemIconText = ((Main.chest[num3].name.Length > 0) ? Main.chest[num3].name : "缠藻箱");
-				if (localPlayer.showItemIconText == "缠藻箱")
+				localPlayer.cursorItemIconText = ((Main.chest[num3].name.Length > 0) ? Main.chest[num3].name : "缠藻箱");
+				if (localPlayer.cursorItemIconText == "缠藻箱")
 				{
-					localPlayer.showItemIcon2 = base.mod.ItemType("CorruptWoodChest");
-					localPlayer.showItemIconText = "";
+					localPlayer.cursorItemIconID = base.Mod.Find<ModItem>("CorruptWoodChest").Type;
+					localPlayer.cursorItemIconText = "";
 				}
 			}
 			localPlayer.noThrow = 2;
-			localPlayer.showItemIcon = true;
+			localPlayer.cursorItemIconEnabled = true;
 		}
 		public override void MouseOverFar(int i, int j)
 		{
 			this.MouseOver(i, j);
 			Player localPlayer = Main.LocalPlayer;
-			if (localPlayer.showItemIconText == "")
+			if (localPlayer.cursorItemIconText == "")
 			{
-				localPlayer.showItemIcon = false;
-				localPlayer.showItemIcon2 = 0;
+				localPlayer.cursorItemIconEnabled = false;
+				localPlayer.cursorItemIconID = 0;
 			}
 		}
 	}

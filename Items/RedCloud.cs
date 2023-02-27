@@ -13,18 +13,18 @@ namespace MythMod.Items
         }
         public override void SetDefaults()
         {
-            base.item.width = 16;
-            base.item.height = 16;
-            base.item.maxStack = 999;
-            base.item.value = 0;
-            base.item.rare = 0;
-            base.item.useTurn = true;
-            base.item.autoReuse = true;
-            base.item.useAnimation = 15;
-            base.item.useTime = 10;
-            base.item.useStyle = 1;
-            base.item.consumable = true;
-            base.item.createTile = base.mod.TileType("火烧云");
+            base.Item.width = 16;
+            base.Item.height = 16;
+            base.Item.maxStack = 999;
+            base.Item.value = 0;
+            base.Item.rare = 0;
+            base.Item.useTurn = true;
+            base.Item.autoReuse = true;
+            base.Item.useAnimation = 15;
+            base.Item.useTime = 10;
+            base.Item.useStyle = 1;
+            base.Item.consumable = true;
+            base.Item.createTile = base.Mod.Find<ModTile>("火烧云").Type;
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -78,31 +79,31 @@ namespace MythMod.NPCs
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             if (type == 38 && Main.hardMode)
             {
-                shop.item[nextSlot].SetDefaults(base.mod.ItemType("FireWorkBallShout"), false);
+                shop.item[nextSlot].SetDefaults(base.Mod.Find<ModItem>("FireWorkBallShout").Type, false);
                 shop.item[nextSlot].shopCustomPrice = new int?(Item.buyPrice(0, 0, 5, 0));
                 nextSlot++;
-                shop.item[nextSlot].SetDefaults(base.mod.ItemType("FireWorkBallShoutDouble"), false);
+                shop.item[nextSlot].SetDefaults(base.Mod.Find<ModItem>("FireWorkBallShoutDouble").Type, false);
                 shop.item[nextSlot].shopCustomPrice = new int?(Item.buyPrice(0, 0, 25, 0));
                 nextSlot++;
-                shop.item[nextSlot].SetDefaults(base.mod.ItemType("FireWorkBall"), false);
+                shop.item[nextSlot].SetDefaults(base.Mod.Find<ModItem>("FireWorkBall").Type, false);
                 shop.item[nextSlot].shopCustomPrice = new int?(Item.buyPrice(0, 1, 0, 0));
                 nextSlot++;
             }
             if (type == 368 && Main.hardMode && NPC.downedMoonlord)
             {
-                shop.item[nextSlot].SetDefaults(base.mod.ItemType("Code3"), false);
+                shop.item[nextSlot].SetDefaults(base.Mod.Find<ModItem>("Code3").Type, false);
                 shop.item[nextSlot].shopCustomPrice = new int?(Item.buyPrice(0, 50, 0, 0));
                 nextSlot++;
             }
             if (type == 369 && mplayer.ZoneOcean)
             {
-                shop.item[nextSlot].SetDefaults(base.mod.ItemType("GlowingShrimpJam"), false);
+                shop.item[nextSlot].SetDefaults(base.Mod.Find<ModItem>("GlowingShrimpJam").Type, false);
                 shop.item[nextSlot].shopCustomPrice = new int?(Item.buyPrice(0, 25, 0, 0));
                 nextSlot++;
             }
             if (type == 453 && Main.eclipse && NPC.downedMoonlord)
             {
-                shop.item[nextSlot].SetDefaults(base.mod.ItemType("GoldRoundYoyo"), false);
+                shop.item[nextSlot].SetDefaults(base.Mod.Find<ModItem>("GoldRoundYoyo").Type, false);
                 shop.item[nextSlot].shopCustomPrice = new int?(Item.buyPrice(2, 0, 0, 0));
                 nextSlot++;
             }
@@ -111,7 +112,7 @@ namespace MythMod.NPCs
             }
             if (type == 368 && (int)((Main.time - Main.time % 3600) / 3600) % 4 == 0)
             {
-                shop.item[nextSlot].SetDefaults(base.mod.ItemType("Rice"), false);
+                shop.item[nextSlot].SetDefaults(base.Mod.Find<ModItem>("Rice").Type, false);
                 shop.item[nextSlot].shopCustomPrice = new int?(Item.buyPrice(0, 0, 5, 0));
                 nextSlot++;
             }
@@ -119,13 +120,13 @@ namespace MythMod.NPCs
             {
                 if (mplayer.ZoneVolcano)
                 {
-                    shop.item[nextSlot].SetDefaults(base.mod.ItemType("BurningRainbow"), false);
+                    shop.item[nextSlot].SetDefaults(base.Mod.Find<ModItem>("BurningRainbow").Type, false);
                     shop.item[nextSlot].shopCustomPrice = new int?(Item.buyPrice(0, 5, 0, 0));
                     nextSlot++;
                 }
                 if (mplayer.ZoneOcean)
                 {
-                    shop.item[nextSlot].SetDefaults(base.mod.ItemType("ShallowBeach"), false);
+                    shop.item[nextSlot].SetDefaults(base.Mod.Find<ModItem>("ShallowBeach").Type, false);
                     shop.item[nextSlot].shopCustomPrice = new int?(Item.buyPrice(0, 5, 0, 0));
                     nextSlot++;
                 }
@@ -290,7 +291,7 @@ namespace MythMod.NPCs
             }
             if (mplayer.ZoneOcean && !npc.boss)
             {
-                if (npc.type != mod.NPCType("海蓝史莱姆") && npc.type != mod.NPCType("深渊暗流史莱姆") && npc.type != mod.NPCType("小丑鱼") && npc.type != mod.NPCType("水雷") && npc.type != mod.NPCType("旗鱼") && npc.type != mod.NPCType("灯笼鱼") && npc.type != mod.NPCType("海月水母") && npc.type != mod.NPCType("警报水母") && npc.type != mod.NPCType("星渊水母") && npc.type != mod.NPCType("星渊水螅") && npc.type != mod.NPCType("水螅") && npc.type != mod.NPCType("黑星宝螺") && npc.type != mod.NPCType("枪虾") && npc.type != mod.NPCType("海蛇尾"))
+                if (npc.type != Mod.Find<ModNPC>("海蓝史莱姆").Type && npc.type != Mod.Find<ModNPC>("深渊暗流史莱姆").Type && npc.type != Mod.Find<ModNPC>("小丑鱼").Type && npc.type != Mod.Find<ModNPC>("水雷").Type && npc.type != Mod.Find<ModNPC>("旗鱼").Type && npc.type != Mod.Find<ModNPC>("灯笼鱼").Type && npc.type != Mod.Find<ModNPC>("海月水母").Type && npc.type != Mod.Find<ModNPC>("警报水母").Type && npc.type != Mod.Find<ModNPC>("星渊水母").Type && npc.type != Mod.Find<ModNPC>("星渊水螅").Type && npc.type != Mod.Find<ModNPC>("水螅").Type && npc.type != Mod.Find<ModNPC>("黑星宝螺").Type && npc.type != Mod.Find<ModNPC>("枪虾").Type && npc.type != Mod.Find<ModNPC>("海蛇尾").Type)
                 {
                     //npc.life = 0;
                     //npc.lifeMax = 0;
@@ -304,7 +305,7 @@ namespace MythMod.NPCs
                     for (int g = 0; g < 3; g++)
                     {
                         Vector2 v = new Vector2(0, Main.rand.NextFloat(4, 12)).RotatedByRandom(Math.PI * 2);
-                        Projectile.NewProjectile(player.Center, v, mod.ProjectileType("VoidBubble"), 150, 2, Main.myPlayer, 0f, 0f);
+                        Projectile.NewProjectile(player.Center, v, Mod.Find<ModProjectile>("VoidBubble").Type, 150, 2, Main.myPlayer, 0f, 0f);
                     }
                 }
             }
@@ -534,51 +535,51 @@ namespace MythMod.NPCs
                     Player player = Main.player[npc.target];
                     if (MythWorld.MythIndex < 2)
                     {
-                        if (npc.life < npc.lifeMax * 0.66f && NPC.CountNPCS(mod.NPCType("AncientFire")) < 1)
+                        if (npc.life < npc.lifeMax * 0.66f && NPC.CountNPCS(Mod.Find<ModNPC>("AncientFire").Type) < 1)
                         {
-                            NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AncientFire"), 0, 0f, 0f, 0f, 0f, 255);
+                            NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, Mod.Find<ModNPC>("AncientFire").Type, 0, 0f, 0f, 0f, 0f, 255);
                         }
-                        if (npc.life < npc.lifeMax * 0.33f && NPC.CountNPCS(mod.NPCType("AncientShadow")) < 1)
+                        if (npc.life < npc.lifeMax * 0.33f && NPC.CountNPCS(Mod.Find<ModNPC>("AncientShadow").Type) < 1)
                         {
-                            NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AncientShadow"), 0, 0f, 0f, 0f, 0f, 255);
+                            NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, Mod.Find<ModNPC>("AncientShadow").Type, 0, 0f, 0f, 0f, 0f, 255);
                         }
                     }
                     if (MythWorld.MythIndex == 2)
                     {
-                        if (npc.life < npc.lifeMax * 0.66f && NPC.CountNPCS(mod.NPCType("AncientFire")) < 1)
+                        if (npc.life < npc.lifeMax * 0.66f && NPC.CountNPCS(Mod.Find<ModNPC>("AncientFire").Type) < 1)
                         {
-                            NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AncientFire"), 0, 0f, 0f, 0f, 0f, 255);
+                            NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, Mod.Find<ModNPC>("AncientFire").Type, 0, 0f, 0f, 0f, 0f, 255);
                         }
-                        if (npc.life < npc.lifeMax * 0.33f && NPC.CountNPCS(mod.NPCType("AncientFire")) < 2)
+                        if (npc.life < npc.lifeMax * 0.33f && NPC.CountNPCS(Mod.Find<ModNPC>("AncientFire").Type) < 2)
                         {
-                            NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AncientFire"), 0, 0f, 0f, 0f, 0f, 255);
+                            NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, Mod.Find<ModNPC>("AncientFire").Type, 0, 0f, 0f, 0f, 0f, 255);
                         }
-                        if (npc.life < npc.lifeMax * 0.33f && NPC.CountNPCS(mod.NPCType("AncientShadow")) < 1)
+                        if (npc.life < npc.lifeMax * 0.33f && NPC.CountNPCS(Mod.Find<ModNPC>("AncientShadow").Type) < 1)
                         {
-                            NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AncientShadow"), 0, 0f, 0f, 0f, 0f, 255);
+                            NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, Mod.Find<ModNPC>("AncientShadow").Type, 0, 0f, 0f, 0f, 0f, 255);
                         }
                     }
                     if (MythWorld.MythIndex >= 3)
                     {
-                        if (npc.life < npc.lifeMax * 0.66f && NPC.CountNPCS(mod.NPCType("AncientFire")) < 1)
+                        if (npc.life < npc.lifeMax * 0.66f && NPC.CountNPCS(Mod.Find<ModNPC>("AncientFire").Type) < 1)
                         {
-                            NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AncientFire"), 0, 0f, 0f, 0f, 0f, 255);
+                            NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, Mod.Find<ModNPC>("AncientFire").Type, 0, 0f, 0f, 0f, 0f, 255);
                         }
-                        if (npc.life < npc.lifeMax * 0.33f && NPC.CountNPCS(mod.NPCType("AncientFire")) < 2)
+                        if (npc.life < npc.lifeMax * 0.33f && NPC.CountNPCS(Mod.Find<ModNPC>("AncientFire").Type) < 2)
                         {
-                            NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AncientFire"), 0, 0f, 0f, 0f, 0f, 255);
+                            NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, Mod.Find<ModNPC>("AncientFire").Type, 0, 0f, 0f, 0f, 0f, 255);
                         }
-                        if (npc.life < npc.lifeMax * 0.1f && NPC.CountNPCS(mod.NPCType("AncientFire")) < 4)
+                        if (npc.life < npc.lifeMax * 0.1f && NPC.CountNPCS(Mod.Find<ModNPC>("AncientFire").Type) < 4)
                         {
-                            NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AncientFire"), 0, 0f, 0f, 0f, 0f, 255);
+                            NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, Mod.Find<ModNPC>("AncientFire").Type, 0, 0f, 0f, 0f, 0f, 255);
                         }
-                        if (npc.life < npc.lifeMax * 0.66f && NPC.CountNPCS(mod.NPCType("AncientShadow")) < 1)
+                        if (npc.life < npc.lifeMax * 0.66f && NPC.CountNPCS(Mod.Find<ModNPC>("AncientShadow").Type) < 1)
                         {
-                            NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AncientShadow"), 0, 0f, 0f, 0f, 0f, 255);
+                            NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, Mod.Find<ModNPC>("AncientShadow").Type, 0, 0f, 0f, 0f, 0f, 255);
                         }
-                        if (npc.life < npc.lifeMax * 0.33f && NPC.CountNPCS(mod.NPCType("AncientShadow")) < 2)
+                        if (npc.life < npc.lifeMax * 0.33f && NPC.CountNPCS(Mod.Find<ModNPC>("AncientShadow").Type) < 2)
                         {
-                            NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("AncientShadow"), 0, 0f, 0f, 0f, 0f, 255);
+                            NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, Mod.Find<ModNPC>("AncientShadow").Type, 0, 0f, 0f, 0f, 0f, 255);
                         }
                     }
                 }
@@ -597,11 +598,11 @@ namespace MythMod.NPCs
                         {
                             if ((int)(Main.time) % 180 == 0)
                             {
-                                Projectile.NewProjectile(npc.Center.X, npc.Center.Y, vector3.X * 6f, vector3.Y * 6f, base.mod.ProjectileType("花刺"), 25, 0f, Main.myPlayer, 0f, 0f);
+                                Projectile.NewProjectile(npc.Center.X, npc.Center.Y, vector3.X * 6f, vector3.Y * 6f, base.Mod.Find<ModProjectile>("花刺").Type, 25, 0f, Main.myPlayer, 0f, 0f);
                             }
                             if ((int)(Main.time) % 180 == 90)
                             {
-                                Projectile.NewProjectile(npc.Center.X, npc.Center.Y, vector3.X * 4f, vector3.Y * 4f, base.mod.ProjectileType("GreenThornBalll"), 40, 0.5f, Main.myPlayer, 0f, 0f);
+                                Projectile.NewProjectile(npc.Center.X, npc.Center.Y, vector3.X * 4f, vector3.Y * 4f, base.Mod.Find<ModProjectile>("GreenThornBalll").Type, 40, 0.5f, Main.myPlayer, 0f, 0f);
                             }
                         }
                     }
@@ -611,7 +612,7 @@ namespace MythMod.NPCs
                         {
                             if ((int)(Main.time) % 900 == 0)
                             {
-                                Projectile.NewProjectile(npc.Center.X, npc.Center.Y, vector3.X * 4f, vector3.Y * 4f, base.mod.ProjectileType("PoisonSeed"), 40, 0.5f, Main.myPlayer, 0f, 0f);
+                                Projectile.NewProjectile(npc.Center.X, npc.Center.Y, vector3.X * 4f, vector3.Y * 4f, base.Mod.Find<ModProjectile>("PoisonSeed").Type, 40, 0.5f, Main.myPlayer, 0f, 0f);
                             }
                         }
                     }
@@ -641,7 +642,7 @@ namespace MythMod.NPCs
                         for (int i = 0; i < 40; i++)
                         {
                             deltaX += 20;
-                            Projectile.NewProjectile(npc.Center.X + deltaX + Main.rand.Next(-30,30), npc.Center.Y - 800 - deltaX + Main.rand.Next(-300, 300), 0, 12, mod.ProjectileType("月炎流火"), 50, 0.5f, Main.myPlayer, 0f, 0f);
+                            Projectile.NewProjectile(npc.Center.X + deltaX + Main.rand.Next(-30,30), npc.Center.Y - 800 - deltaX + Main.rand.Next(-300, 300), 0, 12, Mod.Find<ModProjectile>("月炎流火").Type, 50, 0.5f, Main.myPlayer, 0f, 0f);
                         }
                     }
                 }
@@ -652,10 +653,10 @@ namespace MythMod.NPCs
                     {
                         if ((int)(Main.time) % 900 == 0)
                         {
-                            Projectile.NewProjectile(player.Center.X - 500, player.Center.Y, 0, 0, mod.ProjectileType("WINDRelief"), 0, 0, Main.myPlayer, 0, 0);
-                            Projectile.NewProjectile(player.Center.X + 500, player.Center.Y, 0, 0, mod.ProjectileType("WINDRelief"), 0, 0, Main.myPlayer, 0, 0);
-                            Projectile.NewProjectile(player.Center.X - 1100, player.Center.Y, 0, 0, mod.ProjectileType("WINDRelief"), 0, 0, Main.myPlayer, 0, 0);
-                            Projectile.NewProjectile(player.Center.X + 1100, player.Center.Y, 0, 0, mod.ProjectileType("WINDRelief"), 0, 0, Main.myPlayer, 0, 0);
+                            Projectile.NewProjectile(player.Center.X - 500, player.Center.Y, 0, 0, Mod.Find<ModProjectile>("WINDRelief").Type, 0, 0, Main.myPlayer, 0, 0);
+                            Projectile.NewProjectile(player.Center.X + 500, player.Center.Y, 0, 0, Mod.Find<ModProjectile>("WINDRelief").Type, 0, 0, Main.myPlayer, 0, 0);
+                            Projectile.NewProjectile(player.Center.X - 1100, player.Center.Y, 0, 0, Mod.Find<ModProjectile>("WINDRelief").Type, 0, 0, Main.myPlayer, 0, 0);
+                            Projectile.NewProjectile(player.Center.X + 1100, player.Center.Y, 0, 0, Mod.Find<ModProjectile>("WINDRelief").Type, 0, 0, Main.myPlayer, 0, 0);
                         }
                         if (npc.velocity.Length() >= 3 && Main.rand.Next(10) == 1)
                         {
@@ -666,25 +667,25 @@ namespace MythMod.NPCs
                         {
                             if (Main.rand.Next(3) == 1)
                             {
-                                Projectile.NewProjectile(player.Center.X + Main.rand.Next(-1000, 1000), mplayer.Cloud - 800 + Main.rand.Next(-800, 200), v.X, v.Y, mod.ProjectileType("Mist"), 0, 0, Main.myPlayer, 0, 0);
+                                Projectile.NewProjectile(player.Center.X + Main.rand.Next(-1000, 1000), mplayer.Cloud - 800 + Main.rand.Next(-800, 200), v.X, v.Y, Mod.Find<ModProjectile>("Mist").Type, 0, 0, Main.myPlayer, 0, 0);
                             }
                         }
                         else
                         {
                             if (Main.rand.Next(3) == 1)
                             {
-                                Projectile.NewProjectile(player.Center.X + Main.rand.Next(-1000, 1000), player.Center.Y + Main.rand.Next(-800, 800), v.X, v.Y, mod.ProjectileType("Mist"), 0, 0, Main.myPlayer, 0, 0);
+                                Projectile.NewProjectile(player.Center.X + Main.rand.Next(-1000, 1000), player.Center.Y + Main.rand.Next(-800, 800), v.X, v.Y, Mod.Find<ModProjectile>("Mist").Type, 0, 0, Main.myPlayer, 0, 0);
                             }
                         }
                     }
                 }
-                if (npc.type == 125 && npc.life <= 15000 && NPC.CountNPCS(mod.NPCType("LaserEyeS")) < 1/*双子*/)
+                if (npc.type == 125 && npc.life <= 15000 && NPC.CountNPCS(Mod.Find<ModNPC>("LaserEyeS").Type) < 1/*双子*/)
                 {
-                    NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("LaserEyeS"), 0, 0f, 0f, 0f, 0f, 255);
+                    NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, Mod.Find<ModNPC>("LaserEyeS").Type, 0, 0f, 0f, 0f, 0f, 255);
                 }
-                if (npc.type == 126 && npc.life <= 17500 && NPC.CountNPCS(mod.NPCType("CurseEyeS")) < 1/*双子*/)
+                if (npc.type == 126 && npc.life <= 17500 && NPC.CountNPCS(Mod.Find<ModNPC>("CurseEyeS").Type) < 1/*双子*/)
                 {
-                    NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("CurseEyeS"), 0, 0f, 0f, 0f, 0f, 255);
+                    NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, Mod.Find<ModNPC>("CurseEyeS").Type, 0, 0f, 0f, 0f, 0f, 255);
                 }
                 if (npc.type == 222/*蜂王*/)
                 {
@@ -833,18 +834,18 @@ namespace MythMod.NPCs
                     {
                         if (Main.rand.Next(150) == 1)
                         {
-                            NPC.NewNPC((int)(player.Center.X + npc.velocity.X * 1000f), (int)player.Center.Y - 150, mod.NPCType("DiscleanEgg"), 0, 0f, 0f, 0f, 0f, 255);
+                            NPC.NewNPC((int)(player.Center.X + npc.velocity.X * 1000f), (int)player.Center.Y - 150, Mod.Find<ModNPC>("DiscleanEgg").Type, 0, 0f, 0f, 0f, 0f, 255);
                         }
                         if (Main.rand.Next(150) == 1)
                         {
-                            NPC.NewNPC((int)(player.Center.X + Main.rand.Next(-100, 100)), (int)player.Center.Y - 750, mod.NPCType("DiscleanEgg"), 0, 0f, 0f, 0f, 0f, 255);
+                            NPC.NewNPC((int)(player.Center.X + Main.rand.Next(-100, 100)), (int)player.Center.Y - 750, Mod.Find<ModNPC>("DiscleanEgg").Type, 0, 0f, 0f, 0f, 0f, 255);
                         }
                     }
                     num90 += 1;
                     if(num90 == 1800)
                     {
                         Vector2 V = new Vector2(npc.Center.X * 2 - player.Center.X, player.Center.Y) / 16f;
-                        if (!Main.tile[(int)V.X, (int)V.Y].active() && !Main.tile[(int)V.X + 1, (int)V.Y].active() && !Main.tile[(int)V.X - 1, (int)V.Y].active() && !Main.tile[(int)V.X + 1, (int)V.Y + 1].active() && !Main.tile[(int)V.X + 1, (int)V.Y - 1].active() && !Main.tile[(int)V.X - 1, (int)V.Y + 1].active() && !Main.tile[(int)V.X - 1, (int)V.Y - 1].active())
+                        if (!Main.tile[(int)V.X, (int)V.Y].HasTile && !Main.tile[(int)V.X + 1, (int)V.Y].HasTile && !Main.tile[(int)V.X - 1, (int)V.Y].HasTile && !Main.tile[(int)V.X + 1, (int)V.Y + 1].HasTile && !Main.tile[(int)V.X + 1, (int)V.Y - 1].HasTile && !Main.tile[(int)V.X - 1, (int)V.Y + 1].HasTile && !Main.tile[(int)V.X - 1, (int)V.Y - 1].HasTile)
                         {
                             player.position = V * 16f;
                             npc.velocity *= -1;
@@ -899,13 +900,13 @@ namespace MythMod.NPCs
                         if (num74)
                         {
                             num74 = false;
-                            num75 = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, base.mod.ProjectileType("骷髅守护粒子"), 70, 0f, Main.myPlayer, 0f, 0f);
-                            num77 = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, base.mod.ProjectileType("骷髅守护粒子"), 70, 0f, Main.myPlayer, 0f, 0f);
-                            num78 = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, base.mod.ProjectileType("骷髅守护粒子"), 70, 0f, Main.myPlayer, 0f, 0f);
-                            num79 = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, base.mod.ProjectileType("骷髅守护粒子"), 70, 0f, Main.myPlayer, 0f, 0f);
-                            num81 = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, base.mod.ProjectileType("骷髅守护粒子"), 70, 0f, Main.myPlayer, 0f, 0f);
-                            num83 = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("PriSkeHurt"), 0, 0f, 0f, 0f, 0f, 255);
-                            num84 = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("PriSkeHurt"), 0, 0f, 0f, 0f, 0f, 255);
+                            num75 = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, base.Mod.Find<ModProjectile>("骷髅守护粒子").Type, 70, 0f, Main.myPlayer, 0f, 0f);
+                            num77 = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, base.Mod.Find<ModProjectile>("骷髅守护粒子").Type, 70, 0f, Main.myPlayer, 0f, 0f);
+                            num78 = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, base.Mod.Find<ModProjectile>("骷髅守护粒子").Type, 70, 0f, Main.myPlayer, 0f, 0f);
+                            num79 = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, base.Mod.Find<ModProjectile>("骷髅守护粒子").Type, 70, 0f, Main.myPlayer, 0f, 0f);
+                            num81 = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, base.Mod.Find<ModProjectile>("骷髅守护粒子").Type, 70, 0f, Main.myPlayer, 0f, 0f);
+                            num83 = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, Mod.Find<ModNPC>("PriSkeHurt").Type, 0, 0f, 0f, 0f, 0f, 255);
+                            num84 = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, Mod.Find<ModNPC>("PriSkeHurt").Type, 0, 0f, 0f, 0f, 0f, 255);
                         }
                         Vector3 vector20 = new Vector3((float)Math.Sin(Math.PI / 600f * num76) * 100f, (float)Math.Sin(Math.PI / 400f * num88) * 25f, (float)Math.Cos(Math.PI / 600f * num76) * 100f);
                         Vector3 vector21 = new Vector3(-(float)Math.Sin(Math.PI / 600f * num76) * 100f, (float)Math.Sin(Math.PI / 400f * num88) * 25f, -(float)Math.Cos(Math.PI / 600f * num76) * 100f);
@@ -929,7 +930,7 @@ namespace MythMod.NPCs
                             Main.npc[num83].position = npc.Center;
                             Main.npc[num84].position = npc.Center - new Vector2(40, 0);
                         }
-                        if (NPC.CountNPCS(mod.NPCType("PriSkeHurt")) > 0)
+                        if (NPC.CountNPCS(Mod.Find<ModNPC>("PriSkeHurt").Type) > 0)
                         {
                             npc.dontTakeDamage = true;
                         }                        
@@ -942,11 +943,11 @@ namespace MythMod.NPCs
                             Main.projectile[num78].scale *= 0.98f;
                             Main.projectile[num79].scale *= 0.98f;
                             Main.projectile[num81].scale *= 0.98f;
-                            if (Main.npc[num83].type == mod.NPCType("PriSkeHurt"))
+                            if (Main.npc[num83].type == Mod.Find<ModNPC>("PriSkeHurt").Type)
                             {
                                 Main.npc[num83].active = false;
                             }
-                            if (Main.npc[num84].type == mod.NPCType("PriSkeHurt"))
+                            if (Main.npc[num84].type == Mod.Find<ModNPC>("PriSkeHurt").Type)
                             {
                                 Main.npc[num84].active = false;
                             }
@@ -989,7 +990,7 @@ namespace MythMod.NPCs
                             for (int z = 0; z < 20; z++)
                             {
                                 Vector2 v = new Vector2(0, Main.rand.Next(45, 650)).RotatedByRandom(Math.PI * 2);
-                                Projectile.NewProjectile(player.Center.X + v.X, player.Center.Y + v.Y, 0, 0, mod.ProjectileType("RedLazerBall"), 0, 0f, Main.myPlayer, 0f, 0f);
+                                Projectile.NewProjectile(player.Center.X + v.X, player.Center.Y + v.Y, 0, 0, Mod.Find<ModProjectile>("RedLazerBall").Type, 0, 0f, Main.myPlayer, 0f, 0f);
                             }
                         }
                         if (num91 > 600 && num91 < 1200)
@@ -997,7 +998,7 @@ namespace MythMod.NPCs
                             if (num91 % 75 < 15)
                             {
                                 Vector2 v = (player.Center - npc.Center).RotatedBy((num91 % 75 - 7.5d) / 5d) / (player.Center - npc.Center).Length() * 15f;
-                                Projectile.NewProjectile(npc.Center.X + v.X * 5, npc.Center.Y + v.Y * 5, 0, 0, mod.ProjectileType("RedLazerBall2"), 0, 0f, Main.myPlayer, v.X, v.Y);
+                                Projectile.NewProjectile(npc.Center.X + v.X * 5, npc.Center.Y + v.Y * 5, 0, 0, Mod.Find<ModProjectile>("RedLazerBall2").Type, 0, 0f, Main.myPlayer, v.X, v.Y);
                             }
                         }
                         if (num91 > 1200 && num91 < 1800)
@@ -1006,7 +1007,7 @@ namespace MythMod.NPCs
                             {
                                 Vector2 v0 = new Vector2(0, Main.rand.Next(45, 650)).RotatedByRandom(Math.PI * 2);
                                 Vector2 v1 = -v0.RotatedBy(Main.rand.NextFloat(-0.15f, 0.15f)) / v0.Length() * 15f;
-                                Projectile.NewProjectile(player.Center.X + v0.X, player.Center.Y + v0.Y, 0, 0, mod.ProjectileType("RedLazerBall2"), 0, 0f, Main.myPlayer, v1.X, v1.Y);
+                                Projectile.NewProjectile(player.Center.X + v0.X, player.Center.Y + v0.Y, 0, 0, Mod.Find<ModProjectile>("RedLazerBall2").Type, 0, 0f, Main.myPlayer, v1.X, v1.Y);
                             }
                         }
                         if (num91 >= 1799 && num91 < 2400)
@@ -1016,13 +1017,13 @@ namespace MythMod.NPCs
                             {
                                 Vector2 v1 = v.RotatedBy((num91 % 75 - 7.5) / 22.5d * Math.PI);
                                 Vector2 v2 = -v1.RotatedBy(0.4) / v1.Length() * 15;
-                                Projectile.NewProjectile(player.Center.X + v1.X, player.Center.Y + v1.Y, 0, 0, mod.ProjectileType("RedLazerBall2"), 0, 0f, Main.myPlayer, v2.X, v2.Y);
+                                Projectile.NewProjectile(player.Center.X + v1.X, player.Center.Y + v1.Y, 0, 0, Mod.Find<ModProjectile>("RedLazerBall2").Type, 0, 0f, Main.myPlayer, v2.X, v2.Y);
                                 v1 = v.RotatedBy((num91 % 75 - 7.5) / 22.5d * Math.PI + Math.PI * 0.66666666667);
                                 v2 = -v1.RotatedBy(0.4) / v1.Length() * 15;
-                                Projectile.NewProjectile(player.Center.X + v1.X, player.Center.Y + v1.Y, 0, 0, mod.ProjectileType("RedLazerBall2"), 0, 0f, Main.myPlayer, v2.X, v2.Y);
+                                Projectile.NewProjectile(player.Center.X + v1.X, player.Center.Y + v1.Y, 0, 0, Mod.Find<ModProjectile>("RedLazerBall2").Type, 0, 0f, Main.myPlayer, v2.X, v2.Y);
                                 v1 = v.RotatedBy((num91 % 75 - 7.5) / 22.5d * Math.PI + Math.PI * 1.33333333333);
                                 v2 = -v1.RotatedBy(0.4) / v1.Length() * 15;
-                                Projectile.NewProjectile(player.Center.X + v1.X, player.Center.Y + v1.Y, 0, 0, mod.ProjectileType("RedLazerBall2"), 0, 0f, Main.myPlayer, v2.X, v2.Y);
+                                Projectile.NewProjectile(player.Center.X + v1.X, player.Center.Y + v1.Y, 0, 0, Mod.Find<ModProjectile>("RedLazerBall2").Type, 0, 0f, Main.myPlayer, v2.X, v2.Y);
                             }
                         }
                         if (num91 > 2400 && num91 < 3200)
@@ -1030,7 +1031,7 @@ namespace MythMod.NPCs
                             if (num91 % 75 < 30)
                             {
                                 Vector2 v = new Vector2((num91 % 75 - 15) * 80, -200 + (float)Math.Sin(player.velocity.Length()) * 100f);
-                                Projectile.NewProjectile(npc.Center.X + v.X + player.velocity.X * 15f, npc.Center.Y + v.Y + player.velocity.Y * 15f, 0, 0, mod.ProjectileType("RedLazerBall2"), 0, 0f, Main.myPlayer, 0, 15);
+                                Projectile.NewProjectile(npc.Center.X + v.X + player.velocity.X * 15f, npc.Center.Y + v.Y + player.velocity.Y * 15f, 0, 0, Mod.Find<ModProjectile>("RedLazerBall2").Type, 0, 0f, Main.myPlayer, 0, 15);
                             }
                         }
                         if (num91 > 3200 && num91 < 3600)
@@ -1044,7 +1045,7 @@ namespace MythMod.NPCs
                                 {
                                     Vector2 vvv = vv.RotatedBy(Math.PI * y / 2.5);
                                     Vector2 vvvv = -vvv / vvv.Length() * 15f;
-                                    Projectile.NewProjectile(npc.Center.X + v.X + vvv.X, npc.Center.Y + v.Y + vvv.Y, 0, 0, mod.ProjectileType("RedLazerBall2"), 0, 0f, Main.myPlayer, vvvv.X, vvvv.Y);
+                                    Projectile.NewProjectile(npc.Center.X + v.X + vvv.X, npc.Center.Y + v.Y + vvv.Y, 0, 0, Mod.Find<ModProjectile>("RedLazerBall2").Type, 0, 0f, Main.myPlayer, vvvv.X, vvvv.Y);
                                 }
                             }
                         }
@@ -1060,7 +1061,7 @@ namespace MythMod.NPCs
                                 for (int z = 0; z < 20; z++)
                                 {
                                     Vector2 v = new Vector2(0, Main.rand.Next(45, 650)).RotatedByRandom(Math.PI * 2);
-                                    Projectile.NewProjectile(player.Center.X + v.X, player.Center.Y + v.Y, 0, 0, mod.ProjectileType("RedCircle"), 0, 0f, Main.myPlayer, 0f, 0f);
+                                    Projectile.NewProjectile(player.Center.X + v.X, player.Center.Y + v.Y, 0, 0, Mod.Find<ModProjectile>("RedCircle").Type, 0, 0f, Main.myPlayer, 0f, 0f);
                                 }
                             }
                             if (num92 > 3600)
@@ -1098,7 +1099,7 @@ namespace MythMod.NPCs
                         for (int m = 0; m < 4; m++)
                         {
                             Vector2 vector = npc.Center + new Vector2(0, Main.rand.NextFloat(300, 800)).RotatedByRandom(Math.PI * 2);
-                            NPC.NewNPC((int)vector.X, (int)vector.Y, mod.NPCType("PhantomBrain"), 0, 0f, 0f, 0f, 0f, 255);
+                            NPC.NewNPC((int)vector.X, (int)vector.Y, Mod.Find<ModNPC>("PhantomBrain").Type, 0, 0f, 0f, 0f, 0f, 255);
                         }
                         KSLZN = false;
                     }
@@ -1108,16 +1109,16 @@ namespace MythMod.NPCs
                         if (num54)
                         {
                             num54 = false;
-                            num53 = Projectile.NewProjectile(player.Center.X, player.Center.Y - (float)Math.Abs(npc.Center.Y - player.Center.Y) / 2f, 0, 0, base.mod.ProjectileType("克苏鲁之脑镜像"), 0, 0f, Main.myPlayer, 0f, 0f);
-                            num55 = Projectile.NewProjectile(player.Center.X, player.Center.Y + (float)Math.Abs(npc.Center.Y - player.Center.Y) / 2f, 0, 0, base.mod.ProjectileType("克苏鲁之脑镜像"), 0, 0f, Main.myPlayer, 0f, 0f);
-                            num56 = Projectile.NewProjectile(player.Center.X - (float)Math.Abs(npc.Center.X - player.Center.X) / 2f, player.Center.Y, 0, 0, base.mod.ProjectileType("克苏鲁之脑镜像"), 0, 0f, Main.myPlayer, 0f, 0f);
-                            num57 = Projectile.NewProjectile(player.Center.X + (float)Math.Abs(npc.Center.X - player.Center.X) / 2f, player.Center.Y, 0, 0, base.mod.ProjectileType("克苏鲁之脑镜像"), 0, 0f, Main.myPlayer, 0f, 0f);
-                            num59 = Projectile.NewProjectile(player.Center.X - (float)Math.Abs(npc.Center.X - player.Center.X) / 2f, player.Center.Y, 0, 0, base.mod.ProjectileType("克苏鲁之脑镜像"), 0, 0f, Main.myPlayer, 0f, 0f);
-                            num62 = Projectile.NewProjectile(player.Center.X + (float)Math.Abs(npc.Center.X - player.Center.X) / 2f, player.Center.Y, 0, 0, base.mod.ProjectileType("克苏鲁之脑镜像"), 0, 0f, Main.myPlayer, 0f, 0f);
-                            num63 = Projectile.NewProjectile(player.Center.X - (float)Math.Abs(npc.Center.X - player.Center.X) / 2f, player.Center.Y, 0, 0, base.mod.ProjectileType("克苏鲁之脑镜像"), 0, 0f, Main.myPlayer, 0f, 0f);
-                            num64 = Projectile.NewProjectile(player.Center.X + (float)Math.Abs(npc.Center.X - player.Center.X) / 2f, player.Center.Y, 0, 0, base.mod.ProjectileType("克苏鲁之脑镜像"), 0, 0f, Main.myPlayer, 0f, 0f);
-                            num65 = Projectile.NewProjectile(player.Center.X - (float)Math.Abs(npc.Center.X - player.Center.X) / 2f, player.Center.Y, 0, 0, base.mod.ProjectileType("克苏鲁之脑镜像"), 0, 0f, Main.myPlayer, 0f, 0f);
-                            num66 = Projectile.NewProjectile(player.Center.X + (float)Math.Abs(npc.Center.X - player.Center.X) / 2f, player.Center.Y, 0, 0, base.mod.ProjectileType("克苏鲁之脑镜像"), 0, 0f, Main.myPlayer, 0f, 0f);
+                            num53 = Projectile.NewProjectile(player.Center.X, player.Center.Y - (float)Math.Abs(npc.Center.Y - player.Center.Y) / 2f, 0, 0, base.Mod.Find<ModProjectile>("克苏鲁之脑镜像").Type, 0, 0f, Main.myPlayer, 0f, 0f);
+                            num55 = Projectile.NewProjectile(player.Center.X, player.Center.Y + (float)Math.Abs(npc.Center.Y - player.Center.Y) / 2f, 0, 0, base.Mod.Find<ModProjectile>("克苏鲁之脑镜像").Type, 0, 0f, Main.myPlayer, 0f, 0f);
+                            num56 = Projectile.NewProjectile(player.Center.X - (float)Math.Abs(npc.Center.X - player.Center.X) / 2f, player.Center.Y, 0, 0, base.Mod.Find<ModProjectile>("克苏鲁之脑镜像").Type, 0, 0f, Main.myPlayer, 0f, 0f);
+                            num57 = Projectile.NewProjectile(player.Center.X + (float)Math.Abs(npc.Center.X - player.Center.X) / 2f, player.Center.Y, 0, 0, base.Mod.Find<ModProjectile>("克苏鲁之脑镜像").Type, 0, 0f, Main.myPlayer, 0f, 0f);
+                            num59 = Projectile.NewProjectile(player.Center.X - (float)Math.Abs(npc.Center.X - player.Center.X) / 2f, player.Center.Y, 0, 0, base.Mod.Find<ModProjectile>("克苏鲁之脑镜像").Type, 0, 0f, Main.myPlayer, 0f, 0f);
+                            num62 = Projectile.NewProjectile(player.Center.X + (float)Math.Abs(npc.Center.X - player.Center.X) / 2f, player.Center.Y, 0, 0, base.Mod.Find<ModProjectile>("克苏鲁之脑镜像").Type, 0, 0f, Main.myPlayer, 0f, 0f);
+                            num63 = Projectile.NewProjectile(player.Center.X - (float)Math.Abs(npc.Center.X - player.Center.X) / 2f, player.Center.Y, 0, 0, base.Mod.Find<ModProjectile>("克苏鲁之脑镜像").Type, 0, 0f, Main.myPlayer, 0f, 0f);
+                            num64 = Projectile.NewProjectile(player.Center.X + (float)Math.Abs(npc.Center.X - player.Center.X) / 2f, player.Center.Y, 0, 0, base.Mod.Find<ModProjectile>("克苏鲁之脑镜像").Type, 0, 0f, Main.myPlayer, 0f, 0f);
+                            num65 = Projectile.NewProjectile(player.Center.X - (float)Math.Abs(npc.Center.X - player.Center.X) / 2f, player.Center.Y, 0, 0, base.Mod.Find<ModProjectile>("克苏鲁之脑镜像").Type, 0, 0f, Main.myPlayer, 0f, 0f);
+                            num66 = Projectile.NewProjectile(player.Center.X + (float)Math.Abs(npc.Center.X - player.Center.X) / 2f, player.Center.Y, 0, 0, base.Mod.Find<ModProjectile>("克苏鲁之脑镜像").Type, 0, 0f, Main.myPlayer, 0f, 0f);
                         }
                         Main.projectile[num53].position.X = player.Center.X - 100f;
                         Main.projectile[num53].position.Y = player.Center.Y - (float)Math.Abs(npc.Center.Y - player.Center.Y) / 1.45f - 91f;
@@ -1260,7 +1261,7 @@ namespace MythMod.NPCs
                         {
                             for(int i = -7;i < 8;i++)
                             {
-                                Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, mod.ProjectileType("RedLazerBall3"), 0, 0f, Main.myPlayer, (float)(Math.PI * i / 7.5), 0f);
+                                Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, Mod.Find<ModProjectile>("RedLazerBall3").Type, 0, 0f, Main.myPlayer, (float)(Math.PI * i / 7.5), 0f);
                             }
                             num94 = false;
                         }
@@ -1427,13 +1428,13 @@ namespace MythMod.NPCs
                             if(v.Length() < 800)
                             {
                                 v = v / v.Length() * 12f;
-                                Projectile.NewProjectile(npc.Center.X, npc.Center.Y, v.X, v.Y, mod.ProjectileType("RedArrow"), npc.damage / 5, 0f, Main.myPlayer, 0f, 0f);
+                                Projectile.NewProjectile(npc.Center.X, npc.Center.Y, v.X, v.Y, Mod.Find<ModProjectile>("RedArrow").Type, npc.damage / 5, 0f, Main.myPlayer, 0f, 0f);
                             }
                         }
                     }
                     for (int u = 0; u < 200; u++)
                     {
-                        if (Main.npc[u].type == mod.NPCType("ExploreMonster2") && Main.npc[u].active)
+                        if (Main.npc[u].type == Mod.Find<ModNPC>("ExploreMonster2").Type && Main.npc[u].active)
                         {
                             if ((Main.npc[u].Center - npc.Center).Length() < 300)
                             {
@@ -1517,17 +1518,17 @@ namespace MythMod.NPCs
                     if (npc.life <= 10000 && golem)
                     {
                         golem = false;
-                        NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y - 30, mod.NPCType("GlomePower"), 0, 1f, 0f, 0f, 0f, 255);
-                        NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y - 30, mod.NPCType("GlomePower"), 0, 2f, 0f, 0f, 0f, 255);
-                        NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y - 30, mod.NPCType("GlomePower"), 0, 3f, 0f, 0f, 0f, 255);
-                        NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y - 30, mod.NPCType("GlomePower"), 0, 4f, 0f, 0f, 0f, 255);
-                        NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y - 30, mod.NPCType("GlomePower"), 0, 5f, 0f, 0f, 0f, 255);
+                        NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y - 30, Mod.Find<ModNPC>("GlomePower").Type, 0, 1f, 0f, 0f, 0f, 255);
+                        NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y - 30, Mod.Find<ModNPC>("GlomePower").Type, 0, 2f, 0f, 0f, 0f, 255);
+                        NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y - 30, Mod.Find<ModNPC>("GlomePower").Type, 0, 3f, 0f, 0f, 0f, 255);
+                        NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y - 30, Mod.Find<ModNPC>("GlomePower").Type, 0, 4f, 0f, 0f, 0f, 255);
+                        NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y - 30, Mod.Find<ModNPC>("GlomePower").Type, 0, 5f, 0f, 0f, 0f, 255);
                     }
-                    if (NPC.CountNPCS(mod.NPCType("GlomePower")) >= 1)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("GlomePower").Type) >= 1)
                     {
                         npc.dontTakeDamage = true;
                     }
-                    if (NPC.CountNPCS(mod.NPCType("GlomePower")) == 0)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("GlomePower").Type) == 0)
                     {
                         npc.dontTakeDamage = false;
                     }
@@ -1591,11 +1592,11 @@ namespace MythMod.NPCs
                     npc.defense = 24;
                 }
             }
-            if (npc.HasBuff(mod.BuffType("Freeze")) && npc.type != mod.NPCType("MagicBaby"))
+            if (npc.HasBuff(Mod.Find<ModBuff>("Freeze").Type) && npc.type != Mod.Find<ModNPC>("MagicBaby").Type)
             {
                 return false;
             }
-            if (npc.HasBuff(mod.BuffType("Ban")))
+            if (npc.HasBuff(Mod.Find<ModBuff>("Ban").Type))
             {
                 return false;
             }
@@ -1637,8 +1638,8 @@ namespace MythMod.NPCs
                                 if (num == 1)
                                 {
                                     Vector2 vector = npc.Center + new Vector2(0f, (float)npc.height / 2f);
-                                    NPC.NewNPC((int)vector.X - 25, (int)vector.Y, mod.NPCType("FlyingSlime"), 0, 0f, 0f, 0f, 0f, 255);
-                                    NPC.NewNPC((int)vector.X + 25, (int)vector.Y - 10, mod.NPCType("FlyingSpicySlime"), 0, 0f, 0f, 0f, 0f, 255);
+                                    NPC.NewNPC((int)vector.X - 25, (int)vector.Y, Mod.Find<ModNPC>("FlyingSlime").Type, 0, 0f, 0f, 0f, 0f, 255);
+                                    NPC.NewNPC((int)vector.X + 25, (int)vector.Y - 10, Mod.Find<ModNPC>("FlyingSpicySlime").Type, 0, 0f, 0f, 0f, 0f, 255);
                                     npc.ai[2] += 12f;
                                     npc.ai[0] += 700f;
                                 }
@@ -1654,8 +1655,8 @@ namespace MythMod.NPCs
                                 if (num4002 == 1)
                                 {
                                     Vector2 vector = npc.Center + new Vector2(0f, (float)npc.height / 2f);
-                                    NPC.NewNPC((int)vector.X - 25, (int)vector.Y, mod.NPCType("FlyingSlime"), 0, 0f, 0f, 0f, 0f, 255);
-                                    NPC.NewNPC((int)vector.X + 25, (int)vector.Y + 10, mod.NPCType("FlyingSpicySlime"), 0, 0f, 0f, 0f, 0f, 255);
+                                    NPC.NewNPC((int)vector.X - 25, (int)vector.Y, Mod.Find<ModNPC>("FlyingSlime").Type, 0, 0f, 0f, 0f, 0f, 255);
+                                    NPC.NewNPC((int)vector.X + 25, (int)vector.Y + 10, Mod.Find<ModNPC>("FlyingSpicySlime").Type, 0, 0f, 0f, 0f, 0f, 255);
                                     npc.ai[2] += 5f;
                                     npc.ai[0] += 110f;
                                     if (npc.velocity.Y > 0)
@@ -1671,7 +1672,7 @@ namespace MythMod.NPCs
                             if (num1 == 1)
                             {
                                 Vector2 vector = npc.Center + new Vector2(0f, (float)npc.height / 2f);
-                                NPC.NewNPC((int)vector.X, (int)vector.Y, mod.NPCType("FlyingSlime"), 0, 0f, 0f, 0f, 0f, 255);
+                                NPC.NewNPC((int)vector.X, (int)vector.Y, Mod.Find<ModNPC>("FlyingSlime").Type, 0, 0f, 0f, 0f, 0f, 255);
                                 npc.ai[2] += 2f;
                                 npc.ai[0] += 35f;
                                 if (npc.velocity.Y > 0)
@@ -1694,8 +1695,8 @@ namespace MythMod.NPCs
                                 if (num == 1)
                                 {
                                     Vector2 vector = npc.Center + new Vector2(0f, (float)npc.height / 2f);
-                                    NPC.NewNPC((int)vector.X - 25, (int)vector.Y, mod.NPCType("FlyingSlime"), 0, 0f, 0f, 0f, 0f, 255);
-                                    NPC.NewNPC((int)vector.X + 25, (int)vector.Y - 10, mod.NPCType("FlyingSpicySlime"), 0, 0f, 0f, 0f, 0f, 255);
+                                    NPC.NewNPC((int)vector.X - 25, (int)vector.Y, Mod.Find<ModNPC>("FlyingSlime").Type, 0, 0f, 0f, 0f, 0f, 255);
+                                    NPC.NewNPC((int)vector.X + 25, (int)vector.Y - 10, Mod.Find<ModNPC>("FlyingSpicySlime").Type, 0, 0f, 0f, 0f, 0f, 255);
                                     npc.ai[2] += 4f;
                                     npc.ai[0] += 200f;
                                 }
@@ -1711,10 +1712,10 @@ namespace MythMod.NPCs
                                 if (num4002 == 1)
                                 {
                                     Vector2 vector = npc.Center + new Vector2(0f, (float)npc.height / 2f);
-                                    NPC.NewNPC((int)vector.X - 25, (int)vector.Y, mod.NPCType("FlyingSlime"), 0, 0f, 0f, 0f, 0f, 255);
+                                    NPC.NewNPC((int)vector.X - 25, (int)vector.Y, Mod.Find<ModNPC>("FlyingSlime").Type, 0, 0f, 0f, 0f, 0f, 255);
                                     if (Main.rand.Next(20) >= 15 && MythWorld.MythIndex >= 2)
                                     {
-                                        NPC.NewNPC((int)vector.X + 25, (int)vector.Y + 10, mod.NPCType("FlyingSpicySlime"), 0, 0f, 0f, 0f, 0f, 255);
+                                        NPC.NewNPC((int)vector.X + 25, (int)vector.Y + 10, Mod.Find<ModNPC>("FlyingSpicySlime").Type, 0, 0f, 0f, 0f, 0f, 255);
                                     }
                                     npc.ai[2] += 1.5f;
                                     npc.ai[0] += 40f;
@@ -1731,7 +1732,7 @@ namespace MythMod.NPCs
                             if (num1 == 1)
                             {
                                 Vector2 vector = npc.Center + new Vector2(0f, (float)npc.height / 2f);
-                                NPC.NewNPC((int)vector.X, (int)vector.Y, mod.NPCType("FlyingSlime"), 0, 0f, 0f, 0f, 0f, 255);
+                                NPC.NewNPC((int)vector.X, (int)vector.Y, Mod.Find<ModNPC>("FlyingSlime").Type, 0, 0f, 0f, 0f, 0f, 255);
                                 npc.ai[2] += 0.8f;
                                 npc.ai[0] += 10f;
                                 if (npc.velocity.Y > 0)
@@ -1778,8 +1779,8 @@ namespace MythMod.NPCs
                             {
                                 Vector2 v1 = npc.velocity.RotatedBy(Math.PI / 2d) / npc.velocity.Length();
                                 Vector2 v2 = npc.velocity.RotatedBy(-Math.PI / 2d) / npc.velocity.Length();
-                                Projectile.NewProjectile(npc.Center.X + v1.X * 25, npc.Center.Y + v1.Y * 25, v1.X, v1.Y, mod.ProjectileType("RedArrow2"), npc.damage / 5, 0, Main.myPlayer, 0, 0);
-                                Projectile.NewProjectile(npc.Center.X + v2.X * 25, npc.Center.Y + v2.Y * 25, v2.X, v2.Y, mod.ProjectileType("RedArrow2"), npc.damage / 5, 0, Main.myPlayer, 0, 0);
+                                Projectile.NewProjectile(npc.Center.X + v1.X * 25, npc.Center.Y + v1.Y * 25, v1.X, v1.Y, Mod.Find<ModProjectile>("RedArrow2").Type, npc.damage / 5, 0, Main.myPlayer, 0, 0);
+                                Projectile.NewProjectile(npc.Center.X + v2.X * 25, npc.Center.Y + v2.Y * 25, v2.X, v2.Y, Mod.Find<ModProjectile>("RedArrow2").Type, npc.damage / 5, 0, Main.myPlayer, 0, 0);
                             }
                         }
                         if (npc.velocity.Length() < 5)
@@ -1815,7 +1816,7 @@ namespace MythMod.NPCs
                             npc.velocity *= 0.8f;
                             Rlase += (float)(Math.PI / 50f) * (Ranlaser % 2 - 0.5f) * 2;
                             Vector2 v1 = new Vector2(0, 15).RotatedBy(npc.rotation);
-                            Projectile.NewProjectile(npc.Center.X + v1.X * 2.5f, npc.Center.Y + v1.Y * 2.5f, 0, 0, mod.ProjectileType("PurpleLazerBall2"), npc.damage / 5, 0, Main.myPlayer, v1.X, v1.Y);
+                            Projectile.NewProjectile(npc.Center.X + v1.X * 2.5f, npc.Center.Y + v1.Y * 2.5f, 0, 0, Mod.Find<ModProjectile>("PurpleLazerBall2").Type, npc.damage / 5, 0, Main.myPlayer, v1.X, v1.Y);
                         }
                     }
                     if (Laser == 700)
@@ -1877,7 +1878,7 @@ namespace MythMod.NPCs
                             {
                                 CountLaser += 1;
                                 VlaserRot[CountLaser] = v.RotatedBy((Laser % 60 - 6) / 5f);
-                                ProjLas[CountLaser] = Projectile.NewProjectile(npc.Center.X + VlaserRot[CountLaser].X * 2.5f, npc.Center.Y + VlaserRot[CountLaser].Y * 2.5f, 0, 0, mod.ProjectileType("PurpleLazerBall2"), npc.damage / 5, 0, Main.myPlayer, VlaserRot[CountLaser].X, VlaserRot[CountLaser].Y);
+                                ProjLas[CountLaser] = Projectile.NewProjectile(npc.Center.X + VlaserRot[CountLaser].X * 2.5f, npc.Center.Y + VlaserRot[CountLaser].Y * 2.5f, 0, 0, Mod.Find<ModProjectile>("PurpleLazerBall2").Type, npc.damage / 5, 0, Main.myPlayer, VlaserRot[CountLaser].X, VlaserRot[CountLaser].Y);
                             }
                             if (CountLaser >= 12)
                             {
@@ -1917,7 +1918,7 @@ namespace MythMod.NPCs
                             for (int i = 0; i < 17; i++)
                             {
                                 Vector2 vi = new Vector2(0, 15).RotatedBy(i / 8.5 * Math.PI);
-                                Projectile.NewProjectile(npc.Center.X + vi.X * 5f, npc.Center.Y + vi.Y * 5f, 0, 0, mod.ProjectileType("PurpleLazerBall2"), npc.damage / 4, 0, Main.myPlayer, vi.X, vi.Y);
+                                Projectile.NewProjectile(npc.Center.X + vi.X * 5f, npc.Center.Y + vi.Y * 5f, 0, 0, Mod.Find<ModProjectile>("PurpleLazerBall2").Type, npc.damage / 4, 0, Main.myPlayer, vi.X, vi.Y);
                             }
                         }
                         if (Laser % 12 == 0)
@@ -1957,7 +1958,7 @@ namespace MythMod.NPCs
                             for (int i = 0; i < 17; i++)
                             {
                                 Vector2 vi = new Vector2(0, 15).RotatedBy(i / 8.5 * Math.PI);
-                                Projectile.NewProjectile(npc.Center.X + vi.X * 5f, npc.Center.Y + vi.Y * 5f, 0, 0, mod.ProjectileType("PurpleLazerBall2"), npc.damage / 4, 0, Main.myPlayer, vi.X, vi.Y);
+                                Projectile.NewProjectile(npc.Center.X + vi.X * 5f, npc.Center.Y + vi.Y * 5f, 0, 0, Mod.Find<ModProjectile>("PurpleLazerBall2").Type, npc.damage / 4, 0, Main.myPlayer, vi.X, vi.Y);
                             }
                         }
                         if (Laser % 12 == 0)
@@ -1968,7 +1969,7 @@ namespace MythMod.NPCs
                     }
                     for (int y = 0; y < 32; y++)
                     {
-                        if (ProjLas[y] != -1 && Main.projectile[ProjLas[y]].active && Main.projectile[ProjLas[y]].type == mod.ProjectileType("PurpleLazerBall2"))
+                        if (ProjLas[y] != -1 && Main.projectile[ProjLas[y]].active && Main.projectile[ProjLas[y]].type == Mod.Find<ModProjectile>("PurpleLazerBall2").Type)
                         {
                             Main.projectile[ProjLas[y]].position = new Vector2(npc.Center.X + VlaserRot[y].X * 5f, npc.Center.Y + VlaserRot[y].Y * 5f);
                         }
@@ -2051,37 +2052,37 @@ namespace MythMod.NPCs
                                         mplayer.CurseV[t] = mplayer.CurseV[t - 1] + vTwC;
                                         if ((mplayer.LaserV[t] - mplayer.CurseV[t]).Length() < 20)
                                         {
-                                            Projectile.NewProjectile(mplayer.LaserV[0].X, mplayer.LaserV[0].Y, 0, 0, mod.ProjectileType("TwinLig"), npc.damage / 3, 0, Main.myPlayer, 0, 0);
+                                            Projectile.NewProjectile(mplayer.LaserV[0].X, mplayer.LaserV[0].Y, 0, 0, Mod.Find<ModProjectile>("TwinLig").Type, npc.damage / 3, 0, Main.myPlayer, 0, 0);
                                             for (int h = 0; h < 10; h++)
                                             {
                                                 Vector2 v1 = new Vector2(0, 1).RotatedBy(h / 5d * Math.PI);
-                                                Projectile.NewProjectile(npc.Center.X + v1.X * 25, npc.Center.Y + v1.Y * 25, v1.X, v1.Y, mod.ProjectileType("RedArrow2"), npc.damage / 5, 0, Main.myPlayer, 0, 0);
+                                                Projectile.NewProjectile(npc.Center.X + v1.X * 25, npc.Center.Y + v1.Y * 25, v1.X, v1.Y, Mod.Find<ModProjectile>("RedArrow2").Type, npc.damage / 5, 0, Main.myPlayer, 0, 0);
                                                 v1 = new Vector2(0, 1.2f).RotatedBy((h + 0.5) / 5d * Math.PI);
-                                                Projectile.NewProjectile(npc.Center.X + v1.X * 25, npc.Center.Y + v1.Y * 25, v1.X, v1.Y, mod.ProjectileType("RedArrow2"), npc.damage / 5, 0, Main.myPlayer, 0, 0);
+                                                Projectile.NewProjectile(npc.Center.X + v1.X * 25, npc.Center.Y + v1.Y * 25, v1.X, v1.Y, Mod.Find<ModProjectile>("RedArrow2").Type, npc.damage / 5, 0, Main.myPlayer, 0, 0);
                                             }
                                             break;
                                         }
                                         if ((mplayer.LaserV[t] - mplayer.CurseV[t - 1]).Length() < 20)
                                         {
-                                            Projectile.NewProjectile(mplayer.LaserV[0].X, mplayer.LaserV[0].Y, 0, 0, mod.ProjectileType("TwinLig"), npc.damage / 3, 0, Main.myPlayer, 0, 0);
+                                            Projectile.NewProjectile(mplayer.LaserV[0].X, mplayer.LaserV[0].Y, 0, 0, Mod.Find<ModProjectile>("TwinLig").Type, npc.damage / 3, 0, Main.myPlayer, 0, 0);
                                             for (int h = 0; h < 10; h++)
                                             {
                                                 Vector2 v1 = new Vector2(0, 1).RotatedBy(h / 5d * Math.PI);
-                                                Projectile.NewProjectile(npc.Center.X + v1.X * 25, npc.Center.Y + v1.Y * 25, v1.X, v1.Y, mod.ProjectileType("RedArrow2"), npc.damage / 5, 0, Main.myPlayer, 0, 0);
+                                                Projectile.NewProjectile(npc.Center.X + v1.X * 25, npc.Center.Y + v1.Y * 25, v1.X, v1.Y, Mod.Find<ModProjectile>("RedArrow2").Type, npc.damage / 5, 0, Main.myPlayer, 0, 0);
                                                 v1 = new Vector2(0, 1.2f).RotatedBy((h + 0.5) / 5d * Math.PI);
-                                                Projectile.NewProjectile(npc.Center.X + v1.X * 25, npc.Center.Y + v1.Y * 25, v1.X, v1.Y, mod.ProjectileType("RedArrow2"), npc.damage / 5, 0, Main.myPlayer, 0, 0);
+                                                Projectile.NewProjectile(npc.Center.X + v1.X * 25, npc.Center.Y + v1.Y * 25, v1.X, v1.Y, Mod.Find<ModProjectile>("RedArrow2").Type, npc.damage / 5, 0, Main.myPlayer, 0, 0);
                                             }
                                             break;
                                         }
                                         if ((mplayer.LaserV[t - 1] - mplayer.CurseV[t]).Length() < 20)
                                         {
-                                            Projectile.NewProjectile(mplayer.LaserV[0].X, mplayer.LaserV[0].Y, 0, 0, mod.ProjectileType("TwinLig"), npc.damage / 3, 0, Main.myPlayer, 0, 0);
+                                            Projectile.NewProjectile(mplayer.LaserV[0].X, mplayer.LaserV[0].Y, 0, 0, Mod.Find<ModProjectile>("TwinLig").Type, npc.damage / 3, 0, Main.myPlayer, 0, 0);
                                             for (int h = 0; h < 10; h++)
                                             {
                                                 Vector2 v1 = new Vector2(0, 1).RotatedBy(h / 5d * Math.PI);
-                                                Projectile.NewProjectile(npc.Center.X + v1.X * 25, npc.Center.Y + v1.Y * 25, v1.X, v1.Y, mod.ProjectileType("RedArrow2"), npc.damage / 5, 0, Main.myPlayer, 0, 0);
+                                                Projectile.NewProjectile(npc.Center.X + v1.X * 25, npc.Center.Y + v1.Y * 25, v1.X, v1.Y, Mod.Find<ModProjectile>("RedArrow2").Type, npc.damage / 5, 0, Main.myPlayer, 0, 0);
                                                 v1 = new Vector2(0, 1.2f).RotatedBy((h + 0.5) / 5d * Math.PI);
-                                                Projectile.NewProjectile(npc.Center.X + v1.X * 25, npc.Center.Y + v1.Y * 25, v1.X, v1.Y, mod.ProjectileType("RedArrow2"), npc.damage / 5, 0, Main.myPlayer, 0, 0);
+                                                Projectile.NewProjectile(npc.Center.X + v1.X * 25, npc.Center.Y + v1.Y * 25, v1.X, v1.Y, Mod.Find<ModProjectile>("RedArrow2").Type, npc.damage / 5, 0, Main.myPlayer, 0, 0);
                                             }
                                             break;
                                         }
@@ -2094,13 +2095,13 @@ namespace MythMod.NPCs
                                                 {
                                                     if ((mplayer.LaserV[t - x] - mplayer.CurseV[t - y]).Length() < 20)
                                                     {
-                                                        Projectile.NewProjectile(mplayer.LaserV[0].X, mplayer.LaserV[0].Y, 0, 0, mod.ProjectileType("TwinLig"), npc.damage / 3, 0, Main.myPlayer, 0, 0);
+                                                        Projectile.NewProjectile(mplayer.LaserV[0].X, mplayer.LaserV[0].Y, 0, 0, Mod.Find<ModProjectile>("TwinLig").Type, npc.damage / 3, 0, Main.myPlayer, 0, 0);
                                                         for (int h = 0; h < 10; h++)
                                                         {
                                                             Vector2 v1 = new Vector2(0, 1).RotatedBy(h / 5d * Math.PI);
-                                                            Projectile.NewProjectile(npc.Center.X + v1.X * 25, npc.Center.Y + v1.Y * 25, v1.X, v1.Y, mod.ProjectileType("RedArrow2"), npc.damage / 5, 0, Main.myPlayer, 0, 0);
+                                                            Projectile.NewProjectile(npc.Center.X + v1.X * 25, npc.Center.Y + v1.Y * 25, v1.X, v1.Y, Mod.Find<ModProjectile>("RedArrow2").Type, npc.damage / 5, 0, Main.myPlayer, 0, 0);
                                                             v1 = new Vector2(0, 1.2f).RotatedBy((h + 0.5) / 5d * Math.PI);
-                                                            Projectile.NewProjectile(npc.Center.X + v1.X * 25, npc.Center.Y + v1.Y * 25, v1.X, v1.Y, mod.ProjectileType("RedArrow2"), npc.damage / 5, 0, Main.myPlayer, 0, 0);
+                                                            Projectile.NewProjectile(npc.Center.X + v1.X * 25, npc.Center.Y + v1.Y * 25, v1.X, v1.Y, Mod.Find<ModProjectile>("RedArrow2").Type, npc.damage / 5, 0, Main.myPlayer, 0, 0);
                                                         }
                                                         CanB = true;
                                                         break;
@@ -2134,9 +2135,9 @@ namespace MythMod.NPCs
                             if (mplayer.TwinslocalAIMyth % 2 == 0)
                             {
                                 Vector2 v1 = v.RotatedBy(Math.Sin(mplayer.TwinslocalAIMyth / 16f));
-                                Projectile.NewProjectile(npc.Center.X + v1.X * 2.5f, npc.Center.Y + v1.Y * 2.5f, 0, 0, mod.ProjectileType("RedLazerBall2"), npc.damage / 3, 0, Main.myPlayer, v1.X, v1.Y);
+                                Projectile.NewProjectile(npc.Center.X + v1.X * 2.5f, npc.Center.Y + v1.Y * 2.5f, 0, 0, Mod.Find<ModProjectile>("RedLazerBall2").Type, npc.damage / 3, 0, Main.myPlayer, v1.X, v1.Y);
                                 v1 = v.RotatedBy(-Math.Sin(mplayer.TwinslocalAIMyth / 16f));
-                                Projectile.NewProjectile(npc.Center.X + v1.X * 2.5f, npc.Center.Y + v1.Y * 2.5f, 0, 0, mod.ProjectileType("RedLazerBall2"), npc.damage / 3, 0, Main.myPlayer, v1.X, v1.Y);
+                                Projectile.NewProjectile(npc.Center.X + v1.X * 2.5f, npc.Center.Y + v1.Y * 2.5f, 0, 0, Mod.Find<ModProjectile>("RedLazerBall2").Type, npc.damage / 3, 0, Main.myPlayer, v1.X, v1.Y);
                                 Rlase = r0 * 0.9f + r1 * 0.1f;
                             }
                         }
@@ -2157,7 +2158,7 @@ namespace MythMod.NPCs
                                 if (mplayer.TwinslocalAIMyth % 15 == 0)
                                 {
                                     Vector2 v1 = new Vector2(0, 15).RotatedBy(npc.rotation);
-                                    Projectile.NewProjectile(npc.Center.X + v1.X * 3f, npc.Center.Y + v1.Y * 3f, 0, 0, mod.ProjectileType("RedLazerBall2"), npc.damage / 3, 0, Main.myPlayer, v1.X, v1.Y);
+                                    Projectile.NewProjectile(npc.Center.X + v1.X * 3f, npc.Center.Y + v1.Y * 3f, 0, 0, Mod.Find<ModProjectile>("RedLazerBall2").Type, npc.damage / 3, 0, Main.myPlayer, v1.X, v1.Y);
                                 }
                             }
                             if (npc.velocity.Length() < 5)
@@ -2200,7 +2201,7 @@ namespace MythMod.NPCs
                                     float z0 = (mplayer.TwinslocalAIMyth - 2000) / 100f;
                                     float z = z0 * z0 * z0;
                                     Vector2 v1 = new Vector2(0, 1).RotatedBy(h / 3d * Math.PI + z);
-                                    Projectile.NewProjectile(npc.Center.X + v1.X * 25, npc.Center.Y + v1.Y * 25, v1.X, v1.Y, mod.ProjectileType("RedArrow2"), npc.damage / 5, 0, Main.myPlayer, 0, 0);
+                                    Projectile.NewProjectile(npc.Center.X + v1.X * 25, npc.Center.Y + v1.Y * 25, v1.X, v1.Y, Mod.Find<ModProjectile>("RedArrow2").Type, npc.damage / 5, 0, Main.myPlayer, 0, 0);
                                 }
                             }
                             npc.velocity *= 0.96f;
@@ -2250,7 +2251,7 @@ namespace MythMod.NPCs
                         if (Curse % 60 == 0)
                         {
                             Vector2 vi = new Vector2(0, 15).RotatedBy(npc.rotation);
-                            Projectile.NewProjectile(npc.Center.X + vi.X * 5f, npc.Center.Y + vi.Y * 5f, vi.X, vi.Y, mod.ProjectileType("SuperCurseBallHost"), npc.damage, 0, Main.myPlayer, 0, 0);
+                            Projectile.NewProjectile(npc.Center.X + vi.X * 5f, npc.Center.Y + vi.Y * 5f, vi.X, vi.Y, Mod.Find<ModProjectile>("SuperCurseBallHost").Type, npc.damage, 0, Main.myPlayer, 0, 0);
                         }
                     }
                     if(Curse > 600 && Curse < 1500)
@@ -2344,7 +2345,7 @@ namespace MythMod.NPCs
                             }
                             if (M == 4)
                             {
-                                Projectile.NewProjectile(npc.Center.X + vi.X * 5f, npc.Center.Y + vi.Y * 5f, vi.X, vi.Y, mod.ProjectileType("CurseBallSplit"), npc.damage / 5, 0, Main.myPlayer, 0, 0);
+                                Projectile.NewProjectile(npc.Center.X + vi.X * 5f, npc.Center.Y + vi.Y * 5f, vi.X, vi.Y, Mod.Find<ModProjectile>("CurseBallSplit").Type, npc.damage / 5, 0, Main.myPlayer, 0, 0);
                             }
                             if (M == 5)
                             {
@@ -2492,7 +2493,7 @@ namespace MythMod.NPCs
                             if(mplayer.TwinslocalAIMyth % 10 == 0)
                             {
                                 Vector2 vz = new Vector2(0, Main.rand.NextFloat(15f, 600f)).RotatedByRandom(Math.PI * 2d);
-                                Projectile.NewProjectile(player.Center.X + vz.X, player.Center.Y + vz.Y, 0, 0, mod.ProjectileType("CurseBallStrengthen"), npc.damage / 3, 0, Main.myPlayer, 0, 0);
+                                Projectile.NewProjectile(player.Center.X + vz.X, player.Center.Y + vz.Y, 0, 0, Mod.Find<ModProjectile>("CurseBallStrengthen").Type, npc.damage / 3, 0, Main.myPlayer, 0, 0);
                             }
                         }
                         npc.rotation = (float)(Rcurs - Math.PI / 2d);
@@ -2506,15 +2507,15 @@ namespace MythMod.NPCs
             }
             return true;
         }
-        public override bool PreNPCLoot(NPC npc)
+        public override bool PreKill(NPC npc)
         {
             if (npc.type == 50 && npc.ai[3] == 9999)
             {
                 return false;
             }
-            return base.PreNPCLoot(npc);
+            return base.PreKill(npc);
         }
-        public override void NPCLoot(NPC npc)
+        public override void OnKill(NPC npc)
         {
             Player player = Main.LocalPlayer;
             if (npc.boss)
@@ -2530,24 +2531,24 @@ namespace MythMod.NPCs
                 }
                 if (Main.rand.Next(kz) == 1)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("MagicStone"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("MagicStone").Type, 1, false, 0, false, false);
                 }
             }
             Mod Cmod = ModLoader.GetMod("CalamityMod");
             if (ModLoader.GetMod("CalamityMod") != null)
             {
-                if (npc.type == Cmod.NPCType("DesertScourgeHead"))
+                if (npc.type == Cmod.Find<ModNPC>("DesertScourgeHead").Type)
                 {
                     if (MythWorld.Myth)
                     {
-                        Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("SwordDESER"), 1, false, 0, false, false);
+                        Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("SwordDESER").Type, 1, false, 0, false, false);
                     }
                 }
-                if (npc.type == Cmod.NPCType("CrabulonIdle"))
+                if (npc.type == Cmod.Find<ModNPC>("CrabulonIdle").Type)
                 {
                     if (MythWorld.Myth)
                     {
-                        Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("SwordCRA"), 1, false, 0, false, false);
+                        Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("SwordCRA").Type, 1, false, 0, false, false);
                     }
                 }
             }
@@ -2555,37 +2556,37 @@ namespace MythMod.NPCs
             {
                 if(Main.rand.Next(500) == 1)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("FreezingClub"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("FreezingClub").Type, 1, false, 0, false, false);
                 }
                 if(Main.bloodMoon && Main.hardMode)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("CrimsonAxePlus"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("CrimsonAxePlus").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 74)
             {
                 if (Main.rand.Next(5) == 1)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("BirdFeather"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("BirdFeather").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 298)
             {
                 if (Main.rand.Next(5) == 1)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("RedBirdFeather"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("RedBirdFeather").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 297)
             {
                 if (Main.rand.Next(5) == 1)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("BlueBirdFeather"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("BlueBirdFeather").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 442)
             {
-                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("GoldBirdFeather"), 1, false, 0, false, false);
+                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("GoldBirdFeather").Type, 1, false, 0, false, false);
             }
             if (npc.type == 48)
             {
@@ -2593,14 +2594,14 @@ namespace MythMod.NPCs
                 {
                     if (Main.rand.Next(125) == 25)
                     {
-                        Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("FeatherMagic"), 1, false, 0, false, false);
+                        Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("FeatherMagic").Type, 1, false, 0, false, false);
                     }
                 }
                 else
                 {
                     if (Main.rand.Next(250) == 25)
                     {
-                        Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("FeatherMagic"), 1, false, 0, false, false);
+                        Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("FeatherMagic").Type, 1, false, 0, false, false);
                     }
                 }
             }
@@ -2608,128 +2609,128 @@ namespace MythMod.NPCs
             {
                 if (Main.rand.Next(350) == 25)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("CurseClub"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("CurseClub").Type, 1, false, 0, false, false);
                 }
             }
-            if (player.ZoneHoly && Main.hardMode)
+            if (player.ZoneHallow && Main.hardMode)
             {
                 if (Main.rand.Next(350) == 25)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("CrystalClub"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("CrystalClub").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 301)
             {
                 if (Main.rand.Next(150) == 25)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("CrowSickle"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("CrowSickle").Type, 1, false, 0, false, false);
                 }
             }
             if (player.ZoneCrimson && Main.hardMode)
             {
                 if (Main.rand.Next(350) == 25)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("BloodLiquidClub"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("BloodLiquidClub").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 50)
             {
                 if (MythWorld.Myth)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("KSChest"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("KSChest").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 493)
             {
                 if (MythWorld.Myth)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("StardustStaff"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("StardustStaff").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 507)
             {
                 if (MythWorld.Myth)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("NebulaMysteriousStaff"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("NebulaMysteriousStaff").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 422)
             {
                 if (MythWorld.Myth)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("AlienSpike"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("AlienSpike").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 517)
             {
                 if (MythWorld.Myth)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("SolarSwirl"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("SolarSwirl").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 439)
             {
                 if (MythWorld.Myth)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("LuChest"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("LuChest").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 245)
             {
                 if (MythWorld.Myth)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("GolChest"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("GolChest").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 2)
             {
                 if (Main.rand.Next(1000) > 950)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("CrystalKnife"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("CrystalKnife").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.boss && !Main.hardMode)
             {
-                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("MagicI"), Main.rand.Next(1, 3), false, 0, false, false);
+                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("MagicI").Type, Main.rand.Next(1, 3), false, 0, false, false);
                 if (Main.expertMode)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("MagicI"), Main.rand.Next(1, 3), false, 0, false, false);
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("MagicII"), Main.rand.Next(1, 2), false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("MagicI").Type, Main.rand.Next(1, 3), false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("MagicII").Type, Main.rand.Next(1, 2), false, 0, false, false);
                     if (MythWorld.Myth)
                     {
-                        Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("MagicII"), Main.rand.Next(1, 2), false, 0, false, false);
+                        Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("MagicII").Type, Main.rand.Next(1, 2), false, 0, false, false);
                         if (Main.rand.Next(3) == 1)
                         {
-                            Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("MagicIII"), 1, false, 0, false, false);
+                            Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("MagicIII").Type, 1, false, 0, false, false);
                         }
                     }
                 }
             }
             if (npc.boss && Main.hardMode)
             {
-                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("MagicI"), Main.rand.Next(1, 5), false, 0, false, false);
+                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("MagicI").Type, Main.rand.Next(1, 5), false, 0, false, false);
                 if (Main.expertMode)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("MagicII"), Main.rand.Next(1, 5), false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("MagicII").Type, Main.rand.Next(1, 5), false, 0, false, false);
                     if (MythWorld.Myth)
                     {
-                        Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("MagicII"), Main.rand.Next(1, 3), false, 0, false, false);
+                        Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("MagicII").Type, Main.rand.Next(1, 3), false, 0, false, false);
                         if (Main.rand.Next(2) == 1)
                         {
-                            Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("MagicIII"), Main.rand.Next(1, 3), false, 0, false, false);
+                            Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("MagicIII").Type, Main.rand.Next(1, 3), false, 0, false, false);
                             if (Main.rand.Next(2) == 1)
                             {
-                                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("MagicIV"), 1, false, 0, false, false);
+                                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("MagicIV").Type, 1, false, 0, false, false);
                             }
                         }
                         if (MythWorld.downedMoonLoad)
                         {
                             if (Main.rand.Next(3) == 1)
                             {
-                                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("MagicIII"), 1, false, 0, false, false);
+                                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("MagicIII").Type, 1, false, 0, false, false);
                                 if (Main.rand.Next(2) == 1)
                                 {
-                                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("MagicIV"), 1, false, 0, false, false);
+                                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("MagicIV").Type, 1, false, 0, false, false);
                                 }
                             }
                         }
@@ -2744,13 +2745,13 @@ namespace MythMod.NPCs
                     {
                         if (MythWorld.Myth)
                         {
-                            Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("EmpMagic"), 1, false, 0, false, false);
+                            Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("EmpMagic").Type, 1, false, 0, false, false);
                         }
                         else
                         {
                             if (Main.rand.Next(2) == 1)
                             {
-                                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("EmpMagic"), 1, false, 0, false, false);
+                                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("EmpMagic").Type, 1, false, 0, false, false);
                             }
                         }
                     }
@@ -2758,14 +2759,14 @@ namespace MythMod.NPCs
                     {
                         if (Main.rand.Next(5) == 1)
                         {
-                            Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("EmpMagic"), 1, false, 0, false, false);
+                            Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("EmpMagic").Type, 1, false, 0, false, false);
                         }
                     }
                 }
             }
             if (npc.type == 398)
             {
-                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("MLChest"), 1, false, 0, false, false);
+                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("MLChest").Type, 1, false, 0, false, false);
             }
             if (npc.type == 125)
             {
@@ -2774,7 +2775,7 @@ namespace MythMod.NPCs
                 }
                 else
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("LazarBattery"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("LazarBattery").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 126)
@@ -2784,170 +2785,170 @@ namespace MythMod.NPCs
                 }
                 else
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("LazarBattery"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("LazarBattery").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 113)
             {
                 if (MythWorld.Myth)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("FleChest"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("FleChest").Type, 1, false, 0, false, false);
                 }
-                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("SealTableOfOcean"), 1, false, 0, false, false);
+                Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("SealTableOfOcean").Type, 1, false, 0, false, false);
             }
             if (npc.type == 127)
             {
                 if (MythWorld.Myth)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("SkePChest"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("SkePChest").Type, 1, false, 0, false, false);
                 }
                 else
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("LazarBattery"), Main.expertMode ? 2 : 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("LazarBattery").Type, Main.expertMode ? 2 : 1, false, 0, false, false);
                 }
             }
             if (npc.type == 134)
             {
                 if (MythWorld.Myth)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("DesChest"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("DesChest").Type, 1, false, 0, false, false);
                 }
                 else
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("LazarBattery"), Main.expertMode ? 2 : 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("LazarBattery").Type, Main.expertMode ? 2 : 1, false, 0, false, false);
                 }
             }
             if (npc.type == 262)
             {
                 if (MythWorld.Myth)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("PlaChest"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("PlaChest").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 370)
             {
                 if (MythWorld.Myth)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("DukChest"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("DukChest").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 35)
             {
                 if (MythWorld.Myth)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("SkeChest"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("SkeChest").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 222)
             {
                 if (MythWorld.Myth)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("QBChest"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("QBChest").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 150 || npc.type == 51 || npc.type == 60 || npc.type == 49 || npc.type == 93 || npc.type == 151 || npc.type == 137)
             {
                 if (Main.rand.Next(30) == 1)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("BatMeat"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("BatMeat").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 345)
             {
                 if (MythWorld.downedMoonLoad && Main.rand.Next(5) == 2)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("SoulOfFrozen"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("SoulOfFrozen").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type >= 87 && npc.type <= 92)
             {
                 if (Main.rand.Next(150) == 2)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("ThunderFlower"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("ThunderFlower").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type >= 454 && npc.type <= 459)
             {
                 if (Main.rand.Next(150) == 2)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("ShadowFlower"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("ShadowFlower").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 344)
             {
                 if (MythWorld.downedMoonLoad && Main.rand.Next(5) == 2)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("SoulOfPine"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("SoulOfPine").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 346)
             {
                 if (MythWorld.downedMoonLoad && Main.rand.Next(5) == 2)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("MaChineSoul"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("MaChineSoul").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 140)
             {
                 if (Main.rand.Next(100) == 14)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("AmbiguousNight"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("AmbiguousNight").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 21 || npc.type == 201 || npc.type == 202 || npc.type == 203 || npc.type == 322 || npc.type == 323 || npc.type == 324 || npc.type == 449 || npc.type == 450 || npc.type == 451 || npc.type == 452 || npc.type == -46 || npc.type == -47 || npc.type == -48 || npc.type == -49 || npc.type == -50 || npc.type == -51 || npc.type == -52 || npc.type == -53)
             {
                 if (Main.rand.Next(100) == 14)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("GreatBlade"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("GreatBlade").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 64 && Main.hardMode)
             {
                 if (Main.rand.Next(20) == 14)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("MysteriesBroken"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("MysteriesBroken").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 67 && Main.hardMode)
             {
                 if (Main.rand.Next(20) == 14)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("MysteriesBroken"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("MysteriesBroken").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 65 && Main.hardMode)
             {
                 if (Main.rand.Next(20) == 14)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("MysteriesBroken"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("MysteriesBroken").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 221 && Main.hardMode)
             {
                 if (Main.rand.Next(20) == 14)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("MysteriesBroken"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("MysteriesBroken").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 4)
             {
                 if (MythWorld.Myth)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("EOCChest"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("EOCChest").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 266)
             {
                 if (MythWorld.Myth)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("BOCChest"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("BOCChest").Type, 1, false, 0, false, false);
                 }
             }
             if (npc.type == 15)
             {
                 if (MythWorld.Myth)
                 {
-                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.mod.ItemType("EOWChest"), 1, false, 0, false, false);
+                    Item.NewItem((int)npc.position.X, (int)npc.position.Y, npc.width, npc.height, base.Mod.Find<ModItem>("EOWChest").Type, 1, false, 0, false, false);
                 }
             }
         }
@@ -2964,7 +2965,7 @@ namespace MythMod.NPCs
             {
                 npc.defense = 0;
             }
-            if (player.HasBuff(mod.BuffType("嗜血狂暴")))
+            if (player.HasBuff(Mod.Find<ModBuff>("嗜血狂暴").Type))
             {
                 mplayer.Crazyindex += Main.rand.Next(1, 3);
             }
@@ -2972,12 +2973,12 @@ namespace MythMod.NPCs
             {
                 if (Main.rand.Next(40) == 1)
                 {
-                    int y = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("ExploreMonster2"), 0, 0f, 0f, 0f, 0f, 255);
+                    int y = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, Mod.Find<ModNPC>("ExploreMonster2").Type, 0, 0f, 0f, 0f, 0f, 255);
                     Main.npc[y].velocity = new Vector2(0, Main.rand.NextFloat(0.5f, 7f)).RotatedByRandom(Math.PI * 2);
                 }
                 if (Main.rand.Next(40) == 1)
                 {
-                    int y = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, mod.NPCType("ExploreMonster3"), 0, 0f, 0f, 0f, 0f, 255);
+                    int y = NPC.NewNPC((int)npc.Center.X, (int)npc.Center.Y, Mod.Find<ModNPC>("ExploreMonster3").Type, 0, 0f, 0f, 0f, 0f, 255);
                     Main.npc[y].velocity = new Vector2(0, Main.rand.NextFloat(0.5f, 7f)).RotatedByRandom(Math.PI * 2);
                 }
             }
@@ -3012,14 +3013,14 @@ namespace MythMod.NPCs
                     int num42 = Main.rand.Next(6);
                     if (num42 == 1)
                     {
-                        int num43 = Projectile.NewProjectile(npc.Center.X - npc.velocity.X * 5f, npc.Center.Y, 0, 0, mod.ProjectileType("WOFGore" + Main.rand.Next(6).ToString()), 88, 0f, Main.myPlayer, 0f, 0f);
+                        int num43 = Projectile.NewProjectile(npc.Center.X - npc.velocity.X * 5f, npc.Center.Y, 0, 0, Mod.Find<ModProjectile>("WOFGore" + Main.rand.Next(6).ToString()).Type, 88, 0f, Main.myPlayer, 0f, 0f);
                     }
                 }
                 if (MythWorld.MythIndex >= 2 && npc.type == 13)
                 {
                     if (Main.rand.Next(10) == 1)
                     {
-                        int num = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, base.mod.ProjectileType("EndlessCurseFlame"), (int)((double)npc.damage * 0.5f), 0.5f, Main.myPlayer, 0f, 0f);
+                        int num = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, base.Mod.Find<ModProjectile>("EndlessCurseFlame").Type, (int)((double)npc.damage * 0.5f), 0.5f, Main.myPlayer, 0f, 0f);
                         Main.projectile[num].friendly = false;
                         Main.projectile[num].hostile = true;
                         Vector2 vector10 = npc.Center + new Vector2(0f, (float)npc.height / 2f);
@@ -3046,7 +3047,7 @@ namespace MythMod.NPCs
                 {
                     if (Main.rand.Next(30) == 1)
                     {
-                        int num = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, base.mod.ProjectileType("EndlessCurseFlame"), (int)((double)npc.damage * 0.5f), 0.5f, Main.myPlayer, 0f, 0f);
+                        int num = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, base.Mod.Find<ModProjectile>("EndlessCurseFlame").Type, (int)((double)npc.damage * 0.5f), 0.5f, Main.myPlayer, 0f, 0f);
                         Main.projectile[num].friendly = false;
                         Main.projectile[num].hostile = true;
                         Vector2 vector10 = npc.Center + new Vector2(0f, (float)npc.height / 2f);
@@ -3073,7 +3074,7 @@ namespace MythMod.NPCs
                 {
                     if (Main.rand.Next(30) == 1)
                     {
-                        int num = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, base.mod.ProjectileType("EndlessCurseFlame"), (int)((double)npc.damage * 0.5f), 0.5f, Main.myPlayer, 0f, 0f);
+                        int num = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, base.Mod.Find<ModProjectile>("EndlessCurseFlame").Type, (int)((double)npc.damage * 0.5f), 0.5f, Main.myPlayer, 0f, 0f);
                         Main.projectile[num].friendly = false;
                         Main.projectile[num].hostile = true;
                     }
@@ -3210,228 +3211,228 @@ namespace MythMod.NPCs
                     {
                         if (i <= 37 && i >= 34)
                         {
-                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 13, (ushort)base.mod.TileType("海洋石砖"), true, false, -1, 0);
+                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 13, (ushort)base.Mod.Find<ModTile>("海洋石砖").Type, true, false, -1, 0);
                         }
                         if (i == 19)
                         {
-                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 14, (ushort)base.mod.TileType("海洋封印台"), true, false, -1, 0);
-                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 23, (ushort)base.mod.TileType("海洋封印台"), true, false, -1, 0);
-                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 27, (ushort)base.mod.TileType("海洋封印台"), true, false, -1, 0);
+                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 14, (ushort)base.Mod.Find<ModTile>("海洋封印台").Type, true, false, -1, 0);
+                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 23, (ushort)base.Mod.Find<ModTile>("海洋封印台").Type, true, false, -1, 0);
+                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 27, (ushort)base.Mod.Find<ModTile>("海洋封印台").Type, true, false, -1, 0);
                         }
                         if ((i <= 34 && i >= 32) || (i <= 39 && i >= 37))
                         {
-                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 12, (ushort)base.mod.TileType("海洋石砖"), true, false, -1, 0);
+                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 12, (ushort)base.Mod.Find<ModTile>("海洋石砖").Type, true, false, -1, 0);
                         }
                         if (i <= 36 && i >= 35)
                         {
-                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 - 12, (ushort)base.mod.WallType("海洋密室砖墙"), true);
+                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 - 12, (ushort)base.Mod.Find<ModWall>("海洋密室砖墙").Type, true);
                         }
                         if ((i <= 20 && i >= 18) || (i <= 32 && i >= 31) || (i <= 40 && i >= 39))
                         {
-                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 11, (ushort)base.mod.TileType("海洋石砖"), true, false, -1, 0);
+                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 11, (ushort)base.Mod.Find<ModTile>("海洋石砖").Type, true, false, -1, 0);
                         }
                         if (i <= 38 && i >= 33)
                         {
-                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 - 11, (ushort)base.mod.WallType("海洋密室砖墙"), true);
+                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 - 11, (ushort)base.Mod.Find<ModWall>("海洋密室砖墙").Type, true);
                         }
                         if ((i <= 21 && i >= 17) || (i <= 31 && i >= 31) || (i <= 41 && i >= 40))
                         {
-                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 10, (ushort)base.mod.TileType("海洋石砖"), true, false, -1, 0);
+                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 10, (ushort)base.Mod.Find<ModTile>("海洋石砖").Type, true, false, -1, 0);
                         }
                         if (i <= 39 && i >= 32)
                         {
-                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 - 10, (ushort)base.mod.WallType("海洋密室砖墙"), true);
+                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 - 10, (ushort)base.Mod.Find<ModWall>("海洋密室砖墙").Type, true);
                         }
                         if ((i <= 22 && i >= 16) || (i <= 31 && i >= 30) || (i <= 41 && i >= 41))
                         {
-                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 9, (ushort)base.mod.TileType("海洋石砖"), true, false, -1, 0);
+                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 9, (ushort)base.Mod.Find<ModTile>("海洋石砖").Type, true, false, -1, 0);
                         }
                         if (i <= 40 && i >= 32)
                         {
-                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 - 9, (ushort)base.mod.WallType("海洋密室砖墙"), true);
+                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 - 9, (ushort)base.Mod.Find<ModWall>("海洋密室砖墙").Type, true);
                         }
                         if ((i <= 23 && i >= 15) || (i <= 30 && i >= 30) || (i <= 42 && i >= 41))
                         {
-                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 8, (ushort)base.mod.TileType("海洋石砖"), true, false, -1, 0);
+                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 8, (ushort)base.Mod.Find<ModTile>("海洋石砖").Type, true, false, -1, 0);
                         }
                         if (i <= 40 && i >= 31)
                         {
-                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 - 8, (ushort)base.mod.WallType("海洋密室砖墙"), true);
+                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 - 8, (ushort)base.Mod.Find<ModWall>("海洋密室砖墙").Type, true);
                         }
                         if ((i <= 17 && i >= 14) || (i <= 30 && i >= 21) || (i <= 45 && i >= 41))
                         {
-                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 7, (ushort)base.mod.TileType("海洋石砖"), true, false, -1, 0);
+                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 7, (ushort)base.Mod.Find<ModTile>("海洋石砖").Type, true, false, -1, 0);
                         }
                         if ((i <= 20 && i >= 18) || (i <= 40 && i >= 31))
                         {
-                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 - 7, (ushort)base.mod.WallType("海洋密室砖墙"), true);
+                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 - 7, (ushort)base.Mod.Find<ModWall>("海洋密室砖墙").Type, true);
                         }
                         if ((i <= 16 && i >= 14) || (i <= 30 && i >= 22) || (i <= 47 && i >= 41))
                         {
-                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 6, (ushort)base.mod.TileType("海洋石砖"), true, false, -1, 0);
+                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 6, (ushort)base.Mod.Find<ModTile>("海洋石砖").Type, true, false, -1, 0);
                         }
                         if ((i <= 21 && i >= 17) || (i <= 40 && i >= 31))
                         {
-                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 - 6, (ushort)base.mod.WallType("海洋密室砖墙"), true);
+                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 - 6, (ushort)base.Mod.Find<ModWall>("海洋密室砖墙").Type, true);
                         }
                         if ((i <= 4 && i >= 3) || (i <= 7 && i >= 6) || (i <= 10 && i >= 9) || (i <= 15 && i >= 12) || (i <= 29 && i >= 24) || (i <= 50 && i >= 47))
                         {
-                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 5, (ushort)base.mod.TileType("海洋石砖"), true, false, -1, 0);
+                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 5, (ushort)base.Mod.Find<ModTile>("海洋石砖").Type, true, false, -1, 0);
                         }
                         if ((i <= 23 && i >= 16) || (i <= 46 && i >= 30))
                         {
-                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 - 5, (ushort)base.mod.WallType("海洋密室砖墙"), true);
+                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 - 5, (ushort)base.Mod.Find<ModWall>("海洋密室砖墙").Type, true);
                         }
                         if ((i <= 14 && i >= 2) || (i <= 29 && i >= 25) || (i <= 50 && i >= 48))
                         {
-                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 4, (ushort)base.mod.TileType("海洋石砖"), true, false, -1, 0);
+                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 4, (ushort)base.Mod.Find<ModTile>("海洋石砖").Type, true, false, -1, 0);
                         }
                         if ((i <= 24 && i >= 15) || (i <= 47 && i >= 30))
                         {
-                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 - 4, (ushort)base.mod.WallType("海洋密室砖墙"), true);
+                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 - 4, (ushort)base.Mod.Find<ModWall>("海洋密室砖墙").Type, true);
                         }
                         if (i <= 50 && i >= 49)
                         {
-                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 3, (ushort)base.mod.TileType("海洋石砖"), true, false, -1, 0);
+                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 3, (ushort)base.Mod.Find<ModTile>("海洋石砖").Type, true, false, -1, 0);
                         }
                         if (i <= 51 && i >= 49)
                         {
-                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 2, (ushort)base.mod.TileType("海洋石砖"), true, false, -1, 0);
+                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 2, (ushort)base.Mod.Find<ModTile>("海洋石砖").Type, true, false, -1, 0);
                         }
                         if (i <= 53 && i >= 49)
                         {
-                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 1, (ushort)base.mod.TileType("海洋石砖"), true, false, -1, 0);
+                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 - 1, (ushort)base.Mod.Find<ModTile>("海洋石砖").Type, true, false, -1, 0);
                         }
                         if (i >= 4 && i <= 50)
                         {
-                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 - 3, (ushort)base.mod.WallType("海洋密室砖墙"), true);
+                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 - 3, (ushort)base.Mod.Find<ModWall>("海洋密室砖墙").Type, true);
                         }
                         if (i >= 4 && i <= 50)
                         {
-                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 - 2, (ushort)base.mod.WallType("海洋密室砖墙"), true);
+                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 - 2, (ushort)base.Mod.Find<ModWall>("海洋密室砖墙").Type, true);
                         }
                         if (i >= 4 && i <= 50)
                         {
-                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 - 1, (ushort)base.mod.WallType("海洋密室砖墙"), true);
+                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 - 1, (ushort)base.Mod.Find<ModWall>("海洋密室砖墙").Type, true);
                         }
                         if (i >= 4 && i <= 51)
                         {
-                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120, (ushort)base.mod.WallType("海洋密室砖墙"), true);
+                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120, (ushort)base.Mod.Find<ModWall>("海洋密室砖墙").Type, true);
                         }
                         if (i <= 33 || i >= 44)
                         {
-                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120, (ushort)base.mod.TileType("海洋石砖"), true, false, -1, 0);
+                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120, (ushort)base.Mod.Find<ModTile>("海洋石砖").Type, true, false, -1, 0);
                         }
                         if (i <= 34 || i >= 41)
                         {
                             if (i >= 4 && i <= 62)
                             {
-                                WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 + 1, (ushort)base.mod.TileType("海洋石砖"), true, false, -1, 0);
+                                WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 + 1, (ushort)base.Mod.Find<ModTile>("海洋石砖").Type, true, false, -1, 0);
                             }
                         }
                         else
                         {
-                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 + 1, (ushort)base.mod.WallType("海洋密室砖墙"), true);
-                            Main.tile[Main.maxTilesX - 650 + i, 120 + 1].liquid = 1;
+                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 + 1, (ushort)base.Mod.Find<ModWall>("海洋密室砖墙").Type, true);
+                            Main.tile[Main.maxTilesX - 650 + i, 120 + 1].LiquidAmount = 1;
                         }
                         if (i <= 35 || i >= 41)
                         {
                             if (i >= 6 && i <= 54)
                             {
-                                WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 + 2, (ushort)base.mod.TileType("海洋石砖"), true, false, -1, 0);
+                                WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 + 2, (ushort)base.Mod.Find<ModTile>("海洋石砖").Type, true, false, -1, 0);
                             }
                         }
                         else
                         {
-                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 + 2, (ushort)base.mod.WallType("海洋密室砖墙"), true);
-                            Main.tile[Main.maxTilesX - 650 + i, 120 + 2].liquid = 1;
+                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 + 2, (ushort)base.Mod.Find<ModWall>("海洋密室砖墙").Type, true);
+                            Main.tile[Main.maxTilesX - 650 + i, 120 + 2].LiquidAmount = 1;
                         }
                         if (i <= 35 || i >= 41)
                         {
                             if (i >= 14 && i <= 43)
                             {
-                                WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 + 3, (ushort)base.mod.TileType("海洋石砖"), true, false, -1, 0);
+                                WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 + 3, (ushort)base.Mod.Find<ModTile>("海洋石砖").Type, true, false, -1, 0);
                             }
                         }
                         else
                         {
-                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 + 3, (ushort)base.mod.WallType("海洋密室砖墙"), true);
-                            Main.tile[Main.maxTilesX - 650 + i, 120 + 3].liquid = 1;
+                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 + 3, (ushort)base.Mod.Find<ModWall>("海洋密室砖墙").Type, true);
+                            Main.tile[Main.maxTilesX - 650 + i, 120 + 3].LiquidAmount = 1;
                         }
                         if (i <= 34 || i >= 42)
                         {
                             if (i >= 17 && i <= 44)
                             {
-                                WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 + 4, (ushort)base.mod.TileType("海洋石砖"), true, false, -1, 0);
+                                WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 + 4, (ushort)base.Mod.Find<ModTile>("海洋石砖").Type, true, false, -1, 0);
                             }
                         }
                         else
                         {
-                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 + 4, (ushort)base.mod.WallType("海洋密室砖墙"), true);
-                            Main.tile[Main.maxTilesX - 650 + i, 120 + 4].liquid = 1;
+                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 + 4, (ushort)base.Mod.Find<ModWall>("海洋密室砖墙").Type, true);
+                            Main.tile[Main.maxTilesX - 650 + i, 120 + 4].LiquidAmount = 1;
                         }
                         if (i <= 34 || i >= 42)
                         {
                             if (i >= 25 && i <= 44)
                             {
-                                WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 + 5, (ushort)base.mod.TileType("海洋石砖"), true, false, -1, 0);
+                                WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 + 5, (ushort)base.Mod.Find<ModTile>("海洋石砖").Type, true, false, -1, 0);
                             }
                         }
                         else
                         {
-                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 + 5, (ushort)base.mod.WallType("海洋密室砖墙"), true);
-                            Main.tile[Main.maxTilesX - 650 + i, 120 + 5].liquid = 1;
+                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 + 5, (ushort)base.Mod.Find<ModWall>("海洋密室砖墙").Type, true);
+                            Main.tile[Main.maxTilesX - 650 + i, 120 + 5].LiquidAmount = 1;
                         }
                         if (i <= 34 || i >= 42)
                         {
                             if (i >= 25 && i <= 44)
                             {
-                                WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 + 6, (ushort)base.mod.TileType("海洋石砖"), true, false, -1, 0);
+                                WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 + 6, (ushort)base.Mod.Find<ModTile>("海洋石砖").Type, true, false, -1, 0);
                             }
                         }
                         else
                         {
-                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 + 6, (ushort)base.mod.WallType("海洋密室砖墙"), true);
-                            Main.tile[Main.maxTilesX - 650 + i, 120 + 6].liquid = 1;
+                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 + 6, (ushort)base.Mod.Find<ModWall>("海洋密室砖墙").Type, true);
+                            Main.tile[Main.maxTilesX - 650 + i, 120 + 6].LiquidAmount = 1;
                         }
                         if (i <= 34 || i >= 42)
                         {
                             if (i >= 26 && i <= 44)
                             {
-                                WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 + 7, (ushort)base.mod.TileType("海洋石砖"), true, false, -1, 0);
+                                WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 + 7, (ushort)base.Mod.Find<ModTile>("海洋石砖").Type, true, false, -1, 0);
                             }
                         }
                         else
                         {
-                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 + 7, (ushort)base.mod.WallType("海洋密室砖墙"), true);
-                            Main.tile[Main.maxTilesX - 650 + i, 120 + 8].liquid = 1;
-                            Main.tile[Main.maxTilesX - 650 + i, 120 + 7].liquid = 1;
-                            Main.tile[Main.maxTilesX - 650 + i, 120 + 6].liquid = 1;
-                            Main.tile[Main.maxTilesX - 650 + i, 120 + 5].liquid = 1;
-                            Main.tile[Main.maxTilesX - 650 + i, 120 + 4].liquid = 1;
-                            Main.tile[Main.maxTilesX - 650 + i, 120 + 3].liquid = 1;
-                            Main.tile[Main.maxTilesX - 650 + i, 120 + 2].liquid = 1;
-                            Main.tile[Main.maxTilesX - 650 + i, 120 + 1].liquid = 1;
-                            Main.tile[Main.maxTilesX - 650 + i, 120].liquid = 1;
+                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 + 7, (ushort)base.Mod.Find<ModWall>("海洋密室砖墙").Type, true);
+                            Main.tile[Main.maxTilesX - 650 + i, 120 + 8].LiquidAmount = 1;
+                            Main.tile[Main.maxTilesX - 650 + i, 120 + 7].LiquidAmount = 1;
+                            Main.tile[Main.maxTilesX - 650 + i, 120 + 6].LiquidAmount = 1;
+                            Main.tile[Main.maxTilesX - 650 + i, 120 + 5].LiquidAmount = 1;
+                            Main.tile[Main.maxTilesX - 650 + i, 120 + 4].LiquidAmount = 1;
+                            Main.tile[Main.maxTilesX - 650 + i, 120 + 3].LiquidAmount = 1;
+                            Main.tile[Main.maxTilesX - 650 + i, 120 + 2].LiquidAmount = 1;
+                            Main.tile[Main.maxTilesX - 650 + i, 120 + 1].LiquidAmount = 1;
+                            Main.tile[Main.maxTilesX - 650 + i, 120].LiquidAmount = 1;
                         }
                         if (i <= 34 || i >= 42)
                         {
                             if (i >= 26 && i <= 44)
                             {
-                                WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 + 8, (ushort)base.mod.TileType("海洋石砖"), true, false, -1, 0);
+                                WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 + 8, (ushort)base.Mod.Find<ModTile>("海洋石砖").Type, true, false, -1, 0);
                             }
                         }
                         else
                         {
-                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 + 8, (ushort)base.mod.WallType("海洋密室砖墙"), true);
+                            WorldGen.PlaceWall(Main.maxTilesX - 650 + i, 120 + 8, (ushort)base.Mod.Find<ModWall>("海洋密室砖墙").Type, true);
                         }
                         if (i >= 27 && i <= 44)
                         {
-                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 + 9, (ushort)base.mod.TileType("海洋石砖"), true, false, -1, 0);
+                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 + 9, (ushort)base.Mod.Find<ModTile>("海洋石砖").Type, true, false, -1, 0);
                         }
                         if (i >= 29 && i <= 40)
                         {
-                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 + 10, (ushort)base.mod.TileType("海洋石砖"), true, false, -1, 0);
+                            WorldGen.PlaceTile(Main.maxTilesX - 650 + i, 120 + 10, (ushort)base.Mod.Find<ModTile>("海洋石砖").Type, true, false, -1, 0);
                         }
                     }
                 }
@@ -3454,7 +3455,7 @@ namespace MythMod.NPCs
                 npc.velocity.X = npc.velocity.X * 0f;
                 npc.velocity.Y = npc.velocity.Y * 0f;
             }
-            if (npc.HasBuff(mod.BuffType("Freeze2")) && !npc.HasBuff(mod.BuffType("Freeze")))
+            if (npc.HasBuff(Mod.Find<ModBuff>("Freeze2").Type) && !npc.HasBuff(Mod.Find<ModBuff>("Freeze").Type))
             {
                 if (4f * npc.width * npc.height / 10300f * npc.scale > 1.5f)
                 {
@@ -3472,20 +3473,20 @@ namespace MythMod.NPCs
                 }
             }
         }
-        public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Color drawColor)
+        public override void PostDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            if (npc.HasBuff(mod.BuffType("Freeze")))
+            if (npc.HasBuff(Mod.Find<ModBuff>("Freeze").Type))
             {
                 npc.color = new Color(50, 50, 50, 0);
                 npc.position = npc.oldPosition;
                 //spriteBatch.Draw(base.mod.GetTexture("UIImages/冰封"), npc.Center, null, new Color(1,1,1,1), 0, new Vector2(2, 2), 1f, SpriteEffects.None, 0f);
                 if (4f * npc.width * npc.height / 10300f * npc.scale > 1.5f)
                 {
-                    spriteBatch.Draw(base.mod.GetTexture("UIImages/冰封"), npc.Center - Main.screenPosition, null, new Color(150, 150, 150, 50), 0, new Vector2(103, 100), 1.5f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(base.Mod.GetTexture("UIImages/冰封"), npc.Center - Main.screenPosition, null, new Color(150, 150, 150, 50), 0, new Vector2(103, 100), 1.5f, SpriteEffects.None, 0f);
                 }
                 else
                 {
-                    spriteBatch.Draw(base.mod.GetTexture("UIImages/冰封"), npc.Center - Main.screenPosition, null, new Color(150, 150, 150, 50), 0, new Vector2(103, 100), 4f * npc.width * npc.height / 10300f * npc.scale, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(base.Mod.GetTexture("UIImages/冰封"), npc.Center - Main.screenPosition, null, new Color(150, 150, 150, 50), 0, new Vector2(103, 100), 4f * npc.width * npc.height / 10300f * npc.scale, SpriteEffects.None, 0f);
                 }
                 if (!npc.noGravity)
                 {
@@ -3500,11 +3501,11 @@ namespace MythMod.NPCs
                     if(npc.life <= 3000 && npc.life >= 1800)
                     {
                         float Colo = (3000 - npc.life) / 1200f; 
-                        spriteBatch.Draw(base.mod.GetTexture("UIImages/Darkness"), npc.Center - Main.screenPosition, null, new Color(Colo, Colo, Colo, Colo), 0, new Vector2(1980, 1980), 1.5f, SpriteEffects.None, 0f);
+                        spriteBatch.Draw(base.Mod.GetTexture("UIImages/Darkness"), npc.Center - Main.screenPosition, null, new Color(Colo, Colo, Colo, Colo), 0, new Vector2(1980, 1980), 1.5f, SpriteEffects.None, 0f);
                     }
                     if (npc.life <= 1800)
                     {
-                        spriteBatch.Draw(base.mod.GetTexture("UIImages/Darkness"), npc.Center - Main.screenPosition, null, new Color(1f, 1f, 1f, 1f), 0, new Vector2(1980, 1980), 1.5f, SpriteEffects.None, 0f);
+                        spriteBatch.Draw(base.Mod.GetTexture("UIImages/Darkness"), npc.Center - Main.screenPosition, null, new Color(1f, 1f, 1f, 1f), 0, new Vector2(1980, 1980), 1.5f, SpriteEffects.None, 0f);
                     }
                     /*spriteBatch.Draw(base.mod.GetTexture("UIImages/DarknessPure"), new Vector2(0, 0), new Rectangle(0, 0, Dx, Main.screenHeight + 100), new Color(1f, 1f, 1f, 1f), 0, new Vector2(264, 264), 1.5f, SpriteEffects.None, 0f);
                     spriteBatch.Draw(base.mod.GetTexture("UIImages/DarknessPure"), new Vector2(0, 0), new Rectangle(Dx, 0, 528, Dy), new Color(1f, 1f, 1f, 1f), 0, new Vector2(264, 264), 1.5f, SpriteEffects.None, 0f);
@@ -3514,7 +3515,7 @@ namespace MythMod.NPCs
             }
         }
         public int Hitcool = 0;
-        public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(NPC npc, SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             if (MythWorld.MythIndex == 4 && Hitcool == 0)
             {
@@ -3553,13 +3554,13 @@ namespace MythMod.NPCs
                             float num47 = (float)Main.rand.Next(50000, 100000) / 60000f;
                             if (npc.type == NPCID.TargetDummy)
                             {
-                                int num40 = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, (float)num45 * (float)num47 * 0.5f, (float)num46 * (float)num47 * 0.5f, base.mod.ProjectileType("Lighting2"), 35, 2f, Main.myPlayer, 0f, 0);
+                                int num40 = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, (float)num45 * (float)num47 * 0.5f, (float)num46 * (float)num47 * 0.5f, base.Mod.Find<ModProjectile>("Lighting2").Type, 35, 2f, Main.myPlayer, 0f, 0);
                                 Main.projectile[num40].tileCollide = false;
                                 Main.projectile[num40].timeLeft = 200;
                             }
                             else
                             {
-                                int num40 = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, (float)num45 * (float)num47 * 0.7f, (float)num46 * (float)num47 * 0.7f, base.mod.ProjectileType("Lighting2"), 35, 2f, Main.myPlayer, 0f, 0);
+                                int num40 = Projectile.NewProjectile(npc.Center.X, npc.Center.Y, (float)num45 * (float)num47 * 0.7f, (float)num46 * (float)num47 * 0.7f, base.Mod.Find<ModProjectile>("Lighting2").Type, 35, 2f, Main.myPlayer, 0f, 0);
                                 Main.projectile[num40].tileCollide = false;
                                 Main.projectile[num40].timeLeft = 200;
                             }
@@ -3568,18 +3569,18 @@ namespace MythMod.NPCs
                     num6++;
                 }
             }
-            if (npc.HasBuff(mod.BuffType("Freeze")) && npc.type == NPCID.TargetDummy)
+            if (npc.HasBuff(Mod.Find<ModBuff>("Freeze").Type) && npc.type == NPCID.TargetDummy)
             {
                 npc.color = new Color(50, 50, 50, 0);
                 npc.position = npc.oldPosition;
                 //spriteBatch.Draw(base.mod.GetTexture("UIImages/冰封"), npc.Center, null, new Color(1,1,1,1), 0, new Vector2(2, 2), 1f, SpriteEffects.None, 0f);
                 if (4f * npc.width * npc.height / 10300f * npc.scale > 1.5f)
                 {
-                    spriteBatch.Draw(base.mod.GetTexture("UIImages/冰封"), npc.Center - Main.screenPosition, null, new Color(150, 150, 150, 50), 0, new Vector2(103, 100), 1.5f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(base.Mod.GetTexture("UIImages/冰封"), npc.Center - Main.screenPosition, null, new Color(150, 150, 150, 50), 0, new Vector2(103, 100), 1.5f, SpriteEffects.None, 0f);
                 }
                 else
                 {
-                    spriteBatch.Draw(base.mod.GetTexture("UIImages/冰封"), npc.Center - Main.screenPosition, null, new Color(150, 150, 150, 50), 0, new Vector2(103, 100), 4f * npc.width * npc.height / 10300f * npc.scale, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(base.Mod.GetTexture("UIImages/冰封"), npc.Center - Main.screenPosition, null, new Color(150, 150, 150, 50), 0, new Vector2(103, 100), 4f * npc.width * npc.height / 10300f * npc.scale, SpriteEffects.None, 0f);
                 }
             }
             if (num85 < 121 && NPC.CountNPCS(127) > 0)
@@ -3593,7 +3594,7 @@ namespace MythMod.NPCs
                 float r = unit.ToRotation() - (float)Math.PI / 2f;
                 for (float i = 0; i < num80; i += 2)
                 {
-                    spriteBatch.Draw(base.mod.GetTexture("Projectiles/骷髅守护粒子连线"), vector24 + unit * i - Main.screenPosition, null, new Color(255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 0), r, new Vector2(2, 2), 1f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(base.Mod.GetTexture("Projectiles/骷髅守护粒子连线"), vector24 + unit * i - Main.screenPosition, null, new Color(255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 0), r, new Vector2(2, 2), 1f, SpriteEffects.None, 0f);
                 }
                 Vector2 vector27 = new Vector2(Main.projectile[num77].Center.X, Main.projectile[num77].Center.Y);
                 num80 = (float)Math.Sqrt((vector25.X - vector27.X) * (vector25.X - vector27.X) + (vector25.Y - vector27.Y) * (vector25.Y - vector27.Y));
@@ -3602,7 +3603,7 @@ namespace MythMod.NPCs
                 float r1 = unit.ToRotation() - (float)Math.PI / 2f;
                 for (float j = 0; j < num80; j += 2)
                 {
-                    spriteBatch.Draw(base.mod.GetTexture("Projectiles/骷髅守护粒子连线"), vector25 + unit * j - Main.screenPosition, null, new Color(255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 0), r1, new Vector2(2, 2), 1f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(base.Mod.GetTexture("Projectiles/骷髅守护粒子连线"), vector25 + unit * j - Main.screenPosition, null, new Color(255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 0), r1, new Vector2(2, 2), 1f, SpriteEffects.None, 0f);
                 }
                 Vector2 vector29 = new Vector2(Main.projectile[num79].Center.X, Main.projectile[num79].Center.Y);
                 num80 = (float)Math.Sqrt((vector27.X - vector29.X) * (vector27.X - vector29.X) + (vector27.Y - vector29.Y) * (vector27.Y - vector29.Y));
@@ -3611,7 +3612,7 @@ namespace MythMod.NPCs
                 float r2 = unit.ToRotation() - (float)Math.PI / 2f;
                 for (float k = 0; k < num80; k += 2)
                 {
-                    spriteBatch.Draw(base.mod.GetTexture("Projectiles/骷髅守护粒子连线"), vector27 + unit * k - Main.screenPosition, null, new Color(255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 0), r2, new Vector2(2, 2), 1f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(base.Mod.GetTexture("Projectiles/骷髅守护粒子连线"), vector27 + unit * k - Main.screenPosition, null, new Color(255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 0), r2, new Vector2(2, 2), 1f, SpriteEffects.None, 0f);
                 }
                 num80 = (float)Math.Sqrt((vector24.X - vector29.X) * (vector24.X - vector29.X) + (vector24.Y - vector29.Y) * (vector24.Y - vector29.Y));
                 unit = vector24 - vector29;
@@ -3619,7 +3620,7 @@ namespace MythMod.NPCs
                 float r3 = unit.ToRotation() - (float)Math.PI / 2f;
                 for (l = 0; l < num80; l += 2)
                 {
-                    spriteBatch.Draw(base.mod.GetTexture("Projectiles/骷髅守护粒子连线"), vector29 + unit * l - Main.screenPosition, null, new Color(255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 0), r3, new Vector2(2, 2), 1f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(base.Mod.GetTexture("Projectiles/骷髅守护粒子连线"), vector29 + unit * l - Main.screenPosition, null, new Color(255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 0), r3, new Vector2(2, 2), 1f, SpriteEffects.None, 0f);
                 }
                 Vector2 vector26 = new Vector2(Main.projectile[num81].Center.X - 4, Main.projectile[num81].Center.Y);
                 num80 = (float)Math.Sqrt((vector26.X - vector29.X) * (vector26.X - vector29.X) + (vector26.Y - vector29.Y) * (vector26.Y - vector29.Y));
@@ -3628,7 +3629,7 @@ namespace MythMod.NPCs
                 r3 = unit.ToRotation() - (float)Math.PI / 2f;
                 for (l = 0; l < num80; l += 2)
                 {
-                    spriteBatch.Draw(base.mod.GetTexture("Projectiles/骷髅守护粒子连线"), vector29 + unit * l - Main.screenPosition, null, new Color(255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 0), r3, new Vector2(2, 2), 1f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(base.Mod.GetTexture("Projectiles/骷髅守护粒子连线"), vector29 + unit * l - Main.screenPosition, null, new Color(255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 0), r3, new Vector2(2, 2), 1f, SpriteEffects.None, 0f);
                 }
                 num80 = (float)Math.Sqrt((vector26.X - vector24.X) * (vector26.X - vector24.X) + (vector26.Y - vector24.Y) * (vector26.Y - vector24.Y));
                 unit = vector26 - vector24;
@@ -3636,7 +3637,7 @@ namespace MythMod.NPCs
                 r3 = unit.ToRotation() - (float)Math.PI / 2f;
                 for (l = 0; l < num80; l += 2)
                 {
-                    spriteBatch.Draw(base.mod.GetTexture("Projectiles/骷髅守护粒子连线"), vector24 + unit * l - Main.screenPosition, null, new Color(255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 0), r3, new Vector2(2, 2), 1f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(base.Mod.GetTexture("Projectiles/骷髅守护粒子连线"), vector24 + unit * l - Main.screenPosition, null, new Color(255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 0), r3, new Vector2(2, 2), 1f, SpriteEffects.None, 0f);
                 }
                 num80 = (float)Math.Sqrt((vector26.X - vector27.X) * (vector26.X - vector27.X) + (vector26.Y - vector27.Y) * (vector26.Y - vector27.Y));
                 unit = vector26 - vector27;
@@ -3644,7 +3645,7 @@ namespace MythMod.NPCs
                 r3 = unit.ToRotation() - (float)Math.PI / 2f;
                 for (l = 0; l < num80; l += 2)
                 {
-                    spriteBatch.Draw(base.mod.GetTexture("Projectiles/骷髅守护粒子连线"), vector27 + unit * l - Main.screenPosition, null, new Color(255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 0), r3, new Vector2(2, 2), 1f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(base.Mod.GetTexture("Projectiles/骷髅守护粒子连线"), vector27 + unit * l - Main.screenPosition, null, new Color(255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 0), r3, new Vector2(2, 2), 1f, SpriteEffects.None, 0f);
                 }
                 num80 = (float)Math.Sqrt((vector26.X - vector25.X) * (vector26.X - vector25.X) + (vector26.Y - vector25.Y) * (vector26.Y - vector25.Y));
                 unit = vector26 - vector25;
@@ -3652,15 +3653,15 @@ namespace MythMod.NPCs
                 r3 = unit.ToRotation() - (float)Math.PI / 2f;
                 for (l = 0; l < num80; l += 2)
                 {
-                    spriteBatch.Draw(base.mod.GetTexture("Projectiles/骷髅守护粒子连线"), vector25 + unit * l - Main.screenPosition, null, new Color(255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 0), r3, new Vector2(2, 2), 1f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(base.Mod.GetTexture("Projectiles/骷髅守护粒子连线"), vector25 + unit * l - Main.screenPosition, null, new Color(255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 255 * (120 - num85) / 120f, 0), r3, new Vector2(2, 2), 1f, SpriteEffects.None, 0f);
                 }
             }
             if (npc.type == 266 && !npc.dontTakeDamage)
             {
                 num8 += 0.02f;
-                Texture2D t = Main.npcTexture[266];
+                Texture2D t = TextureAssets.Npc[266].Value;
                 Player p = Main.player[Main.myPlayer];
-                int num = Main.npcTexture[npc.type].Height / 8;
+                int num = TextureAssets.Npc[npc.type].Value.Height / 8;
                 if (npc.life <= 3000)
                 {
                     Main.spriteBatch.Draw(t, p.Center - Main.screenPosition + new Vector2(0f, p.gfxOffY) + ((npc.Center - p.Center) * 0.5f).RotatedBy((npc.Center - p.Center).Length() / 200f * 0.5f), new Rectangle?(new Rectangle(0, npc.frame.Y, t.Width, num)), npc.GetAlpha(lightColor) * 0.9f * ((3000f - npc.life) / (3000f) + 0.1f), npc.rotation, new Vector2((float)t.Width / 2f, (float)num / 2f), npc.scale, SpriteEffects.None, 1f);

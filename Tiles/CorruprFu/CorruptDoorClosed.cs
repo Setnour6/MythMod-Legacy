@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent.ObjectInteractions;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -11,7 +12,7 @@ namespace MythMod.Tiles.CorruprFu
 {
 	public class CorruptDoorClosed : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[(int)base.Type] = true;
 			Main.tileBlockLight[(int)base.Type] = true;
@@ -48,12 +49,12 @@ namespace MythMod.Tiles.CorruprFu
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
 			modTranslation.SetDefault("朽木门");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
-			this.disableSmartCursor = true;
-			this.adjTiles = new int[]
+			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+			this.AdjTiles = new int[]
 			{
 				10
 			};
-			this.openDoorID = base.mod.TileType("CorruptDoorOpen");
+			this.OpenDoorID = base.Mod.Find<ModTile>("CorruptDoorOpen").Type;
 			modTranslation.AddTranslation(GameCulture.Chinese, "朽木门");
 		}
 		public override bool CreateDust(int i, int j, ref int type)
@@ -65,20 +66,20 @@ namespace MythMod.Tiles.CorruprFu
 		{
 			num = (fail ? 1 : 3);
 		}
-		public override bool HasSmartInteract()
+		public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings)
 		{
 			return true;
 		}
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			Item.NewItem(i * 16, j * 16, 16, 48, base.mod.ItemType("CorruptWoodDoor"), 1, false, 0, false, false);
+			Item.NewItem(i * 16, j * 16, 16, 48, base.Mod.Find<ModItem>("CorruptWoodDoor").Type, 1, false, 0, false, false);
 		}
 		public override void MouseOver(int i, int j)
 		{
 			Player localPlayer = Main.LocalPlayer;
 			localPlayer.noThrow = 2;
-			localPlayer.showItemIcon = true;
-			localPlayer.showItemIcon2 = base.mod.ItemType("CorruptWoodDoor");
+			localPlayer.cursorItemIconEnabled = true;
+			localPlayer.cursorItemIconID = base.Mod.Find<ModItem>("CorruptWoodDoor").Type;
 		}
 	}
 }

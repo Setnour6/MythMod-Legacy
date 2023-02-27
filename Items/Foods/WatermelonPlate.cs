@@ -17,27 +17,26 @@ namespace MythMod.Items.Foods
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 72;
-            base.item.height = 40;
-            base.item.rare = 1;
-            base.item.value = Item.sellPrice(0, 0, 5, 0);
-            base.item.UseSound = SoundID.Item8;
-            base.item.maxStack = 200;
-            base.item.useAnimation = 15;
-            base.item.useTime = 10;
-            base.item.useStyle = 1;
-            base.item.consumable = true;
-            base.item.useTurn = true;
-            base.item.autoReuse = true;
-            base.item.createTile = base.mod.TileType("西瓜拼盘");
+			base.Item.width = 72;
+            base.Item.height = 40;
+            base.Item.rare = 1;
+            base.Item.value = Item.sellPrice(0, 0, 5, 0);
+            base.Item.UseSound = SoundID.Item8;
+            base.Item.maxStack = 200;
+            base.Item.useAnimation = 15;
+            base.Item.useTime = 10;
+            base.Item.useStyle = 1;
+            base.Item.consumable = true;
+            base.Item.useTurn = true;
+            base.Item.autoReuse = true;
+            base.Item.createTile = base.Mod.Find<ModTile>("西瓜拼盘").Type;
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = Recipe.Create(Mod.Find<ModItem>("WatermelonPlate").Type, 1);
             recipe.AddIngredient(null, "WatermenlonPiece", 4);
             recipe.requiredTile[0] = 220;
-            recipe.SetResult(mod.ItemType("WatermelonPlate"), 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }
 	}
 }

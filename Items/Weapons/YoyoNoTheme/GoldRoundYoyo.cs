@@ -14,33 +14,33 @@ namespace MythMod.Items.Weapons.YoyoNoTheme
         public override void SetStaticDefaults()
         {
             DisplayName.AddTranslation(GameCulture.Chinese, "金边球");
-            ItemID.Sets.Yoyo[item.type] = true;
-            ItemID.Sets.GamepadExtraRange[item.type] = 15;
-            ItemID.Sets.GamepadSmartQuickReach[item.type] = true;
+            ItemID.Sets.Yoyo[Item.type] = true;
+            ItemID.Sets.GamepadExtraRange[Item.type] = 15;
+            ItemID.Sets.GamepadSmartQuickReach[Item.type] = true;
             base.Tooltip.AddTranslation(GameCulture.Chinese, "");
         }
         public static short GetGlowMask = 0;
         private int o = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            item.useStyle = 5;
-            item.width = 24;
-            item.height = 24;
-            item.noUseGraphic = true;
-            item.UseSound = SoundID.Item1;
-            item.melee = true;
-            item.channel = true;
-            item.shoot = mod.ProjectileType("GoldRoundYoyo");
-            item.useAnimation = 5;
-            item.useTime = 14;
-            item.shootSpeed = 0f;
-            item.knockBack = 0.2f;
-            item.damage = 280;
-            item.noMelee = true;
-            item.value = Item.sellPrice(0, 0, 3, 0);
-            item.rare = 11;
-            ItemID.Sets.Yoyo[base.item.type] = true;
+            Item.glowMask = GetGlowMask;
+            Item.useStyle = 5;
+            Item.width = 24;
+            Item.height = 24;
+            Item.noUseGraphic = true;
+            Item.UseSound = SoundID.Item1;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.channel = true;
+            Item.shoot = Mod.Find<ModProjectile>("GoldRoundYoyo").Type;
+            Item.useAnimation = 5;
+            Item.useTime = 14;
+            Item.shootSpeed = 0f;
+            Item.knockBack = 0.2f;
+            Item.damage = 280;
+            Item.noMelee = true;
+            Item.value = Item.sellPrice(0, 0, 3, 0);
+            Item.rare = 11;
+            ItemID.Sets.Yoyo[base.Item.type] = true;
         }
     }
 }

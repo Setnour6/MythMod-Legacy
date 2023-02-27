@@ -13,11 +13,11 @@ namespace MythMod.Tiles.电梯
 {
     public class 电梯门 : ModTile
     {
-        public override void SetDefaults()
+        public override void SetStaticDefaults()
         {
             Main.tileFrameImportant[(int)base.Type] = true;
             Main.tileNoAttach[(int)base.Type] = true;
-            this.minPick = 260;
+            this.MinPick = 260;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style3x2);
             TileObjectData.newTile.Height = 4;
             TileObjectData.newTile.Width = 3;
@@ -31,12 +31,12 @@ namespace MythMod.Tiles.电梯
             TileObjectData.newTile.UsesCustomCanPlace = true;
             TileObjectData.newTile.AnchorTop = default(AnchorData);
             TileObjectData.addTile((int)base.Type);
-            this.dustType = 224;
+            this.DustType = 224;
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
             base.AddMapEntry(new Color(60, 60, 60), modTranslation);
-            this.mineResist = 3f;
-            base.SetDefaults();
+            this.MineResist = 3f;
+            base.SetStaticDefaults();
             modTranslation.AddTranslation(GameCulture.Chinese, "");
         }
         private int num = 0;
@@ -60,7 +60,7 @@ namespace MythMod.Tiles.电梯
                     {
                         for (int b = j; b < j + 4; b++)
                         {
-                            Main.tile[a, b].frameY += 72;
+                            Main.tile[a, b].TileFrameY += 72;
                         }
                     }
                     instant = false;
@@ -71,7 +71,7 @@ namespace MythMod.Tiles.电梯
                     {
                         for (int b = j; b < j + 4; b++)
                         {
-                            Main.tile[a, b].frameY += 72;
+                            Main.tile[a, b].TileFrameY += 72;
                         }
                     }
                     instant = true;
@@ -82,7 +82,7 @@ namespace MythMod.Tiles.电梯
                     {
                         for (int b = j; b < j + 4; b++)
                         {
-                            Main.tile[a, b].frameY += 72;
+                            Main.tile[a, b].TileFrameY += 72;
                         }
                     }
                     instant = false;
@@ -93,7 +93,7 @@ namespace MythMod.Tiles.电梯
                     {
                         for (int b = j; b < j + 4; b++)
                         {
-                            Main.tile[a, b].frameY += 72;
+                            Main.tile[a, b].TileFrameY += 72;
                         }
                     }
                     instant = true;
@@ -104,7 +104,7 @@ namespace MythMod.Tiles.电梯
                     {
                         for (int b = j; b < j + 4; b++)
                         {
-                            Main.tile[a, b].frameY += 72;
+                            Main.tile[a, b].TileFrameY += 72;
                         }
                     }
                     instant = false;
@@ -115,7 +115,7 @@ namespace MythMod.Tiles.电梯
                     {
                         for (int b = j; b < j + 4; b++)
                         {
-                            Main.tile[a, b].frameY += 72;
+                            Main.tile[a, b].TileFrameY += 72;
                         }
                     }
                     instant = true;
@@ -130,7 +130,7 @@ namespace MythMod.Tiles.电梯
                     {
                         for (int b = j; b < j + 4; b++)
                         {
-                            Main.tile[a, b].frameY -= 72;
+                            Main.tile[a, b].TileFrameY -= 72;
                         }
                     }
                     instant = true;
@@ -141,7 +141,7 @@ namespace MythMod.Tiles.电梯
                     {
                         for (int b = j; b < j + 4; b++)
                         {
-                            Main.tile[a, b].frameY -= 72;
+                            Main.tile[a, b].TileFrameY -= 72;
                         }
                     }
                     instant = false;
@@ -152,7 +152,7 @@ namespace MythMod.Tiles.电梯
                     {
                         for (int b = j; b < j + 4; b++)
                         {
-                            Main.tile[a, b].frameY -= 72;
+                            Main.tile[a, b].TileFrameY -= 72;
                         }
                     }
                     instant = true;
@@ -163,7 +163,7 @@ namespace MythMod.Tiles.电梯
                     {
                         for (int b = j; b < j + 4; b++)
                         {
-                            Main.tile[a, b].frameY -= 72;
+                            Main.tile[a, b].TileFrameY -= 72;
                         }
                     }
                     instant = false;
@@ -174,7 +174,7 @@ namespace MythMod.Tiles.电梯
                     {
                         for (int b = j; b < j + 4; b++)
                         {
-                            Main.tile[a, b].frameY -= 72;
+                            Main.tile[a, b].TileFrameY -= 72;
                         }
                     }
                     instant = true;
@@ -185,7 +185,7 @@ namespace MythMod.Tiles.电梯
                     {
                         for (int b = j; b < j + 4; b++)
                         {
-                            Main.tile[a, b].frameY -= 72;
+                            Main.tile[a, b].TileFrameY -= 72;
                         }
                     }
                     instant = false;
@@ -203,13 +203,13 @@ namespace MythMod.Tiles.电梯
             switch (frameX / 54)
             {
                 case 0:
-                    num = base.mod.ItemType("LiftDoor");
+                    num = base.Mod.Find<ModItem>("LiftDoor").Type;
                     break;
                 case 1:
-                    num = base.mod.ItemType("WoodLiftDoor");
+                    num = base.Mod.Find<ModItem>("WoodLiftDoor").Type;
                     break;
                 case 2:
-                    num = base.mod.ItemType("RedWoodLiftDoor");
+                    num = base.Mod.Find<ModItem>("RedWoodLiftDoor").Type;
                     break;
             }
             if (num > 0)
@@ -226,7 +226,7 @@ namespace MythMod.Tiles.电梯
                 zero = Vector2.Zero;
             }
             int height = 16;
-            Main.spriteBatch.Draw(mod.GetTexture("Tiles/电梯门Glow"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.frameX, tile.frameY, 16, height), new Color(55, 55, 55, 0), 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(Mod.GetTexture("Tiles/电梯门Glow"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, height), new Color(55, 55, 55, 0), 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
         }
         public override void RightClick(int i, int j)//右击
         {

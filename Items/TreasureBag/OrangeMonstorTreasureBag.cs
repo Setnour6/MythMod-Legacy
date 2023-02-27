@@ -27,12 +27,12 @@ namespace MythMod.Items.TreasureBag
 		}
 		public override void SetDefaults()
 		{
-            base.item.maxStack = 999;
-            base.item.consumable = true;
-            base.item.width = 24;
-            base.item.height = 24;
-            base.item.rare = 9;
-            base.item.expert = true;
+            base.Item.maxStack = 999;
+            base.Item.consumable = true;
+            base.Item.width = 24;
+            base.Item.height = 24;
+            base.Item.rare = 9;
+            base.Item.expert = true;
 		}
 		public override bool CanRightClick()
 		{
@@ -44,23 +44,23 @@ namespace MythMod.Items.TreasureBag
 			switch (Main.rand.Next(1, 6))
 			{
 			case 1:
-                type = base.mod.ItemType("OrangeSummonStaff");
+                type = base.Mod.Find<ModItem>("OrangeSummonStaff").Type;
 			    break;
 			case 2:
-                type = base.mod.ItemType("OrangeFurlBlade");
+                type = base.Mod.Find<ModItem>("OrangeFurlBlade").Type;
 			    break;
 			case 3:
-                type = base.mod.ItemType("OrangeBlade");
+                type = base.Mod.Find<ModItem>("OrangeBlade").Type;
 			    break;
             case 4:
-                type = base.mod.ItemType("OrangeBracelet");
+                type = base.Mod.Find<ModItem>("OrangeBracelet").Type;
 			    break;
             case 5:
-                type = base.mod.ItemType("OrangeStaff");
+                type = base.Mod.Find<ModItem>("OrangeStaff").Type;
                 break;
             }
             player.QuickSpawnItem(type, 1);
-            player.QuickSpawnItem(mod.ItemType("OrangeBullet"), 333);
+            player.QuickSpawnItem(Mod.Find<ModItem>("OrangeBullet").Type, 333);
         }
     }
 }

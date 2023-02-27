@@ -16,14 +16,14 @@ namespace MythMod.Items//制作是mod名字
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetDefaults()
         {
-            base.item.useStyle = 1;
-			base.item.useTurn = true;
-            item.width = 56;//宽
-            item.height = 38;//高
-            item.rare = 2;//品质
-            item.scale = 1f;//大小
-            item.value = 100;
-            item.maxStack = 999;
+            base.Item.useStyle = 1;
+			base.Item.useTurn = true;
+            Item.width = 56;//宽
+            Item.height = 38;//高
+            Item.rare = 2;//品质
+            Item.scale = 1f;//大小
+            Item.value = 100;
+            Item.maxStack = 999;
         }
     }
 }

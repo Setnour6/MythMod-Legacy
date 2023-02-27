@@ -4,6 +4,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.Graphics.Effects;
@@ -21,24 +22,24 @@ namespace MythMod.NPCs.Yasitaya
         public override void SetStaticDefaults()
         {
             base.DisplayName.SetDefault("深渊烈焰刀");
-            Main.projFrames[projectile.type] = 1;
+            Main.projFrames[Projectile.type] = 1;
         }
 
         public override void SetDefaults()
         {
-            base.projectile.width = 80;
-            base.projectile.height = 80;
-            base.projectile.friendly = false;
-            base.projectile.hostile = true;
-            base.projectile.ignoreWater = true;
-            base.projectile.penetrate = -1;
-            base.projectile.extraUpdates = 0;
-            base.projectile.timeLeft = 26;
-            base.projectile.usesLocalNPCImmunity = false;
+            base.Projectile.width = 80;
+            base.Projectile.height = 80;
+            base.Projectile.friendly = false;
+            base.Projectile.hostile = true;
+            base.Projectile.ignoreWater = true;
+            base.Projectile.penetrate = -1;
+            base.Projectile.extraUpdates = 0;
+            base.Projectile.timeLeft = 26;
+            base.Projectile.usesLocalNPCImmunity = false;
             /*base.projectile.localNPCHitCooldown = 400;*/
-            base.projectile.tileCollide = false;
-            ProjectileID.Sets.TrailingMode[projectile.type] = 0;
-            ProjectileID.Sets.TrailCacheLength[projectile.type] = 30;
+            base.Projectile.tileCollide = false;
+            ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 30;
         }
         private float lig = 0;
         private double Rot = 0;
@@ -51,12 +52,12 @@ namespace MythMod.NPCs.Yasitaya
         private Vector2[] Vd = new Vector2[30];
         public override void AI()
         {
-            projectile.velocity = new Vector2(10, -10).RotatedBy(projectile.rotation);
-            if (projectile.timeLeft == 26)
+            Projectile.velocity = new Vector2(10, -10).RotatedBy(Projectile.rotation);
+            if (Projectile.timeLeft == 26)
             {
                 for (int i = 0; i < 200; i++)
                 {
-                    if (Main.npc[i].type == mod.NPCType("Yasitaya"))
+                    if (Main.npc[i].type == Mod.Find<ModNPC>("Yasitaya").Type)
                     {
                         n = i;
                         break;
@@ -65,85 +66,85 @@ namespace MythMod.NPCs.Yasitaya
             }
             if (n != -1)
             {
-                if (projectile.timeLeft == 25)
+                if (Projectile.timeLeft == 25)
                 {
-                    Main.PlaySound(mod.GetLegacySoundSlot(SoundType.Item, "Sounds/Item/Knife"), (int)projectile.Center.X, (int)projectile.Center.Y);
-                    projectile.position = Main.npc[n].Center + new Vector2(-20, -20).RotatedBy(projectile.timeLeft / 16.66667d);
-                    Vd[projectile.timeLeft] = new Vector2(-20, -20).RotatedBy(projectile.timeLeft / 16.66667d);
-                    projectile.scale = 0;
+                    SoundEngine.PlaySound(Mod.GetLegacySoundSlot(SoundType.Item, "Sounds/Item/Knife"), (int)Projectile.Center.X, (int)Projectile.Center.Y);
+                    Projectile.position = Main.npc[n].Center + new Vector2(-20, -20).RotatedBy(Projectile.timeLeft / 16.66667d);
+                    Vd[Projectile.timeLeft] = new Vector2(-20, -20).RotatedBy(Projectile.timeLeft / 16.66667d);
+                    Projectile.scale = 0;
                     Rot = Main.rand.NextFloat(-0.5f, 0.5f);
                     Squ = Main.rand.NextFloat(0.42f, 1);
                 }
-                if (projectile.timeLeft < 25)
+                if (Projectile.timeLeft < 25)
                 {
                     lig = 1f;
-                    Vector2 v0 = new Vector2(-90 * Main.npc[n].spriteDirection, -90).RotatedBy((25 - projectile.timeLeft) / 16.6667d * Math.PI * Main.npc[n].spriteDirection);
-                    projectile.position = Main.npc[n].Center + new Vector2(v0.X, v0.Y * Squ).RotatedBy(Rot) + new Vector2(-10, 0);
-                    Vd[projectile.timeLeft] = new Vector2(v0.X, v0.Y * Squ).RotatedBy(Rot);
-                    projectile.scale = (float)Math.Sin(projectile.timeLeft / 25d * Math.PI) * 6;
-                    projectile.rotation = (float)(Math.Atan2((Main.npc[n].Center - projectile.Center).Y, (Main.npc[n].Center - projectile.Center).X) + Math.PI / 2d);
+                    Vector2 v0 = new Vector2(-90 * Main.npc[n].spriteDirection, -90).RotatedBy((25 - Projectile.timeLeft) / 16.6667d * Math.PI * Main.npc[n].spriteDirection);
+                    Projectile.position = Main.npc[n].Center + new Vector2(v0.X, v0.Y * Squ).RotatedBy(Rot) + new Vector2(-10, 0);
+                    Vd[Projectile.timeLeft] = new Vector2(v0.X, v0.Y * Squ).RotatedBy(Rot);
+                    Projectile.scale = (float)Math.Sin(Projectile.timeLeft / 25d * Math.PI) * 6;
+                    Projectile.rotation = (float)(Math.Atan2((Main.npc[n].Center - Projectile.Center).Y, (Main.npc[n].Center - Projectile.Center).X) + Math.PI / 2d);
                 }
             }
             /*int num22 = Dust.NewDust(projectile.position - new Vector2(4, 4), projectile.width, projectile.height, mod.DustType("DarkF2"), 0, 0, 0, default(Color), 1.5f);
             Main.dust[num22].velocity *= 0.2f;*/
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
         {
             Player p = Main.player[Main.myPlayer];
             if (n != -1)
             {
                 //spriteBatch.Draw(Main.projectileTexture[projectile.type], projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), projectile.rotation, new Vector2(1, 10), projectile.scale, SpriteEffects.None, 0f);
-                Texture2D texture = mod.GetTexture("NPCs/Yasitaya/YasitayaBlade");
-                int Times = (int)((Math.Sin((500 - projectile.timeLeft) / 50d * Math.PI) + 0.15f) * 9600f / Math.Log(projectile.timeLeft + 4));
+                Texture2D texture = Mod.GetTexture("NPCs/Yasitaya/YasitayaBlade");
+                int Times = (int)((Math.Sin((500 - Projectile.timeLeft) / 50d * Math.PI) + 0.15f) * 9600f / Math.Log(Projectile.timeLeft + 4));
                 int y = 0;
-                Vector2 v0 = new Vector2(-45 * Main.npc[n].spriteDirection, -45).RotatedBy((25 - projectile.timeLeft - y * 2f) / 16.66667d * Math.PI * Main.npc[n].spriteDirection);
+                Vector2 v0 = new Vector2(-45 * Main.npc[n].spriteDirection, -45).RotatedBy((25 - Projectile.timeLeft - y * 2f) / 16.66667d * Math.PI * Main.npc[n].spriteDirection);
                 Vector2 v1 = Main.npc[n].Center + new Vector2(v0.X, v0.Y * Squ).RotatedBy(Rot) + new Vector2(-10, 0);
                 float Rot2 = (float)(Math.Atan2((Main.npc[n].Center - (v1 + new Vector2(15, 15))).Y, (Main.npc[n].Center - (v1 + new Vector2(15, 15))).X) + Math.PI / 2d);
                 Color color2 = Lighting.GetColor((int)(Main.npc[n].Center.X / 16d), (int)(Main.npc[n].Center.Y / 16d));
                 if (y == 0 && Main.npc[n].spriteDirection == 1)
                 {
-                    spriteBatch.Draw(mod.GetTexture("NPCs/Yasitaya/DarkKnife"), v1 + new Vector2(15, 15) - Main.screenPosition, null, color2, Rot2 + (float)(Math.PI / 4d * 3 * Main.npc[n].spriteDirection), new Vector2(55, 61), 1, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(Mod.GetTexture("NPCs/Yasitaya/DarkKnife"), v1 + new Vector2(15, 15) - Main.screenPosition, null, color2, Rot2 + (float)(Math.PI / 4d * 3 * Main.npc[n].spriteDirection), new Vector2(55, 61), 1, SpriteEffects.None, 0f);
                 }
                 if (y == 0 && Main.npc[n].spriteDirection == -1)
                 {
-                    spriteBatch.Draw(mod.GetTexture("NPCs/Yasitaya/DarkKnife"), v1 + new Vector2(15, 15) - Main.screenPosition, null, color2, Rot2 + (float)(Math.PI / 4d * 3 * Main.npc[n].spriteDirection), new Vector2(55, 61), 1, SpriteEffects.FlipHorizontally, 0f);
+                    spriteBatch.Draw(Mod.GetTexture("NPCs/Yasitaya/DarkKnife"), v1 + new Vector2(15, 15) - Main.screenPosition, null, color2, Rot2 + (float)(Math.PI / 4d * 3 * Main.npc[n].spriteDirection), new Vector2(55, 61), 1, SpriteEffects.FlipHorizontally, 0f);
                 }
             }
             return false;
         }
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-            target.velocity += (projectile.Center - Main.npc[n].Center) / (projectile.Center - Main.npc[n].Center).Length() * 10f;
+            target.velocity += (Projectile.Center - Main.npc[n].Center) / (Projectile.Center - Main.npc[n].Center).Length() * 10f;
             base.OnHitNPC(target, damage, knockback, crit);
         }
-        public override void PostDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override void PostDraw(Color lightColor)
         {
             List<CustomVertexInfo> bars = new List<CustomVertexInfo>();
 
             // 把所有的点都生成出来，按照顺序
 
-            for (int i = 1; i < 24 - projectile.timeLeft; ++i)
+            for (int i = 1; i < 24 - Projectile.timeLeft; ++i)
             {
-                if (projectile.oldPos[i] == Vector2.Zero) break;
+                if (Projectile.oldPos[i] == Vector2.Zero) break;
                 //spriteBatch.Draw(Main.magicPixel, projectile.oldPos[i] - Main.screenPosition,
                 //    new Rectangle(0, 0, 1, 1), Color.White, 0f, new Vector2(0.5f, 0.5f), 5f, SpriteEffects.None, 0f);
 
                 float M = 126;
-                if(projectile.timeLeft < 6)
+                if(Projectile.timeLeft < 6)
                 {
-                    M = projectile.timeLeft * 11;
+                    M = Projectile.timeLeft * 11;
                 }
-                M *= ((24 - projectile.timeLeft) - i) / (float)(24 - projectile.timeLeft);
+                M *= ((24 - Projectile.timeLeft) - i) / (float)(24 - Projectile.timeLeft);
                 int width = (int)M;
-                var normalDir = projectile.oldPos[i - 1] - projectile.oldPos[i];
+                var normalDir = Projectile.oldPos[i - 1] - Projectile.oldPos[i];
                 normalDir = Vector2.Normalize(new Vector2(-normalDir.Y, normalDir.X));
 
-                var factor = i / (float)projectile.oldPos.Length;
+                var factor = i / (float)Projectile.oldPos.Length;
                 var color = Color.Lerp(Color.White, Color.Red, factor);
                 var w = MathHelper.Lerp(1f, 0.05f, factor);
 
-                bars.Add(new CustomVertexInfo(projectile.oldPos[i] + normalDir * width + new Vector2(40, 40) + Vd[i + projectile.timeLeft] * 0.5f, color, new Vector3((float)Math.Sqrt(factor), 1, w)));
-                bars.Add(new CustomVertexInfo(projectile.oldPos[i] + normalDir * -width + new Vector2(40, 40) + Vd[i + projectile.timeLeft] * 0.5f, color, new Vector3((float)Math.Sqrt(factor), 0, w)));
+                bars.Add(new CustomVertexInfo(Projectile.oldPos[i] + normalDir * width + new Vector2(40, 40) + Vd[i + Projectile.timeLeft] * 0.5f, color, new Vector3((float)Math.Sqrt(factor), 1, w)));
+                bars.Add(new CustomVertexInfo(Projectile.oldPos[i] + normalDir * -width + new Vector2(40, 40) + Vd[i + Projectile.timeLeft] * 0.5f, color, new Vector3((float)Math.Sqrt(factor), 0, w)));
             }
 
             List<CustomVertexInfo> triangleList = new List<CustomVertexInfo>();
@@ -152,7 +153,7 @@ namespace MythMod.NPCs.Yasitaya
 
                 // 按照顺序连接三角形
                 triangleList.Add(bars[0]);
-                var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + Vector2.Normalize(projectile.velocity) * 30, Color.White, new Vector3(0, 0.5f, 1));
+                var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + Vector2.Normalize(Projectile.velocity) * 30, Color.White, new Vector3(0, 0.5f, 1));
                 triangleList.Add(bars[1]);
                 triangleList.Add(vertex);
                 for (int i = 0; i < bars.Count - 2; i += 2)
@@ -180,11 +181,11 @@ namespace MythMod.NPCs.Yasitaya
                 var model = Matrix.CreateTranslation(new Vector3(-Main.screenPosition.X, -Main.screenPosition.Y, 0));
 
                 // 把变换和所需信息丢给shader
-                mod.GetEffect("Effects/Trail").Parameters["uTransform"].SetValue(model * projection);
-                mod.GetEffect("Effects/Trail").Parameters["uTime"].SetValue(-(float)Main.time * 0.03f);
-                Main.graphics.GraphicsDevice.Textures[0] = mod.GetTexture("NPCs/Yasitaya/heatmapRed");
-                Main.graphics.GraphicsDevice.Textures[1] = mod.GetTexture("NPCs/Yasitaya/Lightline");
-                Main.graphics.GraphicsDevice.Textures[2] = mod.GetTexture("NPCs/Yasitaya/FogTrace");
+                Mod.GetEffect("Effects/Trail").Parameters["uTransform"].SetValue(model * projection);
+                Mod.GetEffect("Effects/Trail").Parameters["uTime"].SetValue(-(float)Main.time * 0.03f);
+                Main.graphics.GraphicsDevice.Textures[0] = Mod.GetTexture("NPCs/Yasitaya/heatmapRed");
+                Main.graphics.GraphicsDevice.Textures[1] = Mod.GetTexture("NPCs/Yasitaya/Lightline");
+                Main.graphics.GraphicsDevice.Textures[2] = Mod.GetTexture("NPCs/Yasitaya/FogTrace");
                 Main.graphics.GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[1] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[2] = SamplerState.PointWrap;
@@ -192,7 +193,7 @@ namespace MythMod.NPCs.Yasitaya
                 //Main.graphics.GraphicsDevice.Textures[1] = Main.magicPixel;
                 //Main.graphics.GraphicsDevice.Textures[2] = Main.magicPixel;
 
-                mod.GetEffect("Effects/Trail").CurrentTechnique.Passes[0].Apply();
+                Mod.GetEffect("Effects/Trail").CurrentTechnique.Passes[0].Apply();
 
 
                 Main.graphics.GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList, triangleList.ToArray(), 0, triangleList.Count / 3);
@@ -206,7 +207,7 @@ namespace MythMod.NPCs.Yasitaya
 
                 // 按照顺序连接三角形
                 triangleList.Add(bars[0]);
-                var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + Vector2.Normalize(projectile.velocity) * 30, Color.White, new Vector3(0, 0.5f, 1));
+                var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + Vector2.Normalize(Projectile.velocity) * 30, Color.White, new Vector3(0, 0.5f, 1));
                 triangleList.Add(bars[1]);
                 triangleList.Add(vertex);
                 for (int i = 0; i < bars.Count - 2; i += 2)
@@ -234,11 +235,11 @@ namespace MythMod.NPCs.Yasitaya
                 var model = Matrix.CreateTranslation(new Vector3(-Main.screenPosition.X, -Main.screenPosition.Y, 0));
 
                 // 把变换和所需信息丢给shader
-                mod.GetEffect("Effects/Trail").Parameters["uTransform"].SetValue(model * projection);
-                mod.GetEffect("Effects/Trail").Parameters["uTime"].SetValue(-(float)Main.time * 0.03f);
-                Main.graphics.GraphicsDevice.Textures[0] = mod.GetTexture("NPCs/Yasitaya/heatmapRed");
-                Main.graphics.GraphicsDevice.Textures[1] = mod.GetTexture("NPCs/Yasitaya/Lightline");
-                Main.graphics.GraphicsDevice.Textures[2] = mod.GetTexture("NPCs/Yasitaya/FogTrace");
+                Mod.GetEffect("Effects/Trail").Parameters["uTransform"].SetValue(model * projection);
+                Mod.GetEffect("Effects/Trail").Parameters["uTime"].SetValue(-(float)Main.time * 0.03f);
+                Main.graphics.GraphicsDevice.Textures[0] = Mod.GetTexture("NPCs/Yasitaya/heatmapRed");
+                Main.graphics.GraphicsDevice.Textures[1] = Mod.GetTexture("NPCs/Yasitaya/Lightline");
+                Main.graphics.GraphicsDevice.Textures[2] = Mod.GetTexture("NPCs/Yasitaya/FogTrace");
                 Main.graphics.GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[1] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[2] = SamplerState.PointWrap;
@@ -246,7 +247,7 @@ namespace MythMod.NPCs.Yasitaya
                 //Main.graphics.GraphicsDevice.Textures[1] = Main.magicPixel;
                 //Main.graphics.GraphicsDevice.Textures[2] = Main.magicPixel;
 
-                mod.GetEffect("Effects/Trail").CurrentTechnique.Passes[0].Apply();
+                Mod.GetEffect("Effects/Trail").CurrentTechnique.Passes[0].Apply();
 
 
                 Main.graphics.GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList, triangleList.ToArray(), 0, triangleList.Count / 3);

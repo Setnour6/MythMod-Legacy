@@ -28,23 +28,23 @@ namespace MythMod.Items.Weapons
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            base.item.damage = 190;
-			base.item.width = 78;
-			base.item.height = 34;
-			base.item.useTime = 40;
-			base.item.useAnimation = 40;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.ranged = true;
-			base.item.knockBack = 1f;
-			base.item.value = 50000;
-			base.item.rare = 5;
-			base.item.UseSound = SoundID.Item31;
-			base.item.autoReuse = true;
-            base.item.shoot = base.mod.ProjectileType("SteelDragonGun");
-			base.item.shootSpeed = 13f;
-			base.item.useAmmo = 771;
+            Item.glowMask = GetGlowMask;
+            base.Item.damage = 190;
+			base.Item.width = 78;
+			base.Item.height = 34;
+			base.Item.useTime = 40;
+			base.Item.useAnimation = 40;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.DamageType = DamageClass.Ranged;
+			base.Item.knockBack = 1f;
+			base.Item.value = 50000;
+			base.Item.rare = 5;
+			base.Item.UseSound = SoundID.Item31;
+			base.Item.autoReuse = true;
+            base.Item.shoot = base.Mod.Find<ModProjectile>("SteelDragonGun").Type;
+			base.Item.shootSpeed = 13f;
+			base.Item.useAmmo = 771;
 		}
 		public override Vector2? HoldoutOffset()
         {
@@ -58,24 +58,24 @@ namespace MythMod.Items.Weapons
         {
             if (player.altFunctionUse == 2)
             {
-                base.item.useTime = 60;
-                base.item.useAnimation = 60;
+                base.Item.useTime = 60;
+                base.Item.useAnimation = 60;
             }
             else
             {
-                base.item.useTime = 55;
-                base.item.useAnimation = 55;
+                base.Item.useTime = 55;
+                base.Item.useAnimation = 55;
             }
             return base.CanUseItem(player);
         }
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             if (player.altFunctionUse == 2)
             {
-                Projectile.NewProjectile(position.X, position.Y, speedX, speedY, base.mod.ProjectileType("SteelDragonGun"), damage * 2, knockBack, player.whoAmI, 0f, 0f);
+                Projectile.NewProjectile(position.X, position.Y, speedX, speedY, base.Mod.Find<ModProjectile>("SteelDragonGun").Type, damage * 2, knockBack, player.whoAmI, 0f, 0f);
                 return false;
             }
-            Projectile.NewProjectile(position.X, position.Y, speedX, speedY, base.mod.ProjectileType("SteelDragonGun"), damage * 2, knockBack, player.whoAmI, 0f, 0f);
+            Projectile.NewProjectile(position.X, position.Y, speedX, speedY, base.Mod.Find<ModProjectile>("SteelDragonGun").Type, damage * 2, knockBack, player.whoAmI, 0f, 0f);
             return false;
         }
 	}

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.GameContent.Shaders;
 using Terraria.Graphics.Effects;
@@ -23,18 +25,18 @@ namespace MythMod.Projectiles.projectile3
 		}
 		public override void SetDefaults()
 		{
-            projectile.width = 50;
-            projectile.height = 50;
-            projectile.netImportant = true;
-            projectile.friendly = true;
+            Projectile.width = 50;
+            Projectile.height = 50;
+            Projectile.netImportant = true;
+            Projectile.friendly = true;
             //projectile.aiStyle = 54;
-            projectile.timeLeft = 300;
-            projectile.penetrate = -1;
-            projectile.melee = true;
+            Projectile.timeLeft = 300;
+            Projectile.penetrate = -1;
+            Projectile.DamageType = DamageClass.Melee;
             //this.aiType = 317;
-            projectile.tileCollide = false;
-            projectile.usesLocalNPCImmunity = true;
-            projectile.scale = 0.3f;
+            Projectile.tileCollide = false;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.scale = 0.3f;
         }
         public override Color? GetAlpha(Color lightColor)
         {
@@ -49,7 +51,7 @@ namespace MythMod.Projectiles.projectile3
         {
             if(!off)
             {
-                if(projectile.timeLeft > 100)
+                if(Projectile.timeLeft > 100)
                 {
                     if (lig < 1)
                     {
@@ -73,21 +75,21 @@ namespace MythMod.Projectiles.projectile3
                     lig -= 0.01f;
                     if (lig <= 0)
                     {
-                        projectile.Kill();
+                        Projectile.Kill();
                     }
                 }
             }
-            float num2 = base.projectile.Center.X;
-            float num3 = base.projectile.Center.Y;
+            float num2 = base.Projectile.Center.X;
+            float num3 = base.Projectile.Center.Y;
             float num4 = 400f;
             bool flag = false;
             for (int j = 0; j < 200; j++)
             {
-                if (Main.npc[j].CanBeChasedBy(base.projectile, false) && Collision.CanHit(base.projectile.Center, 1, 1, Main.npc[j].Center, 1, 1))
+                if (Main.npc[j].CanBeChasedBy(base.Projectile, false) && Collision.CanHit(base.Projectile.Center, 1, 1, Main.npc[j].Center, 1, 1))
                 {
                     float num5 = Main.npc[j].position.X + (float)(Main.npc[j].width / 2);
                     float num6 = Main.npc[j].position.Y + (float)(Main.npc[j].height / 2);
-                    float num7 = Math.Abs(base.projectile.position.X + (float)(base.projectile.width / 2) - num5) + Math.Abs(base.projectile.position.Y + (float)(base.projectile.height / 2) - num6);
+                    float num7 = Math.Abs(base.Projectile.position.X + (float)(base.Projectile.width / 2) - num5) + Math.Abs(base.Projectile.position.Y + (float)(base.Projectile.height / 2) - num6);
                     if (num7 < num4)
                     {
                         num4 = num7;
@@ -114,8 +116,8 @@ namespace MythMod.Projectiles.projectile3
                     }
                     if (num7 < 50)
                     {
-                        Main.npc[j].StrikeNPC(projectile.damage, projectile.knockBack, projectile.direction, Main.rand.Next(200) > 150 ? true : false);
-                        projectile.penetrate--;
+                        Main.npc[j].StrikeNPC(Projectile.damage, Projectile.knockBack, Projectile.direction, Main.rand.Next(200) > 150 ? true : false);
+                        Projectile.penetrate--;
                         NPC target = Main.npc[j];
                     }
                 }
@@ -123,35 +125,35 @@ namespace MythMod.Projectiles.projectile3
             if (flag)
             {
                 float num8 = 50f;
-                Vector2 vector1 = new Vector2(base.projectile.position.X + (float)base.projectile.width * 0.5f, base.projectile.position.Y + (float)base.projectile.height * 0.5f);
+                Vector2 vector1 = new Vector2(base.Projectile.position.X + (float)base.Projectile.width * 0.5f, base.Projectile.position.Y + (float)base.Projectile.height * 0.5f);
                 float num9 = num2 - vector1.X;
                 float num10 = num3 - vector1.Y;
                 float num11 = (float)Math.Sqrt((double)(num9 * num9 + num10 * num10));
                 num11 = num8 / num11;
                 num9 *= num11;
                 num10 *= num11;
-                base.projectile.velocity.X = (base.projectile.velocity.X * ((Leng + 0.25f) * 20f) + num9) / ((Leng + 0.25f) * 21f);
-                base.projectile.velocity.Y = (base.projectile.velocity.Y * ((Leng + 0.25f) * 20f) + num10) / ((Leng + 0.25f) * 21f);
-                if(projectile.velocity.Length() > 15f)
+                base.Projectile.velocity.X = (base.Projectile.velocity.X * ((Leng + 0.25f) * 20f) + num9) / ((Leng + 0.25f) * 21f);
+                base.Projectile.velocity.Y = (base.Projectile.velocity.Y * ((Leng + 0.25f) * 20f) + num10) / ((Leng + 0.25f) * 21f);
+                if(Projectile.velocity.Length() > 15f)
                 {
-                    projectile.velocity *= 0.65f;
+                    Projectile.velocity *= 0.65f;
                 }
-                projectile.velocity *= 0.65f;
+                Projectile.velocity *= 0.65f;
             }
             if (Leng < 0.85f)
             {
-                if(projectile.timeLeft > 60)
+                if(Projectile.timeLeft > 60)
                 {
-                    Vector2 vector = base.projectile.Center;
-                    int num = Dust.NewDust(vector - new Vector2(4, 4), 0, 0, mod.DustType("Haiyi"), 0, 0, 0, default(Color), 3f * (0.85f - Leng));
+                    Vector2 vector = base.Projectile.Center;
+                    int num = Dust.NewDust(vector - new Vector2(4, 4), 0, 0, Mod.Find<ModDust>("Haiyi").Type, 0, 0, 0, default(Color), 3f * (0.85f - Leng));
                     Main.dust[num].velocity *= 0.0f;
                     Main.dust[num].noGravity = true;
                     Main.dust[num].scale *= 1.2f;
                 }
                 else
                 {
-                    Vector2 vector = base.projectile.Center;
-                    int num = Dust.NewDust(vector - new Vector2(4, 4), 0, 0, mod.DustType("Haiyi"), 0, 0, 0, default(Color), 3f * (0.85f - Leng) * projectile.timeLeft / 60f);
+                    Vector2 vector = base.Projectile.Center;
+                    int num = Dust.NewDust(vector - new Vector2(4, 4), 0, 0, Mod.Find<ModDust>("Haiyi").Type, 0, 0, 0, default(Color), 3f * (0.85f - Leng) * Projectile.timeLeft / 60f);
                     Main.dust[num].velocity *= 0.0f;
                     Main.dust[num].noGravity = true;
                     Main.dust[num].scale *= 1.2f;
@@ -159,24 +161,24 @@ namespace MythMod.Projectiles.projectile3
             }
             if(Leng < 0.1f)
             {
-                projectile.penetrate = 1;
+                Projectile.penetrate = 1;
             }
         }
         private double Alp = 0;
         private double Beta = 0;
         private float Leng = 1;
         private float Leng2 = 1;
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
         {
             if(!Flag)
             {
-                if(Leng < 1 + (float)Math.Sin(projectile.timeLeft / 6f) / 15f)
+                if(Leng < 1 + (float)Math.Sin(Projectile.timeLeft / 6f) / 15f)
                 {
                     Leng += 0.02f;
                 }
                 else
                 {
-                    Leng = 1 + (float)Math.Sin(projectile.timeLeft / 6f) / 15f;
+                    Leng = 1 + (float)Math.Sin(Projectile.timeLeft / 6f) / 15f;
                 }
                 Leng2 = 0;
             }
@@ -230,144 +232,144 @@ namespace MythMod.Projectiles.projectile3
             Vector2 v1002 = new Vector2(v10.X * Zm / (Zm - v10.Z), v10.Y * Zm / (Zm - v10.Z)).RotatedBy(Beta);
             Vector2 v1102 = new Vector2(v11.X * Zm / (Zm - v11.Z), v11.Y * Zm / (Zm - v11.Z)).RotatedBy(Beta);
             Vector2 v1202 = new Vector2(v12.X * Zm / (Zm - v12.Z), v12.Y * Zm / (Zm - v12.Z)).RotatedBy(Beta);*/
-            spriteBatch.Draw(Main.projectileTexture[projectile.type], v102 + projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), 0, new Vector2(25, 25), projectile.scale, SpriteEffects.None, 0f);
-            spriteBatch.Draw(Main.projectileTexture[projectile.type], v202 + projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), 0, new Vector2(25, 25), projectile.scale, SpriteEffects.None, 0f);
-            spriteBatch.Draw(Main.projectileTexture[projectile.type], v302 + projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), 0, new Vector2(25, 25), projectile.scale, SpriteEffects.None, 0f);
-            spriteBatch.Draw(Main.projectileTexture[projectile.type], v402 + projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), 0, new Vector2(25, 25), projectile.scale, SpriteEffects.None, 0f);
-            spriteBatch.Draw(Main.projectileTexture[projectile.type], v502 + projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), 0, new Vector2(25, 25), projectile.scale, SpriteEffects.None, 0f);
-            spriteBatch.Draw(Main.projectileTexture[projectile.type], v602 + projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), 0, new Vector2(25, 25), projectile.scale, SpriteEffects.None, 0f);
-            spriteBatch.Draw(Main.projectileTexture[projectile.type], v702 + projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), 0, new Vector2(25, 25), projectile.scale, SpriteEffects.None, 0f);
-            spriteBatch.Draw(Main.projectileTexture[projectile.type], v802 + projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), 0, new Vector2(25, 25), projectile.scale, SpriteEffects.None, 0f);
-            spriteBatch.Draw(Main.projectileTexture[projectile.type], v902 + projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), 0, new Vector2(25, 25), projectile.scale, SpriteEffects.None, 0f);
-            spriteBatch.Draw(Main.projectileTexture[projectile.type], v1002 + projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), 0, new Vector2(25, 25), projectile.scale, SpriteEffects.None, 0f);
-            spriteBatch.Draw(Main.projectileTexture[projectile.type], v1102 + projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), 0, new Vector2(25, 25), projectile.scale, SpriteEffects.None, 0f);
-            spriteBatch.Draw(Main.projectileTexture[projectile.type], v1202 + projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), 0, new Vector2(25, 25), projectile.scale, SpriteEffects.None, 0f);
-            Texture2D texture = mod.GetTexture("Projectiles/projectile3/星尘光标连线");
-            Texture2D texture2 = mod.GetTexture("Projectiles/projectile3/Haiyi");
+            spriteBatch.Draw(TextureAssets.Projectile[Projectile.type].Value, v102 + Projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), 0, new Vector2(25, 25), Projectile.scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(TextureAssets.Projectile[Projectile.type].Value, v202 + Projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), 0, new Vector2(25, 25), Projectile.scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(TextureAssets.Projectile[Projectile.type].Value, v302 + Projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), 0, new Vector2(25, 25), Projectile.scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(TextureAssets.Projectile[Projectile.type].Value, v402 + Projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), 0, new Vector2(25, 25), Projectile.scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(TextureAssets.Projectile[Projectile.type].Value, v502 + Projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), 0, new Vector2(25, 25), Projectile.scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(TextureAssets.Projectile[Projectile.type].Value, v602 + Projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), 0, new Vector2(25, 25), Projectile.scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(TextureAssets.Projectile[Projectile.type].Value, v702 + Projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), 0, new Vector2(25, 25), Projectile.scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(TextureAssets.Projectile[Projectile.type].Value, v802 + Projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), 0, new Vector2(25, 25), Projectile.scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(TextureAssets.Projectile[Projectile.type].Value, v902 + Projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), 0, new Vector2(25, 25), Projectile.scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(TextureAssets.Projectile[Projectile.type].Value, v1002 + Projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), 0, new Vector2(25, 25), Projectile.scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(TextureAssets.Projectile[Projectile.type].Value, v1102 + Projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), 0, new Vector2(25, 25), Projectile.scale, SpriteEffects.None, 0f);
+            spriteBatch.Draw(TextureAssets.Projectile[Projectile.type].Value, v1202 + Projectile.Center - Main.screenPosition, null, new Color(lig, lig, lig, 0), 0, new Vector2(25, 25), Projectile.scale, SpriteEffects.None, 0f);
+            Texture2D texture = Mod.GetTexture("Projectiles/projectile3/星尘光标连线");
+            Texture2D texture2 = Mod.GetTexture("Projectiles/projectile3/Haiyi");
             //*1
             for (float k = 0;k < (v1102 - v302).Length();k++)
             {
-                spriteBatch.Draw(texture, v1102 + (v302 - v1102) / (v302 - v1102).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v1102 + (v302 - v1102) / (v302 - v1102).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v1102 - v102).Length(); k++)
             {
-                spriteBatch.Draw(texture, v1102 + (v102 - v1102) / (v102 - v1102).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v1102 + (v102 - v1102) / (v102 - v1102).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v1102 - v802).Length(); k++)
             {
-                spriteBatch.Draw(texture, v1102 + (v802 - v1102) / (v802 - v1102).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v1102 + (v802 - v1102) / (v802 - v1102).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v1102 - v902).Length(); k++)
             {
-                spriteBatch.Draw(texture, v1102 + (v902 - v1102) / (v902 - v1102).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v1102 + (v902 - v1102) / (v902 - v1102).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v1102 - v602).Length(); k++)
             {
-                spriteBatch.Draw(texture, v1102 + (v602 - v1102) / (v1102 - v602).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v1102 + (v602 - v1102) / (v1102 - v602).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             //*2
             for (float k = 0; k < (v1002 - v402).Length(); k++)
             {
-                spriteBatch.Draw(texture, v1002 + (v402 - v1002) / (v402 - v1002).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v1002 + (v402 - v1002) / (v402 - v1002).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v1002 - v202).Length(); k++)
             {
-                spriteBatch.Draw(texture, v1002 + (v202 - v1002) / (v202 - v1002).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v1002 + (v202 - v1002) / (v202 - v1002).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v1002 - v702).Length(); k++)
             {
-                spriteBatch.Draw(texture, v1002 + (v702 - v1002) / (v702 - v1002).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v1002 + (v702 - v1002) / (v702 - v1002).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v1002 - v1202).Length(); k++)
             {
-                spriteBatch.Draw(texture, v1002 + (v1202 - v1002) / (v1202 - v1002).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v1002 + (v1202 - v1002) / (v1202 - v1002).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v1002 - v502).Length(); k++)
             {
-                spriteBatch.Draw(texture, v1002 + (v502 - v1002) / (v1002 - v502).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v1002 + (v502 - v1002) / (v1002 - v502).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             //*3
             for (float k = 0; k < (v802 - v602).Length(); k++)
             {
-                spriteBatch.Draw(texture, v802 + (v602 - v802) / (v602 - v802).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v802 + (v602 - v802) / (v602 - v802).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v602 - v102).Length(); k++)
             {
-                spriteBatch.Draw(texture, v602 + (v102 - v602) / (v102 - v602).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v602 + (v102 - v602) / (v102 - v602).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v102 - v902).Length(); k++)
             {
-                spriteBatch.Draw(texture, v102 + (v902 - v102) / (v902 - v102).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v102 + (v902 - v102) / (v902 - v102).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v902 - v302).Length(); k++)
             {
-                spriteBatch.Draw(texture, v302 + (v902 - v302) / (v902 - v302).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v302 + (v902 - v302) / (v902 - v302).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v302 - v802).Length(); k++)
             {
-                spriteBatch.Draw(texture, v302 + (v802 - v302) / (v802 - v302).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v302 + (v802 - v302) / (v802 - v302).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             //*4
             for (float k = 0; k < (v502 - v702).Length(); k++)
             {
-                spriteBatch.Draw(texture, v502 + (v702 - v502) / (v702 - v502).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v502 + (v702 - v502) / (v702 - v502).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v702 - v402).Length(); k++)
             {
-                spriteBatch.Draw(texture, v702 + (v402 - v702) / (v402 - v702).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v702 + (v402 - v702) / (v402 - v702).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v402 - v1202).Length(); k++)
             {
-                spriteBatch.Draw(texture, v402 + (v1202 - v402) / (v1202 - v402).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v402 + (v1202 - v402) / (v1202 - v402).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v1202 - v202).Length(); k++)
             {
-                spriteBatch.Draw(texture, v1202 + (v202 - v1202) / (v202 - v1202).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v1202 + (v202 - v1202) / (v202 - v1202).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v202 - v502).Length(); k++)
             {
-                spriteBatch.Draw(texture, v202 + (v502 - v202) / (v502 - v202).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v202 + (v502 - v202) / (v502 - v202).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             //*5
             for (float k = 0; k < (v402 - v802).Length(); k++)
             {
-                spriteBatch.Draw(texture, v402 + (v802 - v402) / (v802 - v402).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v402 + (v802 - v402) / (v802 - v402).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v402 - v302).Length(); k++)
             {
-                spriteBatch.Draw(texture, v402 + (v302 - v402) / (v302 - v402).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v402 + (v302 - v402) / (v302 - v402).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v702 - v902).Length(); k++)
             {
-                spriteBatch.Draw(texture, v702 + (v902 - v702) / (v902 - v702).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v702 + (v902 - v702) / (v902 - v702).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v702 - v302).Length(); k++)
             {
-                spriteBatch.Draw(texture, v702 + (v302 - v702) / (v302 - v702).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v702 + (v302 - v702) / (v302 - v702).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v502 - v902).Length(); k++)
             {
-                spriteBatch.Draw(texture, v502 + (v902 - v502) / (v902 - v502).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v502 + (v902 - v502) / (v902 - v502).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v502 - v102).Length(); k++)
             {
-                spriteBatch.Draw(texture, v502 + (v102 - v502) / (v102 - v502).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v502 + (v102 - v502) / (v102 - v502).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v202 - v602).Length(); k++)
             {
-                spriteBatch.Draw(texture, v202 + (v602 - v202) / (v602 - v202).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v202 + (v602 - v202) / (v602 - v202).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v202 - v102).Length(); k++)
             {
-                spriteBatch.Draw(texture, v202 + (v102 - v202) / (v102 - v202).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v202 + (v102 - v202) / (v102 - v202).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v1202 - v602).Length(); k++)
             {
-                spriteBatch.Draw(texture, v1202 + (v602 - v1202) / (v602 - v1202).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v1202 + (v602 - v1202) / (v602 - v1202).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             for (float k = 0; k < (v1202 - v802).Length(); k++)
             {
-                spriteBatch.Draw(texture, v1202 + (v802 - v1202) / (v802 - v1202).Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture, v1202 + (v802 - v1202) / (v802 - v1202).Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.5f, lig * 0.2f, lig, 0), 0, new Vector2(1, 1), 1, SpriteEffects.None, 0f);
             }
             //*6
             if(pink > 0)
@@ -375,51 +377,51 @@ namespace MythMod.Projectiles.projectile3
                 Vector2 v0 = new Vector2(0, 0);
                 for (float k = 0; k < (v0 - v102).Length(); k++)
                 {
-                    spriteBatch.Draw(texture, v102 / v102.Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.9f * ((v0 - v102).Length() - k) / (v0 - v102).Length() * pink, lig * 0.2f * ((v0 - v102).Length() - k) / (v0 - v102).Length(), lig * 0.2f * k / (v0 - v102).Length(), 0), 0, new Vector2(1, 1), 2.5f / (k / 3f + 3) + 0.5f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(texture, v102 / v102.Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.9f * ((v0 - v102).Length() - k) / (v0 - v102).Length() * pink, lig * 0.2f * ((v0 - v102).Length() - k) / (v0 - v102).Length(), lig * 0.2f * k / (v0 - v102).Length(), 0), 0, new Vector2(1, 1), 2.5f / (k / 3f + 3) + 0.5f, SpriteEffects.None, 0f);
                 }
                 for (float k = 0; k < (v0 - v202).Length(); k++)
                 {
-                    spriteBatch.Draw(texture, v202 / v202.Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.9f * ((v0 - v202).Length() - k) / (v0 - v202).Length() * pink, lig * 0.2f * ((v0 - v202).Length() - k) / (v0 - v202).Length(), lig * 0.2f * k / (v0 - v202).Length(), 0), 0, new Vector2(1, 1), 2.5f / (k / 3f + 3) + 0.5f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(texture, v202 / v202.Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.9f * ((v0 - v202).Length() - k) / (v0 - v202).Length() * pink, lig * 0.2f * ((v0 - v202).Length() - k) / (v0 - v202).Length(), lig * 0.2f * k / (v0 - v202).Length(), 0), 0, new Vector2(1, 1), 2.5f / (k / 3f + 3) + 0.5f, SpriteEffects.None, 0f);
                 }
                 for (float k = 0; k < (v0 - v302).Length(); k++)
                 {
-                    spriteBatch.Draw(texture, v302 / v302.Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.9f * ((v0 - v302).Length() - k) / (v0 - v302).Length() * pink, lig * 0.2f * ((v0 - v302).Length() - k) / (v0 - v302).Length(), lig * 0.2f * k / (v0 - v302).Length(), 0), 0, new Vector2(1, 1), 2.5f / (k / 3f + 3) + 0.5f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(texture, v302 / v302.Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.9f * ((v0 - v302).Length() - k) / (v0 - v302).Length() * pink, lig * 0.2f * ((v0 - v302).Length() - k) / (v0 - v302).Length(), lig * 0.2f * k / (v0 - v302).Length(), 0), 0, new Vector2(1, 1), 2.5f / (k / 3f + 3) + 0.5f, SpriteEffects.None, 0f);
                 }
                 for (float k = 0; k < (v0 - v402).Length(); k++)
                 {
-                    spriteBatch.Draw(texture, v402 / v402.Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.9f * ((v0 - v402).Length() - k) / (v0 - v402).Length() * pink, lig * 0.2f * ((v0 - v402).Length() - k) / (v0 - v402).Length(), lig * 0.2f * k / (v0 - v402).Length(), 0), 0, new Vector2(1, 1), 2.5f / (k / 3f + 3) + 0.5f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(texture, v402 / v402.Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.9f * ((v0 - v402).Length() - k) / (v0 - v402).Length() * pink, lig * 0.2f * ((v0 - v402).Length() - k) / (v0 - v402).Length(), lig * 0.2f * k / (v0 - v402).Length(), 0), 0, new Vector2(1, 1), 2.5f / (k / 3f + 3) + 0.5f, SpriteEffects.None, 0f);
                 }
                 for (float k = 0; k < (v0 - v502).Length(); k++)
                 {
-                    spriteBatch.Draw(texture, v502 / v502.Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.9f * ((v0 - v502).Length() - k) / (v0 - v502).Length() * pink, lig * 0.2f * ((v0 - v502).Length() - k) / (v0 - v502).Length(), lig * 0.2f * k / (v0 - v502).Length(), 0), 0, new Vector2(1, 1), 2.5f / (k / 3f + 3) + 0.5f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(texture, v502 / v502.Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.9f * ((v0 - v502).Length() - k) / (v0 - v502).Length() * pink, lig * 0.2f * ((v0 - v502).Length() - k) / (v0 - v502).Length(), lig * 0.2f * k / (v0 - v502).Length(), 0), 0, new Vector2(1, 1), 2.5f / (k / 3f + 3) + 0.5f, SpriteEffects.None, 0f);
                 }
                 for (float k = 0; k < (v0 - v602).Length(); k++)
                 {
-                    spriteBatch.Draw(texture, v602 / v602.Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.9f * ((v0 - v602).Length() - k) / (v0 - v602).Length() * pink, lig * 0.2f * ((v0 - v602).Length() - k) / (v0 - v602).Length(), lig * 0.2f * k / (v0 - v602).Length(), 0), 0, new Vector2(1, 1), 2.5f / (k / 3f + 3) + 0.5f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(texture, v602 / v602.Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.9f * ((v0 - v602).Length() - k) / (v0 - v602).Length() * pink, lig * 0.2f * ((v0 - v602).Length() - k) / (v0 - v602).Length(), lig * 0.2f * k / (v0 - v602).Length(), 0), 0, new Vector2(1, 1), 2.5f / (k / 3f + 3) + 0.5f, SpriteEffects.None, 0f);
                 }
                 for (float k = 0; k < (v0 - v702).Length(); k++)
                 {
-                    spriteBatch.Draw(texture, v702 / v702.Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.9f * ((v0 - v702).Length() - k) / (v0 - v702).Length() * pink, lig * 0.2f * ((v0 - v702).Length() - k) / (v0 - v702).Length(), lig * 0.2f * k / (v0 - v702).Length(), 0), 0, new Vector2(1, 1), 2.5f / (k / 3f + 3) + 0.5f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(texture, v702 / v702.Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.9f * ((v0 - v702).Length() - k) / (v0 - v702).Length() * pink, lig * 0.2f * ((v0 - v702).Length() - k) / (v0 - v702).Length(), lig * 0.2f * k / (v0 - v702).Length(), 0), 0, new Vector2(1, 1), 2.5f / (k / 3f + 3) + 0.5f, SpriteEffects.None, 0f);
                 }
                 for (float k = 0; k < (v0 - v802).Length(); k++)
                 {
-                    spriteBatch.Draw(texture, v802 / v802.Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.9f * ((v0 - v802).Length() - k) / (v0 - v802).Length() * pink, lig * 0.2f * ((v0 - v802).Length() - k) / (v0 - v802).Length(), lig * 0.2f * k / (v0 - v802).Length(), 0), 0, new Vector2(1, 1), 2.5f / (k / 3f + 3) + 0.5f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(texture, v802 / v802.Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.9f * ((v0 - v802).Length() - k) / (v0 - v802).Length() * pink, lig * 0.2f * ((v0 - v802).Length() - k) / (v0 - v802).Length(), lig * 0.2f * k / (v0 - v802).Length(), 0), 0, new Vector2(1, 1), 2.5f / (k / 3f + 3) + 0.5f, SpriteEffects.None, 0f);
                 }
                 for (float k = 0; k < (v0 - v902).Length(); k++)
                 {
-                    spriteBatch.Draw(texture, v902 / v902.Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.9f * ((v0 - v902).Length() - k) / (v0 - v902).Length() * pink, lig * 0.2f * ((v0 - v902).Length() - k) / (v0 - v902).Length(), lig * 0.2f * k / (v0 - v902).Length(), 0), 0, new Vector2(1, 1), 2.5f / (k / 3f + 3) + 0.5f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(texture, v902 / v902.Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.9f * ((v0 - v902).Length() - k) / (v0 - v902).Length() * pink, lig * 0.2f * ((v0 - v902).Length() - k) / (v0 - v902).Length(), lig * 0.2f * k / (v0 - v902).Length(), 0), 0, new Vector2(1, 1), 2.5f / (k / 3f + 3) + 0.5f, SpriteEffects.None, 0f);
                 }
                 for (float k = 0; k < (v0 - v1002).Length(); k++)
                 {
-                    spriteBatch.Draw(texture, v1002 / v1002.Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.9f * ((v0 - v1002).Length() - k) / (v0 - v1002).Length() * pink, lig * 0.2f * ((v0 - v1002).Length() - k) / (v0 - v1002).Length(), lig * 0.2f * k / (v0 - v1002).Length(), 0), 0, new Vector2(1, 1), 2.5f / (k / 3f + 3) + 0.5f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(texture, v1002 / v1002.Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.9f * ((v0 - v1002).Length() - k) / (v0 - v1002).Length() * pink, lig * 0.2f * ((v0 - v1002).Length() - k) / (v0 - v1002).Length(), lig * 0.2f * k / (v0 - v1002).Length(), 0), 0, new Vector2(1, 1), 2.5f / (k / 3f + 3) + 0.5f, SpriteEffects.None, 0f);
                 }
                 for (float k = 0; k < (v0 - v1102).Length(); k++)
                 {
-                    spriteBatch.Draw(texture, v1102 / v1102.Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.9f * ((v0 - v1102).Length() - k) / (v0 - v1102).Length() * pink, lig * 0.2f * ((v0 - v1102).Length() - k) / (v0 - v1102).Length(), lig * 0.2f * k / (v0 - v1102).Length(), 0), 0, new Vector2(1, 1), 2.5f / (k / 3f + 3) + 0.5f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(texture, v1102 / v1102.Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.9f * ((v0 - v1102).Length() - k) / (v0 - v1102).Length() * pink, lig * 0.2f * ((v0 - v1102).Length() - k) / (v0 - v1102).Length(), lig * 0.2f * k / (v0 - v1102).Length(), 0), 0, new Vector2(1, 1), 2.5f / (k / 3f + 3) + 0.5f, SpriteEffects.None, 0f);
                 }
                 for (float k = 0; k < (v0 - v1202).Length(); k++)
                 {
-                    spriteBatch.Draw(texture, v1202 / v1202.Length() * k + projectile.Center - Main.screenPosition, null, new Color(lig * 0.9f * ((v0 - v1202).Length() - k) / (v0 - v1202).Length() * pink, lig * 0.2f * ((v0 - v1202).Length() - k) / (v0 - v1202).Length(), lig * 0.2f * k / (v0 - v1202).Length(), 0), 0, new Vector2(1, 1), 2.5f / (k / 3f + 3) + 0.5f, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(texture, v1202 / v1202.Length() * k + Projectile.Center - Main.screenPosition, null, new Color(lig * 0.9f * ((v0 - v1202).Length() - k) / (v0 - v1202).Length() * pink, lig * 0.2f * ((v0 - v1202).Length() - k) / (v0 - v1202).Length(), lig * 0.2f * k / (v0 - v1202).Length(), 0), 0, new Vector2(1, 1), 2.5f / (k / 3f + 3) + 0.5f, SpriteEffects.None, 0f);
                 }
             }
 
@@ -429,24 +431,24 @@ namespace MythMod.Projectiles.projectile3
         {
             if (timeLeft != 0)
             {
-                Main.PlaySound(2, (int)base.projectile.position.X, (int)base.projectile.position.Y, 14, 0.36f, 0f);
-                base.projectile.position.X = base.projectile.position.X + (float)(base.projectile.width / 2);
-                base.projectile.position.Y = base.projectile.position.Y + (float)(base.projectile.height / 2);
-                base.projectile.width = 40;
-                base.projectile.height = 40;
-                base.projectile.position.X = base.projectile.position.X - (float)(base.projectile.width / 2);
-                base.projectile.position.Y = base.projectile.position.Y - (float)(base.projectile.height / 2);
+                SoundEngine.PlaySound(SoundID.Item14.WithVolumeScale(0.36f), new Vector2(base.Projectile.position.X, base.Projectile.position.Y));
+                base.Projectile.position.X = base.Projectile.position.X + (float)(base.Projectile.width / 2);
+                base.Projectile.position.Y = base.Projectile.position.Y + (float)(base.Projectile.height / 2);
+                base.Projectile.width = 40;
+                base.Projectile.height = 40;
+                base.Projectile.position.X = base.Projectile.position.X - (float)(base.Projectile.width / 2);
+                base.Projectile.position.Y = base.Projectile.position.Y - (float)(base.Projectile.height / 2);
                 for (int j = 0; j < 90; j++)
                 {
-                    int num2 = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y), 0, 0, mod.DustType("Haiyi"), 0f, 0f, 100, default(Color), 3f);
+                    int num2 = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y), 0, 0, Mod.Find<ModDust>("Haiyi").Type, 0f, 0f, 100, default(Color), 3f);
                     Main.dust[num2].velocity.X = (float)(1f * Math.Sin(Math.PI * (float)(j) / 45f)) * Main.rand.NextFloat(0.9f, 1.1f);
                     Main.dust[num2].velocity.Y = (float)(1f * Math.Cos(Math.PI * (float)(j) / 45f)) * Main.rand.NextFloat(0.9f, 1.1f);
                 }
                 for (int j = 0; j < 200; j++)
                 {
-                    if (!Main.npc[j].dontTakeDamage && (Main.npc[j].Center - projectile.Center).Length() < 90f && !Main.npc[j].friendly)
+                    if (!Main.npc[j].dontTakeDamage && (Main.npc[j].Center - Projectile.Center).Length() < 90f && !Main.npc[j].friendly)
                     {
-                        Main.npc[j].StrikeNPC((int)(projectile.damage * Main.rand.NextFloat(0.85f, 1.15f)), 100 / (Main.npc[j].Center - projectile.Center).Length(), (int)((Main.npc[j].Center.X - projectile.Center.X) / Math.Abs(Main.npc[j].Center.X - projectile.Center.X)));
+                        Main.npc[j].StrikeNPC((int)(Projectile.damage * Main.rand.NextFloat(0.85f, 1.15f)), 100 / (Main.npc[j].Center - Projectile.Center).Length(), (int)((Main.npc[j].Center.X - Projectile.Center.X) / Math.Abs(Main.npc[j].Center.X - Projectile.Center.X)));
                     }
                 }
             }

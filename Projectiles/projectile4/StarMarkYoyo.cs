@@ -13,18 +13,18 @@ namespace MythMod.Projectiles.projectile4
         private float X = 0;
 		public override void SetDefaults()
 		{
-			base.projectile.CloneDefaults(547);
-            base.projectile.width = 16;
-			base.projectile.height = 16;
-			base.projectile.scale = 1f;
-            ProjectileID.Sets.YoyosMaximumRange[projectile.type] = 300f;
+			base.Projectile.CloneDefaults(547);
+            base.Projectile.width = 16;
+			base.Projectile.height = 16;
+			base.Projectile.scale = 1f;
+            ProjectileID.Sets.YoyosMaximumRange[Projectile.type] = 300f;
         }
 		public override void AI()
 		{
-            ProjectileExtras.YoyoAI(base.projectile.whoAmI, 60f, 300f, 14f);
+            ProjectileExtras.YoyoAI(base.Projectile.whoAmI, 60f, 300f, 14f);
             if(Main.rand.Next(15) == 1)
             {
-                int num = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, mod.DustType("Star"), 0f, 0f, 100, default(Color), 0.8f);
+                int num = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, Mod.Find<ModDust>("Star").Type, 0f, 0f, 100, default(Color), 0.8f);
                 if (Main.rand.Next(2) == 0)
                 {
                     Main.dust[num].scale = 0.5f;
@@ -36,9 +36,9 @@ namespace MythMod.Projectiles.projectile4
         {
             target.AddBuff(153, 300);
         }
-        public override void PostDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override void PostDraw(Color lightColor)
         {
-            spriteBatch.Draw(base.mod.GetTexture("Projectiles/projectile4/StarMarkYoyoGlow"), base.projectile.Center - Main.screenPosition, null, Color.White * 0.7f, base.projectile.rotation, new Vector2(8f, 8f), 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(base.Mod.GetTexture("Projectiles/projectile4/StarMarkYoyoGlow"), base.Projectile.Center - Main.screenPosition, null, Color.White * 0.7f, base.Projectile.rotation, new Vector2(8f, 8f), 1f, SpriteEffects.None, 0f);
         }
     }
 }

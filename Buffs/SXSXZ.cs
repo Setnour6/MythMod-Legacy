@@ -9,7 +9,7 @@ namespace MythMod.Buffs
     public class SXSXZ : ModBuff
 	{
 		// Token: 0x060000B3 RID: 179 RVA: 0x0002DB34 File Offset: 0x0002BD34
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("嗜血水螅杖");
             base.Description.SetDefault("嗜血水螅为你而战");
@@ -21,7 +21,7 @@ namespace MythMod.Buffs
 		public override void Update(Player player, ref int buffIndex)
 		{
 			MythPlayer modPlayer = player.GetModPlayer<MythPlayer>();
-            if (player.ownedProjectileCounts[base.mod.ProjectileType("嗜血水螅杖")] > 0)
+            if (player.ownedProjectileCounts[base.Mod.Find<ModProjectile>("嗜血水螅杖").Type] > 0)
 			{
 				modPlayer.SXSXZ = true;
 			}

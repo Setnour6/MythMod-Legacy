@@ -25,25 +25,25 @@ namespace MythMod.Items.Weapons.FestivalWeapons
 
 		public override void SetDefaults()
 		{
-			item.useStyle = 1;
-			item.shootSpeed = 17f;
-			item.shoot = mod.ProjectileType("TangerineKnife");
-			item.width = 68;
-			item.height = 68;
-			item.UseSound = SoundID.Item1;
-			item.useAnimation = 20;
-			item.useTime = 20;
-			item.noUseGraphic = true;
-			item.noMelee = true;
-            item.damage = 358;
-            item.autoReuse = true;
-            item.melee = true;
-            item.value = 100000;
-            item.rare = 11;
+			Item.useStyle = 1;
+			Item.shootSpeed = 17f;
+			Item.shoot = Mod.Find<ModProjectile>("TangerineKnife").Type;
+			Item.width = 68;
+			Item.height = 68;
+			Item.UseSound = SoundID.Item1;
+			Item.useAnimation = 20;
+			Item.useTime = 20;
+			Item.noUseGraphic = true;
+			Item.noMelee = true;
+            Item.damage = 358;
+            Item.autoReuse = true;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.value = 100000;
+            Item.rare = 11;
         }
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
-            type = mod.ProjectileType("TangerineKnife");
+            type = Mod.Find<ModProjectile>("TangerineKnife").Type;
             Projectile.NewProjectile(position.X, position.Y, speedX, speedY, type, damage, knockBack, Main.myPlayer, 0f, 0f);
             return false;
         }

@@ -17,14 +17,14 @@ namespace MythMod.Projectiles.projectile5
         }
         public override void SetDefaults()
         {
-            projectile.width = 32;
-            projectile.height = 32;
-            projectile.friendly = false;
-            projectile.hostile = true;
-            projectile.aiStyle = -1;
-            projectile.penetrate = -1;
-            projectile.timeLeft = 100;
-            projectile.tileCollide = false;
+            Projectile.width = 32;
+            Projectile.height = 32;
+            Projectile.friendly = false;
+            Projectile.hostile = true;
+            Projectile.aiStyle = -1;
+            Projectile.penetrate = -1;
+            Projectile.timeLeft = 100;
+            Projectile.tileCollide = false;
         }
         private Vector2 v0;
         private int Fra = 0;
@@ -34,37 +34,37 @@ namespace MythMod.Projectiles.projectile5
         private int ChaseNPC = -1;
         public override void AI()
         {
-            if (projectile.timeLeft == 100)
+            if (Projectile.timeLeft == 100)
             {
-                v0 = projectile.Center;
+                v0 = Projectile.Center;
                 for(int i  =0;i < 200;i++)
                 {
-                    if(Main.npc[i].type == mod.NPCType("AncientTangerineTreeEye"))
+                    if(Main.npc[i].type == Mod.Find<ModNPC>("AncientTangerineTreeEye").Type)
                     {
                         ChaseNPC = i;
-                        projectile.position = (Main.npc[i].Center - new Vector2(16, -16));
+                        Projectile.position = (Main.npc[i].Center - new Vector2(16, -16));
                         break;
                     }
                 }
-                int pl = Player.FindClosest(projectile.Center, 1, 1);
-                Vector2 v = Main.player[pl].Center - projectile.Center;
-                projectile.rotation = (float)Math.Atan2(v.Y, v.X) + (float)Math.PI / 2f + projectile.ai[0] * (float)Math.PI / 6f;
+                int pl = Player.FindClosest(Projectile.Center, 1, 1);
+                Vector2 v = Main.player[pl].Center - Projectile.Center;
+                Projectile.rotation = (float)Math.Atan2(v.Y, v.X) + (float)Math.PI / 2f + Projectile.ai[0] * (float)Math.PI / 6f;
             }
-            projectile.rotation += 0.06f * projectile.ai[0];
+            Projectile.rotation += 0.06f * Projectile.ai[0];
             if (ChaseNPC != -1)
             {
-                projectile.velocity = Main.npc[ChaseNPC].velocity;
+                Projectile.velocity = Main.npc[ChaseNPC].velocity;
             }
-            if (projectile.timeLeft > 540)
+            if (Projectile.timeLeft > 540)
             {
                 Sca += 1 / 60f;
             }
-            if (projectile.timeLeft % 30 == 0)
+            if (Projectile.timeLeft % 30 == 0)
             {
-                Vector2 b = new Vector2(0, 4).RotatedBy(projectile.rotation);
-                Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, -b.X + projectile.velocity.X, -b.Y + projectile.velocity.Y, mod.ProjectileType("GreenLeafBall"), 50, 0f, Main.myPlayer, 0f, 0);
+                Vector2 b = new Vector2(0, 4).RotatedBy(Projectile.rotation);
+                Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, -b.X + Projectile.velocity.X, -b.Y + Projectile.velocity.Y, Mod.Find<ModProjectile>("GreenLeafBall").Type, 50, 0f, Main.myPlayer, 0f, 0);
             }
-            if (projectile.timeLeft % 5 == 0 && projectile.timeLeft > 60)
+            if (Projectile.timeLeft % 5 == 0 && Projectile.timeLeft > 60)
             {
                 if(FraX > 0)
                 {
@@ -75,7 +75,7 @@ namespace MythMod.Projectiles.projectile5
                     FraX = 0;
                 }
             }
-            if (projectile.timeLeft % 5 == 0 && projectile.timeLeft < 60)
+            if (Projectile.timeLeft % 5 == 0 && Projectile.timeLeft < 60)
             {
                 if (FraX < 128)
                 {
@@ -86,36 +86,36 @@ namespace MythMod.Projectiles.projectile5
                     FraX = 128;
                 }
             }
-            if (projectile.timeLeft < 480)
+            if (Projectile.timeLeft < 480)
             {
                 n *= 0.99f;
             }
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            projectile.Kill();
+            Projectile.Kill();
             return false;
         }
         float n = 0.2f;
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
         {
             float Leng = 4000f;
             float[] samples = new float[2];
-            Vector2 unit = new Vector2(0, -1).RotatedBy(projectile.rotation);
-            Collision.LaserScan(projectile.Center, unit, 3f, 4000f, samples);
+            Vector2 unit = new Vector2(0, -1).RotatedBy(Projectile.rotation);
+            Collision.LaserScan(Projectile.Center, unit, 3f, 4000f, samples);
             float maxDis = (samples[0] + samples[1]) * 0.5f;
             Leng = maxDis;
             for(int k = 0;k < Leng - 24;k+=16)
             {
                 if(k >= Leng - 40)
                 {
-                    spriteBatch.Draw(base.mod.GetTexture("Projectiles/projectile5/GreenLightEnd"), base.projectile.Center - Main.screenPosition + new Vector2(0, - k - 8).RotatedBy(projectile.rotation), new Rectangle(FraX, 0, 16, 48), new Color(1f, 1f, 1f, 0), projectile.rotation - (float)(Math.PI / 2f), new Vector2(8f, 24f), 1, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(base.Mod.GetTexture("Projectiles/projectile5/GreenLightEnd"), base.Projectile.Center - Main.screenPosition + new Vector2(0, - k - 8).RotatedBy(Projectile.rotation), new Rectangle(FraX, 0, 16, 48), new Color(1f, 1f, 1f, 0), Projectile.rotation - (float)(Math.PI / 2f), new Vector2(8f, 24f), 1, SpriteEffects.None, 0f);
                     if(!Main.gamePaused)
                     {
                         for(int g =0;g < 4; g++)
                         {
                             Vector2 v = new Vector2(0, Main.rand.NextFloat(0.1f,4.3f)).RotatedByRandom(MathHelper.TwoPi);
-                            int num = Dust.NewDust(projectile.Center + new Vector2(0, -k - 8).RotatedBy(projectile.rotation) - new Vector2(8, 8), 8, 8, mod.DustType("Poison"), v.X, v.Y, 0, default(Color), 4f * (128 - FraX) / 128f);
+                            int num = Dust.NewDust(Projectile.Center + new Vector2(0, -k - 8).RotatedBy(Projectile.rotation) - new Vector2(8, 8), 8, 8, Mod.Find<ModDust>("Poison").Type, v.X, v.Y, 0, default(Color), 4f * (128 - FraX) / 128f);
                             Main.dust[num].noGravity = true;
                         }
                     }
@@ -124,11 +124,11 @@ namespace MythMod.Projectiles.projectile5
                 {
                     if (k == 0)
                     {
-                        spriteBatch.Draw(base.mod.GetTexture("Projectiles/projectile5/GreenLightShoot"), base.projectile.Center - Main.screenPosition + new Vector2(0, - k - 8).RotatedBy(projectile.rotation), new Rectangle(FraX, 0, 16, 48), new Color(1f, 1f, 1f, 0), projectile.rotation - (float)(Math.PI / 2f), new Vector2(8f, 24f), 1, SpriteEffects.None, 0f);
+                        spriteBatch.Draw(base.Mod.GetTexture("Projectiles/projectile5/GreenLightShoot"), base.Projectile.Center - Main.screenPosition + new Vector2(0, - k - 8).RotatedBy(Projectile.rotation), new Rectangle(FraX, 0, 16, 48), new Color(1f, 1f, 1f, 0), Projectile.rotation - (float)(Math.PI / 2f), new Vector2(8f, 24f), 1, SpriteEffects.None, 0f);
                     }
                     else
                     {
-                        spriteBatch.Draw(base.mod.GetTexture("Projectiles/projectile5/GreenLight"), base.projectile.Center - Main.screenPosition + new Vector2(0, - k - 8).RotatedBy(projectile.rotation), new Rectangle(FraX, 0, 16, 48), new Color(1f, 1f, 1f, 0), projectile.rotation - (float)(Math.PI / 2f), new Vector2(8f, 24f), 1, SpriteEffects.None, 0f);
+                        spriteBatch.Draw(base.Mod.GetTexture("Projectiles/projectile5/GreenLight"), base.Projectile.Center - Main.screenPosition + new Vector2(0, - k - 8).RotatedBy(Projectile.rotation), new Rectangle(FraX, 0, 16, 48), new Color(1f, 1f, 1f, 0), Projectile.rotation - (float)(Math.PI / 2f), new Vector2(8f, 24f), 1, SpriteEffects.None, 0f);
                     }
                 }
             }

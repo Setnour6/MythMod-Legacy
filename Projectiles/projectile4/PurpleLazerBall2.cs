@@ -17,14 +17,14 @@ namespace MythMod.Projectiles.projectile4
         }
         public override void SetDefaults()
         {
-            projectile.width = 26;
-            projectile.height = 26;
-            projectile.friendly = false;
-            projectile.hostile = true;
-            projectile.aiStyle = -1;
-            projectile.penetrate = -1;
-            projectile.timeLeft = 600;
-            projectile.tileCollide = false;
+            Projectile.width = 26;
+            Projectile.height = 26;
+            Projectile.friendly = false;
+            Projectile.hostile = true;
+            Projectile.aiStyle = -1;
+            Projectile.penetrate = -1;
+            Projectile.timeLeft = 600;
+            Projectile.tileCollide = false;
         }
         private float Stre = 0.01f;
         private float BStre = 0.01f;
@@ -35,7 +35,7 @@ namespace MythMod.Projectiles.projectile4
         {
             if (BStre == 0.01f)
             {
-                v = new Vector2(projectile.ai[0], projectile.ai[1]);
+                v = new Vector2(Projectile.ai[0], Projectile.ai[1]);
             }
             if(Bmax)
             {
@@ -49,9 +49,9 @@ namespace MythMod.Projectiles.projectile4
                     else
                     {
                         Stre = 0;
-                        int u = Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, v.X, v.Y, 83, projectile.damage, 0f, Main.myPlayer, 0f, 0f);
+                        int u = Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, v.X, v.Y, 83, Projectile.damage, 0f, Main.myPlayer, 0f, 0f);
                         Main.projectile[u].hostile = true;
-                        projectile.Kill();
+                        Projectile.Kill();
                     }
                 }
                 else
@@ -80,12 +80,12 @@ namespace MythMod.Projectiles.projectile4
                 }
             }
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
         {
             if(Stre <= 1)
             {
-                spriteBatch.Draw(base.mod.GetTexture("Projectiles/projectile4/PurpleLazerBall"), base.projectile.Center - Main.screenPosition, null, new Color(BStre, BStre, BStre, 0), base.projectile.rotation, new Vector2(13f, 13f), BStre, SpriteEffects.None, 0f);
-                spriteBatch.Draw(base.mod.GetTexture("Projectiles/projectile4/PurpleLazer"), base.projectile.Center - Main.screenPosition + v * 0.3f, new Rectangle(0, 0, 3000, 16), new Color(Stre, Stre, Stre, 0), (float)Math.Atan2(v.Y, v.X), new Vector2(8, 8), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(base.Mod.GetTexture("Projectiles/projectile4/PurpleLazerBall"), base.Projectile.Center - Main.screenPosition, null, new Color(BStre, BStre, BStre, 0), base.Projectile.rotation, new Vector2(13f, 13f), BStre, SpriteEffects.None, 0f);
+                spriteBatch.Draw(base.Mod.GetTexture("Projectiles/projectile4/PurpleLazer"), base.Projectile.Center - Main.screenPosition + v * 0.3f, new Rectangle(0, 0, 3000, 16), new Color(Stre, Stre, Stre, 0), (float)Math.Atan2(v.Y, v.X), new Vector2(8, 8), 1, SpriteEffects.None, 0f);
             }
             return false;
         }

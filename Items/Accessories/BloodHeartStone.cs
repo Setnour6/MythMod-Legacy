@@ -16,21 +16,21 @@ namespace MythMod.Items.Accessories
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 18;
-			base.item.height = 18;
-			base.item.value = 0;
-			base.item.accessory = true;
-            base.item.rare = 7;
+			base.Item.width = 18;
+			base.Item.height = 18;
+			base.Item.value = 0;
+			base.Item.accessory = true;
+            base.Item.rare = 7;
         }
         private int WetIndex = 0;
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
             player.lifeRegen += (int)player.velocity.Length();
-            player.magicDamage += player.velocity.Length() / 90f;
-            player.meleeDamage += player.velocity.Length() / 90f;
-            player.rangedDamage += player.velocity.Length() / 90f;
-            player.minionDamage += player.velocity.Length() / 90f;
-            player.thrownDamage += player.velocity.Length() / 90f;
+            player.GetDamage(DamageClass.Magic) += player.velocity.Length() / 90f;
+            player.GetDamage(DamageClass.Melee) += player.velocity.Length() / 90f;
+            player.GetDamage(DamageClass.Ranged) += player.velocity.Length() / 90f;
+            player.GetDamage(DamageClass.Summon) += player.velocity.Length() / 90f;
+            player.GetDamage(DamageClass.Throwing) += player.velocity.Length() / 90f;
         }
 	}
 }

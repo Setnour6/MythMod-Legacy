@@ -8,19 +8,19 @@ namespace MythMod.Tiles.砖块
 {
     public class 橄榄石晶莹宝石块 : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileSolid[(int)base.Type] = true;
             Main.tileLighted[Type] = true;
             Main.tileMergeDirt[(int)base.Type] = false;
 			Main.tileBlockLight[(int)base.Type] = true;
-			this.dustType = 163;
-            this.drop = base.mod.ItemType("OlivineBrick");
+			this.DustType = 163;
+            this.ItemDrop = base.Mod.Find<ModItem>("OlivineBrick").Type;
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("橄榄石晶莹宝石块");
 			base.AddMapEntry(new Color(87, 150, 0), modTranslation);
-			this.mineResist = 5f;
-			this.soundType = 21;
+			this.MineResist = 5f;
+			this.HitSound = 21;
 			Main.tileSpelunker[(int)base.Type] = true;
             modTranslation.AddTranslation(GameCulture.Chinese, "橄榄石晶莹宝石块");
 		}

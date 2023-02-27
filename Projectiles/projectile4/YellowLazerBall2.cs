@@ -17,14 +17,14 @@ namespace MythMod.Projectiles.projectile4
         }
         public override void SetDefaults()
         {
-            projectile.width = 26;
-            projectile.height = 26;
-            projectile.friendly = false;
-            projectile.hostile = true;
-            projectile.aiStyle = -1;
-            projectile.penetrate = -1;
-            projectile.timeLeft = 600;
-            projectile.tileCollide = false;
+            Projectile.width = 26;
+            Projectile.height = 26;
+            Projectile.friendly = false;
+            Projectile.hostile = true;
+            Projectile.aiStyle = -1;
+            Projectile.penetrate = -1;
+            Projectile.timeLeft = 600;
+            Projectile.tileCollide = false;
         }
         private float Stre = 0.01f;
         private float BStre = 0.01f;
@@ -35,14 +35,14 @@ namespace MythMod.Projectiles.projectile4
         {
             for(int h = 0;h < 200;h++)
             {
-                if(Main.npc[h].type == mod.NPCType("LanternGhostKing"))
+                if(Main.npc[h].type == Mod.Find<ModNPC>("LanternGhostKing").Type)
                 {
-                    projectile.velocity = Main.npc[h].velocity;
+                    Projectile.velocity = Main.npc[h].velocity;
                 }
             }
             if (BStre == 0.01f)
             {
-                v = new Vector2(projectile.ai[0], projectile.ai[1]);
+                v = new Vector2(Projectile.ai[0], Projectile.ai[1]);
             }
             if(Bmax)
             {
@@ -63,7 +63,7 @@ namespace MythMod.Projectiles.projectile4
                         }*/
                         /*int u = Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, v.X, v.Y, 83, projectile.damage, 0f, Main.myPlayer, 0f, 0f;
                         Main.projectile[u].hostile = true;*/
-                        projectile.Kill();
+                        Projectile.Kill();
                     }
                 }
                 else
@@ -103,11 +103,11 @@ namespace MythMod.Projectiles.projectile4
         private float Dy = 0;
         private float K = 0;
         private float dK = 0;
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
         {
             if(Stre <= 1)
             {
-                spriteBatch.Draw(base.mod.GetTexture("Projectiles/projectile4/YellowLazerBall2"), base.projectile.Center - Main.screenPosition, null, new Color(BStre, BStre, BStre, 0), base.projectile.rotation, new Vector2(13f, 13f), BStre, SpriteEffects.None, 0f);
+                spriteBatch.Draw(base.Mod.GetTexture("Projectiles/projectile4/YellowLazerBall2"), base.Projectile.Center - Main.screenPosition, null, new Color(BStre, BStre, BStre, 0), base.Projectile.rotation, new Vector2(13f, 13f), BStre, SpriteEffects.None, 0f);
                 float Rot = (float)Math.Atan2(v.Y, v.X);
                 for (float o = 0;o < 6;o+= 0.1f)
                 {
@@ -115,7 +115,7 @@ namespace MythMod.Projectiles.projectile4
                     Vector2 vp0 = new Vector2((o - 0.1f) * 100, (o - 0.1f) * (o -0.1f) * K * 10000).RotatedBy(Rot);
                     float L = (vp - vp0).Length();
                     float Rot2 = (float)Math.Atan(20000 * o * K);
-                    spriteBatch.Draw(base.mod.GetTexture("Projectiles/projectile4/YellowLazer"), base.projectile.Center - Main.screenPosition + v * 0.3f + vp, new Rectangle(0, 0, (int)(L), 16), new Color(Stre, Stre, Stre, 0), Rot + Rot2, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
+                    spriteBatch.Draw(base.Mod.GetTexture("Projectiles/projectile4/YellowLazer"), base.Projectile.Center - Main.screenPosition + v * 0.3f + vp, new Rectangle(0, 0, (int)(L), 16), new Color(Stre, Stre, Stre, 0), Rot + Rot2, new Vector2(8, 8), 1, SpriteEffects.None, 0f);
                 }
             }
             return false;

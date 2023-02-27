@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -13,24 +15,24 @@ namespace MythMod.NPCs.LanternMoon
         public override void SetStaticDefaults()
         {
             base.DisplayName.SetDefault("FireButterfly");
-            Main.npcFrameCount[base.npc.type] = 3;
+            Main.npcFrameCount[base.NPC.type] = 3;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "花火蝶");
         }
 
         public override void SetDefaults()
         {
-            base.npc.lifeMax = 1200;
-            base.npc.width = 10;
-            base.npc.height = 10;
-            base.npc.aiStyle = -1;
-            base.npc.noGravity = true;
-            npc.damage = 100;
-            npc.friendly = false;
-            base.npc.scale = 1f;
-            base.npc.HitSound = SoundID.NPCHit1;
-            base.npc.DeathSound = SoundID.NPCDeath1;
-            this.aiType = 356;
-            this.animationType = 444;
+            base.NPC.lifeMax = 1200;
+            base.NPC.width = 10;
+            base.NPC.height = 10;
+            base.NPC.aiStyle = -1;
+            base.NPC.noGravity = true;
+            NPC.damage = 100;
+            NPC.friendly = false;
+            base.NPC.scale = 1f;
+            base.NPC.HitSound = SoundID.NPCHit1;
+            base.NPC.DeathSound = SoundID.NPCDeath1;
+            this.AIType = 356;
+            this.AnimationType = 444;
         }
         private int k0 = 0;
         public override void AI()
@@ -38,7 +40,7 @@ namespace MythMod.NPCs.LanternMoon
             k0 += 1;
             if(k0 % 300 == 0)
             {
-                Main.PlaySound(2, (int)base.npc.position.X, (int)base.npc.position.Y, 14, 0.36f, 0f);
+                SoundEngine.PlaySound(SoundID.Item14.WithVolumeScale(0.36f), new Vector2(base.NPC.position.X, base.NPC.position.Y));
                 float num6 = (float)Main.rand.Next(0, 10000);
                 double num8 = Main.rand.Next(-1000, 1000) / 100d;
                 double num9 = (double)Math.Sqrt(100 - (int)num8 * (int)num8);
@@ -48,20 +50,20 @@ namespace MythMod.NPCs.LanternMoon
                 {
                     v1 = v1.RotatedBy(Math.PI / 7.5f);
                     Vector2 v2 = new Vector2(v1.X * (float)num6 / 10000, v1.Y);
-                    int p = Dust.NewDust(npc.Center, 0, 0, mod.DustType("Greenfire"), v1.X * 5f, v1.Y * 5f, 0, default(Color), Main.rand.NextFloat(0.9f, 1.6f));
+                    int p = Dust.NewDust(NPC.Center, 0, 0, Mod.Find<ModDust>("Greenfire").Type, v1.X * 5f, v1.Y * 5f, 0, default(Color), Main.rand.NextFloat(0.9f, 1.6f));
                     Main.dust[p].velocity = v2.RotatedBy(Math.Atan2((float)num8, (float)num9)) * 5f;
                     Main.dust[p].fadeIn = 1.4f;
                 }
             }
-            Lighting.AddLight(base.npc.position, 0f, 0.3f, 0f);
-            int j0 = Dust.NewDust(new Vector2((float)npc.Center.X, (float)npc.Center.Y) + new Vector2(0, 15).RotatedBy(Main.time / 10f), 0, 0, 89, 0f, 0f, 0, default(Color), Main.rand.NextFloat(0.9f, 1.6f));
+            Lighting.AddLight(base.NPC.position, 0f, 0.3f, 0f);
+            int j0 = Dust.NewDust(new Vector2((float)NPC.Center.X, (float)NPC.Center.Y) + new Vector2(0, 15).RotatedBy(Main.time / 10f), 0, 0, 89, 0f, 0f, 0, default(Color), Main.rand.NextFloat(0.9f, 1.6f));
             Main.dust[j0].noGravity = true;
             Main.dust[j0].velocity *= 0.15f;
-            float num = base.npc.ai[0];
-            float num2 = base.npc.ai[1];
+            float num = base.NPC.ai[0];
+            float num2 = base.NPC.ai[1];
             if (Main.netMode != 1)
             {
-                if (base.npc.ai[2] == 0f)
+                if (base.NPC.ai[2] == 0f)
                 {
                     int num3 = 0;
                     int num4 = 4;
@@ -104,19 +106,19 @@ namespace MythMod.NPCs.LanternMoon
                     {
                         num11 = num3;
                     }
-                    base.npc.ai[2] = (float)(1 + num11);
+                    base.NPC.ai[2] = (float)(1 + num11);
                 }
-                if (base.npc.ai[3] == 0f)
+                if (base.NPC.ai[3] == 0f)
                 {
-                    base.npc.ai[3] = (float)Main.rand.Next(75, 111) * 0.01f;
+                    base.NPC.ai[3] = (float)Main.rand.Next(75, 111) * 0.01f;
                 }
-                base.npc.localAI[0] -= 1f;
-                if (base.npc.localAI[0] <= 0f)
+                base.NPC.localAI[0] -= 1f;
+                if (base.NPC.localAI[0] <= 0f)
                 {
-                    base.npc.TargetClosest(true);
-                    base.npc.localAI[0] = (float)Main.rand.Next(90, 240);
-                    float num12 = Math.Abs(base.npc.Center.X - Main.player[base.npc.target].Center.X);
-                    if (num12 > 700f && base.npc.localAI[3] == 0f)
+                    base.NPC.TargetClosest(true);
+                    base.NPC.localAI[0] = (float)Main.rand.Next(90, 240);
+                    float num12 = Math.Abs(base.NPC.Center.X - Main.player[base.NPC.target].Center.X);
+                    if (num12 > 700f && base.NPC.localAI[3] == 0f)
                     {
                         float num13 = (float)Main.rand.Next(50, 151) * 0.01f;
                         if (num12 > 1000f)
@@ -127,9 +129,9 @@ namespace MythMod.NPCs.LanternMoon
                         {
                             num13 = (float)Main.rand.Next(100, 151) * 0.01f;
                         }
-                        int num14 = base.npc.direction * Main.rand.Next(100, 251);
+                        int num14 = base.NPC.direction * Main.rand.Next(100, 251);
                         int num15 = Main.rand.Next(-50, 51);
-                        if (base.npc.position.Y > Main.player[base.npc.target].position.Y - 100f)
+                        if (base.NPC.position.Y > Main.player[base.NPC.target].position.Y - 100f)
                         {
                             num15 -= Main.rand.Next(100, 251);
                         }
@@ -139,7 +141,7 @@ namespace MythMod.NPCs.LanternMoon
                     }
                     else
                     {
-                        base.npc.localAI[3] = 1f;
+                        base.NPC.localAI[3] = 1f;
                         float num17 = (float)Main.rand.Next(26, 301) * 0.01f;
                         int num18 = Main.rand.Next(-100, 101);
                         int num19 = Main.rand.Next(-100, 101);
@@ -147,42 +149,42 @@ namespace MythMod.NPCs.LanternMoon
                         num = (float)num18 * num20;
                         num2 = (float)num19 * num20;
                     }
-                    base.npc.netUpdate = true;
+                    base.NPC.netUpdate = true;
                 }
             }
-            base.npc.scale = base.npc.ai[3];
+            base.NPC.scale = base.NPC.ai[3];
             int num21 = 60;
-            base.npc.velocity.X = (base.npc.velocity.X * (float)(num21 - 1) + num) / (float)num21;
-            base.npc.velocity.Y = (base.npc.velocity.Y * (float)(num21 - 1) + num2) / (float)num21;
-            if (base.npc.velocity.Y > 0f)
+            base.NPC.velocity.X = (base.NPC.velocity.X * (float)(num21 - 1) + num) / (float)num21;
+            base.NPC.velocity.Y = (base.NPC.velocity.Y * (float)(num21 - 1) + num2) / (float)num21;
+            if (base.NPC.velocity.Y > 0f)
             {
                 int num22 = 3;
-                int num23 = (int)base.npc.Center.X / 16;
-                int num24 = (int)base.npc.Center.Y / 16;
+                int num23 = (int)base.NPC.Center.X / 16;
+                int num24 = (int)base.NPC.Center.Y / 16;
                 int num25;
                 for (int i = num24; i < num24 + num22; i = num25 + 1)
                 {
-                    if (Main.tile[num23, i] != null && ((Main.tile[num23, i].nactive() && Main.tileSolid[(int)Main.tile[num23, i].type]) || Main.tile[num23, i].liquid > 0))
+                    if (Main.tile[num23, i] != null && ((Main.tile[num23, i].HasUnactuatedTile && Main.tileSolid[(int)Main.tile[num23, i].TileType]) || Main.tile[num23, i].LiquidAmount > 0))
                     {
                         num2 *= -1f;
-                        if (base.npc.velocity.Y > 0f)
+                        if (base.NPC.velocity.Y > 0f)
                         {
-                            base.npc.velocity.Y = base.npc.velocity.Y * 0.9f;
+                            base.NPC.velocity.Y = base.NPC.velocity.Y * 0.9f;
                         }
                     }
                     num25 = i;
                 }
             }
-            if (base.npc.velocity.Y < 0f)
+            if (base.NPC.velocity.Y < 0f)
             {
                 int num26 = 30;
                 bool flag = false;
-                int num27 = (int)base.npc.Center.X / 16;
-                int num28 = (int)base.npc.Center.Y / 16;
+                int num27 = (int)base.NPC.Center.X / 16;
+                int num28 = (int)base.NPC.Center.Y / 16;
                 int num29;
                 for (int j = num28; j < num28 + num26; j = num29 + 1)
                 {
-                    if (Main.tile[num27, j] != null && Main.tile[num27, j].nactive() && Main.tileSolid[(int)Main.tile[num27, j].type])
+                    if (Main.tile[num27, j] != null && Main.tile[num27, j].HasUnactuatedTile && Main.tileSolid[(int)Main.tile[num27, j].TileType])
                     {
                         flag = true;
                     }
@@ -191,23 +193,23 @@ namespace MythMod.NPCs.LanternMoon
                 if (!flag)
                 {
                     num2 *= -1f;
-                    if (base.npc.velocity.Y < 0f)
+                    if (base.NPC.velocity.Y < 0f)
                     {
-                        base.npc.velocity.Y = base.npc.velocity.Y * 0.9f;
+                        base.NPC.velocity.Y = base.NPC.velocity.Y * 0.9f;
                     }
                 }
             }
-            if (base.npc.localAI[1] > 0f)
+            if (base.NPC.localAI[1] > 0f)
             {
-                base.npc.localAI[1] -= 1f;
+                base.NPC.localAI[1] -= 1f;
             }
             else
             {
-                base.npc.localAI[1] = 15f;
+                base.NPC.localAI[1] = 15f;
             }
-            if (base.npc.collideX)
+            if (base.NPC.collideX)
             {
-                if (base.npc.velocity.X < 0f)
+                if (base.NPC.velocity.X < 0f)
                 {
                     num = Math.Abs(num);
                 }
@@ -215,36 +217,36 @@ namespace MythMod.NPCs.LanternMoon
                 {
                     num = -Math.Abs(num);
                 }
-                base.npc.velocity.X = base.npc.velocity.X * -0.2f;
+                base.NPC.velocity.X = base.NPC.velocity.X * -0.2f;
             }
-            if (base.npc.velocity.X < 0f)
+            if (base.NPC.velocity.X < 0f)
             {
-                base.npc.direction = -1;
+                base.NPC.direction = -1;
             }
-            if (base.npc.velocity.X > 0f)
+            if (base.NPC.velocity.X > 0f)
             {
-                base.npc.direction = 1;
+                base.NPC.direction = 1;
             }
-            base.npc.ai[0] = num;
-            base.npc.ai[1] = num2;
+            base.NPC.ai[0] = num;
+            base.NPC.ai[1] = num2;
         }
         public override void HitEffect(int hitDirection, double damage)
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
-            if (base.npc.life <= 0)
+            if (base.NPC.life <= 0)
             {
                 for (int r = 0; r < 15; r++)
                 {
-                    Dust.NewDust(new Vector2((float)npc.position.X, (float)npc.position.Y), npc.width, npc.height, 183, 0f, 0f, 0, default(Color), Main.rand.NextFloat(0.9f, 1.6f));
+                    Dust.NewDust(new Vector2((float)NPC.position.X, (float)NPC.position.Y), NPC.width, NPC.height, 183, 0f, 0f, 0, default(Color), Main.rand.NextFloat(0.9f, 1.6f));
                 }
                 return;
             }
             int num = 0;
-            while ((double)num < damage / (double)base.npc.lifeMax * 50.0)
+            while ((double)num < damage / (double)base.NPC.lifeMax * 50.0)
             {
                 for (int r = 0; r < 4; r++)
                 {
-                    Dust.NewDust(new Vector2((float)npc.position.X, (float)npc.position.Y), npc.width, npc.height, 183, 0f, 0f, 0, default(Color), Main.rand.NextFloat(0.9f, 1.6f));
+                    Dust.NewDust(new Vector2((float)NPC.position.X, (float)NPC.position.Y), NPC.width, NPC.height, 183, 0f, 0f, 0, default(Color), Main.rand.NextFloat(0.9f, 1.6f));
                 }
                 num++;
             }
@@ -264,20 +266,20 @@ namespace MythMod.NPCs.LanternMoon
                 }
             }
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             SpriteEffects effects = SpriteEffects.None;
-            if (base.npc.spriteDirection == 1)
+            if (base.NPC.spriteDirection == 1)
             {
                 effects = SpriteEffects.FlipHorizontally;
             }
-            Vector2 value = new Vector2(base.npc.Center.X, base.npc.Center.Y);
-            Vector2 vector = new Vector2((float)(Main.npcTexture[base.npc.type].Width / 2), (float)(Main.npcTexture[base.npc.type].Height / Main.npcFrameCount[base.npc.type] / 2));
+            Vector2 value = new Vector2(base.NPC.Center.X, base.NPC.Center.Y);
+            Vector2 vector = new Vector2((float)(TextureAssets.Npc[base.NPC.type].Value.Width / 2), (float)(TextureAssets.Npc[base.NPC.type].Value.Height / Main.npcFrameCount[base.NPC.type] / 2));
             Vector2 vector2 = value - Main.screenPosition;
-            vector2 -= new Vector2((float)base.mod.GetTexture("NPCs/LanternMoon/FireFlyGreen").Width, (float)(base.mod.GetTexture("NPCs/LanternMoon/FireFlyGreen").Height / Main.npcFrameCount[base.npc.type])) * 1f / 2f;
-            vector2 += vector * 1f + new Vector2(0f, 4f + base.npc.gfxOffY);
-            Color color = Utils.MultiplyRGBA(new Color(297 - base.npc.alpha, 297 - base.npc.alpha, 297 - base.npc.alpha, 0), Color.White);
-            Main.spriteBatch.Draw(base.mod.GetTexture("NPCs/LanternMoon/FireFlyGreen"), vector2, new Rectangle?(base.npc.frame), color, base.npc.rotation, vector, 1f, effects, 0f);
+            vector2 -= new Vector2((float)base.Mod.GetTexture("NPCs/LanternMoon/FireFlyGreen").Width, (float)(base.Mod.GetTexture("NPCs/LanternMoon/FireFlyGreen").Height / Main.npcFrameCount[base.NPC.type])) * 1f / 2f;
+            vector2 += vector * 1f + new Vector2(0f, 4f + base.NPC.gfxOffY);
+            Color color = Utils.MultiplyRGBA(new Color(297 - base.NPC.alpha, 297 - base.NPC.alpha, 297 - base.NPC.alpha, 0), Color.White);
+            Main.spriteBatch.Draw(base.Mod.GetTexture("NPCs/LanternMoon/FireFlyGreen"), vector2, new Rectangle?(base.NPC.frame), color, base.NPC.rotation, vector, 1f, effects, 0f);
             return false;
         }
         public bool decide;

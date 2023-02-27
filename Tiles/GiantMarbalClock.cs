@@ -11,20 +11,20 @@ namespace MythMod.Tiles
 	{
         private float Pos = 280000;
         private float Tiome = 0;
-        public override void SetDefaults()
+        public override void SetStaticDefaults()
 		{
 			Main.tileSolid[(int)base.Type] = true;
 			Main.tileMergeDirt[(int)base.Type] = false;
 			Main.tileBlockLight[(int)base.Type] = true;
-			Main.tileValue[(int)base.Type] = 700;
-			this.minPick = 500;
-			this.dustType = 51;
-            this.drop = base.mod.ItemType("GiantMarbalClock");
+			Main.tileOreFinderPriority[(int)base.Type] = 700;
+			this.MinPick = 500;
+			this.DustType = 51;
+            this.ItemDrop = base.Mod.Find<ModItem>("GiantMarbalClock").Type;
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("遗迹大理石巨钟");
 			base.AddMapEntry(new Color(30, 144, 255), modTranslation);
-			this.mineResist = 5f;
-			this.soundType = 21;
+			this.MineResist = 5f;
+			this.HitSound = 21;
 			Main.tileSpelunker[(int)base.Type] = true;
             modTranslation.AddTranslation(GameCulture.Chinese, "遗迹大理石巨钟");
 		}
@@ -43,7 +43,7 @@ namespace MythMod.Tiles
             float P0 = Pos % 80 - 40;
             Vector2 v = new Vector2(P0, P0);
             float L = (float)Math.Sqrt(86 * 86 - v.Length() * v.Length()) - 18;
-            Main.spriteBatch.Draw(mod.GetTexture("Tiles/GiantMarbalClockBack"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + Vector2.Zero + new Vector2(204, 204), new Rectangle(0, 0, 172, 172), color, 0f, new Vector2(86, 86), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(Mod.GetTexture("Tiles/GiantMarbalClockBack"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + Vector2.Zero + new Vector2(204, 204), new Rectangle(0, 0, 172, 172), color, 0f, new Vector2(86, 86), 1f, SpriteEffects.None, 0f);
             for (int x = 0; x < 150; x += 8)
             {
                 for (int y = 0; y < 150; y += 8)
@@ -54,15 +54,15 @@ namespace MythMod.Tiles
                         float S = (float)(Math.Sqrt(Math.Sqrt((x - 75) * (x - 75) + (y - 75) * (y - 75)) + 0.05f)) / 12f;
                         if (colorP[x, y] != new Color(0, 0, 0))
                         {
-                            Main.spriteBatch.Draw(mod.GetTexture("Tiles/GiantMarbalClockBackDot"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + new Vector2(204, 204) + new Vector2(x - 75, y - 75) * 1.2f, new Rectangle(0, 0, 16, 16), new Color(colorP[x, y].R * S / 255f, colorP[x, y].G * S / 255f, colorP[x, y].B * S / 255f, 0), 0, new Vector2(8, 8), 10f / (float)(Math.Sqrt(Math.Sqrt((x - 75) * (x - 75) + (y - 75) * (y - 75)) + 1)), SpriteEffects.None, 0f);
+                            Main.spriteBatch.Draw(Mod.GetTexture("Tiles/GiantMarbalClockBackDot"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + new Vector2(204, 204) + new Vector2(x - 75, y - 75) * 1.2f, new Rectangle(0, 0, 16, 16), new Color(colorP[x, y].R * S / 255f, colorP[x, y].G * S / 255f, colorP[x, y].B * S / 255f, 0), 0, new Vector2(8, 8), 10f / (float)(Math.Sqrt(Math.Sqrt((x - 75) * (x - 75) + (y - 75) * (y - 75)) + 1)), SpriteEffects.None, 0f);
                             if ((x - 75) * (x - 75) + (y - 75) * (y - 75) < 1000)
                             {
                                 float Ro = 0;
                                 for (float u = colorP[x, y].R * S / 255f + colorP[x, y].G * S / 255f + colorP[x, y].B * S / 255f; u > 0; u -= 0.04f)
                                 {
                                     Ro += 0.05f;
-                                    Main.spriteBatch.Draw(mod.GetTexture("Tiles/GiantMarbalClockBackDot"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + new Vector2(204, 204) - new Vector2(x - 75, y - 75).RotatedBy(Ro) * 2.4f, new Rectangle(0, 0, 16, 16), new Color(colorP[x, y].R * S / 255f, colorP[x, y].G * S / 255f, colorP[x, y].B * S / 255f, 0), 0, new Vector2(8, 8), 10f / (float)(Math.Sqrt(Math.Sqrt((x - 75) * (x - 75) + (y - 75) * (y - 75)) + 1)) * u, SpriteEffects.None, 0f);
-                                    Main.spriteBatch.Draw(mod.GetTexture("Tiles/GiantMarbalClockBackDot"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + new Vector2(204, 204) - new Vector2(x - 75, y - 75).RotatedBy(-Ro) * 2.4f, new Rectangle(0, 0, 16, 16), new Color(colorP[x, y].R * S / 255f, colorP[x, y].G * S / 255f, colorP[x, y].B * S / 255f, 0), 0, new Vector2(8, 8), 10f / (float)(Math.Sqrt(Math.Sqrt((x - 75) * (x - 75) + (y - 75) * (y - 75)) + 1)) * u, SpriteEffects.None, 0f);
+                                    Main.spriteBatch.Draw(Mod.GetTexture("Tiles/GiantMarbalClockBackDot"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + new Vector2(204, 204) - new Vector2(x - 75, y - 75).RotatedBy(Ro) * 2.4f, new Rectangle(0, 0, 16, 16), new Color(colorP[x, y].R * S / 255f, colorP[x, y].G * S / 255f, colorP[x, y].B * S / 255f, 0), 0, new Vector2(8, 8), 10f / (float)(Math.Sqrt(Math.Sqrt((x - 75) * (x - 75) + (y - 75) * (y - 75)) + 1)) * u, SpriteEffects.None, 0f);
+                                    Main.spriteBatch.Draw(Mod.GetTexture("Tiles/GiantMarbalClockBackDot"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + new Vector2(204, 204) - new Vector2(x - 75, y - 75).RotatedBy(-Ro) * 2.4f, new Rectangle(0, 0, 16, 16), new Color(colorP[x, y].R * S / 255f, colorP[x, y].G * S / 255f, colorP[x, y].B * S / 255f, 0), 0, new Vector2(8, 8), 10f / (float)(Math.Sqrt(Math.Sqrt((x - 75) * (x - 75) + (y - 75) * (y - 75)) + 1)) * u, SpriteEffects.None, 0f);
                                 }
                             }
                         }
@@ -77,8 +77,8 @@ namespace MythMod.Tiles
             {
                 Main.spriteBatch.Draw(mod.GetTexture("Tiles/GiantMarbalClockBackHalo"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) - new Vector2(z / 1.4142135623731f, -z / 1.4142135623731f) + new Vector2(22, 22) + v + new Vector2(188, 188), new Rectangle(0, 0, 6, 24), color, (float)Math.PI * 0.75f, new Vector2(3, 3), 1f, SpriteEffects.None, 0f);
             }*/
-            Main.spriteBatch.Draw(mod.GetTexture("Tiles/GiantMarbalClockC"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + Vector2.Zero + new Vector2(204, 204), new Rectangle(0, 0, 172, 172), color, 0f, new Vector2(86, 86), 1f, SpriteEffects.None, 0f);
-            Main.spriteBatch.Draw(mod.GetTexture("Tiles/HourPin"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + Vector2.Zero + new Vector2(204, 204), new Rectangle(0, 0, 172, 172), color, Tiome / 12f, new Vector2(86, 86), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(Mod.GetTexture("Tiles/GiantMarbalClockC"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + Vector2.Zero + new Vector2(204, 204), new Rectangle(0, 0, 172, 172), color, 0f, new Vector2(86, 86), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(Mod.GetTexture("Tiles/HourPin"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + Vector2.Zero + new Vector2(204, 204), new Rectangle(0, 0, 172, 172), color, Tiome / 12f, new Vector2(86, 86), 1f, SpriteEffects.None, 0f);
             Color[] colorU = new Color[50];
             Vector2 vH = new Vector2(32, 0).RotatedBy(Tiome / 12f + Math.PI / 2d);
             for (int e = 0;e < 5;e++)
@@ -96,8 +96,8 @@ namespace MythMod.Tiles
                 HB += colorU[f].B;
             }
             Color C = new Color(HR / 1020f, HG / 1020f,HB / 1020f,0);
-            Main.spriteBatch.Draw(mod.GetTexture("Tiles/HourPinGlow"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + Vector2.Zero + new Vector2(204, 204), new Rectangle(0, 0, 172, 172), C, Tiome / 12f, new Vector2(86, 86), 1f, SpriteEffects.None, 0f);
-            Main.spriteBatch.Draw(mod.GetTexture("Tiles/MinutePin"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + Vector2.Zero + new Vector2(204, 204), new Rectangle(0, 0, 172, 172), color, Tiome, new Vector2(86, 86), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(Mod.GetTexture("Tiles/HourPinGlow"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + Vector2.Zero + new Vector2(204, 204), new Rectangle(0, 0, 172, 172), C, Tiome / 12f, new Vector2(86, 86), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(Mod.GetTexture("Tiles/MinutePin"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + Vector2.Zero + new Vector2(204, 204), new Rectangle(0, 0, 172, 172), color, Tiome, new Vector2(86, 86), 1f, SpriteEffects.None, 0f);
             Color[] colorV = new Color[50];
             Vector2 vM = new Vector2(0, -32).RotatedBy(Tiome / 12f + Math.PI / 2d);
             for (int e = 0; e < 5; e++)
@@ -115,7 +115,7 @@ namespace MythMod.Tiles
                 MB += colorV[f].B;
             }
             Color C0 = new Color(MR / 1020f, MG / 1020f, MB / 1020f, 0);
-            Main.spriteBatch.Draw(mod.GetTexture("Tiles/MinutePinGlow"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + Vector2.Zero + new Vector2(204, 204), new Rectangle(0, 0, 172, 172), C0, Tiome, new Vector2(86, 86), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(Mod.GetTexture("Tiles/MinutePinGlow"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + Vector2.Zero + new Vector2(204, 204), new Rectangle(0, 0, 172, 172), C0, Tiome, new Vector2(86, 86), 1f, SpriteEffects.None, 0f);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace MythMod.Tiles.Plants
     public class 苹果树 : ModTile
     {
         // Token: 0x06004868 RID: 18536 RVA: 0x0034883C File Offset: 0x00346A3C
-        public override void SetDefaults()
+        public override void SetStaticDefaults()
         {
             Main.tileFrameImportant[(int)base.Type] = true;
             Main.tileNoAttach[(int)base.Type] = true;
@@ -38,13 +38,13 @@ namespace MythMod.Tiles.Plants
             TileObjectData.newTile.Origin = new Point16(0, 8);
             TileObjectData.newTile.UsesCustomCanPlace = true;
             TileObjectData.addTile((int)base.Type);
-            this.dustType = 39;
-            this.soundType = 6;
+            this.DustType = 39;
+            this.HitSound = 6;
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
             base.AddMapEntry(new Color(100, 210, 80), modTranslation);
-            this.mineResist = 3f;
-            base.SetDefaults();
+            this.MineResist = 3f;
+            base.SetStaticDefaults();
             modTranslation.AddTranslation(GameCulture.Chinese, "");
         }
         private int xm = 0;
@@ -59,10 +59,10 @@ namespace MythMod.Tiles.Plants
         {
             if (frameX == 146)
             {
-                Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("苹果"), 5);
-                Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("苹果"), 5);
-                Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("苹果"), 5);
-                Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("苹果"), 5);
+                Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("苹果").Type, 5);
+                Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("苹果").Type, 5);
+                Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("苹果").Type, 5);
+                Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("苹果").Type, 5);
                 Item.NewItem(i * 16, j * 16, 16, 32, 9, 15);
             }
             Color messageColor = Color.Purple;
@@ -71,17 +71,17 @@ namespace MythMod.Tiles.Plants
         public override void PlaceInWorld(int i, int j, Item item)
         {
             short num = (short)(Main.rand.Next(0, 0));
-            Main.tile[i, j].frameX = 0;
+            Main.tile[i, j].TileFrameX = 0;
         }
         public override void RandomUpdate(int i, int j)
         {
-            if (Main.tile[i, j].frameX < 270 && Main.rand.Next(80) == 0)
+            if (Main.tile[i, j].TileFrameX < 270 && Main.rand.Next(80) == 0)
             {
                 for (int y = j; y < j + 20; y++)
                 {
-                    if (Main.tile[i, y - 10].type == mod.TileType("苹果树"))
+                    if (Main.tile[i, y - 10].TileType == Mod.Find<ModTile>("苹果树").Type)
                     {
-                        Main.tile[i, y - 10].frameX += 144;
+                        Main.tile[i, y - 10].TileFrameX += 144;
                     }
                 }
                 xm += 1;

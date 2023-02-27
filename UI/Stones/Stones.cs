@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Reflection;
 using ReLogic.Graphics;
@@ -185,11 +185,11 @@ namespace MythMod.UI.Stones
             {
                 spriteBatch.Draw(mod.GetTexture("Items/Gems/MysteriesPearl"), new Vector2(Main.mouseX + 18, Main.mouseY + 18), null, Microsoft.Xna.Framework.Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
 
-                if (Main.mouseRight && !HLBZ && NPC.CountNPCS(mod.NPCType("OceanCrystal")) < 1)
+                if (Main.mouseRight && !HLBZ && NPC.CountNPCS(mod.Find<ModNPC>("OceanCrystal").Type) < 1)
                 {
                     for (int num66 = 0; num66 < 58; num66++)
                     {
-                        if (player.inventory[num66].type == mod.ItemType("MysteriesPearl") && player.inventory[num66].stack > 0)
+                        if (player.inventory[num66].type == mod.Find<ModItem>("MysteriesPearl").Type && player.inventory[num66].stack > 0)
                         {
                             player.inventory[num66].stack--;
                             HLBZ = true;
@@ -410,7 +410,7 @@ namespace MythMod.UI.Stones
             {
                 if (Main.worldName != mplayer.worldnm)
                 {
-                    Item.NewItem((int)player.position.X, (int)player.position.Y, player.width, player.height, mod.ItemType("OceanWorld"), 1, false, 0, false, false);
+                    Item.NewItem((int)player.position.X, (int)player.position.Y, player.width, player.height, mod.Find<ModItem>("OceanWorld").Type, 1, false, 0, false, false);
                     Dictionary<string, string> worlddefaults = new Dictionary<string, string>();
                     Main.menuMode = 10;
 
@@ -521,7 +521,7 @@ namespace MythMod.UI.Stones
                 {
                     HLBZ = false;
                     Stones.Open = false;
-                    NPC.NewNPC((int)player.Center.X, (int)player.Center.Y - 200, mod.NPCType("OceanCrystal"), 0, 0, 0, 0, 255);
+                    NPC.NewNPC((int)player.Center.X, (int)player.Center.Y - 200, mod.Find<ModNPC>("OceanCrystal").Type, 0, 0, 0, 0, 255);
                     Movie = false;
                     mplayer.movieTime = 0;
                     Movietime = 0;

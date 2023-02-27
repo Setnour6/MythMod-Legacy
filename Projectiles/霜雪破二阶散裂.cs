@@ -18,31 +18,31 @@ namespace MythMod.Projectiles
 		// Token: 0x06001F15 RID: 7957 RVA: 0x0018D09C File Offset: 0x0018B29C
 		public override void SetDefaults()
 		{
-			base.projectile.width = 6;
-			base.projectile.height = 6;
-			base.projectile.hostile = true;
-			base.projectile.ignoreWater = true;
-			base.projectile.tileCollide = false;
-			base.projectile.penetrate = 1;
-			base.projectile.timeLeft = 240;
-			base.projectile.alpha = 255;
-            base.projectile.friendly = false;
-			this.cooldownSlot = 1;
+			base.Projectile.width = 6;
+			base.Projectile.height = 6;
+			base.Projectile.hostile = true;
+			base.Projectile.ignoreWater = true;
+			base.Projectile.tileCollide = false;
+			base.Projectile.penetrate = 1;
+			base.Projectile.timeLeft = 240;
+			base.Projectile.alpha = 255;
+            base.Projectile.friendly = false;
+			this.CooldownSlot = 1;
 		}
 
 		// Token: 0x06001F16 RID: 7958 RVA: 0x0018D118 File Offset: 0x0018B318
 		public override void AI()
 		{
-            int ID = Dust.NewDust(projectile.position, 0, 0, 180, 0, 0, 201, default(Color), 1.6f);/*粉尘效果不用管*/
-            int ID2 = Dust.NewDust(projectile.position, 0, 0, 187, 0, 0, 201, default(Color), 1.3f);/*粉尘效果不用管*/
-            int ID3 = Dust.NewDust(projectile.position, 0, 0, 172, 0, 0, 201, default(Color), 1.6f);/*粉尘效果不用管*/
+            int ID = Dust.NewDust(Projectile.position, 0, 0, 180, 0, 0, 201, default(Color), 1.6f);/*粉尘效果不用管*/
+            int ID2 = Dust.NewDust(Projectile.position, 0, 0, 187, 0, 0, 201, default(Color), 1.3f);/*粉尘效果不用管*/
+            int ID3 = Dust.NewDust(Projectile.position, 0, 0, 172, 0, 0, 201, default(Color), 1.6f);/*粉尘效果不用管*/
 			Main.dust[ID].noGravity = true;
 			Main.dust[ID2].noGravity = true;
 			Main.dust[ID3].noGravity = true;
 			Main.dust[ID].velocity *= 0.0f;
 			Main.dust[ID2].velocity *= 0.0f;
 			Main.dust[ID3].velocity *= 0.0f;
-			Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 0f / 255f, (float)(255 - base.projectile.alpha) * 0.15f / 255f, (float)(255 - base.projectile.alpha) * 0.75f / 255f);
+			Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 0f / 255f, (float)(255 - base.Projectile.alpha) * 0.15f / 255f, (float)(255 - base.Projectile.alpha) * 0.75f / 255f);
 		}
 		// Token: 0x06001F17 RID: 7959 RVA: 0x0000C841 File Offset: 0x0000AA41
         // Token: 0x0600298B RID: 10635 RVA: 0x00213848 File Offset: 0x00211A48

@@ -16,10 +16,10 @@ namespace MythMod.Walls
     public class 熔岩石墙 : ModWall
 	{
 		// Token: 0x060046D6 RID: 18134 RVA: 0x0027F638 File Offset: 0x0027D838
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.wallHouse[(int)base.Type] = false;
-			this.dustType = 240;
+			this.DustType = 240;
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
 			base.AddMapEntry(new Color(15, 2, 0), modTranslation);

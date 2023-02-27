@@ -17,14 +17,14 @@ namespace MythMod.Items.Foods
         }
         public override void SetDefaults()
         {
-            base.item.width = 22;
-            base.item.height = 38;
-            base.item.rare = 8;
-			base.item.useAnimation = 30;
-			base.item.useTime = 20;
-			base.item.useStyle = 2;
-			base.item.UseSound = SoundID.Item8;
-            base.item.maxStack = 200;
+            base.Item.width = 22;
+            base.Item.height = 38;
+            base.Item.rare = 8;
+			base.Item.useAnimation = 30;
+			base.Item.useTime = 20;
+			base.Item.useStyle = 2;
+			base.Item.UseSound = SoundID.Item8;
+            base.Item.maxStack = 200;
 		}
     }
 }

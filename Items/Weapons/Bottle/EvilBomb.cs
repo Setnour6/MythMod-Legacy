@@ -16,23 +16,23 @@ namespace MythMod.Items.Weapons.Bottle
 		}
 		public override void SetDefaults()
 		{
-            base.item.damage = 22;
-            base.item.thrown = true;
-            base.item.crit = 6;
-            base.item.width = 20;
-            base.item.height = 38;
-            base.item.useTime = 48;
-            base.item.useAnimation = 48;
-            base.item.useStyle = 5;
-            base.item.noMelee = true;
-            base.item.knockBack = 2f;
-            base.item.autoReuse = true;
-            base.item.value = Item.sellPrice(0, 0, 1, 0);
-            base.item.shoot = base.mod.ProjectileType("EvilBomb");
-            base.item.noUseGraphic = true;
-            base.item.rare = 3;
-            base.item.UseSound = SoundID.Item5;
-            base.item.shootSpeed = 7f;
+            base.Item.damage = 22;
+            base.Item.DamageType = DamageClass.Throwing;
+            base.Item.crit = 6;
+            base.Item.width = 20;
+            base.Item.height = 38;
+            base.Item.useTime = 48;
+            base.Item.useAnimation = 48;
+            base.Item.useStyle = 5;
+            base.Item.noMelee = true;
+            base.Item.knockBack = 2f;
+            base.Item.autoReuse = true;
+            base.Item.value = Item.sellPrice(0, 0, 1, 0);
+            base.Item.shoot = base.Mod.Find<ModProjectile>("EvilBomb").Type;
+            base.Item.noUseGraphic = true;
+            base.Item.rare = 3;
+            base.Item.UseSound = SoundID.Item5;
+            base.Item.shootSpeed = 7f;
         }
 		public override void AddRecipes()
         {

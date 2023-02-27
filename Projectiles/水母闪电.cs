@@ -1,4 +1,5 @@
-﻿using Terraria.ID;
+﻿using Terraria.GameContent;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -30,21 +31,21 @@ namespace MythMod.Projectiles
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("水母闪电");
-			Main.projFrames[base.projectile.type] = 4;
+			Main.projFrames[base.Projectile.type] = 4;
 		}
 
 		// Token: 0x06002BA1 RID: 11169 RVA: 0x00185D40 File Offset: 0x00183F40
 		public override void SetDefaults()
 		{
-			base.projectile.width = 50;
-			base.projectile.height = 200;
-			base.projectile.friendly = false;
-			base.projectile.hostile = false;
-			base.projectile.magic = true;
-			base.projectile.penetrate = -1;
-			base.projectile.timeLeft = 30;
-			base.projectile.alpha = 0;
-			base.projectile.tileCollide = false;
+			base.Projectile.width = 50;
+			base.Projectile.height = 200;
+			base.Projectile.friendly = false;
+			base.Projectile.hostile = false;
+			base.Projectile.DamageType = DamageClass.Magic;
+			base.Projectile.penetrate = -1;
+			base.Projectile.timeLeft = 30;
+			base.Projectile.alpha = 0;
+			base.Projectile.tileCollide = false;
 		}
 		// Token: 0x06002BA2 RID: 11170 RVA: 0x00229C74 File Offset: 0x00227E74
 		public override void AI()
@@ -53,16 +54,16 @@ namespace MythMod.Projectiles
 			{
 				num7 = Main.rand.Next(4);
 				num6 = false;
-				vector3 = base.projectile.Center;
+				vector3 = base.Projectile.Center;
 			}
-			base.projectile.frame = (int)num7;
-			if (projectile.timeLeft < 12 && projectile.timeLeft > 18)
+			base.Projectile.frame = (int)num7;
+			if (Projectile.timeLeft < 12 && Projectile.timeLeft > 18)
             {
-                projectile.hostile = false;
+                Projectile.hostile = false;
             }
 			else
 			{
-				projectile.hostile = true;
+				Projectile.hostile = true;
 			}
 		}
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
@@ -70,61 +71,61 @@ namespace MythMod.Projectiles
         }
 		public override Color? GetAlpha(Color lightColor)
 		{
-			if(base.projectile.timeLeft >= 24)
+			if(base.Projectile.timeLeft >= 24)
 			{
 				num2 += 0.0014f;
 			}
-			if(base.projectile.timeLeft >= 18 && base.projectile.timeLeft < 24)
+			if(base.Projectile.timeLeft >= 18 && base.Projectile.timeLeft < 24)
 			{
 				num2 -= 0.0022f;
 			}
-			if(base.projectile.timeLeft >= 6 && base.projectile.timeLeft < 18)
+			if(base.Projectile.timeLeft >= 6 && base.Projectile.timeLeft < 18)
 			{
 				num2 += 0.006f;
 			}
-			if(base.projectile.timeLeft < 6)
+			if(base.Projectile.timeLeft < 6)
 			{
 				num2 -= 0.01f;
 			}
-			return new Color?(new Color(num2 * 5f, num2 * 0.15f * 5f, 0, base.projectile.alpha));
+			return new Color?(new Color(num2 * 5f, num2 * 0.15f * 5f, 0, base.Projectile.alpha));
 		}
-		public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+		public override bool PreDraw(ref Color lightColor)
         {
             float maxDistance = 10000f;
             float step = 200f;
-            Vector2 unit = projectile.velocity;
+            Vector2 unit = Projectile.velocity;
             unit.Normalize();
             float r = unit.ToRotation();
-			int num = Main.projectileTexture[base.projectile.type].Height / Main.projFrames[base.projectile.type];
-			int y = num * base.projectile.frame;
+			int num = TextureAssets.Projectile[base.Projectile.type].Value.Height / Main.projFrames[base.Projectile.type];
+			int y = num * base.Projectile.frame;
             for (float i = 0; i < maxDistance; i += step)
             {
 				Texture2D texture;
 				if(i == 0)
 				{
-					texture = base.mod.GetTexture("Projectiles/代码杀射线发射端");
+					texture = base.Mod.GetTexture("Projectiles/代码杀射线发射端");
 				}
 				else
 				{
-					texture = Main.projectileTexture[projectile.type];
+					texture = TextureAssets.Projectile[Projectile.type].Value;
 				}
 				if(i > 2)
 				{
-					spriteBatch.Draw(Main.projectileTexture[projectile.type], vector3 + unit * (i + 190) - Main.screenPosition,  new Rectangle?(new Rectangle(0, y, texture.Width, num)),  base.projectile.GetAlpha(lightColor), r - (float)Math.PI / 2f, Main.projectileTexture[projectile.type].Size() * 0.5f, 1f, SpriteEffects.None, 0f);
+					spriteBatch.Draw(TextureAssets.Projectile[Projectile.type].Value, vector3 + unit * (i + 190) - Main.screenPosition,  new Rectangle?(new Rectangle(0, y, texture.Width, num)),  base.Projectile.GetAlpha(lightColor), r - (float)Math.PI / 2f, TextureAssets.Projectile[Projectile.type].Value.Size() * 0.5f, 1f, SpriteEffects.None, 0f);
 				}
             }
 			return false;
         }
 		public override void CutTiles()
         {
-            Vector2 unit = projectile.velocity;
-            Terraria.Utils.PlotTileLine(vector3, vector3 + unit * Distance, (projectile.width + 16) * projectile.scale,  new Utils.PerLinePoint(DelegateMethods.CutTiles));
+            Vector2 unit = Projectile.velocity;
+            Terraria.Utils.PlotTileLine(vector3, vector3 + unit * Distance, (Projectile.width + 16) * Projectile.scale,  new Utils.PerLinePoint(DelegateMethods.CutTiles));
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {
-            Vector2 unit = projectile.velocity;
+            Vector2 unit = Projectile.velocity;
             float point = 0f;
-            return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), base.projectile.Center, base.projectile.Center + unit * Distance, 14, ref point);
+            return Collision.CheckAABBvLineCollision(targetHitbox.TopLeft(), targetHitbox.Size(), base.Projectile.Center, base.Projectile.Center + unit * Distance, 14, ref point);
         }
 	}
 }

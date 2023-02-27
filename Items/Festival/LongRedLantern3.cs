@@ -13,24 +13,24 @@ namespace MythMod.Items.Festival
         }
         public override void SetDefaults()
         {
-            base.item.width = 32;
-            base.item.height = 24;
-            base.item.rare = 2;
-            base.item.scale = 1f;
-            base.item.createTile = base.mod.TileType("LargeLantern3");
-            base.item.placeStyle = 0;
-            base.item.useStyle = 1;
-            base.item.useTurn = true;
-            base.item.useAnimation = 15;
-            base.item.useTime = 10;
-            base.item.autoReuse = true;
-            base.item.consumable = true;
-            base.item.maxStack = 999;
-            base.item.value = 10000;
+            base.Item.width = 32;
+            base.Item.height = 24;
+            base.Item.rare = 2;
+            base.Item.scale = 1f;
+            base.Item.createTile = base.Mod.Find<ModTile>("LargeLantern3").Type;
+            base.Item.placeStyle = 0;
+            base.Item.useStyle = 1;
+            base.Item.useTurn = true;
+            base.Item.useAnimation = 15;
+            base.Item.useTime = 10;
+            base.Item.autoReuse = true;
+            base.Item.consumable = true;
+            base.Item.maxStack = 999;
+            base.Item.value = 10000;
         }
         public override void PostUpdate()
         {
-            Lighting.AddLight((int)((base.item.position.X + (float)(base.item.width / 2)) / 16f), (int)((base.item.position.Y + (float)(base.item.height / 2)) / 16f), 0.4f, 0f, 0f);
+            Lighting.AddLight((int)((base.Item.position.X + (float)(base.Item.width / 2)) / 16f), (int)((base.Item.position.Y + (float)(base.Item.height / 2)) / 16f), 0.4f, 0f, 0f);
         }
     }
 }

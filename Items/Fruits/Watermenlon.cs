@@ -21,17 +21,17 @@ namespace MythMod.Items.Fruits
 		// Token: 0x060005E4 RID: 1508 RVA: 0x00041780 File Offset: 0x0003F980
 		public override void SetDefaults()
 		{
-			base.item.width = 28;
-			base.item.height = 28;
-			base.item.rare = 2;
-			base.item.useAnimation = 20;
-			base.item.useTime = 20;
-			base.item.useStyle = 2;
-			base.item.UseSound = SoundID.Item8;
-			base.item.consumable = true;
-            base.item.maxStack = 200;
-            item.rare = 0;
-            item.value = 600;
+			base.Item.width = 28;
+			base.Item.height = 28;
+			base.Item.rare = 2;
+			base.Item.useAnimation = 20;
+			base.Item.useTime = 20;
+			base.Item.useStyle = 2;
+			base.Item.UseSound = SoundID.Item8;
+			base.Item.consumable = true;
+            base.Item.maxStack = 200;
+            Item.rare = 0;
+            Item.value = 600;
         }
 
 		// Token: 0x060005E5 RID: 1509 RVA: 0x000043CB File Offset: 0x000025CB

@@ -14,7 +14,7 @@ namespace MythMod.NPCs.Ocean
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("深海蟹");
-			Main.npcFrameCount[base.npc.type] = 8;
+			Main.npcFrameCount[base.NPC.type] = 8;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "深海蟹");
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -24,20 +24,20 @@ namespace MythMod.NPCs.Ocean
 		// Token: 0x06001B18 RID: 6936 RVA: 0x0014B828 File Offset: 0x00149A28
 		public override void SetDefaults()
 		{
-			base.npc.aiStyle = 3;
-			base.npc.damage = 20;
-			base.npc.width = 44;
-			base.npc.height = 34;
-			base.npc.defense = 5;
-			base.npc.lifeMax = 23;
-			base.npc.knockBackResist = 0.8f;
-			this.animationType = 67;
-			base.npc.lavaImmune = false;
-			base.npc.noGravity = false;
-			base.npc.noTileCollide = false;
-			base.npc.HitSound = SoundID.NPCHit1;
-			base.npc.DeathSound = SoundID.NPCDeath1;
-			base.npc.buffImmune[24] = true;
+			base.NPC.aiStyle = 3;
+			base.NPC.damage = 20;
+			base.NPC.width = 44;
+			base.NPC.height = 34;
+			base.NPC.defense = 5;
+			base.NPC.lifeMax = 23;
+			base.NPC.knockBackResist = 0.8f;
+			this.AnimationType = 67;
+			base.NPC.lavaImmune = false;
+			base.NPC.noGravity = false;
+			base.NPC.noTileCollide = false;
+			base.NPC.HitSound = SoundID.NPCHit1;
+			base.NPC.DeathSound = SoundID.NPCDeath1;
+			base.NPC.buffImmune[24] = true;
 		}
 
 		// Token: 0x06001B19 RID: 6937 RVA: 0x0014B900 File Offset: 0x00149B00
@@ -46,7 +46,7 @@ namespace MythMod.NPCs.Ocean
 		}
 
 		// Token: 0x06001B1A RID: 6938 RVA: 0x000037AF File Offset: 0x000019AF
-		public override bool PreNPCLoot()
+		public override bool PreKill()
 		{
 			return false;
 		}

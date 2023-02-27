@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.DataStructures;
@@ -25,20 +26,20 @@ namespace MythMod.Items.Weapons
         }
         public override void SetDefaults()
         {
-            base.item.melee = false;
-            base.item.magic = true;
-            base.item.width = 40;
-            base.item.height = 40;
-            base.item.useTime = 25;
-            base.item.mana = 25;
-            base.item.damage = 200;
-            base.item.useAnimation = 25;
-            base.item.useTurn = true;
-            base.item.useStyle = 1;
-            base.item.value = 50000;
-            base.item.UseSound = SoundID.Item1;
-            base.item.autoReuse = true;
-            base.item.rare = 8;
+            base.Item.melee = false/* tModPorter Suggestion: Remove. See Item.DamageType */;
+            base.Item.DamageType = DamageClass.Magic;
+            base.Item.width = 40;
+            base.Item.height = 40;
+            base.Item.useTime = 25;
+            base.Item.mana = 25;
+            base.Item.damage = 200;
+            base.Item.useAnimation = 25;
+            base.Item.useTurn = true;
+            base.Item.useStyle = 1;
+            base.Item.value = 50000;
+            base.Item.UseSound = SoundID.Item1;
+            base.Item.autoReuse = true;
+            base.Item.rare = 8;
         }
         public override void AddRecipes()
         {
@@ -46,10 +47,10 @@ namespace MythMod.Items.Weapons
         }
         public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
         {
-            Vector2 origin = new Vector2(item.width / 2f, item.height / 2f);
-            spriteBatch.Draw(base.mod.GetTexture("Items/Weapons/星云诡迷杖Glow"), base.item.Center - Main.screenPosition, null, new Color(255, 255, 255, 0), rotation, origin, 1f, SpriteEffects.None, 0f);
+            Vector2 origin = new Vector2(Item.width / 2f, Item.height / 2f);
+            spriteBatch.Draw(base.Mod.GetTexture("Items/Weapons/星云诡迷杖Glow"), base.Item.Center - Main.screenPosition, null, new Color(255, 255, 255, 0), rotation, origin, 1f, SpriteEffects.None, 0f);
         }
-        public override bool UseItem(Player player)
+        public override bool? UseItem(Player player)/* tModPorter Suggestion: Return null instead of false */
         {
             MythPlayer modPlayer = player.GetModPlayer<MythPlayer>();
             if (player.altFunctionUse == 2)
@@ -65,7 +66,7 @@ namespace MythMod.Items.Weapons
                 {
                     Vector2 v = Main.screenPosition + new Vector2(Main.mouseX, Main.mouseY) - player.Center;
                     v = v / v.Length() * Main.rand.NextFloat(8.4f, 22.7f);
-                    int zi = Projectile.NewProjectile(player.position.X, player.position.Y - 2, v.X / 2f, v.Y / 2f, 573, item.damage * 5, item.knockBack, player.whoAmI, 0f, 0f);
+                    int zi = Projectile.NewProjectile(player.position.X, player.position.Y - 2, v.X / 2f, v.Y / 2f, 573, Item.damage * 5, Item.knockBack, player.whoAmI, 0f, 0f);
                     Main.projectile[zi].hostile = false;
                     Main.projectile[zi].friendly = true;
                 }
@@ -86,7 +87,7 @@ namespace MythMod.Items.Weapons
                         {
                             player.lostCoinString = Main.ValueToCoins(player.lostCoins);
                         }
-                        Main.PlaySound(5, (int)player.position.X, (int)player.position.Y, 1, 1f, 0f);
+                        SoundEngine.PlaySound(SoundID.PlayerKilled, player.position);
                         player.headVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
                         player.bodyVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
                         player.legVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;

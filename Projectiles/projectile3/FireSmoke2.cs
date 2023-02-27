@@ -13,14 +13,14 @@ namespace MythMod.Projectiles.projectile3
         }
 		public override void SetDefaults()
 		{
-			base.projectile.width = 20;
-			base.projectile.height = 20;
-			base.projectile.friendly = true;
-			base.projectile.melee = true;
-			base.projectile.penetrate = 1;
-			base.projectile.aiStyle = -1;
-			base.projectile.timeLeft = 60;
-            base.projectile.hostile = true;
+			base.Projectile.width = 20;
+			base.Projectile.height = 20;
+			base.Projectile.friendly = true;
+			base.Projectile.DamageType = DamageClass.Melee;
+			base.Projectile.penetrate = 1;
+			base.Projectile.aiStyle = -1;
+			base.Projectile.timeLeft = 60;
+            base.Projectile.hostile = true;
 		}
         private int T = 0;
         public override void AI()
@@ -28,11 +28,11 @@ namespace MythMod.Projectiles.projectile3
             if(T == 0)
             {
                 T = Main.rand.Next(20, 150);
-                projectile.timeLeft = T;
+                Projectile.timeLeft = T;
             }
-            if(projectile.timeLeft %3 == 0)
+            if(Projectile.timeLeft %3 == 0)
             {
-                Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, 0, -12 * Main.rand.NextFloat(0.8f,1.2f), mod.ProjectileType("FireSmoke"), 100, 2f, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, 0, -12 * Main.rand.NextFloat(0.8f,1.2f), Mod.Find<ModProjectile>("FireSmoke").Type, 100, 2f, Main.myPlayer, 0f, 0f);
             }
 		}
 	}

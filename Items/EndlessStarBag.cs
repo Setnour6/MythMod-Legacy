@@ -30,30 +30,29 @@ namespace MythMod.Items
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            base.item.ranged = true;
-			base.item.width = 22;
-            base.item.damage = -15;
-			base.item.height = 36;
-			base.item.maxStack = 1;
-			base.item.consumable = false;
-			base.item.knockBack = 1.5f;
-			base.item.value = 50000;
-			base.item.rare = 3;
-            base.item.shoot = 12;
-            base.item.shootSpeed = 0;
-            base.item.ammo = AmmoID.FallenStar;
+            Item.glowMask = GetGlowMask;
+            base.Item.DamageType = DamageClass.Ranged;
+			base.Item.width = 22;
+            base.Item.damage = -15;
+			base.Item.height = 36;
+			base.Item.maxStack = 1;
+			base.Item.consumable = false;
+			base.Item.knockBack = 1.5f;
+			base.Item.value = 50000;
+			base.Item.rare = 3;
+            base.Item.shoot = 12;
+            base.Item.shootSpeed = 0;
+            base.Item.ammo = AmmoID.FallenStar;
 		}
         public override void AddRecipes()
         {
             {
-                ModRecipe recipe = new ModRecipe(mod);
+                Recipe recipe = CreateRecipe(1);
                 recipe.AddIngredient(null, "PureJelly", 3);
                 recipe.AddIngredient(null, "BloodCryst", 3);
                 recipe.AddIngredient(ItemID.FallenStar, 200);
-                recipe.SetResult(this, 1);
                 recipe.requiredTile[0] = 220;
-                recipe.AddRecipe();
+                recipe.Register();
             }
         }
 	}

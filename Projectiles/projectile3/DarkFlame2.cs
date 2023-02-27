@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,20 +24,20 @@ namespace MythMod.Projectiles.projectile3
         }
         public override void SetDefaults()
         {
-            projectile.width = 16;
-            projectile.height = 16;
-            projectile.aiStyle = -1;
-            projectile.friendly = false;
-            projectile.hostile = true;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = true;
-            projectile.timeLeft = 180;
-            projectile.alpha = 0;
-            projectile.penetrate = 3;
-            projectile.scale = 1f;
-            this.cooldownSlot = 1;
-            ProjectileID.Sets.TrailingMode[projectile.type] = 0;
-            ProjectileID.Sets.TrailCacheLength[projectile.type] = 60;
+            Projectile.width = 16;
+            Projectile.height = 16;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = false;
+            Projectile.hostile = true;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = true;
+            Projectile.timeLeft = 180;
+            Projectile.alpha = 0;
+            Projectile.penetrate = 3;
+            Projectile.scale = 1f;
+            this.CooldownSlot = 1;
+            ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 60;
         }
         private bool initialization = true;
         private double X;
@@ -46,7 +46,7 @@ namespace MythMod.Projectiles.projectile3
         private float rg = 0;
         public override void AI()
         {
-            base.projectile.rotation = (float)Math.Atan2((double)base.projectile.velocity.Y, (double)base.projectile.velocity.X) - (float)Math.PI * 0.5f;
+            base.Projectile.rotation = (float)Math.Atan2((double)base.Projectile.velocity.Y, (double)base.Projectile.velocity.X) - (float)Math.PI * 0.5f;
             /*if (projectile.timeLeft < 3595)
             {
                 Vector2 vector = base.projectile.Center;
@@ -55,15 +55,15 @@ namespace MythMod.Projectiles.projectile3
                 Main.dust[num].noGravity = true;
                 Main.dust[num].alpha = 150;
             }*/
-            if(projectile.timeLeft == 179)
+            if(Projectile.timeLeft == 179)
             {
                 Y = Main.rand.NextFloat(0, 100f);
             }
 
-                projectile.velocity *= 0.985f;
+                Projectile.velocity *= 0.985f;
 
             
-            projectile.velocity = projectile.velocity.RotatedBy(Main.rand.NextFloat(-0.25f,0.25f) / projectile.velocity.Length());
+            Projectile.velocity = Projectile.velocity.RotatedBy(Main.rand.NextFloat(-0.25f,0.25f) / Projectile.velocity.Length());
         }
         public override Color? GetAlpha(Color lightColor)
         {
@@ -71,57 +71,57 @@ namespace MythMod.Projectiles.projectile3
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            base.projectile.penetrate--;
-            if (base.projectile.penetrate <= 0)
+            base.Projectile.penetrate--;
+            if (base.Projectile.penetrate <= 0)
             {
-                base.projectile.Kill();
+                base.Projectile.Kill();
             }
             else
             {
-                projectile.velocity = projectile.velocity.RotatedBy(Main.rand.NextFloat(1.57f, 4.71f));
-                projectile.velocity.Y *= 0.2f;
+                Projectile.velocity = Projectile.velocity.RotatedBy(Main.rand.NextFloat(1.57f, 4.71f));
+                Projectile.velocity.Y *= 0.2f;
             }
             return false;
         }
-        public override void PostDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override void PostDraw(Color lightColor)
         {
             List<CustomVertexInfo> bars = new List<CustomVertexInfo>();
 
             // 把所有的点都生成出来，按照顺序
-            for (int i = 1; i < projectile.oldPos.Length; ++i)
+            for (int i = 1; i < Projectile.oldPos.Length; ++i)
             {
-                if (projectile.oldPos[i] == Vector2.Zero) break;
+                if (Projectile.oldPos[i] == Vector2.Zero) break;
                 //spriteBatch.Draw(Main.magicPixel, projectile.oldPos[i] - Main.screenPosition,
                 //    new Rectangle(0, 0, 1, 1), Color.White, 0f, new Vector2(0.5f, 0.5f), 5f, SpriteEffects.None, 0f);
 
                 int width = 0;
-                float x = 180 - projectile.timeLeft;
+                float x = 180 - Projectile.timeLeft;
                 width = (int)(1200 / (x - 203) + (x + 3000) * (x - 600) / 10000f + 185.8f) * 2;
-                var normalDir = projectile.oldPos[i - 1] - projectile.oldPos[i];
+                var normalDir = Projectile.oldPos[i - 1] - Projectile.oldPos[i];
                 normalDir = Vector2.Normalize(new Vector2(-normalDir.Y, normalDir.X));
 
                 var alpha = (float)0;
-                if (projectile.timeLeft > 120)
+                if (Projectile.timeLeft > 120)
                 {
-                    alpha = 0 + i / (float)projectile.oldPos.Length;
+                    alpha = 0 + i / (float)Projectile.oldPos.Length;
                 }
                 else
                 {
-                    if(1 - projectile.timeLeft / 120f + i / (float)projectile.oldPos.Length > 1)
+                    if(1 - Projectile.timeLeft / 120f + i / (float)Projectile.oldPos.Length > 1)
                     {
                         alpha = 1;
                     }
                     else
                     {
-                        alpha = 1 - projectile.timeLeft / 120f + i / (float)projectile.oldPos.Length;
+                        alpha = 1 - Projectile.timeLeft / 120f + i / (float)Projectile.oldPos.Length;
                     }
                 }
-                var factor = i / (float)projectile.oldPos.Length;
+                var factor = i / (float)Projectile.oldPos.Length;
                 var color = Color.Lerp(Color.White, Color.Blue, factor);
                 var w = MathHelper.Lerp(1f, 0.05f, alpha);
 
-                bars.Add(new CustomVertexInfo(projectile.oldPos[i] + normalDir * width + new Vector2(13, 13) - projectile.velocity * 1.5f, color, new Vector3((float)Math.Sqrt(factor), 1, w)));
-                bars.Add(new CustomVertexInfo(projectile.oldPos[i] + normalDir * -width + new Vector2(13, 13) - projectile.velocity * 1.5f, color, new Vector3((float)Math.Sqrt(factor), 0, w)));
+                bars.Add(new CustomVertexInfo(Projectile.oldPos[i] + normalDir * width + new Vector2(13, 13) - Projectile.velocity * 1.5f, color, new Vector3((float)Math.Sqrt(factor), 1, w)));
+                bars.Add(new CustomVertexInfo(Projectile.oldPos[i] + normalDir * -width + new Vector2(13, 13) - Projectile.velocity * 1.5f, color, new Vector3((float)Math.Sqrt(factor), 0, w)));
             }
 
             List<CustomVertexInfo> triangleList = new List<CustomVertexInfo>();
@@ -131,7 +131,7 @@ namespace MythMod.Projectiles.projectile3
 
                 // 按照顺序连接三角形
                 triangleList.Add(bars[0]);
-                var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + Vector2.Normalize(projectile.velocity) * 30, Color.White, new Vector3(0, 0.5f, 1));
+                var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + Vector2.Normalize(Projectile.velocity) * 30, Color.White, new Vector3(0, 0.5f, 1));
                 triangleList.Add(bars[1]);
                 triangleList.Add(vertex);
                 for (int i = 0; i < bars.Count - 2; i += 2)

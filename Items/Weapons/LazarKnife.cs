@@ -27,31 +27,30 @@ namespace MythMod.Items.Weapons
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            item.useStyle = 1;
-			item.shootSpeed = 27f;
-			item.shoot = mod.ProjectileType("LaserKnife");
-			item.width = 54;
-			item.height = 60;
-			item.maxStack = 999;
-			item.consumable = true;
-			item.UseSound = SoundID.Item1;
-			item.useAnimation = 10;
-			item.useTime = 10;
-			item.noUseGraphic = true;
-			item.noMelee = true;
-			item.rare = 6;
-            item.damage = 90;
-            item.autoReuse = true;
+            Item.glowMask = GetGlowMask;
+            Item.useStyle = 1;
+			Item.shootSpeed = 27f;
+			Item.shoot = Mod.Find<ModProjectile>("LaserKnife").Type;
+			Item.width = 54;
+			Item.height = 60;
+			Item.maxStack = 999;
+			Item.consumable = true;
+			Item.UseSound = SoundID.Item1;
+			Item.useAnimation = 10;
+			Item.useTime = 10;
+			Item.noUseGraphic = true;
+			Item.noMelee = true;
+			Item.rare = 6;
+            Item.damage = 90;
+            Item.autoReuse = true;
         }
 		public override void AddRecipes()
 		{
-			ModRecipe modRecipe = new ModRecipe(base.mod);
+			Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
 			modRecipe.AddIngredient(null, "LazarBattery", 1);
             modRecipe.AddIngredient(42, 100);
             modRecipe.requiredTile[0] = 134;
-			modRecipe.SetResult(this, 1);
-			modRecipe.AddRecipe();
+			modRecipe.Register();
 		}
 	}
 }

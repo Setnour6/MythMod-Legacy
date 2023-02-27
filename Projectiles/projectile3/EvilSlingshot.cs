@@ -13,20 +13,20 @@ namespace MythMod.Projectiles.projectile3
 		}
 		public override void SetDefaults()
 		{
-			base.projectile.width = 20;
-			base.projectile.height = 20;
-			base.projectile.friendly = true;
-			base.projectile.melee = true;
-			base.projectile.penetrate = 15;
-			base.projectile.aiStyle = 1;
-			base.projectile.timeLeft = 1200;
-            base.projectile.hostile = false;
-            projectile.penetrate = 1;
+			base.Projectile.width = 20;
+			base.Projectile.height = 20;
+			base.Projectile.friendly = true;
+			base.Projectile.DamageType = DamageClass.Melee;
+			base.Projectile.penetrate = 15;
+			base.Projectile.aiStyle = 1;
+			base.Projectile.timeLeft = 1200;
+            base.Projectile.hostile = false;
+            Projectile.penetrate = 1;
 
         }
 		public override void AI()
 		{
-            int r = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) + base.projectile.velocity * 1.5f + new Vector2(-9, -4), 0, 0, 27, 0, 0, 0, default(Color), 1f);
+            int r = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) + base.Projectile.velocity * 1.5f + new Vector2(-9, -4), 0, 0, 27, 0, 0, 0, default(Color), 1f);
             Main.dust[r].velocity.X = 0;
             Main.dust[r].velocity.Y = 0;
             Main.dust[r].noGravity = true;

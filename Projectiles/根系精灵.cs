@@ -12,47 +12,47 @@ namespace MythMod.Projectiles
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("根系精灵");
-			ProjectileID.Sets.MinionSacrificable[base.projectile.type] = true;
-			ProjectileID.Sets.MinionTargettingFeature[base.projectile.type] = true;
+			ProjectileID.Sets.MinionSacrificable[base.Projectile.type] = true;
+			ProjectileID.Sets.MinionTargettingFeature[base.Projectile.type] = true;
 		}
 		public override void SetDefaults()
 		{
-			base.projectile.width = 36;
-			base.projectile.height = 36;
-			base.projectile.netImportant = true;
-			base.projectile.friendly = true;
-			base.projectile.minionSlots = 1f;
-			base.projectile.aiStyle = 54;
-			base.projectile.timeLeft = 18000;
-			base.projectile.penetrate = -1;
-			base.projectile.timeLeft *= 5;
-			base.projectile.minion = true;
-			this.aiType = 317;
-			base.projectile.tileCollide = false;
-			base.projectile.usesLocalNPCImmunity = true;
-			base.projectile.localNPCHitCooldown = 10;
+			base.Projectile.width = 36;
+			base.Projectile.height = 36;
+			base.Projectile.netImportant = true;
+			base.Projectile.friendly = true;
+			base.Projectile.minionSlots = 1f;
+			base.Projectile.aiStyle = 54;
+			base.Projectile.timeLeft = 18000;
+			base.Projectile.penetrate = -1;
+			base.Projectile.timeLeft *= 5;
+			base.Projectile.minion = true;
+			this.AIType = 317;
+			base.Projectile.tileCollide = false;
+			base.Projectile.usesLocalNPCImmunity = true;
+			base.Projectile.localNPCHitCooldown = 10;
 		}
 		public override void AI()
 		{
-			if (base.projectile.localAI[0] == 0f)
+			if (base.Projectile.localAI[0] == 0f)
 			{
 				int num = 36;
 				for (int i = 0; i < num; i++)
 				{
-					Vector2 vector = Vector2.Normalize(base.projectile.velocity) * new Vector2((float)base.projectile.width / 2f, (float)base.projectile.height) * 0.75f;
-					vector = Utils.RotatedBy(vector, (double)((float)(i - (num / 2 - 1)) * 6.28318548f / (float)num), default(Vector2)) + base.projectile.Center;
-					Vector2 vector2 = vector - base.projectile.Center;
+					Vector2 vector = Vector2.Normalize(base.Projectile.velocity) * new Vector2((float)base.Projectile.width / 2f, (float)base.Projectile.height) * 0.75f;
+					vector = Utils.RotatedBy(vector, (double)((float)(i - (num / 2 - 1)) * 6.28318548f / (float)num), default(Vector2)) + base.Projectile.Center;
+					Vector2 vector2 = vector - base.Projectile.Center;
 					int num2 = Dust.NewDust(vector + vector2, 0, 0, 5, vector2.X * 1.5f, vector2.Y * 1.5f, 100, default(Color), 1.4f);
 					Main.dust[num2].noGravity = true;
 					Main.dust[num2].noLight = true;
 					Main.dust[num2].velocity = vector2;
 				}
-				base.projectile.localAI[0] += 1f;
+				base.Projectile.localAI[0] += 1f;
 			}
-            bool flag = base.projectile.type == base.mod.ProjectileType("根系精灵");
-			Player player = Main.player[base.projectile.owner];
+            bool flag = base.Projectile.type == base.Mod.Find<ModProjectile>("根系精灵").Type;
+			Player player = Main.player[base.Projectile.owner];
 			MythPlayer modPlayer = player.GetModPlayer<MythPlayer>();
-            player.AddBuff(base.mod.BuffType("GXJL"), 3600, true);
+            player.AddBuff(base.Mod.Find<ModBuff>("GXJL").Type, 3600, true);
 			if (flag)
 			{
 				if (player.dead)
@@ -61,7 +61,7 @@ namespace MythMod.Projectiles
 				}
                 if (modPlayer.GXJL)
 				{
-					base.projectile.timeLeft = 2;
+					base.Projectile.timeLeft = 2;
 				}
 			}
 		}

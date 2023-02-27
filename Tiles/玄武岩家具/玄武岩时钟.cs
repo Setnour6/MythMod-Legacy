@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent.ObjectInteractions;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -13,14 +14,14 @@ namespace MythMod.Tiles.玄武岩家具
 	public class 玄武岩时钟 : ModTile
 	{
 		// Token: 0x06004174 RID: 16756 RVA: 0x0032BE68 File Offset: 0x0032A068
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[(int)base.Type] = true;
 			Main.tileNoAttach[(int)base.Type] = true;
 			Main.tileLavaDeath[(int)base.Type] = true;
 			Main.tileWaterDeath[(int)base.Type] = false;
 			TileID.Sets.HasOutlines[(int)base.Type] = true;
-			this.animationFrameHeight = 90;
+			this.AnimationFrameHeight = 90;
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style2xX);
 			TileObjectData.newTile.Height = 5;
 			TileObjectData.newTile.CoordinateHeights = new int[]
@@ -37,7 +38,7 @@ namespace MythMod.Tiles.玄武岩家具
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
 			modTranslation.SetDefault("玄武岩时钟");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
-			this.adjTiles = new int[]
+			this.AdjTiles = new int[]
 			{
 				104
 			};
@@ -45,7 +46,7 @@ namespace MythMod.Tiles.玄武岩家具
 		}
 
 		// Token: 0x06004175 RID: 16757 RVA: 0x00003A42 File Offset: 0x00001C42
-		public override bool HasSmartInteract()
+		public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings)
 		{
 			return true;
 		}
@@ -115,14 +116,14 @@ namespace MythMod.Tiles.玄武岩家具
 		{
 			if (closer)
 			{
-				Main.clock = true;
+				Main.SceneMetrics.HasClock = true;
 			}
 		}
 
 		// Token: 0x0600417A RID: 16762 RVA: 0x0032C090 File Offset: 0x0032A290
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			Item.NewItem(i * 16, j * 16, 48, 32, base.mod.ItemType("BasaltClock"), 1, false, 0, false, false);
+			Item.NewItem(i * 16, j * 16, 48, 32, base.Mod.Find<ModItem>("BasaltClock").Type, 1, false, 0, false, false);
 		}
 	}
 }

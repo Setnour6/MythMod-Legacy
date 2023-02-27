@@ -28,47 +28,47 @@ namespace MythMod.NPCs
         private bool St = true;
         public override void SetDefaults()
 		{
-            npc.behindTiles = true;
+            NPC.behindTiles = true;
 
-            base.npc.damage = 0;
-			base.npc.width = 2;
-			base.npc.height = 2;
-			base.npc.defense = 0;
-			base.npc.lifeMax = 1;
-			base.npc.knockBackResist = 0f;
-			base.npc.value = (float)Item.buyPrice(0, 0, 0, 0);
-            base.npc.color = new Color(0, 0, 0, 0);
-			base.npc.alpha = 255;
-            base.npc.boss = false;
-			base.npc.lavaImmune = true;
-			base.npc.noGravity = false;
-			base.npc.noTileCollide = false;
-			base.npc.HitSound = SoundID.NPCHit1;
-			base.npc.dontTakeDamage = true;
+            base.NPC.damage = 0;
+			base.NPC.width = 2;
+			base.NPC.height = 2;
+			base.NPC.defense = 0;
+			base.NPC.lifeMax = 1;
+			base.NPC.knockBackResist = 0f;
+			base.NPC.value = (float)Item.buyPrice(0, 0, 0, 0);
+            base.NPC.color = new Color(0, 0, 0, 0);
+			base.NPC.alpha = 255;
+            base.NPC.boss = false;
+			base.NPC.lavaImmune = true;
+			base.NPC.noGravity = false;
+			base.NPC.noTileCollide = false;
+			base.NPC.HitSound = SoundID.NPCHit1;
+			base.NPC.dontTakeDamage = true;
 		}
 		public override void AI()
         {
-			Player player = Main.player[base.npc.target];
+			Player player = Main.player[base.NPC.target];
             if(St)
             {
-                npc.localAI[0] = 0;
+                NPC.localAI[0] = 0;
                 St = false;
             }
-			base.npc.localAI[0] += 1;
+			base.NPC.localAI[0] += 1;
 			bool expertMode = Main.expertMode;
 			float num6 = expertMode ? 5f : 3f;
-			if(base.npc.localAI[0] >= 2)
+			if(base.NPC.localAI[0] >= 2)
 			{
-	    		if ((base.npc.collideY || base.npc.collideX) && !Attack)
+	    		if ((base.NPC.collideY || base.NPC.collideX) && !Attack)
                 {
-                    npc.velocity *= 0;
+                    NPC.velocity *= 0;
 	    		}
-                if (npc.velocity.Length() == 0 && !Attack)
+                if (NPC.velocity.Length() == 0 && !Attack)
                 {
-                    int type = base.mod.ProjectileType("CrimsonTusk1");
-                    int num7 = Projectile.NewProjectile((int)base.npc.Center.X, (int)base.npc.Center.Y - 12, 0, 0, type, (int)(8 * num6), 2f, Main.myPlayer, 0f, 0f);
+                    int type = base.Mod.Find<ModProjectile>("CrimsonTusk1").Type;
+                    int num7 = Projectile.NewProjectile((int)base.NPC.Center.X, (int)base.NPC.Center.Y - 12, 0, 0, type, (int)(8 * num6), 2f, Main.myPlayer, 0f, 0f);
                     X = 1;
-                    npc.alpha = 0;
+                    NPC.alpha = 0;
                     n = Main.rand.Next(8);
                     Attack = true;
                 }
@@ -87,17 +87,17 @@ namespace MythMod.NPCs
                 drawPos.Y += 0.5f;
                 if (drawPos.Y > 52)
                 {
-                    npc.active = false;
+                    NPC.active = false;
                 }
             }
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            Color color = Lighting.GetColor((int)((npc.Center.X / 16d) + drawPos.X), (int)((npc.Center.Y / 16d) + drawPos.Y - 16));
-            color = npc.GetAlpha(color) * ((255 - npc.alpha) / 255f);
-            T[n] = mod.GetTexture("Projectiles/BloodyTusk/Tusk" + n.ToString());
+            Color color = Lighting.GetColor((int)((NPC.Center.X / 16d) + drawPos.X), (int)((NPC.Center.Y / 16d) + drawPos.Y - 16));
+            color = NPC.GetAlpha(color) * ((255 - NPC.alpha) / 255f);
+            T[n] = Mod.GetTexture("Projectiles/BloodyTusk/Tusk" + n.ToString());
 
-            Main.spriteBatch.Draw(T[n], npc.position - Main.screenPosition + drawPos - new Vector2(0, 16), null, color, base.npc.rotation, new Vector2(T[n].Width / 2f, T[n].Height / 2f), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(T[n], NPC.position - Main.screenPosition + drawPos - new Vector2(0, 16), null, color, base.NPC.rotation, new Vector2(T[n].Width / 2f, T[n].Height / 2f), 1f, SpriteEffects.None, 0f);
             return false;
         }
     }

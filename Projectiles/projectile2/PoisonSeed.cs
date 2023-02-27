@@ -17,16 +17,16 @@ namespace MythMod.Projectiles.projectile2
         // Token: 0x06001C82 RID: 7298 RVA: 0x0016F518 File Offset: 0x0016D718
         public override void SetDefaults()
 		{
-			base.projectile.width = 40;
-			base.projectile.height = 40;
-			base.projectile.friendly = false;
-            base.projectile.hostile = true;
-            base.projectile.alpha = 0;
-			base.projectile.penetrate = -1;
-			base.projectile.tileCollide = true;
-			base.projectile.timeLeft = 3600;
-            base.projectile.ranged = true;
-            base.projectile.aiStyle = -1;
+			base.Projectile.width = 40;
+			base.Projectile.height = 40;
+			base.Projectile.friendly = false;
+            base.Projectile.hostile = true;
+            base.Projectile.alpha = 0;
+			base.Projectile.penetrate = -1;
+			base.Projectile.tileCollide = true;
+			base.Projectile.timeLeft = 3600;
+            base.Projectile.DamageType = DamageClass.Ranged;
+            base.Projectile.aiStyle = -1;
 		}
         float timer = 0;
         static int j = 0;
@@ -38,8 +38,8 @@ namespace MythMod.Projectiles.projectile2
         public override void AI()
         {
             j += 1;
-            projectile.rotation = (float)System.Math.Atan2((double)projectile.velocity.Y, (double)projectile.velocity.X) + 1.57f + num;
-            if(projectile.timeLeft <= 250 && !x)
+            Projectile.rotation = (float)System.Math.Atan2((double)Projectile.velocity.Y, (double)Projectile.velocity.X) + 1.57f + num;
+            if(Projectile.timeLeft <= 250 && !x)
             {
                 num += 0.15f;
             }
@@ -55,38 +55,38 @@ namespace MythMod.Projectiles.projectile2
                     m = 0;
                 }
             }
-            if (projectile.velocity.Y < 15f && !x)
+            if (Projectile.velocity.Y < 15f && !x)
             {
-                projectile.velocity.Y += 0.2f;
+                Projectile.velocity.Y += 0.2f;
             }
             if(j % 3 == 0)
             {
                 Vector2 v = new Vector2(0, Main.rand.Next(20, 90)).RotatedByRandom(Math.PI * 2);
                 Vector2 v2 = v.RotatedByRandom(Math.PI * 2) / Main.rand.NextFloat(10f, 40f);
-                int num4 = Projectile.NewProjectile(base.projectile.Center.X + v.X, base.projectile.Center.Y + v.Y, v2.X, v2.Y, base.mod.ProjectileType("PoisonFog"), 5, 0, base.projectile.owner, 0f, 0f);
+                int num4 = Projectile.NewProjectile(base.Projectile.Center.X + v.X, base.Projectile.Center.Y + v.Y, v2.X, v2.Y, base.Mod.Find<ModProjectile>("PoisonFog").Type, 5, 0, base.Projectile.owner, 0f, 0f);
             }
-            if(projectile.timeLeft < 60)
+            if(Projectile.timeLeft < 60)
             {
-                projectile.alpha += 5;
+                Projectile.alpha += 5;
             }
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            if (projectile.velocity.Length() > 0.5f)
+            if (Projectile.velocity.Length() > 0.5f)
             {
-                if (base.projectile.velocity.X != oldVelocity.X)
+                if (base.Projectile.velocity.X != oldVelocity.X)
                 {
-                    base.projectile.velocity.X = -oldVelocity.X * 0.6f;
+                    base.Projectile.velocity.X = -oldVelocity.X * 0.6f;
                 }
-                if (base.projectile.velocity.Y != oldVelocity.Y)
+                if (base.Projectile.velocity.Y != oldVelocity.Y)
                 {
-                    base.projectile.velocity.Y = -oldVelocity.Y * 0.6f;
+                    base.Projectile.velocity.Y = -oldVelocity.Y * 0.6f;
                 }
             }
             else
             {
-                base.projectile.velocity.Y *= 0;
-                base.projectile.velocity.X *= 0;
+                base.Projectile.velocity.Y *= 0;
+                base.Projectile.velocity.X *= 0;
                 x = true;
             }
             return false;

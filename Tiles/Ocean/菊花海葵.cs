@@ -15,13 +15,13 @@ namespace MythMod.Tiles.Ocean
         private bool num3 = false;
         private bool flag2 = false;
         // Token: 0x0600400B RID: 16395 RVA: 0x0032258C File Offset: 0x0032078C
-        public override void SetDefaults()
+        public override void SetStaticDefaults()
         {
             Main.tileFrameImportant[(int)base.Type] = true;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
             TileObjectData.newTile.StyleHorizontal = true;
             TileObjectData.newTile.LavaDeath = false;
-            this.drop = base.mod.ItemType("OrangeSeaAnemone");
+            this.ItemDrop = base.Mod.Find<ModItem>("OrangeSeaAnemone").Type;
             TileObjectData.addTile((int)base.Type);
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
@@ -47,38 +47,38 @@ namespace MythMod.Tiles.Ocean
                 num += (3 / (MythWorld.菊花海葵 + 0.0001f)) * Main.rand.Next(1000, 1200) / 1000f;
                 if (i % 2 == 1)
                 {
-                    if ((int)num % (3) == 0 && Main.tile[i, j].frameY < 72)
+                    if ((int)num % (3) == 0 && Main.tile[i, j].TileFrameY < 72)
                     {
-                        Main.tile[i, j].frameY += 18;
+                        Main.tile[i, j].TileFrameY += 18;
                     }
                 }
                 if (i % 2 == 0)
                 {
-                    if ((int)num % (3) == 0 && Main.tile[i, j].frameY < 72)
+                    if ((int)num % (3) == 0 && Main.tile[i, j].TileFrameY < 72)
                     {
-                        Main.tile[i, j].frameY += 18;
+                        Main.tile[i, j].TileFrameY += 18;
                     }
                 }
                 flag2 = true;
             }
-            if (Main.tile[i, j].frameY >= 18 && !flag)
+            if (Main.tile[i, j].TileFrameY >= 18 && !flag)
             {
                 num += 3 * Main.rand.Next(1000, 1200) / 1000f;
                 if (i % 2 == 1)
                 {
-                    if ((int)num % (5) == 0 && Main.tile[i, j].frameY > 18)
+                    if ((int)num % (5) == 0 && Main.tile[i, j].TileFrameY > 18)
                     {
-                        Main.tile[i, j].frameY -= 18;
+                        Main.tile[i, j].TileFrameY -= 18;
                     }
                 }
                 if (i % 2 == 0)
                 {
-                    if ((int)num % (5) == 0 && Main.tile[i, j].frameY > 18)
+                    if ((int)num % (5) == 0 && Main.tile[i, j].TileFrameY > 18)
                     {
-                        Main.tile[i, j].frameY -= 18;
+                        Main.tile[i, j].TileFrameY -= 18;
                     }
                 }
-                if (Main.tile[i, j].frameY < 18)
+                if (Main.tile[i, j].TileFrameY < 18)
                 {
                     flag2 = false;
                 }
@@ -89,7 +89,7 @@ namespace MythMod.Tiles.Ocean
         public override void PlaceInWorld(int i, int j, Item item)
         {
             short num = (short)(Main.rand.Next(0, 3) * 18);
-            Main.tile[i, j].frameX = num;
+            Main.tile[i, j].TileFrameX = num;
         }
         public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
         {
@@ -100,7 +100,7 @@ namespace MythMod.Tiles.Ocean
                 zero = Vector2.Zero;
             }
             int height = 16;
-            Main.spriteBatch.Draw(mod.GetTexture("Tiles/Ocean/菊花海葵Glow"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.frameX, tile.frameY, 16, height), new Color(55,55,55,0), 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(Mod.GetTexture("Tiles/Ocean/菊花海葵Glow"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, height), new Color(55,55,55,0), 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
         }
     }
 }

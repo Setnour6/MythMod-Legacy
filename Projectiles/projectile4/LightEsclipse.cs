@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,19 +23,19 @@ namespace MythMod.Projectiles.projectile4
         }
         public override void SetDefaults()
         {
-            projectile.width = 8;
-            projectile.height = 8;
-            projectile.aiStyle = -1;
-            projectile.friendly = true;
-            projectile.hostile = false;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = true;
-            projectile.extraUpdates = 30;
-            projectile.timeLeft = 1000;
-            projectile.alpha = 0;
-            projectile.penetrate = 999;
-            projectile.scale = 1f;
-            this.cooldownSlot = 1;
+            Projectile.width = 8;
+            Projectile.height = 8;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = true;
+            Projectile.hostile = false;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = true;
+            Projectile.extraUpdates = 30;
+            Projectile.timeLeft = 1000;
+            Projectile.alpha = 0;
+            Projectile.penetrate = 999;
+            Projectile.scale = 1f;
+            this.CooldownSlot = 1;
         }
         private bool initialization = true;
         private double X;
@@ -44,41 +44,41 @@ namespace MythMod.Projectiles.projectile4
         private float rg = 0;
         public override void AI()
         {
-            base.projectile.rotation = (float)Math.Atan2((double)base.projectile.velocity.Y, (double)base.projectile.velocity.X) - (float)Math.PI * 0.5f;
-            if (projectile.timeLeft < 1000 && projectile.timeLeft > 100)
+            base.Projectile.rotation = (float)Math.Atan2((double)base.Projectile.velocity.Y, (double)base.Projectile.velocity.X) - (float)Math.PI * 0.5f;
+            if (Projectile.timeLeft < 1000 && Projectile.timeLeft > 100)
             {
-                projectile.tileCollide = true;
-                Vector2 vector = base.projectile.Center;
-                int num = Dust.NewDust(vector - new Vector2(4, 4), 2, 2, 87, 50f, 50f, 0, default(Color), (float)projectile.scale * 1.2f);
+                Projectile.tileCollide = true;
+                Vector2 vector = base.Projectile.Center;
+                int num = Dust.NewDust(vector - new Vector2(4, 4), 2, 2, 87, 50f, 50f, 0, default(Color), (float)Projectile.scale * 1.2f);
                 Main.dust[num].velocity *= 0.0f;
                 Main.dust[num].noGravity = true;
                 Main.dust[num].scale *= 1.2f;
                 Main.dust[num].color = Color.DarkOrange;
                 Main.dust[num].alpha = 200;
             }
-            if (projectile.timeLeft < 100)
+            if (Projectile.timeLeft < 100)
             {
-                Vector2 vector = base.projectile.Center;
-                int num = Dust.NewDust(vector - new Vector2(4, 4), 2, 2, 87, 50f, 50f, 0, default(Color), (float)projectile.scale * 1.2f * projectile.timeLeft / 100f);
+                Vector2 vector = base.Projectile.Center;
+                int num = Dust.NewDust(vector - new Vector2(4, 4), 2, 2, 87, 50f, 50f, 0, default(Color), (float)Projectile.scale * 1.2f * Projectile.timeLeft / 100f);
                 Main.dust[num].velocity *= 0.0f;
                 Main.dust[num].noGravity = true;
                 Main.dust[num].scale *= 1.2f;
                 Main.dust[num].color = Color.DarkOrange;
                 Main.dust[num].alpha = 200;
             }
-            if (projectile.velocity.Y < 15 && projectile.timeLeft > 50)
+            if (Projectile.velocity.Y < 15 && Projectile.timeLeft > 50)
             {
-                projectile.velocity.Y += 0.01f;
+                Projectile.velocity.Y += 0.01f;
             }
-            if(projectile.timeLeft <= 50)
+            if(Projectile.timeLeft <= 50)
             {
-                projectile.scale *= 0.96f;
-                projectile.alpha += 1;
+                Projectile.scale *= 0.96f;
+                Projectile.alpha += 1;
             }
         }
         public override Color? GetAlpha(Color lightColor)
         {
-            return new Color?(new Color(255, 255, 255, 0) * ((projectile.timeLeft) / 1000f));
+            return new Color?(new Color(255, 255, 255, 0) * ((Projectile.timeLeft) / 1000f));
         }
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
@@ -94,9 +94,9 @@ namespace MythMod.Projectiles.projectile4
             }
             for (int a = 0; a < 30; a++)
             {
-                Vector2 vector = base.projectile.Center;
+                Vector2 vector = base.Projectile.Center;
                 Vector2 v = new Vector2(0, Main.rand.NextFloat(0, 2.5f)).RotatedByRandom(Math.PI * 2);
-                int num = Dust.NewDust(vector - new Vector2(4, 4), 2, 2, 87, v.X, v.Y, 0, default(Color), (float)projectile.scale * 1.5f);
+                int num = Dust.NewDust(vector - new Vector2(4, 4), 2, 2, 87, v.X, v.Y, 0, default(Color), (float)Projectile.scale * 1.5f);
                 Main.dust[num].noGravity = true;
                 Main.dust[num].scale *= 1.2f;
                 Main.dust[num].alpha = 200;
@@ -104,10 +104,10 @@ namespace MythMod.Projectiles.projectile4
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            if (projectile.timeLeft > 51)
+            if (Projectile.timeLeft > 51)
             {
-                projectile.timeLeft = 50;
-                projectile.velocity *= 0;
+                Projectile.timeLeft = 50;
+                Projectile.velocity *= 0;
             }
             return false;
         }

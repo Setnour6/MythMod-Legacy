@@ -14,28 +14,27 @@ namespace MythMod.Items.Furnitures//制作是mod名字
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetDefaults()
         {
-            base.item.width = 48;//宽
-            base.item.height = 64;//高
-            base.item.rare = 2;//品质
-            base.item.scale = 1f;//大小
-            base.item.createTile = base.mod.TileType("大理石电梯楼层显示标");
-            base.item.useStyle = 1;
-            base.item.useTurn = true;
-            base.item.useAnimation = 15;
-            base.item.useTime = 10;
-            base.item.autoReuse = true;
-            base.item.consumable = true;
-            base.item.maxStack = 999;
-            base.item.value = 400;
+            base.Item.width = 48;//宽
+            base.Item.height = 64;//高
+            base.Item.rare = 2;//品质
+            base.Item.scale = 1f;//大小
+            base.Item.createTile = base.Mod.Find<ModTile>("大理石电梯楼层显示标").Type;
+            base.Item.useStyle = 1;
+            base.Item.useTurn = true;
+            base.Item.useAnimation = 15;
+            base.Item.useTime = 10;
+            base.Item.autoReuse = true;
+            base.Item.consumable = true;
+            base.Item.maxStack = 999;
+            base.Item.value = 400;
         }
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(null, "LiftLabel", 1);
             modRecipe.AddIngredient(3066, 2);
-            modRecipe.SetResult(this, 1);
             modRecipe.AddTile(18);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
     }
 }

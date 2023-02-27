@@ -28,29 +28,29 @@ namespace MythMod.Items.Weapons
 		}
 		public override void SetDefaults()
 		{
-			base.item.damage = 90;
-			base.item.width = 40;
-			base.item.height = 22;
-			base.item.useTime = 12;
-			base.item.useAnimation = 12;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.ranged = true;
-			base.item.knockBack = 1f;
-			base.item.value = 50000;
-			base.item.rare = 8;
-			base.item.UseSound = SoundID.Item31;
-			base.item.autoReuse = true;
-            base.item.shoot = 577;
-			base.item.shootSpeed = 14f;
-			base.item.useAmmo = 97;
+			base.Item.damage = 90;
+			base.Item.width = 40;
+			base.Item.height = 22;
+			base.Item.useTime = 12;
+			base.Item.useAnimation = 12;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.DamageType = DamageClass.Ranged;
+			base.Item.knockBack = 1f;
+			base.Item.value = 50000;
+			base.Item.rare = 8;
+			base.Item.UseSound = SoundID.Item31;
+			base.Item.autoReuse = true;
+            base.Item.shoot = 577;
+			base.Item.shootSpeed = 14f;
+			base.Item.useAmmo = 97;
 		}
         public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
         {
-            Vector2 origin = new Vector2(item.width / 2f, item.height / 2f);
-            spriteBatch.Draw(base.mod.GetTexture("Items/Weapons/异星蜇刺Glow"), base.item.Center - Main.screenPosition, null, new Color(255, 255, 255, 0), rotation, origin, 1f, SpriteEffects.None, 0f);
+            Vector2 origin = new Vector2(Item.width / 2f, Item.height / 2f);
+            spriteBatch.Draw(base.Mod.GetTexture("Items/Weapons/异星蜇刺Glow"), base.Item.Center - Main.screenPosition, null, new Color(255, 255, 255, 0), rotation, origin, 1f, SpriteEffects.None, 0f);
         }
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
 			float num = speedX + (float)Main.rand.Next(-10, 11) * 0.05f;
 			float num2 = speedY + (float)Main.rand.Next(-10, 11) * 0.05f;
@@ -80,7 +80,7 @@ namespace MythMod.Items.Weapons
             }
             if(Main.rand.Next(10) == 1)
             {
-                int zi = Projectile.NewProjectile(position.X, position.Y - 2, speedX / 7f, speedY / 7f, mod.ProjectileType("Thunderstaff"), (int)((double)damage) * 32, knockBack, player.whoAmI, 0f, 0f);
+                int zi = Projectile.NewProjectile(position.X, position.Y - 2, speedX / 7f, speedY / 7f, Mod.Find<ModProjectile>("Thunderstaff").Type, (int)((double)damage) * 32, knockBack, player.whoAmI, 0f, 0f);
             }
             return false;
 		}

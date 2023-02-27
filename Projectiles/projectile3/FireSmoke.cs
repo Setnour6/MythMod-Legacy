@@ -13,39 +13,39 @@ namespace MythMod.Projectiles.projectile3
         }
 		public override void SetDefaults()
 		{
-			base.projectile.width = 20;
-			base.projectile.height = 20;
-			base.projectile.friendly = true;
-			base.projectile.melee = true;
-			base.projectile.penetrate = 1;
-			base.projectile.aiStyle = -1;
-			base.projectile.timeLeft = 60;
-            base.projectile.hostile = true;
+			base.Projectile.width = 20;
+			base.Projectile.height = 20;
+			base.Projectile.friendly = true;
+			base.Projectile.DamageType = DamageClass.Melee;
+			base.Projectile.penetrate = 1;
+			base.Projectile.aiStyle = -1;
+			base.Projectile.timeLeft = 60;
+            base.Projectile.hostile = true;
 		}
         private int T = 0;
         private float H = 0;
         public override void AI()
         {
-            if (projectile.ai[1] != 1)
+            if (Projectile.ai[1] != 1)
             {
                 if (T == 0)
                 {
                     T = 2;
-                    H = projectile.Center.Y;
+                    H = Projectile.Center.Y;
                 }
-                int num = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, 188, 0f, 0f, 100, Color.White, (H - projectile.Center.Y) / 50f + 0.75f);
-                Main.dust[num].velocity *= ((H - projectile.Center.Y) / 50f + 0.75f) * 0.05f;
+                int num = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, 188, 0f, 0f, 100, Color.White, (H - Projectile.Center.Y) / 50f + 0.75f);
+                Main.dust[num].velocity *= ((H - Projectile.Center.Y) / 50f + 0.75f) * 0.05f;
             }
             else
             {
-                int num = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, 188, 0f, 0f, 100, Color.White, (30 - projectile.timeLeft) / 6f);
+                int num = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, 188, 0f, 0f, 100, Color.White, (30 - Projectile.timeLeft) / 6f);
             }
-            if(projectile.ai[1] != 1)
+            if(Projectile.ai[1] != 1)
             {
-                projectile.velocity.Y += 0.5f;
-                if (projectile.velocity.Y >= 0)
+                Projectile.velocity.Y += 0.5f;
+                if (Projectile.velocity.Y >= 0)
                 {
-                    projectile.active = false;
+                    Projectile.active = false;
                 }
             }
            // Lighting.AddLight((int)projectile.Center.X, (int)projectile.Center.Y, ((H - projectile.Center.Y) / 50f + 0.75f) * 100f, ((H - projectile.Center.Y) / 50f + 0.75f) * 10f, 0);

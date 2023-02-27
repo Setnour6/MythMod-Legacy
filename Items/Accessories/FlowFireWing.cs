@@ -23,11 +23,11 @@ namespace MythMod.Items.Accessories
         }
         public override void SetDefaults()
         {
-            base.item.width = 38;
-            base.item.height = 38;
-            base.item.value = Item.buyPrice(0, 40, 0, 0);
-            item.rare = 11;
-            base.item.accessory = true;
+            base.Item.width = 38;
+            base.Item.height = 38;
+            base.Item.value = Item.buyPrice(0, 40, 0, 0);
+            Item.rare = 11;
+            base.Item.accessory = true;
         }
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
@@ -47,7 +47,7 @@ namespace MythMod.Items.Accessories
                 }
                 Main.dust[num2].shader = GameShaders.Armor.GetSecondaryShader(player.cWings, player);
                 Vector2 v = new Vector2(0, Main.rand.Next(0, 20)).RotatedByRandom(Math.PI * 2);
-                int num4 = Projectile.NewProjectile(player.Center.X + v.X, player.Center.Y + v.Y, player.velocity.X * 1.2f, player.velocity.Y * 1.2f, base.mod.ProjectileType("熔炉烈焰"), 200, 0, Main.myPlayer, Main.rand.Next(2500, 3200) / 4000f, 0f);
+                int num4 = Projectile.NewProjectile(player.Center.X + v.X, player.Center.Y + v.Y, player.velocity.X * 1.2f, player.velocity.Y * 1.2f, base.Mod.Find<ModProjectile>("熔炉烈焰").Type, 200, 0, Main.myPlayer, Main.rand.Next(2500, 3200) / 4000f, 0f);
             }
             player.wingTimeMax = 261;
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
@@ -68,8 +68,8 @@ namespace MythMod.Items.Accessories
         }
         public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
         {
-            Vector2 origin = new Vector2(item.width / 2f, item.height / 2f);
-            spriteBatch.Draw(base.mod.GetTexture("Items/Accessories/流火之翼Glow"), base.item.Center - Main.screenPosition, null, new Color(255, 255, 255, 0), rotation, origin, 1f, SpriteEffects.None, 0f);
+            Vector2 origin = new Vector2(Item.width / 2f, Item.height / 2f);
+            spriteBatch.Draw(base.Mod.GetTexture("Items/Accessories/流火之翼Glow"), base.Item.Center - Main.screenPosition, null, new Color(255, 255, 255, 0), rotation, origin, 1f, SpriteEffects.None, 0f);
         }
         //public override void DrawArmorColor(Player drawPlayer, float shadow, ref Color color, ref int glowMask, ref Color glowMaskColor)
         //{

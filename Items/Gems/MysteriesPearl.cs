@@ -15,21 +15,20 @@ namespace MythMod.Items.Gems
         }
         public override void SetDefaults()
         {
-            item.width = 40;
-            item.height = 40;
-            item.rare = 4;
-            item.scale = 1f;
-            item.value = 20000;
-            item.maxStack = 999;
-            item.useTime = 14;
+            Item.width = 40;
+            Item.height = 40;
+            Item.rare = 4;
+            Item.scale = 1f;
+            Item.value = 20000;
+            Item.maxStack = 999;
+            Item.useTime = 14;
         }
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(null, "MysteriesBroken", 3);
             modRecipe.requiredTile[0] = 134;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
     }
 }

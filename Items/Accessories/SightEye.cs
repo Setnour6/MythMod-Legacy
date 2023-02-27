@@ -17,17 +17,17 @@ namespace MythMod.Items.Accessories
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 34;
-			base.item.height = 36;
-			base.item.value = 3000;
-			base.item.accessory = true;
-            item.rare = 3;
+			base.Item.width = 34;
+			base.Item.height = 36;
+			base.Item.value = 3000;
+			base.Item.accessory = true;
+            Item.rare = 3;
         }
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
-            player.rangedCrit += 5;
-            player.meleeCrit += 5;
-            player.magicCrit += 5;
+            player.GetCritChance(DamageClass.Ranged) += 5;
+            player.GetCritChance(DamageClass.Generic) += 5;
+            player.GetCritChance(DamageClass.Magic) += 5;
             player.nightVision = true;
         }
 	}

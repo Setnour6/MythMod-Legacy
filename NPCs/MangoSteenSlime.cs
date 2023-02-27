@@ -14,57 +14,57 @@ namespace MythMod.NPCs
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("山竹史莱姆");
-			Main.npcFrameCount[base.npc.type] = 4;
+			Main.npcFrameCount[base.NPC.type] = 4;
 		}
 
 		// Token: 0x06001B18 RID: 6936 RVA: 0x0014B828 File Offset: 0x00149A28
 		public override void SetDefaults()
 		{
-			base.npc.aiStyle = 14;
-			base.npc.damage = 162;
-			base.npc.width = 40;
-			base.npc.height = 30;
-			base.npc.defense = 35;
-			base.npc.lifeMax = 285;
-			base.npc.knockBackResist = 0.8f;
-			this.animationType = 121;
-			base.npc.alpha = 30;
-			base.npc.lavaImmune = false;
-			base.npc.noGravity = false;
-			base.npc.noTileCollide = false;
-			base.npc.HitSound = SoundID.NPCHit1;
-			base.npc.DeathSound = SoundID.NPCDeath1;
-			base.npc.buffImmune[24] = true;
+			base.NPC.aiStyle = 14;
+			base.NPC.damage = 162;
+			base.NPC.width = 40;
+			base.NPC.height = 30;
+			base.NPC.defense = 35;
+			base.NPC.lifeMax = 285;
+			base.NPC.knockBackResist = 0.8f;
+			this.AnimationType = 121;
+			base.NPC.alpha = 30;
+			base.NPC.lavaImmune = false;
+			base.NPC.noGravity = false;
+			base.NPC.noTileCollide = false;
+			base.NPC.HitSound = SoundID.NPCHit1;
+			base.NPC.DeathSound = SoundID.NPCDeath1;
+			base.NPC.buffImmune[24] = true;
 		}
 
 		// Token: 0x06001B19 RID: 6937 RVA: 0x0014B900 File Offset: 0x00149B00
 		public override void AI()
 		{
 			float num = 1.0025f;
-			NPC npc = base.npc;
+			NPC npc = base.NPC;
 			npc.velocity.X = npc.velocity.X * num;
-			NPC npc2 = base.npc;
+			NPC npc2 = base.NPC;
 			npc2.velocity.Y = npc2.velocity.Y * num;
 		}
 
 		// Token: 0x06001B1A RID: 6938 RVA: 0x000037AF File Offset: 0x000019AF
-		public override bool PreNPCLoot()
+		public override bool PreKill()
 		{
-                Item.NewItem((int)base.npc.position.X, (int)base.npc.position.Y, base.npc.width, base.npc.height, base.mod.ItemType("山竹之魂"), Main.rand.Next(2,5), false, 0, false, false);
+                Item.NewItem((int)base.NPC.position.X, (int)base.NPC.position.Y, base.NPC.width, base.NPC.height, base.Mod.Find<ModItem>("山竹之魂").Type, Main.rand.Next(2,5), false, 0, false, false);
 			return false;
 		}
 
 		// Token: 0x06001B1B RID: 6939 RVA: 0x0014B944 File Offset: 0x00149B44
 		public override void HitEffect(int hitDirection, double damage)
 		{
-			if (Main.netMode != 1 && base.npc.life <= 0)
+			if (Main.netMode != 1 && base.NPC.life <= 0)
 			{
-				Vector2 vector = base.npc.Center + new Vector2(0f, (float)base.npc.height / 2f);
+				Vector2 vector = base.NPC.Center + new Vector2(0f, (float)base.NPC.height / 2f);
 				NPC.NewNPC((int)vector.X, (int)vector.Y, 1, 0, 0f, 0f, 0f, 0f, 255);
 			}
 			for (int i = 0; i < 5; i++)
 			{
-				Dust.NewDust(base.npc.position, base.npc.width, base.npc.height, 4, (float)hitDirection, -1f, 0, default(Color), 1f);
+				Dust.NewDust(base.NPC.position, base.NPC.width, base.NPC.height, 4, (float)hitDirection, -1f, 0, default(Color), 1f);
 			}
 		}
 

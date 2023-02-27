@@ -8,7 +8,7 @@ namespace MythMod.Tiles.Foods
 {
 	public class 红酒 : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
         {
             Main.tileFrameImportant[(int)base.Type] = true;
             Main.tileNoAttach[(int)base.Type] = true;
@@ -29,12 +29,12 @@ namespace MythMod.Tiles.Foods
             TileObjectData.addAlternate(1);
             TileObjectData.newTile.LavaDeath = false;
             TileObjectData.addTile((int)base.Type);
-            this.disableSmartCursor = true;
-            this.adjTiles = new int[]
+            this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+            this.AdjTiles = new int[]
             {
                 15
             };
-            this.dustType = -1;
+            this.DustType = -1;
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
             base.AddMapEntry(new Color(153, 107, 0), modTranslation);
@@ -45,7 +45,7 @@ namespace MythMod.Tiles.Foods
 		}
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("红酒"));
+            Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("红酒").Type);
         }
     }
 }

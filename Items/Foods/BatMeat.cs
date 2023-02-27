@@ -17,12 +17,12 @@ namespace MythMod.Items.Foods
 		}
 		public override void SetDefaults()
 		{
-            base.item.width = 16;
-            base.item.height = 22;
-            base.item.rare = 1;
-            base.item.value = Item.sellPrice(0, 0, 50, 0);
-            base.item.UseSound = SoundID.Item8;
-            base.item.maxStack = 200;
+            base.Item.width = 16;
+            base.Item.height = 22;
+            base.Item.rare = 1;
+            base.Item.value = Item.sellPrice(0, 0, 50, 0);
+            base.Item.UseSound = SoundID.Item8;
+            base.Item.maxStack = 200;
         }
 	}
 }

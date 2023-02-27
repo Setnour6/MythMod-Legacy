@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,18 +26,18 @@ namespace MythMod.Projectiles.CorruptMoth
         //7359668
         public override void SetDefaults()
         {
-            projectile.width = 1;
-            projectile.height = 1;
-            projectile.aiStyle = -1;
-            projectile.friendly = false;
-            projectile.hostile = false;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = true;
-            projectile.timeLeft = 1000;
-            projectile.alpha = 0;
-            projectile.penetrate = -1;
-            projectile.scale = 1f;
-            this.cooldownSlot = 1;
+            Projectile.width = 1;
+            Projectile.height = 1;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = false;
+            Projectile.hostile = false;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = true;
+            Projectile.timeLeft = 1000;
+            Projectile.alpha = 0;
+            Projectile.penetrate = -1;
+            Projectile.scale = 1f;
+            this.CooldownSlot = 1;
         }
         //55555
         private bool initialization = true;
@@ -46,11 +46,11 @@ namespace MythMod.Projectiles.CorruptMoth
         private float b;
         public override void AI()
         {
-            projectile.velocity.Y = -5f;
+            Projectile.velocity.Y = -5f;
         }
         public override void Kill(int timeLeft)
         {
-            NPC.NewNPC((int)projectile.Center.X, (int)projectile.Center.Y + 128, mod.NPCType("魔茧"), 0, 0f, 1f, 0f, 0f, 255);
+            NPC.NewNPC((int)Projectile.Center.X, (int)Projectile.Center.Y + 128, Mod.Find<ModNPC>("魔茧").Type, 0, 0f, 1f, 0f, 0f, 255);
         }
     }
 }

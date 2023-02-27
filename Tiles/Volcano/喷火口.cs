@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.Graphics.Capture;
 using Terraria;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -13,11 +14,11 @@ namespace MythMod.Tiles.Volcano
 	public class 喷火口 : ModTile
 	{
 		// Token: 0x06004868 RID: 18536 RVA: 0x0034883C File Offset: 0x00346A3C
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[(int)base.Type] = true;
 			Main.tileNoAttach[(int)base.Type] = true;
-            this.minPick = 264;
+            this.MinPick = 264;
             Main.tileLavaDeath[(int)base.Type] = true;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
             TileObjectData.newTile.Height = 3;
@@ -30,12 +31,12 @@ namespace MythMod.Tiles.Volcano
             };
             TileObjectData.newTile.CoordinateWidth = 80;
             TileObjectData.addTile((int)base.Type);
-			this.dustType = 6;
+			this.DustType = 6;
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
             base.AddMapEntry(new Color(3, 3, 3), modTranslation);
-			this.mineResist = 3f;
-			base.SetDefaults();
+			this.MineResist = 3f;
+			base.SetStaticDefaults();
 			modTranslation.AddTranslation(GameCulture.Chinese, "");
 		}
 		public override void NumDust(int i, int j, bool fail, ref int num)
@@ -52,7 +53,7 @@ namespace MythMod.Tiles.Volcano
             {
                 if (Main.rand.Next(400) == 1)
                 {
-                    Projectile.NewProjectile(i * 16f + 8f, j * 16f - 16f, 0, 0, mod.ProjectileType("FireSmoke2"), 120, 2f, Main.myPlayer, 0f, 0f);
+                    Projectile.NewProjectile(i * 16f + 8f, j * 16f - 16f, 0, 0, Mod.Find<ModProjectile>("FireSmoke2").Type, 120, 2f, Main.myPlayer, 0f, 0f);
                 }
             }
 		}
@@ -83,27 +84,27 @@ namespace MythMod.Tiles.Volcano
             {
                 for (int y = j - 4; y < j + 4; y++)
                 {
-                    if (Main.tile[x, y].lava() && new Vector2(i - x, j - y).Length() <= 4)
+                    if ((Main.tile[x, y].LiquidType == LiquidID.Lava) && new Vector2(i - x, j - y).Length() <= 4)
                     {
                         l += 0.99f;
                     }
                 }
             }
-            Main.spriteBatch.Draw(mod.GetTexture("Tiles/喷火口Glow"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.frameX, tile.frameY, 16, height), new Color(l / 24f, l / 24f, l / 24f, 0), 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(Mod.GetTexture("Tiles/喷火口Glow"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, height), new Color(l / 24f, l / 24f, l / 24f, 0), 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
         }
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
             for (int z = Main.rand.Next(46, 48); z < 50; z++)
             {
-                Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("Basalt"));
+                Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("Basalt").Type);
             }
         }
         public override void PlaceInWorld(int i, int j, Item item)
         {
             short num = (short)(Main.rand.Next(0, 8));
-            Main.tile[i, j].frameX = (short)(num * 80);
-            Main.tile[i, j + 2].frameX = (short)(num * 80);
-            Main.tile[i, j + 1].frameX = (short)(num * 80);
+            Main.tile[i, j].TileFrameX = (short)(num * 80);
+            Main.tile[i, j + 2].TileFrameX = (short)(num * 80);
+            Main.tile[i, j + 1].TileFrameX = (short)(num * 80);
         }
     }
 }

@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,17 +23,17 @@ namespace MythMod.Projectiles.projectile3
         }
         public override void SetDefaults()
         {
-            projectile.width = 1;
-            projectile.height = 1;
-            projectile.aiStyle = -1;
-            projectile.friendly = true;
-            projectile.hostile = false;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = false;
-            projectile.timeLeft = 3000;
-            projectile.alpha = 0;
-            projectile.penetrate = -1;
-            projectile.scale = 0.5f;
+            Projectile.width = 1;
+            Projectile.height = 1;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = true;
+            Projectile.hostile = false;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
+            Projectile.timeLeft = 3000;
+            Projectile.alpha = 0;
+            Projectile.penetrate = -1;
+            Projectile.scale = 0.5f;
         }
         private bool initialization = true;
         private double X;
@@ -42,12 +42,12 @@ namespace MythMod.Projectiles.projectile3
         public override void AI()
         {
             b += 1;
-            Vector2 vg = new Vector2(projectile.ai[0], projectile.ai[1]);
+            Vector2 vg = new Vector2(Projectile.ai[0], Projectile.ai[1]);
             Vector2 v2g = new Vector2(0, 220).RotatedBy(b / 15d);
             Vector2 v4g = new Vector2(0, 220).RotatedBy(b / 15d + Math.PI * 2d / 3d);
             Vector2 v5g = new Vector2(0, 220).RotatedBy(b / 15d + Math.PI * 4d / 3d);
             Vector2 v3g = vg + new Vector2(v2g.X, v2g.Y / 4f);
-            if (projectile.timeLeft > 120)
+            if (Projectile.timeLeft > 120)
             {
                 int numl = Dust.NewDust(vg + new Vector2(v2g.X, v2g.Y / 4f), 1, 1, 91, 0, 0, 0, default(Color), 1.8f);
                 Main.dust[numl].velocity *= 0;
@@ -61,7 +61,7 @@ namespace MythMod.Projectiles.projectile3
             }
             else
             {
-                float pg = projectile.timeLeft / 120f;
+                float pg = Projectile.timeLeft / 120f;
                 int numl = Dust.NewDust(vg + new Vector2(v2g.X, v2g.Y / 4f), 1, 1, 91, 0, 0, 0, default(Color), 1.8f * pg);
                 Main.dust[numl].velocity *= 0;
                 Main.dust[numl].noGravity = true;
@@ -72,10 +72,10 @@ namespace MythMod.Projectiles.projectile3
                 Main.dust[numl3].velocity *= 0;
                 Main.dust[numl3].noGravity = true;
             }
-            if (projectile.timeLeft % 10 == 0)
+            if (Projectile.timeLeft % 10 == 0)
             {
                 float o = Main.rand.NextFloat(0, 1f);
-                Projectile.NewProjectile((vg + v2g * o).X, (vg + v2g * o).Y, 0, 0.01f, base.mod.ProjectileType("CrystalSword11"), projectile.damage, 2f, Main.myPlayer, (float)Math.PI * 0.17f, 0f);
+                Projectile.NewProjectile((vg + v2g * o).X, (vg + v2g * o).Y, 0, 0.01f, base.Mod.Find<ModProjectile>("CrystalSword11").Type, Projectile.damage, 2f, Main.myPlayer, (float)Math.PI * 0.17f, 0f);
             }
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             if (mplayer.CrysSwo > 2)
@@ -84,7 +84,7 @@ namespace MythMod.Projectiles.projectile3
                 int k = 0;
                 for (int y = 0;y < 1000;y++)
                 {
-                    if(Main.projectile[y].type == mod.ProjectileType("CrystalSwordStaff"))
+                    if(Main.projectile[y].type == Mod.Find<ModProjectile>("CrystalSwordStaff").Type)
                     {
                         if(Main.projectile[y].timeLeft < Tl)
                         {
@@ -101,7 +101,7 @@ namespace MythMod.Projectiles.projectile3
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             mplayer.CrysSwo -= 1;
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color drawColor)
+        public override bool PreDraw(ref Color lightColor)
         {
             return false;
         }

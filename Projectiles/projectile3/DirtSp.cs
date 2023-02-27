@@ -13,27 +13,27 @@ namespace MythMod.Projectiles.projectile3
 		}
 		public override void SetDefaults()
 		{
-			projectile.width = 32;
-			projectile.height = 32;
-			projectile.friendly = false;
-            projectile.hostile = false;
-            projectile.aiStyle = -1;
-            projectile.penetrate = -1;
-            projectile.timeLeft = 3600;
-            projectile.tileCollide = true;
+			Projectile.width = 32;
+			Projectile.height = 32;
+			Projectile.friendly = false;
+            Projectile.hostile = false;
+            Projectile.aiStyle = -1;
+            Projectile.penetrate = -1;
+            Projectile.timeLeft = 3600;
+            Projectile.tileCollide = true;
         }
         public override void AI()
 		{
-            projectile.velocity.Y += 1f;
+            Projectile.velocity.Y += 1f;
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
 		{
-		    projectile.Kill();
+		    Projectile.Kill();
 			return false;
 		}
         public override void Kill(int timeLeft)
         {
-            int num4 = Projectile.NewProjectile(base.projectile.Center.X, base.projectile.Center.Y + 30, 0,0, base.mod.ProjectileType("DirtSp2"), base.projectile.damage, base.projectile.knockBack, base.projectile.owner, 0f, projectile.ai[1] / 2f);
+            int num4 = Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y + 30, 0,0, base.Mod.Find<ModProjectile>("DirtSp2").Type, base.Projectile.damage, base.Projectile.knockBack, base.Projectile.owner, 0f, Projectile.ai[1] / 2f);
             Main.projectile[num4].timeLeft = Main.rand.Next(200, 470);
         }
 	}

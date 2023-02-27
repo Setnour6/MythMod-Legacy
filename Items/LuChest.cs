@@ -1,6 +1,5 @@
 ﻿using MythMod.NPCs;
 using Terraria.GameContent.Generation;
-using Terraria.World.Generation;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -15,6 +14,7 @@ using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
 using Terraria.ModLoader.IO;
 using Terraria.GameContent.Achievements;
+using Terraria.WorldBuilding;
 
 namespace MythMod.Items
 {
@@ -29,12 +29,12 @@ namespace MythMod.Items
 		}
 		public override void SetDefaults()
 		{
-            base.item.maxStack = 1;
-            base.item.consumable = false;
-            base.item.width = 24;
-            base.item.height = 24;
-            base.item.rare = 9;
-            base.item.expert = true;
+            base.Item.maxStack = 1;
+            base.Item.consumable = false;
+            base.Item.width = 24;
+            base.Item.height = 24;
+            base.Item.rare = 9;
+            base.Item.expert = true;
             //this.bossBagNPC = 4;
 		}
 		public override bool CanRightClick()
@@ -43,10 +43,10 @@ namespace MythMod.Items
 		}
         public override void RightClick(Player player)
         {
-            player.QuickSpawnItem(base.mod.ItemType("LuChest2"), 1);
-            player.QuickSpawnItem(base.mod.ItemType("ChaosMagic"), 1);
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("LuChest2").Type, 1);
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("ChaosMagic").Type, 1);
 
-            item.stack--;
+            Item.stack--;
         }
 	}
 }

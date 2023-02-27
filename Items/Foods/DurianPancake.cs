@@ -17,17 +17,17 @@ namespace MythMod.Items.Foods
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 28;
-            base.item.height = 16;
-            base.item.rare = 5;
-			base.item.useAnimation = 20;
-			base.item.useTime = 20;
-			base.item.useStyle = 1;
-			base.item.UseSound = SoundID.Item8;
-			base.item.consumable = true;
-            base.item.maxStack = 200;
-            base.item.autoReuse = true;
-            base.item.createTile = base.mod.TileType("榴莲班戟");
+			base.Item.width = 28;
+            base.Item.height = 16;
+            base.Item.rare = 5;
+			base.Item.useAnimation = 20;
+			base.Item.useTime = 20;
+			base.Item.useStyle = 1;
+			base.Item.UseSound = SoundID.Item8;
+			base.Item.consumable = true;
+            base.Item.maxStack = 200;
+            base.Item.autoReuse = true;
+            base.Item.createTile = base.Mod.Find<ModTile>("榴莲班戟").Type;
         }
         public override void AddRecipes()
         {

@@ -12,20 +12,20 @@ namespace MythMod.Items.Weapons
         }
         public override void SetDefaults()
         {
-            item.damage = 10;
-            item.melee = true;
-            item.width = 54;
-            item.height = 76;
-            item.useTime = 28;
-            item.rare = 1;
-            item.useAnimation = 28;
-            item.useStyle = 1;
-            item.knockBack = 2.2f;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 4;
-            item.value = 2000;
-            item.scale = 1f;
+            Item.damage = 10;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 54;
+            Item.height = 76;
+            Item.useTime = 28;
+            Item.rare = 1;
+            Item.useAnimation = 28;
+            Item.useStyle = 1;
+            Item.knockBack = 2.2f;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 4;
+            Item.value = 2000;
+            Item.scale = 1f;
 
         }
     }

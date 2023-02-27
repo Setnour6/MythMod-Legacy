@@ -8,18 +8,18 @@ namespace MythMod.Tiles
 {
     public class 朽木 : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileSolid[(int)base.Type] = true;
 			Main.tileMergeDirt[(int)base.Type] = true;
 			Main.tileBlendAll[(int)base.Type] = true;
 			Main.tileBlockLight[(int)base.Type] = false;
 			Main.tileShine2[(int)base.Type] = false;
-			Main.tileValue[(int)base.Type] = 0;
-			this.dustType = 22;
-			this.soundType = 21;
-			this.soundStyle = 2;
-            this.drop = base.mod.ItemType("WornWood");
+			Main.tileOreFinderPriority[(int)base.Type] = 0;
+			this.DustType = 22;
+			this.HitSound = 21;
+			this.soundStyle/* tModPorter Note: Removed. Integrate into HitSound */ = 2;
+            this.ItemDrop = base.Mod.Find<ModItem>("WornWood").Type;
 			Main.tileSpelunker[(int)base.Type] = true;
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");

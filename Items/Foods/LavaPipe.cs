@@ -19,31 +19,29 @@ namespace MythMod.Items.Foods
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            base.item.width = 22;
-            base.item.height = 38;
-            base.item.rare = 8;
-			base.item.useAnimation = 30;
-			base.item.useTime = 20;
-			base.item.useStyle = 2;
-			base.item.UseSound = SoundID.Item8;
-			base.item.consumable = true;
-            base.item.maxStack = 200;
+            Item.glowMask = GetGlowMask;
+            base.Item.width = 22;
+            base.Item.height = 38;
+            base.Item.rare = 8;
+			base.Item.useAnimation = 30;
+			base.Item.useTime = 20;
+			base.Item.useStyle = 2;
+			base.Item.UseSound = SoundID.Item8;
+			base.Item.consumable = true;
+            base.Item.maxStack = 200;
 		}
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(mod.ItemType("LavaCrystal"), 5);
+            Recipe recipe = CreateRecipe(1);
+            recipe.AddIngredient(Mod.Find<ModItem>("LavaCrystal").Type, 5);
             recipe.AddIngredient(22, 2);
             recipe.requiredTile[0] = 16;
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
-            ModRecipe recipe2 = new ModRecipe(mod);
-            recipe2.AddIngredient(mod.ItemType("LavaCrystal"), 5);
+            recipe.Register();
+            Recipe recipe2 = CreateRecipe(1);
+            recipe2.AddIngredient(Mod.Find<ModItem>("LavaCrystal").Type, 5);
             recipe2.AddIngredient(704, 2);
             recipe2.requiredTile[0] = 16;
-            recipe2.SetResult(this, 1);
-            recipe2.AddRecipe();
+            recipe2.Register();
         }
     }
 }

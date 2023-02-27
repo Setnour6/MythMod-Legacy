@@ -5,31 +5,31 @@ using Terraria.Localization;
 using Terraria;
 namespace MythMod.Items
 {
-    public class WornWood : ModItem//材料是物品名称
+    public class WornWood : ModItem//²ÄÁÏÊÇÎïÆ·Ãû³Æ
     {
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("它长满了海藻");
-            base.DisplayName.AddTranslation(GameCulture.English, "朽木");
+            Tooltip.SetDefault("Ëü³¤ÂúÁËº£Ôå");
+            base.DisplayName.AddTranslation(GameCulture.English, "ÐàÄ¾");
         }
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetDefaults()
         {
-            base.item.createTile = base.mod.TileType("朽木");
-            base.item.useStyle = 1;
-			base.item.useTurn = true;
-            base.item.useAnimation = 15;
-			base.item.useTime = 10;
-            base.item.autoReuse = true;
-			base.item.consumable = true;
-            item.width = 24;//宽
-            item.height =22;//高
-            item.rare = 3;//品质
-            item.scale = 1f;//大小
-            item.value = 0;
-            item.maxStack = 999;
-            item.useTime = 14;
+            base.Item.createTile = base.Mod.Find<ModTile>("ÐàÄ¾").Type;
+            base.Item.useStyle = 1;
+			base.Item.useTurn = true;
+            base.Item.useAnimation = 15;
+			base.Item.useTime = 10;
+            base.Item.autoReuse = true;
+			base.Item.consumable = true;
+            Item.width = 24;//¿í
+            Item.height =22;//¸ß
+            Item.rare = 3;//Æ·ÖÊ
+            Item.scale = 1f;//´óÐ¡
+            Item.value = 0;
+            Item.maxStack = 999;
+            Item.useTime = 14;
         }
     }
 }

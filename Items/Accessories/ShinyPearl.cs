@@ -16,11 +16,11 @@ namespace MythMod.Items.Accessories
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 46;
-			base.item.height = 28;
-			base.item.value = 0;
-			base.item.accessory = true;
-            base.item.rare = 9;
+			base.Item.width = 46;
+			base.Item.height = 28;
+			base.Item.value = 0;
+			base.Item.accessory = true;
+            base.Item.rare = 9;
 
         }
 		public override void UpdateAccessory(Player player, bool hideVisual)

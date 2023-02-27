@@ -7,7 +7,7 @@ namespace MythMod.Buffs
 {
     public class 酒香II : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("酒香II");
             base.Description.SetDefault("好酒,好酒\n提升7%暴击");
@@ -18,10 +18,10 @@ namespace MythMod.Buffs
         }
         public override void Update(Player player, ref int buffIndex)
         {
-            player.magicCrit += 7;
-            player.meleeCrit += 7;
-            player.rangedCrit += 7;
-            player.thrownCrit += 7;
+            player.GetCritChance(DamageClass.Magic) += 7;
+            player.GetCritChance(DamageClass.Generic) += 7;
+            player.GetCritChance(DamageClass.Ranged) += 7;
+            player.GetCritChance(DamageClass.Throwing) += 7;
         }
 	}
 }

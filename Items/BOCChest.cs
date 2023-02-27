@@ -8,7 +8,7 @@ using Terraria.GameContent.Generation;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
-using Terraria.World.Generation;
+using Terraria.WorldBuilding;
 
 namespace MythMod.Items
 {
@@ -23,12 +23,12 @@ namespace MythMod.Items
 		}
 		public override void SetDefaults()
 		{
-            base.item.maxStack = 1;
-            base.item.consumable = false;
-            base.item.width = 24;
-            base.item.height = 24;
-            base.item.rare = 9;
-            base.item.expert = true;
+            base.Item.maxStack = 1;
+            base.Item.consumable = false;
+            base.Item.width = 24;
+            base.Item.height = 24;
+            base.Item.rare = 9;
+            base.Item.expert = true;
             //this.bossBagNPC = 4;
 		}
 		public override bool CanRightClick()
@@ -39,7 +39,7 @@ namespace MythMod.Items
         {
             if (Main.rand.Next(2) == 1)
             {
-                   player.QuickSpawnItem(base.mod.ItemType("SwordBOC"), 1);
+                   player.QuickSpawnItem(base.Mod.Find<ModItem>("SwordBOC").Type, 1);
             }
             //player.QuickSpawnItem(2104, 1);
             //player.QuickSpawnItem(1362, 1);
@@ -49,8 +49,8 @@ namespace MythMod.Items
             //player.QuickSpawnItem(28, Main.rand.Next(80, 140));
             //player.QuickSpawnItem(74, 3);
             //player.QuickSpawnItem(3223, 1);
-            player.QuickSpawnItem(base.mod.ItemType("BOCChest2"), 1);
-			player.QuickSpawnItem(base.mod.ItemType("ElecCell"), Main.rand.Next(4, 12));
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("BOCChest2").Type, 1);
+			player.QuickSpawnItem(base.Mod.Find<ModItem>("ElecCell").Type, Main.rand.Next(4, 12));
         }
 	}
 }

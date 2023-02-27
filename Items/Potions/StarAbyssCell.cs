@@ -15,31 +15,30 @@ namespace MythMod.Items.Potions
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            base.item.width = 40;
-            base.item.height = 40;
-            base.item.rare = 8;
-            base.item.scale = 1f;
-            base.item.createTile = base.mod.TileType("星渊刺胞");
-            base.item.useStyle = 1;
-            base.item.useTurn = true;
-            base.item.useAnimation = 15;
-            base.item.useTime = 10;
-            base.item.autoReuse = true;
-            base.item.consumable = true;
-            base.item.width = 13;
-            base.item.height = 10;
-            base.item.maxStack = 999;
-            base.item.value = 5000;
+            Item.glowMask = GetGlowMask;
+            base.Item.width = 40;
+            base.Item.height = 40;
+            base.Item.rare = 8;
+            base.Item.scale = 1f;
+            base.Item.createTile = base.Mod.Find<ModTile>("星渊刺胞").Type;
+            base.Item.useStyle = 1;
+            base.Item.useTurn = true;
+            base.Item.useAnimation = 15;
+            base.Item.useTime = 10;
+            base.Item.autoReuse = true;
+            base.Item.consumable = true;
+            base.Item.width = 13;
+            base.Item.height = 10;
+            base.Item.maxStack = 999;
+            base.Item.value = 5000;
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = Recipe.Create(Mod.Find<ModItem>("StarPoisonBullet").Type, 20);
             recipe.AddIngredient(null, "StarAbyssCell", 1);
             recipe.AddIngredient(1432, 20);
             recipe.requiredTile[0] = 18;
-            recipe.SetResult(mod.ItemType("StarPoisonBullet"), 20);
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

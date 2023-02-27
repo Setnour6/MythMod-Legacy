@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace MythMod.Projectiles
@@ -13,74 +15,74 @@ namespace MythMod.Projectiles
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("晶刺");
-			Main.projFrames[base.projectile.type] = 4;
+			Main.projFrames[base.Projectile.type] = 4;
 		}
 
 		// Token: 0x06001F15 RID: 7957 RVA: 0x0018D09C File Offset: 0x0018B29C
 		public override void SetDefaults()
 		{
-			base.projectile.width = 40;
-			base.projectile.height = 40;
-			base.projectile.hostile = true;
-			base.projectile.ignoreWater = true;
-			base.projectile.tileCollide = false;
-			base.projectile.penetrate = 1;
-			base.projectile.timeLeft = 150;
-			base.projectile.alpha = 0;
-            base.projectile.friendly = false;
-			this.cooldownSlot = 1;
+			base.Projectile.width = 40;
+			base.Projectile.height = 40;
+			base.Projectile.hostile = true;
+			base.Projectile.ignoreWater = true;
+			base.Projectile.tileCollide = false;
+			base.Projectile.penetrate = 1;
+			base.Projectile.timeLeft = 150;
+			base.Projectile.alpha = 0;
+            base.Projectile.friendly = false;
+			this.CooldownSlot = 1;
 		}
 
 		// Token: 0x06001F16 RID: 7958 RVA: 0x0018D118 File Offset: 0x0018B318
 		public override void AI()
 		{
-			base.projectile.frameCounter++;
-			if (base.projectile.frameCounter > 12)
+			base.Projectile.frameCounter++;
+			if (base.Projectile.frameCounter > 12)
 			{
-				base.projectile.frame++;
-				base.projectile.frameCounter = 0;
+				base.Projectile.frame++;
+				base.Projectile.frameCounter = 0;
 			}
-			if (base.projectile.frame > 3)
+			if (base.Projectile.frame > 3)
 			{
-				base.projectile.frame = 0;
+				base.Projectile.frame = 0;
 			}
-			base.projectile.alpha++;
-			Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 0.482f / 255f, (float)(255 - base.projectile.alpha) * 0.408f / 255f, (float)(255 - base.projectile.alpha) * 1.0f / 255f);
-			if (base.projectile.ai[1] == 0f)
+			base.Projectile.alpha++;
+			Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 0.482f / 255f, (float)(255 - base.Projectile.alpha) * 0.408f / 255f, (float)(255 - base.Projectile.alpha) * 1.0f / 255f);
+			if (base.Projectile.ai[1] == 0f)
 			{
-				base.projectile.ai[1] = 1f;
-				Main.PlaySound(2, (int)base.projectile.position.X, (int)base.projectile.position.Y, 27, 0.2f, 0f);
+				base.Projectile.ai[1] = 1f;
+				SoundEngine.PlaySound(SoundID.Item27.WithVolumeScale(0.2f), new Vector2(base.Projectile.position.X, base.Projectile.position.Y));
 			}
-			Projectile projectile = base.projectile;
+			Projectile projectile = base.Projectile;
 			projectile.velocity.X = projectile.velocity.X * 1.07f;
-			Projectile projectile2 = base.projectile;
+			Projectile projectile2 = base.Projectile;
 			projectile2.velocity.Y = projectile2.velocity.Y * 1.07f;
-			if (base.projectile.velocity.X < 0f)
+			if (base.Projectile.velocity.X < 0f)
 			{
-				base.projectile.spriteDirection = -1;
-				base.projectile.rotation = (float)Math.Atan2(-(double)base.projectile.velocity.Y, -(double)base.projectile.velocity.X);
+				base.Projectile.spriteDirection = -1;
+				base.Projectile.rotation = (float)Math.Atan2(-(double)base.Projectile.velocity.Y, -(double)base.Projectile.velocity.X);
 				return;
 			}
-			base.projectile.spriteDirection = 1;
-			base.projectile.rotation = (float)Math.Atan2((double)base.projectile.velocity.Y, (double)base.projectile.velocity.X);
+			base.Projectile.spriteDirection = 1;
+			base.Projectile.rotation = (float)Math.Atan2((double)base.Projectile.velocity.Y, (double)base.Projectile.velocity.X);
 		}
 
 		// Token: 0x06001F17 RID: 7959 RVA: 0x0000C841 File Offset: 0x0000AA41
 		public override Color? GetAlpha(Color lightColor)
 		{
-			return new Color?(new Color(255, 255, 255, base.projectile.alpha));
+			return new Color?(new Color(255, 255, 255, base.Projectile.alpha));
 		}
         // Token: 0x0600298B RID: 10635 RVA: 0x00213848 File Offset: 0x00211A48
         public override void OnHitPlayer(Player target, int damage, bool crit)
         {
-            target.velocity = projectile.velocity * 0.2f;
+            target.velocity = Projectile.velocity * 0.2f;
         }
         public override void Kill(int timeLeft)
 		{
-			Main.PlaySound(2, (int)base.projectile.position.X, (int)base.projectile.position.Y, 20, 1f, 0f);
+			SoundEngine.PlaySound(SoundID.Item20, new Vector2(base.Projectile.position.X, base.Projectile.position.Y));
 			for (int i = 0; i <= 5; i++)
 			{
-				Dust.NewDust(base.projectile.position + base.projectile.velocity, base.projectile.width, base.projectile.height, 235, base.projectile.oldVelocity.X * 0.5f, base.projectile.oldVelocity.Y * 0.5f, 0, default(Color), 1f);
+				Dust.NewDust(base.Projectile.position + base.Projectile.velocity, base.Projectile.width, base.Projectile.height, 235, base.Projectile.oldVelocity.X * 0.5f, base.Projectile.oldVelocity.Y * 0.5f, 0, default(Color), 1f);
 			}
 		}
 	}

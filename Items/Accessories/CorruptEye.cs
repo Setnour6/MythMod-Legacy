@@ -27,11 +27,11 @@ namespace MythMod.Items.Accessories
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            base.item.width = 32;
-			base.item.height = 32;
-			base.item.value = 10000;
-			base.item.accessory = true;
+            Item.glowMask = GetGlowMask;
+            base.Item.width = 32;
+			base.Item.height = 32;
+			base.Item.value = 10000;
+			base.Item.accessory = true;
             //Player player = Main.player[Main.myPlayer];
             //if (player.name != "万象元素")
             //{
@@ -47,9 +47,9 @@ namespace MythMod.Items.Accessories
             /*MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             mplayer.GreenBlood = 5;*/
             player.statDefense += 5;
-            player.meleeCrit += 8;
-            player.rangedCrit += 8;
-            player.magicCrit += 8;
+            player.GetCritChance(DamageClass.Generic) += 8;
+            player.GetCritChance(DamageClass.Ranged) += 8;
+            player.GetCritChance(DamageClass.Magic) += 8;
             if (player.wet)
             {
                 //player.meleeDamage *= 1.17f;
@@ -61,12 +61,11 @@ namespace MythMod.Items.Accessories
         }
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(null, "CurseflameScale", 5);
             modRecipe.AddIngredient(38,12);
             modRecipe.requiredTile[0] = 16;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
     }
 }

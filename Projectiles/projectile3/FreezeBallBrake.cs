@@ -17,56 +17,56 @@ namespace MythMod.Projectiles.projectile3
 		// Token: 0x06002460 RID: 9312 RVA: 0x001D6574 File Offset: 0x001D4774
 		public override void SetDefaults()
 		{
-			base.projectile.width = 32;
-			base.projectile.height = 32;
-			base.projectile.friendly = true;
-			base.projectile.melee = true;
-			base.projectile.aiStyle = -1;
-            base.projectile.penetrate = -1;
-            base.projectile.timeLeft = 100;
-            base.projectile.extraUpdates = 10;
-            base.projectile.hostile = false;
-            projectile.tileCollide = false;
+			base.Projectile.width = 32;
+			base.Projectile.height = 32;
+			base.Projectile.friendly = true;
+			base.Projectile.DamageType = DamageClass.Melee;
+			base.Projectile.aiStyle = -1;
+            base.Projectile.penetrate = -1;
+            base.Projectile.timeLeft = 100;
+            base.Projectile.extraUpdates = 10;
+            base.Projectile.hostile = false;
+            Projectile.tileCollide = false;
         }
 
         public override Color? GetAlpha(Color lightColor)
         {
-            if (projectile.timeLeft < 3584)
+            if (Projectile.timeLeft < 3584)
             {
                 return new Color?(new Color(255, 255, 255, 0));
             }
             else
             {
-                return new Color?(new Color((3600 - projectile.timeLeft) / 14f, (3600 - projectile.timeLeft) / 14f, (3600 - projectile.timeLeft) / 14f, 0));
+                return new Color?(new Color((3600 - Projectile.timeLeft) / 14f, (3600 - Projectile.timeLeft) / 14f, (3600 - Projectile.timeLeft) / 14f, 0));
             }
         }
         public override void AI()
 		{
             Player player = Main.player[Main.myPlayer];
-            if(projectile.timeLeft / 25f > 5)
+            if(Projectile.timeLeft / 25f > 5)
             {
-                int r = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) - base.projectile.velocity * 1.2f - new Vector2(4, 4), 0, 0, 88, 0, 0, 0, default(Color), 5);
+                int r = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) - base.Projectile.velocity * 1.2f - new Vector2(4, 4), 0, 0, 88, 0, 0, 0, default(Color), 5);
                 Main.dust[r].velocity.X = 0;
                 Main.dust[r].velocity.Y = 0;
                 Main.dust[r].noGravity = true;
             }
             else
             {
-                int r = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) - base.projectile.velocity * 1.2f - new Vector2(4, 4), 0, 0, 88, 0, 0, 0, default(Color), projectile.timeLeft / 25f);
+                int r = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) - base.Projectile.velocity * 1.2f - new Vector2(4, 4), 0, 0, 88, 0, 0, 0, default(Color), Projectile.timeLeft / 25f);
                 Main.dust[r].velocity.X = 0;
                 Main.dust[r].velocity.Y = 0;
                 Main.dust[r].noGravity = true;
             }
-            projectile.tileCollide = false;
+            Projectile.tileCollide = false;
         }
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-            if (target.type != 396 && target.type != 397 && target.type != 398 && target.type != mod.NPCType("千年桔树妖之眼"))
+            if (target.type != 396 && target.type != 397 && target.type != 398 && target.type != Mod.Find<ModNPC>("千年桔树妖之眼").Type)
             {
-                if(!target.HasBuff(mod.BuffType("Freeze")))
+                if(!target.HasBuff(Mod.Find<ModBuff>("Freeze").Type))
                 {
-                    target.AddBuff(mod.BuffType("Freeze"), (int)projectile.ai[1]);
-                    target.AddBuff(mod.BuffType("Freeze2"), (int)projectile.ai[1] + 2);
+                    target.AddBuff(Mod.Find<ModBuff>("Freeze").Type, (int)Projectile.ai[1]);
+                    target.AddBuff(Mod.Find<ModBuff>("Freeze2").Type, (int)Projectile.ai[1] + 2);
                 }
             }
             if(target.type == 113)
@@ -75,10 +75,10 @@ namespace MythMod.Projectiles.projectile3
                 {
                     if (Main.npc[i].type == 113 || Main.npc[i].type == 114)
                     {
-                        if (!target.HasBuff(mod.BuffType("Freeze")))
+                        if (!target.HasBuff(Mod.Find<ModBuff>("Freeze").Type))
                         {
-                            target.AddBuff(mod.BuffType("Freeze"), (int)projectile.ai[1]);
-                            target.AddBuff(mod.BuffType("Freeze2"), (int)projectile.ai[1] + 2);
+                            target.AddBuff(Mod.Find<ModBuff>("Freeze").Type, (int)Projectile.ai[1]);
+                            target.AddBuff(Mod.Find<ModBuff>("Freeze2").Type, (int)Projectile.ai[1] + 2);
                         }
                     }
                 }
@@ -89,10 +89,10 @@ namespace MythMod.Projectiles.projectile3
                 {
                     if (Main.npc[i].type == 113 || Main.npc[i].type == 114)
                     {
-                        if (!target.HasBuff(mod.BuffType("Freeze")))
+                        if (!target.HasBuff(Mod.Find<ModBuff>("Freeze").Type))
                         {
-                            target.AddBuff(mod.BuffType("Freeze"), (int)projectile.ai[1]);
-                            target.AddBuff(mod.BuffType("Freeze2"), (int)projectile.ai[1] + 2);
+                            target.AddBuff(Mod.Find<ModBuff>("Freeze").Type, (int)Projectile.ai[1]);
+                            target.AddBuff(Mod.Find<ModBuff>("Freeze2").Type, (int)Projectile.ai[1] + 2);
                         }
                     }
                 }

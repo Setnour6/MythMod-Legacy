@@ -1,7 +1,9 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -13,7 +15,7 @@ namespace MythMod.Tiles
     public class XYSM宝藏箱2 : ModTile
 	{
 		// Token: 0x06004652 RID: 18002 RVA: 0x0027C814 File Offset: 0x0027AA14
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileSpelunker[(int)base.Type] = true;
 			Main.tileContainer[(int)base.Type] = true;
@@ -21,7 +23,7 @@ namespace MythMod.Tiles
 			Main.tileShine[(int)base.Type] = 1200;
 			Main.tileFrameImportant[(int)base.Type] = true;
 			Main.tileNoAttach[(int)base.Type] = true;
-			Main.tileValue[(int)base.Type] = 575;
+			Main.tileOreFinderPriority[(int)base.Type] = 575;
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
 			TileObjectData.newTile.Origin = new Point16(0, 1);
 			TileObjectData.newTile.CoordinateHeights = new int[]
@@ -29,7 +31,7 @@ namespace MythMod.Tiles
 				16,
 				18
 			};
-			TileObjectData.newTile.HookCheck = new PlacementHook(new Func<int, int, int, int, int, int>(Chest.FindEmptyChest), -1, 0, true);
+			TileObjectData.newTile.HookCheckIfCanPlace = new PlacementHook(new Func<int, int, int, int, int, int>(Chest.FindEmptyChest), -1, 0, true);
 			TileObjectData.newTile.HookPostPlaceMyPlayer = new PlacementHook(new Func<int, int, int, int, int, int>(Chest.AfterPlacement_Hook), -1, 0, false);
 			TileObjectData.newTile.AnchorInvalidTiles = new int[]
 			{
@@ -41,14 +43,14 @@ namespace MythMod.Tiles
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("星渊水母宝藏箱 ");
 			base.AddMapEntry(new Color(247, 145, 156), modTranslation, new Func<string, int, int, string>(this.MapChestName));
-			this.dustType = 155;
-			this.disableSmartCursor = true;
-			this.adjTiles = new int[]
+			this.DustType = 155;
+			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+			this.AdjTiles = new int[]
 			{
 				21
 			};
-            this.chest = "星渊水母宝藏箱";
-            this.chestDrop = base.mod.ItemType("XYSMChest2");
+            this.chest/* tModPorter Note: Removed. Use ContainerName.SetDefault() and TileID.Sets.BasicChest instead */ = "星渊水母宝藏箱";
+            this.ChestDrop = base.Mod.Find<ModItem>("XYSMChest2").Type;
             modTranslation.AddTranslation(GameCulture.Chinese, "星渊水母宝藏箱 ");
 		}
         public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
@@ -60,7 +62,7 @@ namespace MythMod.Tiles
                 zero = Vector2.Zero;
             }
             int height = 16;
-            Main.spriteBatch.Draw(mod.GetTexture("Tiles/XYSM宝藏箱2Glow"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.frameX, tile.frameY, 16, height), new Color(255, 255, 255, 0), 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(Mod.GetTexture("Tiles/XYSM宝藏箱2Glow"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, height), new Color(255, 255, 255, 0), 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
         }
         // Token: 0x06004653 RID: 18003 RVA: 0x0027286C File Offset: 0x00270A6C
         public string MapChestName(string name, int i, int j)
@@ -68,11 +70,11 @@ namespace MythMod.Tiles
 			int num = i;
 			int num2 = j;
 			Tile tile = Main.tile[i, j];
-			if (tile.frameX % 36 != 0)
+			if (tile.TileFrameX % 36 != 0)
 			{
 				num--;
 			}
-			if (tile.frameY != 0)
+			if (tile.TileFrameY != 0)
 			{
 				num2--;
 			}
@@ -93,7 +95,7 @@ namespace MythMod.Tiles
 		// Token: 0x06004655 RID: 18005 RVA: 0x002728E0 File Offset: 0x00270AE0
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			Item.NewItem(i * 16, j * 16, 32, 32, this.chestDrop, 1, false, 0, false, false);
+			Item.NewItem(i * 16, j * 16, 32, 32, this.ChestDrop, 1, false, 0, false, false);
 			Chest.DestroyChest(i, j);
 		}
 
@@ -106,24 +108,24 @@ namespace MythMod.Tiles
 			Main.mouseRightRelease = false;
 			int num = i;
 			int num2 = j;
-			if (tile.frameX % 36 != 0)
+			if (tile.TileFrameX % 36 != 0)
 			{
 				num--;
 			}
-			if (tile.frameY != 0)
+			if (tile.TileFrameY != 0)
 			{
 				num2--;
 			}
 			if (player.sign >= 0)
 			{
-				Main.PlaySound(11, -1, -1, 1, 1f, 0f);
+				SoundEngine.PlaySound(SoundID.MenuClose);
 				player.sign = -1;
 				Main.editSign = false;
 				Main.npcChatText = "";
 			}
 			if (Main.editChest)
 			{
-				Main.PlaySound(12, -1, -1, 1, 1f, 0f);
+				SoundEngine.PlaySound(SoundID.MenuTick);
 				Main.editChest = false;
 				Main.npcChatText = "";
 			}
@@ -141,7 +143,7 @@ namespace MythMod.Tiles
 					if (num3 == player.chest)
 					{
 						player.chest = -1;
-						Main.PlaySound(11, -1, -1, 1, 1f, 0f);
+						SoundEngine.PlaySound(SoundID.MenuClose);
 					}
 					else
 					{
@@ -150,7 +152,7 @@ namespace MythMod.Tiles
 						Main.recBigList = false;
 						player.chestX = num;
 						player.chestY = num2;
-						Main.PlaySound((player.chest < 0) ? 10 : 12, -1, -1, 1, 1f, 0f);
+						SoundEngine.PlaySound((player.chest < 0) ? 10 : 12, -1, -1, 1, 1f, 0f);
 					}
 					Recipe.FindRecipes();
 				}
@@ -160,7 +162,7 @@ namespace MythMod.Tiles
 			{
 				player.chest = -1;
 				Recipe.FindRecipes();
-				Main.PlaySound(11, -1, -1, 1, 1f, 0f);
+				SoundEngine.PlaySound(SoundID.MenuClose);
 				return;
 			}
 			NetMessage.SendData(31, -1, -1, null, num, (float)num2, 0f, 0f, 0, 0, 0);
@@ -174,31 +176,31 @@ namespace MythMod.Tiles
 			Tile tile = Main.tile[i, j];
 			int num = i;
 			int num2 = j;
-			if (tile.frameX % 36 != 0)
+			if (tile.TileFrameX % 36 != 0)
 			{
 				num--;
 			}
-			if (tile.frameY != 0)
+			if (tile.TileFrameY != 0)
 			{
 				num2--;
 			}
 			int num3 = Chest.FindChest(num, num2);
-			player.showItemIcon2 = -1;
+			player.cursorItemIconID = -1;
 			if (num3 < 0)
 			{
-				player.showItemIconText = Lang.chestType[0].Value;//123465
+				player.cursorItemIconText = Lang.chestType[0].Value;//123465
 			}
 			else
 			{
-                player.showItemIconText = ((Main.chest[num3].name.Length > 0) ? Main.chest[num3].name : "星渊水母宝藏箱 ");
-                if (player.showItemIconText == "星渊水母宝藏箱")
+                player.cursorItemIconText = ((Main.chest[num3].name.Length > 0) ? Main.chest[num3].name : "星渊水母宝藏箱 ");
+                if (player.cursorItemIconText == "星渊水母宝藏箱")
 				{
-                    player.showItemIcon2 = base.mod.ItemType("XYSMChest");
-					player.showItemIconText = "";
+                    player.cursorItemIconID = base.Mod.Find<ModItem>("XYSMChest").Type;
+					player.cursorItemIconText = "";
 				}
 			}
 			player.noThrow = 2;
-			player.showItemIcon = true;
+			player.cursorItemIconEnabled = true;
 		}
 
 		// Token: 0x06004658 RID: 18008 RVA: 0x00272BDC File Offset: 0x00270DDC
@@ -206,10 +208,10 @@ namespace MythMod.Tiles
 		{
 			this.MouseOver(i, j);
 			Player player = Main.player[Main.myPlayer];
-			if (player.showItemIconText == "")
+			if (player.cursorItemIconText == "")
 			{
-				player.showItemIcon = false;
-				player.showItemIcon2 = 0;
+				player.cursorItemIconEnabled = false;
+				player.cursorItemIconID = 0;
 			}
 		}
 	}

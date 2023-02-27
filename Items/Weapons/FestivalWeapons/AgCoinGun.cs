@@ -20,27 +20,27 @@ namespace MythMod.Items.Weapons.FestivalWeapons
 		}
 		public override void SetDefaults()
 		{
-			base.item.damage = 37;
-            base.item.crit = 4;
-            base.item.width = 64;
-			base.item.height = 32;
-			base.item.useTime = 12;
-			base.item.useAnimation = 12;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.ranged = true;
-			base.item.knockBack = 1f;
-			base.item.value = 9999;
-			base.item.rare = 4;
-			base.item.UseSound = SoundID.Item31;
-			base.item.autoReuse = true;
-            base.item.shoot = base.mod.ProjectileType("AgCoinBullet");
-			base.item.shootSpeed = 13f;
-			base.item.useAmmo = 97;
+			base.Item.damage = 37;
+            base.Item.crit = 4;
+            base.Item.width = 64;
+			base.Item.height = 32;
+			base.Item.useTime = 12;
+			base.Item.useAnimation = 12;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.DamageType = DamageClass.Ranged;
+			base.Item.knockBack = 1f;
+			base.Item.value = 9999;
+			base.Item.rare = 4;
+			base.Item.UseSound = SoundID.Item31;
+			base.Item.autoReuse = true;
+            base.Item.shoot = base.Mod.Find<ModProjectile>("AgCoinBullet").Type;
+			base.Item.shootSpeed = 13f;
+			base.Item.useAmmo = 97;
 		}
-		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
-            Projectile.NewProjectile(position.X, position.Y + Main.rand.Next(-1, 2) * 6f, speedX, speedY, base.mod.ProjectileType("AgCoinBullet"), damage, knockBack, player.whoAmI, 0f, 0f);
+            Projectile.NewProjectile(position.X, position.Y + Main.rand.Next(-1, 2) * 6f, speedX, speedY, base.Mod.Find<ModProjectile>("AgCoinBullet").Type, damage, knockBack, player.whoAmI, 0f, 0f);
             return false;
 		}
 		public override Vector2? HoldoutOffset()

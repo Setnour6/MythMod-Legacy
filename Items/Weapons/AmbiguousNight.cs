@@ -20,22 +20,22 @@ namespace MythMod.Items.Weapons
 		// Token: 0x06001751 RID: 5969 RVA: 0x0009AFD0 File Offset: 0x000991D0
 		public override void SetDefaults()
 		{
-			base.item.damage = 55;
-			base.item.crit = 6;
-			base.item.ranged = true;
-			base.item.width = 40;
-			base.item.height = 40;
-			base.item.useTime = 16;
-			base.item.useAnimation = 16;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.knockBack = 2f;
-			base.item.autoReuse = true;
-			base.item.value = Item.sellPrice(0, 0, 10, 0);
-			base.item.rare = 4;
-			base.item.UseSound = SoundID.Item5;
-                 item.shoot = 51;
-			base.item.shootSpeed = 15f;
+			base.Item.damage = 55;
+			base.Item.crit = 6;
+			base.Item.DamageType = DamageClass.Ranged;
+			base.Item.width = 40;
+			base.Item.height = 40;
+			base.Item.useTime = 16;
+			base.Item.useAnimation = 16;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 2f;
+			base.Item.autoReuse = true;
+			base.Item.value = Item.sellPrice(0, 0, 10, 0);
+			base.Item.rare = 4;
+			base.Item.UseSound = SoundID.Item5;
+                 Item.shoot = 51;
+			base.Item.shootSpeed = 15f;
 		}
 
 		// Token: 0x06001752 RID: 5970 RVA: 0x00003B08 File Offset: 0x00001D08

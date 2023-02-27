@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.DataStructures;
@@ -19,7 +20,7 @@ namespace MythMod.NPCs
 		public override void SetStaticDefaults()
 		{
 			base.DisplayName.SetDefault("Moon slime");
-			Main.npcFrameCount[base.npc.type] = 2;
+			Main.npcFrameCount[base.NPC.type] = 2;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "星空史莱姆");
 		}
 
@@ -27,22 +28,22 @@ namespace MythMod.NPCs
 		public override void SetDefaults()
 		{
 
-			base.npc.aiStyle = 1;
-			base.npc.damage = 750;
-			base.npc.width = 36;
-			base.npc.height = 26;
-			base.npc.defense = 267;
-			base.npc.lifeMax = 14680;
-			base.npc.knockBackResist = 0f;
-			this.animationType = 81;
-			base.npc.value = (float)Item.buyPrice(0, 70, 0, 0);
-            base.npc.color = new Color(0, 0, 0, 0);
-			base.npc.alpha = 30;
-			base.npc.lavaImmune = false;
-			base.npc.noGravity = false;
-			base.npc.noTileCollide = false;
-			base.npc.HitSound = SoundID.NPCHit1;
-			base.npc.DeathSound = SoundID.NPCDeath1;
+			base.NPC.aiStyle = 1;
+			base.NPC.damage = 750;
+			base.NPC.width = 36;
+			base.NPC.height = 26;
+			base.NPC.defense = 267;
+			base.NPC.lifeMax = 14680;
+			base.NPC.knockBackResist = 0f;
+			this.AnimationType = 81;
+			base.NPC.value = (float)Item.buyPrice(0, 70, 0, 0);
+            base.NPC.color = new Color(0, 0, 0, 0);
+			base.NPC.alpha = 30;
+			base.NPC.lavaImmune = false;
+			base.NPC.noGravity = false;
+			base.NPC.noTileCollide = false;
+			base.NPC.HitSound = SoundID.NPCHit1;
+			base.NPC.DeathSound = SoundID.NPCDeath1;
 		}
 
 		// Token: 0x06001B17 RID: 6935 RVA: 0x0000B428 File Offset: 0x00009628
@@ -56,13 +57,13 @@ namespace MythMod.NPCs
 		{
 			for (int i = 0; i < 5; i++)
 			{
-				Dust.NewDust(base.npc.position, base.npc.width, base.npc.height, 59, (float)hitDirection, -1f, 0, default(Color), 1f);
+				Dust.NewDust(base.NPC.position, base.NPC.width, base.NPC.height, 59, (float)hitDirection, -1f, 0, default(Color), 1f);
 			}
-			if (base.npc.life <= 0)
+			if (base.NPC.life <= 0)
 			{
 				for (int j = 0; j < 20; j++)
 				{
-					Dust.NewDust(base.npc.position, base.npc.width, base.npc.height, 59, (float)hitDirection, -1f, 0, default(Color), 1f);
+					Dust.NewDust(base.NPC.position, base.NPC.width, base.NPC.height, 59, (float)hitDirection, -1f, 0, default(Color), 1f);
 				}
 			}
 		}
@@ -75,7 +76,7 @@ namespace MythMod.NPCs
             {
                 player.lostCoinString = Main.ValueToCoins(player.lostCoins);
             }
-            Main.PlaySound(5, (int)player.position.X, (int)player.position.Y, 1, 1f, 0f);
+            SoundEngine.PlaySound(SoundID.PlayerKilled, player.position);
             player.headVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
             player.bodyVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
             player.legVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
@@ -135,11 +136,11 @@ namespace MythMod.NPCs
 		}
 
 		// Token: 0x0600180C RID: 6156 RVA: 0x0010AEF8 File Offset: 0x001090F8
-		public override void NPCLoot()
+		public override void OnKill()
         {
             if (Main.rand.Next(130) == 0)
             {
-                Item.NewItem((int)base.npc.position.X, (int)base.npc.position.Y, base.npc.width, base.npc.height, base.mod.ItemType("ShadowWithBright"), 1, false, 0, false, false);
+                Item.NewItem((int)base.NPC.position.X, (int)base.NPC.position.Y, base.NPC.width, base.NPC.height, base.Mod.Find<ModItem>("ShadowWithBright").Type, 1, false, 0, false, false);
             }
        }
 	}

@@ -21,30 +21,29 @@ namespace MythMod.Items.Armors
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 18;
-			base.item.height = 18;
-			base.item.value = Item.buyPrice(0, 36, 0, 0);
-			base.item.rare = 11;
-			base.item.defense = 16;
+			base.Item.width = 18;
+			base.Item.height = 18;
+			base.Item.value = Item.buyPrice(0, 36, 0, 0);
+			base.Item.rare = 11;
+			base.Item.defense = 16;
 		}
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(null, "Basalt", 40);
             modRecipe.AddIngredient(null, "Sulfur", 100);
             modRecipe.requiredTile[0] = 412;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
         public override void UpdateEquip(Player player)
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
-            player.rangedCrit += 14;
-            player.rangedDamage *= 1.4f;
+            player.GetCritChance(DamageClass.Ranged) += 14;
+            player.GetDamage(DamageClass.Ranged) *= 1.4f;
         }
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
-            return body.type == base.mod.ItemType("SulfurBreastplate") && legs.type == base.mod.ItemType("SulfurLegging");
+            return body.type == base.Mod.Find<ModItem>("SulfurBreastplate").Type && legs.type == base.Mod.Find<ModItem>("SulfurLegging").Type;
         }
         public override void ArmorSetShadows(Player player)
         {
@@ -55,8 +54,8 @@ namespace MythMod.Items.Armors
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             player.setBonus = "没有怪的时候生成硫磺法球,一旦怪物靠近,立马释放\n远程伤害提高14%,远程暴击率提高14%";
             mplayer.Su = 2;
-            player.rangedCrit += 14;
-            player.rangedDamage *= 1.4f;
+            player.GetCritChance(DamageClass.Ranged) += 14;
+            player.GetDamage(DamageClass.Ranged) *= 1.4f;
             if (mplayer.Su2 == 0)
             {
                 for (int j = 0; j < 16; j++)
@@ -72,9 +71,9 @@ namespace MythMod.Items.Armors
                     double num1 = Main.rand.Next(0, 1000) / 500f;
                     double num2 = Math.Sin((double)num1 * Math.PI) * num4 / 150f;
                     double num3 = Math.Cos((double)num1 * Math.PI) * num4 / 150f;
-                    Projectile.NewProjectile((player.Center + new Vector2(0, -50)).X, (player.Center + new Vector2(0, -50)).Y, (float)num2, (float)num3, base.mod.ProjectileType("SulfurDust"), 80, 2, Main.myPlayer, 0f, 0f);
+                    Projectile.NewProjectile((player.Center + new Vector2(0, -50)).X, (player.Center + new Vector2(0, -50)).Y, (float)num2, (float)num3, base.Mod.Find<ModProjectile>("SulfurDust").Type, 80, 2, Main.myPlayer, 0f, 0f);
                 }
-                Projectile.NewProjectile((player.Center + new Vector2(0, -50)).X, (player.Center + new Vector2(0, -50)).Y, player.velocity.X, player.velocity.Y, base.mod.ProjectileType("SulfurMeltingBall2"), 600, 2, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile((player.Center + new Vector2(0, -50)).X, (player.Center + new Vector2(0, -50)).Y, player.velocity.X, player.velocity.Y, base.Mod.Find<ModProjectile>("SulfurMeltingBall2").Type, 600, 2, Main.myPlayer, 0f, 0f);
                 mplayer.Su2 = 60;
             }
         }

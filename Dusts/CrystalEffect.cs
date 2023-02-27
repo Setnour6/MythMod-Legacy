@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
 //using System.Drawing;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 using Terraria.UI;
 using Terraria.ID;
@@ -106,28 +107,28 @@ namespace MythMod.Dusts
             ContainFea.Add(1517);
             ContainFea.Add(1518);
             ContainFea.Add(1519);
-            ContainFea.Add(mod.ItemType("BirdFeather"));
-            ContainFea.Add(mod.ItemType("BlueBirdFeather"));
-            ContainFea.Add(mod.ItemType("GoldBirdFeather"));
-            ContainFea.Add(mod.ItemType("RedBirdFeather"));
-            ContainFea.Add(mod.ItemType("BeeFeather"));
-            ContainFea.Add(mod.ItemType("SnowFeather"));
-            ContainFea.Add(mod.ItemType("VoidFeather"));
-            ContainFea.Add(mod.ItemType("TwilightFeather"));
-            ContainFea.Add(mod.ItemType("SolarFeather"));
-            ContainFea.Add(mod.ItemType("StardustFeather"));
-            ContainFea.Add(mod.ItemType("LightingFeather"));
-            ContainFea.Add(mod.ItemType("LeaveFeather"));
-            ContainFea.Add(mod.ItemType("GoldFeather"));
-            ContainFea.Add(mod.ItemType("GhostFeather"));
-            ContainFea.Add(mod.ItemType("CrimsonFeather"));
-            ContainFea.Add(mod.ItemType("CorruptFeather"));
-            ContainFea.Add(mod.ItemType("DarkFeather"));
-            ContainFea.Add(mod.ItemType("DarkGoldFeather"));
-            ContainFea.Add(mod.ItemType("RainbowFeather"));
-            ContainFea.Add(mod.ItemType("PoisonFeather"));
-            ContainFea.Add(mod.ItemType("RedSnowFeather"));
-            ContainFea.Add(mod.ItemType("StarlightFeather"));
+            ContainFea.Add(mod.Find<ModItem>("BirdFeather").Type);
+            ContainFea.Add(mod.Find<ModItem>("BlueBirdFeather").Type);
+            ContainFea.Add(mod.Find<ModItem>("GoldBirdFeather").Type);
+            ContainFea.Add(mod.Find<ModItem>("RedBirdFeather").Type);
+            ContainFea.Add(mod.Find<ModItem>("BeeFeather").Type);
+            ContainFea.Add(mod.Find<ModItem>("SnowFeather").Type);
+            ContainFea.Add(mod.Find<ModItem>("VoidFeather").Type);
+            ContainFea.Add(mod.Find<ModItem>("TwilightFeather").Type);
+            ContainFea.Add(mod.Find<ModItem>("SolarFeather").Type);
+            ContainFea.Add(mod.Find<ModItem>("StardustFeather").Type);
+            ContainFea.Add(mod.Find<ModItem>("LightingFeather").Type);
+            ContainFea.Add(mod.Find<ModItem>("LeaveFeather").Type);
+            ContainFea.Add(mod.Find<ModItem>("GoldFeather").Type);
+            ContainFea.Add(mod.Find<ModItem>("GhostFeather").Type);
+            ContainFea.Add(mod.Find<ModItem>("CrimsonFeather").Type);
+            ContainFea.Add(mod.Find<ModItem>("CorruptFeather").Type);
+            ContainFea.Add(mod.Find<ModItem>("DarkFeather").Type);
+            ContainFea.Add(mod.Find<ModItem>("DarkGoldFeather").Type);
+            ContainFea.Add(mod.Find<ModItem>("RainbowFeather").Type);
+            ContainFea.Add(mod.Find<ModItem>("PoisonFeather").Type);
+            ContainFea.Add(mod.Find<ModItem>("RedSnowFeather").Type);
+            ContainFea.Add(mod.Find<ModItem>("StarlightFeather").Type);
             if (Main.playerInventory)
             {
                 Vector2 vMou = new Vector2(Main.mouseX, Main.mouseY);
@@ -151,62 +152,62 @@ namespace MythMod.Dusts
                 if ((vMou - (FesPos + new Vector2(48, 0))).Length() <= 25)
                 {
                     spriteBatch.Draw(mod.GetTexture("UIImages/MISSHighlight"), FesPos + new Vector2(48, 0), null, new Color(255, 255, 255, 255), 0f, Utils.Size(mod.GetTexture("UIImages/MISS")) / 2f, 1f, SpriteEffects.None, 0f);
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, "闪避" + mplayer.Misspossibility.ToString() + "%", Main.mouseX + 20, Main.mouseY, new Color(255, 255, 255), new Color(0, 0, 0), Vector2.Zero, 1);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, "闪避" + mplayer.Misspossibility.ToString() + "%", Main.mouseX + 20, Main.mouseY, new Color(255, 255, 255), new Color(0, 0, 0), Vector2.Zero, 1);
                 }
                 else
                 {
                     spriteBatch.Draw(mod.GetTexture("UIImages/MISS"), FesPos + new Vector2(48, 0), null, new Color(140, 140, 140, 0), 0f, Utils.Size(mod.GetTexture("UIImages/MISS")) / 2f, 1f, SpriteEffects.None, 0f);
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, mplayer.Misspossibility.ToString(), FesPos.X + 48 - mplayer.Misspossibility.ToString().Length * 4, FesPos.Y - 12, new Color(255, 255, 255), new Color(0, 0, 0), Vector2.Zero, 1);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, mplayer.Misspossibility.ToString(), FesPos.X + 48 - mplayer.Misspossibility.ToString().Length * 4, FesPos.Y - 12, new Color(255, 255, 255), new Color(0, 0, 0), Vector2.Zero, 1);
                 }
                 if ((vMou - (FesPos + new Vector2(76, -12))).Length() <= 6)
                 {
                     spriteBatch.Draw(mod.GetTexture("UIImages/ExpolorateHighlight"), FesPos + new Vector2(76, -12), null, new Color(255, 255, 0, 150), 0f, Utils.Size(mod.GetTexture("UIImages/ExpolorateHighlight")) / 2f, 1f, SpriteEffects.None, 0f);
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, "引爆率" + mplayer.ExpolodePoint.ToString() + "‱", Main.mouseX + 20, Main.mouseY, new Color(255, 255, 255), new Color(255, 145, 0), Vector2.Zero, 1);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, "引爆率" + mplayer.ExpolodePoint.ToString() + "‱", Main.mouseX + 20, Main.mouseY, new Color(255, 255, 255), new Color(255, 145, 0), Vector2.Zero, 1);
                 }
                 else
                 {
                     spriteBatch.Draw(mod.GetTexture("UIImages/Expolorate"), FesPos + new Vector2(76, -12), null, new Color(255, 140, 0, 0), 0f, Utils.Size(mod.GetTexture("UIImages/Expolorate")) / 2f, 1f, SpriteEffects.None, 0f);
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, mplayer.ExpolodePoint.ToString(), FesPos.X + 79 - mplayer.ExpolodePoint.ToString().Length, FesPos.Y - 14, new Color(255, 145, 255), new Color(0, 0, 0), Vector2.Zero, 0.5f);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, mplayer.ExpolodePoint.ToString(), FesPos.X + 79 - mplayer.ExpolodePoint.ToString().Length, FesPos.Y - 14, new Color(255, 145, 255), new Color(0, 0, 0), Vector2.Zero, 0.5f);
                 }
                 if ((vMou - (FesPos + new Vector2(76, 12))).Length() <= 6)
                 {
                     spriteBatch.Draw(mod.GetTexture("UIImages/FreezrateHighlight"), FesPos + new Vector2(76, 12), null, new Color(255, 255, 255, 255), 0f, Utils.Size(mod.GetTexture("UIImages/FreezrateHighlight")) / 2f, 1f, SpriteEffects.None, 0f);
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, "冰封率" + mplayer.FreezingPoint.ToString() + "‱", Main.mouseX + 20, Main.mouseY, new Color(255, 255, 255), new Color(0, 120, 200), Vector2.Zero, 1);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, "冰封率" + mplayer.FreezingPoint.ToString() + "‱", Main.mouseX + 20, Main.mouseY, new Color(255, 255, 255), new Color(0, 120, 200), Vector2.Zero, 1);
                 }
                 else
                 {
                     spriteBatch.Draw(mod.GetTexture("UIImages/Freezrate"), FesPos + new Vector2(76, 12), null, new Color(71, 71, 255, 0), 0f, Utils.Size(mod.GetTexture("UIImages/Freezrate")) / 2f, 1f, SpriteEffects.None, 0f);
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, mplayer.FreezingPoint.ToString(), FesPos.X + 79 - mplayer.FreezingPoint.ToString().Length, FesPos.Y + 11, new Color(255, 255, 255), new Color(0, 120, 200), Vector2.Zero, 0.5f);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, mplayer.FreezingPoint.ToString(), FesPos.X + 79 - mplayer.FreezingPoint.ToString().Length, FesPos.Y + 11, new Color(255, 255, 255), new Color(0, 120, 200), Vector2.Zero, 0.5f);
                 }
                 if ((vMou - (FesPos + new Vector2(100, 12))).Length() <= 6)
                 {
                     spriteBatch.Draw(mod.GetTexture("UIImages/LigrateHighlight"), FesPos + new Vector2(100, 12), null, new Color(255, 255, 255, 255), 0f, Utils.Size(mod.GetTexture("UIImages/LigrateHighlight")) / 2f, 1f, SpriteEffects.None, 0f);
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, "雷电率" + mplayer.LightingPoint.ToString() + "‱", Main.mouseX + 20, Main.mouseY, new Color(255, 255, 255), new Color(0, 200, 255), Vector2.Zero, 1);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, "雷电率" + mplayer.LightingPoint.ToString() + "‱", Main.mouseX + 20, Main.mouseY, new Color(255, 255, 255), new Color(0, 200, 255), Vector2.Zero, 1);
                 }
                 else
                 {
                     spriteBatch.Draw(mod.GetTexture("UIImages/Ligrate"), FesPos + new Vector2(100, 12), null, new Color(71, 71, 255, 0), 0f, Utils.Size(mod.GetTexture("UIImages/Ligrate")) / 2f, 1f, SpriteEffects.None, 0f);
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, mplayer.LightingPoint.ToString(), FesPos.X + 108 - mplayer.LightingPoint.ToString().Length, FesPos.Y + 11, new Color(255, 255, 255), new Color(0, 200, 255), Vector2.Zero, 0.5f);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, mplayer.LightingPoint.ToString(), FesPos.X + 108 - mplayer.LightingPoint.ToString().Length, FesPos.Y + 11, new Color(255, 255, 255), new Color(0, 200, 255), Vector2.Zero, 0.5f);
                 }
                 if ((vMou - (FesPos + new Vector2(100, -12))).Length() <= 6)
                 {
                     spriteBatch.Draw(mod.GetTexture("UIImages/BloodrateHighlight"), FesPos + new Vector2(100, -12), null, new Color(255, 255, 255, 255), 0f, Utils.Size(mod.GetTexture("UIImages/BloodrateHighlight")) / 2f, 1f, SpriteEffects.None, 0f);
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, "吸血率" + mplayer.BloodPoint.ToString() + "‱", Main.mouseX + 20, Main.mouseY, new Color(255, 255, 255), new Color(255, 0, 0), Vector2.Zero, 1);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, "吸血率" + mplayer.BloodPoint.ToString() + "‱", Main.mouseX + 20, Main.mouseY, new Color(255, 255, 255), new Color(255, 0, 0), Vector2.Zero, 1);
                 }
                 else
                 {
                     spriteBatch.Draw(mod.GetTexture("UIImages/Bloodrate"), FesPos + new Vector2(100, -12), null, new Color(71, 71, 255, 0), 0f, Utils.Size(mod.GetTexture("UIImages/Bloodrate")) / 2f, 1f, SpriteEffects.None, 0f);
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, mplayer.BloodPoint.ToString(), FesPos.X + 108 - mplayer.BloodPoint.ToString().Length, FesPos.Y - 14, new Color(255, 255, 255), new Color(255, 0, 0), Vector2.Zero, 0.5f);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, mplayer.BloodPoint.ToString(), FesPos.X + 108 - mplayer.BloodPoint.ToString().Length, FesPos.Y - 14, new Color(255, 255, 255), new Color(255, 0, 0), Vector2.Zero, 0.5f);
                 }
                 if ((vMou - (FesPos + new Vector2(129, -12))).Length() <= 6)
                 {
                     spriteBatch.Draw(mod.GetTexture("UIImages/PoisrateHighlight"), FesPos + new Vector2(129, -12), null, new Color(255, 255, 255, 255), 0f, Utils.Size(mod.GetTexture("UIImages/PoisrateHighlight")) / 2f, 1f, SpriteEffects.None, 0f);
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, "放毒率" + mplayer.PoisonPoint.ToString() + "‱", Main.mouseX + 20, Main.mouseY, new Color(255, 255, 255), new Color(71, 109, 11), Vector2.Zero, 1);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, "放毒率" + mplayer.PoisonPoint.ToString() + "‱", Main.mouseX + 20, Main.mouseY, new Color(255, 255, 255), new Color(71, 109, 11), Vector2.Zero, 1);
                 }
                 else
                 {
                     spriteBatch.Draw(mod.GetTexture("UIImages/Poisrate"), FesPos + new Vector2(129, -12), null, new Color(71, 71, 255, 0), 0f, Utils.Size(mod.GetTexture("UIImages/Poisrate")) / 2f, 1f, SpriteEffects.None, 0f);
-                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, mplayer.PoisonPoint.ToString(), FesPos.X + 137 - mplayer.PoisonPoint.ToString().Length, FesPos.Y - 14, new Color(255, 255, 255), new Color(71, 109, 11), Vector2.Zero, 0.5f);
+                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, mplayer.PoisonPoint.ToString(), FesPos.X + 137 - mplayer.PoisonPoint.ToString().Length, FesPos.Y - 14, new Color(255, 255, 255), new Color(71, 109, 11), Vector2.Zero, 0.5f);
                 }
                 /*Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, Main.mouseItem.type.ToString(), Main.mouseX, Main.mouseY + 36, new Color(255, 255, 255), new Color(0, 0, 0), Vector2.Zero, 1);*/
                 if (!FeaSystem)
@@ -225,11 +226,11 @@ namespace MythMod.Dusts
                                 if (fea[u] != 0)
                                 {
                                     float scal = 1f;
-                                    if(Main.itemTexture[fea[u]].Width + Main.itemTexture[fea[u]].Height > 60)
+                                    if(TextureAssets.Item[fea[u]].Value.Width + TextureAssets.Item[fea[u]].Value.Height > 60)
                                     {
-                                        scal = 60f / (float)(Main.itemTexture[fea[u]].Width + Main.itemTexture[fea[u]].Height);
+                                        scal = 60f / (float)(TextureAssets.Item[fea[u]].Value.Width + TextureAssets.Item[fea[u]].Value.Height);
                                     }
-                                    spriteBatch.Draw(Main.itemTexture[fea[u]], vfea[u], null, new Color(255, 255, 255, 255), 0f, Utils.Size(Main.itemTexture[fea[u]]) / 2f, scal, SpriteEffects.None, 0f);
+                                    spriteBatch.Draw(TextureAssets.Item[fea[u]].Value, vfea[u], null, new Color(255, 255, 255, 255), 0f, Utils.Size(TextureAssets.Item[fea[u]].Value) / 2f, scal, SpriteEffects.None, 0f);
                                 }
                             }
                         }
@@ -243,11 +244,11 @@ namespace MythMod.Dusts
                                 if (fea[u] != 0)
                                 {
                                     float scal = 1f;
-                                    if (Main.itemTexture[fea[u]].Width + Main.itemTexture[fea[u]].Height > 60)
+                                    if (TextureAssets.Item[fea[u]].Value.Width + TextureAssets.Item[fea[u]].Value.Height > 60)
                                     {
-                                        scal = 60f / (float)(Main.itemTexture[fea[u]].Width + Main.itemTexture[fea[u]].Height);
+                                        scal = 60f / (float)(TextureAssets.Item[fea[u]].Value.Width + TextureAssets.Item[fea[u]].Value.Height);
                                     }
-                                    spriteBatch.Draw(Main.itemTexture[fea[u]], vfea[u], null, new Color(255, 255, 255, 255), 0f, Utils.Size(Main.itemTexture[fea[u]]) / 2f, scal, SpriteEffects.None, 0f);
+                                    spriteBatch.Draw(TextureAssets.Item[fea[u]].Value, vfea[u], null, new Color(255, 255, 255, 255), 0f, Utils.Size(TextureAssets.Item[fea[u]].Value) / 2f, scal, SpriteEffects.None, 0f);
                                 }
                             }
                         }
@@ -259,7 +260,7 @@ namespace MythMod.Dusts
                     else
                     {
                         spriteBatch.Draw(mod.GetTexture("UIImages/WINGHighLight"), FesPos, null, new Color(255, 255, 255, 255), 0f, Utils.Size(mod.GetTexture("UIImages/WINGHighLight")) / 2f, 1f, SpriteEffects.None, 0f);
-                        Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, "打开羽毛界面", Main.mouseX + 20, Main.mouseY, new Color(255, 255, 255), new Color(0, 0, 0), Vector2.Zero, 1);
+                        Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, "打开羽毛界面", Main.mouseX + 20, Main.mouseY, new Color(255, 255, 255), new Color(0, 0, 0), Vector2.Zero, 1);
                         if (FeaOffDelay == 0 && Main.mouseLeft)
                         {
                             FeaSystem = true;
@@ -280,11 +281,11 @@ namespace MythMod.Dusts
                             if (fea[u] != 0)
                             {
                                 float scal = 1f;
-                                if (Main.itemTexture[fea[u]].Width + Main.itemTexture[fea[u]].Height > 60)
+                                if (TextureAssets.Item[fea[u]].Value.Width + TextureAssets.Item[fea[u]].Value.Height > 60)
                                 {
-                                    scal = 60f / (float)(Main.itemTexture[fea[u]].Width + Main.itemTexture[fea[u]].Height);
+                                    scal = 60f / (float)(TextureAssets.Item[fea[u]].Value.Width + TextureAssets.Item[fea[u]].Value.Height);
                                 }
-                                spriteBatch.Draw(Main.itemTexture[fea[u]], vfea[u], null, new Color(255, 255, 255, 255), 0f, Utils.Size(Main.itemTexture[fea[u]]) / 2f, scal, SpriteEffects.None, 0f);
+                                spriteBatch.Draw(TextureAssets.Item[fea[u]].Value, vfea[u], null, new Color(255, 255, 255, 255), 0f, Utils.Size(TextureAssets.Item[fea[u]].Value) / 2f, scal, SpriteEffects.None, 0f);
                             }
                         }
                     }
@@ -298,11 +299,11 @@ namespace MythMod.Dusts
                             if (fea[u] != 0)
                             {
                                 float scal = 1f;
-                                if (Main.itemTexture[fea[u]].Width + Main.itemTexture[fea[u]].Height > 60)
+                                if (TextureAssets.Item[fea[u]].Value.Width + TextureAssets.Item[fea[u]].Value.Height > 60)
                                 {
-                                    scal = 60f / (float)(Main.itemTexture[fea[u]].Width + Main.itemTexture[fea[u]].Height);
+                                    scal = 60f / (float)(TextureAssets.Item[fea[u]].Value.Width + TextureAssets.Item[fea[u]].Value.Height);
                                 }
-                                spriteBatch.Draw(Main.itemTexture[fea[u]], vfea[u], null, new Color(255, 255, 255, 255), 0f, Utils.Size(Main.itemTexture[fea[u]]) / 2f, scal, SpriteEffects.None, 0f);
+                                spriteBatch.Draw(TextureAssets.Item[fea[u]].Value, vfea[u], null, new Color(255, 255, 255, 255), 0f, Utils.Size(TextureAssets.Item[fea[u]].Value) / 2f, scal, SpriteEffects.None, 0f);
                             }
                         }
                     }
@@ -314,7 +315,7 @@ namespace MythMod.Dusts
                     else
                     {
                         spriteBatch.Draw(mod.GetTexture("UIImages/WING"), FesPos, null, new Color(140, 140, 140, 0), 0f, Utils.Size(mod.GetTexture("UIImages/WING")) / 2f, 1f, SpriteEffects.None, 0f);
-                        Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, "关闭羽毛界面", Main.mouseX + 20, Main.mouseY, new Color(255, 255, 255), new Color(0, 0, 0), Vector2.Zero, 1);
+                        Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, "关闭羽毛界面", Main.mouseX + 20, Main.mouseY, new Color(255, 255, 255), new Color(0, 0, 0), Vector2.Zero, 1);
                         if (FeaOnDelay == 0 && Main.mouseLeft)
                         {
                             FeaSystem = false;
@@ -341,23 +342,23 @@ namespace MythMod.Dusts
                     {
                         fp += 20;
                     }
-                    if (fea[i] == mod.ItemType("SnowFeather"))
+                    if (fea[i] == mod.Find<ModItem>("SnowFeather").Type)
                     {
                         fp += 7;
                     }
-                    if (fea[i] == mod.ItemType("RedSnowFeather"))
+                    if (fea[i] == mod.Find<ModItem>("RedSnowFeather").Type)
                     {
                         fp += 15;
                     }
-                    if (fea[i] == mod.ItemType("PoisonFeather"))
+                    if (fea[i] == mod.Find<ModItem>("PoisonFeather").Type)
                     {
                         pp += 200;
                     }
-                    if (fea[i] == mod.ItemType("DarkGoldFeather"))
+                    if (fea[i] == mod.Find<ModItem>("DarkGoldFeather").Type)
                     {
                         bp += 100;
                     }
-                    if (fea[i] == mod.ItemType("LightingFeather"))
+                    if (fea[i] == mod.Find<ModItem>("LightingFeather").Type)
                     {
                         lp += 60;
                     }
@@ -365,7 +366,7 @@ namespace MythMod.Dusts
                     {
                         ep += 40;
                     }
-                    if (fea[i] == mod.ItemType("SolarFeather"))
+                    if (fea[i] == mod.Find<ModItem>("SolarFeather").Type)
                     {
                         ep += 110;
                     }
@@ -390,7 +391,7 @@ namespace MythMod.Dusts
                                 {
                                     if(Main.mouseItem.stack == 1 && Uns && Main.mouseItem.rare <= i)
                                     {
-                                        Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, "可嵌入羽毛", Main.mouseX, Main.mouseY + 36, new Color(255, 255, 255), new Color(0, 0, 0), Vector2.Zero, 1);
+                                        Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, "可嵌入羽毛", Main.mouseX, Main.mouseY + 36, new Color(255, 255, 255), new Color(0, 0, 0), Vector2.Zero, 1);
                                         if (Main.mouseLeft)
                                         {
                                             if(ContainFea.Contains(Main.mouseItem.type))
@@ -411,14 +412,14 @@ namespace MythMod.Dusts
                                     {
                                         T += "\n该羽毛槽无法承载这么高品质的羽毛";
                                     }
-                                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, T, Main.mouseX, Main.mouseY + 32, new Color(255, 0, 0), new Color(0, 0, 0), Vector2.Zero, 1);
+                                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, T, Main.mouseX, Main.mouseY + 32, new Color(255, 0, 0), new Color(0, 0, 0), Vector2.Zero, 1);
                                 }
                             }
                             else
                             {
                                 if(FeaSystem)
                                 {
-                                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, Lang.GetItemName(fea[i]).ToString(), Main.mouseX, Main.mouseY + 36, new Color(255, 255, 255), new Color(0, 0, 0), Vector2.Zero, 1);
+                                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, Lang.GetItemName(fea[i]).ToString(), Main.mouseX, Main.mouseY + 36, new Color(255, 255, 255), new Color(0, 0, 0), Vector2.Zero, 1);
                                 }
 
                                 if (Main.mouseLeft && cooling == 0)//交换
@@ -446,7 +447,7 @@ namespace MythMod.Dusts
                                     {
                                         T += "\n该羽毛槽无法承载这么高品质的羽毛";
                                     }
-                                    Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, T, Main.mouseX, Main.mouseY + 32, new Color(255, 0, 0), new Color(0, 0, 0), Vector2.Zero, 1);
+                                    Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, T, Main.mouseX, Main.mouseY + 32, new Color(255, 0, 0), new Color(0, 0, 0), Vector2.Zero, 1);
                                 }
                                 if (Main.mouseLeft && cooling == 0 && Main.mouseItem.stack <= 0)//卸下
                                 {
@@ -462,14 +463,14 @@ namespace MythMod.Dusts
                         }
                         else
                         {
-                            Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, "尚未解锁", Main.mouseX, Main.mouseY + 36, new Color(255, 255, 255), new Color(0, 0, 0), Vector2.Zero, 1);
+                            Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, "尚未解锁", Main.mouseX, Main.mouseY + 36, new Color(255, 255, 255), new Color(0, 0, 0), Vector2.Zero, 1);
                         }
                     }
                     mplayer.Feathers[i] = fea[i];
                 }
             }
             /*波江*/
-            if (player.HeldItem.type == mod.ItemType("Wave"))
+            if (player.HeldItem.type == mod.Find<ModItem>("Wave").Type)
             {
                 /*List<CustomVertexInfo> bars = new List<CustomVertexInfo>();
 
@@ -549,17 +550,17 @@ namespace MythMod.Dusts
                     spriteBatch.Begin();
                 }*/
             }
-            if (NPC.CountNPCS(mod.NPCType("CrystalSwordEX")) >= 1)
+            if (NPC.CountNPCS(mod.Find<ModNPC>("CrystalSwordEX").Type) >= 1)
             {
                 for(int l = 0; l < 200; l++)
                 {
-                    if(Main.npc[l].type == mod.NPCType("CrystalSwordEX"))
+                    if(Main.npc[l].type == mod.Find<ModNPC>("CrystalSwordEX").Type)
                     {
-                        Utils.DrawBorderStringFourWay(Main.spriteBatch, Main.fontMouseText, "累计伤害:" + (mplayer.KillCrystal).ToString(), Main.npc[l].Center.X - Main.screenPosition.X - 127f, Main.npc[l].Center.Y - Main.screenPosition.Y - 110f, new Color(0, 150, 255), new Color(255, 255, 255), Vector2.Zero, 2);
+                        Utils.DrawBorderStringFourWay(Main.spriteBatch, FontAssets.MouseText.Value, "累计伤害:" + (mplayer.KillCrystal).ToString(), Main.npc[l].Center.X - Main.screenPosition.X - 127f, Main.npc[l].Center.Y - Main.screenPosition.Y - 110f, new Color(0, 150, 255), new Color(255, 255, 255), Vector2.Zero, 2);
                     }
                 }
             }
-            if (!player.HasBuff(mod.BuffType("愚昧诅咒")))
+            if (!player.HasBuff(mod.Find<ModBuff>("愚昧诅咒").Type))
             {
                 if (mplayer.ArrowMHold > 0)
                 {
@@ -699,7 +700,7 @@ namespace MythMod.Dusts
             }
             for (int i = 0;i < 6000;i++)
             {
-                if(Main.dust[i].type == mod.DustType("PurpleFlame") && Main.dust[i].scale > 0.3f)
+                if(Main.dust[i].type == mod.Find<ModDust>("PurpleFlame").Type && Main.dust[i].scale > 0.3f)
                 {
                     for (int l = 0; l < Main.dust[i].scale * 20f; l++)
                     {
@@ -707,7 +708,7 @@ namespace MythMod.Dusts
                         spriteBatch.Draw(mod.GetTexture("UIImages/fireEffect"), new Vector2(Main.dust[i].position.X + Dx * Main.dust[i].scale, Main.dust[i].position.Y + Main.rand.NextFloat(-2f, 2f) * Main.dust[i].scale) - Main.screenPosition, null, new Color(0.18f,0.12f,0.2f,0), 0f, Utils.Size(mod.GetTexture("UIImages/fireEffect")) / 2f, Main.dust[i].scale * 0.01f * (5 - Math.Abs(Dx)) / 6f, SpriteEffects.None, 0f);
                     }
                 }
-                if (Main.dust[i].type == mod.DustType("Crystal") && Main.dust[i].scale > 0.3f)
+                if (Main.dust[i].type == mod.Find<ModDust>("Crystal").Type && Main.dust[i].scale > 0.3f)
                 {
                     for (int l = 0; l < Main.dust[i].scale * 20f; l++)
                     {
@@ -717,7 +718,7 @@ namespace MythMod.Dusts
                         spriteBatch.Draw(mod.GetTexture("Dusts/CrystalEffect"), new Vector2(Main.dust[i].position.X, Main.dust[i].position.Y - (float)l * Main.dust[i].scale) - Main.screenPosition, null, new Color(Main.dust[i].scale / (float)l * (float)(1 + Math.Sin((float)l / 3d + i)) / 2f, Main.dust[i].scale / (float)l * (float)(1 + Math.Sin((float)l / 3d + i + Math.PI * 4d / 3d)) / 2f, Main.dust[i].scale / (float)l * (float)(1 + Math.Sin((float)l / 3d + i + Math.PI * 1d / 3d)) / 2f, 0), 0f, Utils.Size(mod.GetTexture("Dusts/CrystalEffect")) / 2f, Main.dust[i].scale, SpriteEffects.None, 0f);
                     }
                 }
-                if (Main.dust[i].type == mod.DustType("CrystalBlue") && Main.dust[i].scale > 0.3f)
+                if (Main.dust[i].type == mod.Find<ModDust>("CrystalBlue").Type && Main.dust[i].scale > 0.3f)
                 {
                     for (int l = 0; l < Main.dust[i].scale * 20f; l++)
                     {
@@ -727,7 +728,7 @@ namespace MythMod.Dusts
                         spriteBatch.Draw(mod.GetTexture("Dusts/CrystalEffect"), new Vector2(Main.dust[i].position.X, Main.dust[i].position.Y - (float)l * Main.dust[i].scale) - Main.screenPosition, null, new Color(Main.dust[i].scale / (float)l * (float)(1 + Math.Sin((float)l / 3d + i)) / 20f, Main.dust[i].scale / (float)l * (float)(1 + Math.Sin((float)l / 3d + i + Math.PI * 4d / 3d)) / 6f, Main.dust[i].scale / (float)l * (float)(1 + Math.Sin((float)l / 3d + i + Math.PI * 1d / 3d)) / 0.7f, 0), 0f, Utils.Size(mod.GetTexture("Dusts/CrystalEffect")) / 1f, Main.dust[i].scale, SpriteEffects.None, 0f);
                     }
                 }
-                if (Main.dust[i].type == mod.DustType("CrystalCrism") && Main.dust[i].scale > 0.3f)
+                if (Main.dust[i].type == mod.Find<ModDust>("CrystalCrism").Type && Main.dust[i].scale > 0.3f)
                 {
                     for (int l = 0; l < Main.dust[i].scale * 20f; l++)
                     {
@@ -737,7 +738,7 @@ namespace MythMod.Dusts
                         spriteBatch.Draw(mod.GetTexture("Dusts/CrystalEffect"), new Vector2(Main.dust[i].position.X, Main.dust[i].position.Y - (float)l * Main.dust[i].scale) - Main.screenPosition, null, new Color(Main.dust[i].scale / (float)l * (float)(1 + Math.Sin((float)l / 3d + i)) / 0.7f, Main.dust[i].scale / (float)l * (float)(1 + Math.Sin((float)l / 3d + i + Math.PI * 4d / 3d)) / 5f, Main.dust[i].scale / (float)l * (float)(1 + Math.Sin((float)l / 3d + i + Math.PI * 1d / 3d)) / 20f, 0), 0f, Utils.Size(mod.GetTexture("Dusts/CrystalEffect")) / 2f, Main.dust[i].scale, SpriteEffects.None, 0f);
                     }
                 }
-                if (Main.dust[i].type == mod.DustType("Crystal2") && Main.dust[i].scale > 0.3f)
+                if (Main.dust[i].type == mod.Find<ModDust>("Crystal2").Type && Main.dust[i].scale > 0.3f)
                 {
                     for (int l = 0; l < Main.dust[i].scale * 20f; l++)
                     {
@@ -747,7 +748,7 @@ namespace MythMod.Dusts
                         spriteBatch.Draw(mod.GetTexture("Dusts/CrystalEffect"), new Vector2(Main.dust[i].position.X, Main.dust[i].position.Y - (float)l * Main.dust[i].scale) - Main.screenPosition, null, new Color(Main.dust[i].scale / (float)l * (float)(1 + Math.Sin((float)l / 3d + i)) / 50f, Main.dust[i].scale / (float)l * (float)(1 + Math.Sin((float)l / 3d + i + Math.PI * 4d / 3d)) / 20f, Main.dust[i].scale / (float)l * (float)(1 + Math.Sin((float)l / 3d + i + Math.PI * 1d / 3d)) / 2f, 0), 0f, Utils.Size(mod.GetTexture("Dusts/CrystalEffect")) / 2f, Main.dust[i].scale, SpriteEffects.None, 0f);
                     }
                 }
-                if (Main.dust[i].type == mod.DustType("Star") && Main.dust[i].scale > 0.3f)
+                if (Main.dust[i].type == mod.Find<ModDust>("Star").Type && Main.dust[i].scale > 0.3f)
                 {
                     int R0 = (int)(73 + (Math.Sin(Main.dust[i].scale * 12) + 1) * 70.5);
                     int G0 = (int)(170 - (Math.Sin(Main.dust[i].scale * 12) + 1) * 52);
@@ -759,7 +760,7 @@ namespace MythMod.Dusts
                         spriteBatch.Draw(mod.GetTexture("Dusts/CrystalEffect"), new Vector2(Main.dust[i].position.X, Main.dust[i].position.Y - (float)l * Main.dust[i].scale) - Main.screenPosition, null, new Color(Main.dust[i].scale / (float)l * (float)(1 + Math.Sin((float)l / 3d + i) / 4f) * R0 / 600f, Main.dust[i].scale / (float)l * (float)(1 + Math.Sin((float)l / 3d + i + Math.PI * 4d / 3d) / 4f) * G0 / 600f, Main.dust[i].scale / (float)l * (float)(1 + Math.Sin((float)l / 3d + i + Math.PI * 1d / 3d) / 4f) * 255f / 600f, 0), 0f, Utils.Size(mod.GetTexture("Dusts/CrystalEffect")) / 2f, Main.dust[i].scale, SpriteEffects.None, 0f);
                     }
                 }
-                if (Main.dust[i].type == mod.DustType("Purplefire") && Main.dust[i].scale > 0.15f)
+                if (Main.dust[i].type == mod.Find<ModDust>("Purplefire").Type && Main.dust[i].scale > 0.15f)
                 {
                     float St = Main.dust[i].scale / 6f;
                     if(St > 0.3f)
@@ -768,7 +769,7 @@ namespace MythMod.Dusts
                     }
                     spriteBatch.Draw(mod.GetTexture("Dusts/Purplelight"), new Vector2(Main.dust[i].position.X, Main.dust[i].position.Y) - Main.screenPosition, null, new Color(St,St,St, 0), 0f, new Vector2(56, 56), Main.dust[i].scale * 0.15f, SpriteEffects.None, 0f);
                 }
-                if (Main.dust[i].type == mod.DustType("Redfire") && Main.dust[i].scale > 0.15f)
+                if (Main.dust[i].type == mod.Find<ModDust>("Redfire").Type && Main.dust[i].scale > 0.15f)
                 {
                     float St = Main.dust[i].scale / 6f;
                     if (St > 0.3f)
@@ -777,7 +778,7 @@ namespace MythMod.Dusts
                     }
                     spriteBatch.Draw(mod.GetTexture("Dusts/Redlight"), new Vector2(Main.dust[i].position.X, Main.dust[i].position.Y) - Main.screenPosition, null, new Color(St, St, St, 0), 0f, new Vector2(56, 56), Main.dust[i].scale * 0.15f, SpriteEffects.None, 0f);
                 }
-                if (Main.dust[i].type == mod.DustType("Greenfire") && Main.dust[i].scale > 0.15f)
+                if (Main.dust[i].type == mod.Find<ModDust>("Greenfire").Type && Main.dust[i].scale > 0.15f)
                 {
                     float St = Main.dust[i].scale / 6f;
                     if (St > 0.3f)
@@ -786,39 +787,39 @@ namespace MythMod.Dusts
                     }
                     spriteBatch.Draw(mod.GetTexture("Dusts/Greenlight"), new Vector2(Main.dust[i].position.X, Main.dust[i].position.Y) - Main.screenPosition, null, new Color(St, St, St, 0), 0f, new Vector2(56, 56), Main.dust[i].scale * 0.15f, SpriteEffects.None, 0f);
                 }
-                if (Main.dust[i].type == mod.DustType("BlueEffect") && Main.dust[i].scale > 0.15f)
+                if (Main.dust[i].type == mod.Find<ModDust>("BlueEffect").Type && Main.dust[i].scale > 0.15f)
                 {
                     spriteBatch.Draw(mod.GetTexture("Dusts/Bluelight"), new Vector2(Main.dust[i].position.X, Main.dust[i].position.Y) - Main.screenPosition, null, new Color(Main.dust[i].scale / 2f - 0.075f, Main.dust[i].scale / 2f - 0.075f, Main.dust[i].scale / 2f - 0.075f, 0), 0f, new Vector2(56, 56), (1.2f - Main.dust[i].scale) * 2f, SpriteEffects.None, 0f);
                 }
-                if (Main.dust[i].type == mod.DustType("GreenEffect") && Main.dust[i].scale > 0.15f)
+                if (Main.dust[i].type == mod.Find<ModDust>("GreenEffect").Type && Main.dust[i].scale > 0.15f)
                 {
                     spriteBatch.Draw(mod.GetTexture("Dusts/Greenlight"), new Vector2(Main.dust[i].position.X, Main.dust[i].position.Y) - Main.screenPosition, null, new Color(Main.dust[i].scale / 2f - 0.075f, Main.dust[i].scale / 2f - 0.075f, Main.dust[i].scale / 2f - 0.075f, 0), 0f, new Vector2(56, 56), (1.2f - Main.dust[i].scale) * 2f, SpriteEffects.None, 0f);
                 }
-                if (Main.dust[i].type == mod.DustType("GarnetEffect") && Main.dust[i].scale > 0.15f)
+                if (Main.dust[i].type == mod.Find<ModDust>("GarnetEffect").Type && Main.dust[i].scale > 0.15f)
                 {
                     spriteBatch.Draw(mod.GetTexture("Dusts/Garnetlight"), new Vector2(Main.dust[i].position.X, Main.dust[i].position.Y) - Main.screenPosition, null, new Color(Main.dust[i].scale / 2f - 0.075f, Main.dust[i].scale / 2f - 0.075f, Main.dust[i].scale / 2f - 0.075f, 0), 0f, new Vector2(56, 56), (1.2f - Main.dust[i].scale) * 2f, SpriteEffects.None, 0f);
                 }
-                if (Main.dust[i].type == mod.DustType("PurpleEffect") && Main.dust[i].scale > 0.15f)
+                if (Main.dust[i].type == mod.Find<ModDust>("PurpleEffect").Type && Main.dust[i].scale > 0.15f)
                 {
                     spriteBatch.Draw(mod.GetTexture("Dusts/Purplelight"), new Vector2(Main.dust[i].position.X, Main.dust[i].position.Y) - Main.screenPosition, null, new Color(Main.dust[i].scale / 2f - 0.075f, Main.dust[i].scale / 2f - 0.075f, Main.dust[i].scale / 2f - 0.075f, 0), 0f, new Vector2(56, 56), (1.2f - Main.dust[i].scale) * 2f, SpriteEffects.None, 0f);
                 }
-                if (Main.dust[i].type == mod.DustType("RedEffect") && Main.dust[i].scale > 0.15f)
+                if (Main.dust[i].type == mod.Find<ModDust>("RedEffect").Type && Main.dust[i].scale > 0.15f)
                 {
                     spriteBatch.Draw(mod.GetTexture("Dusts/Redlight"), new Vector2(Main.dust[i].position.X, Main.dust[i].position.Y) - Main.screenPosition, null, new Color(Main.dust[i].scale / 2f - 0.075f, Main.dust[i].scale / 2f - 0.075f, Main.dust[i].scale / 2f - 0.075f, 0), 0f, new Vector2(56, 56), (1.2f - Main.dust[i].scale) * 2f, SpriteEffects.None, 0f);
                 }
-                if (Main.dust[i].type == mod.DustType("WhiteEffect") && Main.dust[i].scale > 0.15f && i % 3 == 0)
+                if (Main.dust[i].type == mod.Find<ModDust>("WhiteEffect").Type && Main.dust[i].scale > 0.15f && i % 3 == 0)
                 {
                     spriteBatch.Draw(mod.GetTexture("Dusts/Silverlight"), new Vector2(Main.dust[i].position.X, Main.dust[i].position.Y) - Main.screenPosition, null, new Color(Main.dust[i].scale / 1.5f - 0.1f, 0, 0, 0), 0f, new Vector2(56, 56), (1.2f - Main.dust[i].scale) * 2f, SpriteEffects.None, 0f);
                 }
-                if (Main.dust[i].type == mod.DustType("WhiteEffect") && Main.dust[i].scale > 0.15f && i % 3 == 1)
+                if (Main.dust[i].type == mod.Find<ModDust>("WhiteEffect").Type && Main.dust[i].scale > 0.15f && i % 3 == 1)
                 {
                     spriteBatch.Draw(mod.GetTexture("Dusts/Silverlight"), new Vector2(Main.dust[i].position.X, Main.dust[i].position.Y) - Main.screenPosition, null, new Color(0, Main.dust[i].scale / 1.5f - 0.1f, 0, 0), 0f, new Vector2(56, 56), (1.2f - Main.dust[i].scale) * 2f, SpriteEffects.None, 0f);
                 }
-                if (Main.dust[i].type == mod.DustType("WhiteEffect") && Main.dust[i].scale > 0.15f && i % 3 == 2)
+                if (Main.dust[i].type == mod.Find<ModDust>("WhiteEffect").Type && Main.dust[i].scale > 0.15f && i % 3 == 2)
                 {
                     spriteBatch.Draw(mod.GetTexture("Dusts/Silverlight"), new Vector2(Main.dust[i].position.X, Main.dust[i].position.Y) - Main.screenPosition, null, new Color(0, 0, Main.dust[i].scale / 1.5f - 0.1f, 0), 0f, new Vector2(56, 56), (1.2f - Main.dust[i].scale) * 2f, SpriteEffects.None, 0f);
                 }
-                if (Main.dust[i].type == mod.DustType("Wave") && Main.dust[i].scale > 0.3f && Main.dust[i].active)
+                if (Main.dust[i].type == mod.Find<ModDust>("Wave").Type && Main.dust[i].scale > 0.3f && Main.dust[i].active)
                 {
                     Vector2 v = Main.dust[i].velocity;
                     for (int l = 0; l < Main.dust[i].velocity.Length() * 400; l += 120)
@@ -839,7 +840,7 @@ namespace MythMod.Dusts
                         }
                     }
                 }
-                if (Main.dust[i].type == mod.DustType("Wind") && Main.dust[i].scale > 0.3f && Main.dust[i].active)
+                if (Main.dust[i].type == mod.Find<ModDust>("Wind").Type && Main.dust[i].scale > 0.3f && Main.dust[i].active)
                 {
                     Vector2 v = Main.screenPosition + new Vector2(Main.mouseX, Main.mouseY);
                     float d = (Main.dust[i].position - v).Length();
@@ -858,11 +859,11 @@ namespace MythMod.Dusts
                         }
                     }
                 }
-                if (Main.dust[i].type == mod.DustType("Pixel") && Main.dust[i].scale > 0.3f && Main.dust[i].active)
+                if (Main.dust[i].type == mod.Find<ModDust>("Pixel").Type && Main.dust[i].scale > 0.3f && Main.dust[i].active)
                 {
                     spriteBatch.Draw(mod.GetTexture("Dusts/PixelEffect" + (i % 4 + 1).ToString()), new Vector2(Main.dust[i].position.X, Main.dust[i].position.Y) - Main.screenPosition, null, new Color(1f, 1f, 1f, 0), 0f, Utils.Size(mod.GetTexture("Dusts/PixelEffect" + (i % 4 + 1).ToString())) / 2f, Main.dust[i].scale / 5f, SpriteEffects.None, 0f);
                 }
-                if (Main.dust[i].type == mod.DustType("Pixel2") && Main.dust[i].scale > 0.3f && Main.dust[i].active)
+                if (Main.dust[i].type == mod.Find<ModDust>("Pixel2").Type && Main.dust[i].scale > 0.3f && Main.dust[i].active)
                 {
                     spriteBatch.Draw(mod.GetTexture("Dusts/PixelEffect" + (i % 4 + 1).ToString()), new Vector2(Main.dust[i].position.X, Main.dust[i].position.Y) - Main.screenPosition, null, new Color(0.4f, 0.4f, 0.4f, 0), 0f, Utils.Size(mod.GetTexture("Dusts/PixelEffect" + (i % 4 + 1).ToString())) / 2f, Main.dust[i].scale / 5f, SpriteEffects.None, 0f);
                 }

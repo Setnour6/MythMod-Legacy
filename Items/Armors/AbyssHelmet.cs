@@ -20,29 +20,28 @@ namespace MythMod.Items.Armors
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 18;
-			base.item.height = 18;
-			base.item.value = Item.buyPrice(0, 30, 0, 0);
-			base.item.rare = 11;
-			base.item.defense = 18;
+			base.Item.width = 18;
+			base.Item.height = 18;
+			base.Item.value = Item.buyPrice(0, 30, 0, 0);
+			base.Item.rare = 11;
+			base.Item.defense = 18;
 		}
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(null, "DarkSeaBar", 12);
             modRecipe.requiredTile[0] = 412;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
         public override void UpdateEquip(Player player)
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
-            player.rangedCrit += 13;
-            player.rangedDamage *= 1.13f;
+            player.GetCritChance(DamageClass.Ranged) += 13;
+            player.GetDamage(DamageClass.Ranged) *= 1.13f;
         }
         public override bool IsArmorSet(Item head, Item body, Item legs)
         {
-            return body.type == base.mod.ItemType("AbyssBreastplate") && legs.type == base.mod.ItemType("AbyssLegging");
+            return body.type == base.Mod.Find<ModItem>("AbyssBreastplate").Type && legs.type == base.Mod.Find<ModItem>("AbyssLegging").Type;
         }
         public override void ArmorSetShadows(Player player)
         {
@@ -53,8 +52,8 @@ namespace MythMod.Items.Armors
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             player.setBonus = "水下受到伤害减半\n远程伤害提高11%,远程暴击率提高16%";
             mplayer.ab = 2;
-            player.rangedCrit += 12;
-            player.rangedDamage *= 1.11f;
+            player.GetCritChance(DamageClass.Ranged) += 12;
+            player.GetDamage(DamageClass.Ranged) *= 1.11f;
         }
     }
 }

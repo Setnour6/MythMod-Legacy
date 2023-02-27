@@ -12,14 +12,14 @@ namespace MythMod.Items.Foods
         }
         public override void SetDefaults()
         {
-            base.item.useStyle = 1;
-			base.item.useTurn = true;
-            item.width = 56;
-            item.height = 38;
-            item.rare = 2;
-            item.scale = 1f;
-            item.value = 100;
-            item.maxStack = 999;
+            base.Item.useStyle = 1;
+			base.Item.useTurn = true;
+            Item.width = 56;
+            Item.height = 38;
+            Item.rare = 2;
+            Item.scale = 1f;
+            Item.value = 100;
+            Item.maxStack = 999;
         }
         public override void AddRecipes()
         {

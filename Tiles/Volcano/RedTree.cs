@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using MythMod.MiscImplementation;
 using Terraria;
 using Terraria.GameContent.Generation;
-using Terraria.World.Generation;
+using Terraria.WorldBuilding;
 
 
 namespace MythMod.Tiles.Volcano
@@ -26,14 +26,14 @@ namespace MythMod.Tiles.Volcano
 			return 1;
 		}*/
 
-		public override int GrowthFXGore()
+		public override int TreeLeaf()
 		{
 			return mod.GetGoreSlot("Gores/RedTreeFX");
 		}
 
 		public override int DropWood()
 		{
-			return mod.ItemType("ShoreWood");
+			return mod.Find<ModItem>("ShoreWood").Type;
 		}
 
         public override Texture2D GetTexture()

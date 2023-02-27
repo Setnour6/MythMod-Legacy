@@ -16,11 +16,11 @@ namespace MythMod.Walls
     public class 青纽扣珊瑚墙 : ModWall
 	{
 		// Token: 0x060046D6 RID: 18134 RVA: 0x0027F638 File Offset: 0x0027D838
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.wallHouse[(int)base.Type] = true;
-			this.dustType = 59;
-            this.drop = base.mod.ItemType("青纽扣珊瑚墙");
+			this.DustType = 59;
+            this.ItemDrop = base.Mod.Find<ModItem>("青纽扣珊瑚墙").Type;
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("青纽扣珊瑚墙");
 			base.AddMapEntry(new Color(2, 56, 32), modTranslation);

@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class PurpleCrystal : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("紫水晶");
             base.Description.SetDefault("闪避增加10%");

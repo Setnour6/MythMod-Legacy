@@ -12,7 +12,7 @@ namespace MythMod.Tiles.玄武岩家具
 	public class 玄武岩书架 : ModTile
 	{
 		// Token: 0x0600414C RID: 16716 RVA: 0x0032AFE8 File Offset: 0x003291E8
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileSolidTop[(int)base.Type] = true;
 			Main.tileLighted[(int)base.Type] = true;
@@ -26,8 +26,8 @@ namespace MythMod.Tiles.玄武岩家具
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
 			modTranslation.SetDefault("玄武岩书架");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
-			this.animationFrameHeight = 54;
-			this.adjTiles = new int[]
+			this.AnimationFrameHeight = 54;
+			this.AdjTiles = new int[]
 			{
 				101
 			};
@@ -50,7 +50,7 @@ namespace MythMod.Tiles.玄武岩家具
 		// Token: 0x0600414F RID: 16719 RVA: 0x0032B0C0 File Offset: 0x003292C0
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("BasaltBookshelf"), 1, false, 0, false, false);
+			Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("BasaltBookshelf").Type, 1, false, 0, false, false);
 		}
 	}
 }

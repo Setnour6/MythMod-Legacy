@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class FirstLove : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("初恋");
             base.Description.SetDefault("暴击率增加8%");

@@ -13,33 +13,33 @@ namespace MythMod.Projectiles
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("终天灭世眼映射");
-			Main.projFrames[base.projectile.type] = 3;
+			Main.projFrames[base.Projectile.type] = 3;
 		}
 
 		// Token: 0x06001F15 RID: 7957 RVA: 0x0018D09C File Offset: 0x0018B29C
 		public override void SetDefaults()
 		{
-			base.projectile.width = 150;
-			base.projectile.height = 150;
-			base.projectile.hostile = true;
-			base.projectile.ignoreWater = true;
-			base.projectile.tileCollide = false;
-			base.projectile.penetrate = 1;
-			base.projectile.timeLeft = 240;
-			base.projectile.alpha = 180;
-            base.projectile.friendly = false;
-			this.cooldownSlot = 1;
+			base.Projectile.width = 150;
+			base.Projectile.height = 150;
+			base.Projectile.hostile = true;
+			base.Projectile.ignoreWater = true;
+			base.Projectile.tileCollide = false;
+			base.Projectile.penetrate = 1;
+			base.Projectile.timeLeft = 240;
+			base.Projectile.alpha = 180;
+            base.Projectile.friendly = false;
+			this.CooldownSlot = 1;
 		}
 
 		// Token: 0x06001F16 RID: 7958 RVA: 0x0018D118 File Offset: 0x0018B318
 		public override void AI()
 		{
-			base.projectile.frameCounter++;
-			if (base.projectile.frame > 2)
+			base.Projectile.frameCounter++;
+			if (base.Projectile.frame > 2)
 			{
-				base.projectile.frame = 0;
+				base.Projectile.frame = 0;
 			}
-			base.projectile.velocity *= 1.07f;
+			base.Projectile.velocity *= 1.07f;
 		}
 	}
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
@@ -26,22 +27,22 @@ namespace MythMod.Projectiles.projectile2
         //7359668
         public override void SetDefaults()
         {
-            projectile.width = 325;
-            projectile.height = 155;
-            projectile.aiStyle = -1;
-            projectile.friendly = false;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = false;
-            projectile.timeLeft = 400;
-            projectile.hostile = false;
-            projectile.penetrate = -1;
-            projectile.scale = 0;
-            this.cooldownSlot = 1;
+            Projectile.width = 325;
+            Projectile.height = 155;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = false;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
+            Projectile.timeLeft = 400;
+            Projectile.hostile = false;
+            Projectile.penetrate = -1;
+            Projectile.scale = 0;
+            this.CooldownSlot = 1;
         }
         //55555
         public override Color? GetAlpha(Color lightColor)
         {
-            return new Color?(new Color(150, 150, 150, 0) * (0.7f + (float)Math.Sin(projectile.timeLeft / 7f) / 2f));
+            return new Color?(new Color(150, 150, 150, 0) * (0.7f + (float)Math.Sin(Projectile.timeLeft / 7f) / 2f));
         }
         private bool initialization = true;
         private float b;
@@ -49,26 +50,26 @@ namespace MythMod.Projectiles.projectile2
         {
             if (initialization)
             {
-                projectile.rotation += Main.rand.NextFloat(-0.105f, 0.105f);
-                projectile.velocity.Y = -5f;
+                Projectile.rotation += Main.rand.NextFloat(-0.105f, 0.105f);
+                Projectile.velocity.Y = -5f;
                 initialization = false;
             }
-            if(projectile.scale < 0.2 && projectile.timeLeft > 25)
+            if(Projectile.scale < 0.2 && Projectile.timeLeft > 25)
             {
-                projectile.scale += 0.02f;
+                Projectile.scale += 0.02f;
             }
-            if(projectile.timeLeft <= 25 && projectile.scale >= 0.02f)
+            if(Projectile.timeLeft <= 25 && Projectile.scale >= 0.02f)
             {
-                projectile.scale -= 0.02f;
+                Projectile.scale -= 0.02f;
             }
-            projectile.velocity.Y *= 0.96f;
+            Projectile.velocity.Y *= 0.96f;
         }
         //14141414141414
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D texture2D = Main.projectileTexture[base.projectile.type];
-            int num = Main.projectileTexture[base.projectile.type].Height;
-            Main.spriteBatch.Draw(texture2D, base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY), new Rectangle?(new Rectangle(0, 0, texture2D.Width, num)), base.projectile.GetAlpha(lightColor), base.projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.projectile.scale, SpriteEffects.None, 1f);
+            Texture2D texture2D = TextureAssets.Projectile[base.Projectile.type].Value;
+            int num = TextureAssets.Projectile[base.Projectile.type].Value.Height;
+            Main.spriteBatch.Draw(texture2D, base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), new Rectangle?(new Rectangle(0, 0, texture2D.Width, num)), base.Projectile.GetAlpha(lightColor), base.Projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.Projectile.scale, SpriteEffects.None, 1f);
             return false;
         }
         public override void Kill(int timeLeft)

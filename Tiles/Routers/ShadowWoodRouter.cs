@@ -10,7 +10,7 @@ namespace MythMod.Tiles.Routers
 {
 	public class ShadowWoodRouter : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileLighted[(int)base.Type] = true;
 			Main.tileFrameImportant[(int)base.Type] = true;
@@ -29,17 +29,17 @@ namespace MythMod.Tiles.Routers
 			modTranslation.SetDefault("暗影木路由器");
 			base.AddMapEntry(new Color(0, 17, 6), modTranslation);
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
-			this.disableSmartCursor = true;
-			this.adjTiles = new int[]
+			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+			this.AdjTiles = new int[]
 			{
 				4
 			};
-			this.drop = base.mod.ItemType("ShadowWoodRouter");
+			this.ItemDrop = base.Mod.Find<ModItem>("ShadowWoodRouter").Type;
 			modTranslation.AddTranslation(GameCulture.Chinese, "暗影木路由器");
 		}
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(i * 16, j * 16, 16, 32, mod.ItemType("ShadowWoodRouter"), 1, false, 0, false, false);
+            Item.NewItem(i * 16, j * 16, 16, 32, Mod.Find<ModItem>("ShadowWoodRouter").Type, 1, false, 0, false, false);
         }
         public override void NearbyEffects(int i, int j, bool closer)
         {

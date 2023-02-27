@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,22 +20,22 @@ namespace MythMod.Projectiles.projectile5
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("叶绿光球");
-            Main.projFrames[projectile.type] = 4;
+            Main.projFrames[Projectile.type] = 4;
         }
         public override void SetDefaults()
         {
-            projectile.width = 30;
-            projectile.height = 30;
-            projectile.aiStyle = -1;
-            projectile.friendly = false;
-            projectile.hostile = true;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = false;
-            projectile.timeLeft = 7200;
-            projectile.alpha = 0;
-            projectile.penetrate = -1;
-            projectile.scale = 0;
-            this.cooldownSlot = 1;
+            Projectile.width = 30;
+            Projectile.height = 30;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = false;
+            Projectile.hostile = true;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
+            Projectile.timeLeft = 7200;
+            Projectile.alpha = 0;
+            Projectile.penetrate = -1;
+            Projectile.scale = 0;
+            this.CooldownSlot = 1;
         }
         public override Color? GetAlpha(Color lightColor)
         {
@@ -47,7 +47,7 @@ namespace MythMod.Projectiles.projectile5
         public override void AI()
         {
             Player player = Main.player[Main.myPlayer];
-            base.projectile.rotation = (float)Math.Atan2((double)base.projectile.velocity.Y, (double)base.projectile.velocity.X) + 1.57f;
+            base.Projectile.rotation = (float)Math.Atan2((double)base.Projectile.velocity.Y, (double)base.Projectile.velocity.X) + 1.57f;
             if (Fa)
             {
                 Fa = false;
@@ -56,49 +56,49 @@ namespace MythMod.Projectiles.projectile5
             {
                 S2 += 0.01f;
             }
-            if (projectile.timeLeft % 6 == 0)
+            if (Projectile.timeLeft % 6 == 0)
             {
-                if (projectile.frame < 3)
+                if (Projectile.frame < 3)
                 {
-                    projectile.frame += 1;
+                    Projectile.frame += 1;
                 }
                 else
                 {
-                    projectile.frame = 0;
+                    Projectile.frame = 0;
                 }
             }
-            if (projectile.timeLeft > 120)
+            if (Projectile.timeLeft > 120)
             {
                 num += 0.011f;
                 float S = (float)(Math.Sin(num) / 5f + 1);
-                projectile.scale = S * S2;
+                Projectile.scale = S * S2;
             }
             else
             {
-                projectile.scale *= 0.99f;
+                Projectile.scale *= 0.99f;
             }
         }
         public override void OnHitPlayer(Player target, int damage, bool crit)
         {
-            projectile.Kill();
+            Projectile.Kill();
         }
         public override void Kill(int timeLeft)
         {
             for (int g = 0; g < 8; g++)
             {
                 Vector2 v = new Vector2(0, Main.rand.NextFloat(0.1f, 8.3f)).RotatedByRandom(MathHelper.TwoPi);
-                int numk = Dust.NewDust(projectile.Center - new Vector2(8, 8), 8, 8, mod.DustType("Poison"), v.X * projectile.scale, v.Y * projectile.scale, 0, default(Color), 4f * projectile.scale);
+                int numk = Dust.NewDust(Projectile.Center - new Vector2(8, 8), 8, 8, Mod.Find<ModDust>("Poison").Type, v.X * Projectile.scale, v.Y * Projectile.scale, 0, default(Color), 4f * Projectile.scale);
                 Main.dust[numk].noGravity = true;
             }
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            base.projectile.Kill();
+            base.Projectile.Kill();
             return false;
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
         {
-            Main.spriteBatch.Draw(mod.GetTexture("Projectiles/projectile5/Lightball"), base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY), null, new Color(0, 1f, 0f, 0), 0, new Vector2(250, 250), base.projectile.scale * 0.1f, SpriteEffects.None, 1f);
+            Main.spriteBatch.Draw(Mod.GetTexture("Projectiles/projectile5/Lightball"), base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), null, new Color(0, 1f, 0f, 0), 0, new Vector2(250, 250), base.Projectile.scale * 0.1f, SpriteEffects.None, 1f);
             return false;
         }
         private float num = 0;

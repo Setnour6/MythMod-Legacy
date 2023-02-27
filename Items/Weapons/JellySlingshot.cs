@@ -16,22 +16,22 @@ namespace MythMod.Items.Weapons
 		}
 		public override void SetDefaults()
 		{
-			base.item.damage = 18;
-			base.item.crit = 8;
-			base.item.ranged = true;
-			base.item.width = 42;
-			base.item.height = 30;
-			base.item.useTime = 14;
-			base.item.useAnimation = 14;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.knockBack = 2f;
-			base.item.autoReuse = false;
-			base.item.value = Item.sellPrice(0, 0, 0, 50);
-			base.item.rare = 2;
-			base.item.UseSound = SoundID.Item5;
-            item.shoot = mod.ProjectileType("JellyBall");
-			base.item.shootSpeed = 10f;
+			base.Item.damage = 18;
+			base.Item.crit = 8;
+			base.Item.DamageType = DamageClass.Ranged;
+			base.Item.width = 42;
+			base.Item.height = 30;
+			base.Item.useTime = 14;
+			base.Item.useAnimation = 14;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 2f;
+			base.Item.autoReuse = false;
+			base.Item.value = Item.sellPrice(0, 0, 0, 50);
+			base.Item.rare = 2;
+			base.Item.UseSound = SoundID.Item5;
+            Item.shoot = Mod.Find<ModProjectile>("JellyBall").Type;
+			base.Item.shootSpeed = 10f;
 		}
 		public override Vector2? HoldoutOffset()
 		{

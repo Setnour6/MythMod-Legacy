@@ -16,85 +16,85 @@ namespace MythMod.Projectiles.projectile3
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("风之精灵");
-            ProjectileID.Sets.MinionSacrificable[projectile.type] = true;
-            ProjectileID.Sets.MinionTargettingFeature[projectile.type] = true;
-            Main.projFrames[projectile.type] = 8;
+            ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
+            ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
+            Main.projFrames[Projectile.type] = 8;
         }
         public override void SetDefaults()
         {
-            projectile.width = 56;
-            projectile.height = 46;
-            projectile.netImportant = true;
-            projectile.friendly = true;
-            projectile.minionSlots = 2f;
-            projectile.timeLeft = 720000;
-            projectile.aiStyle = 54;
-            projectile.timeLeft *= 5;
-            this.aiType = 317;
-            projectile.penetrate = -1;
-            projectile.minion = true;
-            projectile.tileCollide = false;
-            projectile.usesLocalNPCImmunity = true;
-            projectile.localNPCHitCooldown = 10;
+            Projectile.width = 56;
+            Projectile.height = 46;
+            Projectile.netImportant = true;
+            Projectile.friendly = true;
+            Projectile.minionSlots = 2f;
+            Projectile.timeLeft = 720000;
+            Projectile.aiStyle = 54;
+            Projectile.timeLeft *= 5;
+            this.AIType = 317;
+            Projectile.penetrate = -1;
+            Projectile.minion = true;
+            Projectile.tileCollide = false;
+            Projectile.usesLocalNPCImmunity = true;
+            Projectile.localNPCHitCooldown = 10;
         }
         public override void AI()
         {
-            Player player = Main.player[projectile.owner];
-            if (!player.HasBuff(mod.BuffType("WindSprite1")))
+            Player player = Main.player[Projectile.owner];
+            if (!player.HasBuff(Mod.Find<ModBuff>("WindSprite1").Type))
             {
-                projectile.Kill();
+                Projectile.Kill();
             }
-            if (projectile.frameCounter > 7)
+            if (Projectile.frameCounter > 7)
             {
                 num16 += 0.15f;
-                projectile.frame = (int)num16;
-                projectile.frameCounter = 0;
+                Projectile.frame = (int)num16;
+                Projectile.frameCounter = 0;
             }
-            if (projectile.frame > 7)
+            if (Projectile.frame > 7)
             {
-                projectile.frame = 0;
+                Projectile.frame = 0;
                 num16 = 0;
             }
             MythPlayer modPlayer = player.GetModPlayer<MythPlayer>();
-            if(projectile.active)
+            if(Projectile.active)
             {
-                player.AddBuff(mod.BuffType("WindSprite1"), 3600, true);
+                player.AddBuff(Mod.Find<ModBuff>("WindSprite1").Type, 3600, true);
             }
             bool flag = false;
-            float num2 = projectile.Center.X;
-            float num3 = projectile.Center.Y;
+            float num2 = Projectile.Center.X;
+            float num3 = Projectile.Center.Y;
             float num4 = 800f;
-            if (projectile.wet)
+            if (Projectile.wet)
             {
                 num4 = 1600f;
             }
             int l = -1;
             for (int i = 0; i < 200; i++)
             {
-                if (!Main.npc[i].dontTakeDamage && !Main.npc[i].friendly && Main.npc[i].active && Main.npc[i].CanBeChasedBy() && (Main.npc[i].Center - projectile.Center).Length() < 1000)
+                if (!Main.npc[i].dontTakeDamage && !Main.npc[i].friendly && Main.npc[i].active && Main.npc[i].CanBeChasedBy() && (Main.npc[i].Center - Projectile.Center).Length() < 1000)
                 {
                     if (l == -1)
                     {
                         l = i;
                     }
-                    else if ((Main.npc[i].Center - projectile.Center).Length() < (Main.npc[l].Center - projectile.Center).Length())
+                    else if ((Main.npc[i].Center - Projectile.Center).Length() < (Main.npc[l].Center - Projectile.Center).Length())
                     {
                         l = i;
                     }
                 }
             }
-            if (l != -1 && projectile.timeLeft % 90 == 1)
+            if (l != -1 && Projectile.timeLeft % 90 == 1)
             {
                 for(int i = 0; i < 4; i++)
                 {
-                    Vector2 v = (Main.npc[l].Center - projectile.Center) / (Main.npc[l].Center - projectile.Center).Length() * Main.rand.NextFloat(0.85f, 1.15f);
+                    Vector2 v = (Main.npc[l].Center - Projectile.Center) / (Main.npc[l].Center - Projectile.Center).Length() * Main.rand.NextFloat(0.85f, 1.15f);
                     v = v.RotatedBy(Main.rand.NextFloat(-0.3f, 0.3f));
-                    Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, v.X, v.Y, mod.ProjectileType("WindBlade"), projectile.damage, projectile.knockBack, Main.myPlayer, 0f, 0f);
+                    Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, v.X, v.Y, Mod.Find<ModProjectile>("WindBlade").Type, Projectile.damage, Projectile.knockBack, Main.myPlayer, 0f, 0f);
                 }
             }
             if (l != -1)
             {
-                projectile.velocity *= 0.9f;
+                Projectile.velocity *= 0.9f;
             }
 
         }

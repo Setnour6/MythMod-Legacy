@@ -12,7 +12,7 @@ namespace MythMod.Tiles.Plants
     public class 菠萝丛 : ModTile
     {
         // Token: 0x06004868 RID: 18536 RVA: 0x0034883C File Offset: 0x00346A3C
-        public override void SetDefaults()
+        public override void SetStaticDefaults()
         {
             Main.tileFrameImportant[(int)base.Type] = true;
             Main.tileNoAttach[(int)base.Type] = true;
@@ -29,13 +29,13 @@ namespace MythMod.Tiles.Plants
             };
             TileObjectData.newTile.CoordinateWidth = 90;
             TileObjectData.addTile((int)base.Type);
-            this.dustType = 39;
-            this.soundType = 6;
+            this.DustType = 39;
+            this.HitSound = 6;
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
             base.AddMapEntry(new Color(100, 210, 80), modTranslation);
-            this.mineResist = 3f;
-            base.SetDefaults();
+            this.MineResist = 3f;
+            base.SetStaticDefaults();
             modTranslation.AddTranslation(GameCulture.Chinese, "");
         }
         private int xm = 0;
@@ -52,7 +52,7 @@ namespace MythMod.Tiles.Plants
         {
             if (frameX == 368)
             {
-                Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("菠萝"));
+                Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("菠萝").Type);
             }
             Color messageColor = Color.Purple;
             //Main.NewText(Language.GetTextValue(frameX.ToString()), messageColor);
@@ -60,17 +60,17 @@ namespace MythMod.Tiles.Plants
         public override void PlaceInWorld(int i, int j, Item item)
         {
             short num = (short)(Main.rand.Next(0, 0));
-            Main.tile[i, j].frameX = (short)(num * 90);
+            Main.tile[i, j].TileFrameX = (short)(num * 90);
         }
         public override void RandomUpdate(int i, int j)
         {
-            if (Main.tile[i, j].frameX < 400 && Main.rand.Next(5) == 2)
+            if (Main.tile[i, j].TileFrameX < 400 && Main.rand.Next(5) == 2)
             {
                 for (int y = j; y < j + 10; y++)
                 {
-                    if (Main.tile[i, y - 5].type == mod.TileType("菠萝丛"))
+                    if (Main.tile[i, y - 5].TileType == Mod.Find<ModTile>("菠萝丛").Type)
                     {
-                        Main.tile[i, y - 5].frameX += 90;
+                        Main.tile[i, y - 5].TileFrameX += 90;
                     }
                 }
                 xm += 1;

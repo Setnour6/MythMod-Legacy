@@ -1,6 +1,5 @@
 ﻿using MythMod.NPCs;
 using Terraria.GameContent.Generation;
-using Terraria.World.Generation;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -8,6 +7,7 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.DataStructures;
 using Terraria.Localization;
+using Terraria.WorldBuilding;
 
 namespace MythMod.Items
 {
@@ -24,13 +24,13 @@ namespace MythMod.Items
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            base.item.maxStack = 1;
-            base.item.consumable = false;
-            base.item.width = 24;
-            base.item.height = 24;
-            base.item.rare = 9;
-            base.item.expert = true;
+            Item.glowMask = GetGlowMask;
+            base.Item.maxStack = 1;
+            base.Item.consumable = false;
+            base.Item.width = 24;
+            base.Item.height = 24;
+            base.Item.rare = 9;
+            base.Item.expert = true;
             //this.bossBagNPC = 4;
 		}
 		public override bool CanRightClick()
@@ -50,13 +50,13 @@ namespace MythMod.Items
             //player.QuickSpawnItem(2106, 1);
             if (Main.rand.Next(100) >= 50)
             {
-                player.QuickSpawnItem(base.mod.ItemType("SwordTwins"), 1);
+                player.QuickSpawnItem(base.Mod.Find<ModItem>("SwordTwins").Type, 1);
             }
             player.QuickSpawnItem(499, Main.rand.Next(80, 140));
-            player.QuickSpawnItem(base.mod.ItemType("TwinsChest2"), 1);
-            player.QuickSpawnItem(base.mod.ItemType("BloodLightCyanFlame"), 1);
-            player.QuickSpawnItem(base.mod.ItemType("LazarBattery"), Main.rand.Next(3, 8));
-            item.stack--;
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("TwinsChest2").Type, 1);
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("BloodLightCyanFlame").Type, 1);
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("LazarBattery").Type, Main.rand.Next(3, 8));
+            Item.stack--;
         }
 	}
 }

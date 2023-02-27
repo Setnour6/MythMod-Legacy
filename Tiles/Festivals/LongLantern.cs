@@ -11,7 +11,7 @@ namespace MythMod.Tiles.Festivals
 {
 	public class LongLantern : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileLighted[(int)base.Type] = true;
 			Main.tileFrameImportant[(int)base.Type] = true;
@@ -36,7 +36,7 @@ namespace MythMod.Tiles.Festivals
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
 			modTranslation.SetDefault("LongLantern");
 			base.AddMapEntry(new Color(255, 0, 0), modTranslation);
-			this.adjTiles = new int[]
+			this.AdjTiles = new int[]
 			{
 				4
 			};
@@ -53,7 +53,7 @@ namespace MythMod.Tiles.Festivals
 		}
 		public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
 		{
-			if (Main.tile[i, j].frameX < 18)
+			if (Main.tile[i, j].TileFrameX < 18)
 			{
 				r = 0.8f;
 				g = 0.2f;
@@ -67,29 +67,29 @@ namespace MythMod.Tiles.Festivals
 
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			Item.NewItem(i * 16, j * 16, 48, 48, base.mod.ItemType("LongLantern"), 1, false, 0, false, false);
+			Item.NewItem(i * 16, j * 16, 48, 48, base.Mod.Find<ModItem>("LongLantern").Type, 1, false, 0, false, false);
 		}
 		public override void HitWire(int i, int j)
 		{
-			int num = i - (int)(Main.tile[i, j].frameX / 18 % 3);
-			int num2 = j - (int)(Main.tile[i, j].frameY / 18 % 3);
+			int num = i - (int)(Main.tile[i, j].TileFrameX / 18 % 3);
+			int num2 = j - (int)(Main.tile[i, j].TileFrameY / 18 % 3);
             for (int l = num2 - 1; l < num2 + 3; l++)
             {
                 if (Main.tile[num, l] == null)
                 {
                     Main.tile[num, l] = new Tile();
                 }
-                if (Main.tile[num, l].active() && Main.tile[num, l].type == base.Type)
+                if (Main.tile[num, l].HasTile && Main.tile[num, l].TileType == base.Type)
                 {
-                    if (Main.tile[num, l].frameX < 15)
+                    if (Main.tile[num, l].TileFrameX < 15)
                     {
                         Tile tile = Main.tile[num, l];
-                        tile.frameX += 36;
+                        tile.TileFrameX += 36;
                     }
                     else
                     {
                         Tile tile2 = Main.tile[num, l];
-                        tile2.frameX -= 36;
+                        tile2.TileFrameX -= 36;
                     }
                 }
             }

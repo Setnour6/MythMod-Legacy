@@ -19,67 +19,67 @@ namespace MythMod.NPCs
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("克苏鲁之脑");
-			Main.npcFrameCount[base.npc.type] = 4;
+			Main.npcFrameCount[base.NPC.type] = 4;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "克苏鲁之脑");
 		}
         private bool A2 = true;
 		private int num4;	
 		public override void SetDefaults()
 		{
-			base.npc.damage = 0;
-			base.npc.width = 200;
-			base.npc.height = 182;
-			base.npc.defense = 0;
-			base.npc.lifeMax = 2040;
-			base.npc.knockBackResist = 0.7f;
-			base.npc.alpha = 0;
-			base.npc.lavaImmune = false;
-			base.npc.noGravity = true;
-			base.npc.noTileCollide = true;
+			base.NPC.damage = 0;
+			base.NPC.width = 200;
+			base.NPC.height = 182;
+			base.NPC.defense = 0;
+			base.NPC.lifeMax = 2040;
+			base.NPC.knockBackResist = 0.7f;
+			base.NPC.alpha = 0;
+			base.NPC.lavaImmune = false;
+			base.NPC.noGravity = true;
+			base.NPC.noTileCollide = true;
 		}
 		public override void AI()
         {
-			Player player = Main.player[base.npc.target];
-            if((player.Center - npc.Center).Length() >= 100f)
+			Player player = Main.player[base.NPC.target];
+            if((player.Center - NPC.Center).Length() >= 100f)
             {
-                Vector2 v = (player.Center - npc.Center) / ((player.Center - npc.Center).Length() + 0.01f) * 6f;
-                npc.velocity = v;
+                Vector2 v = (player.Center - NPC.Center) / ((player.Center - NPC.Center).Length() + 0.01f) * 6f;
+                NPC.velocity = v;
             }
 
-            if((player.Center - npc.Center).Length() < 100f)
+            if((player.Center - NPC.Center).Length() < 100f)
             {
-                npc.velocity *= 0.98f;
-                npc.alpha += 5;
-                if(npc.alpha >= 255)
+                NPC.velocity *= 0.98f;
+                NPC.alpha += 5;
+                if(NPC.alpha >= 255)
                 {
-                    npc.position = npc.position + new Vector2(0, Main.rand.NextFloat(300, 800)).RotatedByRandom(Math.PI * 2);
+                    NPC.position = NPC.position + new Vector2(0, Main.rand.NextFloat(300, 800)).RotatedByRandom(Math.PI * 2);
                     A2 = false;
                 }
             }
             if(!A2)
             {
-                npc.alpha -= 5;
-                if (npc.alpha <= 0)
+                NPC.alpha -= 5;
+                if (NPC.alpha <= 0)
                 {
-                    npc.alpha = 0;
+                    NPC.alpha = 0;
                     A2 = true;
                 }
             }
             if(NPC.CountNPCS(266) < 1)
             {
-                npc.active = false;
+                NPC.active = false;
             }
         }
 		public override void HitEffect(int hitDirection, double damage)
 		{
-            npc.life = npc.lifeMax;
+            NPC.life = NPC.lifeMax;
 		}
         public override void FindFrame(int frameHeight)
         {
-            base.npc.frameCounter += 0.15f;
-            base.npc.frameCounter %= (double)Main.npcFrameCount[base.npc.type];
-            int num = (int)base.npc.frameCounter;
-            base.npc.frame.Y = num * frameHeight;
+            base.NPC.frameCounter += 0.15f;
+            base.NPC.frameCounter %= (double)Main.npcFrameCount[base.NPC.type];
+            int num = (int)base.NPC.frameCounter;
+            base.NPC.frame.Y = num * frameHeight;
         }
     }
 }

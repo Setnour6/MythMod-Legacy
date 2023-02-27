@@ -19,17 +19,17 @@ namespace MythMod.NPCs.Yasitaya
         }
         public override void SetDefaults()
         {
-            projectile.width = 60;
-            projectile.height = 60;
-            projectile.aiStyle = -1;
-            projectile.friendly = false;
-            projectile.hostile = true;
-            projectile.ignoreWater = true;
-            projectile.magic = false;
-            projectile.tileCollide = false;
-            projectile.timeLeft = 180;
-            projectile.penetrate = 1;
-            projectile.scale = 1;
+            Projectile.width = 60;
+            Projectile.height = 60;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = false;
+            Projectile.hostile = true;
+            Projectile.ignoreWater = true;
+            Projectile.magic = false/* tModPorter Suggestion: Remove. See Item.DamageType */;
+            Projectile.tileCollide = false;
+            Projectile.timeLeft = 180;
+            Projectile.penetrate = 1;
+            Projectile.scale = 1;
         }
         private bool initialization = true;
         private double X;
@@ -41,18 +41,18 @@ namespace MythMod.NPCs.Yasitaya
             for(int h = 0;h < 10;h++)
             {
                 Vector2 v = new Vector2(0, 5).RotatedByRandom(MathHelper.TwoPi);
-                if(projectile.timeLeft < 30)
+                if(Projectile.timeLeft < 30)
                 {
-                    v = new Vector2(0, projectile.timeLeft / 6f).RotatedByRandom(MathHelper.TwoPi);
+                    v = new Vector2(0, Projectile.timeLeft / 6f).RotatedByRandom(MathHelper.TwoPi);
                 }
-                int num = Dust.NewDust(projectile.Center - new Vector2(4, 4), 2, 2, 183, v.X, v.Y, 0, default(Color), 3f);
+                int num = Dust.NewDust(Projectile.Center - new Vector2(4, 4), 2, 2, 183, v.X, v.Y, 0, default(Color), 3f);
                 Main.dust[num].noGravity = true;
-                if (projectile.timeLeft < 30)
+                if (Projectile.timeLeft < 30)
                 {
-                    Main.dust[num].scale = projectile.timeLeft / 10f;
+                    Main.dust[num].scale = Projectile.timeLeft / 10f;
                 }
             }
-            projectile.velocity.Y += 0.1f;
+            Projectile.velocity.Y += 0.1f;
         }       
     }
 }

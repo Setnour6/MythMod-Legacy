@@ -17,14 +17,14 @@ namespace MythMod.Projectiles.projectile4
         }
         public override void SetDefaults()
         {
-            projectile.width = 26;
-            projectile.height = 26;
-            projectile.friendly = false;
-            projectile.hostile = true;
-            projectile.aiStyle = -1;
-            projectile.penetrate = -1;
-            projectile.timeLeft = 360000000;
-            projectile.tileCollide = false;
+            Projectile.width = 26;
+            Projectile.height = 26;
+            Projectile.friendly = false;
+            Projectile.hostile = true;
+            Projectile.aiStyle = -1;
+            Projectile.penetrate = -1;
+            Projectile.timeLeft = 360000000;
+            Projectile.tileCollide = false;
         }
         private float Stre = 0.01f;
         private float BStre = 0.01f;
@@ -36,13 +36,13 @@ namespace MythMod.Projectiles.projectile4
         private Vector2 v = new Vector2(15, 0);
         public override void AI()
         {
-            if(projectile.timeLeft >= 360000000)
+            if(Projectile.timeLeft >= 360000000)
             {
-                theta = projectile.ai[0];
+                theta = Projectile.ai[0];
             }
             theta += 0.01f;
-            projectile.position = Main.screenPosition + new Vector2(Main.screenWidth / 2f, Main.screenHeight / 2f) + v3.RotatedBy(theta);
-            v2 = projectile.Center - new Vector2(Main.mouseX, Main.mouseY) + new Vector2(0, 60).RotatedBy(projectile.ai[0]) - Main.screenPosition;
+            Projectile.position = Main.screenPosition + new Vector2(Main.screenWidth / 2f, Main.screenHeight / 2f) + v3.RotatedBy(theta);
+            v2 = Projectile.Center - new Vector2(Main.mouseX, Main.mouseY) + new Vector2(0, 60).RotatedBy(Projectile.ai[0]) - Main.screenPosition;
             v = -v2 / v2.Length() * 15f;
             if (Bmax)
             {
@@ -55,7 +55,7 @@ namespace MythMod.Projectiles.projectile4
                     }
                     else
                     {
-                        Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, v.X, v.Y, 100, 70, 0f, Main.myPlayer, 0f, 0f);
+                        Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, v.X, v.Y, 100, 70, 0f, Main.myPlayer, 0f, 0f);
                         if(NPC.CountNPCS(134) > 0)
                         {
                             Bmax = false;
@@ -66,7 +66,7 @@ namespace MythMod.Projectiles.projectile4
                         else
                         {
                             Stre = 0;
-                            projectile.Kill();
+                            Projectile.Kill();
                         }
                     }
                 }
@@ -96,12 +96,12 @@ namespace MythMod.Projectiles.projectile4
                 }
             }
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
         {
             if(Stre <= 1)
             {
-                spriteBatch.Draw(base.mod.GetTexture("Projectiles/projectile4/RedLazerBall"), base.projectile.Center - Main.screenPosition, null, new Color(BStre, BStre, BStre, 0), base.projectile.rotation, new Vector2(13f, 13f), BStre, SpriteEffects.None, 0f);
-                spriteBatch.Draw(base.mod.GetTexture("Projectiles/projectile4/RedLazer"), base.projectile.Center - Main.screenPosition + v * 0.3f, new Rectangle(0, 0, 3000, 16), new Color(Stre, Stre, Stre, 0), (float)Math.Atan2(v.Y, v.X), new Vector2(8, 8), 1, SpriteEffects.None, 0f);
+                spriteBatch.Draw(base.Mod.GetTexture("Projectiles/projectile4/RedLazerBall"), base.Projectile.Center - Main.screenPosition, null, new Color(BStre, BStre, BStre, 0), base.Projectile.rotation, new Vector2(13f, 13f), BStre, SpriteEffects.None, 0f);
+                spriteBatch.Draw(base.Mod.GetTexture("Projectiles/projectile4/RedLazer"), base.Projectile.Center - Main.screenPosition + v * 0.3f, new Rectangle(0, 0, 3000, 16), new Color(Stre, Stre, Stre, 0), (float)Math.Atan2(v.Y, v.X), new Vector2(8, 8), 1, SpriteEffects.None, 0f);
             }
             return false;
         }

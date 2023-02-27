@@ -20,14 +20,14 @@ namespace MythMod.Projectiles.projectile4
         private int T = 30;
         public override void SetDefaults()
         {
-            projectile.width = 250;
-            projectile.height = 250;
-            projectile.friendly = false;
-            projectile.hostile = false;
-            projectile.aiStyle = -1;
-            projectile.penetrate = -1;
-            projectile.timeLeft = 600;
-            projectile.tileCollide = false;
+            Projectile.width = 250;
+            Projectile.height = 250;
+            Projectile.friendly = false;
+            Projectile.hostile = false;
+            Projectile.aiStyle = -1;
+            Projectile.penetrate = -1;
+            Projectile.timeLeft = 600;
+            Projectile.tileCollide = false;
         }
         public override void AI()
         {
@@ -46,19 +46,19 @@ namespace MythMod.Projectiles.projectile4
             }
             if(T == 20)
             {
-                int u = Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, 0, 0, 102, 100, 0f, Main.myPlayer, 0f, 0f);
+                int u = Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, 0, 0, 102, 100, 0f, Main.myPlayer, 0f, 0f);
                 Main.projectile[u].timeLeft = 1;
             }
             if(T <= 0)
             {
-                projectile.Kill();
+                Projectile.Kill();
             }
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
         {
             if(Stre < 1)
             {
-                spriteBatch.Draw(base.mod.GetTexture("Projectiles/projectile4/RedCircle"), base.projectile.Center - Main.screenPosition, null, new Color(Stre, Stre, Stre, 0), base.projectile.rotation, new Vector2(125f, 125f), 0.3f / Stre, SpriteEffects.None, 0f);
+                spriteBatch.Draw(base.Mod.GetTexture("Projectiles/projectile4/RedCircle"), base.Projectile.Center - Main.screenPosition, null, new Color(Stre, Stre, Stre, 0), base.Projectile.rotation, new Vector2(125f, 125f), 0.3f / Stre, SpriteEffects.None, 0f);
             }
             return false;
         }

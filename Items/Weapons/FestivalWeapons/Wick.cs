@@ -21,24 +21,24 @@ namespace MythMod.Items.Weapons.FestivalWeapons
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            base.item.damage = 400;
-            base.item.crit = 50;
-            base.item.width = 98;
-			base.item.height = 42;
-			base.item.useTime = 30;
-			base.item.useAnimation = 30;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.ranged = true;
-			base.item.knockBack = 1f;
-			base.item.value = 99999;
-			base.item.rare = 11;
-			base.item.UseSound = SoundID.Item31;
-			base.item.autoReuse = false;
-            base.item.shoot = 14;
-			base.item.shootSpeed = 30f;
-			base.item.useAmmo = 97;
+            Item.glowMask = GetGlowMask;
+            base.Item.damage = 400;
+            base.Item.crit = 50;
+            base.Item.width = 98;
+			base.Item.height = 42;
+			base.Item.useTime = 30;
+			base.Item.useAnimation = 30;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.DamageType = DamageClass.Ranged;
+			base.Item.knockBack = 1f;
+			base.Item.value = 99999;
+			base.Item.rare = 11;
+			base.Item.UseSound = SoundID.Item31;
+			base.Item.autoReuse = false;
+            base.Item.shoot = 14;
+			base.Item.shootSpeed = 30f;
+			base.Item.useAmmo = 97;
 		}
 		public override Vector2? HoldoutOffset()
         {
@@ -46,7 +46,7 @@ namespace MythMod.Items.Weapons.FestivalWeapons
         }
         public override void PostUpdate()
         {
-            Lighting.AddLight((int)((base.item.position.X + (float)(base.item.width / 2)) / 16f), (int)((base.item.position.Y + (float)(base.item.height / 2)) / 16f), 0.4f, 0f, 0f);
+            Lighting.AddLight((int)((base.Item.position.X + (float)(base.Item.width / 2)) / 16f), (int)((base.Item.position.Y + (float)(base.Item.height / 2)) / 16f), 0.4f, 0f, 0f);
         }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent.ObjectInteractions;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -13,7 +14,7 @@ namespace MythMod.Tiles.玄武岩家具
 	public class 玄武岩门Open : ModTile
 	{
 		// Token: 0x06004183 RID: 16771 RVA: 0x0032C328 File Offset: 0x0032A528
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[(int)base.Type] = true;
 			Main.tileSolid[(int)base.Type] = false;
@@ -70,12 +71,12 @@ namespace MythMod.Tiles.玄武岩家具
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
 			modTranslation.SetDefault("玄武岩门");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
-			this.disableSmartCursor = true;
-			this.adjTiles = new int[]
+			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+			this.AdjTiles = new int[]
 			{
 				11
 			};
-			this.closeDoorID = base.mod.TileType("玄武岩门Closed");
+			this.CloseDoorID = base.Mod.Find<ModTile>("玄武岩门Closed").Type;
 			modTranslation.AddTranslation(GameCulture.Chinese, "玄武岩门");
 		}
 
@@ -93,7 +94,7 @@ namespace MythMod.Tiles.玄武岩家具
 		}
 
 		// Token: 0x06004186 RID: 16774 RVA: 0x00003A42 File Offset: 0x00001C42
-		public override bool HasSmartInteract()
+		public override bool HasSmartInteract(int i, int j, SmartInteractScanSettings settings)
 		{
 			return true;
 		}
@@ -101,7 +102,7 @@ namespace MythMod.Tiles.玄武岩家具
 		// Token: 0x06004187 RID: 16775 RVA: 0x0032C61C File Offset: 0x0032A81C
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			Item.NewItem(i * 16, j * 16, 32, 48, base.mod.ItemType("BasaltDoor"), 1, false, 0, false, false);
+			Item.NewItem(i * 16, j * 16, 32, 48, base.Mod.Find<ModItem>("BasaltDoor").Type, 1, false, 0, false, false);
 		}
 
 		// Token: 0x06004188 RID: 16776 RVA: 0x0032C2F0 File Offset: 0x0032A4F0
@@ -109,8 +110,8 @@ namespace MythMod.Tiles.玄武岩家具
 		{
 			Player localPlayer = Main.LocalPlayer;
 			localPlayer.noThrow = 2;
-			localPlayer.showItemIcon = true;
-			localPlayer.showItemIcon2 = base.mod.ItemType("BasaltDoor");
+			localPlayer.cursorItemIconEnabled = true;
+			localPlayer.cursorItemIconID = base.Mod.Find<ModItem>("BasaltDoor").Type;
 		}
 	}
 }

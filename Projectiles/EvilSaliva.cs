@@ -17,23 +17,23 @@ namespace MythMod.Projectiles
 		// Token: 0x060028BE RID: 10430 RVA: 0x00208FC8 File Offset: 0x002071C8
 		public override void SetDefaults()
 		{
-			base.projectile.width = 28;
-			base.projectile.height = 28;
-			base.projectile.friendly = true;
-			base.projectile.penetrate = 1;
-			base.projectile.timeLeft = 3600;
-			base.projectile.melee = true;
-            base.projectile.aiStyle = 27;
-			base.projectile.scale = 1.5f;
+			base.Projectile.width = 28;
+			base.Projectile.height = 28;
+			base.Projectile.friendly = true;
+			base.Projectile.penetrate = 1;
+			base.Projectile.timeLeft = 3600;
+			base.Projectile.DamageType = DamageClass.Melee;
+            base.Projectile.aiStyle = 27;
+			base.Projectile.scale = 1.5f;
 		}
 
 		// Token: 0x060028BF RID: 10431 RVA: 0x00208A7C File Offset: 0x00206C7C
 		public override void AI()
 		{
-            int num3 = Dust.NewDust(base.projectile.Center - base.projectile.velocity * 4f - new Vector2(4, 4), 0, 0, 39, 0, 0, 0, default(Color), 1f);
+            int num3 = Dust.NewDust(base.Projectile.Center - base.Projectile.velocity * 4f - new Vector2(4, 4), 0, 0, 39, 0, 0, 0, default(Color), 1f);
 			Main.dust[num3].noGravity = true;
-			float num = base.projectile.Center.X;
-			float num2 = base.projectile.Center.Y;
+			float num = base.Projectile.Center.X;
+			float num2 = base.Projectile.Center.Y;
 			Main.dust[num3].velocity= new Vector2(0, 0);
 		}
 
@@ -42,7 +42,7 @@ namespace MythMod.Projectiles
         {
             for (int i = 0; i < 30; i++)
             {
-                int num = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, 39, 0f, 0f, 100, default(Color), 1.4f);
+                int num = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, 39, 0f, 0f, 100, default(Color), 1.4f);
                 Main.dust[num].velocity *= 3f;
                 if (Main.rand.Next(2) == 0)
                 {

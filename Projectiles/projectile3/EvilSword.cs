@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.GameInput;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
@@ -23,34 +24,34 @@ namespace MythMod.Projectiles.projectile3
 
         public override void SetDefaults()
         {
-            base.projectile.width = 28;
-            base.projectile.height = 28;
-            base.projectile.aiStyle = 27;
-            base.projectile.friendly = true;
-            base.projectile.melee = true;
-            base.projectile.ignoreWater = true;
-            base.projectile.penetrate = 1;
-            projectile.alpha = 255;
-            base.projectile.extraUpdates = 3;
-            base.projectile.timeLeft = 600;
-            base.projectile.usesLocalNPCImmunity = true;
-            projectile.tileCollide = true;
-            base.projectile.localNPCHitCooldown = 1;
+            base.Projectile.width = 28;
+            base.Projectile.height = 28;
+            base.Projectile.aiStyle = 27;
+            base.Projectile.friendly = true;
+            base.Projectile.DamageType = DamageClass.Melee;
+            base.Projectile.ignoreWater = true;
+            base.Projectile.penetrate = 1;
+            Projectile.alpha = 255;
+            base.Projectile.extraUpdates = 3;
+            base.Projectile.timeLeft = 600;
+            base.Projectile.usesLocalNPCImmunity = true;
+            Projectile.tileCollide = true;
+            base.Projectile.localNPCHitCooldown = 1;
         }
 
         public override void AI()
         {
-            if (projectile.alpha > 5)
+            if (Projectile.alpha > 5)
             {
-                projectile.alpha -= 5;
+                Projectile.alpha -= 5;
             }
-            int num9 = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) - new Vector2(4, 4) - (base.projectile.velocity * 3f).RotatedBy(((float)Math.Sin(Main.time / 3d) / 3f)), 4, 4, 27, 0f, 0f, 100, default(Color), 2f);
+            int num9 = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) - new Vector2(4, 4) - (base.Projectile.velocity * 3f).RotatedBy(((float)Math.Sin(Main.time / 3d) / 3f)), 4, 4, 27, 0f, 0f, 100, default(Color), 2f);
             Main.dust[num9].noGravity = true;
             Main.dust[num9].velocity *= 0.2f;
         }
         public override Color? GetAlpha(Color lightColor)
         {
-            return new Color?(new Color(255, 255, 255, base.projectile.alpha));
+            return new Color?(new Color(255, 255, 255, base.Projectile.alpha));
         }
         public override void Kill(int timeLeft)
         {
@@ -59,14 +60,14 @@ namespace MythMod.Projectiles.projectile3
             for (int i = 0; i < 15; i++)
             {
                 Vector2 v = new Vector2(0, Main.rand.NextFloat(0, 7f)).RotatedByRandom(Math.PI * 2f);
-                int num9 = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) - new Vector2(4, 4), 0, 0, 27, v.X, v.Y, 100, default(Color), 2.4f);
+                int num9 = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) - new Vector2(4, 4), 0, 0, 27, v.X, v.Y, 100, default(Color), 2.4f);
                 Main.dust[num9].noGravity = true;
                 Main.dust[num9].velocity *= 0.0f;
             }
             for (int i = 0; i < 9; i++)
             {
                 Vector2 v = new Vector2(0, Main.rand.NextFloat(0, 7f)).RotatedByRandom(Math.PI * 2f);
-                int num9 = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) - new Vector2(4, 4), 0, 0, 27, v.X, v.Y, 100, default(Color), 1.8f);
+                int num9 = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) - new Vector2(4, 4), 0, 0, 27, v.X, v.Y, 100, default(Color), 1.8f);
                 Main.dust[num9].noGravity = true;
                 Main.dust[num9].velocity *= 0.0f;
             }
@@ -75,19 +76,19 @@ namespace MythMod.Projectiles.projectile3
         {
             for (int i = 0; i < 4; i++)
             {
-                Vector2 v = projectile.velocity.RotatedByRandom(Math.PI * 2) * 0.4f;
-                int num4 = Projectile.NewProjectile(base.projectile.Center.X, base.projectile.Center.Y, v.X, v.Y, base.mod.ProjectileType("EvilSword2"), base.projectile.damage / 2, base.projectile.knockBack, base.projectile.owner, 0f, 20);
+                Vector2 v = Projectile.velocity.RotatedByRandom(Math.PI * 2) * 0.4f;
+                int num4 = Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, v.X, v.Y, base.Mod.Find<ModProjectile>("EvilSword2").Type, base.Projectile.damage / 2, base.Projectile.knockBack, base.Projectile.owner, 0f, 20);
             }
             target.AddBuff(153, 900);
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color drawColor)
+        public override bool PreDraw(ref Color lightColor)
         {
             Mod mod = ModLoader.GetMod("MythMod");
-            Texture2D texture = Main.projectileTexture[projectile.type];
-            Main.spriteBatch.Draw(texture, projectile.Center - Main.screenPosition + new Vector2(0f, projectile.gfxOffY), null, base.projectile.GetAlpha(drawColor), projectile.rotation, new Vector2(20, 20), projectile.scale, SpriteEffects.None, 0f);
+            Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
+            Main.spriteBatch.Draw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), null, base.Projectile.GetAlpha(drawColor), Projectile.rotation, new Vector2(20, 20), Projectile.scale, SpriteEffects.None, 0f);
             for(int i =0;i < 4;i++)
             {
-                Main.spriteBatch.Draw(texture, projectile.Center - Main.screenPosition + new Vector2(0f, projectile.gfxOffY) - projectile.velocity * i * 3f, null, new Color(1 - 1 / 4f * (float)i, 1 - 1 / 4f * (float)i, 1 - 1 / 4f * (float)i, (1 - 1 / 4f * (float)i) * projectile.alpha / 255f), projectile.rotation, new Vector2(20, 20), projectile.scale, SpriteEffects.None, 0f);
+                Main.spriteBatch.Draw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY) - Projectile.velocity * i * 3f, null, new Color(1 - 1 / 4f * (float)i, 1 - 1 / 4f * (float)i, 1 - 1 / 4f * (float)i, (1 - 1 / 4f * (float)i) * Projectile.alpha / 255f), Projectile.rotation, new Vector2(20, 20), Projectile.scale, SpriteEffects.None, 0f);
             }
             return false;
         }

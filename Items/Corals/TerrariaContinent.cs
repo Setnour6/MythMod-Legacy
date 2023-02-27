@@ -26,16 +26,16 @@ namespace MythMod.Items.Corals
         }
         public override void SetDefaults()
         {
-            base.item.width = 90;
-            base.item.height = 120;
-            base.item.useAnimation = 45;
-            base.item.useTime = 45;
-            base.item.useStyle = 4;
-            base.item.UseSound = SoundID.Item105;
-            base.item.consumable = false;
+            base.Item.width = 90;
+            base.Item.height = 120;
+            base.Item.useAnimation = 45;
+            base.Item.useTime = 45;
+            base.Item.useStyle = 4;
+            base.Item.UseSound = SoundID.Item105;
+            base.Item.consumable = false;
         }
 
-        public override bool UseItem(Player player)
+        public override bool? UseItem(Player player)/* tModPorter Suggestion: Return null instead of false */
         {
             if(false)
             {

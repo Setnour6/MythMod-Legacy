@@ -7,7 +7,7 @@ namespace MythMod.Buffs
 {
     public class 劲辣III : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("劲辣III");
             base.Description.SetDefault("附近有辣椒的味道,这味儿对,辣!\n提升11%伤害");
@@ -18,11 +18,11 @@ namespace MythMod.Buffs
         }
         public override void Update(Player player, ref int buffIndex)
         {
-            player.magicDamage *= 1.11f;
-            player.meleeDamage *= 1.11f;
-            player.rangedDamage *= 1.11f;
-            player.minionDamage *= 1.11f;
-            player.thrownDamage *= 1.11f;
+            player.GetDamage(DamageClass.Magic) *= 1.11f;
+            player.GetDamage(DamageClass.Melee) *= 1.11f;
+            player.GetDamage(DamageClass.Ranged) *= 1.11f;
+            player.GetDamage(DamageClass.Summon) *= 1.11f;
+            player.GetDamage(DamageClass.Throwing) *= 1.11f;
         }
 	}
 }

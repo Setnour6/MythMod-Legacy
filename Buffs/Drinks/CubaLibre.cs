@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class CubaLibre : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("自由古巴");
             base.Description.SetDefault("移动速度增加7%");

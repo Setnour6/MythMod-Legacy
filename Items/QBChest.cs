@@ -16,12 +16,12 @@ namespace MythMod.Items
 		}
 		public override void SetDefaults()
 		{
-            base.item.maxStack = 1;
-            base.item.consumable = false;
-            base.item.width = 24;
-            base.item.height = 24;
-            base.item.rare = 9;
-            base.item.expert = true;
+            base.Item.maxStack = 1;
+            base.Item.consumable = false;
+            base.Item.width = 24;
+            base.Item.height = 24;
+            base.Item.rare = 9;
+            base.Item.expert = true;
             //this.bossBagNPC = 50;
 		}
 		public override bool CanRightClick()
@@ -30,7 +30,7 @@ namespace MythMod.Items
 		}
         public override void RightClick(Player player)
         {
-            player.QuickSpawnItem(base.mod.ItemType("QBChest2"), 1);
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("QBChest2").Type, 1);
 			//player.QuickSpawnItem(1121, 1);
 			//player.QuickSpawnItem(1123, 1);
 			//player.QuickSpawnItem(2888, 1);
@@ -49,12 +49,12 @@ namespace MythMod.Items
 			//player.QuickSpawnItem(3333, 1);
             if(Main.rand.Next(100) >= 50)
             {
-                player.QuickSpawnItem(base.mod.ItemType("SwordQB"), 1);
+                player.QuickSpawnItem(base.Mod.Find<ModItem>("SwordQB").Type, 1);
             }
-            player.QuickSpawnItem(base.mod.ItemType("BeeFeather"), 1);
-            player.QuickSpawnItem(base.mod.ItemType("HoneyHeart"), 1);
-            player.QuickSpawnItem(base.mod.ItemType("HoneyBottle"), 1);
-            item.stack--;
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("BeeFeather").Type, 1);
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("HoneyHeart").Type, 1);
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("HoneyBottle").Type, 1);
+            Item.stack--;
         }
 	}
 }

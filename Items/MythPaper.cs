@@ -1,5 +1,6 @@
 ﻿using System;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using MythMod.UI.YinYangLife;
 using Terraria.ID;
@@ -18,20 +19,20 @@ namespace MythMod.Items
         }
         public override void SetDefaults()
         {
-            base.item.width = 28;
-            base.item.height = 28;
-            base.item.expert = true;
-            base.item.useAnimation = 45;
-            base.item.useTime = 45;
-            base.item.useStyle = 4;
-            base.item.UseSound = SoundID.Item105;
-            base.item.consumable = true;
+            base.Item.width = 28;
+            base.Item.height = 28;
+            base.Item.expert = true;
+            base.Item.useAnimation = 45;
+            base.Item.useTime = 45;
+            base.Item.useStyle = 4;
+            base.Item.UseSound = SoundID.Item105;
+            base.Item.consumable = true;
         }
         public override bool CanUseItem(Player player)
         {
             return Main.expertMode;
         }
-        public override bool UseItem(Player player)
+        public override bool? UseItem(Player player)/* tModPorter Suggestion: Return null instead of false */
         {
             for (int i = 0; i < 200; i++)
             {
@@ -44,7 +45,7 @@ namespace MythMod.Items
                     {
                         player.lostCoinString = Main.ValueToCoins(player.lostCoins);
                     }
-                    Main.PlaySound(5, (int)player.position.X, (int)player.position.Y, 1, 1f, 0f);
+                    SoundEngine.PlaySound(SoundID.PlayerKilled, player.position);
                     player.headVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
                     player.bodyVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
                     player.legVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
@@ -112,9 +113,9 @@ namespace MythMod.Items
                 mplayer.YinLife += 30;
                 mplayer.YangLife += 30;
                 YinYangLife.Open = true;
-                Item.NewItem((int)player.position.X, (int)player.position.Y, player.width, player.height, mod.ItemType("EvilOff"), 1, false, 0, false, false);
-                Item.NewItem((int)player.position.X, (int)player.position.Y, player.width, player.height, mod.ItemType("EvilOn"), 1, false, 0, false, false);
-                item.stack--;
+                Item.NewItem((int)player.position.X, (int)player.position.Y, player.width, player.height, mod.Find<ModItem>("EvilOff").Type, 1, false, 0, false, false);
+                Item.NewItem((int)player.position.X, (int)player.position.Y, player.width, player.height, mod.Find<ModItem>("EvilOn").Type, 1, false, 0, false, false);
+                Item.stack--;
             }
             Color Purple = Color.Purple;
             Color Purple2 = Color.Purple;
@@ -122,9 +123,8 @@ namespace MythMod.Items
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
-            recipe.SetResult(this, 1);//制作一个材料
-            recipe.AddRecipe();
+            Recipe recipe = CreateRecipe(1);//制作一个材料
+            recipe.Register();
         }
     }
 }

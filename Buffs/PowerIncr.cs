@@ -7,7 +7,7 @@ namespace MythMod.Buffs
 {
     public class PowerIncr : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("力量暴增");
             base.Description.SetDefault("攻击力暴增");

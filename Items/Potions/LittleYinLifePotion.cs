@@ -17,31 +17,31 @@ namespace MythMod.Items.Potions
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 16;
-			base.item.height = 24;
-            base.item.rare = 2;
-			base.item.useAnimation = 20;
-			base.item.useTime = 20;
-			base.item.useStyle = 2;
-			base.item.UseSound = SoundID.Item8;
-			base.item.consumable = true;
-            base.item.maxStack = 200;
-            item.value = 2000;
+			base.Item.width = 16;
+			base.Item.height = 24;
+            base.Item.rare = 2;
+			base.Item.useAnimation = 20;
+			base.Item.useTime = 20;
+			base.Item.useStyle = 2;
+			base.Item.UseSound = SoundID.Item8;
+			base.Item.consumable = true;
+            base.Item.maxStack = 200;
+            Item.value = 2000;
         }
-        public override bool UseItem(Player player)
+        public override bool? UseItem(Player player)/* tModPorter Suggestion: Return null instead of false */
         {
             MythPlayer modPlayer = player.GetModPlayer<MythPlayer>();
             if (player.itemAnimation > 0 && player.itemTime == 0)
             {
-                player.itemTime = base.item.useTime;
+                player.itemTime = base.Item.useTime;
                 if(Main.dayTime)
                 {
-                    base.item.consumable = false;
+                    base.Item.consumable = false;
                     return false;
                 }
                 else
                 {
-                    base.item.consumable = true;
+                    base.Item.consumable = true;
                     modPlayer.YinLife += 2;
                 }
             }
@@ -49,12 +49,11 @@ namespace MythMod.Items.Potions
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(75, 2);
             recipe.AddIngredient(126, 1);
             recipe.requiredTile[0] = 13;
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }
 	}
 }

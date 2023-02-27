@@ -1,4 +1,4 @@
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -27,26 +27,26 @@ namespace MythMod.Items.Weapons.StarJellyFIsh
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            item.damage = 120;//�˺�
-            item.melee = true;//�Ƿ��ǽ�ս
-            item.width = 52;//��
-            item.height = 84;//��
-            item.useTime = 27;//ʹ��ʱ�Ӷ����ʱ��
-            item.rare = 8;//Ʒ��
-            item.useAnimation = 27;//�Ӷ�ʱ��������ʱ��
-            item.useStyle = 1;//ʹ�ö����������ǻӶ�
-            item.knockBack = 2.2f;//����
-            item.UseSound = SoundID.Item1;//�Ӷ�����
-            item.autoReuse = true;//�ܷ�����Ӷ�
-            item.crit = 14;//����
-            item.shoot = mod.ProjectileType("胭脂凝胶剑气");
-            item.shootSpeed = 12f;
-            item.value = 80000;//��ֵ��1��ʾһͭ�ң�������100�����
-            item.scale = 1f;//��С
+            Item.glowMask = GetGlowMask;
+            Item.damage = 120;//�˺�
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;//�Ƿ��ǽ�ս
+            Item.width = 52;//��
+            Item.height = 84;//��
+            Item.useTime = 27;//ʹ��ʱ�Ӷ����ʱ��
+            Item.rare = 8;//Ʒ��
+            Item.useAnimation = 27;//�Ӷ�ʱ��������ʱ��
+            Item.useStyle = 1;//ʹ�ö����������ǻӶ�
+            Item.knockBack = 2.2f;//����
+            Item.UseSound = SoundID.Item1;//�Ӷ�����
+            Item.autoReuse = true;//�ܷ�����Ӷ�
+            Item.crit = 14;//����
+            Item.shoot = Mod.Find<ModProjectile>("胭脂凝胶剑气").Type;
+            Item.shootSpeed = 12f;
+            Item.value = 80000;//��ֵ��1��ʾһͭ�ң�������100�����
+            Item.scale = 1f;//��С
         }
         // Token: 0x06000D6F RID: 3439 RVA: 0x0006A288 File Offset: 0x00068488
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Vector2 perturbedSpeed = new Vector2(speedX, speedY).RotatedByRandom(MathHelper.ToRadians(1));
             speedX = perturbedSpeed.X;
@@ -56,16 +56,16 @@ namespace MythMod.Items.Weapons.StarJellyFIsh
                 int i = Main.rand.Next(0, 2);
                 if (i == 1)
                 {
-                    Projectile.NewProjectile(position.X, position.Y, speedX * 1.4f, speedY * 1.4f, mod.ProjectileType("胭脂凝胶剑气"), damage * 2, knockBack, player.whoAmI);
+                    Projectile.NewProjectile(position.X, position.Y, speedX * 1.4f, speedY * 1.4f, Mod.Find<ModProjectile>("胭脂凝胶剑气").Type, damage * 2, knockBack, player.whoAmI);
                 }
                 else
                 {
-                    Projectile.NewProjectile(position.X, position.Y, speedX * 1.25f, speedY * 1.25f, mod.ProjectileType("星渊凝胶剑气"), damage, knockBack, player.whoAmI);
+                    Projectile.NewProjectile(position.X, position.Y, speedX * 1.25f, speedY * 1.25f, Mod.Find<ModProjectile>("星渊凝胶剑气").Type, damage, knockBack, player.whoAmI);
                 }
             }
             else
             {
-                Projectile.NewProjectile(position.X, position.Y, speedX, speedY, mod.ProjectileType("胭脂凝胶剑气"), damage, knockBack, player.whoAmI);
+                Projectile.NewProjectile(position.X, position.Y, speedX, speedY, Mod.Find<ModProjectile>("胭脂凝胶剑气").Type, damage, knockBack, player.whoAmI);
             }
             return false;
         }
@@ -74,22 +74,22 @@ namespace MythMod.Items.Weapons.StarJellyFIsh
         {
             if (player.wet)
             {
-                base.item.damage = 268;
-                base.item.useTime = 20;
-                base.item.useAnimation = 20;
+                base.Item.damage = 268;
+                base.Item.useTime = 20;
+                base.Item.useAnimation = 20;
             }
             else
             {
-                base.item.damage = 135;
-                base.item.useTime = 27;
-                base.item.useAnimation = 27;
+                base.Item.damage = 135;
+                base.Item.useTime = 27;
+                base.Item.useAnimation = 27;
             }
             return base.CanUseItem(player);
         }
         // Token: 0x040001CB RID: 459
         public override void PostUpdate()
         {
-            Lighting.AddLight((int)((base.item.position.X + (float)(base.item.width / 3)) / 16f), (int)((base.item.position.Y + (float)(base.item.height / 1.2f)) / 16f), 0.1f, 0.08f, 0.0f);
+            Lighting.AddLight((int)((base.Item.position.X + (float)(base.Item.width / 3)) / 16f), (int)((base.Item.position.Y + (float)(base.Item.height / 1.2f)) / 16f), 0.1f, 0.08f, 0.0f);
         }
     }
 }

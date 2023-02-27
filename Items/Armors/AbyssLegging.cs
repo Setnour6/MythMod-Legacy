@@ -20,19 +20,18 @@ namespace MythMod.Items.Armors
         }
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(null, "DarkSeaBar", 15);
             modRecipe.requiredTile[0] = 412;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
         public override void SetDefaults()
 		{
-			base.item.width = 18;
-			base.item.height = 18;
-			base.item.value = Item.buyPrice(0, 30, 0, 0);
-			base.item.rare = 11;
-			base.item.defense = 20;
+			base.Item.width = 18;
+			base.Item.height = 18;
+			base.Item.value = Item.buyPrice(0, 30, 0, 0);
+			base.Item.rare = 11;
+			base.Item.defense = 20;
 		}
         public override void UpdateEquip(Player player)
         {

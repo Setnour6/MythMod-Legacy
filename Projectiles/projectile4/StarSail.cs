@@ -13,18 +13,18 @@ namespace MythMod.Projectiles.projectile4
 		}
 		public override void SetDefaults()
 		{
-			base.projectile.width = 28;
-			base.projectile.height = 28;
-			base.projectile.friendly = true;
-			base.projectile.penetrate = 1;
-			base.projectile.timeLeft = 3600;
-			base.projectile.melee = true;
-            base.projectile.aiStyle = 27;
-			base.projectile.scale = 1.5f;
+			base.Projectile.width = 28;
+			base.Projectile.height = 28;
+			base.Projectile.friendly = true;
+			base.Projectile.penetrate = 1;
+			base.Projectile.timeLeft = 3600;
+			base.Projectile.DamageType = DamageClass.Melee;
+            base.Projectile.aiStyle = 27;
+			base.Projectile.scale = 1.5f;
 		}
 		public override void AI()
 		{
-            int num = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, mod.DustType("Star"), 0f, 0f, 100, default(Color), 0.8f);
+            int num = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, Mod.Find<ModDust>("Star").Type, 0f, 0f, 100, default(Color), 0.8f);
             if (Main.rand.Next(2) == 0)
             {
                 Main.dust[num].scale = 0.5f;
@@ -34,8 +34,8 @@ namespace MythMod.Projectiles.projectile4
         }
         public override Color? GetAlpha(Color lightColor)
         {
-            int R0 = (int)(73 + (Math.Sin(projectile.timeLeft / 40f) + 1) * 70.5);
-            int G0 = (int)(170 - (Math.Sin(projectile.timeLeft / 40f) + 1) * 52);
+            int R0 = (int)(73 + (Math.Sin(Projectile.timeLeft / 40f) + 1) * 70.5);
+            int G0 = (int)(170 - (Math.Sin(Projectile.timeLeft / 40f) + 1) * 52);
             return new Color?(new Color(R0, G0, 255, 0));
         }
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
@@ -46,7 +46,7 @@ namespace MythMod.Projectiles.projectile4
         {
             for (int i = 0; i < 30; i++)
             {
-                int num = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, mod.DustType("Star"), 0f, 0f, 100, default(Color), 1f);
+                int num = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, Mod.Find<ModDust>("Star").Type, 0f, 0f, 100, default(Color), 1f);
                 Main.dust[num].velocity *= 3f;
                 if (Main.rand.Next(2) == 0)
                 {

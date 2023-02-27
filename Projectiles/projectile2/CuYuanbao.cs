@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace MythMod.Projectiles.projectile2
@@ -13,46 +15,46 @@ namespace MythMod.Projectiles.projectile2
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("铜元宝");
-			Main.projFrames[base.projectile.type] = 1;
+			Main.projFrames[base.Projectile.type] = 1;
 		}
 
 		// Token: 0x06001F15 RID: 7957 RVA: 0x0018D09C File Offset: 0x0018B29C
 		public override void SetDefaults()
 		{
-			base.projectile.width = 80;
-			base.projectile.height = 44;
-			base.projectile.hostile = false;
-            base.projectile.friendly = true;
-            base.projectile.ignoreWater = false;
-			base.projectile.tileCollide = true;
-			base.projectile.penetrate = -1;
-			base.projectile.timeLeft = 600;
-			base.projectile.alpha = 0;
-			this.cooldownSlot = 1;
+			base.Projectile.width = 80;
+			base.Projectile.height = 44;
+			base.Projectile.hostile = false;
+            base.Projectile.friendly = true;
+            base.Projectile.ignoreWater = false;
+			base.Projectile.tileCollide = true;
+			base.Projectile.penetrate = -1;
+			base.Projectile.timeLeft = 600;
+			base.Projectile.alpha = 0;
+			this.CooldownSlot = 1;
 		}
 		// Token: 0x06001F16 RID: 7958 RVA: 0x0018D118 File Offset: 0x0018B318
 		public override void AI()
 		{
-			base.projectile.spriteDirection = 1;
-			base.projectile.rotation = 0;
-            if(projectile.velocity.Y < 15f)
+			base.Projectile.spriteDirection = 1;
+			base.Projectile.rotation = 0;
+            if(Projectile.velocity.Y < 15f)
             {
-                projectile.velocity.Y += 0.2f;
+                Projectile.velocity.Y += 0.2f;
             }
         }
         public override void Kill(int timeLeft)
         {
-            Main.PlaySound(2, (int)base.projectile.position.X, (int)base.projectile.position.Y, 37, 1f, 0f);
+            SoundEngine.PlaySound(SoundID.Item37, new Vector2(base.Projectile.position.X, base.Projectile.position.Y));
             float scaleFactor = (float)(Main.rand.Next(-8, 8) / 100f);
-            Gore.NewGore(base.projectile.position, base.projectile.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/铜元宝碎块1"), 1f);
-            Gore.NewGore(base.projectile.position, base.projectile.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/铜元宝碎块2"), 1f);
-            Gore.NewGore(base.projectile.position, base.projectile.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/铜元宝碎块2"), 1f);
-            Gore.NewGore(base.projectile.position, base.projectile.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/铜元宝碎块3"), 1f);
+            Gore.NewGore(base.Projectile.position, base.Projectile.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/铜元宝碎块1"), 1f);
+            Gore.NewGore(base.Projectile.position, base.Projectile.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/铜元宝碎块2"), 1f);
+            Gore.NewGore(base.Projectile.position, base.Projectile.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/铜元宝碎块2"), 1f);
+            Gore.NewGore(base.Projectile.position, base.Projectile.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/铜元宝碎块3"), 1f);
         }
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-            Main.PlaySound(2, (int)base.projectile.position.X, (int)base.projectile.position.Y, 37, 1f, 0f);
-            target.velocity = projectile.velocity * target.knockBackResist * 0.5f;
+            SoundEngine.PlaySound(SoundID.Item37, new Vector2(base.Projectile.position.X, base.Projectile.position.Y));
+            target.velocity = Projectile.velocity * target.knockBackResist * 0.5f;
         }
         // Token: 0x06001F17 RID: 7959 RVA: 0x0000C841 File Offset: 0x0000AA41
     }

@@ -18,28 +18,28 @@ namespace MythMod.Projectiles.projectile5
         }
         public override void SetDefaults()
         {
-            projectile.width = 1;
-            projectile.height = 1;
-            projectile.aiStyle = -1;
-            projectile.friendly = false;
-            projectile.hostile = true;
-            projectile.light = 0.1f;
-            projectile.timeLeft = 140;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = false;
-            projectile.penetrate = -1;
+            Projectile.width = 1;
+            Projectile.height = 1;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = false;
+            Projectile.hostile = true;
+            Projectile.light = 0.1f;
+            Projectile.timeLeft = 140;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
+            Projectile.penetrate = -1;
 
-            ProjectileID.Sets.TrailingMode[projectile.type] = 0;
-            ProjectileID.Sets.TrailCacheLength[projectile.type] = 60;
+            ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 60;
         }
 
         public override void AI()
         {
             Player player = Main.player[Main.myPlayer];
-            projectile.velocity = projectile.velocity.RotatedBy(-Math.PI * 0.025f);
-            Vector2 v2 = projectile.velocity * Main.rand.NextFloat(0.7f, 1.2f);
-            Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, projectile.velocity.X, projectile.velocity.Y, mod.ProjectileType("GoldLanternLine2"), 2, 0, Main.myPlayer, 0, 0);
-            if(projectile.timeLeft > 60)
+            Projectile.velocity = Projectile.velocity.RotatedBy(-Math.PI * 0.025f);
+            Vector2 v2 = Projectile.velocity * Main.rand.NextFloat(0.7f, 1.2f);
+            Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, Projectile.velocity.X, Projectile.velocity.Y, Mod.Find<ModProjectile>("GoldLanternLine2").Type, 2, 0, Main.myPlayer, 0, 0);
+            if(Projectile.timeLeft > 60)
             {
                 if (sca < 1)
                 {
@@ -57,9 +57,9 @@ namespace MythMod.Projectiles.projectile5
                 {
                     Wid = 12;
                 }
-                if(projectile.timeLeft % 10 == 0)
+                if(Projectile.timeLeft % 10 == 0)
                 {
-                    Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, projectile.velocity.X, projectile.velocity.Y, mod.ProjectileType("GoldLantern"), 0, 0, Main.myPlayer, 0, 0);
+                    Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, Projectile.velocity.X, Projectile.velocity.Y, Mod.Find<ModProjectile>("GoldLantern").Type, 0, 0, Main.myPlayer, 0, 0);
                 }
             }
             else
@@ -85,40 +85,40 @@ namespace MythMod.Projectiles.projectile5
         }
         public override void OnHitPlayer(Player target, int damage, bool crit)
         {
-            projectile.Kill();
+            Projectile.Kill();
         }
         public override void Kill(int timeLeft)
         {
             for(int j = 0;j < 10; j++)
             {
-                Vector2 v2 = projectile.velocity.RotatedBy(j / 5f * Math.PI);
-                Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, v2.X, v2.Y, mod.ProjectileType("GoldLanternLine3"), 0, 0, Main.myPlayer, 0, 0);
+                Vector2 v2 = Projectile.velocity.RotatedBy(j / 5f * Math.PI);
+                Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, v2.X, v2.Y, Mod.Find<ModProjectile>("GoldLanternLine3").Type, 0, 0, Main.myPlayer, 0, 0);
             }
             base.Kill(timeLeft);
         }
         private float Wid = 0;
         private float sca = 0;
-        public override void PostDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override void PostDraw(Color lightColor)
         {
             List<CustomVertexInfo> bars = new List<CustomVertexInfo>();
 
             // 把所有的点都生成出来，按照顺序
-            for (int i = 1; i < projectile.oldPos.Length; ++i)
+            for (int i = 1; i < Projectile.oldPos.Length; ++i)
             {
-                if (projectile.oldPos[i] == Vector2.Zero) break;
+                if (Projectile.oldPos[i] == Vector2.Zero) break;
                 //spriteBatch.Draw(Main.magicPixel, projectile.oldPos[i] - Main.screenPosition,
                 //    new Rectangle(0, 0, 1, 1), Color.White, 0f, new Vector2(0.5f, 0.5f), 5f, SpriteEffects.None, 0f);
 
                 int width = (int)(Wid);
-                var normalDir = projectile.oldPos[i - 1] - projectile.oldPos[i];
+                var normalDir = Projectile.oldPos[i - 1] - Projectile.oldPos[i];
                 normalDir = Vector2.Normalize(new Vector2(-normalDir.Y, normalDir.X));
 
-                var factor = i / (float)projectile.oldPos.Length;
+                var factor = i / (float)Projectile.oldPos.Length;
                 var color = Color.Lerp(Color.White, Color.Red, factor);
                 var w = MathHelper.Lerp(1f, 0.05f, factor);
 
-                bars.Add(new CustomVertexInfo(projectile.oldPos[i] + normalDir * width, color, new Vector3((float)Math.Sqrt(factor), 1, w)));
-                bars.Add(new CustomVertexInfo(projectile.oldPos[i] + normalDir * -width, color, new Vector3((float)Math.Sqrt(factor), 0, w)));
+                bars.Add(new CustomVertexInfo(Projectile.oldPos[i] + normalDir * width, color, new Vector3((float)Math.Sqrt(factor), 1, w)));
+                bars.Add(new CustomVertexInfo(Projectile.oldPos[i] + normalDir * -width, color, new Vector3((float)Math.Sqrt(factor), 0, w)));
             }
 
             List<CustomVertexInfo> triangleList = new List<CustomVertexInfo>();
@@ -127,7 +127,7 @@ namespace MythMod.Projectiles.projectile5
             {
                 // 按照顺序连接三角形
                 triangleList.Add(bars[0]);
-                var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + Vector2.Normalize(projectile.velocity) * 18.5f, Color.White,
+                var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + Vector2.Normalize(Projectile.velocity) * 18.5f, Color.White,
                     new Vector3(0, 0.5f, 1));
                 triangleList.Add(bars[1]);
                 triangleList.Add(vertex);
@@ -160,7 +160,7 @@ namespace MythMod.Projectiles.projectile5
                 MythMod.DefaultEffect2.Parameters["uTime"].SetValue(-(float)Main.time * 0.03f);
                 Main.graphics.GraphicsDevice.Textures[0] = MythMod.MainColorGoldYellow;
                 Main.graphics.GraphicsDevice.Textures[1] = MythMod.MainShape;
-                Main.graphics.GraphicsDevice.Textures[2] = mod.GetTexture("UIImages/Lightline2");
+                Main.graphics.GraphicsDevice.Textures[2] = Mod.GetTexture("UIImages/Lightline2");
                 Main.graphics.GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[1] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[2] = SamplerState.PointWrap;
@@ -180,12 +180,12 @@ namespace MythMod.Projectiles.projectile5
                 x += 0.01f;
                 float K = (float)(Math.Sin(x + Math.Sin(x) * 6) * (0.95 + Math.Sin(x + 0.24 + Math.Sin(x))) + 3) / 30f;
                 float M = (float)(Math.Sin(x + Math.Tan(x) * 6) * (0.95 + Math.Cos(x + 0.24 + Math.Sin(x))) + 3) / 30f;
-                spriteBatch.Draw(base.mod.GetTexture("UIImages/StarEffect"), base.projectile.Center - Main.screenPosition, null, new Color(1f, 0.8f, 0f, 0) * 0.4f, 0, new Vector2(512f, 512f), K * 2.8f * sca, SpriteEffects.None, 0f);
-                spriteBatch.Draw(base.mod.GetTexture("UIImages/StarEffect"), base.projectile.Center - Main.screenPosition, null, new Color(1f, 0.8f, 0f, 0) * 0.4f, (float)(Math.PI * 0.5), new Vector2(512f, 512f), K * 2.8f * sca, SpriteEffects.None, 0f);
-                spriteBatch.Draw(base.mod.GetTexture("UIImages/StarEffect"), base.projectile.Center - Main.screenPosition, null, new Color(1f, 0.6f, 0f, 0) * 0.4f, (float)(Math.PI * 0.75), new Vector2(512f, 512f), M * 2.8f * sca, SpriteEffects.None, 0f);
-                spriteBatch.Draw(base.mod.GetTexture("UIImages/StarEffect"), base.projectile.Center - Main.screenPosition, null, new Color(1f, 0.6f, 0f, 0) * 0.4f, (float)(Math.PI * 0.25), new Vector2(512f, 512f), M * 2.8f * sca, SpriteEffects.None, 0f);
-                spriteBatch.Draw(base.mod.GetTexture("UIImages/StarEffect"), base.projectile.Center - Main.screenPosition, null, new Color(0.8f, 0.4f, 0f, 0) * 0.4f, x * 6f, new Vector2(512f, 512f), (M + K) * 2.8f * sca, SpriteEffects.None, 0f);
-                spriteBatch.Draw(base.mod.GetTexture("UIImages/StarEffect"), base.projectile.Center - Main.screenPosition, null, new Color(0.8f, 0.4f, 0f, 0) * 0.4f, -x * 6f, new Vector2(512f, 512f), (float)Math.Sqrt(M * M + K * K) * 2.8f * sca, SpriteEffects.None, 0f);
+                spriteBatch.Draw(base.Mod.GetTexture("UIImages/StarEffect"), base.Projectile.Center - Main.screenPosition, null, new Color(1f, 0.8f, 0f, 0) * 0.4f, 0, new Vector2(512f, 512f), K * 2.8f * sca, SpriteEffects.None, 0f);
+                spriteBatch.Draw(base.Mod.GetTexture("UIImages/StarEffect"), base.Projectile.Center - Main.screenPosition, null, new Color(1f, 0.8f, 0f, 0) * 0.4f, (float)(Math.PI * 0.5), new Vector2(512f, 512f), K * 2.8f * sca, SpriteEffects.None, 0f);
+                spriteBatch.Draw(base.Mod.GetTexture("UIImages/StarEffect"), base.Projectile.Center - Main.screenPosition, null, new Color(1f, 0.6f, 0f, 0) * 0.4f, (float)(Math.PI * 0.75), new Vector2(512f, 512f), M * 2.8f * sca, SpriteEffects.None, 0f);
+                spriteBatch.Draw(base.Mod.GetTexture("UIImages/StarEffect"), base.Projectile.Center - Main.screenPosition, null, new Color(1f, 0.6f, 0f, 0) * 0.4f, (float)(Math.PI * 0.25), new Vector2(512f, 512f), M * 2.8f * sca, SpriteEffects.None, 0f);
+                spriteBatch.Draw(base.Mod.GetTexture("UIImages/StarEffect"), base.Projectile.Center - Main.screenPosition, null, new Color(0.8f, 0.4f, 0f, 0) * 0.4f, x * 6f, new Vector2(512f, 512f), (M + K) * 2.8f * sca, SpriteEffects.None, 0f);
+                spriteBatch.Draw(base.Mod.GetTexture("UIImages/StarEffect"), base.Projectile.Center - Main.screenPosition, null, new Color(0.8f, 0.4f, 0f, 0) * 0.4f, -x * 6f, new Vector2(512f, 512f), (float)Math.Sqrt(M * M + K * K) * 2.8f * sca, SpriteEffects.None, 0f);
             }
         }
         private float x = 0;

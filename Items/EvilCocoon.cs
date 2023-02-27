@@ -1,6 +1,6 @@
 ﻿using MythMod.NPCs;
+using Terraria.Audio;
 using Terraria.GameContent.Generation;
-using Terraria.World.Generation;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -15,6 +15,7 @@ using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
 using Terraria.ModLoader.IO;
 using Terraria.GameContent.Achievements;
+using Terraria.WorldBuilding;
 
 namespace MythMod.Items
 {
@@ -29,14 +30,14 @@ namespace MythMod.Items
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            base.item.width = 20;
-			base.item.height = 32;
-			base.item.useAnimation = 45;
-			base.item.useTime = 60;
-			base.item.useStyle = 4;
-            base.item.maxStack = 999;
-			base.item.consumable = true;
+            Item.glowMask = GetGlowMask;
+            base.Item.width = 20;
+			base.Item.height = 32;
+			base.Item.useAnimation = 45;
+			base.Item.useTime = 60;
+			base.Item.useStyle = 4;
+            base.Item.maxStack = 999;
+			base.Item.consumable = true;
 		}
 		public override void ModifyTooltips(List<TooltipLine> list)
 		{
@@ -44,20 +45,20 @@ namespace MythMod.Items
 		public override void Update(ref float gravity, ref float maxFallSpeed)
         {
         }
-		public override bool UseItem(Player player)
+		public override bool? UseItem(Player player)/* tModPorter Suggestion: Return null instead of false */
 		{
-			if(NPC.CountNPCS(mod.NPCType("CorruptMoth")) < 1 && player.ZoneCorrupt)
+			if(NPC.CountNPCS(Mod.Find<ModNPC>("CorruptMoth").Type) < 1 && player.ZoneCorrupt)
 			{
 				if(Main.rand.Next(100000) > 50000)
 				{
-					NPC.NewNPC((int)player.position.X - 500, (int)player.position.Y + 800, mod.NPCType("CorruptMoth"), 0, 0f, 0f, 0f, 0f, 255);
-	    	        Main.PlaySound(15, player.position, 0);
+					NPC.NewNPC((int)player.position.X - 500, (int)player.position.Y + 800, Mod.Find<ModNPC>("CorruptMoth").Type, 0, 0f, 0f, 0f, 0f, 255);
+	    	        SoundEngine.PlaySound(SoundID.Roar, player.position);
 			    	return true;
 				}
 				else
 				{
-					NPC.NewNPC((int)player.position.X + 500, (int)player.position.Y + 800, mod.NPCType("CorruptMoth"), 0, 0f, 0f, 0f, 0f, 255);
-	    	        Main.PlaySound(15, player.position, 0);
+					NPC.NewNPC((int)player.position.X + 500, (int)player.position.Y + 800, Mod.Find<ModNPC>("CorruptMoth").Type, 0, 0f, 0f, 0f, 0f, 255);
+	    	        SoundEngine.PlaySound(SoundID.Roar, player.position);
 			    	return true;
 				}
 			}
@@ -66,13 +67,12 @@ namespace MythMod.Items
 		public override void AddRecipes()
         {
             {
-                ModRecipe recipe = new ModRecipe(mod);
+                Recipe recipe = CreateRecipe(1);
                 recipe.AddIngredient(ItemID.ShadowScale, 40);
 				recipe.AddIngredient(ItemID.WormTooth, 5);
 				recipe.AddIngredient(ItemID.VilePowder, 30);
-                recipe.SetResult(this, 1);
                 recipe.requiredTile[0] = 26;
-                recipe.AddRecipe();
+                recipe.Register();
             }
         }
 	}

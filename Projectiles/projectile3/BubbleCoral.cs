@@ -1,9 +1,10 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
@@ -26,20 +27,20 @@ namespace MythMod.Projectiles.projectile3
         private Vector2 v = new Vector2(0, 0);
         public override void SetDefaults()
         {
-            projectile.width = 14;
-            projectile.height = 14;
-            projectile.aiStyle = -1;
-            projectile.friendly = true;
-            projectile.melee = true;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = true;
-            projectile.extraUpdates = (int)1.5f;
-            projectile.timeLeft = 450;
-            projectile.alpha = 0;
-            projectile.penetrate = 2;
-            projectile.scale = 1f;
-            ProjectileID.Sets.TrailCacheLength[base.projectile.type] = 30;
-            ProjectileID.Sets.TrailingMode[base.projectile.type] = 0;
+            Projectile.width = 14;
+            Projectile.height = 14;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = true;
+            Projectile.DamageType = DamageClass.Melee;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = true;
+            Projectile.extraUpdates = (int)1.5f;
+            Projectile.timeLeft = 450;
+            Projectile.alpha = 0;
+            Projectile.penetrate = 2;
+            Projectile.scale = 1f;
+            ProjectileID.Sets.TrailCacheLength[base.Projectile.type] = 30;
+            ProjectileID.Sets.TrailingMode[base.Projectile.type] = 0;
         }
         public override Color? GetAlpha(Color lightColor)
 		{
@@ -47,91 +48,91 @@ namespace MythMod.Projectiles.projectile3
 		}
         public override void AI()
         {
-            int num12 = Dust.NewDust(base.projectile.Center - new Vector2(4, 4), 0, 0, 88, 0f, 0f, 0, default(Color), 0.8f);
+            int num12 = Dust.NewDust(base.Projectile.Center - new Vector2(4, 4), 0, 0, 88, 0f, 0f, 0, default(Color), 0.8f);
             Main.dust[num12].velocity *= 0.0f;
             Main.dust[num12].noGravity = true;
             if (num100)
             {
                 float num7 = Main.rand.Next(-2000, 2000) / 40000f;
-                v = projectile.velocity.RotatedBy(Math.PI * num7) * Main.rand.Next(9000, 11000) / 10000f;
-                if (base.projectile.ai[0] != 0)
+                v = Projectile.velocity.RotatedBy(Math.PI * num7) * Main.rand.Next(9000, 11000) / 10000f;
+                if (base.Projectile.ai[0] != 0)
                 {
                     float num6 = Main.rand.Next(0, 20000) / 10000f;
-                    projectile.velocity = projectile.velocity.RotatedBy(Math.PI * num6);
-                    projectile.timeLeft = (int)(200 / projectile.ai[0]);
+                    Projectile.velocity = Projectile.velocity.RotatedBy(Math.PI * num6);
+                    Projectile.timeLeft = (int)(200 / Projectile.ai[0]);
                 }
                 num100 = false;
             }
-            if (Math.Abs(base.projectile.velocity.X) + Math.Abs(base.projectile.velocity.Y) < 1.5f)
+            if (Math.Abs(base.Projectile.velocity.X) + Math.Abs(base.Projectile.velocity.Y) < 1.5f)
             {
-                base.projectile.velocity *= 1.1f;
+                base.Projectile.velocity *= 1.1f;
             }
-            if (Math.Abs(base.projectile.velocity.X) + Math.Abs(base.projectile.velocity.Y) > 2f)
+            if (Math.Abs(base.Projectile.velocity.X) + Math.Abs(base.Projectile.velocity.Y) > 2f)
             {
-                base.projectile.velocity *= 0.96f;
+                base.Projectile.velocity *= 0.96f;
             }
-            projectile.velocity = projectile.velocity * 0.95f + v * 0.2f;
-            projectile.velocity = projectile.velocity.RotatedBy(Main.rand.Next(-200, 200) / 1000f);
-            base.projectile.rotation = (float)System.Math.Atan2((double)projectile.velocity.Y,(double)projectile.velocity.X) + 1.57f;
+            Projectile.velocity = Projectile.velocity * 0.95f + v * 0.2f;
+            Projectile.velocity = Projectile.velocity.RotatedBy(Main.rand.Next(-200, 200) / 1000f);
+            base.Projectile.rotation = (float)System.Math.Atan2((double)Projectile.velocity.Y,(double)Projectile.velocity.X) + 1.57f;
             NPC target = null;
-            float num2 = base.projectile.Center.X;
-			float num3 = base.projectile.Center.Y;
+            float num2 = base.Projectile.Center.X;
+			float num3 = base.Projectile.Center.Y;
 			float num4 = 400f;
             bool flag = false;
-            if(Main.rand.Next(0, (int)(20 * (base.projectile.ai[0] + 1) * (base.projectile.ai[0] + 1))) == 5 && base.projectile.ai[0] < 2 && projectile.timeLeft <= 420 && !WeakeningFlag)
+            if(Main.rand.Next(0, (int)(20 * (base.Projectile.ai[0] + 1) * (base.Projectile.ai[0] + 1))) == 5 && base.Projectile.ai[0] < 2 && Projectile.timeLeft <= 420 && !WeakeningFlag)
             {
                 int num5 = Main.rand.Next(2, 3);
                 for(int i = 0; i < num5; i++)
                 {
                     v = v.RotatedBy(Main.rand.NextFloat(-0.8f,0.8f));
-                    Projectile.NewProjectile(base.projectile.Center.X, base.projectile.Center.Y, v.X, v.Y, mod.ProjectileType("BubbleCoral"), base.projectile.damage, base.projectile.knockBack, Main.myPlayer, base.projectile.ai[0] + 1, 0f);
+                    Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, v.X, v.Y, Mod.Find<ModProjectile>("BubbleCoral").Type, base.Projectile.damage, base.Projectile.knockBack, Main.myPlayer, base.Projectile.ai[0] + 1, 0f);
                 }
-                projectile.velocity = new Vector2(0, 0);
-                projectile.timeLeft = 30;
+                Projectile.velocity = new Vector2(0, 0);
+                Projectile.timeLeft = 30;
             }
             if (WeakeningFlag)
             {
-                projectile.velocity *= 0.95f;
+                Projectile.velocity *= 0.95f;
             }
         }
         public bool WeakeningFlag = false;
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            base.projectile.tileCollide = false;
-            projectile.timeLeft = 30;
+            base.Projectile.tileCollide = false;
+            Projectile.timeLeft = 30;
             WeakeningFlag = true;
             return false;
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D texture2D = Main.projectileTexture[base.projectile.type];
-            int num = Main.projectileTexture[base.projectile.type].Height / Main.projFrames[base.projectile.type];
-            int y = num * base.projectile.frame;
+            Texture2D texture2D = TextureAssets.Projectile[base.Projectile.type].Value;
+            int num = TextureAssets.Projectile[base.Projectile.type].Value.Height / Main.projFrames[base.Projectile.type];
+            int y = num * base.Projectile.frame;
             SpriteEffects effects = SpriteEffects.None;
-            if (base.projectile.spriteDirection == 1)
+            if (base.Projectile.spriteDirection == 1)
             {
                 effects = SpriteEffects.FlipHorizontally;
             }
             int frameHeight = 20;
-            Vector2 value = new Vector2(base.projectile.Center.X, base.projectile.Center.Y);
-            Vector2 drawOrigin = new Vector2(Main.projectileTexture[projectile.type].Width * 0.5f, projectile.height * 0.5f);
+            Vector2 value = new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y);
+            Vector2 drawOrigin = new Vector2(TextureAssets.Projectile[Projectile.type].Value.Width * 0.5f, Projectile.height * 0.5f);
             Vector2 vector2 = value - Main.screenPosition;
-            if(projectile.timeLeft < 80)
+            if(Projectile.timeLeft < 80)
             {
-                for (int k = 0; k < projectile.oldPos.Length; k++)
+                for (int k = 0; k < Projectile.oldPos.Length; k++)
                 {
-                    Vector2 drawPos = projectile.oldPos[k] - Main.screenPosition + drawOrigin + new Vector2(0f, projectile.gfxOffY);
-                    Color color = projectile.GetAlpha(lightColor) * (((float)(projectile.oldPos.Length - k) / (float)projectile.oldPos.Length) / 80f * (float)projectile.timeLeft);
-                    spriteBatch.Draw(base.mod.GetTexture("Projectiles/靛蓝色"), drawPos, new Rectangle(0, frameHeight * projectile.frame, base.mod.GetTexture("Projectiles/红色").Width, frameHeight), color, projectile.rotation, drawOrigin, projectile.scale, SpriteEffects.None, 0f);
+                    Vector2 drawPos = Projectile.oldPos[k] - Main.screenPosition + drawOrigin + new Vector2(0f, Projectile.gfxOffY);
+                    Color color = Projectile.GetAlpha(lightColor) * (((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length) / 80f * (float)Projectile.timeLeft);
+                    spriteBatch.Draw(base.Mod.GetTexture("Projectiles/靛蓝色"), drawPos, new Rectangle(0, frameHeight * Projectile.frame, base.Mod.GetTexture("Projectiles/红色").Width, frameHeight), color, Projectile.rotation, drawOrigin, Projectile.scale, SpriteEffects.None, 0f);
                 }
             }
             else
             {
-                for (int k = 0; k < projectile.oldPos.Length; k++)
+                for (int k = 0; k < Projectile.oldPos.Length; k++)
                 {
-                    Vector2 drawPos = projectile.oldPos[k] - Main.screenPosition + drawOrigin + new Vector2(0f, projectile.gfxOffY);
-                    Color color = projectile.GetAlpha(lightColor) * ((float)(projectile.oldPos.Length - k) / (float)projectile.oldPos.Length);
-                    spriteBatch.Draw(base.mod.GetTexture("Projectiles/靛蓝色"), drawPos, new Rectangle(0, frameHeight * projectile.frame, base.mod.GetTexture("Projectiles/红色").Width, frameHeight), color, projectile.rotation, drawOrigin, projectile.scale, SpriteEffects.None, 0f);
+                    Vector2 drawPos = Projectile.oldPos[k] - Main.screenPosition + drawOrigin + new Vector2(0f, Projectile.gfxOffY);
+                    Color color = Projectile.GetAlpha(lightColor) * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
+                    spriteBatch.Draw(base.Mod.GetTexture("Projectiles/靛蓝色"), drawPos, new Rectangle(0, frameHeight * Projectile.frame, base.Mod.GetTexture("Projectiles/红色").Width, frameHeight), color, Projectile.rotation, drawOrigin, Projectile.scale, SpriteEffects.None, 0f);
                 }
             }
             return true;

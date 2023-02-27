@@ -26,41 +26,40 @@ namespace MythMod.Items.Ammos
 		}
 		public override void SetDefaults()
 		{
-			base.item.ranged = true;
-			base.item.width = 26;
-            base.item.damage = 19;
-			base.item.height = 34;
-			base.item.maxStack = 1;
-			base.item.consumable = false;
-			base.item.knockBack = 1.5f;
-			base.item.value = 50000;
-			base.item.rare = 2;
-            base.item.shoot = 89;
-            base.item.shootSpeed = 0;
-            base.item.ammo = AmmoID.Bullet;
+			base.Item.DamageType = DamageClass.Ranged;
+			base.Item.width = 26;
+            base.Item.damage = 19;
+			base.Item.height = 34;
+			base.Item.maxStack = 1;
+			base.Item.consumable = false;
+			base.Item.knockBack = 1.5f;
+			base.Item.value = 50000;
+			base.Item.rare = 2;
+            base.Item.shoot = 89;
+            base.Item.shootSpeed = 0;
+            base.Item.ammo = AmmoID.Bullet;
 		}
         public override void UpdateInventory(Player player)
         {
             if (Main.rand.Next(100) >= 50)
             {
-                item.shoot = 279;
-                item.damage = 25;
+                Item.shoot = 279;
+                Item.damage = 25;
             }
             else
             {
-                item.shoot = 89;
-                item.damage = 19;
+                Item.shoot = 89;
+                Item.damage = 19;
             }
             base.UpdateInventory(player);
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(1335, 1998);
             recipe.AddIngredient(515, 1998);
-            recipe.SetResult(this, 1);
             recipe.requiredTile[0] = 125;
-            recipe.AddRecipe();
+            recipe.Register();
         }
 	}
 }

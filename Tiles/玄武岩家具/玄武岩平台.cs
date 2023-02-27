@@ -11,7 +11,7 @@ namespace MythMod.Tiles.玄武岩家具
 	public class 玄武岩平台 : ModTile
 	{
 		// Token: 0x060041C4 RID: 16836 RVA: 0x0032D928 File Offset: 0x0032BB28
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileLighted[(int)base.Type] = true;
 			Main.tileFrameImportant[(int)base.Type] = true;
@@ -20,7 +20,7 @@ namespace MythMod.Tiles.玄武岩家具
 			Main.tileNoAttach[(int)base.Type] = true;
 			Main.tileTable[(int)base.Type] = true;
 			Main.tileLavaDeath[(int)base.Type] = true;
-			this.soundType = 21;
+			this.HitSound = 21;
 			TileID.Sets.Platforms[(int)base.Type] = true;
 			TileObjectData.newTile.CoordinateHeights = new int[]
 			{
@@ -35,9 +35,9 @@ namespace MythMod.Tiles.玄武岩家具
 			TileObjectData.newTile.LavaDeath = true;
 			TileObjectData.addTile((int)base.Type);
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsDoor);
-			this.drop = base.mod.ItemType("BasaltPlatform");
-			this.disableSmartCursor = true;
-			this.adjTiles = new int[]
+			this.ItemDrop = base.Mod.Find<ModItem>("BasaltPlatform").Type;
+			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+			this.AdjTiles = new int[]
 			{
 				19
 			};

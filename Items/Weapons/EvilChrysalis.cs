@@ -1,5 +1,6 @@
 ﻿using System;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -14,40 +15,39 @@ namespace MythMod.Items.Weapons
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("Death");
-			Item.staff[base.item.type] = true;
+			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "邪茧法杖");
 		}
 
 		// Token: 0x060010AA RID: 4266 RVA: 0x0007B4A8 File Offset: 0x000796A8
 		public override void SetDefaults()
 		{
-			base.item.damage = 18;
-			base.item.magic = true;
-			base.item.mana = 12;
-			base.item.width = 56;
-			base.item.height = 58;
-			base.item.useTime = 27;
-			base.item.useAnimation = 27;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.knockBack = 1.5f;
-			base.item.value = 3000;
-			base.item.rare = 3;
-			base.item.UseSound = SoundID.Item60;
-			base.item.autoReuse = true;
-			base.item.shoot = mod.ProjectileType("CorruptMoth");
-            base.item.shootSpeed = 4f;
+			base.Item.damage = 18;
+			base.Item.DamageType = DamageClass.Magic;
+			base.Item.mana = 12;
+			base.Item.width = 56;
+			base.Item.height = 58;
+			base.Item.useTime = 27;
+			base.Item.useAnimation = 27;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 1.5f;
+			base.Item.value = 3000;
+			base.Item.rare = 3;
+			base.Item.UseSound = SoundID.Item60;
+			base.Item.autoReuse = true;
+			base.Item.shoot = Mod.Find<ModProjectile>("CorruptMoth").Type;
+            base.Item.shootSpeed = 4f;
 		}
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);//����һ������
             recipe.AddIngredient(null, "EvilScaleDust", 8); //��Ҫһ������
             recipe.AddIngredient(null, "BrokenWingOfMoth", 12); //��Ҫһ������
             recipe.requiredTile[0] = 26;
-            recipe.SetResult(this, 1); //����һ������
-            recipe.AddRecipe();
+            recipe.Register();
         }
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             for(int i = 0; i < 3; i++)
             {

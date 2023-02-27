@@ -10,7 +10,7 @@ namespace MythMod.Tiles.TangerineFuniture
 {
 	public class TangerineChair : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[(int)base.Type] = true;
 			Main.tileNoAttach[(int)base.Type] = true;
@@ -34,8 +34,8 @@ namespace MythMod.Tiles.TangerineFuniture
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
 			modTranslation.SetDefault("年桔木椅子");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
-			this.disableSmartCursor = true;
-			this.adjTiles = new int[]
+			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+			this.AdjTiles = new int[]
 			{
 				15
 			};
@@ -52,7 +52,7 @@ namespace MythMod.Tiles.TangerineFuniture
 		}
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("TangerineChair"), 1, false, 0, false, false);
+			Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("TangerineChair").Type, 1, false, 0, false, false);
 		}
 	}
 }

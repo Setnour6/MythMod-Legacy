@@ -16,23 +16,23 @@ namespace MythMod.Projectiles
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("藤蔓");
-			Main.projFrames[base.projectile.type] = 1;
+			Main.projFrames[base.Projectile.type] = 1;
 		}
 
 		// Token: 0x06001EC4 RID: 7876 RVA: 0x0018A990 File Offset: 0x00188B90
 		public override void SetDefaults()
 		{
-			base.projectile.extraUpdates = 3;
-			base.projectile.width = 8;
-			base.projectile.height = 8;
-			base.projectile.hostile = false;
-			base.projectile.friendly = true;
-			base.projectile.ignoreWater = true;
-			base.projectile.tileCollide = false;
-			base.projectile.penetrate = 1;
-			base.projectile.timeLeft = 300;
-			base.projectile.alpha = 255;
-			this.cooldownSlot = 1;
+			base.Projectile.extraUpdates = 3;
+			base.Projectile.width = 8;
+			base.Projectile.height = 8;
+			base.Projectile.hostile = false;
+			base.Projectile.friendly = true;
+			base.Projectile.ignoreWater = true;
+			base.Projectile.tileCollide = false;
+			base.Projectile.penetrate = 1;
+			base.Projectile.timeLeft = 300;
+			base.Projectile.alpha = 255;
+			this.CooldownSlot = 1;
 		}
 
 		// Token: 0x06001EC5 RID: 7877 RVA: 0x0018AA00 File Offset: 0x00188C00
@@ -44,38 +44,38 @@ namespace MythMod.Projectiles
                 X = Main.rand.Next(0,2000) / 1000f;
 				initialization = false;
             }
-			if(base.projectile.timeLeft < 75)
+			if(base.Projectile.timeLeft < 75)
 			{
 				if(num >= 50000)
 				{
-			        projectile.velocity = projectile.velocity.RotatedBy(Math.PI / -20f);
-			    	projectile.velocity *= 0.975f;
-			    	int r = Dust.NewDust( new Vector2(base.projectile.Center.X , base.projectile.Center.Y) + base.projectile.velocity * 1.5f, 0, 0, 61, 0, 0, 0, default(Color), 1.2f * (float)base.projectile.timeLeft / 75f + 0.2f);
+			        Projectile.velocity = Projectile.velocity.RotatedBy(Math.PI / -20f);
+			    	Projectile.velocity *= 0.975f;
+			    	int r = Dust.NewDust( new Vector2(base.Projectile.Center.X , base.Projectile.Center.Y) + base.Projectile.velocity * 1.5f, 0, 0, 61, 0, 0, 0, default(Color), 1.2f * (float)base.Projectile.timeLeft / 75f + 0.2f);
 		    	    Main.dust[r].velocity.X = 0;
 		    	    Main.dust[r].velocity.Y = 0;
 		    	    Main.dust[r].noGravity = true;
-                	Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 0.0f / 255f, (float)(255 - base.projectile.alpha) * 0.9f / 255f, (float)(255 - base.projectile.alpha) * 0.0f / 255f);
+                	Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 0.0f / 255f, (float)(255 - base.Projectile.alpha) * 0.9f / 255f, (float)(255 - base.Projectile.alpha) * 0.0f / 255f);
 				}
 				else
 				{
-					projectile.velocity = projectile.velocity.RotatedBy(Math.PI / 20f);
-			    	projectile.velocity *= 0.975f;
-			    	int r = Dust.NewDust( new Vector2(base.projectile.Center.X , base.projectile.Center.Y) + base.projectile.velocity * 1.5f, 0, 0, 61, 0, 0, 0, default(Color), 1.2f * (float)base.projectile.timeLeft / 75f + 0.2f);
+					Projectile.velocity = Projectile.velocity.RotatedBy(Math.PI / 20f);
+			    	Projectile.velocity *= 0.975f;
+			    	int r = Dust.NewDust( new Vector2(base.Projectile.Center.X , base.Projectile.Center.Y) + base.Projectile.velocity * 1.5f, 0, 0, 61, 0, 0, 0, default(Color), 1.2f * (float)base.Projectile.timeLeft / 75f + 0.2f);
 		    	    Main.dust[r].velocity.X = 0;
 		    	    Main.dust[r].velocity.Y = 0;
 		    	    Main.dust[r].noGravity = true;
-                	Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 0.0f / 255f, (float)(255 - base.projectile.alpha) * 0.9f / 255f, (float)(255 - base.projectile.alpha) * 0.0f / 255f);
+                	Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 0.0f / 255f, (float)(255 - base.Projectile.alpha) * 0.9f / 255f, (float)(255 - base.Projectile.alpha) * 0.0f / 255f);
 				}
 			}
 			else
 			{
 				X += 1 / 30f;
-			    projectile.velocity = projectile.velocity.RotatedBy(Math.PI / 60f * (float)Math.Sin(X * Math.PI));
-			    int r = Dust.NewDust( new Vector2(base.projectile.Center.X , base.projectile.Center.Y) + base.projectile.velocity * 1.5f, 0, 0, 61, 0, 0, 0, default(Color), 1.4f);
+			    Projectile.velocity = Projectile.velocity.RotatedBy(Math.PI / 60f * (float)Math.Sin(X * Math.PI));
+			    int r = Dust.NewDust( new Vector2(base.Projectile.Center.X , base.Projectile.Center.Y) + base.Projectile.velocity * 1.5f, 0, 0, 61, 0, 0, 0, default(Color), 1.4f);
 			    Main.dust[r].velocity.X = 0;
 			    Main.dust[r].velocity.Y = 0;
 			    Main.dust[r].noGravity = true;
-            	Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 0.0f / 255f, (float)(255 - base.projectile.alpha) * 0.9f / 255f, (float)(255 - base.projectile.alpha) * 0.0f / 255f);
+            	Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 0.0f / 255f, (float)(255 - base.Projectile.alpha) * 0.9f / 255f, (float)(255 - base.Projectile.alpha) * 0.0f / 255f);
 			}
 		}
 	}

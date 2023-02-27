@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace MythMod.Projectiles
@@ -12,62 +14,62 @@ namespace MythMod.Projectiles
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("铱金剑剑气");
-			Main.projFrames[base.projectile.type] = 19;
+			Main.projFrames[base.Projectile.type] = 19;
 		}
 
 		// Token: 0x06001F15 RID: 7957 RVA: 0x0018D09C File Offset: 0x0018B29C
 		public override void SetDefaults()
 		{
-			base.projectile.width = 40;
-			base.projectile.height = 40;
-			base.projectile.hostile = false;
-			base.projectile.ignoreWater = true;
-			base.projectile.tileCollide = false;
-			base.projectile.penetrate = 150;
-			base.projectile.timeLeft = 1200;
-			base.projectile.alpha = 180;
-            base.projectile.friendly = true;
-			this.cooldownSlot = 1;
+			base.Projectile.width = 40;
+			base.Projectile.height = 40;
+			base.Projectile.hostile = false;
+			base.Projectile.ignoreWater = true;
+			base.Projectile.tileCollide = false;
+			base.Projectile.penetrate = 150;
+			base.Projectile.timeLeft = 1200;
+			base.Projectile.alpha = 180;
+            base.Projectile.friendly = true;
+			this.CooldownSlot = 1;
 		}
 
 		// Token: 0x06001F16 RID: 7958 RVA: 0x0018D118 File Offset: 0x0018B318
 		public override void AI()
 		{
-			base.projectile.frameCounter++;
-			if (base.projectile.frameCounter > 3)
+			base.Projectile.frameCounter++;
+			if (base.Projectile.frameCounter > 3)
 			{
-				base.projectile.frame++;
-				base.projectile.frameCounter = 0;
+				base.Projectile.frame++;
+				base.Projectile.frameCounter = 0;
 			}
-			if (base.projectile.frame > 18)
+			if (base.Projectile.frame > 18)
 			{
-				base.projectile.frame = 0;
+				base.Projectile.frame = 0;
 			}
-			base.projectile.alpha--;
-			Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * -1f / 255f, (float)(255 - base.projectile.alpha) * -1f / 255f, (float)(255 - base.projectile.alpha) * -1.0f / 255f);
-			if (base.projectile.ai[1] == 0f)
+			base.Projectile.alpha--;
+			Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * -1f / 255f, (float)(255 - base.Projectile.alpha) * -1f / 255f, (float)(255 - base.Projectile.alpha) * -1.0f / 255f);
+			if (base.Projectile.ai[1] == 0f)
 			{
-				base.projectile.ai[1] = 1f;
-				Main.PlaySound(2, (int)base.projectile.position.X, (int)base.projectile.position.Y, 20, 1f, 0f);
+				base.Projectile.ai[1] = 1f;
+				SoundEngine.PlaySound(SoundID.Item20, new Vector2(base.Projectile.position.X, base.Projectile.position.Y));
 			}
-			Projectile projectile = base.projectile;
+			Projectile projectile = base.Projectile;
 			projectile.velocity.X = projectile.velocity.X * 1.04f;
-			Projectile projectile2 = base.projectile;
+			Projectile projectile2 = base.Projectile;
 			projectile2.velocity.Y = projectile2.velocity.Y * 1.04f;
-			if (base.projectile.velocity.X < 0f)
+			if (base.Projectile.velocity.X < 0f)
 			{
-				base.projectile.spriteDirection = -1;
-				base.projectile.rotation = (float)Math.Atan2(-(double)base.projectile.velocity.Y, -(double)base.projectile.velocity.X);
+				base.Projectile.spriteDirection = -1;
+				base.Projectile.rotation = (float)Math.Atan2(-(double)base.Projectile.velocity.Y, -(double)base.Projectile.velocity.X);
 				return;
 			}
-			base.projectile.spriteDirection = 1;
-			base.projectile.rotation = (float)Math.Atan2((double)base.projectile.velocity.Y, (double)base.projectile.velocity.X);
+			base.Projectile.spriteDirection = 1;
+			base.Projectile.rotation = (float)Math.Atan2((double)base.Projectile.velocity.Y, (double)base.Projectile.velocity.X);
 		}
 
 		// Token: 0x06001F17 RID: 7959 RVA: 0x0000C841 File Offset: 0x0000AA41
 		public override Color? GetAlpha(Color lightColor)
 		{
-			return new Color?(new Color(0, 0, 0, base.projectile.alpha));
+			return new Color?(new Color(0, 0, 0, base.Projectile.alpha));
 		}
 		public override void Kill(int timeLeft)
 		{

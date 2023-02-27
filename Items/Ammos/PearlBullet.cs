@@ -25,27 +25,26 @@ namespace MythMod.Items.Ammos
 		}
 		public override void SetDefaults()
 		{
-			base.item.ranged = true;
-			base.item.width = 12;
-            base.item.damage = 20;
-			base.item.height = 12;
-			base.item.maxStack = 999;
-			base.item.consumable = true;
-			base.item.knockBack = 1.5f;
-			base.item.value = 30;
-			base.item.rare = 2;
-            base.item.shoot = mod.ProjectileType("珍珠弹");
-            base.item.shootSpeed = 0;
-            base.item.ammo = AmmoID.Bullet;
+			base.Item.DamageType = DamageClass.Ranged;
+			base.Item.width = 12;
+            base.Item.damage = 20;
+			base.Item.height = 12;
+			base.Item.maxStack = 999;
+			base.Item.consumable = true;
+			base.Item.knockBack = 1.5f;
+			base.Item.value = 30;
+			base.Item.rare = 2;
+            base.Item.shoot = Mod.Find<ModProjectile>("珍珠弹").Type;
+            base.Item.shootSpeed = 0;
+            base.Item.ammo = AmmoID.Bullet;
 		}
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(33);
             recipe.AddIngredient(97, 33);
-            recipe.AddIngredient(mod.ItemType("Pearl"), 1);
-            recipe.SetResult(this, 33);
+            recipe.AddIngredient(Mod.Find<ModItem>("Pearl").Type, 1);
             recipe.requiredTile[0] = 134;
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

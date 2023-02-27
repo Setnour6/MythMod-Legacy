@@ -19,28 +19,28 @@ namespace MythMod.Items
         private float X;
 		public override void SetDefaults()
 		{
-			base.item.width = 20;
-			base.item.height = 28;
-			base.item.useAnimation = 45;
-			base.item.useTime = 60;
-			base.item.useStyle = 4;
-            base.item.maxStack = 999;
-			base.item.consumable = true;
-			base.item.shoot = base.mod.ProjectileType("荧光虾酱");
-			item.noUseGraphic = true;
-			base.item.shootSpeed = 4.8f;
+			base.Item.width = 20;
+			base.Item.height = 28;
+			base.Item.useAnimation = 45;
+			base.Item.useTime = 60;
+			base.Item.useStyle = 4;
+            base.Item.maxStack = 999;
+			base.Item.consumable = true;
+			base.Item.shoot = base.Mod.Find<ModProjectile>("荧光虾酱").Type;
+			Item.noUseGraphic = true;
+			base.Item.shootSpeed = 4.8f;
 		}
 		public override void Update(ref float gravity, ref float maxFallSpeed)
         {
         }
-		public override bool UseItem(Player player)
+		public override bool? UseItem(Player player)/* tModPorter Suggestion: Return null instead of false */
 		{
 			return false;
 		}
 		public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
 		{
 			Vector2 origin = new Vector2(10f, 14f);
-			spriteBatch.Draw(base.mod.GetTexture("Items/荧光虾酱Glow"), base.item.Center - Main.screenPosition, null, Color.White, rotation, origin, 1f, SpriteEffects.None, 0f);
+			spriteBatch.Draw(base.Mod.GetTexture("Items/荧光虾酱Glow"), base.Item.Center - Main.screenPosition, null, Color.White, rotation, origin, 1f, SpriteEffects.None, 0f);
 		}
 	}
 }

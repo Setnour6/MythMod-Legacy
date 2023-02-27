@@ -17,19 +17,19 @@ namespace MythMod.Items.Foods
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 36;
-            base.item.height = 24;
-            base.item.rare = 0;
-			base.item.useAnimation = 30;
-			base.item.useTime = 20;
-			base.item.useStyle = 1;
-			base.item.UseSound = SoundID.Item8;
-			base.item.consumable = true;
-            base.item.maxStack = 200;
-            base.item.consumable = true;
-            base.item.useTurn = true;
-            base.item.autoReuse = true;
-            base.item.createTile = base.mod.TileType("猕猴桃沙拉");
+			base.Item.width = 36;
+            base.Item.height = 24;
+            base.Item.rare = 0;
+			base.Item.useAnimation = 30;
+			base.Item.useTime = 20;
+			base.Item.useStyle = 1;
+			base.Item.UseSound = SoundID.Item8;
+			base.Item.consumable = true;
+            base.Item.maxStack = 200;
+            base.Item.consumable = true;
+            base.Item.useTurn = true;
+            base.Item.autoReuse = true;
+            base.Item.createTile = base.Mod.Find<ModTile>("猕猴桃沙拉").Type;
         }
 	}
 }

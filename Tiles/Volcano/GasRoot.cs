@@ -8,7 +8,7 @@ namespace MythMod.Tiles.Volcano
 {
 	public class GasRoot : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
         {
             Main.tileFrameImportant[(int)base.Type] = true;
             Main.tileNoAttach[(int)base.Type] = true;
@@ -30,12 +30,12 @@ namespace MythMod.Tiles.Volcano
             TileObjectData.addAlternate(1);
             TileObjectData.newTile.LavaDeath = false;
             TileObjectData.addTile((int)base.Type);
-            this.disableSmartCursor = true;
-            this.adjTiles = new int[]
+            this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+            this.AdjTiles = new int[]
             {
                 15
             };
-            this.dustType = 5;
+            this.DustType = 5;
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
             base.AddMapEntry(new Color(153, 107, 0), modTranslation);
@@ -46,13 +46,13 @@ namespace MythMod.Tiles.Volcano
 		}
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("GasRoot"));
+            Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("GasRoot").Type);
         }
         public override void PlaceInWorld(int i, int j, Item item)
         {
             short num = (short)(Main.rand.Next(0, 7) * 18);
-            Main.tile[i, j].frameX = num;
-            Main.tile[i, j - 1].frameX = num;
+            Main.tile[i, j].TileFrameX = num;
+            Main.tile[i, j - 1].TileFrameX = num;
         }
     }
 }

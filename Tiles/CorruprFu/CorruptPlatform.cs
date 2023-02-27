@@ -9,7 +9,7 @@ namespace MythMod.Tiles.CorruprFu
 {
 	public class CorruptPlatform : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileLighted[(int)base.Type] = true;
 			Main.tileFrameImportant[(int)base.Type] = true;
@@ -18,7 +18,7 @@ namespace MythMod.Tiles.CorruprFu
 			Main.tileNoAttach[(int)base.Type] = true;
 			Main.tileTable[(int)base.Type] = true;
 			Main.tileLavaDeath[(int)base.Type] = true;
-			this.soundType = 21;
+			this.HitSound = 21;
 			TileID.Sets.Platforms[(int)base.Type] = true;
 			TileObjectData.newTile.CoordinateHeights = new int[]
 			{
@@ -35,9 +35,9 @@ namespace MythMod.Tiles.CorruprFu
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsDoor);
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             base.AddMapEntry(new Color(191, 142, 111), modTranslation);
-            this.drop = base.mod.ItemType("CorruptWoodPlatform");
-			this.disableSmartCursor = true;
-			this.adjTiles = new int[]
+            this.ItemDrop = base.Mod.Find<ModItem>("CorruptWoodPlatform").Type;
+			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+			this.AdjTiles = new int[]
 			{
 				19
 			};

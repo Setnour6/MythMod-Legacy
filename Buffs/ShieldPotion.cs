@@ -7,7 +7,7 @@ namespace MythMod.Buffs
 {
     public class ShieldPotion : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("矿物精华形成的保护层环绕着你");
             base.Description.SetDefault("防御力+24");

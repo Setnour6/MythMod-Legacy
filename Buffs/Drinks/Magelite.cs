@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class Magelite : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("玛格丽特");
             base.Description.SetDefault("闪避增加9%");

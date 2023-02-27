@@ -23,7 +23,7 @@ namespace MythMod.Tiles.Foods
         private int num2 = 0;
         private bool num3 = false;
         private bool flag2 = false;
-        public override void SetDefaults()
+        public override void SetStaticDefaults()
         {
             Main.tileFrameImportant[(int)base.Type] = true;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
@@ -48,18 +48,18 @@ namespace MythMod.Tiles.Foods
         }
         public override void NearbyEffects(int i, int j, bool closer)
         {
-            if (Main.tile[i, j].frameX < 200)
+            if (Main.tile[i, j].TileFrameX < 200)
             {
-                Main.tile[i, j].frameX += 40;
+                Main.tile[i, j].TileFrameX += 40;
             }
-            if (Main.tile[i, j].frameX >= 200)
+            if (Main.tile[i, j].TileFrameX >= 200)
             {
-                Main.tile[i, j].frameX -= 200;
+                Main.tile[i, j].TileFrameX -= 200;
             }
         }
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("ChocolateSpring"));
+            Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("ChocolateSpring").Type);
         }
     }
 }

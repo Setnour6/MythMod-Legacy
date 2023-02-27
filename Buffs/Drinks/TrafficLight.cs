@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class TrafficLight : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("红绿灯");
             base.Description.SetDefault("减少7防御,增加8%攻击,增加6%闪避");

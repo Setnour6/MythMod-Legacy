@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -23,17 +24,17 @@ namespace MythMod.NPCs.Yuanbao
 		// Token: 0x06001B18 RID: 6936 RVA: 0x0014B828 File Offset: 0x00149A28
 		public override void SetDefaults()
 		{
-			base.npc.damage = 0;
-			base.npc.width = 80;
-			base.npc.height = 44;
-			base.npc.defense = 0;
-			base.npc.lifeMax = 10000;
-			base.npc.knockBackResist = 0;
-			base.npc.alpha = 0;
-			base.npc.lavaImmune = true;
-			base.npc.noGravity = false;
-			base.npc.noTileCollide = false;
-            base.npc.aiStyle = -1;
+			base.NPC.damage = 0;
+			base.NPC.width = 80;
+			base.NPC.height = 44;
+			base.NPC.defense = 0;
+			base.NPC.lifeMax = 10000;
+			base.NPC.knockBackResist = 0;
+			base.NPC.alpha = 0;
+			base.NPC.lavaImmune = true;
+			base.NPC.noGravity = false;
+			base.NPC.noTileCollide = false;
+            base.NPC.aiStyle = -1;
         }
 
 		// Token: 0x06001B19 RID: 6937 RVA: 0x0014B900 File Offset: 0x00149B00
@@ -42,11 +43,11 @@ namespace MythMod.NPCs.Yuanbao
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             if (mplayer.GoldTime == 0)
             {
-                npc.alpha += 5;
+                NPC.alpha += 5;
             }
-            if (npc.alpha >= 250)
+            if (NPC.alpha >= 250)
             {
-                npc.active = false;
+                NPC.active = false;
             }
         }
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -57,50 +58,50 @@ namespace MythMod.NPCs.Yuanbao
 		public override void HitEffect(int hitDirection, double damage)
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
-            Main.PlaySound(2, (int)base.npc.position.X, (int)base.npc.position.Y, 37, 1f, 0f);
+            SoundEngine.PlaySound(SoundID.Item37, new Vector2(base.NPC.position.X, base.NPC.position.Y));
             for (int i = 0; i < 5; i++)
             {
-                Dust.NewDust(base.npc.position, base.npc.width, base.npc.height, 11, (float)hitDirection, -1f, 0, default(Color), 1f);
+                Dust.NewDust(base.NPC.position, base.NPC.width, base.NPC.height, 11, (float)hitDirection, -1f, 0, default(Color), 1f);
             }
             for (int j = 0; j < 3; j++)
             {
-                Dust.NewDust(base.npc.position, base.npc.width, base.npc.height, 11, (float)hitDirection, -1f, 0, default(Color), 1f);
+                Dust.NewDust(base.NPC.position, base.NPC.width, base.NPC.height, 11, (float)hitDirection, -1f, 0, default(Color), 1f);
             }
-            if (base.npc.life <= 0)
+            if (base.NPC.life <= 0)
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    Dust.NewDust(base.npc.position, base.npc.width, base.npc.height, 11, (float)hitDirection, -1f, 0, default(Color), 1f);
+                    Dust.NewDust(base.NPC.position, base.NPC.width, base.NPC.height, 11, (float)hitDirection, -1f, 0, default(Color), 1f);
                 }
                 for (int j = 0; j < 25; j++)
                 {
-                    Dust.NewDust(base.npc.position, base.npc.width, base.npc.height, 11, (float)hitDirection, -1f, 0, default(Color), 1f);
+                    Dust.NewDust(base.NPC.position, base.NPC.width, base.NPC.height, 11, (float)hitDirection, -1f, 0, default(Color), 1f);
                 }
                 if (Main.rand.Next(10) == 0)
                 {
-                    Item.NewItem((int)base.npc.Center.X, (int)base.npc.Center.Y, base.npc.width, base.npc.height, base.mod.ItemType("AgYuanbao"), 1, false, 0, false, false);
+                    Item.NewItem((int)base.NPC.Center.X, (int)base.NPC.Center.Y, base.NPC.width, base.NPC.height, base.Mod.Find<ModItem>("AgYuanbao").Type, 1, false, 0, false, false);
                 }
                 if (Main.rand.Next(100) == 0 && mplayer.GoldPoint > 30 && mplayer.GoldPoint < 800)
                 {
-                    Item.NewItem((int)base.npc.Center.X, (int)base.npc.Center.Y, base.npc.width, base.npc.height, base.mod.ItemType("CoinI"), 1, false, 0, false, false);
+                    Item.NewItem((int)base.NPC.Center.X, (int)base.NPC.Center.Y, base.NPC.width, base.NPC.height, base.Mod.Find<ModItem>("CoinI").Type, 1, false, 0, false, false);
                 }
                 if (Main.rand.Next(100) == 0 && mplayer.GoldPoint > 800 && mplayer.GoldPoint < 2400)
                 {
-                    Item.NewItem((int)base.npc.Center.X, (int)base.npc.Center.Y, base.npc.width, base.npc.height, base.mod.ItemType("CoinII"), 1, false, 0, false, false);
+                    Item.NewItem((int)base.NPC.Center.X, (int)base.NPC.Center.Y, base.NPC.width, base.NPC.height, base.Mod.Find<ModItem>("CoinII").Type, 1, false, 0, false, false);
                 }
                 if (Main.rand.Next(100) == 0 && mplayer.GoldPoint > 2400)
                 {
-                    Item.NewItem((int)base.npc.Center.X, (int)base.npc.Center.Y, base.npc.width, base.npc.height, base.mod.ItemType("CoinIII"), 1, false, 0, false, false);
+                    Item.NewItem((int)base.NPC.Center.X, (int)base.NPC.Center.Y, base.NPC.width, base.NPC.height, base.Mod.Find<ModItem>("CoinIII").Type, 1, false, 0, false, false);
                 }
                 float scaleFactor = (float)(Main.rand.Next(-8, 8) / 100f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/银元宝碎块1"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/银元宝碎块2"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/银元宝碎块2"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/银元宝碎块3"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/银元宝碎块1"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/银元宝碎块2"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/银元宝碎块2"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/银元宝碎块3"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/银元宝碎块1"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/银元宝碎块2"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/银元宝碎块2"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/银元宝碎块3"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/银元宝碎块1"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/银元宝碎块2"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/银元宝碎块2"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/银元宝碎块3"), 1f);
                 if (mplayer.GoldTime > 0)
                 {
                     if (Main.expertMode)
@@ -128,7 +129,7 @@ namespace MythMod.NPCs.Yuanbao
                 }
             }
         }
-		public override bool PreNPCLoot()
+		public override bool PreKill()
 		{
 			return false;
 		}

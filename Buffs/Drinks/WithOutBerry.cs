@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class WithOutBerry : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("莓你不行");
             base.Description.SetDefault("增加9%攻击,增加1生命回复");

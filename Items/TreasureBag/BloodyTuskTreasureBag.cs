@@ -27,12 +27,12 @@ namespace MythMod.Items.TreasureBag
 		}
 		public override void SetDefaults()
 		{
-            base.item.maxStack = 999;
-            base.item.consumable = true;
-            base.item.width = 24;
-            base.item.height = 24;
-            base.item.rare = 9;
-            base.item.expert = true;
+            base.Item.maxStack = 999;
+            base.Item.consumable = true;
+            base.Item.width = 24;
+            base.Item.height = 24;
+            base.Item.rare = 9;
+            base.Item.expert = true;
 		}
 		public override bool CanRightClick()
 		{
@@ -44,22 +44,22 @@ namespace MythMod.Items.TreasureBag
             switch (Main.rand.Next(1, 7))
             {
                 case 1:
-                    type = base.mod.ItemType("BoneKnife");
+                    type = base.Mod.Find<ModItem>("BoneKnife").Type;
                     break;
                 case 2:
-                    type = base.mod.ItemType("SpineGun");
+                    type = base.Mod.Find<ModItem>("SpineGun").Type;
                     break;
                 case 3:
-                    type = base.mod.ItemType("TuskBow");
+                    type = base.Mod.Find<ModItem>("TuskBow").Type;
                     break;
                 case 4:
-                    type = base.mod.ItemType("BloodyBoneYoyo");
+                    type = base.Mod.Find<ModItem>("BloodyBoneYoyo").Type;
                     break;
                 case 5:
-                    type = base.mod.ItemType("TuskStaff");
+                    type = base.Mod.Find<ModItem>("TuskStaff").Type;
                     break;
                 case 6:
-                    type = base.mod.ItemType("ToothBlade");
+                    type = base.Mod.Find<ModItem>("ToothBlade").Type;
                     break;
             }
             player.QuickSpawnItem(type, 1);

@@ -10,7 +10,7 @@ namespace MythMod.Tiles.Foods
 {
 	public class 椰子果冻 : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[(int)base.Type] = true;
 			Main.tileNoAttach[(int)base.Type] = true;
@@ -24,19 +24,19 @@ namespace MythMod.Tiles.Foods
             };
             TileObjectData.newTile.CoordinateWidth = 54;
             TileObjectData.addTile((int)base.Type);
-			this.dustType = 31;
+			this.DustType = 31;
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
             base.AddMapEntry(new Color(200, 100, 0), modTranslation);
-            this.mineResist = 3f;
-			base.SetDefaults();
+            this.MineResist = 3f;
+			base.SetStaticDefaults();
 			modTranslation.AddTranslation(GameCulture.Chinese, "");
 		}
         public override void NearbyEffects(int i, int j, bool closer)
         {
             Player player = Main.player[Main.myPlayer];
             //player.AddBuff(mod.BuffType("冰爽II"), 2);
-            player.AddBuff(mod.BuffType("鲜果II"), 20);
+            player.AddBuff(Mod.Find<ModBuff>("鲜果II").Type, 20);
         }
         public override void NumDust(int i, int j, bool fail, ref int num)
 		{
@@ -44,7 +44,7 @@ namespace MythMod.Tiles.Foods
 		}
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("椰子果冻"));
+            Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("椰子果冻").Type);
         }
     }
 }

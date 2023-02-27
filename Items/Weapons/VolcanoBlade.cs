@@ -19,27 +19,27 @@ namespace MythMod.Items.Weapons
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("击中敌人有概率引发烈火爆炸");
+            Tooltip.SetDefault("»÷ÖÐµÐÈËÓÐ¸ÅÂÊÒý·¢ÁÒ»ð±¬Õ¨");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            item.damage = 185;
-            item.melee = true;
-            item.width = 62;
-            item.height = 68;
-            item.useTime = 6;
-            item.rare = 4;
-            item.useAnimation = 14;
-            item.useStyle = 1;
-            item.knockBack = 9;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 15;
-            item.value = 60000;
-            item.scale = 1f;//大小
+            Item.glowMask = GetGlowMask;
+            Item.damage = 185;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 62;
+            Item.height = 68;
+            Item.useTime = 6;
+            Item.rare = 4;
+            Item.useAnimation = 14;
+            Item.useStyle = 1;
+            Item.knockBack = 9;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 15;
+            Item.value = 60000;
+            Item.scale = 1f;//´óÐ¡
         }
         public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
         {
@@ -59,7 +59,7 @@ namespace MythMod.Items.Weapons
             }
             if (Main.rand.Next(5) == 1)
             {
-                Projectile.NewProjectile(target.Center.X, target.Center.Y, 2f, 2f, base.mod.ProjectileType("火山爆炸"), damage * 3, knockback, player.whoAmI, 0f, 0f);
+                Projectile.NewProjectile(target.Center.X, target.Center.Y, 2f, 2f, base.Mod.Find<ModProjectile>("»ðÉ½±¬Õ¨").Type, damage * 3, knockback, player.whoAmI, 0f, 0f);
             }
             target.AddBuff(24, 600);
         }

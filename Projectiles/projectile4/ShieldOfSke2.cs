@@ -13,15 +13,15 @@ namespace MythMod.Projectiles.projectile4
         private float X = 0;
 		public override void SetDefaults()
 		{
-            base.projectile.width = 100;
-            base.projectile.height = 100;
-            base.projectile.friendly = true;
-            base.projectile.hostile = false;
-            base.projectile.ignoreWater = true;
-            base.projectile.penetrate = -1;
-            base.projectile.timeLeft = 360000000;
-            base.projectile.usesLocalNPCImmunity = false;
-            base.projectile.tileCollide = false;
+            base.Projectile.width = 100;
+            base.Projectile.height = 100;
+            base.Projectile.friendly = true;
+            base.Projectile.hostile = false;
+            base.Projectile.ignoreWater = true;
+            base.Projectile.penetrate = -1;
+            base.Projectile.timeLeft = 360000000;
+            base.Projectile.usesLocalNPCImmunity = false;
+            base.Projectile.tileCollide = false;
         }
 		public override void AI()
 		{
@@ -34,8 +34,8 @@ namespace MythMod.Projectiles.projectile4
                     break;
                 }
             }
-            projectile.position = Main.npc[K].Center - new Vector2(50, 50) + new Vector2(0, 100).RotatedBy(Main.npc[K].rotation + Math.PI * 0.6666666667);
-            projectile.rotation = Main.npc[K].rotation + (float)(Math.PI * 0.6666666667);
+            Projectile.position = Main.npc[K].Center - new Vector2(50, 50) + new Vector2(0, 100).RotatedBy(Main.npc[K].rotation + Math.PI * 0.6666666667);
+            Projectile.rotation = Main.npc[K].rotation + (float)(Math.PI * 0.6666666667);
         }
     }
 }

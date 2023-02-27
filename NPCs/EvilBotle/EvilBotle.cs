@@ -32,33 +32,33 @@ namespace MythMod.NPCs.EvilBotle
         private bool T = false;
         public override void SetDefaults()
         {
-            npc.behindTiles = true;
-            base.npc.damage = 0;
-            base.npc.width = 120;
-            base.npc.height = 160;
-            base.npc.defense = 40;
-            bossBag = mod.ItemType("EvilBotleTreasureBag");
-            base.npc.lifeMax = (Main.expertMode ? 11000 : 8000);
+            NPC.behindTiles = true;
+            base.NPC.damage = 0;
+            base.NPC.width = 120;
+            base.NPC.height = 160;
+            base.NPC.defense = 40;
+            bossBag/* tModPorter Note: Removed. Spawn the treasure bag alongside other loot via npcLoot.Add(ItemDropRule.BossBag(type)) */ = Mod.Find<ModItem>("EvilBotleTreasureBag").Type;
+            base.NPC.lifeMax = (Main.expertMode ? 11000 : 8000);
             if (MythWorld.Myth)
             {
-                base.npc.lifeMax = 17000;
+                base.NPC.lifeMax = 17000;
             }
-            for (int i = 0; i < base.npc.buffImmune.Length; i++)
+            for (int i = 0; i < base.NPC.buffImmune.Length; i++)
             {
-                base.npc.buffImmune[i] = true;
+                base.NPC.buffImmune[i] = true;
             }
-            npc.knockBackResist = 0f;
-            base.npc.value = (float)Item.buyPrice(0, 2, 0, 0);
-            base.npc.color = new Color(0, 0, 0, 0);
-            base.npc.aiStyle = -1;
-            this.aiType = -1;
-            base.npc.boss = true;
-            base.npc.lavaImmune = true;
-            base.npc.noGravity = false;
-            base.npc.noTileCollide = false;
-            base.npc.HitSound = SoundID.NPCHit2;
-            base.npc.DeathSound = SoundID.NPCDeath5;
-            this.music = 12;
+            NPC.knockBackResist = 0f;
+            base.NPC.value = (float)Item.buyPrice(0, 2, 0, 0);
+            base.NPC.color = new Color(0, 0, 0, 0);
+            base.NPC.aiStyle = -1;
+            this.AIType = -1;
+            base.NPC.boss = true;
+            base.NPC.lavaImmune = true;
+            base.NPC.noGravity = false;
+            base.NPC.noTileCollide = false;
+            base.NPC.HitSound = SoundID.NPCHit2;
+            base.NPC.DeathSound = SoundID.NPCDeath5;
+            this.Music = 12;
         }
         public bool Lowerthan12000 = false;
         public bool Lowerthan1000 = false;
@@ -66,41 +66,41 @@ namespace MythMod.NPCs.EvilBotle
         public float Al = 0;
         public override void AI()
         {
-            base.npc.TargetClosest(false);
-            Player player = Main.player[base.npc.target];
-            bool flag2 = (double)base.npc.life <= (double)base.npc.lifeMax * 0.8;
+            base.NPC.TargetClosest(false);
+            Player player = Main.player[base.NPC.target];
+            bool flag2 = (double)base.NPC.life <= (double)base.NPC.lifeMax * 0.8;
             bool expertMode = Main.expertMode;
             bool zoneUnderworldHeight = player.ZoneUnderworldHeight;
-            Vector2 vector = new Vector2(base.npc.Center.X, base.npc.Center.Y);
-            Vector2 center = base.npc.Center;
+            Vector2 vector = new Vector2(base.NPC.Center.X, base.NPC.Center.Y);
+            Vector2 center = base.NPC.Center;
             float num = player.Center.X - vector.X;
             float num2 = player.Center.Y - vector.Y;
             float num3 = (float)Math.Sqrt((double)(num * num + num2 * num2));
-            base.npc.localAI[0] += 1;
+            base.NPC.localAI[0] += 1;
             ADDnum += 1;
             if (!player.active || player.dead)
             {
-                base.npc.TargetClosest(false);
-                player = Main.player[base.npc.target];
+                base.NPC.TargetClosest(false);
+                player = Main.player[base.NPC.target];
                 if (!player.active || player.dead)
                 {
-                    base.npc.alpha += 5;
-                    if (base.npc.timeLeft > 150)
+                    base.NPC.alpha += 5;
+                    if (base.NPC.timeLeft > 150)
                     {
-                        base.npc.timeLeft = 150;
+                        base.NPC.timeLeft = 150;
                     }
-                    if (base.npc.alpha >= 254)
+                    if (base.NPC.alpha >= 254)
                     {
-                        base.npc.velocity = new Vector2(0f, 1000f);
-                        npc.noTileCollide = true;
-                        npc.active = false;
+                        base.NPC.velocity = new Vector2(0f, 1000f);
+                        NPC.noTileCollide = true;
+                        NPC.active = false;
                     }
                     return;
                 }
             }
-            if(NPC.CountNPCS(mod.NPCType("EvilBotleFake")) > 0)
+            if(NPC.CountNPCS(Mod.Find<ModNPC>("EvilBotleFake").Type) > 0)
             {
-                npc.dontTakeDamage = true;
+                NPC.dontTakeDamage = true;
                 if(Al < 1)
                 {
                     Al += 0.01f;
@@ -108,7 +108,7 @@ namespace MythMod.NPCs.EvilBotle
             }
             else
             {
-                npc.dontTakeDamage = false;
+                NPC.dontTakeDamage = false;
                 if (Al > 0)
                 {
                     Al -= 0.01f;
@@ -116,7 +116,7 @@ namespace MythMod.NPCs.EvilBotle
             }
             if (!MythWorld.Myth)
             {
-                if (npc.localAI[0] < 1200 && npc.localAI[0] % 40 == 0)
+                if (NPC.localAI[0] < 1200 && NPC.localAI[0] % 40 == 0)
                 {
                     int Dam = 30;
                     if (Main.expertMode)
@@ -129,8 +129,8 @@ namespace MythMod.NPCs.EvilBotle
                     }
                     for (int i = 0; i < 2; i++)
                     {
-                        Vector2 v = new Vector2(Main.rand.Next(-400, 400) * npc.spriteDirection, Main.rand.Next(-1300, -600)).RotatedBy(Main.rand.NextFloat(-0.75f, 0.75f)) * 0.01f;
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y - 35, v.X, v.Y - 4, mod.ProjectileType("DarkFlameball"), Dam, 0f, Main.myPlayer, 0f, 0f);
+                        Vector2 v = new Vector2(Main.rand.Next(-400, 400) * NPC.spriteDirection, Main.rand.Next(-1300, -600)).RotatedBy(Main.rand.NextFloat(-0.75f, 0.75f)) * 0.01f;
+                        Projectile.NewProjectile(NPC.Center.X, NPC.Center.Y - 35, v.X, v.Y - 4, Mod.Find<ModProjectile>("DarkFlameball").Type, Dam, 0f, Main.myPlayer, 0f, 0f);
                     }
                 }
                 /*if (npc.localAI[0] % 600 == 0)
@@ -138,12 +138,12 @@ namespace MythMod.NPCs.EvilBotle
                     Vector2 vu = base.npc.Center + new Vector2(0f, (float)base.npc.height / 2f);
                     NPC.NewNPC((int)vu.X, (int)vu.Y - 35, mod.NPCType("EvilDragon"), 0, 0f, 0f, 0f, 0f, 255);
                 }*/
-                if (npc.localAI[0] % 600 == 0)
+                if (NPC.localAI[0] % 600 == 0)
                 {
-                    Vector2 vu = base.npc.Center + new Vector2(0f, (float)base.npc.height / 2f);
-                    NPC.NewNPC((int)vu.X, (int)vu.Y - 35, mod.NPCType("EvilBotleFake"), 0, 0f, 0f, 0f, 0f, 255);
+                    Vector2 vu = base.NPC.Center + new Vector2(0f, (float)base.NPC.height / 2f);
+                    NPC.NewNPC((int)vu.X, (int)vu.Y - 35, Mod.Find<ModNPC>("EvilBotleFake").Type, 0, 0f, 0f, 0f, 0f, 255);
                 }
-                if (npc.localAI[0] >= 1200 && npc.localAI[0] < 2400)
+                if (NPC.localAI[0] >= 1200 && NPC.localAI[0] < 2400)
                 {
                     int Dam = 30;
                     if (Main.expertMode)
@@ -154,24 +154,24 @@ namespace MythMod.NPCs.EvilBotle
                             Dam = 15;
                         }
                     }
-                    if (npc.localAI[0] % 60 == 0)
+                    if (NPC.localAI[0] % 60 == 0)
                     {
-                        Vector2 v = new Vector2(Main.rand.Next(-400, 400) * npc.spriteDirection, Main.rand.Next(-1300, -600)).RotatedBy(Main.rand.NextFloat(-0.75f, 0.75f)) * 0.01f;
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y - 35, v.X, v.Y - 4, mod.ProjectileType("DarkFlameball"), Dam, 0f, Main.myPlayer, 0f, 0f);
+                        Vector2 v = new Vector2(Main.rand.Next(-400, 400) * NPC.spriteDirection, Main.rand.Next(-1300, -600)).RotatedBy(Main.rand.NextFloat(-0.75f, 0.75f)) * 0.01f;
+                        Projectile.NewProjectile(NPC.Center.X, NPC.Center.Y - 35, v.X, v.Y - 4, Mod.Find<ModProjectile>("DarkFlameball").Type, Dam, 0f, Main.myPlayer, 0f, 0f);
                     }
-                    if (npc.localAI[0] == 1200)
+                    if (NPC.localAI[0] == 1200)
                     {
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y - 200, 0, 0, mod.ProjectileType("DarkFlameMagic"), Dam, 0f, Main.myPlayer, 0f, 0f);
+                        Projectile.NewProjectile(NPC.Center.X, NPC.Center.Y - 200, 0, 0, Mod.Find<ModProjectile>("DarkFlameMagic").Type, Dam, 0f, Main.myPlayer, 0f, 0f);
                     }
                 }
-                if (npc.localAI[0] >= 2400)
+                if (NPC.localAI[0] >= 2400)
                 {
-                    npc.localAI[0] = 0;
+                    NPC.localAI[0] = 0;
                 }
             }
             else
             {
-                if (npc.life > npc.lifeMax * 0.6f && npc.localAI[0] % 40 == 0)
+                if (NPC.life > NPC.lifeMax * 0.6f && NPC.localAI[0] % 40 == 0)
                 {
                     int Dam = 30;
                     if (Main.expertMode)
@@ -184,19 +184,19 @@ namespace MythMod.NPCs.EvilBotle
                     }
                     for (int i = 0; i < 2; i++)
                     {
-                        Vector2 v = new Vector2(Main.rand.Next(-400, 400) * npc.spriteDirection, Main.rand.Next(-1300, -600)).RotatedBy(Main.rand.NextFloat(-0.75f, 0.75f)) * 0.01f;
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y - 35, v.X, v.Y - 4, mod.ProjectileType("DarkFlameball"), Dam, 0f, Main.myPlayer, 0f, 0f);
+                        Vector2 v = new Vector2(Main.rand.Next(-400, 400) * NPC.spriteDirection, Main.rand.Next(-1300, -600)).RotatedBy(Main.rand.NextFloat(-0.75f, 0.75f)) * 0.01f;
+                        Projectile.NewProjectile(NPC.Center.X, NPC.Center.Y - 35, v.X, v.Y - 4, Mod.Find<ModProjectile>("DarkFlameball").Type, Dam, 0f, Main.myPlayer, 0f, 0f);
                     }
                 }
-                if (npc.life <= npc.lifeMax * 0.6f)
+                if (NPC.life <= NPC.lifeMax * 0.6f)
                 {
                     if(!Lowerthan12000)
                     {
-                        this.music = mod.GetSoundSlot((Terraria.ModLoader.SoundType)51, "Sounds/Music/Bottle");
+                        this.Music = Mod.GetSoundSlot((Terraria.ModLoader.SoundType)51, "Sounds/Music/Bottle");
                         Lowerthan12000 = true;
-                        npc.localAI[0] = -300;
+                        NPC.localAI[0] = -300;
                     }
-                    if (npc.life <= 1000)
+                    if (NPC.life <= 1000)
                     {
                         /*if (!Lowerthan1000)
                         {
@@ -207,53 +207,53 @@ namespace MythMod.NPCs.EvilBotle
                     }
                     if(Lowerthan1000)
                     {
-                        Blife = npc.life;
+                        Blife = NPC.life;
                     }
-                    if (npc.localAI[0] > 0 && npc.localAI[0] < 600)
+                    if (NPC.localAI[0] > 0 && NPC.localAI[0] < 600)
                     {
-                        if(npc.localAI[0] == 1)
+                        if(NPC.localAI[0] == 1)
                         {
                             Atype = Main.rand.Next(2);
                         }
                         if(Atype == 0)
                         {
-                            if (npc.localAI[0] % 6 == 2)
+                            if (NPC.localAI[0] % 6 == 2)
                             {
-                                Vector2 v = new Vector2(Main.rand.NextFloat(-0.5f, 0.5f) * npc.spriteDirection, Main.rand.Next(-800, -790)) * 0.01f;
-                                Projectile.NewProjectile(npc.Center.X, npc.Center.Y - 55, v.X, v.Y + 6, mod.ProjectileType("EvilCloud"), 0, 0f, Main.myPlayer, 0f, 0f);
+                                Vector2 v = new Vector2(Main.rand.NextFloat(-0.5f, 0.5f) * NPC.spriteDirection, Main.rand.Next(-800, -790)) * 0.01f;
+                                Projectile.NewProjectile(NPC.Center.X, NPC.Center.Y - 55, v.X, v.Y + 6, Mod.Find<ModProjectile>("EvilCloud").Type, 0, 0f, Main.myPlayer, 0f, 0f);
                             }
-                            if (npc.localAI[0] >= 120 && npc.localAI[0] < 650)
+                            if (NPC.localAI[0] >= 120 && NPC.localAI[0] < 650)
                             {
-                                Vector2 p0 = npc.Center + new Vector2(0, 250);
+                                Vector2 p0 = NPC.Center + new Vector2(0, 250);
                                 float X = Main.rand.NextFloat(-400f, 400f);
                                 float Y = (float)Math.Sqrt(90000 - 0.75f * X * X);
                                 Vector2 vc = new Vector2(X, Y) * Main.rand.NextFloat(-1f, 1f);
-                                int z = Dust.NewDust(npc.Center - new Vector2(4, 4) + p0 + vc, 2, 2, 109, 0, 0, 0, default(Color), Main.rand.NextFloat(2.5f, 5f));
+                                int z = Dust.NewDust(NPC.Center - new Vector2(4, 4) + p0 + vc, 2, 2, 109, 0, 0, 0, default(Color), Main.rand.NextFloat(2.5f, 5f));
                                 Main.dust[z].noGravity = true;
                                 float X0 = Main.rand.NextFloat(-200f, 200f);
                                 float Y0 = -(float)Math.Sqrt(30000 - 0.75f * X0 * X0);
                                 Vector2 vc0 = new Vector2(X0, Y0) * Main.rand.NextFloat(-1f, 1f);
-                                int z0 = Dust.NewDust(npc.Center - new Vector2(4, 4) + p0 + vc0, 2, 2, 109, 0, 0, 0, default(Color), Main.rand.NextFloat(2.5f, 5f));
+                                int z0 = Dust.NewDust(NPC.Center - new Vector2(4, 4) + p0 + vc0, 2, 2, 109, 0, 0, 0, default(Color), Main.rand.NextFloat(2.5f, 5f));
                                 Main.dust[z0].noGravity = true;
                             }
                         }
                         if(Atype == 1)
                         {
-                            if (npc.localAI[0] % 16 == 2)
+                            if (NPC.localAI[0] % 16 == 2)
                             {
-                                Vector2 v = new Vector2((npc.localAI[0] % 300 - 150) * 7, 0);
-                                Projectile.NewProjectile(npc.Center.X + v.X, npc.Center.Y - 55, 0, -6, mod.ProjectileType("LigRelis"), 0, 0f, Main.myPlayer, 0f, 0f);
+                                Vector2 v = new Vector2((NPC.localAI[0] % 300 - 150) * 7, 0);
+                                Projectile.NewProjectile(NPC.Center.X + v.X, NPC.Center.Y - 55, 0, -6, Mod.Find<ModProjectile>("LigRelis").Type, 0, 0f, Main.myPlayer, 0f, 0f);
                             }
-                            if (npc.localAI[0] % 16 == 10)
+                            if (NPC.localAI[0] % 16 == 10)
                             {
-                                Vector2 v = new Vector2(-(npc.localAI[0] % 300 - 150) * 7, 0);
-                                Projectile.NewProjectile(npc.Center.X + v.X, npc.Center.Y - 55, 0, -6, mod.ProjectileType("LigRelis"), 0, 0f, Main.myPlayer, 0f, 0f);
+                                Vector2 v = new Vector2(-(NPC.localAI[0] % 300 - 150) * 7, 0);
+                                Projectile.NewProjectile(NPC.Center.X + v.X, NPC.Center.Y - 55, 0, -6, Mod.Find<ModProjectile>("LigRelis").Type, 0, 0f, Main.myPlayer, 0f, 0f);
                             }
                         }
                     }
-                    if (npc.localAI[0] > 600 && npc.localAI[0] < 1200)
+                    if (NPC.localAI[0] > 600 && NPC.localAI[0] < 1200)
                     {
-                        if (npc.localAI[0] == 601)
+                        if (NPC.localAI[0] == 601)
                         {
                             Atype = Main.rand.Next(2);
                         }
@@ -268,20 +268,20 @@ namespace MythMod.NPCs.EvilBotle
                         }
                         if (Atype == 0)
                         {
-                            if (npc.localAI[0] % 6 == 2)
+                            if (NPC.localAI[0] % 6 == 2)
                             {
-                                Vector2 v = new Vector2(Main.rand.Next(-400, 400) * npc.spriteDirection, Main.rand.Next(-2000, -1100)).RotatedBy(Main.rand.NextFloat(-0.75f, 0.75f)) * 0.01f;
-                                Projectile.NewProjectile(npc.Center.X + 12, npc.Center.Y - 35, v.X, v.Y + Main.rand.NextFloat(-6f, -4.5f), mod.ProjectileType("SuperDarkFlameball"), Dam * 2, 0f, Main.myPlayer, 0f, 0f);
+                                Vector2 v = new Vector2(Main.rand.Next(-400, 400) * NPC.spriteDirection, Main.rand.Next(-2000, -1100)).RotatedBy(Main.rand.NextFloat(-0.75f, 0.75f)) * 0.01f;
+                                Projectile.NewProjectile(NPC.Center.X + 12, NPC.Center.Y - 35, v.X, v.Y + Main.rand.NextFloat(-6f, -4.5f), Mod.Find<ModProjectile>("SuperDarkFlameball").Type, Dam * 2, 0f, Main.myPlayer, 0f, 0f);
                             }
                         }
                         if (Atype == 1)
                         {
-                            if (npc.localAI[0] % 120 == 2)
+                            if (NPC.localAI[0] % 120 == 2)
                             {
                                 for (int t = 0; t < 20; t++)
                                 {
-                                    Vector2 v = new Vector2((float)Math.Sin(npc.localAI[0] / 30f) * 400, Main.rand.Next(-2000, -1100)).RotatedBy(Main.rand.NextFloat(-0.75f, 0.75f)) * 0.01f;
-                                    Projectile.NewProjectile(npc.Center.X + 12, npc.Center.Y - 35, v.X, v.Y + Main.rand.NextFloat(-9f, -1.5f), mod.ProjectileType("SuperDarkFlameball"), Dam * 2, 0f, Main.myPlayer, 0f, 0f);
+                                    Vector2 v = new Vector2((float)Math.Sin(NPC.localAI[0] / 30f) * 400, Main.rand.Next(-2000, -1100)).RotatedBy(Main.rand.NextFloat(-0.75f, 0.75f)) * 0.01f;
+                                    Projectile.NewProjectile(NPC.Center.X + 12, NPC.Center.Y - 35, v.X, v.Y + Main.rand.NextFloat(-9f, -1.5f), Mod.Find<ModProjectile>("SuperDarkFlameball").Type, Dam * 2, 0f, Main.myPlayer, 0f, 0f);
                                 }
                             }
                         }
@@ -291,14 +291,14 @@ namespace MythMod.NPCs.EvilBotle
                         Vector2 vu = base.npc.Center + new Vector2(0f, (float)base.npc.height / 2f);
                         NPC.NewNPC((int)vu.X, (int)vu.Y - 35, mod.NPCType("EvilDragon"), 0, 0f, 0f, 0f, 0f, 255);
                     }*/
-                    if (npc.localAI[0] % 1200 == 0)
+                    if (NPC.localAI[0] % 1200 == 0)
                     {
-                        Vector2 vu = base.npc.Center + new Vector2(0f, (float)base.npc.height / 2f);
-                        NPC.NewNPC((int)vu.X, (int)vu.Y - 35, mod.NPCType("EvilBotleFake"), 0, 0f, 0f, 0f, 0f, 255);
+                        Vector2 vu = base.NPC.Center + new Vector2(0f, (float)base.NPC.height / 2f);
+                        NPC.NewNPC((int)vu.X, (int)vu.Y - 35, Mod.Find<ModNPC>("EvilBotleFake").Type, 0, 0f, 0f, 0f, 0f, 255);
                     }
-                    if (npc.localAI[0] > 1200 && npc.localAI[0] < 2400)
+                    if (NPC.localAI[0] > 1200 && NPC.localAI[0] < 2400)
                     {
-                        if (npc.localAI[0] == 1201)
+                        if (NPC.localAI[0] == 1201)
                         {
                             Atype = Main.rand.Next(3);
                         }
@@ -306,27 +306,27 @@ namespace MythMod.NPCs.EvilBotle
                         Vector2 v8 = player.Center;
                         if(Atype == 0)
                         {
-                            if (npc.localAI[0] % 6 == 2)
+                            if (NPC.localAI[0] % 6 == 2)
                             {
-                                Projectile.NewProjectile(v8.X, v8.Y, 0, 0, mod.ProjectileType("DarkFlameMagicFirst"), 0, 0f, Main.myPlayer, Dam, 0f);
+                                Projectile.NewProjectile(v8.X, v8.Y, 0, 0, Mod.Find<ModProjectile>("DarkFlameMagicFirst").Type, 0, 0f, Main.myPlayer, Dam, 0f);
                             }
                         }
                         if (Atype == 1)
                         {
-                            if (npc.localAI[0] % 20 == 2)
+                            if (NPC.localAI[0] % 20 == 2)
                             {
                                 Vector2 va = new Vector2(0, Main.rand.NextFloat(60f, 360f)).RotatedByRandom(Math.PI * 2d);
-                                Projectile.NewProjectile(v8.X + va.X, v8.Y + va.Y, 0, 0, mod.ProjectileType("DarkFlameMagicFirst"), 0, 0f, Main.myPlayer, Dam, 0f);
+                                Projectile.NewProjectile(v8.X + va.X, v8.Y + va.Y, 0, 0, Mod.Find<ModProjectile>("DarkFlameMagicFirst").Type, 0, 0f, Main.myPlayer, Dam, 0f);
                             }
                         }
                         if (Atype == 2)
                         {
-                            if (npc.localAI[0] % 120 == 2)
+                            if (NPC.localAI[0] % 120 == 2)
                             {
                                 for (int t = 0; t < 30; t++)
                                 {
                                     Vector2 va = new Vector2(0, Main.rand.NextFloat(60f, 1200f)).RotatedByRandom(Math.PI * 2d);
-                                    Projectile.NewProjectile(v8.X + va.X, v8.Y + va.Y, 0, 0, mod.ProjectileType("DarkFlameMagicFirst"), 0, 0f, Main.myPlayer, Dam, 0f);
+                                    Projectile.NewProjectile(v8.X + va.X, v8.Y + va.Y, 0, 0, Mod.Find<ModProjectile>("DarkFlameMagicFirst").Type, 0, 0f, Main.myPlayer, Dam, 0f);
                                 }
                             }
                         }
@@ -343,51 +343,51 @@ namespace MythMod.NPCs.EvilBotle
                             Projectile.NewProjectile(npc.Center.X, npc.Center.Y - 35, v.X, v.Y - 4, mod.ProjectileType("DarkFlameball"), 70, 0f, Main.myPlayer, 0f, 0f);
                         }
                     }*/
-                    if (npc.localAI[0] > 2400 && npc.localAI[0] < 3600)
+                    if (NPC.localAI[0] > 2400 && NPC.localAI[0] < 3600)
                     {
                         Vector2 v8 = player.Center;
-                        if (npc.localAI[0] == 2401)
+                        if (NPC.localAI[0] == 2401)
                         {
                             Atype = Main.rand.Next(2);
                         }
                         if (Atype == 0)
                         {
-                            if (npc.localAI[0] % 6 == 0)
+                            if (NPC.localAI[0] % 6 == 0)
                             {
-                                Vector2 v = new Vector2(Main.rand.Next(-4, 4) * npc.spriteDirection, Main.rand.Next(-800, -790)) * 0.01f;
-                                Projectile.NewProjectile(npc.Center.X, npc.Center.Y - 35, v.X, v.Y - 4, mod.ProjectileType("DarkFlame"), 25, 0f, Main.myPlayer, 0f, 0f);
+                                Vector2 v = new Vector2(Main.rand.Next(-4, 4) * NPC.spriteDirection, Main.rand.Next(-800, -790)) * 0.01f;
+                                Projectile.NewProjectile(NPC.Center.X, NPC.Center.Y - 35, v.X, v.Y - 4, Mod.Find<ModProjectile>("DarkFlame").Type, 25, 0f, Main.myPlayer, 0f, 0f);
                             }
-                            if (npc.localAI[0] % 9 == 0)
+                            if (NPC.localAI[0] % 9 == 0)
                             {
-                                Projectile.NewProjectile(player.Center.X + Main.rand.Next(-800, 800), npc.Center.Y - 35, 0, -4, mod.ProjectileType("DarkBoom0"), 0, 0f, Main.myPlayer, 0f, 0f);
+                                Projectile.NewProjectile(player.Center.X + Main.rand.Next(-800, 800), NPC.Center.Y - 35, 0, -4, Mod.Find<ModProjectile>("DarkBoom0").Type, 0, 0f, Main.myPlayer, 0f, 0f);
                             }
-                            if (npc.localAI[0] % 20 == 0)
+                            if (NPC.localAI[0] % 20 == 0)
                             {
                                 Vector2 vp = new Vector2(0, Main.rand.Next(200, 400)).RotatedByRandom(Math.PI * 2);
-                                Projectile.NewProjectile(player.Center.X + vp.X, player.Center.Y + vp.Y, 0, 0, mod.ProjectileType("DarkFire"), 17, 0f, Main.myPlayer, 0f, 0f);
+                                Projectile.NewProjectile(player.Center.X + vp.X, player.Center.Y + vp.Y, 0, 0, Mod.Find<ModProjectile>("DarkFire").Type, 17, 0f, Main.myPlayer, 0f, 0f);
                             }
                         }
                         if (Atype == 1)
                         {
-                            if (npc.localAI[0] % 6 == 0)
+                            if (NPC.localAI[0] % 6 == 0)
                             {
                                 Vector2 va = new Vector2(0, Main.rand.NextFloat(60f, 600f)).RotatedByRandom(Math.PI * 2d);
-                                if(Main.tile[(int)((v8.X + va.X) / 16), (int)((v8.Y + va.Y) / 16)].active())
+                                if(Main.tile[(int)((v8.X + va.X) / 16), (int)((v8.Y + va.Y) / 16)].HasTile)
                                 {
                                     va = new Vector2(0, Main.rand.NextFloat(60f, 900f)).RotatedByRandom(Math.PI * 2d);
                                 }
-                                Projectile.NewProjectile(v8.X + va.X, v8.Y + va.Y, 0, 0, mod.ProjectileType("PurpleRush"), 0, 0f, Main.myPlayer, Main.rand.Next(3) + 1, 0f);
+                                Projectile.NewProjectile(v8.X + va.X, v8.Y + va.Y, 0, 0, Mod.Find<ModProjectile>("PurpleRush").Type, 0, 0f, Main.myPlayer, Main.rand.Next(3) + 1, 0f);
                             }
-                            if (npc.localAI[0] % 20 == 0)
+                            if (NPC.localAI[0] % 20 == 0)
                             {
                                 Vector2 vp = new Vector2(0, Main.rand.Next(200, 400)).RotatedByRandom(Math.PI * 2);
-                                Projectile.NewProjectile(player.Center.X + vp.X, player.Center.Y + vp.Y, 0, 0, mod.ProjectileType("DarkFire"), 17, 0f, Main.myPlayer, 0f, 0f);
+                                Projectile.NewProjectile(player.Center.X + vp.X, player.Center.Y + vp.Y, 0, 0, Mod.Find<ModProjectile>("DarkFire").Type, 17, 0f, Main.myPlayer, 0f, 0f);
                             }
                         }
                     }
-                    if (npc.localAI[0] == 3601)
+                    if (NPC.localAI[0] == 3601)
                     {
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y - 95, 0, 0, mod.ProjectileType("DarkLazerBall"), 50, 0f, Main.myPlayer, 0, 0f);
+                        Projectile.NewProjectile(NPC.Center.X, NPC.Center.Y - 95, 0, 0, Mod.Find<ModProjectile>("DarkLazerBall").Type, 50, 0f, Main.myPlayer, 0, 0f);
                     }
                     /*if (npc.localAI[0] >= 0 && npc.localAI[0] < 3600)
                     {
@@ -397,9 +397,9 @@ namespace MythMod.NPCs.EvilBotle
                             Projectile.NewProjectile(npc.Center.X - 5, npc.Center.Y - 58, v.X, v.Y - 4, mod.ProjectileType("DarkFlame2"), 150, 0f, Main.myPlayer, 0f, 0f);
                         }
                     }*/
-                    if (npc.localAI[0] >= 4211)
+                    if (NPC.localAI[0] >= 4211)
                     {
-                        npc.localAI[0] = 0;
+                        NPC.localAI[0] = 0;
                     }
                 }
             }
@@ -412,21 +412,21 @@ namespace MythMod.NPCs.EvilBotle
         public static float Addlig = 0.5f;
         public override void HitEffect(int hitDirection, double damage)
         {
-            if (base.npc.life <= 0)
+            if (base.NPC.life <= 0)
             {
                 for (int j = 0; j < 80; j++)
                 {
-                    Dust.NewDust(base.npc.position, base.npc.width, base.npc.height, 5, (float)hitDirection, -1f, 0, default(Color), 1f);
+                    Dust.NewDust(base.NPC.position, base.NPC.width, base.NPC.height, 5, (float)hitDirection, -1f, 0, default(Color), 1f);
                 }
-                base.npc.position.X = base.npc.position.X + (float)(base.npc.width / 2);
-                base.npc.position.Y = base.npc.position.Y + (float)(base.npc.height / 2);
-                base.npc.position.X = base.npc.position.X - (float)(base.npc.width / 2);
-                base.npc.position.Y = base.npc.position.Y - (float)(base.npc.height / 2);
+                base.NPC.position.X = base.NPC.position.X + (float)(base.NPC.width / 2);
+                base.NPC.position.Y = base.NPC.position.Y + (float)(base.NPC.height / 2);
+                base.NPC.position.X = base.NPC.position.X - (float)(base.NPC.width / 2);
+                base.NPC.position.Y = base.NPC.position.Y - (float)(base.NPC.height / 2);
                 float scaleFactor = (float)(Main.rand.Next(-200, 200) / 100);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/EvilBotleGore1"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/EvilBotleGore2"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/EvilBotleGore3"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/EvilBotleGore4"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/EvilBotleGore1"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/EvilBotleGore2"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/EvilBotleGore3"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/EvilBotleGore4"), 1f);
             }
         }
         public override void OnHitPlayer(Player player, int damage, bool crit)
@@ -434,7 +434,7 @@ namespace MythMod.NPCs.EvilBotle
         }
         public Vector2[] Pm = new Vector2[1024];
         public int Wo = 0;
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             Vector2[] P = new Vector2[50];
             Vector2[] Pn = new Vector2[1024];
@@ -442,7 +442,7 @@ namespace MythMod.NPCs.EvilBotle
             float[] L = new float[50];
             int[] T = new int[50];
             int[] Ts = new int[50];
-            Vector2 V0 = npc.Center + new Vector2(0, -78);
+            Vector2 V0 = NPC.Center + new Vector2(0, -78);
             int m = 0;
             int n = 0;
             int u = 0;
@@ -453,7 +453,7 @@ namespace MythMod.NPCs.EvilBotle
             }
             for (int i = 0; i < 1000; i++)
             {                
-                if(Main.projectile[i].type == mod.ProjectileType("DarkFlame") && Main.projectile[i].active)
+                if(Main.projectile[i].type == Mod.Find<ModProjectile>("DarkFlame").Type && Main.projectile[i].active)
                 {
                     N[m] = i;
                     m += 1; 
@@ -601,34 +601,34 @@ namespace MythMod.NPCs.EvilBotle
                     {
                         if (im == 3)
                         {
-                            Main.spriteBatch.Draw(base.mod.GetTexture("UIImages/Pixel"), -Main.screenPosition + npc.Center + v, new Rectangle(0, 0, 1, 1), new Color((int)(20 * Al * 0.8f * Math.Sqrt(Addlig)), 0, (int)(200 * Al * 0.8f * Addlig), 0), 0, new Vector2(0.5f, 0.5f), size * 3f * (Addlig + 0.5f), SpriteEffects.None, 0f);
+                            Main.spriteBatch.Draw(base.Mod.GetTexture("UIImages/Pixel"), -Main.screenPosition + NPC.Center + v, new Rectangle(0, 0, 1, 1), new Color((int)(20 * Al * 0.8f * Math.Sqrt(Addlig)), 0, (int)(200 * Al * 0.8f * Addlig), 0), 0, new Vector2(0.5f, 0.5f), size * 3f * (Addlig + 0.5f), SpriteEffects.None, 0f);
                         }
                         else if (im == 5)
                         {
-                            Main.spriteBatch.Draw(base.mod.GetTexture("UIImages/Pixel"), -Main.screenPosition + npc.Center + v, new Rectangle(0, 0, 1, 1), new Color((int)(41 * Al * 0.8f * Math.Sqrt(Addlig)), 0, (int)(170 * Al * 0.8f * Addlig), 0), 0, new Vector2(0.5f, 0.5f), size * 3f * (Addlig + 0.5f), SpriteEffects.None, 0f);
+                            Main.spriteBatch.Draw(base.Mod.GetTexture("UIImages/Pixel"), -Main.screenPosition + NPC.Center + v, new Rectangle(0, 0, 1, 1), new Color((int)(41 * Al * 0.8f * Math.Sqrt(Addlig)), 0, (int)(170 * Al * 0.8f * Addlig), 0), 0, new Vector2(0.5f, 0.5f), size * 3f * (Addlig + 0.5f), SpriteEffects.None, 0f);
                         }
                         else
                         {
-                            Main.spriteBatch.Draw(base.mod.GetTexture("UIImages/Pixel"), -Main.screenPosition + npc.Center + v, new Rectangle(0, 0, 1, 1), new Color((int)(62 * Al * 0.8f * Math.Sqrt(Addlig)), 0, (int)(151 * Al * 0.8f * Addlig), 0), 0, new Vector2(0.5f, 0.5f), size * 3f * (Addlig + 0.5f), SpriteEffects.None, 0f);
+                            Main.spriteBatch.Draw(base.Mod.GetTexture("UIImages/Pixel"), -Main.screenPosition + NPC.Center + v, new Rectangle(0, 0, 1, 1), new Color((int)(62 * Al * 0.8f * Math.Sqrt(Addlig)), 0, (int)(151 * Al * 0.8f * Addlig), 0), 0, new Vector2(0.5f, 0.5f), size * 3f * (Addlig + 0.5f), SpriteEffects.None, 0f);
                         }
                     }
                 }
             }
             return true;
         }
-        public override void PostDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             if(Lowerthan12000)
             {
-                if(npc.localAI[0] < 0)
+                if(NPC.localAI[0] < 0)
                 {
-                    float xd = (npc.localAI[0] + 300) / 300f * 1.625f;
+                    float xd = (NPC.localAI[0] + 300) / 300f * 1.625f;
                     float St = (float)(Math.Log(3 * xd + 1 + Math.Sin(xd * 5) * 2)) * 0.49f;
-                    Main.spriteBatch.Draw(base.mod.GetTexture("NPCs/EvilBotle/EvilBotleGlow"), -Main.screenPosition + npc.Center + new Vector2(0, 4), null, new Color(St,St,St, 0), 0, new Vector2(60f, 80f), 1, SpriteEffects.None, 0f);
+                    Main.spriteBatch.Draw(base.Mod.GetTexture("NPCs/EvilBotle/EvilBotleGlow"), -Main.screenPosition + NPC.Center + new Vector2(0, 4), null, new Color(St,St,St, 0), 0, new Vector2(60f, 80f), 1, SpriteEffects.None, 0f);
                 }
                 else
                 {
-                    Main.spriteBatch.Draw(base.mod.GetTexture("NPCs/EvilBotle/EvilBotleGlow"), -Main.screenPosition + npc.Center + new Vector2(0, 4), null, new Color(1f, 1f, 1f, 0), 0, new Vector2(60f, 80f), 1, SpriteEffects.None, 0f);
+                    Main.spriteBatch.Draw(base.Mod.GetTexture("NPCs/EvilBotle/EvilBotleGlow"), -Main.screenPosition + NPC.Center + new Vector2(0, 4), null, new Color(1f, 1f, 1f, 0), 0, new Vector2(60f, 80f), 1, SpriteEffects.None, 0f);
                 }
             }
             for (int im = 0; im < 10; im += 2)
@@ -679,15 +679,15 @@ namespace MythMod.NPCs.EvilBotle
                     {
                         if (im == 3)
                         {
-                            Main.spriteBatch.Draw(base.mod.GetTexture("UIImages/Pixel"), -Main.screenPosition + npc.Center + v, new Rectangle(0, 0, 1, 1), new Color((int)(20 * Al * 0.8f * Math.Sqrt(Addlig)), 0, (int)(200 * Al * 0.8f * Addlig), 0), 0, new Vector2(0.5f, 0.5f), size * 3f * (Addlig + 0.5f), SpriteEffects.None, 0f);
+                            Main.spriteBatch.Draw(base.Mod.GetTexture("UIImages/Pixel"), -Main.screenPosition + NPC.Center + v, new Rectangle(0, 0, 1, 1), new Color((int)(20 * Al * 0.8f * Math.Sqrt(Addlig)), 0, (int)(200 * Al * 0.8f * Addlig), 0), 0, new Vector2(0.5f, 0.5f), size * 3f * (Addlig + 0.5f), SpriteEffects.None, 0f);
                         }
                         else if (im == 5)
                         {
-                            Main.spriteBatch.Draw(base.mod.GetTexture("UIImages/Pixel"), -Main.screenPosition + npc.Center + v, new Rectangle(0, 0, 1, 1), new Color((int)(41 * Al * 0.8f * Math.Sqrt(Addlig)), 0, (int)(170 * Al * 0.8f * Addlig), 0), 0, new Vector2(0.5f, 0.5f), size * 3f * (Addlig + 0.5f), SpriteEffects.None, 0f);
+                            Main.spriteBatch.Draw(base.Mod.GetTexture("UIImages/Pixel"), -Main.screenPosition + NPC.Center + v, new Rectangle(0, 0, 1, 1), new Color((int)(41 * Al * 0.8f * Math.Sqrt(Addlig)), 0, (int)(170 * Al * 0.8f * Addlig), 0), 0, new Vector2(0.5f, 0.5f), size * 3f * (Addlig + 0.5f), SpriteEffects.None, 0f);
                         }
                         else
                         {
-                            Main.spriteBatch.Draw(base.mod.GetTexture("UIImages/Pixel"), -Main.screenPosition + npc.Center + v, new Rectangle(0, 0, 1, 1), new Color((int)(62 * Al * 0.8f * Math.Sqrt(Addlig)), 0, (int)(151 * Al * 0.8f * Addlig), 0), 0, new Vector2(0.5f, 0.5f), size * 3f * (Addlig + 0.5f), SpriteEffects.None, 0f);
+                            Main.spriteBatch.Draw(base.Mod.GetTexture("UIImages/Pixel"), -Main.screenPosition + NPC.Center + v, new Rectangle(0, 0, 1, 1), new Color((int)(62 * Al * 0.8f * Math.Sqrt(Addlig)), 0, (int)(151 * Al * 0.8f * Addlig), 0), 0, new Vector2(0.5f, 0.5f), size * 3f * (Addlig + 0.5f), SpriteEffects.None, 0f);
                         }
                     }
                 }
@@ -828,12 +828,12 @@ namespace MythMod.NPCs.EvilBotle
                 }
             }
         }
-        public override void NPCLoot()
+        public override void OnKill()
         {
             bool expertMode = Main.expertMode;
             if (expertMode)
             {
-                Item.NewItem((int)base.npc.position.X, (int)base.npc.position.Y - 40, base.npc.width, base.npc.height, base.mod.ItemType("EvilBotleTreasureBag"), 1, false, 0, false, false);
+                Item.NewItem((int)base.NPC.position.X, (int)base.NPC.position.Y - 40, base.NPC.width, base.NPC.height, base.Mod.Find<ModItem>("EvilBotleTreasureBag").Type, 1, false, 0, false, false);
             }
             else
             {
@@ -841,31 +841,31 @@ namespace MythMod.NPCs.EvilBotle
                 switch (Main.rand.Next(1, 9))
                 {
                     case 1:
-                        type = base.mod.ItemType("DarkStaff");
+                        type = base.Mod.Find<ModItem>("DarkStaff").Type;
                         break;
                     case 2:
-                        type = base.mod.ItemType("EvilBomb");
+                        type = base.Mod.Find<ModItem>("EvilBomb").Type;
                         break;
                     case 3:
-                        type = base.mod.ItemType("EvilRing");
+                        type = base.Mod.Find<ModItem>("EvilRing").Type;
                         break;
                     case 4:
-                        type = base.mod.ItemType("EvilSlingshot");
+                        type = base.Mod.Find<ModItem>("EvilSlingshot").Type;
                         break;
                     case 5:
-                        type = base.mod.ItemType("EvilSword");
+                        type = base.Mod.Find<ModItem>("EvilSword").Type;
                         break;
                     case 6:
-                        type = base.mod.ItemType("ShadowYoyo");
+                        type = base.Mod.Find<ModItem>("ShadowYoyo").Type;
                         break;
                     case 7:
-                        type = base.mod.ItemType("EvilShadowBlade");
+                        type = base.Mod.Find<ModItem>("EvilShadowBlade").Type;
                         break;
                     case 8:
-                        type = base.mod.ItemType("GeometryEvil");
+                        type = base.Mod.Find<ModItem>("GeometryEvil").Type;
                         break;
                 }
-                Item.NewItem((int)base.npc.position.X, (int)base.npc.position.Y - 40, base.npc.width, base.npc.height, type, 1, false, 0, false, false);
+                Item.NewItem((int)base.NPC.position.X, (int)base.NPC.position.Y - 40, base.NPC.width, base.NPC.height, type, 1, false, 0, false, false);
                 if (Main.rand.Next(10) == 1)
                 {
                     //Item.NewItem((int)base.npc.position.X, (int)base.npc.position.Y - 40, base.npc.width, base.npc.height, base.mod.ItemType("BloodyTuskPlatfo"), 1, false, 0, false, false);
@@ -884,8 +884,8 @@ namespace MythMod.NPCs.EvilBotle
                     type2 = 3037;
                     break;
             }
-            Item.NewItem((int)base.npc.position.X, (int)base.npc.position.Y - 40, base.npc.width, base.npc.height, type2, 1, false, 0, false, false);
-            Projectile.NewProjectile(npc.Center.X, npc.Center.Y - 95, 0, 0, mod.ProjectileType("EvilBotleKill"), 200, 0f, Main.myPlayer, 0f, 0f);
+            Item.NewItem((int)base.NPC.position.X, (int)base.NPC.position.Y - 40, base.NPC.width, base.NPC.height, type2, 1, false, 0, false, false);
+            Projectile.NewProjectile(NPC.Center.X, NPC.Center.Y - 95, 0, 0, Mod.Find<ModProjectile>("EvilBotleKill").Type, 200, 0f, Main.myPlayer, 0f, 0f);
             if (!MythWorld.downedBottle)
             {
                 MythWorld.downedBottle = true;

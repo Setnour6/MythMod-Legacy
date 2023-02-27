@@ -15,13 +15,13 @@ namespace MythMod.Items//制作是mod名字
         public override void SetDefaults()
         {
 
-            item.width = 40;//宽
-            item.height = 40;//高
-            item.rare = 24;//品质
-            item.scale = 1f;//大小
-            item.value = 8500;
-            item.maxStack = 999;
-            item.useTime = 14;
+            Item.width = 40;//宽
+            Item.height = 40;//高
+            Item.rare = 24;//品质
+            Item.scale = 1f;//大小
+            Item.value = 8500;
+            Item.maxStack = 999;
+            Item.useTime = 14;
         }
     }
 }

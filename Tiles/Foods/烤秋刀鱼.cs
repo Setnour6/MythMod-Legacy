@@ -10,7 +10,7 @@ namespace MythMod.Tiles.Foods
 {
 	public class 烤秋刀鱼 : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileLighted[(int)base.Type] = true;
 			Main.tileFrameImportant[(int)base.Type] = true;
@@ -31,14 +31,14 @@ namespace MythMod.Tiles.Foods
 			modTranslation.SetDefault("烤秋刀鱼");
             base.AddMapEntry(new Color(242, 141, 0), modTranslation);
             base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
-			this.disableSmartCursor = true;
+			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
 			modTranslation.AddTranslation(GameCulture.Chinese, "烤秋刀鱼");
 		}
         public override void NearbyEffects(int i, int j, bool closer)
         {
             Player player = Main.player[Main.myPlayer];
-            player.AddBuff(mod.BuffType("海的味道I"), 20);
-            player.AddBuff(mod.BuffType("热乎乎的美味I"), 20);
+            player.AddBuff(Mod.Find<ModBuff>("海的味道I").Type, 20);
+            player.AddBuff(Mod.Find<ModBuff>("热乎乎的美味I").Type, 20);
         }
         public override bool CreateDust(int i, int j, ref int type)
 		{
@@ -51,15 +51,15 @@ namespace MythMod.Tiles.Foods
 		}
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("烤秋刀鱼"));
+            Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("烤秋刀鱼").Type);
         }
         public override void PlaceInWorld(int i, int j, Item item)
         {
             short num = (short)(Main.rand.Next(0, 3));
-            Main.tile[i, j].frameX = (short)(num * 48);
-            Main.tile[i, j + 1].frameX = (short)(num * 48);
-            Main.tile[i, j + 2].frameX = (short)(num * 48);
-            Main.tile[i, j + 3].frameX = (short)(num * 48);
+            Main.tile[i, j].TileFrameX = (short)(num * 48);
+            Main.tile[i, j + 1].TileFrameX = (short)(num * 48);
+            Main.tile[i, j + 2].TileFrameX = (short)(num * 48);
+            Main.tile[i, j + 3].TileFrameX = (short)(num * 48);
         }
     }
 }

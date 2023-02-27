@@ -1,4 +1,5 @@
-﻿using Terraria.ID;
+﻿using Terraria.DataStructures;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -18,21 +19,21 @@ namespace MythMod.Items.Weapons
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            item.useStyle = 1;
-			item.shootSpeed = 9f;
-			item.shoot = mod.ProjectileType("Sunflower");
-            item.melee = true;
-            item.width = 46;
-			item.height = 46;
-			item.UseSound = SoundID.Item1;
-			item.useAnimation = 24;
-			item.useTime = 24;
-			item.noUseGraphic = true;
-			item.noMelee = true;
-			item.rare = 1;
-            item.damage = 11;
-            item.autoReuse = false;
+            Item.glowMask = GetGlowMask;
+            Item.useStyle = 1;
+			Item.shootSpeed = 9f;
+			Item.shoot = Mod.Find<ModProjectile>("Sunflower").Type;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 46;
+			Item.height = 46;
+			Item.UseSound = SoundID.Item1;
+			Item.useAnimation = 24;
+			Item.useTime = 24;
+			Item.noUseGraphic = true;
+			Item.noMelee = true;
+			Item.rare = 1;
+            Item.damage = 11;
+            Item.autoReuse = false;
         }
         /*public override void UpdateInventory(Player player)
         {
@@ -45,7 +46,7 @@ namespace MythMod.Items.Weapons
                 item.damage = 10;
             }
         }*/
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Projectile.NewProjectile(position.X + speedX * 3f, position.Y + speedY * 3f, speedX, speedY, type, damage, knockBack, Main.myPlayer, 0f, 0f);
             return false;
@@ -56,11 +57,10 @@ namespace MythMod.Items.Weapons
         }*/
         public override void AddRecipes()
 		{
-			ModRecipe modRecipe = new ModRecipe(base.mod);
+			Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
 			modRecipe.AddIngredient(63, 8);
             modRecipe.requiredTile[0] = 16;
-			modRecipe.SetResult(this, 1);
-			modRecipe.AddRecipe();
+			modRecipe.Register();
 		}
 	}
 }

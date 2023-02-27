@@ -27,12 +27,12 @@ namespace MythMod.Items.TreasureBag
 		}
 		public override void SetDefaults()
 		{
-            base.item.maxStack = 999;
-            base.item.consumable = true;
-            base.item.width = 24;
-            base.item.height = 24;
-            base.item.rare = 9;
-            base.item.expert = true;
+            base.Item.maxStack = 999;
+            base.Item.consumable = true;
+            base.Item.width = 24;
+            base.Item.height = 24;
+            base.Item.rare = 9;
+            base.Item.expert = true;
 		}
 		public override bool CanRightClick()
 		{
@@ -44,28 +44,28 @@ namespace MythMod.Items.TreasureBag
             switch (Main.rand.Next(1, 7))
             {
                 case 1:
-                    type = base.mod.ItemType("Vine");
+                    type = base.Mod.Find<ModItem>("Vine").Type;
                     break;
                 case 2:
-                    type = base.mod.ItemType("GrassGun");
+                    type = base.Mod.Find<ModItem>("GrassGun").Type;
                     break;
                 case 3:
-                    type = base.mod.ItemType("RootStaff");
+                    type = base.Mod.Find<ModItem>("RootStaff").Type;
                     break;
                 case 4:
-                    type = base.mod.ItemType("MossRay");
+                    type = base.Mod.Find<ModItem>("MossRay").Type;
                     break;
                 case 5:
-                    type = base.mod.ItemType("MudBlade");
+                    type = base.Mod.Find<ModItem>("MudBlade").Type;
                     break;
                 case 6:
-                    type = base.mod.ItemType("VineSlingshot");
+                    type = base.Mod.Find<ModItem>("VineSlingshot").Type;
                     break;
             }
             player.QuickSpawnItem(type, 1);
             if(Main.rand.Next(100) == 1)
             {
-                player.QuickSpawnItem(mod.ItemType("MountainStaff"), 1);
+                player.QuickSpawnItem(Mod.Find<ModItem>("MountainStaff").Type, 1);
             }
         }
 	}

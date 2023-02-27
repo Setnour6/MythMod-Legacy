@@ -1,4 +1,5 @@
-﻿using Terraria.ID;
+﻿using Terraria.DataStructures;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -18,24 +19,24 @@ namespace MythMod.Items.Weapons.Bottle
         }
         public override void SetDefaults()
         {
-            base.item.damage = 54;
-			base.item.magic = true;
-			base.item.mana = 28;
-			base.item.width = 28;
-			base.item.height = 30;
-			base.item.useTime = 27;
-			base.item.useAnimation = 27;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.knockBack = 6f;
-			base.item.value = 2000;
-			base.item.rare = 3;
-			base.item.UseSound = SoundID.Item8;
-			base.item.autoReuse = true;
-			base.item.shoot = mod.ProjectileType("BoneFeather");
-			base.item.shootSpeed = 9f;
+            base.Item.damage = 54;
+			base.Item.DamageType = DamageClass.Magic;
+			base.Item.mana = 28;
+			base.Item.width = 28;
+			base.Item.height = 30;
+			base.Item.useTime = 27;
+			base.Item.useAnimation = 27;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 6f;
+			base.Item.value = 2000;
+			base.Item.rare = 3;
+			base.Item.UseSound = SoundID.Item8;
+			base.Item.autoReuse = true;
+			base.Item.shoot = Mod.Find<ModProjectile>("BoneFeather").Type;
+			base.Item.shootSpeed = 9f;
         }
-		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
             Vector2 v0 = new Vector2(speedX, speedY);
             float Rot = Main.rand.NextFloat(0, (float)Math.PI * 2);
@@ -47,19 +48,19 @@ namespace MythMod.Items.Weapons.Bottle
             {
                 float m = i / 6f;
                 Vector2 v = (P1 * m + P2 * (1 - m)) * 0.1f + v0;
-                Projectile.NewProjectile(player.Center.X, player.Center.Y, v.X, v.Y, mod.ProjectileType("DarkFlameball3"), damage, 0f, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(player.Center.X, player.Center.Y, v.X, v.Y, Mod.Find<ModProjectile>("DarkFlameball3").Type, damage, 0f, Main.myPlayer, 0f, 0f);
             }
             for (int i = 0; i < 6; i++)
             {
                 float m = i / 6f;
                 Vector2 v = (P2 * m + P3 * (1 - m)) * 0.1f + v0;
-                Projectile.NewProjectile(player.Center.X, player.Center.Y, v.X, v.Y, mod.ProjectileType("DarkFlameball3"), damage, 0f, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(player.Center.X, player.Center.Y, v.X, v.Y, Mod.Find<ModProjectile>("DarkFlameball3").Type, damage, 0f, Main.myPlayer, 0f, 0f);
             }
             for (int i = 0; i < 6; i++)
             {
                 float m = i / 6f;
                 Vector2 v = (P3 * m + P1 * (1 - m)) * 0.1f + v0;
-                Projectile.NewProjectile(player.Center.X, player.Center.Y, v.X, v.Y, mod.ProjectileType("DarkFlameball3"), damage, 0f, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(player.Center.X, player.Center.Y, v.X, v.Y, Mod.Find<ModProjectile>("DarkFlameball3").Type, damage, 0f, Main.myPlayer, 0f, 0f);
             }
             return false;
         }

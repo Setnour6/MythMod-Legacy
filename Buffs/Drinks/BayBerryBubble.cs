@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class BayBerryBubble : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("杨梅吐气");
             base.Description.SetDefault("攻击力增加13%");

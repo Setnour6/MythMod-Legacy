@@ -1,9 +1,10 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
@@ -23,19 +24,19 @@ namespace MythMod.Projectiles.projectile5
         }
         public override void SetDefaults()
         {
-            projectile.width = 20;
-            projectile.height = 20;
-            projectile.aiStyle = -1;
-            projectile.friendly = false;
-            projectile.hostile = true;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = false;
-            projectile.extraUpdates = 3;
-            projectile.timeLeft = 3600;
-            projectile.alpha = 0;
-            projectile.penetrate = -1;
-            projectile.scale = 1f;
-            this.cooldownSlot = 1;
+            Projectile.width = 20;
+            Projectile.height = 20;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = false;
+            Projectile.hostile = true;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
+            Projectile.extraUpdates = 3;
+            Projectile.timeLeft = 3600;
+            Projectile.alpha = 0;
+            Projectile.penetrate = -1;
+            Projectile.scale = 1f;
+            this.CooldownSlot = 1;
         }
         //55555
         public override Color? GetAlpha(Color lightColor)
@@ -49,35 +50,35 @@ namespace MythMod.Projectiles.projectile5
             if (initialization)
             {
                 num1 = Main.rand.Next(-120, 0);
-                num2 = (int)projectile.ai[0] * 4;
+                num2 = (int)Projectile.ai[0] * 4;
                 num3 = Main.rand.NextFloat(0.3f, 1.8f);
                 num4 = Main.rand.NextFloat(0.3f, 1800f);
                 num5 = Main.rand.NextFloat(2.85f, 3.15f);
-                projectile.timeLeft = Main.rand.Next(3000, 4200);
-                num6 = projectile.timeLeft;
-                projectile.velocity = new Vector2(0, 0.0000006f).RotatedBy(projectile.ai[1]);
+                Projectile.timeLeft = Main.rand.Next(3000, 4200);
+                num6 = Projectile.timeLeft;
+                Projectile.velocity = new Vector2(0, 0.0000006f).RotatedBy(Projectile.ai[1]);
                 Fy = Main.rand.Next(4);
                 initialization = false;
             }
-            if(projectile.timeLeft > num6 - num2 - 240)
+            if(Projectile.timeLeft > num6 - num2 - 240)
             {
-                float Sc = projectile.velocity.Length() / 10f;
+                float Sc = Projectile.velocity.Length() / 10f;
                 if (Sc > 1)
                 {
                     Sc = 1;
-                    projectile.hostile = true;
+                    Projectile.hostile = true;
                 }
-                if (projectile.velocity.Length() > 150)
+                if (Projectile.velocity.Length() > 150)
                 {
-                    projectile.Kill();
+                    Projectile.Kill();
                 }
-                for (int g = 0; g < projectile.velocity.Length() / 4f; g++)
+                for (int g = 0; g < Projectile.velocity.Length() / 4f; g++)
                 {
-                    int r = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) - new Vector2(4, 4) - projectile.velocity / projectile.velocity.Length() * g * 4, 0, 0, mod.DustType("Flame"), 0, 0, 0, default(Color), 4f * Sc);
+                    int r = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) - new Vector2(4, 4) - Projectile.velocity / Projectile.velocity.Length() * g * 4, 0, 0, Mod.Find<ModDust>("Flame").Type, 0, 0, 0, default(Color), 4f * Sc);
                     Main.dust[r].noGravity = true;
                     if (Main.rand.Next(100) > 60)
                     {
-                        int r0 = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) - new Vector2(4, 4) + new Vector2(0, Main.rand.NextFloat(0, 36f)).RotatedByRandom(MathHelper.TwoPi) - projectile.velocity / projectile.velocity.Length() * g * 4, 0, 0, mod.DustType("Flame3"), 0, 0, 0, default(Color), 7f * Sc);
+                        int r0 = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) - new Vector2(4, 4) + new Vector2(0, Main.rand.NextFloat(0, 36f)).RotatedByRandom(MathHelper.TwoPi) - Projectile.velocity / Projectile.velocity.Length() * g * 4, 0, 0, Mod.Find<ModDust>("Flame3").Type, 0, 0, 0, default(Color), 7f * Sc);
                         Main.dust[r0].noGravity = true;
                     }
                 }
@@ -87,10 +88,10 @@ namespace MythMod.Projectiles.projectile5
             num4 += 0.01f;
             if(num2 == 0)
             {
-                projectile.velocity = new Vector2(0, 6).RotatedBy(projectile.ai[1]);
+                Projectile.velocity = new Vector2(0, 6).RotatedBy(Projectile.ai[1]);
                 Boom = true;
             }
-            base.projectile.rotation = (float)Math.Atan2((double)base.projectile.velocity.Y, (double)base.projectile.velocity.X) - (float)Math.PI * 0.5f;
+            base.Projectile.rotation = (float)Math.Atan2((double)base.Projectile.velocity.Y, (double)base.Projectile.velocity.X) - (float)Math.PI * 0.5f;
             /*if (projectile.timeLeft < 995)
             {
                 Vector2 vector = base.projectile.Center - new Vector2(4, 4);
@@ -112,20 +113,20 @@ namespace MythMod.Projectiles.projectile5
             }
             if(Boom)
             {
-                projectile.velocity.Y += y;
-                if(projectile.scale < num3 * 2 && projectile.timeLeft > 300)
+                Projectile.velocity.Y += y;
+                if(Projectile.scale < num3 * 2 && Projectile.timeLeft > 300)
                 {
-                    projectile.scale += 0.005f;
+                    Projectile.scale += 0.005f;
                 }
             }
-            projectile.velocity *= 0.99f;
-            if(projectile.velocity.Y > num3 && y > 0)
+            Projectile.velocity *= 0.99f;
+            if(Projectile.velocity.Y > num3 && y > 0)
             {
-                projectile.velocity.Y *= num3 / projectile.velocity.Y;
+                Projectile.velocity.Y *= num3 / Projectile.velocity.Y;
             }
-            if (projectile.timeLeft < 300)
+            if (Projectile.timeLeft < 300)
             {
-                projectile.scale *= 0.99f;
+                Projectile.scale *= 0.99f;
             }
             //Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 0.8f / 255f * projectile.scale * num1, (float)(255 - base.projectile.alpha) * 0.2f / 255f * projectile.scale * num1, (float)(255 - base.projectile.alpha) * 0f / 255f * projectile.scale * num1);
         }
@@ -140,10 +141,10 @@ namespace MythMod.Projectiles.projectile5
         private float y = 0;
         private int Fy = 0;
         private int fyc = 0;
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D texture2D = Main.projectileTexture[base.projectile.type];
-            int nuM = Main.projectileTexture[base.projectile.type].Height;
+			Texture2D texture2D = TextureAssets.Projectile[base.Projectile.type].Value;
+            int nuM = TextureAssets.Projectile[base.Projectile.type].Value.Height;
             fyc += 1;
             if(fyc == 8)
             {
@@ -155,8 +156,8 @@ namespace MythMod.Projectiles.projectile5
                 Fy = 0;
             }
             Color colorT = new Color(1f * num * (float)(Math.Sin(num4) + 2) / 3f, 1f * num * (float)(Math.Sin(num4) + 2) / 3f, 1f * num * (float)(Math.Sin(num4) + 2) / 3f, 0.5f * num * (float)(Math.Sin(num4) + 2) / 3f);
-            Main.spriteBatch.Draw(texture2D, base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY), new Rectangle?(new Rectangle(0, 0, texture2D.Width, nuM)), colorT, base.projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)nuM / 2f), base.projectile.scale, SpriteEffects.None, 1f);
-            Main.spriteBatch.Draw(mod.GetTexture("Projectiles/projectile5/LanternFire"), base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY), new Rectangle?(new Rectangle(0, 30 * Fy, 20, 30)), colorT, 0, new Vector2(10, 15), base.projectile.scale * 0.5f, SpriteEffects.None, 1f);
+            Main.spriteBatch.Draw(texture2D, base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), new Rectangle?(new Rectangle(0, 0, texture2D.Width, nuM)), colorT, base.Projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)nuM / 2f), base.Projectile.scale, SpriteEffects.None, 1f);
+            Main.spriteBatch.Draw(Mod.GetTexture("Projectiles/projectile5/LanternFire"), base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), new Rectangle?(new Rectangle(0, 30 * Fy, 20, 30)), colorT, 0, new Vector2(10, 15), base.Projectile.scale * 0.5f, SpriteEffects.None, 1f);
             return false;
 		}
     }

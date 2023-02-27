@@ -7,14 +7,14 @@ namespace MythMod.Buffs
 {
     public class 嗜血狂暴 : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("嗜血狂暴");
             base.Description.SetDefault("越攻击攻击力越大");
 			Main.debuff[base.Type] = false;
 			Main.pvpBuff[base.Type] = true;
 			Main.buffNoSave[base.Type] = true;
-			this.longerExpertDebuff = false;
+			this.longerExpertDebuff/* tModPorter Note: Removed. Use BuffID.Sets.LongerExpertDebuff instead */ = false;
 		}
 	}
 }

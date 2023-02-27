@@ -25,26 +25,26 @@ namespace MythMod.Items.Weapons.FestivalWeapons
 		}
 		public override void SetDefaults()
 		{
-			base.item.damage = 270;
-			base.item.mana = 46;
-			base.item.width = 58;
-			base.item.height = 64;
-			base.item.useTime = 36;
-			base.item.useAnimation = 36;
-			base.item.useStyle = 1;
-			base.item.noMelee = true;
-			base.item.knockBack = 2.25f;
-			base.item.value = 100000;
-			base.item.rare = 11;
-			base.item.UseSound = SoundID.Item44;
-			base.item.shoot = base.mod.ProjectileType("TangerineZh");
-			base.item.autoReuse = true;
-			base.item.shootSpeed = 10f;
-			base.item.summon = true;
+			base.Item.damage = 270;
+			base.Item.mana = 46;
+			base.Item.width = 58;
+			base.Item.height = 64;
+			base.Item.useTime = 36;
+			base.Item.useAnimation = 36;
+			base.Item.useStyle = 1;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 2.25f;
+			base.Item.value = 100000;
+			base.Item.rare = 11;
+			base.Item.UseSound = SoundID.Item44;
+			base.Item.shoot = base.Mod.Find<ModProjectile>("TangerineZh").Type;
+			base.Item.autoReuse = true;
+			base.Item.shootSpeed = 10f;
+			base.Item.DamageType = DamageClass.Summon;
 		}
-		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
-			float shootSpeed = base.item.shootSpeed;
+			float shootSpeed = base.Item.shootSpeed;
 			Vector2 vector = player.RotatedRelativePoint(player.MountedCenter, true);
 			float num = (float)Main.mouseX + Main.screenPosition.X - vector.X;
 			float num2 = (float)Main.mouseY + Main.screenPosition.Y - vector.Y;
@@ -65,7 +65,7 @@ namespace MythMod.Items.Weapons.FestivalWeapons
 			num2 = 0f;
 			vector.X = (float)Main.mouseX + Main.screenPosition.X;
 			vector.Y = (float)Main.mouseY + Main.screenPosition.Y;
-			Projectile.NewProjectile(vector.X, vector.Y, num, num2, base.mod.ProjectileType("TangerineZh"), damage, knockBack, player.whoAmI, 0f, 0f);
+			Projectile.NewProjectile(vector.X, vector.Y, num, num2, base.Mod.Find<ModProjectile>("TangerineZh").Type, damage, knockBack, player.whoAmI, 0f, 0f);
             for (int i = 0; i < 25; i++)
             {
                 Vector2 v = new Vector2(0,5).RotatedBy(i / 12.5 * Math.PI);

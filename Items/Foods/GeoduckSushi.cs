@@ -17,28 +17,27 @@ namespace MythMod.Items.Foods
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 40;
-            base.item.height = 28;
-            base.item.rare = 1;
-            base.item.value = Item.sellPrice(0, 0, 5, 0);
-			base.item.UseSound = SoundID.Item8;
-            base.item.maxStack = 200;
-            base.item.useAnimation = 15;
-            base.item.useTime = 10;
-            base.item.useStyle = 1;
-            base.item.consumable = true;
-            base.item.useTurn = true;
-            base.item.autoReuse = true;
-            base.item.createTile = base.mod.TileType("北极贝寿司");
+			base.Item.width = 40;
+            base.Item.height = 28;
+            base.Item.rare = 1;
+            base.Item.value = Item.sellPrice(0, 0, 5, 0);
+			base.Item.UseSound = SoundID.Item8;
+            base.Item.maxStack = 200;
+            base.Item.useAnimation = 15;
+            base.Item.useTime = 10;
+            base.Item.useStyle = 1;
+            base.Item.consumable = true;
+            base.Item.useTurn = true;
+            base.Item.autoReuse = true;
+            base.Item.createTile = base.Mod.Find<ModTile>("北极贝寿司").Type;
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = Recipe.Create(Mod.Find<ModItem>("GeoduckSushi").Type, 1);
             recipe.AddIngredient(null, "CookedRice", 1);
             recipe.AddIngredient(null, "Geoduck", 1);
             recipe.requiredTile[0] = 18;
-            recipe.SetResult(mod.ItemType("GeoduckSushi"), 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }
 	}
 }

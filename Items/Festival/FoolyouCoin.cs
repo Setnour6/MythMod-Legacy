@@ -15,22 +15,22 @@ namespace MythMod.Items.Festival
         }
         public override void SetDefaults()
         {
-            base.item.width = 30;
-            base.item.height = 32;
-            base.item.rare = 2;
-            item.noUseGraphic = true;
-            base.item.scale = 1f;
-            base.item.useStyle = 1;
-            base.item.useTurn = true;
-            base.item.useAnimation = 5;
-            base.item.useTime = 5;
-            base.item.autoReuse = true;
-            base.item.consumable = true;
-            base.item.maxStack = 999;
-            base.item.value = 0;
+            base.Item.width = 30;
+            base.Item.height = 32;
+            base.Item.rare = 2;
+            Item.noUseGraphic = true;
+            base.Item.scale = 1f;
+            base.Item.useStyle = 1;
+            base.Item.useTurn = true;
+            base.Item.useAnimation = 5;
+            base.Item.useTime = 5;
+            base.Item.autoReuse = true;
+            base.Item.consumable = true;
+            base.Item.maxStack = 999;
+            base.Item.value = 0;
         }
         private bool BOSS = false;
-        public override bool UseItem(Player player)
+        public override bool? UseItem(Player player)/* tModPorter Suggestion: Return null instead of false */
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             for(int m = 0; m < 200; m++)

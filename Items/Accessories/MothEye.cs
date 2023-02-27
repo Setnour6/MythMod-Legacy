@@ -29,12 +29,12 @@ namespace MythMod.Items.Accessories
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            base.item.width = 40;
-			base.item.height = 38;
-			base.item.value = 1000;
-			base.item.accessory = true;
-            item.rare = 3;
+            Item.glowMask = GetGlowMask;
+            base.Item.width = 40;
+			base.Item.height = 38;
+			base.Item.value = 1000;
+			base.Item.accessory = true;
+            Item.rare = 3;
         }
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{

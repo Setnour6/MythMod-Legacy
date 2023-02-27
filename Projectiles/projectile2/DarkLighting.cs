@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,19 +25,19 @@ namespace MythMod.Projectiles.projectile2
         }
         public override void SetDefaults()
         {
-            projectile.width = 1;
-            projectile.height = 1;
-            projectile.aiStyle = -1;
-            projectile.friendly = true;
-            projectile.hostile = false;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = false;
-            projectile.extraUpdates = 80;
-            projectile.timeLeft = 500;
-            projectile.alpha = 255;
-            projectile.penetrate = -1;
-            projectile.scale = 1f;
-            this.cooldownSlot = 1;
+            Projectile.width = 1;
+            Projectile.height = 1;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = true;
+            Projectile.hostile = false;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
+            Projectile.extraUpdates = 80;
+            Projectile.timeLeft = 500;
+            Projectile.alpha = 255;
+            Projectile.penetrate = -1;
+            Projectile.scale = 1f;
+            this.CooldownSlot = 1;
         }
         public override Color? GetAlpha(Color lightColor)
 		{
@@ -50,32 +50,32 @@ namespace MythMod.Projectiles.projectile2
         public override void AI()
         {
             /*Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 0.4f / 255f, (float)(255 - base.projectile.alpha) * 0.4f / 255f, (float)(255 - base.projectile.alpha) * 0.5f / 255f);*/
-			base.projectile.rotation = (float)Math.Atan2((double)base.projectile.velocity.Y, (double)base.projectile.velocity.X);
-            int num25 = Dust.NewDust(base.projectile.position, base.projectile.width, base.projectile.height, mod.DustType("DarkF2"), 0, 0, 150, default(Color), 2.4f * base.projectile.timeLeft / 500f);
+			base.Projectile.rotation = (float)Math.Atan2((double)base.Projectile.velocity.Y, (double)base.Projectile.velocity.X);
+            int num25 = Dust.NewDust(base.Projectile.position, base.Projectile.width, base.Projectile.height, Mod.Find<ModDust>("DarkF2").Type, 0, 0, 150, default(Color), 2.4f * base.Projectile.timeLeft / 500f);
             Main.dust[num25].noGravity = true;
             Main.dust[num25].velocity.X = 0;
             Main.dust[num25].velocity.Y = 0;
-            if (projectile.timeLeft % 4 == 1 && Main.rand.Next(1,5) == 3 && projectile.timeLeft < 500)
+            if (Projectile.timeLeft % 4 == 1 && Main.rand.Next(1,5) == 3 && Projectile.timeLeft < 500)
             {
                 float num1 = (float)(Main.rand.Next(-500,500) / 800f);
-			    projectile.velocity = projectile.velocity.RotatedBy(Math.PI * num1);
+			    Projectile.velocity = Projectile.velocity.RotatedBy(Math.PI * num1);
                 Y += num1;
                 if (Math.Abs(Y) > 0.1f && Main.rand.Next(1,5) == 1)
                 {
-			        projectile.velocity = projectile.velocity.RotatedBy(-Y * (1 + Main.rand.Next(-500,500) / 2500f) * Math.PI);
+			        Projectile.velocity = Projectile.velocity.RotatedBy(-Y * (1 + Main.rand.Next(-500,500) / 2500f) * Math.PI);
                     Y = 0;
                 }
             }
-            if (projectile.wet)
+            if (Projectile.wet)
             {
-                projectile.active = false;
+                Projectile.active = false;
             }
             if(Main.rand.Next(450) == 1)
             {
-                Vector2 v = projectile.velocity.RotatedBy(Main.rand.NextFloat(-0.9f,0.9f));
-                int num40 = Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, v.X, v.Y, base.mod.ProjectileType("DarkLighting"), 35, 2f, Main.myPlayer, 0f, 0);
+                Vector2 v = Projectile.velocity.RotatedBy(Main.rand.NextFloat(-0.9f,0.9f));
+                int num40 = Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, v.X, v.Y, base.Mod.Find<ModProjectile>("DarkLighting").Type, 35, 2f, Main.myPlayer, 0f, 0);
                 Main.projectile[num40].tileCollide = false;
-                Main.projectile[num40].timeLeft = projectile.timeLeft;
+                Main.projectile[num40].timeLeft = Projectile.timeLeft;
             }
         }
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)

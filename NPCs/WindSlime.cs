@@ -12,16 +12,16 @@ namespace MythMod.NPCs
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("风史莱姆");
-			Main.npcFrameCount[base.npc.type] = 4;
+			Main.npcFrameCount[base.NPC.type] = 4;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "风史莱姆");
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
 		{
-            if (spawnInfo.playerSafe)
+            if (spawnInfo.PlayerSafe)
             {
                 return 0f;
             }
-            if (spawnInfo.player.GetModPlayer<MythPlayer>().ZoneOcean && spawnInfo.sky)
+            if (spawnInfo.Player.GetModPlayer<MythPlayer>().ZoneOcean && spawnInfo.Sky)
             {
                 return 5f;
             }
@@ -32,21 +32,21 @@ namespace MythMod.NPCs
         }
 		public override void SetDefaults()
 		{
-			base.npc.aiStyle = 14;
-			base.npc.damage = 120;
-			base.npc.width = 40;
-			base.npc.height = 30;
-			base.npc.defense = 5;
-			base.npc.lifeMax = 1500;
-			base.npc.knockBackResist = 0.8f;
-			this.animationType = 121;
-			base.npc.alpha = 75;
-			base.npc.lavaImmune = false;
-			base.npc.noGravity = false;
-			base.npc.noTileCollide = false;
-			base.npc.HitSound = SoundID.NPCHit1;
-			base.npc.DeathSound = SoundID.NPCDeath1;
-			base.npc.buffImmune[24] = true;
+			base.NPC.aiStyle = 14;
+			base.NPC.damage = 120;
+			base.NPC.width = 40;
+			base.NPC.height = 30;
+			base.NPC.defense = 5;
+			base.NPC.lifeMax = 1500;
+			base.NPC.knockBackResist = 0.8f;
+			this.AnimationType = 121;
+			base.NPC.alpha = 75;
+			base.NPC.lavaImmune = false;
+			base.NPC.noGravity = false;
+			base.NPC.noTileCollide = false;
+			base.NPC.HitSound = SoundID.NPCHit1;
+			base.NPC.DeathSound = SoundID.NPCDeath1;
+			base.NPC.buffImmune[24] = true;
 		}
 		public override void AI()
 		{
@@ -55,9 +55,9 @@ namespace MythMod.NPCs
 		public override void HitEffect(int hitDirection, double damage)
 		{
 		}
-        public override void NPCLoot()
+        public override void OnKill()
         {
-            Item.NewItem((int)base.npc.position.X, (int)base.npc.position.Y, base.npc.width, base.npc.height, base.mod.ItemType("WindFragment"), 1, false, 0, false, false);
+            Item.NewItem((int)base.NPC.position.X, (int)base.NPC.position.Y, base.NPC.width, base.NPC.height, base.Mod.Find<ModItem>("WindFragment").Type, 1, false, 0, false, false);
         }
     }
 }

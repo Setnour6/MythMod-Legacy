@@ -16,8 +16,8 @@ using Terraria.ModLoader.IO;
 using MythMod;
 using MythMod.NPCs;
 using System.Linq;
-using Terraria.World.Generation;
 using Terraria.GameContent.Generation;
+using Terraria.WorldBuilding;
 
 namespace MythMod.Tiles.LineTiles
 {
@@ -27,19 +27,19 @@ namespace MythMod.Tiles.LineTiles
 		private int num6 = 0;
 		private int num11 = 0;
 		private int num12 = 0;
-        public override void SetDefaults()
+        public override void SetStaticDefaults()
 		{
 			Main.tileSolid[(int)base.Type] = true;
 			Main.tileMergeDirt[(int)base.Type] = true;
 			Main.tileBlendAll[(int)base.Type] = true;
 			Main.tileBlockLight[(int)base.Type] = true;
 			Main.tileShine2[(int)base.Type] = true;
-			Main.tileValue[(int)base.Type] = 0;
-			this.minPick = 120;
-			this.drop = base.mod.ItemType("MachineBrick2");
-			this.dustType = 6;
-			this.soundType = 21;
-			this.soundStyle = 2;
+			Main.tileOreFinderPriority[(int)base.Type] = 0;
+			this.MinPick = 120;
+			this.ItemDrop = base.Mod.Find<ModItem>("MachineBrick2").Type;
+			this.DustType = 6;
+			this.HitSound = 21;
+			this.soundStyle/* tModPorter Note: Removed. Integrate into HitSound */ = 2;
 			Main.tileSpelunker[(int)base.Type] = true;
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("ExampleLineTile");
@@ -49,7 +49,7 @@ namespace MythMod.Tiles.LineTiles
 		public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
 		{
             Player player = Main.LocalPlayer;
-            Texture2D texture = base.mod.GetTexture("Tiles/LineTiles/ExampleLineTile_Line");
+            Texture2D texture = base.Mod.GetTexture("Tiles/LineTiles/ExampleLineTile_Line");
 			Vector2 position = new Vector2((float)(i * 16) - Main.screenPosition.X, (float)(j * 16) - Main.screenPosition.Y);
 			if (CaptureManager.Instance.IsCapturing)
 			{

@@ -17,27 +17,26 @@ namespace MythMod.Items.Foods
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 20;
-            base.item.height = 34;
-            base.item.rare = 0;
-            base.item.useAnimation = 15;
-            base.item.useTime = 10;
-            base.item.useStyle = 1;
-            base.item.consumable = true;
-            base.item.useTurn = true;
-            base.item.autoReuse = true;
-            base.item.createTile = base.mod.TileType("猕猴桃汁");
-            base.item.UseSound = SoundID.Item8;
-			base.item.consumable = true;
-            base.item.maxStack = 200;
+			base.Item.width = 20;
+            base.Item.height = 34;
+            base.Item.rare = 0;
+            base.Item.useAnimation = 15;
+            base.Item.useTime = 10;
+            base.Item.useStyle = 1;
+            base.Item.consumable = true;
+            base.Item.useTurn = true;
+            base.Item.autoReuse = true;
+            base.Item.createTile = base.Mod.Find<ModTile>("猕猴桃汁").Type;
+            base.Item.UseSound = SoundID.Item8;
+			base.Item.consumable = true;
+            base.Item.maxStack = 200;
 		}
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(null, "Kiwi", 1);
-            recipe.requiredTile[0] = mod.TileType("榨汁机");
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
+            recipe.requiredTile[0] = Mod.Find<ModTile>("榨汁机").Type;
+            recipe.Register();
         }
     }
 }

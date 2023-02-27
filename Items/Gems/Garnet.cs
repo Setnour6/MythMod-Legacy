@@ -17,13 +17,13 @@ namespace MythMod.Items.Gems
         public override void SetDefaults()
         {
 
-            item.width = 16;//宽
-            item.height = 14;//高
-            item.rare = 1;//品质
-            item.scale = 1f;//大小
-            item.value = 10500;
-            item.maxStack = 999;
-            item.useTime = 14;
+            Item.width = 16;//宽
+            Item.height = 14;//高
+            Item.rare = 1;//品质
+            Item.scale = 1f;//大小
+            Item.value = 10500;
+            Item.maxStack = 999;
+            Item.useTime = 14;
         }
     }
 }

@@ -10,11 +10,11 @@ namespace MythMod.Tiles.Volcano
 {
 	public class Shoregrass1 : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[(int)base.Type] = true;
 			Main.tileNoAttach[(int)base.Type] = true;
-            this.minPick = 264;
+            this.MinPick = 264;
             Main.tileLavaDeath[(int)base.Type] = false;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
             TileObjectData.newTile.Height = 2;
@@ -26,12 +26,12 @@ namespace MythMod.Tiles.Volcano
             };
             TileObjectData.newTile.CoordinateWidth = 36;
             TileObjectData.addTile((int)base.Type);
-			this.dustType = 2;
+			this.DustType = 2;
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
             base.AddMapEntry(new Color(74, 123, 0), modTranslation);
-			this.mineResist = 3f;
-			base.SetDefaults();
+			this.MineResist = 3f;
+			base.SetStaticDefaults();
 			modTranslation.AddTranslation(GameCulture.Chinese, "");
 		}
         public override bool CanExplode(int i, int j)
@@ -51,8 +51,8 @@ namespace MythMod.Tiles.Volcano
         public override void PlaceInWorld(int i, int j, Item item)
         {
             short num = (short)(Main.rand.Next(0, 6));
-            Main.tile[i, j].frameX = (short)(num * 36);
-            Main.tile[i, j + 1].frameX = (short)(num * 36);
+            Main.tile[i, j].TileFrameX = (short)(num * 36);
+            Main.tile[i, j + 1].TileFrameX = (short)(num * 36);
         }
     }
 }

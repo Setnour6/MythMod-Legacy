@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.DataStructures;
@@ -21,31 +22,31 @@ namespace MythMod.Projectiles
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("终天灭世眼");
-			Main.projFrames[base.projectile.type] = 3;
+			Main.projFrames[base.Projectile.type] = 3;
 		}
 
 		// Token: 0x06001F15 RID: 7957 RVA: 0x0018D09C File Offset: 0x0018B29C
 		public override void SetDefaults()
 		{
-			base.projectile.width = 110;
-			base.projectile.height = 110;
-			base.projectile.hostile = true;
-			base.projectile.ignoreWater = true;
-			base.projectile.tileCollide = false;
-			base.projectile.penetrate = 1;
-			base.projectile.timeLeft = 1073741824;
-			base.projectile.alpha = 0;
-            base.projectile.friendly = false;
-			this.cooldownSlot = 1;
+			base.Projectile.width = 110;
+			base.Projectile.height = 110;
+			base.Projectile.hostile = true;
+			base.Projectile.ignoreWater = true;
+			base.Projectile.tileCollide = false;
+			base.Projectile.penetrate = 1;
+			base.Projectile.timeLeft = 1073741824;
+			base.Projectile.alpha = 0;
+            base.Projectile.friendly = false;
+			this.CooldownSlot = 1;
 		}
 
 		// Token: 0x06001F16 RID: 7958 RVA: 0x0018D118 File Offset: 0x0018B318
 		public override void AI()
 		{
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
-            if (NPC.CountNPCS(mod.NPCType("终天灭世眼")) < 1 && mplayer.ZTMSY)
+            if (NPC.CountNPCS(Mod.Find<ModNPC>("终天灭世眼").Type) < 1 && mplayer.ZTMSY)
             {
-                NPC.NewNPC((int)projectile.Center.X, (int)projectile.Center.Y, mod.NPCType("终天灭世眼"), 0, 0f, 0f, 0f, 0, 254);
+                NPC.NewNPC((int)Projectile.Center.X, (int)Projectile.Center.Y, Mod.Find<ModNPC>("终天灭世眼").Type, 0, 0f, 0f, 0f, 0, 254);
                 num += 1;
                 Color messageColor = new Color(255, 0, 0);
                 Main.NewText(Language.GetTextValue("勿作弊"), messageColor);
@@ -60,7 +61,7 @@ namespace MythMod.Projectiles
                 {
                     player.lostCoinString = Main.ValueToCoins(player.lostCoins);
                 }
-                Main.PlaySound(5, (int)player.position.X, (int)player.position.Y, 1, 1f, 0f);
+                SoundEngine.PlaySound(SoundID.PlayerKilled, player.position);
                 player.headVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
                 player.bodyVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
                 player.legVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;

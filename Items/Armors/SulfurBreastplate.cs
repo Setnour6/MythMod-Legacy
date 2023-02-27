@@ -20,33 +20,32 @@ namespace MythMod.Items.Armors
         }
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(null, "Basalt", 80);
             modRecipe.AddIngredient(null, "Sulfur", 152);
             modRecipe.requiredTile[0] = 412;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
         public override void SetDefaults()
 		{
-			base.item.width = 18;
-			base.item.height = 18;
-			base.item.value = Item.buyPrice(0, 36, 0, 0);
-			base.item.rare = 11;
-			base.item.defense = 30;
+			base.Item.width = 18;
+			base.Item.height = 18;
+			base.Item.value = Item.buyPrice(0, 36, 0, 0);
+			base.Item.rare = 11;
+			base.Item.defense = 30;
 		}
         public override void UpdateEquip(Player player)
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             mplayer.Misspossibility += 8;
-            player.meleeCrit += 17;
-            player.rangedCrit += 17;
-            player.magicCrit += 17;
-            player.minionDamage *= 1.17f;
-            player.meleeDamage *= 1.17f;
-            player.thrownDamage *= 1.17f;
-            player.magicDamage *= 1.17f;
-            player.rangedDamage *= 1.17f;
+            player.GetCritChance(DamageClass.Generic) += 17;
+            player.GetCritChance(DamageClass.Ranged) += 17;
+            player.GetCritChance(DamageClass.Magic) += 17;
+            player.GetDamage(DamageClass.Summon) *= 1.17f;
+            player.GetDamage(DamageClass.Melee) *= 1.17f;
+            player.GetDamage(DamageClass.Throwing) *= 1.17f;
+            player.GetDamage(DamageClass.Magic) *= 1.17f;
+            player.GetDamage(DamageClass.Ranged) *= 1.17f;
         }
         public override void UpdateArmorSet(Player player)
         {

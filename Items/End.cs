@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
@@ -20,12 +22,12 @@ namespace MythMod.Items
 		// Token: 0x060013E0 RID: 5088 RVA: 0x00051D1C File Offset: 0x0004FF1C
 		public override void SetDefaults()
 		{
-			base.item.width = 28;
-			base.item.height = 18;
-			base.item.useAnimation = 45;
-			base.item.useTime = 60;
-			base.item.useStyle = 4;
-			base.item.consumable = false;
+			base.Item.width = 28;
+			base.Item.height = 18;
+			base.Item.useAnimation = 45;
+			base.Item.useTime = 60;
+			base.Item.useStyle = 4;
+			base.Item.consumable = false;
 		}
 
 		// Token: 0x060013E1 RID: 5089 RVA: 0x00035B90 File Offset: 0x00033D90
@@ -33,9 +35,9 @@ namespace MythMod.Items
 		{
 			foreach (TooltipLine tooltipLine in list)
 			{
-				if (tooltipLine.mod == "Terraria" && tooltipLine.Name == "ItemName")
+				if (tooltipLine.Mod == "Terraria" && tooltipLine.Name == "ItemName")
 				{
-					tooltipLine.overrideColor = new Color?(new Color(43, 96, 222));
+					tooltipLine.OverrideColor = new Color?(new Color(43, 96, 222));
 				}
 			}
 		}
@@ -44,23 +46,23 @@ namespace MythMod.Items
 		// Token: 0x06000C79 RID: 3193 RVA: 0x00006C71 File Offset: 0x00004E71
 		public override bool CanUseItem(Player player)
 		{
-			return !NPC.AnyNPCs(base.mod.NPCType("FinalEye"));
+			return !NPC.AnyNPCs(base.Mod.Find<ModNPC>("FinalEye").Type);
 		}
 		// Token: 0x060013E3 RID: 5091 RVA: 0x00007F40 File Offset: 0x00006140
-		public override bool UseItem(Player player)
+		public override bool? UseItem(Player player)/* tModPorter Suggestion: Return null instead of false */
 		{
-			if(NPC.CountNPCS(mod.NPCType("FinalEye")) < 1 && NPC.CountNPCS(mod.NPCType("FinalSeal")) < 1)
+			if(NPC.CountNPCS(Mod.Find<ModNPC>("FinalEye").Type) < 1 && NPC.CountNPCS(Mod.Find<ModNPC>("FinalSeal").Type) < 1)
 			{
 			    if(MythWorld.Myth)
 		    	{
-		    		NPC.NewNPC((int)player.position.X, (int)player.position.Y - 750, mod.NPCType("FinalSeal"), 0, 0f, 0f, 0f, 0f, 255);
-	    	        Main.PlaySound(15, player.position, 0);
+		    		NPC.NewNPC((int)player.position.X, (int)player.position.Y - 750, Mod.Find<ModNPC>("FinalSeal").Type, 0, 0f, 0f, 0f, 0f, 255);
+	    	        SoundEngine.PlaySound(SoundID.Roar, player.position);
 	    	    	return true;
 	    		}
 		    	else
 	    		{
-		    		NPC.NewNPC((int)player.position.X, (int)player.position.Y - 750, mod.NPCType("FinalEye"), 0, 0f, 0f, 0f, 0f, 255);
-	    	        Main.PlaySound(15, player.position, 0);
+		    		NPC.NewNPC((int)player.position.X, (int)player.position.Y - 750, Mod.Find<ModNPC>("FinalEye").Type, 0, 0f, 0f, 0f, 0f, 255);
+	    	        SoundEngine.PlaySound(SoundID.Roar, player.position);
 	    	    	return true;
 	    		}
 				return false;

@@ -35,24 +35,24 @@ namespace MythMod.NPCs.LanternMoon
 		}
 		public override void SetDefaults()
 		{
-			base.npc.damage = 182;
-			base.npc.width = 34;
-			base.npc.height = 42;
-			base.npc.defense = 90;
-			base.npc.lifeMax = 2600;
-			base.npc.knockBackResist = 0f;
-			base.npc.value = (float)Item.buyPrice(0, 2, 0, 0);
-            base.npc.lavaImmune = false;
-			base.npc.noGravity = true;
-			base.npc.noTileCollide = true;
-			base.npc.HitSound = SoundID.NPCHit1;
-			base.npc.DeathSound = SoundID.NPCDeath1;
-            npc.dontTakeDamage = true;
-            npc.dontCountMe = true;
-            npc.behindTiles = true;
-            npc.alpha = 255;
-            NPCID.Sets.TrailingMode[npc.type] = 0;
-            NPCID.Sets.TrailCacheLength[npc.type] = 400;
+			base.NPC.damage = 182;
+			base.NPC.width = 34;
+			base.NPC.height = 42;
+			base.NPC.defense = 90;
+			base.NPC.lifeMax = 2600;
+			base.NPC.knockBackResist = 0f;
+			base.NPC.value = (float)Item.buyPrice(0, 2, 0, 0);
+            base.NPC.lavaImmune = false;
+			base.NPC.noGravity = true;
+			base.NPC.noTileCollide = true;
+			base.NPC.HitSound = SoundID.NPCHit1;
+			base.NPC.DeathSound = SoundID.NPCDeath1;
+            NPC.dontTakeDamage = true;
+            NPC.dontCountMe = true;
+            NPC.behindTiles = true;
+            NPC.alpha = 255;
+            NPCID.Sets.TrailingMode[NPC.type] = 0;
+            NPCID.Sets.TrailCacheLength[NPC.type] = 400;
             //this.banner = base.npc.type;
             //this.bannerItem = base.mod.ItemType("青苹果糖史莱姆Banner");
         }
@@ -68,10 +68,10 @@ namespace MythMod.NPCs.LanternMoon
         public override void AI()
         {
             G0 += 1;
-            int pl = Player.FindClosest(npc.Center, 1, 1);
+            int pl = Player.FindClosest(NPC.Center, 1, 1);
             if (G0 == 0)
             {
-                npc.velocity = new Vector2(0, -25).RotatedBy(Main.rand.NextFloat(-1f, 1f));
+                NPC.velocity = new Vector2(0, -25).RotatedBy(Main.rand.NextFloat(-1f, 1f));
                 if (Main.rand.Next(20000) > 10000)
                 {
                     Dir = 1;
@@ -81,30 +81,30 @@ namespace MythMod.NPCs.LanternMoon
                     Dir2 = 1;
                 }
                 Maxt = 8;
-                StartY = npc.Center.Y;
-                Vx = npc.velocity.X;
-                PurposePl = npc.velocity = new Vector2(Main.rand.NextFloat(-9f, -6f) * Dir2, 0).RotatedBy(Main.rand.NextFloat(-0.2f, 0.2f));
-                PurposeVe = npc.velocity = new Vector2(0, -25).RotatedBy(Main.rand.NextFloat(-2f, 2f));
+                StartY = NPC.Center.Y;
+                Vx = NPC.velocity.X;
+                PurposePl = NPC.velocity = new Vector2(Main.rand.NextFloat(-9f, -6f) * Dir2, 0).RotatedBy(Main.rand.NextFloat(-0.2f, 0.2f));
+                PurposeVe = NPC.velocity = new Vector2(0, -25).RotatedBy(Main.rand.NextFloat(-2f, 2f));
             }
             if (G0 < Maxt)
             {
                 //npc.position.X += Vx / 100f;
                 PurposeVe = PurposeVe.RotatedBy(Dir * 0.1);
                 PurposePl = PurposePl.RotatedBy(Main.rand.NextFloat(-0.1f,0.1f)) * Main.rand.NextFloat(0.99f,1.01f);
-                npc.velocity = npc.velocity * 0.9f + PurposeVe * 0.05f + PurposePl * 0.05f;
+                NPC.velocity = NPC.velocity * 0.9f + PurposeVe * 0.05f + PurposePl * 0.05f;
             }
             else
             {
                 if (G0 < Maxt + 120)
                 {
-                    Vector2 v = (Main.player[pl].Center - npc.Center) / (Main.player[pl].Center - npc.Center).Length() * 25f;
-                    npc.velocity = npc.velocity * 0.95f + v * 0.05f;
+                    Vector2 v = (Main.player[pl].Center - NPC.Center) / (Main.player[pl].Center - NPC.Center).Length() * 25f;
+                    NPC.velocity = NPC.velocity * 0.95f + v * 0.05f;
                 }
             }
             if (G0 >= Maxt + 120 && G0 < Maxt + 180)
             {
-                Vector2 v = (Main.player[pl].Center - npc.Center) / (Main.player[pl].Center - npc.Center).Length() * 25f;
-                npc.velocity = npc.velocity * 0.92f + v * 0.05f;
+                Vector2 v = (Main.player[pl].Center - NPC.Center) / (Main.player[pl].Center - NPC.Center).Length() * 25f;
+                NPC.velocity = NPC.velocity * 0.92f + v * 0.05f;
             }
             if (G0 >= Maxt + 180)
             {
@@ -112,35 +112,35 @@ namespace MythMod.NPCs.LanternMoon
             }
             if(Green >= 1)
             {
-                npc.active = false;
+                NPC.active = false;
             }
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color drawColor)
+        public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             return false;
         }
-        public override void PostDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             List<CustomVertexInfo> bars = new List<CustomVertexInfo>();
 
             // 把所有的点都生成出来，按照顺序
-            for (int i = 1; i < npc.oldPos.Length; ++i)
+            for (int i = 1; i < NPC.oldPos.Length; ++i)
             {
-                if (npc.oldPos[i] == Vector2.Zero) break;
+                if (NPC.oldPos[i] == Vector2.Zero) break;
                 //spriteBatch.Draw(Main.magicPixel, npc.oldPos[i] - Main.screenPosition,
                 //    new Rectangle(0, 0, 1, 1), Color.White, 0f, new Vector2(0.5f, 0.5f), 5f, SpriteEffects.None, 0f);
                 int width = (int)(6 * Math.Sqrt(Math.Sqrt(i)));
-                var normalDir = npc.oldPos[i - 1] - npc.oldPos[i];
+                var normalDir = NPC.oldPos[i - 1] - NPC.oldPos[i];
                 normalDir = Vector2.Normalize(new Vector2(-normalDir.Y, normalDir.X));
 
-                var factor =((npc.oldPos.Length - i) / 6f) % 1f;
+                var factor =((NPC.oldPos.Length - i) / 6f) % 1f;
                 var color = Color.Lerp(Color.White, Color.Red, factor);
                 var w = MathHelper.Lerp(1f, 0.05f, factor);
                 for(int x = -1;x < 2;x++)
                 {
                     for (int y = -1; y < 2; y++)
                     {
-                        Lighting.AddLight((npc.oldPos[i] * (G0 + 2 - i) / (float)(G0 + 2) + AncientTangerineTreeEye.Center0 * (i) / (float)(G0 + 2)) + new Vector2(x, y), new Vector3(0, 0.1f, 0));
+                        Lighting.AddLight((NPC.oldPos[i] * (G0 + 2 - i) / (float)(G0 + 2) + AncientTangerineTreeEye.Center0 * (i) / (float)(G0 + 2)) + new Vector2(x, y), new Vector3(0, 0.1f, 0));
                     }
                 }
                 if(G0 + 1 - i < 5)
@@ -152,8 +152,8 @@ namespace MythMod.NPCs.LanternMoon
                     Color messageColor2 = Color.Orange;
                     Main.NewText(Language.GetTextValue(key2), messageColor2);
                 }
-                bars.Add(new CustomVertexInfo((npc.oldPos[i] * (G0 + 1 - i) / (float)(G0 + 1) + AncientTangerineTreeEye.Center0 * (i) / (float)(G0 + 1)) + normalDir * width, color, new Vector3(factor, 1, w)));
-                bars.Add(new CustomVertexInfo((npc.oldPos[i] * (G0 + 1 - i) / (float)(G0 + 1) + AncientTangerineTreeEye.Center0 * (i) / (float)(G0 + 1)) + normalDir * -width, color, new Vector3(factor, 0, w)));
+                bars.Add(new CustomVertexInfo((NPC.oldPos[i] * (G0 + 1 - i) / (float)(G0 + 1) + AncientTangerineTreeEye.Center0 * (i) / (float)(G0 + 1)) + normalDir * width, color, new Vector3(factor, 1, w)));
+                bars.Add(new CustomVertexInfo((NPC.oldPos[i] * (G0 + 1 - i) / (float)(G0 + 1) + AncientTangerineTreeEye.Center0 * (i) / (float)(G0 + 1)) + normalDir * -width, color, new Vector3(factor, 0, w)));
             }
 
             List<CustomVertexInfo> triangleList = new List<CustomVertexInfo>();
@@ -163,7 +163,7 @@ namespace MythMod.NPCs.LanternMoon
 
                 // 按照顺序连接三角形
                 triangleList.Add(bars[0]);
-                var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + Vector2.Normalize(npc.velocity) * 30, Color.White,
+                var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + Vector2.Normalize(NPC.velocity) * 30, Color.White,
                     new Vector3(0, 0.5f, 1));
                 triangleList.Add(bars[1]);
                 triangleList.Add(vertex);
@@ -195,9 +195,9 @@ namespace MythMod.NPCs.LanternMoon
                 MythMod.DefaultEffectAll.Parameters["uTransform"].SetValue(model * projection);
                 //MythMod.DefaultEffectAll.Parameters["uTime"].SetValue(-(float)Main.time * 0.03f);
                 MythMod.DefaultEffectAll.Parameters["uGreen"].SetValue(Green);
-                Main.graphics.GraphicsDevice.Textures[0] = mod.GetTexture("NPCs/LanternMoon/WildWine");
-                Main.graphics.GraphicsDevice.Textures[1] = mod.GetTexture("NPCs/LanternMoon/WildWine");
-                Main.graphics.GraphicsDevice.Textures[2] = mod.GetTexture("NPCs/LanternMoon/WildWine");
+                Main.graphics.GraphicsDevice.Textures[0] = Mod.GetTexture("NPCs/LanternMoon/WildWine");
+                Main.graphics.GraphicsDevice.Textures[1] = Mod.GetTexture("NPCs/LanternMoon/WildWine");
+                Main.graphics.GraphicsDevice.Textures[2] = Mod.GetTexture("NPCs/LanternMoon/WildWine");
                 Main.graphics.GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[1] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[2] = SamplerState.PointWrap;
@@ -227,7 +227,7 @@ namespace MythMod.NPCs.LanternMoon
 
                 // 按照顺序连接三角形
                 triangleList.Add(bars[0]);
-                var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + Vector2.Normalize(npc.velocity) * 30, Color.White,
+                var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + Vector2.Normalize(NPC.velocity) * 30, Color.White,
                     new Vector3(0, 0.5f, 1));
                 triangleList.Add(bars[1]);
                 triangleList.Add(vertex);
@@ -259,9 +259,9 @@ namespace MythMod.NPCs.LanternMoon
                 MythMod.DefaultEffectG.Parameters["uTransform"].SetValue(model * projection);
                 //MythMod.DefaultEffectAll.Parameters["uTime"].SetValue(-(float)Main.time * 0.03f);
                 MythMod.DefaultEffectG.Parameters["uGreen"].SetValue(Green);
-                Main.graphics.GraphicsDevice.Textures[0] = mod.GetTexture("NPCs/LanternMoon/WildWinevague");
-                Main.graphics.GraphicsDevice.Textures[1] = mod.GetTexture("NPCs/LanternMoon/WildWinevague");
-                Main.graphics.GraphicsDevice.Textures[2] = mod.GetTexture("NPCs/LanternMoon/WildWinevague");
+                Main.graphics.GraphicsDevice.Textures[0] = Mod.GetTexture("NPCs/LanternMoon/WildWinevague");
+                Main.graphics.GraphicsDevice.Textures[1] = Mod.GetTexture("NPCs/LanternMoon/WildWinevague");
+                Main.graphics.GraphicsDevice.Textures[2] = Mod.GetTexture("NPCs/LanternMoon/WildWinevague");
                 Main.graphics.GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[1] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[2] = SamplerState.PointWrap;

@@ -1,5 +1,6 @@
 ﻿using System;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -16,26 +17,26 @@ namespace MythMod.Items.Weapons
 		}
 		public override void SetDefaults()
 		{
-			base.item.damage = 40;
-			base.item.magic = true;
-			base.item.mana = 20;
-			base.item.width = 68;
-			base.item.height = 68;
-			base.item.useTime = 4;
-			base.item.useAnimation = 4;
-			base.item.useStyle = 5;
-			Item.staff[base.item.type] = true;
-			base.item.noMelee = true;
-			base.item.knockBack = 5f;
-			base.item.value = Item.sellPrice(0, 9, 0, 0);
-			base.item.rare = 7;
-			base.item.UseSound = SoundID.Item43;
-			base.item.autoReuse = true;
-            base.item.shoot = base.mod.ProjectileType("RedLazar");
-			base.item.shootSpeed = 20f;
+			base.Item.damage = 40;
+			base.Item.DamageType = DamageClass.Magic;
+			base.Item.mana = 20;
+			base.Item.width = 68;
+			base.Item.height = 68;
+			base.Item.useTime = 4;
+			base.Item.useAnimation = 4;
+			base.Item.useStyle = 5;
+			Item.staff[base.Item.type] = true;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 5f;
+			base.Item.value = Item.sellPrice(0, 9, 0, 0);
+			base.Item.rare = 7;
+			base.Item.UseSound = SoundID.Item43;
+			base.Item.autoReuse = true;
+            base.Item.shoot = base.Mod.Find<ModProjectile>("RedLazar").Type;
+			base.Item.shootSpeed = 20f;
 		}
         private int i = 0;
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Vector2 v = new Vector2(speedX, speedY);
             i += 1;
@@ -57,7 +58,7 @@ namespace MythMod.Items.Weapons
                     Projectile.NewProjectile((float)position.X + v2.X * 2.2f, (float)position.Y + v2.Y * 2.2f, v.X, v.Y, (int)type, (int)damage, (float)knockBack, player.whoAmI, 0f, 0f);
                 }
             }
-            float shootSpeed = base.item.shootSpeed;
+            float shootSpeed = base.Item.shootSpeed;
             Vector2 v3 = v.RotatedBy(Math.Sin(i / 8f) * 0.3d);
             Vector2 v4 = v.RotatedBy(-Math.Sin(i / 8f) * 0.3d);
             Projectile.NewProjectile((float)position.X + speedX * 2, (float)position.Y + speedY * 2, v3.X, v3.Y, (int)type, (int)damage, (float)knockBack, player.whoAmI, 0f, 0f);
@@ -70,15 +71,14 @@ namespace MythMod.Items.Weapons
         }
         public override void AddRecipes()
 		{
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(null, "LazarBattery", 16);
             modRecipe.AddIngredient(113, 1);
             modRecipe.AddIngredient(547, 10);
             modRecipe.AddIngredient(548, 10);
             modRecipe.AddIngredient(549, 10);
             modRecipe.requiredTile[0] = 134;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
 	}
 }

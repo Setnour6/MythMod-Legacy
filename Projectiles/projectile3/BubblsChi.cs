@@ -22,24 +22,24 @@ namespace MythMod.Projectiles.projectile3
         }
         public override void SetDefaults()
         {
-            base.projectile.width = 28;
-            base.projectile.height = 28;
-            base.projectile.aiStyle = 27;
-            base.projectile.friendly = true;
-            base.projectile.melee = true;
-            base.projectile.ignoreWater = true;
-            base.projectile.penetrate = 1;
-            base.projectile.extraUpdates = 1;
-            base.projectile.timeLeft = 600;
-            base.projectile.usesLocalNPCImmunity = true;
-            base.projectile.localNPCHitCooldown = 1;
+            base.Projectile.width = 28;
+            base.Projectile.height = 28;
+            base.Projectile.aiStyle = 27;
+            base.Projectile.friendly = true;
+            base.Projectile.DamageType = DamageClass.Melee;
+            base.Projectile.ignoreWater = true;
+            base.Projectile.penetrate = 1;
+            base.Projectile.extraUpdates = 1;
+            base.Projectile.timeLeft = 600;
+            base.Projectile.usesLocalNPCImmunity = true;
+            base.Projectile.localNPCHitCooldown = 1;
         }
         public override void AI()
         {
-            if(projectile.timeLeft % 5 == 0)
+            if(Projectile.timeLeft % 5 == 0)
             {
                 Vector2 v = new Vector2(0, 3).RotatedByRandom(Math.PI * 2);
-                Projectile.NewProjectile(base.projectile.Center.X, base.projectile.Center.Y, projectile.velocity.X + v.X, projectile.velocity.Y + v.Y, 405, base.projectile.damage, base.projectile.knockBack, base.projectile.owner, 0f, 0f);
+                Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, Projectile.velocity.X + v.X, Projectile.velocity.Y + v.Y, 405, base.Projectile.damage, base.Projectile.knockBack, base.Projectile.owner, 0f, 0f);
             }
         }
     }

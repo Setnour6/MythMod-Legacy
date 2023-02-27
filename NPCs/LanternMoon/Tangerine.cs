@@ -35,55 +35,55 @@ namespace MythMod.NPCs.LanternMoon
 		}
 		public override void SetDefaults()
 		{
-			base.npc.aiStyle = -1;
-			base.npc.damage = 182;
-			base.npc.width = 40;
-			base.npc.height = 40;
-			base.npc.defense = 0;
-			base.npc.lifeMax = 1;
-			base.npc.knockBackResist = 0f;
-            base.npc.value = (float)Item.buyPrice(0, 2, 0, 0);
-			base.npc.alpha = 0;
-            base.npc.scale = 1;
-            base.npc.lavaImmune = false;
-			base.npc.noGravity = false;
-			base.npc.noTileCollide = false;
-			base.npc.HitSound = SoundID.NPCHit1;
-			base.npc.DeathSound = SoundID.NPCDeath1;
+			base.NPC.aiStyle = -1;
+			base.NPC.damage = 182;
+			base.NPC.width = 40;
+			base.NPC.height = 40;
+			base.NPC.defense = 0;
+			base.NPC.lifeMax = 1;
+			base.NPC.knockBackResist = 0f;
+            base.NPC.value = (float)Item.buyPrice(0, 2, 0, 0);
+			base.NPC.alpha = 0;
+            base.NPC.scale = 1;
+            base.NPC.lavaImmune = false;
+			base.NPC.noGravity = false;
+			base.NPC.noTileCollide = false;
+			base.NPC.HitSound = SoundID.NPCHit1;
+			base.NPC.DeathSound = SoundID.NPCDeath1;
         }
         public override void AI()
         {
-            npc.rotation += npc.ai[0];
-            if (npc.velocity.Y < 9)
+            NPC.rotation += NPC.ai[0];
+            if (NPC.velocity.Y < 9)
             {
-                npc.velocity.Y += 0.15f;
+                NPC.velocity.Y += 0.15f;
             }
-            if (base.npc.collideX || base.npc.collideY)
+            if (base.NPC.collideX || base.NPC.collideY)
             {
-                npc.active = false;
+                NPC.active = false;
                 for (int i = 0; i < 25; i++)
                 {
-                    int num3 = Dust.NewDust(npc.Center - new Vector2(4, 4), 0, 0, 174, 0, 0, 0, default(Color), 2f);
+                    int num3 = Dust.NewDust(NPC.Center - new Vector2(4, 4), 0, 0, 174, 0, 0, 0, default(Color), 2f);
                 }
             }
-            if((npc.velocity - npc.oldVelocity).Length() > 0.8f)
+            if((NPC.velocity - NPC.oldVelocity).Length() > 0.8f)
             {
-                npc.active = false;
+                NPC.active = false;
                 for (int i = 0; i < 25; i++)
                 {
-                    int num3 = Dust.NewDust(npc.Center - new Vector2(4, 4), 0, 0, 174, 0, 0, 0, default(Color), 2f);
+                    int num3 = Dust.NewDust(NPC.Center - new Vector2(4, 4), 0, 0, 174, 0, 0, 0, default(Color), 2f);
                 }
             }
         }
         public override void OnHitPlayer(Player target, int damage, bool crit)
         {
-            npc.active = false;
+            NPC.active = false;
             for (int i = 0; i < 25; i++)
             {
-                int num3 = Dust.NewDust(npc.Center - new Vector2(4, 4), 0, 0, 174, 0, 0, 0, default(Color), 2f);
+                int num3 = Dust.NewDust(NPC.Center - new Vector2(4, 4), 0, 0, 174, 0, 0, 0, default(Color), 2f);
             }
         }
-        public override void NPCLoot()
+        public override void OnKill()
         {
         }
     }

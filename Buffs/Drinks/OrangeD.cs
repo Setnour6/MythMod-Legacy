@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class OrangeD : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("橙汁鸡尾酒");
             base.Description.SetDefault("防御增加5,伤害增加5%");

@@ -13,20 +13,20 @@ namespace MythMod.Items.Shore
         }
         public override void SetDefaults()
         {
-            item.damage = 40;
-            item.melee = true;
-            item.width = 50;
-            item.height = 50;
-            item.useTime = 18;
-            item.rare = 3;
-            item.useAnimation = 12;
-            item.useStyle = 1;
-            item.knockBack = 4;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 2;
-            item.value = 1200;
-            item.scale = 1f;
+            Item.damage = 40;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 50;
+            Item.height = 50;
+            Item.useTime = 18;
+            Item.rare = 3;
+            Item.useAnimation = 12;
+            Item.useStyle = 1;
+            Item.knockBack = 4;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 2;
+            Item.value = 1200;
+            Item.scale = 1f;
 
         }
     }

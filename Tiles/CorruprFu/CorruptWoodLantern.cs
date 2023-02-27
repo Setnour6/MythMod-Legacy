@@ -10,7 +10,7 @@ namespace MythMod.Tiles.CorruprFu
 {
 	public class CorruptWoodLantern : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileLighted[(int)base.Type] = true;
 			Main.tileFrameImportant[(int)base.Type] = true;
@@ -22,8 +22,8 @@ namespace MythMod.Tiles.CorruprFu
 			modTranslation.SetDefault("朽木灯笼");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
-			this.disableSmartCursor = true;
-			this.adjTiles = new int[]
+			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+			this.AdjTiles = new int[]
 			{
 				4
 			};
@@ -40,11 +40,11 @@ namespace MythMod.Tiles.CorruprFu
 		}
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("CorruptWoodLantern"), 1, false, 0, false, false);
+			Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("CorruptWoodLantern").Type, 1, false, 0, false, false);
 		}
 		public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
 		{
-			if (Main.tile[i, j].frameX < 18)
+			if (Main.tile[i, j].TileFrameX < 18)
 			{
 				r = 1f;
 				g = 0.2f;
@@ -57,8 +57,8 @@ namespace MythMod.Tiles.CorruprFu
 		}
 		public override void HitWire(int i, int j)
 		{
-			int num = i - (int)(Main.tile[i, j].frameX / 18 % 1);
-			int num2 = j - (int)(Main.tile[i, j].frameY / 18 % 2);
+			int num = i - (int)(Main.tile[i, j].TileFrameX / 18 % 1);
+			int num2 = j - (int)(Main.tile[i, j].TileFrameY / 18 % 2);
 			for (int k = num; k < num + 1; k++)
 			{
 				for (int l = num2; l < num2 + 2; l++)
@@ -67,17 +67,17 @@ namespace MythMod.Tiles.CorruprFu
 					{
 						Main.tile[k, l] = new Tile();
 					}
-					if (Main.tile[k, l].active() && Main.tile[k, l].type == base.Type)
+					if (Main.tile[k, l].HasTile && Main.tile[k, l].TileType == base.Type)
 					{
-						if (Main.tile[k, l].frameX < 18)
+						if (Main.tile[k, l].TileFrameX < 18)
 						{
 							Tile tile = Main.tile[k, l];
-							tile.frameX += 18;
+							tile.TileFrameX += 18;
 						}
 						else
 						{
 							Tile tile2 = Main.tile[k, l];
-							tile2.frameX -= 18;
+							tile2.TileFrameX -= 18;
 						}
 					}
 				}

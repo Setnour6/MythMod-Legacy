@@ -16,15 +16,15 @@ namespace MythMod.Items.Fruits
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 22;
-			base.item.height = 26;
-			base.item.rare = 2;
-			base.item.useAnimation = 20;
-			base.item.useTime = 20;
-			base.item.useStyle = 2;
-			base.item.UseSound = SoundID.Item8;
-			base.item.consumable = true;
-            base.item.maxStack = 200;
+			base.Item.width = 22;
+			base.Item.height = 26;
+			base.Item.rare = 2;
+			base.Item.useAnimation = 20;
+			base.Item.useTime = 20;
+			base.Item.useStyle = 2;
+			base.Item.UseSound = SoundID.Item8;
+			base.Item.consumable = true;
+            base.Item.maxStack = 200;
 		}
 	}
 }

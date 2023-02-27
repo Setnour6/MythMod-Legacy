@@ -1,3 +1,4 @@
+﻿using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
@@ -15,24 +16,24 @@ namespace MythMod.Items.Weapons
         }
         public override void SetDefaults()
         {
-            item.damage = 1000000;
-            item.melee = true;
-            item.width = 68;
-            item.height = 110;
-            item.useTime = 21;
-            item.rare = 2;
-            item.noMelee = true;
-            item.noUseGraphic = true;
-            item.useAnimation = 21;
-            item.useStyle = 1;
-            item.knockBack = 1.1f;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 6;
-            item.value = 800;
-            item.scale = 1f;
-            item.shoot = mod.ProjectileType("CatastropheWheelKnife");
-            item.shootSpeed = 0;
+            Item.damage = 1000000;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 68;
+            Item.height = 110;
+            Item.useTime = 21;
+            Item.rare = 2;
+            Item.noMelee = true;
+            Item.noUseGraphic = true;
+            Item.useAnimation = 21;
+            Item.useStyle = 1;
+            Item.knockBack = 1.1f;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 6;
+            Item.value = 800;
+            Item.scale = 1f;
+            Item.shoot = Mod.Find<ModProjectile>("CatastropheWheelKnife").Type;
+            Item.shootSpeed = 0;
         }
         public override bool CanUseItem(Player player)
         {
@@ -45,7 +46,7 @@ namespace MythMod.Items.Weapons
                 {
                     player.lostCoinString = Main.ValueToCoins(player.lostCoins);
                 }
-                Main.PlaySound(5, (int)player.position.X, (int)player.position.Y, 1, 1f, 0f);
+                SoundEngine.PlaySound(SoundID.PlayerKilled, player.position);
                 player.headVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
                 player.bodyVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
                 player.legVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
@@ -112,17 +113,17 @@ namespace MythMod.Items.Weapons
                 {
                     MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
                     mplayer.CatastropheWheel = 30;
-                    item.useTime = 22;
-                    item.useAnimation = 22;
+                    Item.useTime = 22;
+                    Item.useAnimation = 22;
                     for(int i = 0;i < 200;i++)
                     {
                         if(!Main.npc[i].dontTakeDamage && !Main.npc[i].friendly)
                         {
-                            Main.npc[i].StrikeNPC((int)(item.damage * Main.rand.NextFloat(0.85f, 1.15f) / 2f), 1, 0);
+                            Main.npc[i].StrikeNPC((int)(Item.damage * Main.rand.NextFloat(0.85f, 1.15f) / 2f), 1, 0);
                         }
                     }
                     Vector2 v = new Vector2(0, Main.rand.NextFloat(0, 50f)).RotatedByRandom(MathHelper.TwoPi);
-                    Projectile.NewProjectile(player.Center.X + v.X, player.Center.Y + v.Y, 0, 0, mod.ProjectileType("CatastropheWheel"), item.damage, item.knockBack, Main.myPlayer, player.direction, 0f);
+                    Projectile.NewProjectile(player.Center.X + v.X, player.Center.Y + v.Y, 0, 0, Mod.Find<ModProjectile>("CatastropheWheel").Type, Item.damage, Item.knockBack, Main.myPlayer, player.direction, 0f);
                     return true;
                 }
             }

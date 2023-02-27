@@ -2,26 +2,26 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria;
-namespace MythMod.Items//制作是mod名字
+namespace MythMod.Items//ÖÆ×÷ÊÇmodÃû×Ö
 {
-    public class Flour : ModItem//材料是物品名称
+    public class Flour : ModItem//²ÄÁÏÊÇÎïÆ·Ãû³Æ
     {
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("");//教程是物品介绍
+            Tooltip.SetDefault("");//½Ì³ÌÊÇÎïÆ·½éÉÜ
         }
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetDefaults()
         {
-            base.item.useStyle = 1;
-			base.item.useTurn = true;
-            item.width = 56;//宽
-            item.height = 38;//高
-            item.rare = 2;//品质
-            item.scale = 1f;//大小
-            item.value = 100;
-            item.maxStack = 999;
+            base.Item.useStyle = 1;
+			base.Item.useTurn = true;
+            Item.width = 56;//¿í
+            Item.height = 38;//¸ß
+            Item.rare = 2;//Æ·ÖÊ
+            Item.scale = 1f;//´óÐ¡
+            Item.value = 100;
+            Item.maxStack = 999;
         }
     }
 }

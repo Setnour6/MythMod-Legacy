@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class GreenHat : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("小绿帽");
             base.Description.SetDefault("攻击力增加6%,暴击率增加4%");

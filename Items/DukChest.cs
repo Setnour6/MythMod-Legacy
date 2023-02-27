@@ -16,12 +16,12 @@ namespace MythMod.Items
 		}
 		public override void SetDefaults()
 		{
-            base.item.maxStack = 1;
-            base.item.consumable = false;
-            base.item.width = 24;
-            base.item.height = 24;
-            base.item.rare = 9;
-            base.item.expert = true;
+            base.Item.maxStack = 1;
+            base.Item.consumable = false;
+            base.Item.width = 24;
+            base.Item.height = 24;
+            base.Item.rare = 9;
+            base.Item.expert = true;
             //this.bossBagNPC = 50;
 		}
 		public override bool CanRightClick()
@@ -30,8 +30,8 @@ namespace MythMod.Items
 		}
         public override void RightClick(Player player)
         {
-            player.QuickSpawnItem(base.mod.ItemType("DukChest2"), 1);
-            player.QuickSpawnItem(base.mod.ItemType("Thunderwater"), 4);
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("DukChest2").Type, 1);
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("Thunderwater").Type, 4);
             //player.QuickSpawnItem(1121, 1);
             //player.QuickSpawnItem(1123, 1);
             //player.QuickSpawnItem(2888, 1);
@@ -48,17 +48,17 @@ namespace MythMod.Items
             //player.QuickSpawnItem(1364, 1);
             //player.QuickSpawnItem(2108, 1);
             //player.QuickSpawnItem(3333, 1);
-            player.QuickSpawnItem(base.mod.ItemType("ThunderStaff"), 1);
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("ThunderStaff").Type, 1);
             if (Main.rand.Next(100) >= 50)
             {
-                player.QuickSpawnItem(base.mod.ItemType("SwordDuk"), 1);
+                player.QuickSpawnItem(base.Mod.Find<ModItem>("SwordDuk").Type, 1);
             }
             if (Main.rand.Next(100) >= 50)
             {
-                player.QuickSpawnItem(base.mod.ItemType("DukeTooth"), 1);
+                player.QuickSpawnItem(base.Mod.Find<ModItem>("DukeTooth").Type, 1);
             }
-            player.QuickSpawnItem(base.mod.ItemType("SeadraStaff"), 1);
-            item.stack--;
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("SeadraStaff").Type, 1);
+            Item.stack--;
         }
 	}
 }

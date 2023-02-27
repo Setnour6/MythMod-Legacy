@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class PinkLady : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("红粉佳人");
             base.Description.SetDefault("闪避增加5%,暴击增加10%");

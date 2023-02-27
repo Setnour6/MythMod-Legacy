@@ -20,22 +20,22 @@ namespace MythMod.Projectiles.projectile3
         public override void SetStaticDefaults()
         {
             base.DisplayName.SetDefault("CrystalBall");
-            Main.projFrames[projectile.type] = 1;
+            Main.projFrames[Projectile.type] = 1;
         }
 
         public override void SetDefaults()
         {
-            base.projectile.width = 48;
-            base.projectile.height = 48;
-            base.projectile.friendly = false;
-            base.projectile.hostile = false;
-            projectile.magic = true;
-            base.projectile.ignoreWater = true;
-            base.projectile.penetrate = -1;
-            base.projectile.timeLeft = 2;
-            base.projectile.usesLocalNPCImmunity = true;
-            base.projectile.localNPCHitCooldown = 1;
-            base.projectile.tileCollide = false;
+            base.Projectile.width = 48;
+            base.Projectile.height = 48;
+            base.Projectile.friendly = false;
+            base.Projectile.hostile = false;
+            Projectile.DamageType = DamageClass.Magic;
+            base.Projectile.ignoreWater = true;
+            base.Projectile.penetrate = -1;
+            base.Projectile.timeLeft = 2;
+            base.Projectile.usesLocalNPCImmunity = true;
+            base.Projectile.localNPCHitCooldown = 1;
+            base.Projectile.tileCollide = false;
         }
         private float num4;
         private int ML = 0;
@@ -49,39 +49,39 @@ namespace MythMod.Projectiles.projectile3
             Player p = Main.player[Main.myPlayer];
             Vector2 v = Main.screenPosition + new Vector2(Main.mouseX, Main.mouseY) - p.Center;
             v = v / v.Length();
-            projectile.velocity = v * 15f;
-            projectile.position = p.position + v - new Vector2(12, 0);
-            if (projectile.timeLeft == 1 && Main.mouseLeft && !p.dead)
+            Projectile.velocity = v * 15f;
+            Projectile.position = p.position + v - new Vector2(12, 0);
+            if (Projectile.timeLeft == 1 && Main.mouseLeft && !p.dead)
             {
-                base.projectile.timeLeft = 24;
+                base.Projectile.timeLeft = 24;
             }
             if (p.dead)
             {
-                projectile.Kill();
+                Projectile.Kill();
             }
-            if (projectile.timeLeft % 4 == 1)
+            if (Projectile.timeLeft % 4 == 1)
             {
-                projectile.friendly = true;
+                Projectile.friendly = true;
             }
             else
             {
-                projectile.friendly = false;
+                Projectile.friendly = false;
             }
             if(ud % 3 == 1)
             {
-                Projectile.NewProjectile(base.projectile.Center.X + Main.rand.Next(-900, 900), base.projectile.Center.Y + Main.rand.Next(-1500, -1100), Main.rand.NextFloat(-2f, 2f), 30f, base.mod.ProjectileType("CrystalSword10"), base.projectile.damage, base.projectile.knockBack, base.projectile.owner, 0f, 0f);
+                Projectile.NewProjectile(base.Projectile.Center.X + Main.rand.Next(-900, 900), base.Projectile.Center.Y + Main.rand.Next(-1500, -1100), Main.rand.NextFloat(-2f, 2f), 30f, base.Mod.Find<ModProjectile>("CrystalSword10").Type, base.Projectile.damage, base.Projectile.knockBack, base.Projectile.owner, 0f, 0f);
             }
             if(p.statMana <= 2)
             {
-                projectile.Kill();
+                Projectile.Kill();
                 p.statMana = 2;
             }
             p.statMana -= 2;
-            p.ChangeDir(base.projectile.direction);
-            p.heldProj = base.projectile.whoAmI;
+            p.ChangeDir(base.Projectile.direction);
+            p.heldProj = base.Projectile.whoAmI;
             p.itemTime = 2;
             p.itemAnimation = 2;
-            p.itemRotation = (float)Math.Atan2((double)(base.projectile.velocity.Y * (float)base.projectile.direction), (double)(base.projectile.velocity.X * (float)base.projectile.direction));
+            p.itemRotation = (float)Math.Atan2((double)(base.Projectile.velocity.Y * (float)base.Projectile.direction), (double)(base.Projectile.velocity.X * (float)base.Projectile.direction));
         }
     }
 }

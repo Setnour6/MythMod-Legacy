@@ -15,16 +15,16 @@ namespace MythMod.Projectiles.projectile2
 		}
 		public override void SetDefaults()
 		{
-			base.projectile.width = 12;
-            base.projectile.tileCollide = true;
-            base.projectile.height = 12;
-			base.projectile.friendly = true;
-            base.projectile.hostile = false;
-            base.projectile.penetrate = 1;
-			base.projectile.timeLeft = 600;
-			base.projectile.melee = true;
-            base.projectile.aiStyle = -1;
-			base.projectile.scale = 1f;
+			base.Projectile.width = 12;
+            base.Projectile.tileCollide = true;
+            base.Projectile.height = 12;
+			base.Projectile.friendly = true;
+            base.Projectile.hostile = false;
+            base.Projectile.penetrate = 1;
+			base.Projectile.timeLeft = 600;
+			base.Projectile.DamageType = DamageClass.Melee;
+            base.Projectile.aiStyle = -1;
+			base.Projectile.scale = 1f;
 		}
 		public override void AI()
 		{
@@ -45,7 +45,7 @@ namespace MythMod.Projectiles.projectile2
             {
                 v1 = v1.RotatedBy(Math.PI / 13f);
                 Vector2 v2 = new Vector2(v1.X * (float)num60 / 10000, v1.Y);
-                int p = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, 174, 0, 0, 0, Color.Red, 1.8f);
+                int p = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, 174, 0, 0, 0, Color.Red, 1.8f);
                 Main.dust[p].velocity = v2.RotatedBy(Math.Atan2((float)num80, (float)num90)) * 2f;
                 Main.dust[p].scale = 1.4f + Math.Abs((float)Math.Atan2(-v1.Y, -v1.X) / (1 + (float)num60 / 2000));
                 Main.dust[p].noGravity = true;

@@ -21,49 +21,49 @@ namespace MythMod.Items.Weapons.SkyWeapons
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("风之子");
-			Item.staff[base.item.type] = true;
+			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "风之子");
-			Main.RegisterItemAnimation(item.type, new DrawAnimationVertical(8, 6));
+			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(8, 6));
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            item.noUseGraphic = true;
-			base.item.damage = 180;
-			base.item.summon = true;
-			base.item.mana = 20;
-            item.width = 54;
-            item.height = 54;
-			base.item.useTime = 26;
-			base.item.useAnimation = 26;
-			base.item.useStyle = 1;
-			base.item.knockBack = 0.3f;
-			base.item.value = 120000;
-			base.item.rare = 11;
-			base.item.UseSound = SoundID.Item60;
-			base.item.autoReuse = true;
-            base.item.shoot = base.mod.ProjectileType("WindChild");
-			base.item.shootSpeed = 6f;
-            item.noMelee = true;
-            item.noUseGraphic = true;
+            Item.glowMask = GetGlowMask;
+            Item.noUseGraphic = true;
+			base.Item.damage = 180;
+			base.Item.DamageType = DamageClass.Summon;
+			base.Item.mana = 20;
+            Item.width = 54;
+            Item.height = 54;
+			base.Item.useTime = 26;
+			base.Item.useAnimation = 26;
+			base.Item.useStyle = 1;
+			base.Item.knockBack = 0.3f;
+			base.Item.value = 120000;
+			base.Item.rare = 11;
+			base.Item.UseSound = SoundID.Item60;
+			base.Item.autoReuse = true;
+            base.Item.shoot = base.Mod.Find<ModProjectile>("WindChild").Type;
+			base.Item.shootSpeed = 6f;
+            Item.noMelee = true;
+            Item.noUseGraphic = true;
         }
         private int o = 0;
-        public override bool UseItem(Player player)
+        public override bool? UseItem(Player player)/* tModPorter Suggestion: Return null instead of false */
         {
             if (player.altFunctionUse == 2)
             {
                 MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
                 if (mplayer.WindC == 0)
                 {
-                    Projectile.NewProjectile(player.Center.X, player.Center.Y, 0, 0, mod.ProjectileType("WindChild2"), item.damage, item.knockBack, Main.myPlayer, 0f, 0f);
+                    Projectile.NewProjectile(player.Center.X, player.Center.Y, 0, 0, Mod.Find<ModProjectile>("WindChild2").Type, Item.damage, Item.knockBack, Main.myPlayer, 0f, 0f);
                 }
             }
             else
             {
-                player.AddBuff(mod.BuffType("WindSprite1"), 3600, true);
-                Projectile.NewProjectile(player.Center.X, player.Center.Y, 0, 0, mod.ProjectileType("WindChild"), item.damage, item.knockBack, Main.myPlayer, 0f, 0f);
+                player.AddBuff(Mod.Find<ModBuff>("WindSprite1").Type, 3600, true);
+                Projectile.NewProjectile(player.Center.X, player.Center.Y, 0, 0, Mod.Find<ModProjectile>("WindChild").Type, Item.damage, Item.knockBack, Main.myPlayer, 0f, 0f);
             }
             return base.UseItem(player);
         }
@@ -73,11 +73,10 @@ namespace MythMod.Items.Weapons.SkyWeapons
         }
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(null, "WindFragment", 333);
             modRecipe.requiredTile[0] = 412;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
         public override bool CanUseItem(Player player)
         {
@@ -86,32 +85,32 @@ namespace MythMod.Items.Weapons.SkyWeapons
             {
                 if (mplayer.WindC == 0)
                 {
-                    item.shoot = mod.ProjectileType("WindChild2");
+                    Item.shoot = Mod.Find<ModProjectile>("WindChild2").Type;
                 }
                 else
                 {
-                    item.shoot = -1;
+                    Item.shoot = -1;
                 }
-                base.item.useTime = 2;
-                item.useStyle = 5;
-                base.item.useAnimation = 6;
-                base.item.mana = 4;
+                base.Item.useTime = 2;
+                Item.useStyle = 5;
+                base.Item.useAnimation = 6;
+                base.Item.mana = 4;
             }
             else
             {
-                item.useStyle = 1;
-                item.shoot = base.mod.ProjectileType("WindChild");
-                base.item.useTime = 26;
-                base.item.useAnimation = 26;
-                base.item.autoReuse = false;
-                base.item.mana = 20;
+                Item.useStyle = 1;
+                Item.shoot = base.Mod.Find<ModProjectile>("WindChild").Type;
+                base.Item.useTime = 26;
+                base.Item.useAnimation = 26;
+                base.Item.autoReuse = false;
+                base.Item.mana = 20;
             }
             return base.CanUseItem(player);
         }
         public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
         {
-            Vector2 origin = new Vector2(item.width / 2f, item.height / 2f);
-            spriteBatch.Draw(base.mod.GetTexture("Items/Weapons/SkyWeapons/WindChildGlow"), base.item.Center - Main.screenPosition, new Rectangle(0, ((int)(Main.time / 8f) % 4) * 54,item.width,item.height), new Color(255, 255, 255, 0), rotation, origin, 1f, SpriteEffects.None, 0f);
+            Vector2 origin = new Vector2(Item.width / 2f, Item.height / 2f);
+            spriteBatch.Draw(base.Mod.GetTexture("Items/Weapons/SkyWeapons/WindChildGlow"), base.Item.Center - Main.screenPosition, new Rectangle(0, ((int)(Main.time / 8f) % 4) * 54,Item.width,Item.height), new Color(255, 255, 255, 0), rotation, origin, 1f, SpriteEffects.None, 0f);
         }
     }
 }

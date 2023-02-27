@@ -10,7 +10,7 @@ namespace MythMod.Tiles.Festivals
 {
 	public class 红烛 : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             Main.tileLighted[Type] = true;
             Main.tileFrameImportant[(int)base.Type] = true;
@@ -27,12 +27,12 @@ namespace MythMod.Tiles.Festivals
             };
             TileObjectData.newTile.CoordinateWidth = 18;
             TileObjectData.addTile((int)base.Type);
-			this.dustType = 115;
+			this.DustType = 115;
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
             base.AddMapEntry(new Color(196, 11, 21), modTranslation);
-			this.mineResist = 3f;
-			base.SetDefaults();
+			this.MineResist = 3f;
+			base.SetStaticDefaults();
 			modTranslation.AddTranslation(GameCulture.Chinese, "");
 		}
         public override void NearbyEffects(int i, int j, bool closer)
@@ -42,16 +42,16 @@ namespace MythMod.Tiles.Festivals
         {
             for (int m = 0; m < 8; m++)
             {
-                if (Main.tile[i, j + m - 4].type == this.Type)
+                if (Main.tile[i, j + m - 4].TileType == this.Type)
                 {
-                    Main.tile[i, j + m - 4].frameX = (short)(18 - Main.tile[i, j].frameX);
+                    Main.tile[i, j + m - 4].TileFrameX = (short)(18 - Main.tile[i, j].TileFrameX);
                 }
             }
             base.RightClick(i, j);
         }
         public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
         {
-            if(Main.tile[i,j].frameX != 0)
+            if(Main.tile[i,j].TileFrameX != 0)
             {
                 r = 0.4f;
                 g = 0.1f;
@@ -67,14 +67,14 @@ namespace MythMod.Tiles.Festivals
         }
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("红烛"));
+            Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("红烛").Type);
         }
         public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
         {
             ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
             Color color = new Color(100, 100, 100, 0);
-            int frameX = Main.tile[i, j].frameX;
-            int frameY = Main.tile[i, j].frameY;
+            int frameX = Main.tile[i, j].TileFrameX;
+            int frameY = Main.tile[i, j].TileFrameY;
             int width = 20;
             int offsetY = 0;
             int height = 20;
@@ -95,7 +95,7 @@ namespace MythMod.Tiles.Festivals
             {
                 float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
                 float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-                Main.spriteBatch.Draw(mod.GetTexture("Tiles/Festivals/红烛Flame"), new Vector2((float)(i * 16 - (int)Main.screenPosition.X) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+                Main.spriteBatch.Draw(Mod.GetTexture("Tiles/Festivals/红烛Flame"), new Vector2((float)(i * 16 - (int)Main.screenPosition.X) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
             }
         }
     }

@@ -26,11 +26,11 @@ namespace MythMod.Items.Feathers
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 40;
-			base.item.height = 38;
-			base.item.value = 1000;
-            base.item.rare = 0;
-            base.item.accessory = true;
+			base.Item.width = 40;
+			base.Item.height = 38;
+			base.Item.value = 1000;
+            base.Item.rare = 0;
+            base.Item.accessory = true;
 		}
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
@@ -40,11 +40,10 @@ namespace MythMod.Items.Feathers
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(320, 3);
             recipe.requiredTile[0] = 13;
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

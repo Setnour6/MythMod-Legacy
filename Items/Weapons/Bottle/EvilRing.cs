@@ -26,25 +26,25 @@ namespace MythMod.Items.Weapons.Bottle
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 42;
-			base.item.height = 32;
-            base.item.rare = 3;
-            base.item.value = 100000;
-			base.item.accessory = true;
+			base.Item.width = 42;
+			base.Item.height = 32;
+            base.Item.rare = 3;
+            base.Item.value = 100000;
+			base.Item.accessory = true;
 		}
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             player.lifeRegen -= 6;
             player.arrowDamage *= 1.27f;
-            player.meleeDamage *= 1.27f;
+            player.GetDamage(DamageClass.Melee) *= 1.27f;
             player.bulletDamage *= 1.27f;
-            player.magicDamage *= 1.27f;
-            player.minionDamage *= 1.27f;
-            player.thrownDamage *= 1.27f;
-            player.rangedCrit += 14;
-            player.meleeCrit += 14;
-            player.magicCrit += 14;
+            player.GetDamage(DamageClass.Magic) *= 1.27f;
+            player.GetDamage(DamageClass.Summon) *= 1.27f;
+            player.GetDamage(DamageClass.Throwing) *= 1.27f;
+            player.GetCritChance(DamageClass.Ranged) += 14;
+            player.GetCritChance(DamageClass.Generic) += 14;
+            player.GetCritChance(DamageClass.Magic) += 14;
         }
     }
 }

@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class Mexican : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("墨西哥人");
             base.Description.SetDefault("防御增加10");

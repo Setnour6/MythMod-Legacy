@@ -10,7 +10,7 @@ namespace MythMod.Tiles.Foods
 {
 	public class 北极贝寿司 : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileLighted[(int)base.Type] = true;
 			Main.tileFrameImportant[(int)base.Type] = true;
@@ -27,18 +27,18 @@ namespace MythMod.Tiles.Foods
 			modTranslation.SetDefault("北极贝寿司");
 			base.AddMapEntry(new Color(0, 17, 6), modTranslation);
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
-			this.disableSmartCursor = true;
-			this.adjTiles = new int[]
+			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+			this.AdjTiles = new int[]
 			{
 				4
 			};
-			this.drop = base.mod.ItemType("北极贝寿司");
+			this.ItemDrop = base.Mod.Find<ModItem>("北极贝寿司").Type;
 			modTranslation.AddTranslation(GameCulture.Chinese, "北极贝寿司");
 		}
         public override void NearbyEffects(int i, int j, bool closer)
         {
             Player player = Main.player[Main.myPlayer];
-            player.AddBuff(mod.BuffType("海的味道I"), 20);
+            player.AddBuff(Mod.Find<ModBuff>("海的味道I").Type, 20);
         }
         public override bool CreateDust(int i, int j, ref int type)
 		{
@@ -52,7 +52,7 @@ namespace MythMod.Tiles.Foods
         public override void PlaceInWorld(int i, int j, Item item)
         {
             short num = (short)(Main.rand.Next(0, 2));
-            Main.tile[i, j].frameX = (short)(num * 36);
+            Main.tile[i, j].TileFrameX = (short)(num * 36);
         }
     }
 }

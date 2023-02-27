@@ -30,11 +30,11 @@ namespace MythMod.Items.Accessories
 		// Token: 0x060005D0 RID: 1488 RVA: 0x0004F5E4 File Offset: 0x0004D7E4
 		public override void SetDefaults()
 		{
-			base.item.width = 42;
-			base.item.height = 32;
-            base.item.rare = 11;
-            base.item.value = 100000;
-			base.item.accessory = true;
+			base.Item.width = 42;
+			base.Item.height = 32;
+            base.Item.rare = 11;
+            base.Item.value = 100000;
+			base.Item.accessory = true;
 		}
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
@@ -43,8 +43,8 @@ namespace MythMod.Items.Accessories
         }
         public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
         {
-            Vector2 origin = new Vector2(item.width / 2f, item.height / 2f);
-            spriteBatch.Draw(base.mod.GetTexture("Items/Accessories/赤炼魔戒Glow"), base.item.Center - Main.screenPosition, null, new Color(255, 255, 255, 0), rotation, origin, 1f, SpriteEffects.None, 0f);
+            Vector2 origin = new Vector2(Item.width / 2f, Item.height / 2f);
+            spriteBatch.Draw(base.Mod.GetTexture("Items/Accessories/赤炼魔戒Glow"), base.Item.Center - Main.screenPosition, null, new Color(255, 255, 255, 0), rotation, origin, 1f, SpriteEffects.None, 0f);
         }
     }
 }

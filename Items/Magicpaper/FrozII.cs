@@ -18,17 +18,17 @@ namespace MythMod.Items.Magicpaper//在虚无mod的Items文件夹里
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetDefaults()
         {
-            item.width = 26;//长度
-            item.height = 40;//高度
-            item.maxStack = 999;//最大叠加
-            item.damage = 210;
-            item.value = 3000;//价值
-            item.rare = 1;//稀有度
-            base.item.useStyle = 1;
-            item.consumable = true;
-            base.item.useAnimation = 17;
-            base.item.useTime = 17;
-            base.item.consumable = true;
+            Item.width = 26;//长度
+            Item.height = 40;//高度
+            Item.maxStack = 999;//最大叠加
+            Item.damage = 210;
+            Item.value = 3000;//价值
+            Item.rare = 1;//稀有度
+            base.Item.useStyle = 1;
+            Item.consumable = true;
+            base.Item.useAnimation = 17;
+            base.Item.useTime = 17;
+            base.Item.consumable = true;
         }
         public override void HoldItem(Player player)
         {
@@ -42,10 +42,10 @@ namespace MythMod.Items.Magicpaper//在虚无mod的Items文件夹里
             {
                 Vector2 v1 = Main.screenPosition + new Vector2(Main.mouseX, Main.mouseY);
                 Vector2 v2 = (v1 - player.Center) / (v1 - player.Center).Length() * 10f;
-                Projectile.NewProjectile(player.Center.X, player.Center.Y, v2.X * 0.7f, v2.Y * 0.7f, mod.ProjectileType("FreezeBall"), item.damage, 0.5f, Main.myPlayer, 10f, 600f);
+                Projectile.NewProjectile(player.Center.X, player.Center.Y, v2.X * 0.7f, v2.Y * 0.7f, Mod.Find<ModProjectile>("FreezeBall").Type, Item.damage, 0.5f, Main.myPlayer, 10f, 600f);
                 mplayer.MagicCool += 600;
-                item.stack--;
-                player.AddBuff(mod.BuffType("愚昧诅咒"), 600, true);
+                Item.stack--;
+                player.AddBuff(Mod.Find<ModBuff>("愚昧诅咒").Type, 600, true);
             }
             return mplayer.MagicCool > 0;
         }
@@ -55,20 +55,18 @@ namespace MythMod.Items.Magicpaper//在虚无mod的Items文件夹里
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(null, "FrozI");
             recipe.AddIngredient(68, 2);
             recipe.AddIngredient(521, 2);
             recipe.requiredTile[0] = 26;
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
-            ModRecipe recipe2 = new ModRecipe(mod);
+            recipe.Register();
+            Recipe recipe2 = CreateRecipe(1);
             recipe2.AddIngredient(null, "FrozI");
             recipe2.AddIngredient(1330, 2);
             recipe2.AddIngredient(521, 2);
             recipe2.requiredTile[0] = 26;
-            recipe2.SetResult(this, 1);
-            recipe2.AddRecipe();
+            recipe2.Register();
         }
     }
 }

@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,22 +21,22 @@ namespace MythMod.Projectiles.projectile5
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("橘色光球");
-            Main.projFrames[projectile.type] = 4;
+            Main.projFrames[Projectile.type] = 4;
         }
         public override void SetDefaults()
         {
-            projectile.width = 30;
-            projectile.height = 30;
-            projectile.aiStyle = -1;
-            projectile.friendly = false;
-            projectile.hostile = false;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = false;
-            projectile.timeLeft = 400;
-            projectile.alpha = 0;
-            projectile.penetrate = -1;
-            projectile.scale = 0;
-            this.cooldownSlot = 1;
+            Projectile.width = 30;
+            Projectile.height = 30;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = false;
+            Projectile.hostile = false;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
+            Projectile.timeLeft = 400;
+            Projectile.alpha = 0;
+            Projectile.penetrate = -1;
+            Projectile.scale = 0;
+            this.CooldownSlot = 1;
         }
         public override Color? GetAlpha(Color lightColor)
         {
@@ -48,12 +48,12 @@ namespace MythMod.Projectiles.projectile5
         public override void AI()
         {
             Player player = Main.player[Main.myPlayer];
-            base.projectile.rotation = (float)Math.Atan2((double)base.projectile.velocity.Y, (double)base.projectile.velocity.X) + 1.57f;
+            base.Projectile.rotation = (float)Math.Atan2((double)base.Projectile.velocity.Y, (double)base.Projectile.velocity.X) + 1.57f;
             if(Fa)
             {
                 for(int j = 0;j <200;j++)
                 {
-                    if(Main.npc[j].type == mod.NPCType("AncientTangerineTreeEye"))
+                    if(Main.npc[j].type == Mod.Find<ModNPC>("AncientTangerineTreeEye").Type)
                     {
                         I = j;
                         break;
@@ -67,36 +67,36 @@ namespace MythMod.Projectiles.projectile5
             }
             else
             {
-                projectile.hostile = true;
+                Projectile.hostile = true;
             }
-            if (projectile.timeLeft % 6 == 0)
+            if (Projectile.timeLeft % 6 == 0)
             {
-                if (projectile.frame < 3)
+                if (Projectile.frame < 3)
                 {
-                    projectile.frame += 1;
+                    Projectile.frame += 1;
                 }
                 else
                 {
-                    projectile.frame = 0;
+                    Projectile.frame = 0;
                 }
             }
             if(I != -1)
             {
-                projectile.position = Main.npc[I].Center + new Vector2(0, dis * projectile.ai[0]).RotatedBy(-AncientTangerineTreeEye.AI0 * 0.8);
+                Projectile.position = Main.npc[I].Center + new Vector2(0, dis * Projectile.ai[0]).RotatedBy(-AncientTangerineTreeEye.AI0 * 0.8);
             }
-            if(dis < projectile.ai[1])
+            if(dis < Projectile.ai[1])
             {
                 dis += 8f;
             }
             else
             {
-                dis = projectile.ai[1];
+                dis = Projectile.ai[1];
             }
-            if(projectile.timeLeft > 120)
+            if(Projectile.timeLeft > 120)
             {
                 num += 0.011f;
                 float S = (float)(Math.Sin(num) / 5f + 1);
-                projectile.scale = S * S2;
+                Projectile.scale = S * S2;
             }
             else
             {
@@ -104,31 +104,31 @@ namespace MythMod.Projectiles.projectile5
         }
         public override void OnHitPlayer(Player target, int damage, bool crit)
         {
-            projectile.Kill();
+            Projectile.Kill();
         }
         public override void Kill(int timeLeft)
         {
             for (int g = 0; g < 8; g++)
             {
                 Vector2 v = new Vector2(0, Main.rand.NextFloat(0.1f, 8.3f)).RotatedByRandom(MathHelper.TwoPi);
-                int numk = Dust.NewDust(projectile.Center - new Vector2(8, 8), 8, 8, 174, v.X * projectile.scale, v.Y * projectile.scale, 0, default(Color), 4f * projectile.scale);
+                int numk = Dust.NewDust(Projectile.Center - new Vector2(8, 8), 8, 8, 174, v.X * Projectile.scale, v.Y * Projectile.scale, 0, default(Color), 4f * Projectile.scale);
                 Main.dust[numk].noGravity = true;
             }
-            Vector2 vz = (Main.npc[I].Center - projectile.Center) / (Main.npc[I].Center - projectile.Center).Length() * 6f;
+            Vector2 vz = (Main.npc[I].Center - Projectile.Center) / (Main.npc[I].Center - Projectile.Center).Length() * 6f;
             for (int h = 0; h < 4; h++)
             {
                 Vector2 v2 = vz.RotatedBy(h - 1.5);
-                Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, -v2.X, -v2.Y, mod.ProjectileType("OrangeLeafBall"), 50, 0f, Main.myPlayer, 0, 0);
+                Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, -v2.X, -v2.Y, Mod.Find<ModProjectile>("OrangeLeafBall").Type, 50, 0f, Main.myPlayer, 0, 0);
             }
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            base.projectile.Kill();
+            base.Projectile.Kill();
             return false;
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
         {
-            Main.spriteBatch.Draw(mod.GetTexture("Projectiles/projectile5/Lightball"), base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY), null, new Color(1f, 0.2f, 0, 0), 0, new Vector2(250, 250), base.projectile.scale * 0.1f, SpriteEffects.None, 1f);
+            Main.spriteBatch.Draw(Mod.GetTexture("Projectiles/projectile5/Lightball"), base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), null, new Color(1f, 0.2f, 0, 0), 0, new Vector2(250, 250), base.Projectile.scale * 0.1f, SpriteEffects.None, 1f);
             return false;
         }
         private float num = 0;

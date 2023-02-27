@@ -20,21 +20,21 @@ namespace MythMod.Projectiles.projectile3
         public override void SetStaticDefaults()
         {
             base.DisplayName.SetDefault("恶魔手电筒");
-            Main.projFrames[projectile.type] = 2;
+            Main.projFrames[Projectile.type] = 2;
         }
 
         public override void SetDefaults()
         {
-            base.projectile.width = 42;
-            base.projectile.height = 42;
-            base.projectile.friendly = false;
-            base.projectile.hostile = false;
-            base.projectile.ignoreWater = true;
-            base.projectile.penetrate = -1;
-            base.projectile.timeLeft = 2;
-            base.projectile.usesLocalNPCImmunity = true;
-            base.projectile.localNPCHitCooldown = 1;
-            base.projectile.tileCollide = false;
+            base.Projectile.width = 42;
+            base.Projectile.height = 42;
+            base.Projectile.friendly = false;
+            base.Projectile.hostile = false;
+            base.Projectile.ignoreWater = true;
+            base.Projectile.penetrate = -1;
+            base.Projectile.timeLeft = 2;
+            base.Projectile.usesLocalNPCImmunity = true;
+            base.Projectile.localNPCHitCooldown = 1;
+            base.Projectile.tileCollide = false;
         }
         private float num4;
         private int ML = 0;
@@ -45,26 +45,26 @@ namespace MythMod.Projectiles.projectile3
         {
             Player p = Main.player[Main.myPlayer];
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
-            projectile.frame = (int)((24 - projectile.timeLeft) / 2f);
+            Projectile.frame = (int)((24 - Projectile.timeLeft) / 2f);
             Vector2 v = Main.screenPosition + new Vector2(Main.mouseX, Main.mouseY) - p.Center;
             v = v / v.Length();
-            projectile.velocity = v * 15f;
-            projectile.position = p.Center + v - new Vector2(21, 21);
-            projectile.spriteDirection = p.direction;
-            base.projectile.rotation = (float)Math.Atan2((double)base.projectile.velocity.Y * p.direction, (double)base.projectile.velocity.X * p.direction) + (float)Math.PI / 4f * projectile.spriteDirection;
+            Projectile.velocity = v * 15f;
+            Projectile.position = p.Center + v - new Vector2(21, 21);
+            Projectile.spriteDirection = p.direction;
+            base.Projectile.rotation = (float)Math.Atan2((double)base.Projectile.velocity.Y * p.direction, (double)base.Projectile.velocity.X * p.direction) + (float)Math.PI / 4f * Projectile.spriteDirection;
             if(mplayer.SD2 > 0 && mplayer.SD == 8)
             {
-                base.projectile.timeLeft = 2;
+                base.Projectile.timeLeft = 2;
             }
-            p.ChangeDir(base.projectile.direction);
-            p.heldProj = base.projectile.whoAmI;
-            if (projectile.ai[0] == 0)
+            p.ChangeDir(base.Projectile.direction);
+            p.heldProj = base.Projectile.whoAmI;
+            if (Projectile.ai[0] == 0)
             {
                 float Lig = 1;
-                projectile.frame = 1;
+                Projectile.frame = 1;
                 for (int step = 1; step < 30; step++)
                 {
-                    Lighting.AddLight(base.projectile.Center + step * projectile.velocity, (float)(255 - base.projectile.alpha) * 1f / 255f * (25 - (float)step) / 30f * Lig, (float)(255 - base.projectile.alpha) * 4f / 255f * (7 - (float)step) / 30f * Lig, (float)(255 - base.projectile.alpha) * 1.5f / 255f * (30 - (float)step) / 30f * Lig);
+                    Lighting.AddLight(base.Projectile.Center + step * Projectile.velocity, (float)(255 - base.Projectile.alpha) * 1f / 255f * (25 - (float)step) / 30f * Lig, (float)(255 - base.Projectile.alpha) * 4f / 255f * (7 - (float)step) / 30f * Lig, (float)(255 - base.Projectile.alpha) * 1.5f / 255f * (30 - (float)step) / 30f * Lig);
                 }
             }
             if(Main.mouseLeft)
@@ -75,10 +75,10 @@ namespace MythMod.Projectiles.projectile3
             {
                 if(ML >= 0)
                 {
-                    projectile.ai[0] += 1;
-                    if (projectile.ai[0] > 2)
+                    Projectile.ai[0] += 1;
+                    if (Projectile.ai[0] > 2)
                     {
-                        projectile.ai[0] = 0;
+                        Projectile.ai[0] = 0;
                     }
                     ML -= 1;
                 }
@@ -91,35 +91,35 @@ namespace MythMod.Projectiles.projectile3
             {
                 if (MR >= 0)
                 {
-                    projectile.ai[0] -= 1;
-                    if (projectile.ai[0] < 0)
+                    Projectile.ai[0] -= 1;
+                    if (Projectile.ai[0] < 0)
                     {
-                        projectile.ai[0] = 2;
+                        Projectile.ai[0] = 2;
                     }
                     MR -= 1;
                 }
             }
-            if (projectile.ai[0] == 1)
+            if (Projectile.ai[0] == 1)
             {
-                projectile.frame = 0;
+                Projectile.frame = 0;
             }
-            if (projectile.ai[0] == 2)
+            if (Projectile.ai[0] == 2)
             {
                 if(Main.time % 30 > 15)
                 {
-                    projectile.frame = 0;
+                    Projectile.frame = 0;
                 }
                 else
                 {
                     float Lig = 1;
-                    projectile.frame = 1;
+                    Projectile.frame = 1;
                     for (int step = 1; step < 30; step++)
                     {
-                        Lighting.AddLight(base.projectile.Center + step * projectile.velocity, (float)(255 - base.projectile.alpha) * 1f / 255f * (25 - (float)step) / 30f * Lig, (float)(255 - base.projectile.alpha) * 4f / 255f * (7 - (float)step) / 30f * Lig, (float)(255 - base.projectile.alpha) * 1.5f / 255f * (30 - (float)step) / 30f * Lig);
+                        Lighting.AddLight(base.Projectile.Center + step * Projectile.velocity, (float)(255 - base.Projectile.alpha) * 1f / 255f * (25 - (float)step) / 30f * Lig, (float)(255 - base.Projectile.alpha) * 4f / 255f * (7 - (float)step) / 30f * Lig, (float)(255 - base.Projectile.alpha) * 1.5f / 255f * (30 - (float)step) / 30f * Lig);
                     }
                 }
             }
-            p.direction = projectile.spriteDirection;
+            p.direction = Projectile.spriteDirection;
         }
     }
 }

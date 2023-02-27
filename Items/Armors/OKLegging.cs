@@ -20,11 +20,11 @@ namespace MythMod.Items.Armors
         }
 		public override void SetDefaults()
 		{
-			base.item.width = 18;
-			base.item.height = 18;
-			base.item.value = Item.buyPrice(0, 18, 0, 0);
-			base.item.rare = 7;
-			base.item.defense = 17;
+			base.Item.width = 18;
+			base.Item.height = 18;
+			base.Item.value = Item.buyPrice(0, 18, 0, 0);
+			base.Item.rare = 7;
+			base.Item.defense = 17;
 		}
 		public override void UpdateEquip(Player player)
 		{

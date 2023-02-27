@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class JinglingMojituo : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("精灵莫吉托");
             base.Description.SetDefault("攻击力增加7%,暴击率增加3%,闪避增加2%");

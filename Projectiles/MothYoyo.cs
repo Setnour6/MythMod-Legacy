@@ -13,15 +13,15 @@ namespace MythMod.Projectiles
         private float X;
 		public override void SetDefaults()
 		{
-			base.projectile.CloneDefaults(547);
-			base.projectile.width = 16;
-			base.projectile.height = 16;
-			base.projectile.scale = 1f;
-            ProjectileID.Sets.YoyosMaximumRange[projectile.type] = 220f;
+			base.Projectile.CloneDefaults(547);
+			base.Projectile.width = 16;
+			base.Projectile.height = 16;
+			base.Projectile.scale = 1f;
+            ProjectileID.Sets.YoyosMaximumRange[Projectile.type] = 220f;
         }
 		public override void AI()
 		{
-            ProjectileExtras.YoyoAI(base.projectile.whoAmI, 60f, 220f, 15f);
+            ProjectileExtras.YoyoAI(base.Projectile.whoAmI, 60f, 220f, 15f);
         }
 		public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
 		{

@@ -1,4 +1,5 @@
 ﻿using System;
+using Terraria;
 using Terraria.ModLoader;
 using Terraria.Localization;
 namespace MythMod.Items.Furnitures
@@ -11,26 +12,25 @@ namespace MythMod.Items.Furnitures
         }
 		public override void SetDefaults()
 		{
-			item.width = 28;
-			item.height = 20;
-			item.maxStack = 999;
-			item.useTurn = true;
-			item.autoReuse = true;
-			item.useAnimation = 15;
-			item.useTime = 10;
-			item.useStyle = 1;
-			item.consumable = true;
-			item.value = 1000;
-			item.createTile = mod.TileType("玄武岩书架");
+			Item.width = 28;
+			Item.height = 20;
+			Item.maxStack = 999;
+			Item.useTurn = true;
+			Item.autoReuse = true;
+			Item.useAnimation = 15;
+			Item.useTime = 10;
+			Item.useStyle = 1;
+			Item.consumable = true;
+			Item.value = 1000;
+			Item.createTile = Mod.Find<ModTile>("玄武岩书架").Type;
 		}
 		public override void AddRecipes()
 		{
-			ModRecipe modRecipe = new ModRecipe(mod);
+			Recipe modRecipe = CreateRecipe(1);
 			modRecipe.AddIngredient(null, "Basalt", 20);
 			modRecipe.AddIngredient(149, 10);
-			modRecipe.SetResult(this, 1);
 			modRecipe.AddTile(16);
-			modRecipe.AddRecipe();
+			modRecipe.Register();
 		}
 	}
 }

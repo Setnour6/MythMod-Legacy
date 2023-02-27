@@ -23,55 +23,55 @@ namespace MythMod.Projectiles.projectile3
 
         public override void SetDefaults()
         {
-            base.projectile.width = 28;
-            base.projectile.height = 28;
-            base.projectile.aiStyle = 27;
-            base.projectile.friendly = false;
-            base.projectile.melee = true;
-            base.projectile.ignoreWater = true;
-            base.projectile.penetrate = -1;
-            projectile.alpha = 255;
-            base.projectile.extraUpdates = 100;
-            base.projectile.timeLeft = 600;
-            base.projectile.usesLocalNPCImmunity = true;
-            projectile.tileCollide = true;
-            base.projectile.localNPCHitCooldown = 1;
+            base.Projectile.width = 28;
+            base.Projectile.height = 28;
+            base.Projectile.aiStyle = 27;
+            base.Projectile.friendly = false;
+            base.Projectile.DamageType = DamageClass.Melee;
+            base.Projectile.ignoreWater = true;
+            base.Projectile.penetrate = -1;
+            Projectile.alpha = 255;
+            base.Projectile.extraUpdates = 100;
+            base.Projectile.timeLeft = 600;
+            base.Projectile.usesLocalNPCImmunity = true;
+            Projectile.tileCollide = true;
+            base.Projectile.localNPCHitCooldown = 1;
         }
 
         public override void AI()
         {
-            if (projectile.alpha > 5)
+            if (Projectile.alpha > 5)
             {
-                projectile.alpha -= 25;
+                Projectile.alpha -= 25;
             }
             else
             {
-                projectile.penetrate = 1;
-                projectile.friendly = true;
+                Projectile.penetrate = 1;
+                Projectile.friendly = true;
             }
-            if(projectile.timeLeft > 120)
+            if(Projectile.timeLeft > 120)
             {
-                int num90 = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) - new Vector2(4, 4) - (base.projectile.velocity * 3f).RotatedBy(((float)Math.Sin(Main.time / 3d) / 3f)), 4, 4, 27, 0f, 0f, 100, default(Color), 1f);
+                int num90 = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) - new Vector2(4, 4) - (base.Projectile.velocity * 3f).RotatedBy(((float)Math.Sin(Main.time / 3d) / 3f)), 4, 4, 27, 0f, 0f, 100, default(Color), 1f);
                 Main.dust[num90].noGravity = true;
                 Main.dust[num90].velocity *= 0.2f;
             }
             else
             {
-                int num90 = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) - new Vector2(4, 4) - (base.projectile.velocity * 3f).RotatedBy(((float)Math.Sin(Main.time / 3d) / 3f)), 4, 4, 27, 0f, 0f, 100, default(Color), projectile.timeLeft / 120f);
+                int num90 = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) - new Vector2(4, 4) - (base.Projectile.velocity * 3f).RotatedBy(((float)Math.Sin(Main.time / 3d) / 3f)), 4, 4, 27, 0f, 0f, 100, default(Color), Projectile.timeLeft / 120f);
                 Main.dust[num90].noGravity = true;
                 Main.dust[num90].velocity *= 0.2f;
             }
-            float num20 = base.projectile.Center.X;
-            float num30 = base.projectile.Center.Y;
+            float num20 = base.Projectile.Center.X;
+            float num30 = base.Projectile.Center.Y;
             float num4 = 1200f;
             bool flag = false;
             for (int j = 0; j < 200; j++)
             {
-                if (Main.npc[j].CanBeChasedBy(base.projectile, false) && Collision.CanHit(base.projectile.Center, 1, 1, Main.npc[j].Center, 1, 1))
+                if (Main.npc[j].CanBeChasedBy(base.Projectile, false) && Collision.CanHit(base.Projectile.Center, 1, 1, Main.npc[j].Center, 1, 1))
                 {
                     float num5 = Main.npc[j].position.X + (float)(Main.npc[j].width / 2);
                     float num6 = Main.npc[j].position.Y + (float)(Main.npc[j].height / 2);
-                    float num7 = Math.Abs(base.projectile.position.X + (float)(base.projectile.width / 2) - num5) + Math.Abs(base.projectile.position.Y + (float)(base.projectile.height / 2) - num6);
+                    float num7 = Math.Abs(base.Projectile.position.X + (float)(base.Projectile.width / 2) - num5) + Math.Abs(base.Projectile.position.Y + (float)(base.Projectile.height / 2) - num6);
                     if (num7 < num4)
                     {
                         num4 = num7;
@@ -81,24 +81,24 @@ namespace MythMod.Projectiles.projectile3
                     }
                 }
             }
-            if (flag && projectile.timeLeft % 20 < 10)
+            if (flag && Projectile.timeLeft % 20 < 10)
             {
                 float num8 = 20f;
-                Vector2 vector1 = new Vector2(base.projectile.position.X + (float)base.projectile.width * 0.5f, base.projectile.position.Y + (float)base.projectile.height * 0.5f);
+                Vector2 vector1 = new Vector2(base.Projectile.position.X + (float)base.Projectile.width * 0.5f, base.Projectile.position.Y + (float)base.Projectile.height * 0.5f);
                 float num9 = num20 - vector1.X;
                 float num10 = num30 - vector1.Y;
-                Vector2 v = new Vector2(num20, num30) - projectile.Center;
+                Vector2 v = new Vector2(num20, num30) - Projectile.Center;
                 float num11 = (float)Math.Sqrt((double)(num9 * num9 + num10 * num10));
                 num11 = num8 / num11;
                 num9 *= num11;
                 num10 *= num11;
-                base.projectile.velocity.X = (base.projectile.velocity.X * v.Length() * 2 + num9) / (v.Length() * 2 + 1);
-                base.projectile.velocity.Y = (base.projectile.velocity.Y * v.Length() * 2 + num10) / (v.Length() * 2 + 1);
+                base.Projectile.velocity.X = (base.Projectile.velocity.X * v.Length() * 2 + num9) / (v.Length() * 2 + 1);
+                base.Projectile.velocity.Y = (base.Projectile.velocity.Y * v.Length() * 2 + num10) / (v.Length() * 2 + 1);
             }
         }
         public override Color? GetAlpha(Color lightColor)
         {
-            return new Color?(new Color(255, 255, 255, base.projectile.alpha));
+            return new Color?(new Color(255, 255, 255, base.Projectile.alpha));
         }
         public override void Kill(int timeLeft)
         {

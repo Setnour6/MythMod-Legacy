@@ -7,7 +7,7 @@ namespace MythMod.Buffs
 {
     public class 热乎乎的美味III : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("热乎乎的美味III");
             base.Description.SetDefault("附近有新出炉的东西,让你状态良好\n提升生命回复速度");

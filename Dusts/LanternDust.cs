@@ -22,7 +22,7 @@ namespace MythMod.Dusts
 		{
             for (int t = 0; t < 1000; t++)
             {
-                if (Main.projectile[t].type == mod.ProjectileType("ExplodeLantern") && Main.projectile[t].active)
+                if (Main.projectile[t].type == Mod.Find<ModProjectile>("ExplodeLantern").Type && Main.projectile[t].active)
                 {
                     float L = (dust.position - Main.projectile[t].Center).Length();
                     if (L < Leng)

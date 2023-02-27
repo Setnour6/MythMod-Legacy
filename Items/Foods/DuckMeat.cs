@@ -17,25 +17,23 @@ namespace MythMod.Items.Foods
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 26;
-            base.item.height = 40;
-            base.item.rare = 0;
-            base.item.useAnimation = 15;
-            base.item.useTime = 10;
-            base.item.useStyle = 1;
+			base.Item.width = 26;
+            base.Item.height = 40;
+            base.Item.rare = 0;
+            base.Item.useAnimation = 15;
+            base.Item.useTime = 10;
+            base.Item.useStyle = 1;
 		}
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(2123, 1);
             recipe.requiredTile[0] = 16;
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
-            ModRecipe recipe2 = new ModRecipe(mod);
+            recipe.Register();
+            Recipe recipe2 = CreateRecipe(1);
             recipe2.AddIngredient(2122, 1);
             recipe2.requiredTile[0] = 16;
-            recipe2.SetResult(this, 1);
-            recipe2.AddRecipe();
+            recipe2.Register();
         }
     }
 }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
@@ -16,34 +18,33 @@ namespace MythMod.Items
         }
         public override void SetDefaults()
         {
-            base.item.width = 28;
-            base.item.height = 18;
-            base.item.useAnimation = 45;
-            base.item.useTime = 60;
-            base.item.useStyle = 4;
-            base.item.consumable = false;
+            base.Item.width = 28;
+            base.Item.height = 18;
+            base.Item.useAnimation = 45;
+            base.Item.useTime = 60;
+            base.Item.useStyle = 4;
+            base.Item.consumable = false;
         }
         public override bool CanUseItem(Player player)
         {
-            return !NPC.AnyNPCs(base.mod.NPCType("CrystalSword"));
+            return !NPC.AnyNPCs(base.Mod.Find<ModNPC>("CrystalSword").Type);
         }
-        public override bool UseItem(Player player)
+        public override bool? UseItem(Player player)/* tModPorter Suggestion: Return null instead of false */
         {
-            if (NPC.CountNPCS(mod.NPCType("CrystalSwordEX")) < 1)
+            if (NPC.CountNPCS(Mod.Find<ModNPC>("CrystalSwordEX").Type) < 1)
             {
-                NPC.NewNPC((int)player.position.X, (int)player.position.Y - 750, mod.NPCType("CrystalSwordEX"), 0, 0f, 0f, 0f, 0f, 255);
-                Main.PlaySound(15, player.position, 0);
+                NPC.NewNPC((int)player.position.X, (int)player.position.Y - 750, Mod.Find<ModNPC>("CrystalSwordEX").Type, 0, 0f, 0f, 0f, 0f, 255);
+                SoundEngine.PlaySound(SoundID.Roar, player.position);
                 return true;
             }
             return false;
         }
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(null, "Crystal", 400);
             modRecipe.requiredTile[0] = 412;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
     }
 }

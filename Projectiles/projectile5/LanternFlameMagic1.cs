@@ -16,14 +16,14 @@ namespace MythMod.Projectiles.projectile5
 		}
 		public override void SetDefaults()
 		{
-			projectile.width = 1;
-			projectile.height = 1;
-            projectile.friendly = false;
-            projectile.extraUpdates = 10;
-            projectile.aiStyle = -1;
-            projectile.penetrate = -1;
-            projectile.timeLeft = 80000000;
-            projectile.tileCollide = false;
+			Projectile.width = 1;
+			Projectile.height = 1;
+            Projectile.friendly = false;
+            Projectile.extraUpdates = 10;
+            Projectile.aiStyle = -1;
+            Projectile.penetrate = -1;
+            Projectile.timeLeft = 80000000;
+            Projectile.tileCollide = false;
         }
         float r = 0;
         private Vector2 v0;
@@ -31,7 +31,7 @@ namespace MythMod.Projectiles.projectile5
         public override void AI()
         {
             r = LanternGhostKing.CirR;
-            projectile.position = LanternGhostKing.Cirposi;
+            Projectile.position = LanternGhostKing.Cirposi;
             /* if(projectile.timeLeft >= 200 && projectile.timeLeft <= 1000 && projectile.timeLeft % 100 == 0)
              {
                  double io = Main.rand.NextFloat(0, 10f);
@@ -49,14 +49,14 @@ namespace MythMod.Projectiles.projectile5
                  Main.dust[l].velocity.Y = 0;
                  Main.dust[l].noGravity = true;
              }*/
-            if(NPC.CountNPCS(mod.NPCType("LanternGhostKing")) < 1)
+            if(NPC.CountNPCS(Mod.Find<ModNPC>("LanternGhostKing").Type) < 1)
             {
-                projectile.Kill();
+                Projectile.Kill();
             }
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
 		{
-		    projectile.Kill();
+		    Projectile.Kill();
 			return false;
 		}
         /*public override void Kill(int timeLeft)
@@ -76,7 +76,7 @@ namespace MythMod.Projectiles.projectile5
                 Main.dust[num].fadeIn = 1f + (float)Main.rand.NextFloat(-0.5f, 0.5f) * 0.1f;
             }
         }*/
-        public override void PostDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override void PostDraw(Color lightColor)
         {
             List<CustomVertexInfo> bars = new List<CustomVertexInfo>();
 
@@ -100,8 +100,8 @@ namespace MythMod.Projectiles.projectile5
                 var color = Color.Lerp(Color.White, Color.Blue, 0.2f);
                 var w = MathHelper.Lerp(1f, 0.05f, alpha);
 
-                bars.Add(new CustomVertexInfo(projectile.Center + new Vector2(0, r + width).RotatedBy(i / r * 2), color, new Vector3((float)Math.Sqrt(factor), 1, w)));
-                bars.Add(new CustomVertexInfo(projectile.Center + new Vector2(0, r).RotatedBy(i / r * 2), color, new Vector3((float)Math.Sqrt(factor), 0, w)));
+                bars.Add(new CustomVertexInfo(Projectile.Center + new Vector2(0, r + width).RotatedBy(i / r * 2), color, new Vector3((float)Math.Sqrt(factor), 1, w)));
+                bars.Add(new CustomVertexInfo(Projectile.Center + new Vector2(0, r).RotatedBy(i / r * 2), color, new Vector3((float)Math.Sqrt(factor), 0, w)));
             }
 
             List<CustomVertexInfo> triangleList = new List<CustomVertexInfo>();

@@ -1,10 +1,10 @@
 ﻿using MythMod.NPCs;
 using Terraria.GameContent.Generation;
-using Terraria.World.Generation;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.WorldBuilding;
 
 namespace MythMod.Items.UnderSea
 {
@@ -19,13 +19,13 @@ namespace MythMod.Items.UnderSea
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
+            Item.glowMask = GetGlowMask;
             Item refItem = new Item();
-            item.width = refItem.width;
-            item.height = refItem.height;
-            item.maxStack = 999;
-            item.value = 2000;
-            item.rare = 8;
+            Item.width = refItem.width;
+            Item.height = refItem.height;
+            Item.maxStack = 999;
+            Item.value = 2000;
+            Item.rare = 8;
         }
     }
 }

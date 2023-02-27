@@ -1,3 +1,4 @@
+﻿using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
@@ -15,24 +16,24 @@ namespace MythMod.Items.Weapons.Clubs
         }
         public override void SetDefaults()
         {
-            item.damage = 9;
-            item.melee = true;
-            item.width = 64;
-            item.height = 64;
-            item.useTime = 4;
-            item.rare = 1;
-            item.noMelee = true;
-            item.noUseGraphic = true;
-            item.useAnimation = 4;
-            item.useStyle = 1;
-            item.knockBack = 11f;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 0;
-            item.value = 50;
-            item.scale = 1f;
-            item.shoot = mod.ProjectileType("WoodenClub");
-            item.shootSpeed = 0;
+            Item.damage = 9;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 64;
+            Item.height = 64;
+            Item.useTime = 4;
+            Item.rare = 1;
+            Item.noMelee = true;
+            Item.noUseGraphic = true;
+            Item.useAnimation = 4;
+            Item.useStyle = 1;
+            Item.knockBack = 11f;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 0;
+            Item.value = 50;
+            Item.scale = 1f;
+            Item.shoot = Mod.Find<ModProjectile>("WoodenClub").Type;
+            Item.shootSpeed = 0;
         }
         private bool St = false;
         public override void HoldItem(Player player)
@@ -42,7 +43,7 @@ namespace MythMod.Items.Weapons.Clubs
                 St = false;
             }
         }
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             if(!St && Main.mouseLeft)
             {
@@ -53,11 +54,10 @@ namespace MythMod.Items.Weapons.Clubs
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(9, 18);
-            recipe.SetResult(this, 1);
             recipe.requiredTile[0] = 18;
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

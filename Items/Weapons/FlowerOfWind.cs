@@ -17,31 +17,30 @@ namespace MythMod.Items.Weapons
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            base.item.damage = 240;
-			base.item.magic = true;
-			base.item.mana = 15;
-			base.item.width = 58;
-			base.item.height = 68;
-			base.item.useTime = 26;
-			base.item.useAnimation = 26;
-			base.item.useStyle = 5;
-			Item.staff[base.item.type] = true;
-			base.item.noMelee = true;
-			base.item.knockBack = 5f;
-			base.item.value = Item.sellPrice(0, 2, 0, 0);
-			base.item.rare = 6;
-			base.item.UseSound = SoundID.Item43;
-			base.item.autoReuse = true;
-            base.item.shoot = base.mod.ProjectileType("WindPeddle");
-			base.item.shootSpeed = 14f;
+            base.Item.damage = 240;
+			base.Item.DamageType = DamageClass.Magic;
+			base.Item.mana = 15;
+			base.Item.width = 58;
+			base.Item.height = 68;
+			base.Item.useTime = 26;
+			base.Item.useAnimation = 26;
+			base.Item.useStyle = 5;
+			Item.staff[base.Item.type] = true;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 5f;
+			base.Item.value = Item.sellPrice(0, 2, 0, 0);
+			base.Item.rare = 6;
+			base.Item.UseSound = SoundID.Item43;
+			base.Item.autoReuse = true;
+            base.Item.shoot = base.Mod.Find<ModProjectile>("WindPeddle").Type;
+			base.Item.shootSpeed = 14f;
 		}
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(null, "WindFragment", 333);
             modRecipe.requiredTile[0] = 412;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
         //public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
         //{

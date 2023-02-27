@@ -3,19 +3,19 @@ using Terraria.ModLoader;
 
 namespace MythMod.Backgrounds
 {
-	public class MythUgBgStyle : ModUgBgStyle
+	public class MythUgBgStyle : ModUndergroundBackgroundStyle
 	{
-		public override bool ChooseBgStyle()
+		public override bool ChooseBgStyle()/* tModPorter Note: Removed. Create a ModBiome (or ModSceneEffect) class and override UndergroundBackgroundStyle property to return this object through Mod/ModContent.Find, then move this code into IsBiomeActive (or IsSceneEffectActive) */
 		{
-			return ((MythPlayer)Main.player[Main.myPlayer].GetModPlayer(mod, "MythPlayer")).ZoneOcean;
+			return ((MythPlayer)Main.player[Main.myPlayer].GetModPlayer(Mod, "MythPlayer")).ZoneOcean;
 		}
 
         public override void FillTextureArray(int[] textureSlots)
 		{
-			textureSlots[0] = mod.GetBackgroundSlot("Backgrounds/OceanUG0");
-			textureSlots[1] = mod.GetBackgroundSlot("Backgrounds/Blank");
-			textureSlots[2] = mod.GetBackgroundSlot("Backgrounds/OceanUG2");
-			textureSlots[3] = mod.GetBackgroundSlot("Backgrounds/OceanUG3");
+			textureSlots[0] = BackgroundTextureLoader.GetBackgroundSlot(Mod, "Backgrounds/OceanUG0");
+			textureSlots[1] = BackgroundTextureLoader.GetBackgroundSlot(Mod, "Backgrounds/Blank");
+			textureSlots[2] = BackgroundTextureLoader.GetBackgroundSlot(Mod, "Backgrounds/OceanUG2");
+			textureSlots[3] = BackgroundTextureLoader.GetBackgroundSlot(Mod, "Backgrounds/OceanUG3");
 		}
     }
 }

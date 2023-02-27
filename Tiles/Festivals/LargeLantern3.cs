@@ -10,7 +10,7 @@ namespace MythMod.Tiles.Festivals
 {
 	public class LargeLantern3 : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[(int)base.Type] = true;
 			Main.tileNoAttach[(int)base.Type] = true;
@@ -22,13 +22,13 @@ namespace MythMod.Tiles.Festivals
 			TileObjectData.addAlternate(1);
 			TileObjectData.newTile.AnchorRight = new AnchorData((Terraria.Enums.AnchorType)1, 2, 0);
 			TileObjectData.addTile((int)base.Type);
-			this.dustType = 115;
+			this.DustType = 115;
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
             modTranslation.AddTranslation(GameCulture.Chinese, "");
             base.AddMapEntry(new Color(255, 0, 0), modTranslation);
-			this.mineResist = 3f;
-			base.SetDefaults();
+			this.MineResist = 3f;
+			base.SetStaticDefaults();
 		}
 		public override void NumDust(int i, int j, bool fail, ref int num)
 		{
@@ -36,7 +36,7 @@ namespace MythMod.Tiles.Festivals
 		}
         public override void NearbyEffects(int i, int j, bool closer)
         {
-            if (Main.tile[i, j].frameY > 40)
+            if (Main.tile[i, j].TileFrameY > 40)
             {
                 Lighting.AddLight(new Vector2(i * 16, j * 16), new Vector3(0.8f, 0.2f, 0f));
             }
@@ -53,17 +53,17 @@ namespace MythMod.Tiles.Festivals
                     {
                         Main.tile[k, l] = new Tile();
                     }
-                    if (Main.tile[k, l].active() && Main.tile[k, l].type == base.Type)
+                    if (Main.tile[k, l].HasTile && Main.tile[k, l].TileType == base.Type)
                     {
-                        if (Main.tile[k, l].frameY < 54)
+                        if (Main.tile[k, l].TileFrameY < 54)
                         {
                             Tile tile = Main.tile[k, l];
-                            tile.frameY += 54;
+                            tile.TileFrameY += 54;
                         }
                         else
                         {
                             Tile tile2 = Main.tile[k, l];
-                            tile2.frameY -= 54;
+                            tile2.TileFrameY -= 54;
                         }
                     }
                 }
@@ -77,7 +77,7 @@ namespace MythMod.Tiles.Festivals
         }
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("LargeLantern3"));
+            Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("LargeLantern3").Type);
         }
     }
 }

@@ -23,19 +23,19 @@ namespace MythMod.Items.Fishes
 		// Token: 0x060002CF RID: 719 RVA: 0x000352F4 File Offset: 0x000334F4
 		public override void SetDefaults()
 		{
-			base.item.damage = 1;
-			base.item.melee = true;
-			base.item.width = 26;
-			base.item.height = 26;
-			base.item.useTime = 40;
-			base.item.useAnimation = 40;
-			base.item.useTurn = true;
-			base.item.useStyle = 1;
-			base.item.knockBack = 0.1f;
-			base.item.value = 0;
-			base.item.UseSound = SoundID.Item1;
-			base.item.autoReuse = true;
-            base.item.rare = -1;
+			base.Item.damage = 1;
+			base.Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+			base.Item.width = 26;
+			base.Item.height = 26;
+			base.Item.useTime = 40;
+			base.Item.useAnimation = 40;
+			base.Item.useTurn = true;
+			base.Item.useStyle = 1;
+			base.Item.knockBack = 0.1f;
+			base.Item.value = 0;
+			base.Item.UseSound = SoundID.Item1;
+			base.Item.autoReuse = true;
+            base.Item.rare = -1;
 		}
 
 		// Token: 0x060002D0 RID: 720 RVA: 0x000353C8 File Offset: 0x000335C8

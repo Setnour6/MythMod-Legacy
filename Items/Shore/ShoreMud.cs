@@ -25,21 +25,21 @@ namespace MythMod.Items.Shore
         }
         public override void SetDefaults()
         {
-            base.item.width = 40;
-            base.item.height = 40;
-            base.item.rare = 0;
-            base.item.scale = 1f;
-            base.item.createTile = base.mod.TileType("ShoreMud");
-            base.item.useStyle = 1;
-            base.item.useTurn = true;
-            base.item.useAnimation = 15;
-            base.item.useTime = 10;
-            base.item.autoReuse = true;
-            base.item.consumable = true;
-            base.item.width = 13;
-            base.item.height = 10;
-            base.item.maxStack = 999;
-            base.item.value = 4000;
+            base.Item.width = 40;
+            base.Item.height = 40;
+            base.Item.rare = 0;
+            base.Item.scale = 1f;
+            base.Item.createTile = base.Mod.Find<ModTile>("ShoreMud").Type;
+            base.Item.useStyle = 1;
+            base.Item.useTurn = true;
+            base.Item.useAnimation = 15;
+            base.Item.useTime = 10;
+            base.Item.autoReuse = true;
+            base.Item.consumable = true;
+            base.Item.width = 13;
+            base.Item.height = 10;
+            base.Item.maxStack = 999;
+            base.Item.value = 4000;
         }
     }
 }

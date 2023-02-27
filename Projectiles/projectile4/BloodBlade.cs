@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 using System.IO;
 using Terraria.ID;
@@ -19,19 +20,19 @@ namespace MythMod.Projectiles.projectile4
         }
         public override void SetDefaults()
         {
-            projectile.width = 60;
-            projectile.height = 60;
-            projectile.aiStyle = -1;
-            projectile.friendly = false;
-            projectile.hostile = true;
-            projectile.ignoreWater = true;
-            projectile.magic = false;
-            projectile.tileCollide = false;
-            projectile.timeLeft = 1080;
-            projectile.penetrate = 1;
-            projectile.scale = 1;
-            ProjectileID.Sets.TrailingMode[projectile.type] = 0;
-            ProjectileID.Sets.TrailCacheLength[projectile.type] = 30;
+            Projectile.width = 60;
+            Projectile.height = 60;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = false;
+            Projectile.hostile = true;
+            Projectile.ignoreWater = true;
+            Projectile.magic = false/* tModPorter Suggestion: Remove. See Item.DamageType */;
+            Projectile.tileCollide = false;
+            Projectile.timeLeft = 1080;
+            Projectile.penetrate = 1;
+            Projectile.scale = 1;
+            ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 30;
         }
         private bool initialization = true;
         private double X;
@@ -41,12 +42,12 @@ namespace MythMod.Projectiles.projectile4
 
         public override Color? GetAlpha(Color lightColor)
         {
-            return new Color?(new Color(1f - 1f / projectile.velocity.Length(), 1f - 1f / projectile.velocity.Length(), 1f - 1f / projectile.velocity.Length(), 0));
+            return new Color?(new Color(1f - 1f / Projectile.velocity.Length(), 1f - 1f / Projectile.velocity.Length(), 1f - 1f / Projectile.velocity.Length(), 0));
         }
         public override void AI()
         {
-            projectile.rotation = (float)(Math.Atan2(projectile.velocity.Y, projectile.velocity.X) + Math.PI * 0.25);
-            projectile.velocity *= (1 + 0.5f / projectile.velocity.Length());
+            Projectile.rotation = (float)(Math.Atan2(Projectile.velocity.Y, Projectile.velocity.X) + Math.PI * 0.25);
+            Projectile.velocity *= (1 + 0.5f / Projectile.velocity.Length());
             if (K >= 40)
             {
                 K *= 0.96f;
@@ -55,24 +56,24 @@ namespace MythMod.Projectiles.projectile4
             {
                 K *= 1.05f;
             }
-            if(projectile.penetrate <= 0)
+            if(Projectile.penetrate <= 0)
             {
-                projectile.Kill();
+                Projectile.Kill();
             }
             K += Main.rand.NextFloat(-0.025f, 0.025f);            
-            int num = Dust.NewDust(projectile.Center - new Vector2(4, 4) + new Vector2(0, 12).RotatedBy(projectile.timeLeft / 4f), 2, 2, mod.DustType("RedEffect2"), 0, 0, 0, default(Color), 1f);
+            int num = Dust.NewDust(Projectile.Center - new Vector2(4, 4) + new Vector2(0, 12).RotatedBy(Projectile.timeLeft / 4f), 2, 2, Mod.Find<ModDust>("RedEffect2").Type, 0, 0, 0, default(Color), 1f);
             Main.dust[num].noGravity = false;
             Main.dust[num].velocity *= 0;
-            int num20 = Dust.NewDust(projectile.Center - new Vector2(4, 4) - new Vector2(0, 12).RotatedBy(projectile.timeLeft / 4f), 2, 2, mod.DustType("RedEffect2"), 0, 0, 0, default(Color), 1f);
+            int num20 = Dust.NewDust(Projectile.Center - new Vector2(4, 4) - new Vector2(0, 12).RotatedBy(Projectile.timeLeft / 4f), 2, 2, Mod.Find<ModDust>("RedEffect2").Type, 0, 0, 0, default(Color), 1f);
             Main.dust[num20].noGravity = false;
             Main.dust[num20].velocity *= 0;
-            int num21 = Dust.NewDust(projectile.Center - new Vector2(4, 4), 2, 2, mod.DustType("RedEffect2"), 0, 0, 0, default(Color), 1.5f);
+            int num21 = Dust.NewDust(Projectile.Center - new Vector2(4, 4), 2, 2, Mod.Find<ModDust>("RedEffect2").Type, 0, 0, 0, default(Color), 1.5f);
             Main.dust[num21].velocity *= 0;
-            int num22 = Dust.NewDust(projectile.Center - new Vector2(4, 4) + new Vector2(0, Main.rand.NextFloat(0, 8f)).RotatedByRandom(Math.PI * 2), 2, 2, mod.DustType("RedEffect2"), 0, 0, 0, default(Color), 1.5f);
+            int num22 = Dust.NewDust(Projectile.Center - new Vector2(4, 4) + new Vector2(0, Main.rand.NextFloat(0, 8f)).RotatedByRandom(Math.PI * 2), 2, 2, Mod.Find<ModDust>("RedEffect2").Type, 0, 0, 0, default(Color), 1.5f);
             Main.dust[num22].velocity *= 0.2f;
-            if(Collision.CanHit(projectile.Center, 1, 1, Main.player[Player.FindClosest(projectile.Center, 60, 60)].Center, 1, 1))
+            if(Collision.CanHit(Projectile.Center, 1, 1, Main.player[Player.FindClosest(Projectile.Center, 60, 60)].Center, 1, 1))
             {
-                projectile.tileCollide = true;
+                Projectile.tileCollide = true;
             }
         }
         public override void Kill(int timeLeft)
@@ -83,39 +84,39 @@ namespace MythMod.Projectiles.projectile4
                 double num1 = Main.rand.Next(0, 1000) / 500f;
                 double num2 = Math.Sin((double)num1 * Math.PI) * num4 / 40f;
                 double num3 = Math.Cos((double)num1 * Math.PI) * num4 / 40f;
-                int num5 = Projectile.NewProjectile(base.projectile.Center.X, base.projectile.Center.Y, (float)num2, (float)num3, base.mod.ProjectileType("RedGemDust"), 0, 0, base.projectile.owner, 0f, 0f);
+                int num5 = Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, (float)num2, (float)num3, base.Mod.Find<ModProjectile>("RedGemDust").Type, 0, 0, base.Projectile.owner, 0f, 0f);
                 Main.projectile[num5].scale = Main.rand.Next(1150, 2200) / 1000f;
             }
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D texture2D = Main.projectileTexture[base.projectile.type];
-            int num = Main.projectileTexture[base.projectile.type].Height / Main.projFrames[base.projectile.type];
-            int y = num * base.projectile.frame;
-            Main.spriteBatch.Draw(texture2D, base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), base.projectile.GetAlpha(lightColor), base.projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.projectile.scale, SpriteEffects.None, 0f);
+            Texture2D texture2D = TextureAssets.Projectile[base.Projectile.type].Value;
+            int num = TextureAssets.Projectile[base.Projectile.type].Value.Height / Main.projFrames[base.Projectile.type];
+            int y = num * base.Projectile.frame;
+            Main.spriteBatch.Draw(texture2D, base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), base.Projectile.GetAlpha(lightColor), base.Projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.Projectile.scale, SpriteEffects.None, 0f);
             return false;
         }
-        public override void PostDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override void PostDraw(Color lightColor)
         {
             List<CustomVertexInfo> bars = new List<CustomVertexInfo>();
 
-            // 把所有的点都生成出来，按照顺序
-            for (int i = 1; i < projectile.oldPos.Length; ++i)
+            // °ÑËùÓÐµÄµã¶¼Éú³É³öÀ´£¬°´ÕÕË³Ðò
+            for (int i = 1; i < Projectile.oldPos.Length; ++i)
             {
-                if (projectile.oldPos[i] == Vector2.Zero) break;
+                if (Projectile.oldPos[i] == Vector2.Zero) break;
                 //spriteBatch.Draw(Main.magicPixel, projectile.oldPos[i] - Main.screenPosition,
                 //    new Rectangle(0, 0, 1, 1), Color.White, 0f, new Vector2(0.5f, 0.5f), 5f, SpriteEffects.None, 0f);
 
                 int width = 30;
-                var normalDir = projectile.oldPos[i - 1] - projectile.oldPos[i];
+                var normalDir = Projectile.oldPos[i - 1] - Projectile.oldPos[i];
                 normalDir = Vector2.Normalize(new Vector2(-normalDir.Y, normalDir.X));
 
-                var factor = i / (float)projectile.oldPos.Length;
+                var factor = i / (float)Projectile.oldPos.Length;
                 var color = Color.Lerp(Color.White, Color.Red, factor);
                 var w = MathHelper.Lerp(1f, 0.05f, factor);
 
-                bars.Add(new CustomVertexInfo(projectile.oldPos[i] + normalDir * width + new Vector2(30, 30) - projectile.velocity * 1.5f, color, new Vector3((float)Math.Sqrt(factor), 1, w)));
-                bars.Add(new CustomVertexInfo(projectile.oldPos[i] + normalDir * -width + new Vector2(30, 30) - projectile.velocity * 1.5f, color, new Vector3((float)Math.Sqrt(factor), 0, w)));
+                bars.Add(new CustomVertexInfo(Projectile.oldPos[i] + normalDir * width + new Vector2(30, 30) - Projectile.velocity * 1.5f, color, new Vector3((float)Math.Sqrt(factor), 1, w)));
+                bars.Add(new CustomVertexInfo(Projectile.oldPos[i] + normalDir * -width + new Vector2(30, 30) - Projectile.velocity * 1.5f, color, new Vector3((float)Math.Sqrt(factor), 0, w)));
             }
 
             List<CustomVertexInfo> triangleList = new List<CustomVertexInfo>();
@@ -123,9 +124,9 @@ namespace MythMod.Projectiles.projectile4
             if (bars.Count > 2)
             {
 
-                // 按照顺序连接三角形
+                // °´ÕÕË³ÐòÁ¬½ÓÈý½ÇÐÎ
                 triangleList.Add(bars[0]);
-                var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + Vector2.Normalize(projectile.velocity) * 30, Color.White, new Vector3(0, 0.5f, 1));
+                var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + Vector2.Normalize(Projectile.velocity) * 30, Color.White, new Vector3(0, 0.5f, 1));
                 triangleList.Add(bars[1]);
                 triangleList.Add(vertex);
                 for (int i = 0; i < bars.Count - 2; i += 2)
@@ -143,7 +144,7 @@ namespace MythMod.Projectiles.projectile4
                 spriteBatch.End();
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.PointWrap, DepthStencilState.Default, RasterizerState.CullNone);
                 RasterizerState originalState = Main.graphics.GraphicsDevice.RasterizerState;
-                // 干掉注释掉就可以只显示三角形栅格
+                // ¸Éµô×¢ÊÍµô¾Í¿ÉÒÔÖ»ÏÔÊ¾Èý½ÇÐÎÕ¤¸ñ
                 //RasterizerState rasterizerState = new RasterizerState();
                 //rasterizerState.CullMode = CullMode.None;
                 //rasterizerState.FillMode = FillMode.WireFrame;
@@ -152,7 +153,7 @@ namespace MythMod.Projectiles.projectile4
                 var projection = Matrix.CreateOrthographicOffCenter(0, Main.screenWidth, Main.screenHeight, 0, 0, 1);
                 var model = Matrix.CreateTranslation(new Vector3(-Main.screenPosition.X, -Main.screenPosition.Y, 0));
 
-                // 把变换和所需信息丢给shader
+                // °Ñ±ä»»ºÍËùÐèÐÅÏ¢¶ª¸øshader
                 MythMod.DefaultEffect.Parameters["uTransform"].SetValue(model * projection);
                 MythMod.DefaultEffect.Parameters["uTime"].SetValue(-(float)Main.time * 0.03f);
                 Main.graphics.GraphicsDevice.Textures[0] = MythMod.MainColorRed;
@@ -177,7 +178,7 @@ namespace MythMod.Projectiles.projectile4
         }
 
 
-        // 自定义顶点数据结构，注意这个结构体里面的顺序需要和shader里面的数据相同
+        // ×Ô¶¨Òå¶¥µãÊý¾Ý½á¹¹£¬×¢ÒâÕâ¸ö½á¹¹ÌåÀïÃæµÄË³ÐòÐèÒªºÍshaderÀïÃæµÄÊý¾ÝÏàÍ¬
         private struct CustomVertexInfo : IVertexType
         {
             private static VertexDeclaration _vertexDeclaration = new VertexDeclaration(new VertexElement[3]

@@ -7,7 +7,7 @@ namespace MythMod.Buffs
 {
     public class LavaCup : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("熔岩杯子");
             base.Description.SetDefault("多喝岩浆哦");

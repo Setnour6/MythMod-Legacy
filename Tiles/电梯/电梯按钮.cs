@@ -12,7 +12,7 @@ namespace MythMod.Tiles.电梯
 	{
         private bool LiftU = false;
         private bool LiftD = false;
-        public override void SetDefaults()
+        public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[(int)base.Type] = true;
 			Main.tileLavaDeath[(int)base.Type] = true;
@@ -28,8 +28,8 @@ namespace MythMod.Tiles.电梯
             TileObjectData.newTile.StyleHorizontal = true;
 			TileObjectData.newTile.StyleWrapLimit = 36;
 			TileObjectData.addTile((int)base.Type);
-			this.dustType = 7;
-			this.disableSmartCursor = true;
+			this.DustType = 7;
+			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
 			modTranslation.SetDefault("电梯按钮");
 			base.AddMapEntry(new Color(60, 60, 60), modTranslation);
@@ -50,11 +50,11 @@ namespace MythMod.Tiles.电梯
             int height = 16;
             if (LiftU && m < 120)
             {
-                Main.spriteBatch.Draw(mod.GetTexture("Tiles/LiftU"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.frameX, tile.frameY, 16, height), new Color(155, 155, 155, 0), 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                Main.spriteBatch.Draw(Mod.GetTexture("Tiles/LiftU"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, height), new Color(155, 155, 155, 0), 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
             }
             if (LiftD && m < 120)
             {
-                Main.spriteBatch.Draw(mod.GetTexture("Tiles/LiftD"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.frameX, tile.frameY, 16, height), new Color(155, 155, 155, 0), 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                Main.spriteBatch.Draw(Mod.GetTexture("Tiles/LiftD"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, height), new Color(155, 155, 155, 0), 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
             }
             if (mplayer.LiftD == false)
             {
@@ -67,7 +67,7 @@ namespace MythMod.Tiles.电梯
         }
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-		    Item.NewItem(i * 16, j * 16, 16, 32, mod.ItemType("LiftButton"), 1, false, 0, false, false);
+		    Item.NewItem(i * 16, j * 16, 16, 32, Mod.Find<ModItem>("LiftButton").Type, 1, false, 0, false, false);
 		}
         public override void RightClick(int i, int j)
         {
@@ -76,7 +76,7 @@ namespace MythMod.Tiles.电梯
             mplayer.Zonefloor = 0;
             mplayer.firstClick = true;
             mplayer.liftPos = new Vector2(i * 16, j * 16);
-            if (Main.tile[i, j].frameY > 8)
+            if (Main.tile[i, j].TileFrameY > 8)
             {
                 if(!LiftD)
                 {

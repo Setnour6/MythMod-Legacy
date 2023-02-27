@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.GameContent.Events;
 using Terraria.ID;
 using Terraria.Localization;
@@ -18,13 +19,13 @@ namespace MythMod.NPCs.Yasitaya
         public override void SetStaticDefaults()
         {
             base.DisplayName.SetDefault("Yasitaya");
-            Main.npcFrameCount[base.npc.type] = 50;
-            NPCID.Sets.ExtraFramesCount[base.npc.type] = 9;
-            NPCID.Sets.AttackFrameCount[base.npc.type] = 4;
-            NPCID.Sets.DangerDetectRange[base.npc.type] = 400;
-            NPCID.Sets.AttackType[base.npc.type] = 0;
-            NPCID.Sets.AttackTime[base.npc.type] = 60;
-            NPCID.Sets.AttackAverageChance[base.npc.type] = 15;
+            Main.npcFrameCount[base.NPC.type] = 50;
+            NPCID.Sets.ExtraFramesCount[base.NPC.type] = 9;
+            NPCID.Sets.AttackFrameCount[base.NPC.type] = 4;
+            NPCID.Sets.DangerDetectRange[base.NPC.type] = 400;
+            NPCID.Sets.AttackType[base.NPC.type] = 0;
+            NPCID.Sets.AttackTime[base.NPC.type] = 60;
+            NPCID.Sets.AttackAverageChance[base.NPC.type] = 15;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "雅斯塔亚");
         }
         private bool canDespawn = false;
@@ -34,21 +35,21 @@ namespace MythMod.NPCs.Yasitaya
         }
         public override void SetDefaults()
         {
-            base.npc.townNPC = true;
-            base.npc.friendly = true;
-            base.npc.width = 40;
-            base.npc.height = 56;
-            base.npc.aiStyle = 7;
-            base.npc.damage = 100;
-            base.npc.defense = 100;
-            base.npc.lifeMax = 500;
-            base.npc.HitSound = SoundID.NPCHit1;
-            base.npc.DeathSound = SoundID.NPCDeath6;
-            base.npc.knockBackResist = 0.5f;
-            this.animationType = 22;
+            base.NPC.townNPC = true;
+            base.NPC.friendly = true;
+            base.NPC.width = 40;
+            base.NPC.height = 56;
+            base.NPC.aiStyle = 7;
+            base.NPC.damage = 100;
+            base.NPC.defense = 100;
+            base.NPC.lifeMax = 500;
+            base.NPC.HitSound = SoundID.NPCHit1;
+            base.NPC.DeathSound = SoundID.NPCDeath6;
+            base.NPC.knockBackResist = 0.5f;
+            this.AnimationType = 22;
         }
 
-        public override string TownNPCName()
+        public override List<string> SetNPCNameList()/* tModPorter Suggestion: Return a list of names */
         {
             return "";
         }
@@ -76,22 +77,22 @@ namespace MythMod.NPCs.Yasitaya
             Player player = Main.player[Main.myPlayer];
             if (!Battle)
             {
-                if (npc.life >= 10)
+                if (NPC.life >= 10)
                 {
-                    npc.dontTakeDamage = false;
+                    NPC.dontTakeDamage = false;
                 }
                 else
                 {
-                    npc.life += 2;
+                    NPC.life += 2;
                 }
                 localb += 1;
-                if (localb >= 5 && npc.life < npc.lifeMax)
+                if (localb >= 5 && NPC.life < NPC.lifeMax)
                 {
                     localb = 0;
-                    npc.life += 1;
+                    NPC.life += 1;
                 }
-                npc.townNPC = true;
-                npc.friendly = true;
+                NPC.townNPC = true;
+                NPC.friendly = true;
                 if (Fly)
                 {
                     WingCC += 1;
@@ -106,7 +107,7 @@ namespace MythMod.NPCs.Yasitaya
                     WingC = 0;
                     WingCC = 0;
                 }
-                if (!npc.collideY)
+                if (!NPC.collideY)
                 {
                     Fly = true;
                 }
@@ -128,14 +129,14 @@ namespace MythMod.NPCs.Yasitaya
                     {
                         for (int z = 2; z < 20; z++)
                         {
-                            float num7 = (npc.Center - (Main.projectile[j].Center + Main.projectile[j].velocity * z)).Length();
+                            float num7 = (NPC.Center - (Main.projectile[j].Center + Main.projectile[j].velocity * z)).Length();
                             if (num7 < 100)
                             {
                                 Px[j] = num7;
                             }
                             if (Px[j] < PxClo[j])
                             {
-                                DangerC[j] = npc.Center - (Main.projectile[j].Center + Main.projectile[j].velocity * z);
+                                DangerC[j] = NPC.Center - (Main.projectile[j].Center + Main.projectile[j].velocity * z);
                                 PxClo[j] = Px[j];
                                 Theaten[j] = Main.projectile[j].damage;
                             }
@@ -151,14 +152,14 @@ namespace MythMod.NPCs.Yasitaya
                     {
                         for (int z = 2; z < 20; z++)
                         {
-                            float num7 = (npc.Center - (Main.npc[j].Center + Main.npc[j].velocity * z)).Length();
+                            float num7 = (NPC.Center - (Main.npc[j].Center + Main.npc[j].velocity * z)).Length();
                             if (num7 < 100)
                             {
                                 Px[j + 1000] = num7;
                             }
                             if (Px[j + 1000] < PxClo[j + 1000])
                             {
-                                DangerC[j + 1000] = npc.Center - (Main.npc[j].Center + Main.npc[j].velocity * z);
+                                DangerC[j + 1000] = NPC.Center - (Main.npc[j].Center + Main.npc[j].velocity * z);
                                 PxClo[j + 1000] = Px[j + 1000];
                                 Theaten[j + 1000] = Main.npc[j].damage;
                             }
@@ -187,10 +188,10 @@ namespace MythMod.NPCs.Yasitaya
                     for (int i = 0; i < 100; i++)
                     {
                         Vector2 Vk = new Vector2(0, Main.rand.NextFloat(25, 600f)).RotatedBy(Main.rand.NextFloat(0, (float)Math.PI * 2f));
-                        Vector2 Vm = npc.Center + Vk;
-                        if (!Main.tile[(int)(Vm.X / 16), (int)(Vm.Y / 16)].active() && !Main.tile[(int)(Vm.X / 16), (int)(Vm.Y / 16) + 1].active() && !Main.tile[(int)(Vm.X / 16), (int)(Vm.Y / 16) - 1].active() &&
-                            !Main.tile[(int)(Vm.X / 16) + 1, (int)(Vm.Y / 16)].active() && !Main.tile[(int)(Vm.X / 16) + 1, (int)(Vm.Y / 16) + 1].active() && !Main.tile[(int)(Vm.X / 16) + 1, (int)(Vm.Y / 16) - 1].active() &&
-                            !Main.tile[(int)(Vm.X / 16) - 1, (int)(Vm.Y / 16)].active() && !Main.tile[(int)(Vm.X / 16) - 1, (int)(Vm.Y / 16) + 1].active() && !Main.tile[(int)(Vm.X / 16) - 1, (int)(Vm.Y / 16) - 1].active())
+                        Vector2 Vm = NPC.Center + Vk;
+                        if (!Main.tile[(int)(Vm.X / 16), (int)(Vm.Y / 16)].HasTile && !Main.tile[(int)(Vm.X / 16), (int)(Vm.Y / 16) + 1].HasTile && !Main.tile[(int)(Vm.X / 16), (int)(Vm.Y / 16) - 1].HasTile &&
+                            !Main.tile[(int)(Vm.X / 16) + 1, (int)(Vm.Y / 16)].HasTile && !Main.tile[(int)(Vm.X / 16) + 1, (int)(Vm.Y / 16) + 1].HasTile && !Main.tile[(int)(Vm.X / 16) + 1, (int)(Vm.Y / 16) - 1].HasTile &&
+                            !Main.tile[(int)(Vm.X / 16) - 1, (int)(Vm.Y / 16)].HasTile && !Main.tile[(int)(Vm.X / 16) - 1, (int)(Vm.Y / 16) + 1].HasTile && !Main.tile[(int)(Vm.X / 16) - 1, (int)(Vm.Y / 16) - 1].HasTile)
                         {
                             float[] Py = new float[1201];
                             float[] PyClo = new float[1201];
@@ -225,7 +226,7 @@ namespace MythMod.NPCs.Yasitaya
                                 Theatem[j + 1000] = 0;
                                 PyClo[j + 1000] = 1000;
                                 Py[j + 1000] = 1000;
-                                if (Main.npc[j].active && !Main.npc[j].friendly && Main.npc[j].damage > 120 && Main.npc[i].type == mod.NPCType("Yasitaya"))
+                                if (Main.npc[j].active && !Main.npc[j].friendly && Main.npc[j].damage > 120 && Main.npc[i].type == Mod.Find<ModNPC>("Yasitaya").Type)
                                 {
                                     for (int z = 2; z < 20; z++)
                                     {
@@ -256,13 +257,13 @@ namespace MythMod.NPCs.Yasitaya
                                 for (int za = 0; za < 100; za++)
                                 {
                                     Vector2 vz = new Vector2(0, Main.rand.NextFloat(0, 5f)).RotatedByRandom(Math.PI * 2d);
-                                    Dust.NewDust(base.npc.position, base.npc.width, base.npc.height, 255, vz.X, vz.Y, 0, default(Color), 1f);
+                                    Dust.NewDust(base.NPC.position, base.NPC.width, base.NPC.height, 255, vz.X, vz.Y, 0, default(Color), 1f);
                                 }
-                                npc.position += Vk;
+                                NPC.position += Vk;
                                 for (int za = 0; za < 100; za++)
                                 {
                                     Vector2 vz = new Vector2(0, Main.rand.NextFloat(0, 5f)).RotatedByRandom(Math.PI * 2d);
-                                    Dust.NewDust(base.npc.position, base.npc.width, base.npc.height, 255, vz.X, vz.Y, 0, default(Color), 1f);
+                                    Dust.NewDust(base.NPC.position, base.NPC.width, base.NPC.height, 255, vz.X, vz.Y, 0, default(Color), 1f);
                                 }
                                 Tran = false;
                                 Chaos = 50;
@@ -277,17 +278,17 @@ namespace MythMod.NPCs.Yasitaya
                     VPre += ve;
                     if (ve.Length() > 4)
                     {
-                        npc.velocity += ve / ve.Length() * 4f;
+                        NPC.velocity += ve / ve.Length() * 4f;
                     }
                     else
                     {
-                        npc.velocity += ve;
+                        NPC.velocity += ve;
                     }
-                    if (npc.velocity.Length() > 8)
+                    if (NPC.velocity.Length() > 8)
                     {
-                        npc.velocity = npc.velocity / npc.velocity.Length() * 8f;
+                        NPC.velocity = NPC.velocity / NPC.velocity.Length() * 8f;
                     }
-                    if (npc.velocity.X * ve.X + npc.velocity.Y * ve.Y < -8)
+                    if (NPC.velocity.X * ve.X + NPC.velocity.Y * ve.Y < -8)
                     {
                         Tran = true;
                     }
@@ -297,24 +298,24 @@ namespace MythMod.NPCs.Yasitaya
                     VPre += ve;
                     if (ve.Length() > 3)
                     {
-                        npc.velocity += ve / ve.Length() * 3f;
+                        NPC.velocity += ve / ve.Length() * 3f;
                     }
                     else
                     {
-                        npc.velocity += ve;
+                        NPC.velocity += ve;
                     }
-                    if (npc.velocity.Length() > 3)
+                    if (NPC.velocity.Length() > 3)
                     {
-                        npc.velocity = npc.velocity / npc.velocity.Length() * 3f;
+                        NPC.velocity = NPC.velocity / NPC.velocity.Length() * 3f;
                     }
-                    if (npc.velocity.X * ve.X + npc.velocity.Y * ve.Y < -8)
+                    if (NPC.velocity.X * ve.X + NPC.velocity.Y * ve.Y < -8)
                     {
                         Tran = true;
                     }
                 }
-                if (npc.wet)
+                if (NPC.wet)
                 {
-                    npc.velocity.Y -= 0.1f;
+                    NPC.velocity.Y -= 0.1f;
                 }
                 float[] Ix = new float[201];
                 int Ixmin = 2000;
@@ -324,9 +325,9 @@ namespace MythMod.NPCs.Yasitaya
                     for (int j = 0; j < 200; j++)
                     {
                         Ix[j] = -1;
-                        if (Collision.CanHit(npc.Center, 1, 1, Main.npc[j].Center, 1, 1) && Main.npc[j].active && Main.npc[j].type != mod.NPCType("Yasitaya") && !Main.npc[j].friendly && Main.npc[j].type != NPCID.TargetDummy)
+                        if (Collision.CanHit(NPC.Center, 1, 1, Main.npc[j].Center, 1, 1) && Main.npc[j].active && Main.npc[j].type != Mod.Find<ModNPC>("Yasitaya").Type && !Main.npc[j].friendly && Main.npc[j].type != NPCID.TargetDummy)
                         {
-                            float num7 = (npc.Center - Main.npc[j].Center).Length();
+                            float num7 = (NPC.Center - Main.npc[j].Center).Length();
                             if (num7 < 800)
                             {
                                 Ix[j] = num7;
@@ -352,14 +353,14 @@ namespace MythMod.NPCs.Yasitaya
                 if (Count > 0)
                 {
                     Attacking = true;
-                    npc.aiStyle = -1;
+                    NPC.aiStyle = -1;
                     if (Ix[Ixmin] <= 120)
                     {
-                        if ((Main.npc[Ixmin].Center.X - npc.Center.X) != 0)
+                        if ((Main.npc[Ixmin].Center.X - NPC.Center.X) != 0)
                         {
-                            npc.direction = Math.Sign(Main.npc[Ixmin].Center.X - npc.Center.X);
+                            NPC.direction = Math.Sign(Main.npc[Ixmin].Center.X - NPC.Center.X);
                         }
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, mod.ProjectileType("YasitayaBlade"), 200, 4, 255, 0f, 0f);
+                        Projectile.NewProjectile(NPC.Center.X, NPC.Center.Y, 0, 0, Mod.Find<ModProjectile>("YasitayaBlade").Type, 200, 4, 255, 0f, 0f);
                         Attacktime = 25;
                     }
                 }
@@ -370,14 +371,14 @@ namespace MythMod.NPCs.Yasitaya
                 else
                 {
                     Attacktime = 0;
-                    npc.aiStyle = 7;
+                    NPC.aiStyle = 7;
                     Attacking = false;
                 }
                 if (Chaos > 0)
                 {
                     Chaos -= 1;
                     Vector2 vz = new Vector2(0, Main.rand.NextFloat(0, Chaos / 30f)).RotatedByRandom(Math.PI * 2d);
-                    Dust.NewDust(base.npc.position, base.npc.width, base.npc.height, 255, vz.X, vz.Y, 0, default(Color), Chaos / 60f);
+                    Dust.NewDust(base.NPC.position, base.NPC.width, base.NPC.height, 255, vz.X, vz.Y, 0, default(Color), Chaos / 60f);
                 }
                 else
                 {
@@ -407,7 +408,7 @@ namespace MythMod.NPCs.Yasitaya
                         string key2 = "当然,我还有一把";
                         Main.NewText(Language.GetTextValue(key2), Color.Yellow);
                         Attacking = true;
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, mod.ProjectileType("YasitayaBlade2"), 1, 4, 255, 0f, 0f);
+                        Projectile.NewProjectile(NPC.Center.X, NPC.Center.Y, 0, 0, Mod.Find<ModProjectile>("YasitayaBlade2").Type, 1, 4, 255, 0f, 0f);
                         Attacktime = 25;
                         Talk = 0;
                     }
@@ -417,12 +418,12 @@ namespace MythMod.NPCs.Yasitaya
                     Talk = 0;
                     if (Sent)
                     {
-                        if ((player.Center - npc.Center).Length() < 48)
+                        if ((player.Center - NPC.Center).Length() < 48)
                         {
                             string key2 = "这是我从小用到大的武器,今天送给你了,好好珍惜";
                             Main.NewText(Language.GetTextValue(key2), Color.Yellow);
                             Talk = 600;
-                            Item.NewItem((int)base.npc.position.X, (int)base.npc.position.Y - 40, base.npc.width, base.npc.height, base.mod.ItemType("YasitayaWeapon"), 1, false, 0, false, false);
+                            Item.NewItem((int)base.NPC.position.X, (int)base.NPC.position.Y - 40, base.NPC.width, base.NPC.height, base.Mod.Find<ModItem>("YasitayaWeapon").Type, 1, false, 0, false, false);
                             Sent = false;
                         }
                     }
@@ -431,15 +432,15 @@ namespace MythMod.NPCs.Yasitaya
             else
             {
                 timer++;
-                if (npc.life < 2000)
+                if (NPC.life < 2000)
                 {
-                    npc.townNPC = true;
-                    npc.friendly = true;
-                    npc.aiStyle = 7;
-                    npc.damage = 100;
-                    npc.defense = 100;
-                    npc.lifeMax = 500;
-                    npc.life = 500;
+                    NPC.townNPC = true;
+                    NPC.friendly = true;
+                    NPC.aiStyle = 7;
+                    NPC.damage = 100;
+                    NPC.defense = 100;
+                    NPC.lifeMax = 500;
+                    NPC.life = 500;
                     Talk = 480;
                     Battle = false;
                     string key2 = "停下!";
@@ -448,8 +449,8 @@ namespace MythMod.NPCs.Yasitaya
 
                 //飞行
                 locala += 1;
-                npc.friendly = false;
-                npc.townNPC = false;
+                NPC.friendly = false;
+                NPC.townNPC = false;
                 if (Fly)
                 {
                     WingCC += 1;
@@ -464,7 +465,7 @@ namespace MythMod.NPCs.Yasitaya
                     WingC = 0;
                     WingCC = 0;
                 }
-                if (!npc.collideY)
+                if (!NPC.collideY)
                 {
                     Fly = true;
                 }
@@ -486,14 +487,14 @@ namespace MythMod.NPCs.Yasitaya
                     {
                         for (int z = 2; z < 20; z++)
                         {
-                            float num7 = (npc.Center - (Main.projectile[j].Center + Main.projectile[j].velocity * z)).Length();
+                            float num7 = (NPC.Center - (Main.projectile[j].Center + Main.projectile[j].velocity * z)).Length();
                             if (num7 < 100)
                             {
                                 Px[j] = num7;
                             }
                             if (Px[j] < PxClo[j])
                             {
-                                DangerC[j] = npc.Center - (Main.projectile[j].Center + Main.projectile[j].velocity * z);
+                                DangerC[j] = NPC.Center - (Main.projectile[j].Center + Main.projectile[j].velocity * z);
                                 PxClo[j] = Px[j];
                                 Theaten[j] = Main.projectile[j].damage;
                             }
@@ -535,10 +536,10 @@ namespace MythMod.NPCs.Yasitaya
                     for (int i = 0; i < 100; i++)
                     {
                         Vector2 Vk = new Vector2(0, Main.rand.NextFloat(25, 600f)).RotatedBy(Main.rand.NextFloat(0, (float)Math.PI * 2f));
-                        Vector2 Vm = npc.Center + Vk;
-                        if (!Main.tile[(int)(Vm.X / 16), (int)(Vm.Y / 16)].active() && !Main.tile[(int)(Vm.X / 16), (int)(Vm.Y / 16) + 1].active() && !Main.tile[(int)(Vm.X / 16), (int)(Vm.Y / 16) - 1].active() &&
-                            !Main.tile[(int)(Vm.X / 16) + 1, (int)(Vm.Y / 16)].active() && !Main.tile[(int)(Vm.X / 16) + 1, (int)(Vm.Y / 16) + 1].active() && !Main.tile[(int)(Vm.X / 16) + 1, (int)(Vm.Y / 16) - 1].active() &&
-                            !Main.tile[(int)(Vm.X / 16) - 1, (int)(Vm.Y / 16)].active() && !Main.tile[(int)(Vm.X / 16) - 1, (int)(Vm.Y / 16) + 1].active() && !Main.tile[(int)(Vm.X / 16) - 1, (int)(Vm.Y / 16) - 1].active())
+                        Vector2 Vm = NPC.Center + Vk;
+                        if (!Main.tile[(int)(Vm.X / 16), (int)(Vm.Y / 16)].HasTile && !Main.tile[(int)(Vm.X / 16), (int)(Vm.Y / 16) + 1].HasTile && !Main.tile[(int)(Vm.X / 16), (int)(Vm.Y / 16) - 1].HasTile &&
+                            !Main.tile[(int)(Vm.X / 16) + 1, (int)(Vm.Y / 16)].HasTile && !Main.tile[(int)(Vm.X / 16) + 1, (int)(Vm.Y / 16) + 1].HasTile && !Main.tile[(int)(Vm.X / 16) + 1, (int)(Vm.Y / 16) - 1].HasTile &&
+                            !Main.tile[(int)(Vm.X / 16) - 1, (int)(Vm.Y / 16)].HasTile && !Main.tile[(int)(Vm.X / 16) - 1, (int)(Vm.Y / 16) + 1].HasTile && !Main.tile[(int)(Vm.X / 16) - 1, (int)(Vm.Y / 16) - 1].HasTile)
                         {
                             float[] Py = new float[1201];
                             float[] PyClo = new float[1201];
@@ -581,13 +582,13 @@ namespace MythMod.NPCs.Yasitaya
                                 for (int za = 0; za < 100; za++)
                                 {
                                     Vector2 vz = new Vector2(0, Main.rand.NextFloat(0, 5f)).RotatedByRandom(Math.PI * 2d);
-                                    Dust.NewDust(base.npc.position, base.npc.width, base.npc.height, 255, vz.X, vz.Y, 0, default(Color), 1f);
+                                    Dust.NewDust(base.NPC.position, base.NPC.width, base.NPC.height, 255, vz.X, vz.Y, 0, default(Color), 1f);
                                 }
-                                npc.position += Vk;
+                                NPC.position += Vk;
                                 for (int za = 0; za < 100; za++)
                                 {
                                     Vector2 vz = new Vector2(0, Main.rand.NextFloat(0, 5)).RotatedByRandom(Math.PI * 2d);
-                                    Dust.NewDust(base.npc.position, base.npc.width, base.npc.height, 255, vz.X, vz.Y, 0, default(Color), 1f);
+                                    Dust.NewDust(base.NPC.position, base.NPC.width, base.NPC.height, 255, vz.X, vz.Y, 0, default(Color), 1f);
                                 }
                                 Tran = false;
                                 Chaos = 50;
@@ -627,48 +628,48 @@ namespace MythMod.NPCs.Yasitaya
                     vShouldBe = player.Center + new Vector2(120, 0);
                     if (timer > 840)
                     {
-                        npc.spriteDirection = -1;
+                        NPC.spriteDirection = -1;
                     }
                 }
-                Vector2 Vadd = (vShouldBe - npc.Center) / (vShouldBe - npc.Center).Length() * 2f;
+                Vector2 Vadd = (vShouldBe - NPC.Center) / (vShouldBe - NPC.Center).Length() * 2f;
                 Vector2 VPre = Vector2.Zero;
                 if (Fly)
                 {
                     if (timer < 620)
                     {
                         VPre += ve;
-                        npc.velocity += Vadd;
+                        NPC.velocity += Vadd;
                         if (ve.Length() > 8)
                         {
-                            npc.velocity += ve / ve.Length() * 8f;
+                            NPC.velocity += ve / ve.Length() * 8f;
                         }
                         else
                         {
-                            npc.velocity += ve;
+                            NPC.velocity += ve;
                         }
-                        if (npc.velocity.Length() > 16)
+                        if (NPC.velocity.Length() > 16)
                         {
-                            npc.velocity = npc.velocity / npc.velocity.Length() * 16f;
+                            NPC.velocity = NPC.velocity / NPC.velocity.Length() * 16f;
                         }
                     }
                     if (timer < 1000 && timer > 800)
                     {
                         VPre += ve;
-                        npc.velocity += Vadd;
+                        NPC.velocity += Vadd;
                         if (ve.Length() > 8)
                         {
-                            npc.velocity += ve / ve.Length() * 8f;
+                            NPC.velocity += ve / ve.Length() * 8f;
                         }
                         else
                         {
-                            npc.velocity += ve;
+                            NPC.velocity += ve;
                         }
-                        if (npc.velocity.Length() > 16)
+                        if (NPC.velocity.Length() > 16)
                         {
-                            npc.velocity = npc.velocity / npc.velocity.Length() * 16f;
+                            NPC.velocity = NPC.velocity / NPC.velocity.Length() * 16f;
                         }
                     }
-                    if (npc.velocity.X * ve.X + npc.velocity.Y * ve.Y < -8 && Chaos == 0)
+                    if (NPC.velocity.X * ve.X + NPC.velocity.Y * ve.Y < -8 && Chaos == 0)
                     {
                         if (!Bantran)
                         {
@@ -680,39 +681,39 @@ namespace MythMod.NPCs.Yasitaya
                 {
                     if (timer < 600)
                     {
-                        npc.velocity += Vadd / 2.5f;
+                        NPC.velocity += Vadd / 2.5f;
                         VPre += ve;
                         if (ve.Length() > 6)
                         {
-                            npc.velocity += ve / ve.Length() * 6f;
+                            NPC.velocity += ve / ve.Length() * 6f;
                         }
                         else
                         {
-                            npc.velocity += ve;
+                            NPC.velocity += ve;
                         }
-                        if (npc.velocity.Length() > 6)
+                        if (NPC.velocity.Length() > 6)
                         {
-                            npc.velocity = npc.velocity / npc.velocity.Length() * 6f;
+                            NPC.velocity = NPC.velocity / NPC.velocity.Length() * 6f;
                         }
                     }
                     if (timer < 1000 && timer > 800)
                     {
-                        npc.velocity += Vadd / 2.5f;
+                        NPC.velocity += Vadd / 2.5f;
                         VPre += ve;
                         if (ve.Length() > 6)
                         {
-                            npc.velocity += ve / ve.Length() * 6f;
+                            NPC.velocity += ve / ve.Length() * 6f;
                         }
                         else
                         {
-                            npc.velocity += ve;
+                            NPC.velocity += ve;
                         }
-                        if (npc.velocity.Length() > 6)
+                        if (NPC.velocity.Length() > 6)
                         {
-                            npc.velocity = npc.velocity / npc.velocity.Length() * 6f;
+                            NPC.velocity = NPC.velocity / NPC.velocity.Length() * 6f;
                         }
                     }
-                    if (npc.velocity.X * ve.X + npc.velocity.Y * ve.Y < -8 && Chaos == 0)
+                    if (NPC.velocity.X * ve.X + NPC.velocity.Y * ve.Y < -8 && Chaos == 0)
                     {
                         if (!Bantran)
                         {
@@ -725,41 +726,41 @@ namespace MythMod.NPCs.Yasitaya
                     Shock = false;
                     vShouldBe = new Vector2(x, y) + player.Center;
                     int Countz = 0;
-                    if ((npc.Center - player.Center).Length() < 150)
+                    if ((NPC.Center - player.Center).Length() < 150)
                     {
                         Countz = 1;
                     }
-                    if ((npc.Center - player.Center).Length() > 320)
+                    if ((NPC.Center - player.Center).Length() > 320)
                     {
                         Countz = 2;
                     }
                     if (Attacktime == 0)
                     {
-                        if (npc.velocity.X != 0)
+                        if (NPC.velocity.X != 0)
                         {
-                            npc.spriteDirection = Math.Sign(npc.velocity.X);
-                            npc.direction = Math.Sign(npc.velocity.X);
+                            NPC.spriteDirection = Math.Sign(NPC.velocity.X);
+                            NPC.direction = Math.Sign(NPC.velocity.X);
                         }
                     }
                     if (Countz == 1 && !Attacking && locala > 240)
                     {
                         Attacking = true;
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, mod.ProjectileType("YasitayaBlade2"), 90, 4, 255, 0f, 0f);
-                        if (npc.velocity.X != 0)
+                        Projectile.NewProjectile(NPC.Center.X, NPC.Center.Y, 0, 0, Mod.Find<ModProjectile>("YasitayaBlade2").Type, 90, 4, 255, 0f, 0f);
+                        if (NPC.velocity.X != 0)
                         {
-                            npc.spriteDirection = Math.Sign(npc.velocity.X);
-                            npc.direction = Math.Sign(npc.velocity.X);
+                            NPC.spriteDirection = Math.Sign(NPC.velocity.X);
+                            NPC.direction = Math.Sign(NPC.velocity.X);
                         }
                         Attacktime = 25;
                     }
                     if (Countz == 2 && !Attacking && locala > 240)
                     {
                         Attacking = true;
-                        Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, mod.ProjectileType("YasitayaBlade3"), 90, 4, 255, 0f, 0f);
-                        if (npc.velocity.X != 0)
+                        Projectile.NewProjectile(NPC.Center.X, NPC.Center.Y, 0, 0, Mod.Find<ModProjectile>("YasitayaBlade3").Type, 90, 4, 255, 0f, 0f);
+                        if (NPC.velocity.X != 0)
                         {
-                            npc.spriteDirection = Math.Sign(npc.velocity.X);
-                            npc.direction = Math.Sign(npc.velocity.X);
+                            NPC.spriteDirection = Math.Sign(NPC.velocity.X);
+                            NPC.direction = Math.Sign(NPC.velocity.X);
                         }
                         Attacktime = 40;
                     }
@@ -777,28 +778,28 @@ namespace MythMod.NPCs.Yasitaya
                 {
                     if (timer == 500)
                     {
-                        Projectile.NewProjectile(npc.Center.X - 164, npc.Center.Y - 150, 0, 0, mod.ProjectileType("GiantSword"), 90, 4, 255, 0f, 0f);
+                        Projectile.NewProjectile(NPC.Center.X - 164, NPC.Center.Y - 150, 0, 0, Mod.Find<ModProjectile>("GiantSword").Type, 90, 4, 255, 0f, 0f);
                     }
                     if (timer == 600)
                     {
                         for (int k = 0; k < 18; k++)
                         {
-                            int h = Projectile.NewProjectile(npc.Center.X - 19 + (k - 8.5f) * 150, npc.Center.Y - 150 + (float)(60 * Math.Sin((k - 8.5f) / 3d)), 0, 0, mod.ProjectileType("BloodSwordGas"), 30, 0.5f, 255, Math.Abs((k - 8.5f) * 4f), 0);
+                            int h = Projectile.NewProjectile(NPC.Center.X - 19 + (k - 8.5f) * 150, NPC.Center.Y - 150 + (float)(60 * Math.Sin((k - 8.5f) / 3d)), 0, 0, Mod.Find<ModProjectile>("BloodSwordGas").Type, 30, 0.5f, 255, Math.Abs((k - 8.5f) * 4f), 0);
                             Main.projectile[h].ai[0] = Math.Abs((k - 8.5f) * 4f) + 30;
                         }
                     }
                     if (timer >= 600)
                     {
-                        if (!npc.collideY)
+                        if (!NPC.collideY)
                         {
-                            npc.velocity.Y += 1.3f;
-                            npc.velocity.X *= 0;
+                            NPC.velocity.Y += 1.3f;
+                            NPC.velocity.X *= 0;
                         }
                         else
                         {
                             if (!Shock)
                             {
-                                Projectile.NewProjectile(npc.Center.X, npc.Center.Y - 150, 0, 0, mod.ProjectileType("CrackBomb"), 90, 4, 255, 0f, 0f);
+                                Projectile.NewProjectile(NPC.Center.X, NPC.Center.Y - 150, 0, 0, Mod.Find<ModProjectile>("CrackBomb").Type, 90, 4, 255, 0f, 0f);
                                 Shock = true;
                             }
                         }
@@ -811,7 +812,7 @@ namespace MythMod.NPCs.Yasitaya
                 {
                     if (timer == 900)
                     {
-                        Projectile.NewProjectile(npc.Center.X - 164, npc.Center.Y - 150, 0, 0, mod.ProjectileType("DarkKnife"), 60, 4, 255, 0f, 0f);
+                        Projectile.NewProjectile(NPC.Center.X - 164, NPC.Center.Y - 150, 0, 0, Mod.Find<ModProjectile>("DarkKnife").Type, 60, 4, 255, 0f, 0f);
                     }
                 }
                 if (timer > 1000)
@@ -822,25 +823,25 @@ namespace MythMod.NPCs.Yasitaya
                 {
                     Chaos -= 1;
                     Vector2 vz = new Vector2(0, Main.rand.NextFloat(0, Chaos / 30f)).RotatedByRandom(Math.PI * 2d);
-                    Dust.NewDust(base.npc.position, base.npc.width, base.npc.height, 255, vz.X, vz.Y, 0, default(Color), Chaos / 60f);
+                    Dust.NewDust(base.NPC.position, base.NPC.width, base.NPC.height, 255, vz.X, vz.Y, 0, default(Color), Chaos / 60f);
                 }
                 else
                 {
                     Chaos = 0;
                 }
-                npc.dontTakeDamage = false;
+                NPC.dontTakeDamage = false;
             }
             if (player.dead && Battle)
             {
-                npc.townNPC = true;
-                npc.friendly = true;
-                npc.aiStyle = 7;
-                npc.damage = 100;
-                npc.defense = 100;
-                npc.lifeMax = 500;
-                npc.boss = false;
-                npc.life = 500;
-                npc.active = true;
+                NPC.townNPC = true;
+                NPC.friendly = true;
+                NPC.aiStyle = 7;
+                NPC.damage = 100;
+                NPC.defense = 100;
+                NPC.lifeMax = 500;
+                NPC.boss = false;
+                NPC.life = 500;
+                NPC.active = true;
                 locala = 0;
                 Battle = false;
                 string key2 = "我下手好像…重了点";
@@ -850,7 +851,7 @@ namespace MythMod.NPCs.Yasitaya
         private bool Shock = false;
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
         {
-            if (NPC.AnyNPCs(npc.type))
+            if (NPC.AnyNPCs(NPC.type))
             {
                 return 0f;
             }
@@ -907,32 +908,32 @@ namespace MythMod.NPCs.Yasitaya
         }
         public override void HitEffect(int hitDirection, double damage)
         {
-            if (npc.life < 2000 && Battle)
+            if (NPC.life < 2000 && Battle)
             {
-                npc.townNPC = true;
-                npc.friendly = true;
-                npc.aiStyle = 7;
-                npc.damage = 100;
-                npc.defense = 100;
-                npc.lifeMax = 500;
-                npc.boss = false;
-                npc.life = 500;
-                npc.active = true;
+                NPC.townNPC = true;
+                NPC.friendly = true;
+                NPC.aiStyle = 7;
+                NPC.damage = 100;
+                NPC.defense = 100;
+                NPC.lifeMax = 500;
+                NPC.boss = false;
+                NPC.life = 500;
+                NPC.active = true;
                 Talk = 480;
                 locala = 0;
                 Battle = false;
                 string key2 = "停下!";
                 Main.NewText(Language.GetTextValue(key2), Color.Yellow);
             }
-            if (npc.life < 10 && !Battle)
+            if (NPC.life < 10 && !Battle)
             {
-                npc.dontTakeDamage = true;
-                npc.active = true;
-                npc.life += 10;
+                NPC.dontTakeDamage = true;
+                NPC.active = true;
+                NPC.life += 10;
             }
-            if (npc.life >= 10 && !Battle)
+            if (NPC.life >= 10 && !Battle)
             {
-                npc.dontTakeDamage = false;
+                NPC.dontTakeDamage = false;
             }
         }
         /*String Ta = "挑战";*/
@@ -944,11 +945,11 @@ namespace MythMod.NPCs.Yasitaya
             {
                 if (!HasBeendown)
                 {
-                    npc.friendly = false;
-                    npc.aiStyle = -1;
-                    npc.lifeMax = 50000;
-                    npc.life = 50000;
-                    npc.boss = true;
+                    NPC.friendly = false;
+                    NPC.aiStyle = -1;
+                    NPC.lifeMax = 50000;
+                    NPC.life = 50000;
+                    NPC.boss = true;
                     locala = 0;
                     Battle = true;
                 }
@@ -1034,47 +1035,47 @@ namespace MythMod.NPCs.Yasitaya
         {
             multiplier = 2f;
         }
-        public override void PostDraw(SpriteBatch spriteBatch, Color drawColor)
+        public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             SpriteEffects effects = SpriteEffects.None;
-            if (base.npc.spriteDirection == 1)
+            if (base.NPC.spriteDirection == 1)
             {
                 effects = SpriteEffects.FlipHorizontally;
             }
-            Vector2 value = new Vector2(base.npc.Center.X, base.npc.Center.Y);
-            Vector2 vector = new Vector2((float)(Main.npcTexture[base.npc.type].Width / 2), (float)(Main.npcTexture[base.npc.type].Height / Main.npcFrameCount[base.npc.type] / 2));
+            Vector2 value = new Vector2(base.NPC.Center.X, base.NPC.Center.Y);
+            Vector2 vector = new Vector2((float)(TextureAssets.Npc[base.NPC.type].Value.Width / 2), (float)(TextureAssets.Npc[base.NPC.type].Value.Height / Main.npcFrameCount[base.NPC.type] / 2));
             Vector2 vector2 = value - Main.screenPosition;
-            vector2 -= new Vector2((float)base.mod.GetTexture("NPCs/Yasitaya/YasitayaGlow").Width, (float)(base.mod.GetTexture("NPCs/Yasitaya/YasitayaGlow").Height / Main.npcFrameCount[base.npc.type])) * 1f / 2f;
-            vector2 += vector * 1f + new Vector2(0f, 4f + base.npc.gfxOffY);
-            Color color2 = Lighting.GetColor((int)(npc.Center.X / 16d), (int)(npc.Center.Y / 16d));
-            Color color = Utils.MultiplyRGBA(new Color(297 - base.npc.alpha, 297 - base.npc.alpha, 297 - base.npc.alpha, 0), Color.White);
-            Main.spriteBatch.Draw(base.mod.GetTexture("NPCs/Yasitaya/YasitayaGlow"), vector2, new Rectangle?(base.npc.frame), color * (0.25f), base.npc.rotation, vector, 1f, effects, 0f);
+            vector2 -= new Vector2((float)base.Mod.GetTexture("NPCs/Yasitaya/YasitayaGlow").Width, (float)(base.Mod.GetTexture("NPCs/Yasitaya/YasitayaGlow").Height / Main.npcFrameCount[base.NPC.type])) * 1f / 2f;
+            vector2 += vector * 1f + new Vector2(0f, 4f + base.NPC.gfxOffY);
+            Color color2 = Lighting.GetColor((int)(NPC.Center.X / 16d), (int)(NPC.Center.Y / 16d));
+            Color color = Utils.MultiplyRGBA(new Color(297 - base.NPC.alpha, 297 - base.NPC.alpha, 297 - base.NPC.alpha, 0), Color.White);
+            Main.spriteBatch.Draw(base.Mod.GetTexture("NPCs/Yasitaya/YasitayaGlow"), vector2, new Rectangle?(base.NPC.frame), color * (0.25f), base.NPC.rotation, vector, 1f, effects, 0f);
             if (Chaos > 0)
             {
-                Main.spriteBatch.Draw(base.mod.GetTexture("NPCs/Yasitaya/YasitayaTran"), npc.Center - Main.screenPosition + new Vector2(12 * npc.spriteDirection, 0), new Rectangle(0, 0, 50, 46), color2, base.npc.rotation, new Vector2(25, 23), 1f, effects, 0f);
+                Main.spriteBatch.Draw(base.Mod.GetTexture("NPCs/Yasitaya/YasitayaTran"), NPC.Center - Main.screenPosition + new Vector2(12 * NPC.spriteDirection, 0), new Rectangle(0, 0, 50, 46), color2, base.NPC.rotation, new Vector2(25, 23), 1f, effects, 0f);
             }
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
             if (WingC > 3)
             {
                 WingC = 0;
             }
-            Color color2 = Lighting.GetColor((int)(npc.Center.X / 16d), (int)(npc.Center.Y / 16d));
+            Color color2 = Lighting.GetColor((int)(NPC.Center.X / 16d), (int)(NPC.Center.Y / 16d));
             if (Fly)
             {
                 SpriteEffects effects = SpriteEffects.None;
-                if (base.npc.spriteDirection == 1)
+                if (base.NPC.spriteDirection == 1)
                 {
                     effects = SpriteEffects.FlipHorizontally;
                 }
-                Vector2 value = new Vector2(base.npc.Center.X, base.npc.Center.Y);
-                Vector2 vector = new Vector2((float)(Main.npcTexture[base.npc.type].Width / 2), (float)(Main.npcTexture[base.npc.type].Height / Main.npcFrameCount[base.npc.type] / 2));
+                Vector2 value = new Vector2(base.NPC.Center.X, base.NPC.Center.Y);
+                Vector2 vector = new Vector2((float)(TextureAssets.Npc[base.NPC.type].Value.Width / 2), (float)(TextureAssets.Npc[base.NPC.type].Value.Height / Main.npcFrameCount[base.NPC.type] / 2));
                 Vector2 vector2 = value - Main.screenPosition;
-                vector2 -= new Vector2((float)base.mod.GetTexture("NPCs/Yasitaya/YasitayaWings").Width, (float)(base.mod.GetTexture("NPCs/Yasitaya/YasitayaWings").Height / 4)) * 1f / 2f;
-                vector2 += vector * 1f + new Vector2(0f, 4f + base.npc.gfxOffY);
+                vector2 -= new Vector2((float)base.Mod.GetTexture("NPCs/Yasitaya/YasitayaWings").Width, (float)(base.Mod.GetTexture("NPCs/Yasitaya/YasitayaWings").Height / 4)) * 1f / 2f;
+                vector2 += vector * 1f + new Vector2(0f, 4f + base.NPC.gfxOffY);
 
-                Main.spriteBatch.Draw(base.mod.GetTexture("NPCs/Yasitaya/YasitayaWings"), vector2 + new Vector2(18, 28) + new Vector2(2 * (1 - npc.spriteDirection) * 2, 0), new Rectangle(0, WingC * 56, 86, 56), color2, base.npc.rotation, new Vector2(43, 56), 1f, effects, 0f);
+                Main.spriteBatch.Draw(base.Mod.GetTexture("NPCs/Yasitaya/YasitayaWings"), vector2 + new Vector2(18, 28) + new Vector2(2 * (1 - NPC.spriteDirection) * 2, 0), new Rectangle(0, WingC * 56, 86, 56), color2, base.NPC.rotation, new Vector2(43, 56), 1f, effects, 0f);
 
             }
             return true;

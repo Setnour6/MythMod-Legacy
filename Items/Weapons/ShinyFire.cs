@@ -28,24 +28,24 @@ namespace MythMod.Items.Weapons
 		}
 		public override void SetDefaults()
 		{
-			base.item.damage = 5000;
-			base.item.magic = true;
-			base.item.mana = 100;
-			base.item.width = 28;
-			base.item.height = 30;
-			base.item.useTime = 48;
-			base.item.useAnimation = 48;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.knockBack = 6f;
-			base.item.value = 100000;
-			base.item.rare = 6;
-			base.item.UseSound = SoundID.Item14;
-			base.item.autoReuse = true;
-			base.item.shoot = base.mod.ProjectileType("焰火");
-			base.item.shootSpeed = 2.7f;
+			base.Item.damage = 5000;
+			base.Item.DamageType = DamageClass.Magic;
+			base.Item.mana = 100;
+			base.Item.width = 28;
+			base.Item.height = 30;
+			base.Item.useTime = 48;
+			base.Item.useAnimation = 48;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 6f;
+			base.Item.value = 100000;
+			base.Item.rare = 6;
+			base.Item.UseSound = SoundID.Item14;
+			base.Item.autoReuse = true;
+			base.Item.shoot = base.Mod.Find<ModProjectile>("焰火").Type;
+			base.Item.shootSpeed = 2.7f;
         }
-		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
 			float num = 0.7854f;
 			double num2 = Math.Atan2((double)speedX, (double)speedY) - (double)(num / 2f);

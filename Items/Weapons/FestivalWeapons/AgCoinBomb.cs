@@ -16,23 +16,23 @@ namespace MythMod.Items.Weapons.FestivalWeapons
 		}
 		public override void SetDefaults()
 		{
-            base.item.damage = 52;
-            base.item.thrown = true;
-            base.item.crit = 6;
-            base.item.width = 20;
-            base.item.height = 38;
-            base.item.useTime = 48;
-            base.item.useAnimation = 48;
-            base.item.useStyle = 5;
-            base.item.noMelee = true;
-            base.item.knockBack = 2f;
-            base.item.autoReuse = true;
-            base.item.value = Item.sellPrice(0, 0, 99, 99);
-            base.item.shoot = base.mod.ProjectileType("AgBomb");
-            base.item.noUseGraphic = true;
-            base.item.rare = 4;
-            base.item.UseSound = SoundID.Item5;
-            base.item.shootSpeed = 9f;
+            base.Item.damage = 52;
+            base.Item.DamageType = DamageClass.Throwing;
+            base.Item.crit = 6;
+            base.Item.width = 20;
+            base.Item.height = 38;
+            base.Item.useTime = 48;
+            base.Item.useAnimation = 48;
+            base.Item.useStyle = 5;
+            base.Item.noMelee = true;
+            base.Item.knockBack = 2f;
+            base.Item.autoReuse = true;
+            base.Item.value = Item.sellPrice(0, 0, 99, 99);
+            base.Item.shoot = base.Mod.Find<ModProjectile>("AgBomb").Type;
+            base.Item.noUseGraphic = true;
+            base.Item.rare = 4;
+            base.Item.UseSound = SoundID.Item5;
+            base.Item.shootSpeed = 9f;
         }
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
 		public override void AddRecipes()

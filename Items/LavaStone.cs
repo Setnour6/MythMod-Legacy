@@ -26,21 +26,21 @@ namespace MythMod.Items
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            base.item.createTile = base.mod.TileType("MeltingLava");
-			base.item.useStyle = 1;
-			base.item.useTurn = true;
-            base.item.useAnimation = 15;
-			base.item.useTime = 10;
-            base.item.autoReuse = true;
-			base.item.consumable = true;
-            item.width = 26;
-            item.height = 24;
-            item.rare = 2;
-            item.scale = 1f;
-            item.value = 500;
-            item.maxStack = 999;
-            item.useTime = 14;
+            Item.glowMask = GetGlowMask;
+            base.Item.createTile = base.Mod.Find<ModTile>("MeltingLava").Type;
+			base.Item.useStyle = 1;
+			base.Item.useTurn = true;
+            base.Item.useAnimation = 15;
+			base.Item.useTime = 10;
+            base.Item.autoReuse = true;
+			base.Item.consumable = true;
+            Item.width = 26;
+            Item.height = 24;
+            Item.rare = 2;
+            Item.scale = 1f;
+            Item.value = 500;
+            Item.maxStack = 999;
+            Item.useTime = 14;
         }
     }
 }

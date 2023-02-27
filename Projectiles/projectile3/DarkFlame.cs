@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,18 +23,18 @@ namespace MythMod.Projectiles.projectile3
         }
         public override void SetDefaults()
         {
-            projectile.width = 16;
-            projectile.height = 16;
-            projectile.aiStyle = -1;
-            projectile.friendly = false;
-            projectile.hostile = true;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = true;
-            projectile.timeLeft = 120;
-            projectile.alpha = 0;
-            projectile.penetrate = 3;
-            projectile.scale = 1f;
-            this.cooldownSlot = 1;
+            Projectile.width = 16;
+            Projectile.height = 16;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = false;
+            Projectile.hostile = true;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = true;
+            Projectile.timeLeft = 120;
+            Projectile.alpha = 0;
+            Projectile.penetrate = 3;
+            Projectile.scale = 1f;
+            this.CooldownSlot = 1;
         }
         private bool initialization = true;
         private double X;
@@ -43,7 +43,7 @@ namespace MythMod.Projectiles.projectile3
         private float rg = 0;
         public override void AI()
         {
-            base.projectile.rotation = (float)Math.Atan2((double)base.projectile.velocity.Y, (double)base.projectile.velocity.X) - (float)Math.PI * 0.5f;
+            base.Projectile.rotation = (float)Math.Atan2((double)base.Projectile.velocity.Y, (double)base.Projectile.velocity.X) - (float)Math.PI * 0.5f;
             /*if (projectile.timeLeft < 3595)
             {
                 Vector2 vector = base.projectile.Center;
@@ -52,8 +52,8 @@ namespace MythMod.Projectiles.projectile3
                 Main.dust[num].noGravity = true;
                 Main.dust[num].alpha = 150;
             }*/
-            projectile.velocity *= 0.985f;
-            projectile.velocity = projectile.velocity.RotatedBy(Main.rand.NextFloat(-0.25f,0.25f) / projectile.velocity.Length());
+            Projectile.velocity *= 0.985f;
+            Projectile.velocity = Projectile.velocity.RotatedBy(Main.rand.NextFloat(-0.25f,0.25f) / Projectile.velocity.Length());
         }
         public override Color? GetAlpha(Color lightColor)
         {
@@ -61,15 +61,15 @@ namespace MythMod.Projectiles.projectile3
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            base.projectile.penetrate--;
-            if (base.projectile.penetrate <= 0)
+            base.Projectile.penetrate--;
+            if (base.Projectile.penetrate <= 0)
             {
-                base.projectile.Kill();
+                base.Projectile.Kill();
             }
             else
             {
-                projectile.velocity = projectile.velocity.RotatedBy(Main.rand.NextFloat(1.57f, 4.71f));
-                projectile.velocity.Y *= 0.2f;
+                Projectile.velocity = Projectile.velocity.RotatedBy(Main.rand.NextFloat(1.57f, 4.71f));
+                Projectile.velocity.Y *= 0.2f;
             }
             return false;
         }

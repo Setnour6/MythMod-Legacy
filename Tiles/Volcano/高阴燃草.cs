@@ -7,7 +7,7 @@ namespace MythMod.Tiles.Volcano
 {
 	public class 高阴燃草 : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileCut[(int)base.Type] = true;
 			Main.tileSolid[(int)base.Type] = false;
@@ -16,17 +16,17 @@ namespace MythMod.Tiles.Volcano
 			Main.tileLavaDeath[(int)base.Type] = true;
 			Main.tileWaterDeath[(int)base.Type] = true;
 			Main.tileFrameImportant[(int)base.Type] = true;
-            this.dustType = 191;
-            this.soundStyle = 1;
-			this.soundType = 6;
+            this.DustType = 191;
+            this.soundStyle/* tModPorter Note: Removed. Integrate into HitSound */ = 1;
+			this.HitSound = 6;
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             base.AddMapEntry(new Color(127, 111, 144), modTranslation);
-			base.SetDefaults();
+			base.SetStaticDefaults();
 		}
         public override void PlaceInWorld(int i, int j, Item item)
         {
             short num = (short)(Main.rand.Next(0, 23));
-            Main.tile[i, j].frameX = (short)(num * 18);
+            Main.tile[i, j].TileFrameX = (short)(num * 18);
         }
     }
 }

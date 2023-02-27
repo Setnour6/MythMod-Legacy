@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class SexOnTheBeach : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("激情海岸");
             base.Description.SetDefault("伤害增加8%");

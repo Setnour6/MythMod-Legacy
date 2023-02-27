@@ -9,7 +9,7 @@ namespace MythMod.Tiles.Foods
 {
 	public class 荧光虾酱 : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
         {
             Main.tileLighted[(int)base.Type] = true;
             Main.tileFrameImportant[(int)base.Type] = true;
@@ -31,12 +31,12 @@ namespace MythMod.Tiles.Foods
             TileObjectData.addAlternate(1);
             TileObjectData.newTile.LavaDeath = false;
             TileObjectData.addTile((int)base.Type);
-            this.disableSmartCursor = true;
-            this.adjTiles = new int[]
+            this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+            this.AdjTiles = new int[]
             {
                 15
             };
-            this.dustType = -1;
+            this.DustType = -1;
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
             base.AddMapEntry(new Color(153, 107, 0), modTranslation);
@@ -50,7 +50,7 @@ namespace MythMod.Tiles.Foods
                 zero = Vector2.Zero;
             }
             int height = 16;
-            Main.spriteBatch.Draw(mod.GetTexture("Tiles/Foods/荧光虾酱Glow"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.frameX, tile.frameY, 16, height), new Color(255, 255, 255, 0), 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(Mod.GetTexture("Tiles/Foods/荧光虾酱Glow"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, height), new Color(255, 255, 255, 0), 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
         }
         public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
         {
@@ -64,7 +64,7 @@ namespace MythMod.Tiles.Foods
 		}
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("GlowingShrimpJam"));
+            Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("GlowingShrimpJam").Type);
         }
     }
 }

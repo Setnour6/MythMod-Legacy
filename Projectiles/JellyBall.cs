@@ -13,19 +13,19 @@ namespace MythMod.Projectiles
 		}
 		public override void SetDefaults()
 		{
-			base.projectile.width = 20;
-			base.projectile.height = 20;
-			base.projectile.friendly = true;
-			base.projectile.melee = true;
-			base.projectile.penetrate = 15;
-			base.projectile.aiStyle = 1;
-			base.projectile.timeLeft = 1200;
-            base.projectile.hostile = false;
+			base.Projectile.width = 20;
+			base.Projectile.height = 20;
+			base.Projectile.friendly = true;
+			base.Projectile.DamageType = DamageClass.Melee;
+			base.Projectile.penetrate = 15;
+			base.Projectile.aiStyle = 1;
+			base.Projectile.timeLeft = 1200;
+            base.Projectile.hostile = false;
 		}
 		public override void AI()
 		{
-			base.projectile.localAI[0] += 1f;
-			if (base.projectile.localAI[0] > 4f)
+			base.Projectile.localAI[0] += 1f;
+			if (base.Projectile.localAI[0] > 4f)
 			{
 			}
 			this.projTime--;
@@ -36,23 +36,23 @@ namespace MythMod.Projectiles
 		}
 		public override bool OnTileCollide(Vector2 oldVelocity)
 		{
-			base.projectile.penetrate--;
-			if (base.projectile.penetrate <= 0)
+			base.Projectile.penetrate--;
+			if (base.Projectile.penetrate <= 0)
 			{
-				base.projectile.Kill();
+				base.Projectile.Kill();
 			}
 			else
 			{
-				base.projectile.ai[0] += 0.1f;
-				if (base.projectile.velocity.X != oldVelocity.X)
+				base.Projectile.ai[0] += 0.1f;
+				if (base.Projectile.velocity.X != oldVelocity.X)
 				{
-					base.projectile.velocity.X = -oldVelocity.X;
+					base.Projectile.velocity.X = -oldVelocity.X;
 				}
-				if (base.projectile.velocity.Y != oldVelocity.Y)
+				if (base.Projectile.velocity.Y != oldVelocity.Y)
 				{
-					base.projectile.velocity.Y = -oldVelocity.Y;
+					base.Projectile.velocity.Y = -oldVelocity.Y;
 				}
-				base.projectile.velocity *= 0.98f;
+				base.Projectile.velocity *= 0.98f;
 			}
 			return false;
 		}

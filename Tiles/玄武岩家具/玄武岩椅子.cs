@@ -12,7 +12,7 @@ namespace MythMod.Tiles.玄武岩家具
 	public class 玄武岩椅子 : ModTile
 	{
 		// Token: 0x0600415E RID: 16734 RVA: 0x0032B55C File Offset: 0x0032975C
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[(int)base.Type] = true;
 			Main.tileNoAttach[(int)base.Type] = true;
@@ -36,8 +36,8 @@ namespace MythMod.Tiles.玄武岩家具
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
 			modTranslation.SetDefault("玄武岩椅子");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
-			this.disableSmartCursor = true;
-			this.adjTiles = new int[]
+			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+			this.AdjTiles = new int[]
 			{
 				15
 			};
@@ -60,7 +60,7 @@ namespace MythMod.Tiles.玄武岩家具
 		// Token: 0x06004161 RID: 16737 RVA: 0x0032B680 File Offset: 0x00329880
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("BasaltChair"), 1, false, 0, false, false);
+			Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("BasaltChair").Type, 1, false, 0, false, false);
 		}
 	}
 }

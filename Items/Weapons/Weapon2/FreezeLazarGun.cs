@@ -26,24 +26,24 @@ namespace MythMod.Items.Weapons.Weapon2
         }
         public override void SetDefaults()
         {
-            base.item.damage = 150;
-			base.item.width = 46;
-			base.item.height = 26;
-			base.item.useTime = 11;
-			base.item.useAnimation = 11;
-			base.item.useStyle = 5;
-            base.item.mana = 11;
-            base.item.noMelee = true;
-			base.item.magic = true;
-			base.item.knockBack = 1f;
-			base.item.value = 50000;
-			base.item.rare = 6;
-			base.item.UseSound = SoundID.Item31;
-			base.item.autoReuse = true;
-            base.item.shoot = base.mod.ProjectileType("FreezeLazar");
-			base.item.shootSpeed = 40f;
+            base.Item.damage = 150;
+			base.Item.width = 46;
+			base.Item.height = 26;
+			base.Item.useTime = 11;
+			base.Item.useAnimation = 11;
+			base.Item.useStyle = 5;
+            base.Item.mana = 11;
+            base.Item.noMelee = true;
+			base.Item.DamageType = DamageClass.Magic;
+			base.Item.knockBack = 1f;
+			base.Item.value = 50000;
+			base.Item.rare = 6;
+			base.Item.UseSound = SoundID.Item31;
+			base.Item.autoReuse = true;
+            base.Item.shoot = base.Mod.Find<ModProjectile>("FreezeLazar").Type;
+			base.Item.shootSpeed = 40f;
 		}
-        public override bool ConsumeAmmo(Player player)
+        public override bool CanConsumeAmmo(Item ammo, Player player)
 		{
 			return Main.rand.Next(0, 100) > 24;
 		}
@@ -53,12 +53,11 @@ namespace MythMod.Items.Weapons.Weapon2
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(514);
             recipe.AddIngredient(2161, 5);
-            recipe.SetResult(this, 1);
             recipe.requiredTile[0] = 134;
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

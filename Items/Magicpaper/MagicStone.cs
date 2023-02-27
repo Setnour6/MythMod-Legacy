@@ -15,11 +15,11 @@ namespace MythMod.Items.Magicpaper
         }
         public override void SetDefaults()
         {
-            item.width = 26;
-            item.height = 40;
-            item.maxStack = 999;
-            item.value = 6000000;
-            item.rare = 1;
+            Item.width = 26;
+            Item.height = 40;
+            Item.maxStack = 999;
+            Item.value = 6000000;
+            Item.rare = 1;
         }
     }
 }

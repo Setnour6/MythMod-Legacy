@@ -13,11 +13,11 @@ namespace MythMod.Waters
 		}
 		public override int ChooseWaterfallStyle()
 		{
-			return base.mod.GetWaterfallStyleSlot("CoralWaterflow");
+			return base.Mod.GetWaterfallStyleSlot("CoralWaterflow");
 		}
 		public override int GetSplashDust()
 		{
-			return mod.DustType("Wave");
+			return Mod.Find<ModDust>("Wave").Type;
 		}
 		public override int GetDropletGore()
 		{

@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class JinglingFeishi : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("精灵菲仕");
             base.Description.SetDefault("攻击力增加4%,暴击率增加6%");

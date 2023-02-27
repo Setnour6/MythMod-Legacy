@@ -22,17 +22,17 @@ namespace MythMod.Projectiles.projectile4
         }
         public override void SetDefaults()
         {
-            projectile.width = 26;
-            projectile.height = 26;
-            projectile.aiStyle = -1;
-            projectile.hostile = true;
-            projectile.friendly = false;
-            projectile.ignoreWater = true;
-            projectile.magic = true;
-            projectile.tileCollide = false;
-            projectile.timeLeft = 20;
-            projectile.penetrate = 1;
-            projectile.scale = 1;
+            Projectile.width = 26;
+            Projectile.height = 26;
+            Projectile.aiStyle = -1;
+            Projectile.hostile = true;
+            Projectile.friendly = false;
+            Projectile.ignoreWater = true;
+            Projectile.DamageType = DamageClass.Magic;
+            Projectile.tileCollide = false;
+            Projectile.timeLeft = 20;
+            Projectile.penetrate = 1;
+            Projectile.scale = 1;
         }
         private bool initialization = true;
         private double X;
@@ -47,28 +47,28 @@ namespace MythMod.Projectiles.projectile4
         }
         public override void AI()
         {
-            if (projectile.timeLeft == 20)
+            if (Projectile.timeLeft == 20)
             {
                 Vector2 vo = new Vector2(0, 5).RotatedByRandom(Math.PI * 2);
                 b = Main.rand.NextFloat(0, 100f);
-                vL[0] = projectile.Center;
-                for (int i = 1; i < projectile.ai[0]; i++)
+                vL[0] = Projectile.Center;
+                for (int i = 1; i < Projectile.ai[0]; i++)
                 {
                     vL[i] = vL[i - 1] + vo + new Vector2(0, Main.rand.NextFloat(0, 3f)).RotatedByRandom(Math.PI * 2);
                     vo = vo.RotatedBy(Main.rand.NextFloat(-0.15f,0.15f));
-                    if (Main.rand.Next(100) < 4 && projectile.ai[1] > -2)
+                    if (Main.rand.Next(100) < 4 && Projectile.ai[1] > -2)
                     {
-                        Projectile.NewProjectile(vL[i].X, vL[i].Y, 0, 0, mod.ProjectileType("RedLightingbolt"), 0, 0f, Main.myPlayer, projectile.ai[0] - i, projectile.ai[1] - 1f);
+                        Projectile.NewProjectile(vL[i].X, vL[i].Y, 0, 0, Mod.Find<ModProjectile>("RedLightingbolt").Type, 0, 0f, Main.myPlayer, Projectile.ai[0] - i, Projectile.ai[1] - 1f);
                     }
                 }
             }
-            if (projectile.timeLeft == 10)
+            if (Projectile.timeLeft == 10)
             {
                 int I = 0;
                 for (int i = 15; i < 99; i++)
                 {
-                    projectile.position = vL[i];
-                    if (Main.tile[(int)(projectile.Center.X / 16), (int)(projectile.Center.Y / 16)].type == 367 || Main.tile[(int)(projectile.Center.X / 16), (int)(projectile.Center.Y / 16)].type == 357)
+                    Projectile.position = vL[i];
+                    if (Main.tile[(int)(Projectile.Center.X / 16), (int)(Projectile.Center.Y / 16)].TileType == 367 || Main.tile[(int)(Projectile.Center.X / 16), (int)(Projectile.Center.Y / 16)].TileType == 357)
                     {
                         I = i;
                         break;
@@ -79,9 +79,9 @@ namespace MythMod.Projectiles.projectile4
                     for (int j = 0; j < 15; j++)
                     {
                         Vector2 v0 = new Vector2(0, Main.rand.NextFloat(0f, 3f)).RotatedByRandom(Math.PI * 2);
-                        int num = Dust.NewDust(vL[I] - new Vector2(4, 4) + new Vector2(0, 12).RotatedBy(projectile.timeLeft / 4f), 2, 2, 112, v0.X, v0.Y, 0, default(Color), Main.rand.NextFloat(0.5f, 1.2f));
+                        int num = Dust.NewDust(vL[I] - new Vector2(4, 4) + new Vector2(0, 12).RotatedBy(Projectile.timeLeft / 4f), 2, 2, 112, v0.X, v0.Y, 0, default(Color), Main.rand.NextFloat(0.5f, 1.2f));
                         v0 = new Vector2(0, Main.rand.NextFloat(0f, 6f)).RotatedByRandom(Math.PI * 2);
-                        int num1 = Dust.NewDust(vL[I] - new Vector2(4, 4) + new Vector2(0, 12).RotatedBy(projectile.timeLeft / 4f), 2, 2, 112, v0.X, v0.Y, 0, default(Color), Main.rand.NextFloat(0.5f, 1.2f));
+                        int num1 = Dust.NewDust(vL[I] - new Vector2(4, 4) + new Vector2(0, 12).RotatedBy(Projectile.timeLeft / 4f), 2, 2, 112, v0.X, v0.Y, 0, default(Color), Main.rand.NextFloat(0.5f, 1.2f));
                     }
                     for (int i = I; i < 99; i++)
                     {
@@ -89,14 +89,14 @@ namespace MythMod.Projectiles.projectile4
                     }
                 }
             }
-            if (projectile.timeLeft < 10)
+            if (Projectile.timeLeft < 10)
             {
                 for (int i = 1; i < 99; i++)
                 {
                     if (vL[i] != Vector2.Zero)
                     {
                         vL[i] += new Vector2(0,Main.rand.NextFloat(0,2f)).RotatedByRandom(Math.PI * 2);
-                        Lighting.AddLight(vL[i],new Vector3(1f, 0, 0f) * 0.1f * projectile.timeLeft);
+                        Lighting.AddLight(vL[i],new Vector3(1f, 0, 0f) * 0.1f * Projectile.timeLeft);
                     }
                 }
             }
@@ -104,7 +104,7 @@ namespace MythMod.Projectiles.projectile4
         public override void Kill(int timeLeft)
         {
         }
-        public override void PostDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override void PostDraw(Color lightColor)
         {
             List<CustomVertexInfo> bars = new List<CustomVertexInfo>();
 
@@ -116,15 +116,15 @@ namespace MythMod.Projectiles.projectile4
                     break;
                 }
                 int width = 40;
-                if (projectile.timeLeft < 10)
+                if (Projectile.timeLeft < 10)
                 {
-                    if (projectile.timeLeft > 5)
+                    if (Projectile.timeLeft > 5)
                     {
                         width = 20;
                     }
                     else
                     {
-                        width = projectile.timeLeft * 4;
+                        width = Projectile.timeLeft * 4;
                     }
                 }
                 else

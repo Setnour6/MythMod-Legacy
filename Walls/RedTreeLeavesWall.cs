@@ -14,10 +14,10 @@ namespace MythMod.Walls
 {
     public class RedTreeLeavesWall : ModWall
     {
-        public override void SetDefaults()
+        public override void SetStaticDefaults()
         {
             Main.wallHouse[(int)base.Type] = true;
-            this.dustType = 163;
+            this.DustType = 163;
             /*this.drop = base.mod.ItemType("RedTreeLeavesWall");*/
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");

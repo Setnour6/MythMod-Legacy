@@ -22,12 +22,12 @@ namespace MythMod.Items
 		// Token: 0x06000910 RID: 2320 RVA: 0x0004C6BC File Offset: 0x0004A8BC
 		public override void SetDefaults()
 		{
-            base.item.maxStack = 1;
-            base.item.consumable = false;
-            base.item.width = 24;
-            base.item.height = 24;
-            base.item.rare = 9;
-            base.item.expert = true;
+            base.Item.maxStack = 1;
+            base.Item.consumable = false;
+            base.Item.width = 24;
+            base.Item.height = 24;
+            base.Item.rare = 9;
+            base.Item.expert = true;
             //this.bossBagNPC = 50;
 		}
 
@@ -40,7 +40,7 @@ namespace MythMod.Items
         // Token: 0x06000912 RID: 2322 RVA: 0x0004C730 File Offset: 0x0004A930
         public override void RightClick(Player player)
         {
-            player.QuickSpawnItem(base.mod.ItemType("FTJEChest2"), 1);
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("FTJEChest2").Type, 1);
 			//player.QuickSpawnItem(1121, 1);
 			//player.QuickSpawnItem(1123, 1);
 			//player.QuickSpawnItem(2888, 1);
@@ -59,11 +59,11 @@ namespace MythMod.Items
 			//player.QuickSpawnItem(3333, 1);
             if(Main.rand.Next(100) >= 50)
             {
-                player.QuickSpawnItem(base.mod.ItemType("SwordFTJE"), 1);
+                player.QuickSpawnItem(base.Mod.Find<ModItem>("SwordFTJE").Type, 1);
             }
-            player.QuickSpawnItem(base.mod.ItemType("MothEye"), 1);
-            player.QuickSpawnItem(base.mod.ItemType("DustOfCorrupt"), 1);
-            item.stack--;
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("MothEye").Type, 1);
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("DustOfCorrupt").Type, 1);
+            Item.stack--;
         }
     }
 }

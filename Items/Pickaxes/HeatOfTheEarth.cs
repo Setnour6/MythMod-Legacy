@@ -24,22 +24,22 @@ namespace MythMod.Items.Pickaxes
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            base.item.damage = 240;
-			base.item.melee = true;
-			base.item.width = 46;
-			base.item.height = 46;
-			base.item.useTime = 5;
-			base.item.useAnimation = 5;
-			base.item.useTurn = true;
-			base.item.pick = 350;
-			base.item.useStyle = 1;
-			base.item.knockBack = 9f;
-			base.item.value = 100000;
-			base.item.UseSound = SoundID.Item1;
-			base.item.autoReuse = true;
-			base.item.tileBoost += 4;
-            base.item.rare = 11;
+            Item.glowMask = GetGlowMask;
+            base.Item.damage = 240;
+			base.Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+			base.Item.width = 46;
+			base.Item.height = 46;
+			base.Item.useTime = 5;
+			base.Item.useAnimation = 5;
+			base.Item.useTurn = true;
+			base.Item.pick = 350;
+			base.Item.useStyle = 1;
+			base.Item.knockBack = 9f;
+			base.Item.value = 100000;
+			base.Item.UseSound = SoundID.Item1;
+			base.Item.autoReuse = true;
+			base.Item.tileBoost += 4;
+            base.Item.rare = 11;
 		}
 		public override void MeleeEffects(Player player, Rectangle hitbox)
 		{

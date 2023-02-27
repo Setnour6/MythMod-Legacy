@@ -7,7 +7,7 @@ namespace MythMod.Buffs
 {
     public class Missable : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("Missable");
             base.Description.SetDefault("闪避率增加6%");

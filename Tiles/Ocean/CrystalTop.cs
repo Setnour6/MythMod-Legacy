@@ -13,19 +13,19 @@ namespace MythMod.Tiles.Ocean
 	{
 		private float num5 = 0;
 		private int num6 = 0;
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileSolid[(int)base.Type] = true;
 			Main.tileMergeDirt[(int)base.Type] = true;
 			Main.tileBlendAll[(int)base.Type] = true;
 			Main.tileBlockLight[(int)base.Type] = true;
 			Main.tileShine2[(int)base.Type] = true;
-			Main.tileValue[(int)base.Type] = 1300;
-			this.minPick = 200;
-			this.dustType = 183;
-			this.soundType = 21;
-			this.soundStyle = 2;
-            this.drop = base.mod.ItemType("CrystalTop");
+			Main.tileOreFinderPriority[(int)base.Type] = 1300;
+			this.MinPick = 200;
+			this.DustType = 183;
+			this.HitSound = 21;
+			this.soundStyle/* tModPorter Note: Removed. Integrate into HitSound */ = 2;
+            this.ItemDrop = base.Mod.Find<ModItem>("CrystalTop").Type;
 			Main.tileSpelunker[(int)base.Type] = true;
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
 			base.AddMapEntry(new Color(0,115,231), modTranslation);

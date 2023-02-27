@@ -29,25 +29,25 @@ namespace MythMod.Items.Weapons
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            base.item.damage = 120;
-			base.item.magic = true;
-			base.item.mana = 15;
-			base.item.width = 28;
-			base.item.height = 30;
-			base.item.useTime = 9;
-			base.item.useAnimation = 9;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.knockBack = 6f;
-			base.item.value = 10000;
-			base.item.rare = 6;
-			base.item.UseSound = SoundID.Item14;
-			base.item.autoReuse = true;
-			base.item.shoot = base.mod.ProjectileType("THUNDER");
-			base.item.shootSpeed = 4f;
+            Item.glowMask = GetGlowMask;
+            base.Item.damage = 120;
+			base.Item.DamageType = DamageClass.Magic;
+			base.Item.mana = 15;
+			base.Item.width = 28;
+			base.Item.height = 30;
+			base.Item.useTime = 9;
+			base.Item.useAnimation = 9;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 6f;
+			base.Item.value = 10000;
+			base.Item.rare = 6;
+			base.Item.UseSound = SoundID.Item14;
+			base.Item.autoReuse = true;
+			base.Item.shoot = base.Mod.Find<ModProjectile>("THUNDER").Type;
+			base.Item.shootSpeed = 4f;
         }
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Vector2 v = new Vector2(speedX, speedY);
             int i = Main.rand.Next(1, 3);
@@ -62,14 +62,13 @@ namespace MythMod.Items.Weapons
         }
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(1508, 20);
             modRecipe.AddIngredient(531, 1);
             modRecipe.AddIngredient(null, "MysteriesPearl", 1);
             modRecipe.AddIngredient(null, "LazarBattery", 10);
             modRecipe.requiredTile[0] = 125;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
     }
 }

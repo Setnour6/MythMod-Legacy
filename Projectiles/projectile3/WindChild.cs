@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.GameInput;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
@@ -20,21 +21,21 @@ namespace MythMod.Projectiles.projectile3
         public override void SetStaticDefaults()
         {
             base.DisplayName.SetDefault("风之子");
-            Main.projFrames[projectile.type] = 6;
+            Main.projFrames[Projectile.type] = 6;
         }
 
         public override void SetDefaults()
         {
-            base.projectile.width = 54;
-            base.projectile.height = 54;
-            base.projectile.friendly = false;
-            base.projectile.hostile = false;
-            base.projectile.ignoreWater = true;
-            base.projectile.penetrate = -1;
-            base.projectile.timeLeft = 26;
-            base.projectile.usesLocalNPCImmunity = true;
-            base.projectile.localNPCHitCooldown = 1;
-            base.projectile.tileCollide = false;
+            base.Projectile.width = 54;
+            base.Projectile.height = 54;
+            base.Projectile.friendly = false;
+            base.Projectile.hostile = false;
+            base.Projectile.ignoreWater = true;
+            base.Projectile.penetrate = -1;
+            base.Projectile.timeLeft = 26;
+            base.Projectile.usesLocalNPCImmunity = true;
+            base.Projectile.localNPCHitCooldown = 1;
+            base.Projectile.tileCollide = false;
         }
         private float num4;
         private float Dx = 0;
@@ -48,24 +49,24 @@ namespace MythMod.Projectiles.projectile3
         {
             Player p = Main.player[Main.myPlayer];
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
-            p.AddBuff(mod.BuffType("WindSprite1"), 3600, true);
-            if (projectile.timeLeft == 16)
+            p.AddBuff(Mod.Find<ModBuff>("WindSprite1").Type, 3600, true);
+            if (Projectile.timeLeft == 16)
             {
-                Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, projectile.velocity.X, projectile.velocity.Y, mod.ProjectileType("WindSprite1"), projectile.damage, projectile.knockBack, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, Projectile.velocity.X, Projectile.velocity.Y, Mod.Find<ModProjectile>("WindSprite1").Type, Projectile.damage, Projectile.knockBack, Main.myPlayer, 0f, 0f);
             }
-            if (projectile.timeLeft == 14)
+            if (Projectile.timeLeft == 14)
             {
-                Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, projectile.velocity.X, projectile.velocity.Y, mod.ProjectileType("WindSprite2"), projectile.damage, projectile.knockBack, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, Projectile.velocity.X, Projectile.velocity.Y, Mod.Find<ModProjectile>("WindSprite2").Type, Projectile.damage, Projectile.knockBack, Main.myPlayer, 0f, 0f);
             }
             if (Main.time % 8 == 1)
             {
-                if (projectile.frame < 5)
+                if (Projectile.frame < 5)
                 {
-                    projectile.frame += 1;
+                    Projectile.frame += 1;
                 }
                 else
                 {
-                    projectile.frame = 0;
+                    Projectile.frame = 0;
                 }
             }
             if (k == 0)
@@ -75,13 +76,13 @@ namespace MythMod.Projectiles.projectile3
                 k += 1;
             }
             v = v / v.Length();
-            projectile.velocity = v * 20f;
-            projectile.position = p.Center + v - new Vector2(27, 27);
-            projectile.spriteDirection = D;
-            base.projectile.rotation = (float)Math.Atan2((double)base.projectile.velocity.Y * p.direction, (double)base.projectile.velocity.X * p.direction) + (float)Math.PI / 4f * projectile.spriteDirection;
+            Projectile.velocity = v * 20f;
+            Projectile.position = p.Center + v - new Vector2(27, 27);
+            Projectile.spriteDirection = D;
+            base.Projectile.rotation = (float)Math.Atan2((double)base.Projectile.velocity.Y * p.direction, (double)base.Projectile.velocity.X * p.direction) + (float)Math.PI / 4f * Projectile.spriteDirection;
             //p.ChangeDir(base.projectile.direction);
-            p.heldProj = base.projectile.whoAmI;
-            projectile.alpha = 0;
+            p.heldProj = base.Projectile.whoAmI;
+            Projectile.alpha = 0;
             k = 1;
             l += 1;
             if (l <= 27)
@@ -103,25 +104,25 @@ namespace MythMod.Projectiles.projectile3
                 l = 0;
             }
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
         {
             SpriteEffects effects = SpriteEffects.None;
-            if (projectile.spriteDirection == 1)
+            if (Projectile.spriteDirection == 1)
             {
                 effects = SpriteEffects.FlipHorizontally;
-                Texture2D texture2D = Main.projectileTexture[base.projectile.type];
-                int num = Main.projectileTexture[base.projectile.type].Height / Main.projFrames[base.projectile.type];
-                int y = num * base.projectile.frame;
-                Main.spriteBatch.Draw(texture2D, base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), base.projectile.GetAlpha(lightColor), base.projectile.rotation + (float)Math.PI / 2f, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.projectile.scale, effects, 0f);
-                Main.spriteBatch.Draw(mod.GetTexture("Projectiles/projectile3/WindChildGlow"), base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), new Color(255, 255, 255, 0), base.projectile.rotation + (float)Math.PI / 2f, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.projectile.scale, effects, 0f);
+                Texture2D texture2D = TextureAssets.Projectile[base.Projectile.type].Value;
+                int num = TextureAssets.Projectile[base.Projectile.type].Value.Height / Main.projFrames[base.Projectile.type];
+                int y = num * base.Projectile.frame;
+                Main.spriteBatch.Draw(texture2D, base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), base.Projectile.GetAlpha(lightColor), base.Projectile.rotation + (float)Math.PI / 2f, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.Projectile.scale, effects, 0f);
+                Main.spriteBatch.Draw(Mod.GetTexture("Projectiles/projectile3/WindChildGlow"), base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), new Color(255, 255, 255, 0), base.Projectile.rotation + (float)Math.PI / 2f, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.Projectile.scale, effects, 0f);
             }
             else
             {
-                Texture2D texture2D = Main.projectileTexture[base.projectile.type];
-                int num = Main.projectileTexture[base.projectile.type].Height / Main.projFrames[base.projectile.type];
-                int y = num * base.projectile.frame;
-                Main.spriteBatch.Draw(texture2D, base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), base.projectile.GetAlpha(lightColor), base.projectile.rotation - (float)Math.PI / 2f, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.projectile.scale, effects, 0f);
-                Main.spriteBatch.Draw(mod.GetTexture("Projectiles/projectile3/WindChildGlow"), base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), new Color(255,255,255,0), base.projectile.rotation - (float)Math.PI / 2f, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.projectile.scale, effects, 0f);
+                Texture2D texture2D = TextureAssets.Projectile[base.Projectile.type].Value;
+                int num = TextureAssets.Projectile[base.Projectile.type].Value.Height / Main.projFrames[base.Projectile.type];
+                int y = num * base.Projectile.frame;
+                Main.spriteBatch.Draw(texture2D, base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), base.Projectile.GetAlpha(lightColor), base.Projectile.rotation - (float)Math.PI / 2f, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.Projectile.scale, effects, 0f);
+                Main.spriteBatch.Draw(Mod.GetTexture("Projectiles/projectile3/WindChildGlow"), base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), new Color(255,255,255,0), base.Projectile.rotation - (float)Math.PI / 2f, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.Projectile.scale, effects, 0f);
             }
             return false;
         }

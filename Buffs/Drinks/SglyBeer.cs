@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class SglyBeer : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("桑格利亚");
             base.Description.SetDefault("伤害增加9%");

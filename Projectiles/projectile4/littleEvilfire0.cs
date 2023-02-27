@@ -15,17 +15,17 @@ namespace MythMod.Projectiles.projectile4
 		}
 		public override void SetDefaults()
 		{
-			projectile.width = 12;
-			projectile.height = 12;
-            projectile.hostile = false;
-            projectile.friendly = false;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = true;
-            projectile.alpha = 0;
-			projectile.penetrate = 11;
-			projectile.timeLeft = 900;
-            projectile.extraUpdates = 96;
-            projectile.tileCollide = true;
+			Projectile.width = 12;
+			Projectile.height = 12;
+            Projectile.hostile = false;
+            Projectile.friendly = false;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = true;
+            Projectile.alpha = 0;
+			Projectile.penetrate = 11;
+			Projectile.timeLeft = 900;
+            Projectile.extraUpdates = 96;
+            Projectile.tileCollide = true;
         }
         private float Y = 0;
         private float X = 0;
@@ -33,7 +33,7 @@ namespace MythMod.Projectiles.projectile4
         private bool Orbit = false;
         public override void AI()
 		{
-            projectile.velocity.Y += 0.1f;
+            Projectile.velocity.Y += 0.1f;
         }
         public override void Kill(int timeLeft)
         {
@@ -41,7 +41,7 @@ namespace MythMod.Projectiles.projectile4
             {
                 if (!(timeLeft <= 10))
                 {
-                    Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, 0, 0, mod.ProjectileType("PurpleFlame"), 20, 0f, Main.myPlayer, projectile.timeLeft / 200f * Main.rand.NextFloat(0.60f, 1.50f), 0f);
+                    Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, 0, 0, Mod.Find<ModProjectile>("PurpleFlame").Type, 20, 0f, Main.myPlayer, Projectile.timeLeft / 200f * Main.rand.NextFloat(0.60f, 1.50f), 0f);
                 }
             }
         }

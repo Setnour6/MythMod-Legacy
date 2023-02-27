@@ -20,32 +20,31 @@ namespace MythMod.Items.Weapons
 		// Token: 0x06001CC1 RID: 7361 RVA: 0x000D4A44 File Offset: 0x000D2C44
 		public override void SetDefaults()
 		{
-			base.item.damage = 352;
-			base.item.melee = true;
-			base.item.width = 68;
-			base.item.height = 68;
-			base.item.useTime = 20;
-			base.item.useAnimation = 20;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.noUseGraphic = true;
-			base.item.knockBack = 8f;
-			base.item.value = Item.buyPrice(0, 9, 0, 0);
-			base.item.rare = 11;
-			base.item.UseSound = SoundID.Item1;
-			base.item.autoReuse = true;
-			base.item.channel = true;
-			base.item.shoot = base.mod.ProjectileType("硫磺玄武岩链球");
-			base.item.shootSpeed = 12f;
+			base.Item.damage = 352;
+			base.Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+			base.Item.width = 68;
+			base.Item.height = 68;
+			base.Item.useTime = 20;
+			base.Item.useAnimation = 20;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.noUseGraphic = true;
+			base.Item.knockBack = 8f;
+			base.Item.value = Item.buyPrice(0, 9, 0, 0);
+			base.Item.rare = 11;
+			base.Item.UseSound = SoundID.Item1;
+			base.Item.autoReuse = true;
+			base.Item.channel = true;
+			base.Item.shoot = base.Mod.Find<ModProjectile>("硫磺玄武岩链球").Type;
+			base.Item.shootSpeed = 12f;
 		}
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(null, "Basalt", 30);
             modRecipe.AddIngredient(null, "Sulfur", 48);
             modRecipe.requiredTile[0] = 412;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
     }
 }

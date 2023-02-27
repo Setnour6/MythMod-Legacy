@@ -29,13 +29,13 @@ namespace MythMod.Items.TreasureBag
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            base.item.maxStack = 999;
-            base.item.consumable = true;
-            base.item.width = 24;
-            base.item.height = 24;
-            base.item.rare = 9;
-            base.item.expert = true;
+            Item.glowMask = GetGlowMask;
+            base.Item.maxStack = 999;
+            base.Item.consumable = true;
+            base.Item.width = 24;
+            base.Item.height = 24;
+            base.Item.rare = 9;
+            base.Item.expert = true;
         }
         public override bool CanRightClick()
         {
@@ -45,27 +45,27 @@ namespace MythMod.Items.TreasureBag
         {
             if (Main.rand.Next(2) == 0)
             {
-                player.QuickSpawnItem(base.mod.ItemType("BloodyJellyfishStaff"), 1);
+                player.QuickSpawnItem(base.Mod.Find<ModItem>("BloodyJellyfishStaff").Type, 1);
             }
             if (Main.rand.Next(2) == 0)
             {
-                player.QuickSpawnItem(base.mod.ItemType("CarmineBlade"), 1);
+                player.QuickSpawnItem(base.Mod.Find<ModItem>("CarmineBlade").Type, 1);
             }
             if (Main.rand.Next(2) == 0)
             {
-                player.QuickSpawnItem(base.mod.ItemType("GlowingJellyStaff"), 1);
+                player.QuickSpawnItem(base.Mod.Find<ModItem>("GlowingJellyStaff").Type, 1);
             }
             if (Main.rand.Next(2) == 0)
             {
-                player.QuickSpawnItem(base.mod.ItemType("LightOfFrozenSea"), 1);
+                player.QuickSpawnItem(base.Mod.Find<ModItem>("LightOfFrozenSea").Type, 1);
             }
             if (Main.rand.Next(2) == 0)
             {
-                player.QuickSpawnItem(base.mod.ItemType("RedGlassSpear"), 1);
+                player.QuickSpawnItem(base.Mod.Find<ModItem>("RedGlassSpear").Type, 1);
             }
             if (Main.rand.Next(2) == 0)
             {
-                player.QuickSpawnItem(base.mod.ItemType("TentacleBow"), 1);
+                player.QuickSpawnItem(base.Mod.Find<ModItem>("TentacleBow").Type, 1);
             }
         }
     }

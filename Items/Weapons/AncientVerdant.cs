@@ -1,4 +1,4 @@
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -27,55 +27,55 @@ namespace MythMod.Items.Weapons
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            item.damage = 4000;
-            item.melee = true;
-            item.width = 92;
-            item.height = 92;
-            item.useTime = 25;
-            item.rare = 2;
-            item.useAnimation = 25;
-            item.useStyle = 1;
-            item.knockBack = 14f;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 24;
-            item.value = 2000000;
-            item.scale = 1f;
-            item.shoot = 1;
-            item.shootSpeed = 14f;
+            Item.glowMask = GetGlowMask;
+            Item.damage = 4000;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 92;
+            Item.height = 92;
+            Item.useTime = 25;
+            Item.rare = 2;
+            Item.useAnimation = 25;
+            Item.useStyle = 1;
+            Item.knockBack = 14f;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 24;
+            Item.value = 2000000;
+            Item.scale = 1f;
+            Item.shoot = 1;
+            Item.shootSpeed = 14f;
         }
 		public override void ModifyTooltips(List<TooltipLine> list)
 		{
 			foreach (TooltipLine tooltipLine in list)
 			{
-				if (tooltipLine.mod == "Terraria" && tooltipLine.Name == "ItemName")
+				if (tooltipLine.Mod == "Terraria" && tooltipLine.Name == "ItemName")
 				{
-					tooltipLine.overrideColor = new Color?(new Color(0, 246, 255));
+					tooltipLine.OverrideColor = new Color?(new Color(0, 246, 255));
 				}
 			}
 		}
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
 			switch (Main.rand.Next(1 , 7))
 			{
 			case 1:
-                type = base.mod.ProjectileType("火山剑气");
+                type = base.Mod.Find<ModProjectile>("火山剑气").Type;
 				break;
 			case 2:
-                type = base.mod.ProjectileType("海洋剑气");
+                type = base.Mod.Find<ModProjectile>("海洋剑气").Type;
 				break;
             case 3:
-                type = base.mod.ProjectileType("林木剑气");
+                type = base.Mod.Find<ModProjectile>("林木剑气").Type;
                 break;
             case 4:
-                type = base.mod.ProjectileType("远古剑气");
+                type = base.Mod.Find<ModProjectile>("远古剑气").Type;
                 break;
             case 5:
-                type = base.mod.ProjectileType("远古剑气");
+                type = base.Mod.Find<ModProjectile>("远古剑气").Type;
                 break;
             case 6:
-                type = base.mod.ProjectileType("远古剑气");
+                type = base.Mod.Find<ModProjectile>("远古剑气").Type;
                 break;
 			}
 			Projectile.NewProjectile(position.X, position.Y, speedX, speedY, type, damage, knockBack, Main.myPlayer, 0f, 0f);

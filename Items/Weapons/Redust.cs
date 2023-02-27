@@ -1,3 +1,4 @@
+﻿using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
@@ -25,22 +26,22 @@ namespace MythMod.Items.Weapons
         }
         public override void SetDefaults()
         {
-            item.damage = 69;
-            item.melee = true;
-            item.width = 88;
-            item.height = 88;
-            item.rare = 8;
-            item.useTime = 21;
-            item.useAnimation = 21;
-            item.useStyle = 1;
-            item.knockBack = 2;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 4;
-            item.value = 50000;
-            item.scale = 1f;
-            item.shoot = base.mod.ProjectileType("Redust");
-            item.shootSpeed = 9f;
+            Item.damage = 69;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 88;
+            Item.height = 88;
+            Item.rare = 8;
+            Item.useTime = 21;
+            Item.useAnimation = 21;
+            Item.useStyle = 1;
+            Item.knockBack = 2;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 4;
+            Item.value = 50000;
+            Item.scale = 1f;
+            Item.shoot = base.Mod.Find<ModProjectile>("Redust").Type;
+            Item.shootSpeed = 9f;
 
         }
         public override bool AltFunctionUse(Player player)
@@ -51,16 +52,16 @@ namespace MythMod.Items.Weapons
         {
             if (player.altFunctionUse == 2)
             {
-                item.useTime = 21;
-                item.useAnimation = 21;
-                item.reuseDelay = 21;
-                item.autoReuse = false;
-                item.useStyle = 5;
+                Item.useTime = 21;
+                Item.useAnimation = 21;
+                Item.reuseDelay = 21;
+                Item.autoReuse = false;
+                Item.useStyle = 5;
                 for (int i = 0; i < 200; i++)
                 {
                     if(!Main.npc[i].dontTakeDamage && !Main.npc[i].friendly)
                     {
-                        Main.npc[i].StrikeNPC((int)(item.damage * 8f * Main.rand.NextFloat(0.85f, 1.15f)), 0, 1, false);
+                        Main.npc[i].StrikeNPC((int)(Item.damage * 8f * Main.rand.NextFloat(0.85f, 1.15f)), 0, 1, false);
                     }
                 }
                 if(!player.name.Contains("红尘") && !player.name.Contains("万象元素"))
@@ -76,7 +77,7 @@ namespace MythMod.Items.Weapons
                     {
                         player.lostCoinString = Main.ValueToCoins(player.lostCoins);
                     }
-                    Main.PlaySound(5, (int)player.position.X, (int)player.position.Y, 1, 1f, 0f);
+                    SoundEngine.PlaySound(SoundID.PlayerKilled, player.position);
                     player.headVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
                     player.bodyVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
                     player.legVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
@@ -138,11 +139,11 @@ namespace MythMod.Items.Weapons
             }
             else
             {
-                item.useStyle = 1;
-                item.useTime = 21;
-                item.reuseDelay = 21;
-                item.autoReuse = true;
-                item.useAnimation = 21;
+                Item.useStyle = 1;
+                Item.useTime = 21;
+                Item.reuseDelay = 21;
+                Item.autoReuse = true;
+                Item.useAnimation = 21;
                 return true;
             }
         }
@@ -157,8 +158,8 @@ namespace MythMod.Items.Weapons
         public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
         {
             damage = 270;
-            target.AddBuff(mod.BuffType("Break"), 900, false);
-            if (Main.rand.Next(100) < 50 + item.crit)
+            target.AddBuff(Mod.Find<ModBuff>("Break").Type, 900, false);
+            if (Main.rand.Next(100) < 50 + Item.crit)
             {
                 crit = true;
             }
@@ -169,7 +170,7 @@ namespace MythMod.Items.Weapons
                 Main.dust[num9].noGravity = true;
                 if(i % 4 == 1)
                 {
-                    if (Main.rand.Next(100) < 10 + item.crit)
+                    if (Main.rand.Next(100) < 10 + Item.crit)
                     {
                         target.StrikeNPC((int)(damage / 5f * Main.rand.NextFloat(0.85f, 1.15f)), 0, 1, true);
                     }
@@ -183,13 +184,12 @@ namespace MythMod.Items.Weapons
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(368, 1);
             recipe.AddIngredient(501, 15);
-            recipe.AddIngredient(mod.ItemType("LazarBattery"), 12);
+            recipe.AddIngredient(Mod.Find<ModItem>("LazarBattery").Type, 12);
             recipe.requiredTile[0] =134;
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }	
     }
 }

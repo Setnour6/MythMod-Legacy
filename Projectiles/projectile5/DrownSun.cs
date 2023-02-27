@@ -20,21 +20,21 @@ namespace MythMod.Projectiles.projectile5
         public override void SetStaticDefaults()
         {
             base.DisplayName.SetDefault("灭日");
-            Main.projFrames[projectile.type] = 1;
+            Main.projFrames[Projectile.type] = 1;
         }
 
         public override void SetDefaults()
         {
-            base.projectile.width = 48;
-            base.projectile.height = 48;
-            base.projectile.friendly = false;
-            base.projectile.hostile = false;
-            base.projectile.ignoreWater = true;
-            base.projectile.penetrate = -1;
-            base.projectile.timeLeft = 2;
-            base.projectile.usesLocalNPCImmunity = true;
-            base.projectile.localNPCHitCooldown = 1;
-            base.projectile.tileCollide = false;
+            base.Projectile.width = 48;
+            base.Projectile.height = 48;
+            base.Projectile.friendly = false;
+            base.Projectile.hostile = false;
+            base.Projectile.ignoreWater = true;
+            base.Projectile.penetrate = -1;
+            base.Projectile.timeLeft = 2;
+            base.Projectile.usesLocalNPCImmunity = true;
+            base.Projectile.localNPCHitCooldown = 1;
+            base.Projectile.tileCollide = false;
         }
         private int D = 0;
         private int lazarCo = 0;
@@ -47,25 +47,25 @@ namespace MythMod.Projectiles.projectile5
         {
             Player p = Main.player[Main.myPlayer];
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
-            projectile.frame = (int)((24 - projectile.timeLeft) / 2f);
+            Projectile.frame = (int)((24 - Projectile.timeLeft) / 2f);
             Vector2 v = Main.screenPosition + new Vector2(Main.mouseX, Main.mouseY) - p.Center;
             v = v / v.Length();
-            projectile.velocity = v * 15f;
-            projectile.position = p.Center + v - new Vector2(24, 24);
-            projectile.spriteDirection = p.direction;
-            base.projectile.rotation = (float)Math.Atan2((double)base.projectile.velocity.Y * p.direction, (double)base.projectile.velocity.X * p.direction) + (float)Math.PI / 4f * projectile.spriteDirection;
+            Projectile.velocity = v * 15f;
+            Projectile.position = p.Center + v - new Vector2(24, 24);
+            Projectile.spriteDirection = p.direction;
+            base.Projectile.rotation = (float)Math.Atan2((double)base.Projectile.velocity.Y * p.direction, (double)base.Projectile.velocity.X * p.direction) + (float)Math.PI / 4f * Projectile.spriteDirection;
             if(mplayer.SD2 > 0 && mplayer.SD == 5)
             {
-                base.projectile.timeLeft = 2;
+                base.Projectile.timeLeft = 2;
             }
             Rot = Math.Atan2(p.Center.Y - (Main.screenPosition.Y + Main.mouseY), p.Center.X - (Main.screenPosition.X + Main.mouseX)) - Math.PI / 2d;
-            p.ChangeDir(base.projectile.direction);
-            p.heldProj = base.projectile.whoAmI;
+            p.ChangeDir(base.Projectile.direction);
+            p.heldProj = base.Projectile.whoAmI;
             //p.direction = projectile.spriteDirection;
             if (Main.mouseLeft)
             {
-                projectile.alpha = 0;
-                projectile.timeLeft = 60;
+                Projectile.alpha = 0;
+                Projectile.timeLeft = 60;
                 if (Main.mouseX > Main.screenWidth / 2)
                 {
                     p.direction = 1;
@@ -94,12 +94,12 @@ namespace MythMod.Projectiles.projectile5
                 else
                 {
                     Str = 0;
-                    projectile.alpha = 255;
-                    projectile.Kill();
+                    Projectile.alpha = 255;
+                    Projectile.Kill();
                 }
             }
         }
-        public override void PostDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override void PostDraw(Color lightColor)
         {
             List<CustomVertexInfo> bars = new List<CustomVertexInfo>();
 
@@ -113,13 +113,13 @@ namespace MythMod.Projectiles.projectile5
                 var w = MathHelper.Lerp(1f, 0.05f, alpha);
                 if (!Main.gamePaused)
                 {
-                    if ((player.Center - (projectile.Center - new Vector2(0, 20 * (k + 3)).RotatedBy(Rot))).Length() < 20)
+                    if ((player.Center - (Projectile.Center - new Vector2(0, 20 * (k + 3)).RotatedBy(Rot))).Length() < 20)
                     {
-                        Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, 0, 0, mod.ProjectileType("Hit"), 40, 0, Main.myPlayer, k * 10, 0);
+                        Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, 0, 0, Mod.Find<ModProjectile>("Hit").Type, 40, 0, Main.myPlayer, k * 10, 0);
                     }
                 }
-                bars.Add(new CustomVertexInfo(projectile.Center - new Vector2(0, 20 * (k + 3)).RotatedBy(Rot) + new Vector2(0, (120 - 180 / (float)(k + 5)) * Str / 90f).RotatedBy(Rot + Math.PI / 2d), color, new Vector3((float)Math.Sqrt(Math.Sqrt(Math.Sqrt(factor))), 1, w)));
-                bars.Add(new CustomVertexInfo(projectile.Center - new Vector2(0, 20 * (k + 3)).RotatedBy(Rot) - new Vector2(0, (120 - 180 / (float)(k + 5)) * Str / 90f).RotatedBy(Rot + Math.PI / 2d), color, new Vector3((float)Math.Sqrt(Math.Sqrt(Math.Sqrt(factor))), 0, w)));
+                bars.Add(new CustomVertexInfo(Projectile.Center - new Vector2(0, 20 * (k + 3)).RotatedBy(Rot) + new Vector2(0, (120 - 180 / (float)(k + 5)) * Str / 90f).RotatedBy(Rot + Math.PI / 2d), color, new Vector3((float)Math.Sqrt(Math.Sqrt(Math.Sqrt(factor))), 1, w)));
+                bars.Add(new CustomVertexInfo(Projectile.Center - new Vector2(0, 20 * (k + 3)).RotatedBy(Rot) - new Vector2(0, (120 - 180 / (float)(k + 5)) * Str / 90f).RotatedBy(Rot + Math.PI / 2d), color, new Vector3((float)Math.Sqrt(Math.Sqrt(Math.Sqrt(factor))), 0, w)));
             }
 
 
@@ -162,7 +162,7 @@ namespace MythMod.Projectiles.projectile5
                 MythMod.DefaultEffect2.Parameters["uTime"].SetValue(-(float)Main.time * 0.03f);
                 Main.graphics.GraphicsDevice.Textures[0] = MythMod.MainColorGoldYellow;
                 Main.graphics.GraphicsDevice.Textures[1] = MythMod.MainShape;
-                Main.graphics.GraphicsDevice.Textures[2] = mod.GetTexture("UIImages/FogTraceTheta");
+                Main.graphics.GraphicsDevice.Textures[2] = Mod.GetTexture("UIImages/FogTraceTheta");
                 Main.graphics.GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[1] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[2] = SamplerState.PointWrap;
@@ -216,7 +216,7 @@ namespace MythMod.Projectiles.projectile5
                 MythMod.DefaultEffect2.Parameters["uTime"].SetValue(-(float)Main.time * 0.03f);
                 Main.graphics.GraphicsDevice.Textures[0] = MythMod.MainColorColdPurple;
                 Main.graphics.GraphicsDevice.Textures[1] = MythMod.MainShape;
-                Main.graphics.GraphicsDevice.Textures[2] = mod.GetTexture("UIImages/FogTraceDelta");
+                Main.graphics.GraphicsDevice.Textures[2] = Mod.GetTexture("UIImages/FogTraceDelta");
                 Main.graphics.GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[1] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[2] = SamplerState.PointWrap;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -16,103 +17,102 @@ namespace MythMod.Items.Weapons
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("Death");
-			Item.staff[base.item.type] = true;
+			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "血腥獠牙杖");
 			base.Tooltip.SetDefault("让地面长出獠牙");
 		}
 
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);//����һ������
             recipe.AddIngredient(null, "BoneLiquid", 8); //��Ҫһ������
             recipe.AddIngredient(null, "BrokenTooth", 12); //��Ҫһ������
             recipe.requiredTile[0] = 26;
-            recipe.SetResult(this, 1); //����һ������
-            recipe.AddRecipe();
+            recipe.Register();
         }
         // Token: 0x060010AA RID: 4266 RVA: 0x0007B4A8 File Offset: 0x000796A8
         public override void SetDefaults()
 		{
-			base.item.damage = 31;
-			base.item.magic = true;
-			base.item.mana = 7;
-			base.item.width = 56;
-			base.item.height = 58;
-			base.item.useTime = 60;
-			base.item.useAnimation = 60;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.knockBack = 5f;
-			base.item.value = 3000;
-			base.item.rare = 3;
-			base.item.UseSound = SoundID.Item60;
-			base.item.autoReuse = true;
-			base.item.shoot = mod.ProjectileType("CrimsonTuskStaff4");
-			base.item.shootSpeed = 1f;
+			base.Item.damage = 31;
+			base.Item.DamageType = DamageClass.Magic;
+			base.Item.mana = 7;
+			base.Item.width = 56;
+			base.Item.height = 58;
+			base.Item.useTime = 60;
+			base.Item.useAnimation = 60;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 5f;
+			base.Item.value = 3000;
+			base.Item.rare = 3;
+			base.Item.UseSound = SoundID.Item60;
+			base.Item.autoReuse = true;
+			base.Item.shoot = Mod.Find<ModProjectile>("CrimsonTuskStaff4").Type;
+			base.Item.shootSpeed = 1f;
 		}
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
 			switch (Main.rand.Next(0 , 5))
 			{
 			case 1:
-                type = base.mod.ProjectileType("CrimsonTuskStaff1");
+                type = base.Mod.Find<ModProjectile>("CrimsonTuskStaff1").Type;
 				break;
 			case 2:
-                type = base.mod.ProjectileType("CrimsonTuskStaff2");
+                type = base.Mod.Find<ModProjectile>("CrimsonTuskStaff2").Type;
 				break;
             case 3:
-                type = base.mod.ProjectileType("CrimsonTuskStaff3");
+                type = base.Mod.Find<ModProjectile>("CrimsonTuskStaff3").Type;
                 break;
             case 4:
-                type = base.mod.ProjectileType("CrimsonTuskStaff4");
+                type = base.Mod.Find<ModProjectile>("CrimsonTuskStaff4").Type;
                 break;
 			}
 			Projectile.NewProjectile(position.X - 100f + Main.rand.Next(-50,50), position.Y - 100f, 0, 2.5f, type, damage, knockBack, Main.myPlayer, 0f, 0f);
 			switch (Main.rand.Next(0 , 5))
 			{
 			case 1:
-                type = base.mod.ProjectileType("CrimsonTuskStaff1");
+                type = base.Mod.Find<ModProjectile>("CrimsonTuskStaff1").Type;
 				break;
 			case 2:
-                type = base.mod.ProjectileType("CrimsonTuskStaff2");
+                type = base.Mod.Find<ModProjectile>("CrimsonTuskStaff2").Type;
 				break;
             case 3:
-                type = base.mod.ProjectileType("CrimsonTuskStaff3");
+                type = base.Mod.Find<ModProjectile>("CrimsonTuskStaff3").Type;
                 break;
             case 4:
-                type = base.mod.ProjectileType("CrimsonTuskStaff4");
+                type = base.Mod.Find<ModProjectile>("CrimsonTuskStaff4").Type;
                 break;
 			}
 			Projectile.NewProjectile(position.X + 100f + Main.rand.Next(-50,50), position.Y - 100f, 0, 2.5f, type, damage, knockBack, Main.myPlayer, 0f, 0f);
 			switch (Main.rand.Next(0 , 5))
 			{
 			case 1:
-                type = base.mod.ProjectileType("CrimsonTuskStaff1");
+                type = base.Mod.Find<ModProjectile>("CrimsonTuskStaff1").Type;
 				break;
 			case 2:
-                type = base.mod.ProjectileType("CrimsonTuskStaff2");
+                type = base.Mod.Find<ModProjectile>("CrimsonTuskStaff2").Type;
 				break;
             case 3:
-                type = base.mod.ProjectileType("CrimsonTuskStaff3");
+                type = base.Mod.Find<ModProjectile>("CrimsonTuskStaff3").Type;
                 break;
             case 4:
-                type = base.mod.ProjectileType("CrimsonTuskStaff4");
+                type = base.Mod.Find<ModProjectile>("CrimsonTuskStaff4").Type;
                 break;
 			}
 			Projectile.NewProjectile(position.X - 200f + Main.rand.Next(-50,50), position.Y - 100f, 0, 1.0f, type, damage, knockBack, Main.myPlayer, 0f, 0f);
 			switch (Main.rand.Next(0 , 5))
 			{
 			case 1:
-                type = base.mod.ProjectileType("CrimsonTuskStaff1");
+                type = base.Mod.Find<ModProjectile>("CrimsonTuskStaff1").Type;
 				break;
 			case 2:
-                type = base.mod.ProjectileType("CrimsonTuskStaff2");
+                type = base.Mod.Find<ModProjectile>("CrimsonTuskStaff2").Type;
 				break;
             case 3:
-                type = base.mod.ProjectileType("CrimsonTuskStaff3");
+                type = base.Mod.Find<ModProjectile>("CrimsonTuskStaff3").Type;
                 break;
             case 4:
-                type = base.mod.ProjectileType("CrimsonTuskStaff4");
+                type = base.Mod.Find<ModProjectile>("CrimsonTuskStaff4").Type;
                 break;
 			}
 			Projectile.NewProjectile(position.X + 200f + Main.rand.Next(-50,50), position.Y - 100f, 0, 1.0f, type, damage, knockBack, Main.myPlayer, 0f, 0f);

@@ -12,7 +12,7 @@ namespace MythMod.Tiles.CorruprFu
 	public class CorruptWoodChair : ModTile
 	{
 		// Token: 0x0600415E RID: 16734 RVA: 0x0032B55C File Offset: 0x0032975C
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[(int)base.Type] = true;
 			Main.tileNoAttach[(int)base.Type] = true;
@@ -36,8 +36,8 @@ namespace MythMod.Tiles.CorruprFu
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
 			modTranslation.SetDefault("朽木椅子");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
-			this.disableSmartCursor = true;
-			this.adjTiles = new int[]
+			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+			this.AdjTiles = new int[]
 			{
 				15
 			};
@@ -60,7 +60,7 @@ namespace MythMod.Tiles.CorruprFu
 		// Token: 0x06004161 RID: 16737 RVA: 0x0032B680 File Offset: 0x00329880
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("CorruptWoodChair"), 1, false, 0, false, false);
+			Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("CorruptWoodChair").Type, 1, false, 0, false, false);
 		}
 	}
 }

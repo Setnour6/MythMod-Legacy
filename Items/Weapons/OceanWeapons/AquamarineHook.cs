@@ -15,27 +15,26 @@ namespace MythMod.Items.Weapons.OceanWeapons
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 40;
-			base.item.height = 40;
-			base.item.value = Item.sellPrice(0, 4, 0, 0);
-			base.item.rare = 7;
-			base.item.noUseGraphic = true;
-			base.item.useStyle = 5;
-			base.item.shootSpeed = 30f;
-            base.item.shoot = base.mod.ProjectileType("AquamarineHookPro");
-			base.item.UseSound = SoundID.Item1;
-			base.item.useAnimation = 20;
-			base.item.useTime = 20;
-			base.item.noMelee = false;
+			base.Item.width = 40;
+			base.Item.height = 40;
+			base.Item.value = Item.sellPrice(0, 4, 0, 0);
+			base.Item.rare = 7;
+			base.Item.noUseGraphic = true;
+			base.Item.useStyle = 5;
+			base.Item.shootSpeed = 30f;
+            base.Item.shoot = base.Mod.Find<ModProjectile>("AquamarineHookPro").Type;
+			base.Item.UseSound = SoundID.Item1;
+			base.Item.useAnimation = 20;
+			base.Item.useTime = 20;
+			base.Item.noMelee = false;
 		}
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(null, "Aquamarine", 7);
             recipe.AddIngredient(null, "RedCoral", 1); 
             recipe.requiredTile[0] = 412;
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }
 	}
 }

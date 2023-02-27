@@ -15,11 +15,11 @@ namespace MythMod.Tiles.Ocean
     public class 海洋封印台 : ModTile
     {
         // Token: 0x06004868 RID: 18536 RVA: 0x0034883C File Offset: 0x00346A3C
-        public override void SetDefaults()
+        public override void SetStaticDefaults()
         {
             Main.tileFrameImportant[(int)base.Type] = true;
             Main.tileNoAttach[(int)base.Type] = true;
-            this.minPick = 260;
+            this.MinPick = 260;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style3x2);
             TileObjectData.newTile.Height = 4;
             TileObjectData.newTile.Width = 4;
@@ -33,12 +33,12 @@ namespace MythMod.Tiles.Ocean
             TileObjectData.newTile.UsesCustomCanPlace = true;
             TileObjectData.newTile.AnchorTop = default(AnchorData);
             TileObjectData.addTile((int)base.Type);
-            this.dustType = 224;
+            this.DustType = 224;
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
             base.AddMapEntry(new Color(7, 76, 67), modTranslation);
-            this.mineResist = 3f;
-            base.SetDefaults();
+            this.MineResist = 3f;
+            base.SetStaticDefaults();
             modTranslation.AddTranslation(GameCulture.Chinese, "");
         }
 
@@ -59,7 +59,7 @@ namespace MythMod.Tiles.Ocean
         }
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("SealTableOfOcean"));
+            Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("SealTableOfOcean").Type);
         }
         public override void RightClick(int i, int j)//右击
         {
@@ -72,11 +72,11 @@ namespace MythMod.Tiles.Ocean
                 Stones.Open = false;
             }
             Tile tile2 = Main.tile[i, j + 1];
-            if ((!tile2.nactive() || !Main.tileSolid[(int)tile2.type] || Main.tileSolidTop[(int)tile2.type]) && tile2.liquid < 255)
+            if ((!tile2.HasUnactuatedTile || !Main.tileSolid[(int)tile2.TileType] || Main.tileSolidTop[(int)tile2.TileType]) && tile2.LiquidAmount < 255)
             {
-                if (tile2.liquid > 250)
+                if (tile2.LiquidAmount > 250)
                 {
-                    tile2.liquid = byte.MaxValue;
+                    tile2.LiquidAmount = byte.MaxValue;
                 }
                 else
                 {
@@ -96,11 +96,11 @@ namespace MythMod.Tiles.Ocean
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             if (mplayer.movieTime > 0)
             {
-                Main.spriteBatch.Draw(mod.GetTexture("Tiles/Ocean/海洋封印台Glow"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.frameX, tile.frameY, 16, height), new Color(mplayer.movieTime / 120f, mplayer.movieTime / 120f, mplayer.movieTime / 120f, 0), 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                Main.spriteBatch.Draw(Mod.GetTexture("Tiles/Ocean/海洋封印台Glow"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, height), new Color(mplayer.movieTime / 120f, mplayer.movieTime / 120f, mplayer.movieTime / 120f, 0), 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
             }
-            if (NPC.CountNPCS(mod.NPCType("OceanCrystal")) > 0)
+            if (NPC.CountNPCS(Mod.Find<ModNPC>("OceanCrystal").Type) > 0)
             {
-                Main.spriteBatch.Draw(mod.GetTexture("Tiles/Ocean/海洋封印台Glow"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.frameX, tile.frameY, 16, height), new Color(255, 255, 255, 0), 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                Main.spriteBatch.Draw(Mod.GetTexture("Tiles/Ocean/海洋封印台Glow"), new Vector2(i * 16 - (int)Main.screenPosition.X, j * 16 - (int)Main.screenPosition.Y) + zero, new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, height), new Color(255, 255, 255, 0), 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
             }
         }
     }

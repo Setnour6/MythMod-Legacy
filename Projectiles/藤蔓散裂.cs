@@ -18,24 +18,24 @@ namespace MythMod.Projectiles
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("藤蔓散裂");
-			Main.projFrames[base.projectile.type] = 1;
+			Main.projFrames[base.Projectile.type] = 1;
 		}
 
         public override void SetDefaults()
         {
-            base.projectile.extraUpdates = 3;
-            base.projectile.width = 8;
-            base.projectile.height = 8;
-            base.projectile.hostile = true;
-            base.projectile.friendly = false;
-            base.projectile.ignoreWater = true;
-            base.projectile.tileCollide = false;
-            base.projectile.penetrate = 1;
-            base.projectile.timeLeft = 300;
-            base.projectile.alpha = 255;
-            this.cooldownSlot = 1;
-            ProjectileID.Sets.TrailingMode[projectile.type] = 0;
-            ProjectileID.Sets.TrailCacheLength[projectile.type] = 60;
+            base.Projectile.extraUpdates = 3;
+            base.Projectile.width = 8;
+            base.Projectile.height = 8;
+            base.Projectile.hostile = true;
+            base.Projectile.friendly = false;
+            base.Projectile.ignoreWater = true;
+            base.Projectile.tileCollide = false;
+            base.Projectile.penetrate = 1;
+            base.Projectile.timeLeft = 300;
+            base.Projectile.alpha = 255;
+            this.CooldownSlot = 1;
+            ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 60;
         }
         public override void AI()
 		{
@@ -45,61 +45,61 @@ namespace MythMod.Projectiles
                 X = Main.rand.Next(0,2000) / 1000f;
 				initialization = false;
             }
-			if(base.projectile.timeLeft < 75)
+			if(base.Projectile.timeLeft < 75)
 			{
 				if(num >= 50000)
 				{
-			        projectile.velocity = projectile.velocity.RotatedBy(Math.PI / -20f);
-			    	projectile.velocity *= 0.975f;
+			        Projectile.velocity = Projectile.velocity.RotatedBy(Math.PI / -20f);
+			    	Projectile.velocity *= 0.975f;
 			    	//int r = Dust.NewDust( new Vector2(base.projectile.Center.X , base.projectile.Center.Y) + base.projectile.velocity * 1.5f, 0, 0, 61, 0, 0, 0, default(Color), 1.2f * (float)base.projectile.timeLeft / 75f + 0.2f);
 		    	    //Main.dust[r].velocity.X = 0;
 		    	    //Main.dust[r].velocity.Y = 0;
 		    	    //Main.dust[r].noGravity = true;
-                	Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 0.0f / 255f, (float)(255 - base.projectile.alpha) * 0.9f / 255f, (float)(255 - base.projectile.alpha) * 0.0f / 255f);
+                	Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 0.0f / 255f, (float)(255 - base.Projectile.alpha) * 0.9f / 255f, (float)(255 - base.Projectile.alpha) * 0.0f / 255f);
 				}
 				else
 				{
-					projectile.velocity = projectile.velocity.RotatedBy(Math.PI / 20f);
-			    	projectile.velocity *= 0.975f;
+					Projectile.velocity = Projectile.velocity.RotatedBy(Math.PI / 20f);
+			    	Projectile.velocity *= 0.975f;
 			    	//int r = Dust.NewDust( new Vector2(base.projectile.Center.X , base.projectile.Center.Y) + base.projectile.velocity * 1.5f, 0, 0, 61, 0, 0, 0, default(Color), 1.2f * (float)base.projectile.timeLeft / 75f + 0.2f);
 		    	    //Main.dust[r].velocity.X = 0;
 		    	    //Main.dust[r].velocity.Y = 0;
 		    	   // Main.dust[r].noGravity = true;
-                	Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 0.0f / 255f, (float)(255 - base.projectile.alpha) * 0.9f / 255f, (float)(255 - base.projectile.alpha) * 0.0f / 255f);
+                	Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 0.0f / 255f, (float)(255 - base.Projectile.alpha) * 0.9f / 255f, (float)(255 - base.Projectile.alpha) * 0.0f / 255f);
 				}
 			}
 			else
 			{
 				X += 1 / 30f;
-			    projectile.velocity = projectile.velocity.RotatedBy(Math.PI / 60f * (float)Math.Sin(X * Math.PI));
+			    Projectile.velocity = Projectile.velocity.RotatedBy(Math.PI / 60f * (float)Math.Sin(X * Math.PI));
 			    //int r = Dust.NewDust( new Vector2(base.projectile.Center.X , base.projectile.Center.Y) + base.projectile.velocity * 1.5f, 0, 0, 61, 0, 0, 0, default(Color), 1.4f);
 			    //Main.dust[r].velocity.X = 0;
 			    //Main.dust[r].velocity.Y = 0;
 			    //Main.dust[r].noGravity = true;
-            	Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 0.0f / 255f, (float)(255 - base.projectile.alpha) * 0.9f / 255f, (float)(255 - base.projectile.alpha) * 0.0f / 255f);
+            	Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 0.0f / 255f, (float)(255 - base.Projectile.alpha) * 0.9f / 255f, (float)(255 - base.Projectile.alpha) * 0.0f / 255f);
 			}
 		}
-        public override void PostDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override void PostDraw(Color lightColor)
         {
             List<CustomVertexInfo> bars = new List<CustomVertexInfo>();
 
             // 把所有的点都生成出来，按照顺序
-            for (int i = 1; i < projectile.oldPos.Length; ++i)
+            for (int i = 1; i < Projectile.oldPos.Length; ++i)
             {
-                if (projectile.oldPos[i] == Vector2.Zero) break;
+                if (Projectile.oldPos[i] == Vector2.Zero) break;
                 //spriteBatch.Draw(Main.magicPixel, projectile.oldPos[i] - Main.screenPosition,
                 //    new Rectangle(0, 0, 1, 1), Color.White, 0f, new Vector2(0.5f, 0.5f), 5f, SpriteEffects.None, 0f);
 
                 int width = 15;
-                var normalDir = projectile.oldPos[i - 1] - projectile.oldPos[i];
+                var normalDir = Projectile.oldPos[i - 1] - Projectile.oldPos[i];
                 normalDir = Vector2.Normalize(new Vector2(-normalDir.Y, normalDir.X));
 
-                var factor = i / (float)projectile.oldPos.Length;
+                var factor = i / (float)Projectile.oldPos.Length;
                 var color = Color.Lerp(Color.White, Color.Green, factor);
                 var w = MathHelper.Lerp(1f, 0.05f, factor);
 
-                bars.Add(new CustomVertexInfo(projectile.oldPos[i] + normalDir * width + new Vector2(4, 4) - projectile.velocity, color, new Vector3((float)Math.Sqrt(factor), 1, w)));
-                bars.Add(new CustomVertexInfo(projectile.oldPos[i] + normalDir * -width + new Vector2(4, 4) - projectile.velocity, color, new Vector3((float)Math.Sqrt(factor), 0, w)));
+                bars.Add(new CustomVertexInfo(Projectile.oldPos[i] + normalDir * width + new Vector2(4, 4) - Projectile.velocity, color, new Vector3((float)Math.Sqrt(factor), 1, w)));
+                bars.Add(new CustomVertexInfo(Projectile.oldPos[i] + normalDir * -width + new Vector2(4, 4) - Projectile.velocity, color, new Vector3((float)Math.Sqrt(factor), 0, w)));
             }
 
             List<CustomVertexInfo> triangleList = new List<CustomVertexInfo>();
@@ -109,7 +109,7 @@ namespace MythMod.Projectiles
 
                 // 按照顺序连接三角形
                 triangleList.Add(bars[0]);
-                var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + Vector2.Normalize(projectile.velocity), Color.White, new Vector3(0, 0.5f, 1));
+                var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + Vector2.Normalize(Projectile.velocity), Color.White, new Vector3(0, 0.5f, 1));
                 triangleList.Add(bars[1]);
                 triangleList.Add(vertex);
                 for (int i = 0; i < bars.Count - 2; i += 2)
@@ -141,7 +141,7 @@ namespace MythMod.Projectiles
                 MythMod.DefaultEffectB.Parameters["uTime"].SetValue(-(float)Main.time * 0.03f);
                 Main.graphics.GraphicsDevice.Textures[0] = MythMod.MainColorGreen;
                 Main.graphics.GraphicsDevice.Textures[1] = MythMod.MainShape;
-                Main.graphics.GraphicsDevice.Textures[2] = mod.GetTexture("UIImages/Lightline2");
+                Main.graphics.GraphicsDevice.Textures[2] = Mod.GetTexture("UIImages/Lightline2");
                 Main.graphics.GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[1] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[2] = SamplerState.PointWrap;

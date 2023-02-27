@@ -28,28 +28,27 @@ namespace MythMod.Items.Ammos
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            base.item.ranged = true;
-			base.item.width = 32;
-            base.item.damage = 19;
-            base.item.crit = 4;
-            base.item.height = 32;
-			base.item.maxStack = 1;
-			base.item.consumable = false;
-			base.item.knockBack = 1.5f;
-			base.item.value = 50000;
-			base.item.rare = 7;
-            base.item.shoot = mod.ProjectileType("StarPoisonArrow");
-            base.item.shootSpeed = 2;
-            base.item.ammo = AmmoID.Arrow;
+            Item.glowMask = GetGlowMask;
+            base.Item.DamageType = DamageClass.Ranged;
+			base.Item.width = 32;
+            base.Item.damage = 19;
+            base.Item.crit = 4;
+            base.Item.height = 32;
+			base.Item.maxStack = 1;
+			base.Item.consumable = false;
+			base.Item.knockBack = 1.5f;
+			base.Item.value = 50000;
+			base.Item.rare = 7;
+            base.Item.shoot = Mod.Find<ModProjectile>("StarPoisonArrow").Type;
+            base.Item.shootSpeed = 2;
+            base.Item.ammo = AmmoID.Arrow;
 		}
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(mod.ItemType("StarPoisonArrow"), 3996);
-            recipe.SetResult(this, 1);
+            Recipe recipe = CreateRecipe(1);
+            recipe.AddIngredient(Mod.Find<ModItem>("StarPoisonArrow").Type, 3996);
             recipe.requiredTile[0] = 125;
-            recipe.AddRecipe();
+            recipe.Register();
         }
         public override void UpdateInventory(Player player)
         {

@@ -13,7 +13,7 @@ namespace MythMod.Projectiles
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("克苏鲁之脑镜像");
-            Main.projFrames[projectile.type] = 8; /*【帧数为6】对应的贴图也要画6帧哦*/
+            Main.projFrames[Projectile.type] = 8; /*【帧数为6】对应的贴图也要画6帧哦*/
 		}
 		private bool initialization = true;
         private float X;
@@ -21,14 +21,14 @@ namespace MythMod.Projectiles
 		// Token: 0x06001C82 RID: 7298 RVA: 0x0016F518 File Offset: 0x0016D718
 		public override void SetDefaults()
 		{
-			base.projectile.width = 200;
-			base.projectile.height = 182;
-			base.projectile.friendly = false;
-			base.projectile.hostile = false;
-			base.projectile.penetrate = -1;
-			base.projectile.tileCollide = false;
-			base.projectile.timeLeft = 300000000;
-			base.projectile.magic = true;
+			base.Projectile.width = 200;
+			base.Projectile.height = 182;
+			base.Projectile.friendly = false;
+			base.Projectile.hostile = false;
+			base.Projectile.penetrate = -1;
+			base.Projectile.tileCollide = false;
+			base.Projectile.timeLeft = 300000000;
+			base.Projectile.DamageType = DamageClass.Magic;
 		}
 		// Token: 0x06001F17 RID: 7959 RVA: 0x0000C841 File Offset: 0x0000AA41
 		// Token: 0x06001C83 RID: 7299 RVA: 0x0016F58C File Offset: 0x0016D78C
@@ -36,7 +36,7 @@ namespace MythMod.Projectiles
         {
 			if(NPC.CountNPCS(266) < 1)
 			{
-				base.projectile.timeLeft = 0;
+				base.Projectile.timeLeft = 0;
 			}
 		}
         // Token: 0x06001C84 RID: 7300 RVA: 0x0016F648 File Offset: 0x0016D848

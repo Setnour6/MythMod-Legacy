@@ -1,4 +1,5 @@
-﻿using Terraria.ID;
+﻿using Terraria.DataStructures;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -17,23 +18,23 @@ namespace MythMod.Items.Weapons.Weapon2
         }
         public override void SetDefaults()
         {
-            item.damage = 200;
-            item.melee = true;
-            item.width = 60;
-            item.height = 60;
-            item.useTime = 60;
-            item.rare = 10;
-            item.useAnimation = 15;
-            item.useStyle = 1;
-            item.knockBack = 12;
-            item.UseSound = SoundID.Item1;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 25;
-            item.value = 10000;
-            item.scale = 1f;
-            item.shoot = base.mod.ProjectileType("StarSail");
-            item.shootSpeed = 12f;
+            Item.damage = 200;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 60;
+            Item.height = 60;
+            Item.useTime = 60;
+            Item.rare = 10;
+            Item.useAnimation = 15;
+            Item.useStyle = 1;
+            Item.knockBack = 12;
+            Item.UseSound = SoundID.Item1;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 25;
+            Item.value = 10000;
+            Item.scale = 1f;
+            Item.shoot = base.Mod.Find<ModProjectile>("StarSail").Type;
+            Item.shootSpeed = 12f;
         }
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {
@@ -45,22 +46,21 @@ namespace MythMod.Items.Weapons.Weapon2
         public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
         {
         }
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Projectile.NewProjectile(position.X, position.Y, speedX, speedY, type, (int)((double)damage * 2d), knockBack * 10, player.whoAmI, 0f, 0f);
             return false;
         }
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(422, 20);
             modRecipe.AddIngredient(502, 20);
             modRecipe.AddIngredient(520, 20);
             modRecipe.AddIngredient(501, 20);
             modRecipe.AddIngredient(75, 20);
             modRecipe.requiredTile[0] = 412;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
     }
 }

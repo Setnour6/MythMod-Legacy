@@ -12,33 +12,33 @@ namespace MythMod.NPCs.EvilBotle
         public override void SetStaticDefaults()
         {
             base.DisplayName.SetDefault("古咒飞龙");
-            Main.npcFrameCount[base.npc.type] = 5;
+            Main.npcFrameCount[base.NPC.type] = 5;
         }
 		public override void SetDefaults()
 		{
-			base.npc.aiStyle = 14;
-			base.npc.damage = 40;
-			base.npc.width = 40;
-			base.npc.height = 30;
-			base.npc.defense = 5;
-			base.npc.lifeMax = 230;
-			base.npc.knockBackResist = 0.8f;
-			this.animationType = 121;
-			base.npc.alpha = 75;
-			base.npc.lavaImmune = false;
-			base.npc.noGravity = false;
-			base.npc.noTileCollide = false;
+			base.NPC.aiStyle = 14;
+			base.NPC.damage = 40;
+			base.NPC.width = 40;
+			base.NPC.height = 30;
+			base.NPC.defense = 5;
+			base.NPC.lifeMax = 230;
+			base.NPC.knockBackResist = 0.8f;
+			this.AnimationType = 121;
+			base.NPC.alpha = 75;
+			base.NPC.lavaImmune = false;
+			base.NPC.noGravity = false;
+			base.NPC.noTileCollide = false;
 			//base.npc.HitSound = SoundID.NPCHit1;
 			//base.npc.DeathSound = SoundID.NPCDeath1;
-            npc.value = 2000;
-            base.npc.buffImmune[24] = true;
+            NPC.value = 2000;
+            base.NPC.buffImmune[24] = true;
 		}
         private int numk = 0;
 		public override void AI()
 		{
-            NPC npc = base.npc;
+            NPC npc = base.NPC;
             float num = 1.0025f;
-			NPC npc2 = base.npc;
+			NPC npc2 = base.NPC;
 			if(Math.Abs(npc.velocity.X) <= 1.5f)
 			{
 				npc.velocity.X = npc.velocity.X * num;
@@ -59,13 +59,13 @@ namespace MythMod.NPCs.EvilBotle
 		}
         public override Color? GetAlpha(Color lightColor)
         {
-            return new Color?(new Color(255, 255, 255, base.npc.alpha));
+            return new Color?(new Color(255, 255, 255, base.NPC.alpha));
         }
         public override void HitEffect(int hitDirection, double damage)
 		{
 			for (int i = 0; i < 25; i++)
 			{
-				Dust.NewDust(base.npc.position, base.npc.width, base.npc.height, 27, (float)hitDirection, -1f, 0, default(Color), 2f);
+				Dust.NewDust(base.NPC.position, base.NPC.width, base.NPC.height, 27, (float)hitDirection, -1f, 0, default(Color), 2f);
 			}
 		}
 	}

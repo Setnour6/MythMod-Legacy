@@ -16,22 +16,22 @@ namespace MythMod.Items.Weapons
 		}
 		public override void SetDefaults()
 		{
-			base.item.damage = 9;
-			base.item.crit = 7;
-			base.item.ranged = true;
-			base.item.width = 42;
-			base.item.height = 30;
-			base.item.useTime = 14;
-			base.item.useAnimation = 14;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.knockBack = 2f;
-			base.item.autoReuse = false;
-			base.item.value = Item.sellPrice(0, 0, 0, 50);
-			base.item.rare = 1;
-			base.item.UseSound = SoundID.Item5;
-                 item.shoot = 51;
-			base.item.shootSpeed = 8f;
+			base.Item.damage = 9;
+			base.Item.crit = 7;
+			base.Item.DamageType = DamageClass.Ranged;
+			base.Item.width = 42;
+			base.Item.height = 30;
+			base.Item.useTime = 14;
+			base.Item.useAnimation = 14;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 2f;
+			base.Item.autoReuse = false;
+			base.Item.value = Item.sellPrice(0, 0, 0, 50);
+			base.Item.rare = 1;
+			base.Item.UseSound = SoundID.Item5;
+                 Item.shoot = 51;
+			base.Item.shootSpeed = 8f;
 		}
 		public override Vector2? HoldoutOffset()
 		{
@@ -39,12 +39,11 @@ namespace MythMod.Items.Weapons
 		}
 		public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(276, 7);
             recipe.AddIngredient(ItemID.Cobweb, 14);
-            recipe.SetResult(this, 1);
             recipe.requiredTile[0] = 18;
-            recipe.AddRecipe();
+            recipe.Register();
         }
 	}
 }

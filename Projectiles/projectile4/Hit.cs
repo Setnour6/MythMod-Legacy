@@ -15,17 +15,17 @@ namespace MythMod.Projectiles.projectile4
 		}
 		public override void SetDefaults()
 		{
-			projectile.width = 12;
-			projectile.height = 12;
-            projectile.hostile = true;
-            projectile.friendly = false;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = false;
-            projectile.alpha = 0;
-			projectile.penetrate = 1;
-			projectile.timeLeft = 1;
-            projectile.extraUpdates = 12;
-            projectile.tileCollide = true;
+			Projectile.width = 12;
+			Projectile.height = 12;
+            Projectile.hostile = true;
+            Projectile.friendly = false;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
+            Projectile.alpha = 0;
+			Projectile.penetrate = 1;
+			Projectile.timeLeft = 1;
+            Projectile.extraUpdates = 12;
+            Projectile.tileCollide = true;
         }
         private float Y = 0;
         private float X = 0;

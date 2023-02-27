@@ -24,15 +24,15 @@ namespace MythMod.Items.Corals
         }
         public override void SetDefaults()
         {
-            base.item.width = 90;
-            base.item.height = 120;
-            base.item.useAnimation = 5;
-            base.item.useTime = 5;
-            base.item.useStyle = 4;
-            base.item.UseSound = SoundID.Item105;
-            base.item.consumable = false;
+            base.Item.width = 90;
+            base.Item.height = 120;
+            base.Item.useAnimation = 5;
+            base.Item.useTime = 5;
+            base.Item.useStyle = 4;
+            base.Item.UseSound = SoundID.Item105;
+            base.Item.consumable = false;
         }
-        public override bool UseItem(Player player)
+        public override bool? UseItem(Player player)/* tModPorter Suggestion: Return null instead of false */
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             if (Main.worldName != mplayer.worldnm)
@@ -91,7 +91,7 @@ namespace MythMod.Items.Corals
         }
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(null, "MysteriesPearl", 30);
             modRecipe.AddIngredient(null, "YellowSpongeChannel", 40);
             modRecipe.AddIngredient(null, "PurpleSpongeChannel", 40);
@@ -99,8 +99,7 @@ namespace MythMod.Items.Corals
             modRecipe.AddIngredient(null, "BlueTreeCoral", 8);
             modRecipe.AddIngredient(null, "RedCoral", 8);
             modRecipe.requiredTile[0] = 134;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
     }
 }

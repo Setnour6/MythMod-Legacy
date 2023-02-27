@@ -7,7 +7,7 @@ namespace MythMod.Buffs
 {
     public class 鲜果I : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("鲜果I");
             base.Description.SetDefault("附近有水果,让你状态良好\n提升魔力回复速度");

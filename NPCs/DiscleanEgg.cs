@@ -24,27 +24,27 @@ namespace MythMod.NPCs
 		// Token: 0x06001809 RID: 6153 RVA: 0x0010AD00 File Offset: 0x00108F00
 		public override void SetDefaults()
 		{
-			base.npc.damage = 50;
-			base.npc.width = 58;
-			base.npc.height = 58;
-			base.npc.defense = 0;
-			base.npc.lifeMax = 100;
+			base.NPC.damage = 50;
+			base.NPC.width = 58;
+			base.NPC.height = 58;
+			base.NPC.defense = 0;
+			base.NPC.lifeMax = 100;
 			if(MythWorld.Myth)
 			{
-				base.npc.lifeMax = 150;
+				base.NPC.lifeMax = 150;
 			}
-			base.npc.knockBackResist = 0.7f;
-			base.npc.value = (float)Item.buyPrice(0, 0, 0, 0);
-            base.npc.color = new Color(0, 0, 0, 0);
-			base.npc.alpha = 0;
-            base.npc.boss = false;
-			base.npc.lavaImmune = true;
-			base.npc.noGravity = false;
-			base.npc.noTileCollide = false;
-			base.npc.HitSound = SoundID.NPCHit1;
-			base.npc.DeathSound = SoundID.NPCDeath1;
-			base.npc.aiStyle = -1;
-			this.aiType = -1;
+			base.NPC.knockBackResist = 0.7f;
+			base.NPC.value = (float)Item.buyPrice(0, 0, 0, 0);
+            base.NPC.color = new Color(0, 0, 0, 0);
+			base.NPC.alpha = 0;
+            base.NPC.boss = false;
+			base.NPC.lavaImmune = true;
+			base.NPC.noGravity = false;
+			base.NPC.noTileCollide = false;
+			base.NPC.HitSound = SoundID.NPCHit1;
+			base.NPC.DeathSound = SoundID.NPCDeath1;
+			base.NPC.aiStyle = -1;
+			this.AIType = -1;
 		}
         private float omega = 0;
 		// Token: 0x06001B19 RID: 6937 RVA: 0x0014B900 File Offset: 0x00149B00
@@ -54,56 +54,56 @@ namespace MythMod.NPCs
             if(omega == 0)
             {
                 omega = Main.rand.NextFloat((float)(Math.PI * 2));
-                npc.velocity.X = player.velocity.X;
+                NPC.velocity.X = player.velocity.X;
             }
-            if(npc.Center.Y < player.Center.Y - 150)
+            if(NPC.Center.Y < player.Center.Y - 150)
             {
-                base.npc.noTileCollide = true;
-                base.npc.knockBackResist = 0f;
+                base.NPC.noTileCollide = true;
+                base.NPC.knockBackResist = 0f;
             }
             else
             {
-                base.npc.noTileCollide = false;
-                base.npc.knockBackResist = 0.7f;
+                base.NPC.noTileCollide = false;
+                base.NPC.knockBackResist = 0.7f;
             }
-            npc.rotation += omega * npc.velocity.Length() * 0.01f;
-			Vector2 vector = new Vector2(base.npc.Center.X, base.npc.Center.Y);
-            if ((player.Center - npc.Center).Length() <= 500f)
+            NPC.rotation += omega * NPC.velocity.Length() * 0.01f;
+			Vector2 vector = new Vector2(base.NPC.Center.X, base.NPC.Center.Y);
+            if ((player.Center - NPC.Center).Length() <= 500f)
             {
-                base.npc.localAI[0] += 1;
+                base.NPC.localAI[0] += 1;
             }
-			if(base.npc.localAI[0] >= 450)
+			if(base.NPC.localAI[0] >= 450)
 			{
                 NPC.NewNPC((int)vector.X, (int)vector.Y, 489, 0, 0f, 1f, 0f, 0f, 255);
                 NPC.NewNPC((int)vector.X - 10, (int)vector.Y, 489, 0, 1f, 0f, 0f, 0f, 255);
                 NPC.NewNPC((int)vector.X + 10, (int)vector.Y, 490, 0, 0f, 1f, 0f, 0f, 255);
-                base.npc.life = 0;
-			    base.npc.position.X = base.npc.position.X + (float)(base.npc.width / 2);
-                base.npc.position.Y = base.npc.position.Y + (float)(base.npc.height / 2);
-                base.npc.position.X = base.npc.position.X - (float)(base.npc.width / 2);
-                base.npc.position.Y = base.npc.position.Y - (float)(base.npc.height / 2);
+                base.NPC.life = 0;
+			    base.NPC.position.X = base.NPC.position.X + (float)(base.NPC.width / 2);
+                base.NPC.position.Y = base.NPC.position.Y + (float)(base.NPC.height / 2);
+                base.NPC.position.X = base.NPC.position.X - (float)(base.NPC.width / 2);
+                base.NPC.position.Y = base.NPC.position.Y - (float)(base.NPC.height / 2);
                 float scaleFactor = (float)(Main.rand.Next(-200, 200) / 100);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/血卵碎块1"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/血卵碎块2"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/血卵碎块3"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/血卵碎块1"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/血卵碎块2"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/血卵碎块3"), 1f);
 			}
 		}
 		public override void HitEffect(int hitDirection, double damage)
 		{
-			if (base.npc.life <= 0)
+			if (base.NPC.life <= 0)
 			{
-                Vector2 vector = new Vector2(base.npc.Center.X, base.npc.Center.Y);
+                Vector2 vector = new Vector2(base.NPC.Center.X, base.NPC.Center.Y);
                 NPC.NewNPC((int)vector.X, (int)vector.Y, 489, 0, 0f, 1f, 0f, 0f, 255);
                 NPC.NewNPC((int)vector.X - 10, (int)vector.Y, 489, 0, 1f, 0f, 0f, 0f, 255);
                 NPC.NewNPC((int)vector.X + 10, (int)vector.Y, 490, 0, 0f, 1f, 0f, 0f, 255);
-                base.npc.position.X = base.npc.position.X + (float)(base.npc.width / 2);
-                base.npc.position.Y = base.npc.position.Y + (float)(base.npc.height / 2);
-                base.npc.position.X = base.npc.position.X - (float)(base.npc.width / 2);
-                base.npc.position.Y = base.npc.position.Y - (float)(base.npc.height / 2);
+                base.NPC.position.X = base.NPC.position.X + (float)(base.NPC.width / 2);
+                base.NPC.position.Y = base.NPC.position.Y + (float)(base.NPC.height / 2);
+                base.NPC.position.X = base.NPC.position.X - (float)(base.NPC.width / 2);
+                base.NPC.position.Y = base.NPC.position.Y - (float)(base.NPC.height / 2);
                 float scaleFactor = (float)(Main.rand.Next(-200, 200) / 100);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/血卵碎块1"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/血卵碎块2"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/血卵碎块3"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/血卵碎块1"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/血卵碎块2"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/血卵碎块3"), 1f);
             }
 		}
 	}

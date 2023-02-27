@@ -31,24 +31,24 @@ namespace MythMod.Items.Weapons
         }
         public override void SetDefaults()
         {
-            base.item.damage = 26;
-			base.item.magic = true;
-			base.item.mana = 6;
-			base.item.width = 28;
-			base.item.height = 30;
-			base.item.useTime = 24;
-			base.item.useAnimation = 24;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.knockBack = 6f;
-			base.item.value = 2000;
-			base.item.rare = 2;
-			base.item.UseSound = SoundID.Item8;
-			base.item.autoReuse = true;
-			base.item.shoot = 38;
-			base.item.shootSpeed = 6f;
+            base.Item.damage = 26;
+			base.Item.DamageType = DamageClass.Magic;
+			base.Item.mana = 6;
+			base.Item.width = 28;
+			base.Item.height = 30;
+			base.Item.useTime = 24;
+			base.Item.useAnimation = 24;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 6f;
+			base.Item.value = 2000;
+			base.Item.rare = 2;
+			base.Item.UseSound = SoundID.Item8;
+			base.Item.autoReuse = true;
+			base.Item.shoot = 38;
+			base.Item.shootSpeed = 6f;
         }
-		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
             Vector2 v = new Vector2(speedX, speedY);
             for (int k = 0; k < 6; k++)

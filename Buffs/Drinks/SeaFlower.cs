@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class SeaFlower : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("花与海");
             base.Description.SetDefault("伤害增加7%");

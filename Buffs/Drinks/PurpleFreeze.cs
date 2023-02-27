@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class PurpleFreeze : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("紫气东来");
             base.Description.SetDefault("暴击增加12%");

@@ -13,11 +13,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Terraria.IO;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
-using Terraria.World.Generation;
 using Terraria.Map;
+using Terraria.WorldBuilding;
 namespace MythMod
 {
-    public class MythWorld : ModWorld
+    public class MythWorld : ModSystem
 	{
 		public static int 玄武岩礁石 = 0;
 		public static bool downedMoonLoad = false;
@@ -50,7 +50,7 @@ namespace MythMod
         public static int MythIndex = 1;
         private int LfX = 0;
         private int LfY = 0;
-        public override void Initialize()
+        public override void OnWorldLoad()/* tModPorter Suggestion: Also override OnWorldUnload, and mirror your worldgen-sensitive data initialization in PreWorldGen */
 		{
             MythWorld.downedMoonLoad = false;
             MythWorld.downedHYFY = false;
@@ -67,7 +67,7 @@ namespace MythMod
             MythWorld.Myth = false;
             MythWorld.Onew = false;
         }
-        public override TagCompound Save()
+        public override void SaveWorldData(TagCompound tag)/* tModPorter Suggestion: Edit tag parameter instead of returning new TagCompound */
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             List<string> list = new List<string>();
@@ -140,14 +140,14 @@ namespace MythMod
                 return;
             }
         }
-		public override void TileCountsAvailable(int[] tileCounts)
+		public override void TileCountsAvailable(ReadOnlySpan<int> tileCounts)
 		{
-            菊花海葵 = tileCounts[mod.TileType("菊花海葵")];
-            紫点海葵 = tileCounts[mod.TileType("紫点海葵")];
+            菊花海葵 = tileCounts[Mod.Find<ModTile>("菊花海葵").Type];
+            紫点海葵 = tileCounts[Mod.Find<ModTile>("紫点海葵").Type];
         }
         public override void PostWorldGen()
         {
-            NPC.NewNPC(Main.maxTilesX * 8, 200, mod.NPCType("Yasitaya"), 0, 0f, 0f, 0f, 0f, 255);
+            NPC.NewNPC(Main.maxTilesX * 8, 200, Mod.Find<ModNPC>("Yasitaya").Type, 0, 0f, 0f, 0f, 0f, 255);
             int Xd = 2000;
             int Yd = 600;
             if (Main.maxTilesX == 6400)
@@ -160,7 +160,7 @@ namespace MythMod
                 Xd = 4000;
                 Yd = 1200;
             }
-            Texture2D tex = mod.GetTexture("UIImages/World/大理石遗迹Kill");
+            Texture2D tex = Mod.GetTexture("UIImages/World/大理石遗迹Kill");
             Color[] colorTex = new Color[tex.Width * tex.Height];
             tex.GetData(colorTex);
 
@@ -175,7 +175,7 @@ namespace MythMod
                     }
                 }
             }
-            Texture2D tex1 = mod.GetTexture("UIImages/World/大理石遗迹Wall");
+            Texture2D tex1 = Mod.GetTexture("UIImages/World/大理石遗迹Wall");
             Color[] colorTex1 = new Color[tex1.Width * tex1.Height];
             tex1.GetData(colorTex);
 
@@ -185,12 +185,12 @@ namespace MythMod
                 {
                     if (new Color(colorTex[x + y * tex1.Width].R, colorTex[x + y * tex1.Width].G, colorTex[x + y * tex1.Width].B) == new Color(111, 117, 135))
                     {
-                        Main.tile[x + Xd, y + Yd].wall = 179;
-                        Main.tile[x + Xd, y + Yd].active(false);
+                        Main.tile[x + Xd, y + Yd].WallType = 179;
+                        Main.tile[x + Xd, y + Yd].HasTile = false;
                     }
                 }
             }
-            Texture2D tex2 = mod.GetTexture("UIImages/World/大理石遗迹Tile");
+            Texture2D tex2 = Mod.GetTexture("UIImages/World/大理石遗迹Tile");
             Color[] colortex2 = new Color[tex2.Width * tex2.Height];
             tex2.GetData(colorTex);
 
@@ -200,33 +200,33 @@ namespace MythMod
                 {
                     if (new Color(colorTex[x + y * tex2.Width].R, colorTex[x + y * tex2.Width].G, colorTex[x + y * tex2.Width].B) == new Color(168, 178, 204))
                     {
-                        Main.tile[x + Xd, y + Yd].type = 357;
-                        Main.tile[x + Xd, y + Yd].active(true);
+                        Main.tile[x + Xd, y + Yd].TileType = 357;
+                        Main.tile[x + Xd, y + Yd].HasTile = true;
                     }
                     if (new Color(colorTex[x + y * tex2.Width].R, colorTex[x + y * tex2.Width].G, colorTex[x + y * tex2.Width].B) == new Color(63, 89, 255))
                     {
-                        Main.tile[x + Xd, y + Yd].type = (ushort)mod.TileType("GiantMarbalClock");
-                        Main.tile[x + Xd, y + Yd].active(true);
+                        Main.tile[x + Xd, y + Yd].TileType = (ushort)Mod.Find<ModTile>("GiantMarbalClock").Type;
+                        Main.tile[x + Xd, y + Yd].HasTile = true;
                     }
                     if (new Color(colorTex[x + y * tex2.Width].R, colorTex[x + y * tex2.Width].G, colorTex[x + y * tex2.Width].B) == new Color(226, 109, 140))
                     {
-                        Main.tile[x + Xd, y + Yd].type = 19;
-                        Main.tile[x + Xd, y + Yd].active(true);
-                        Main.tile[x + Xd, y + Yd].frameY = 522;
+                        Main.tile[x + Xd, y + Yd].TileType = 19;
+                        Main.tile[x + Xd, y + Yd].HasTile = true;
+                        Main.tile[x + Xd, y + Yd].TileFrameY = 522;
                         WorldGen.SlopeTile(x + Xd, y + Yd, 1);
                     }
                     if (new Color(colorTex[x + y * tex2.Width].R, colorTex[x + y * tex2.Width].G, colorTex[x + y * tex2.Width].B) == new Color(226, 109, 70))
                     {
-                        Main.tile[x + Xd, y + Yd].type = 19;
-                        Main.tile[x + Xd, y + Yd].active(true);
-                        Main.tile[x + Xd, y + Yd].frameY = 522;
+                        Main.tile[x + Xd, y + Yd].TileType = 19;
+                        Main.tile[x + Xd, y + Yd].HasTile = true;
+                        Main.tile[x + Xd, y + Yd].TileFrameY = 522;
                         WorldGen.SlopeTile(x + Xd, y + Yd, 2);
                     }
                     if (new Color(colorTex[x + y * tex2.Width].R, colorTex[x + y * tex2.Width].G, colorTex[x + y * tex2.Width].B) == new Color(204, 99, 127))
                     {
-                        Main.tile[x + Xd, y + Yd].type = 19;
-                        Main.tile[x + Xd, y + Yd].active(true);
-                        Main.tile[x + Xd, y + Yd].frameY = 522;
+                        Main.tile[x + Xd, y + Yd].TileType = 19;
+                        Main.tile[x + Xd, y + Yd].HasTile = true;
+                        Main.tile[x + Xd, y + Yd].TileFrameY = 522;
                     }
                 }
             }
@@ -236,24 +236,24 @@ namespace MythMod
                 {
                     if (new Color(colorTex[x + y * tex2.Width].R, colorTex[x + y * tex2.Width].G, colorTex[x + y * tex2.Width].B) == new Color(255, 13, 5))
                     {
-                        WorldGen.PlaceTile(x + Xd, y + Yd, mod.TileType("MarbleFragment"), false, true, -1, 0);
+                        WorldGen.PlaceTile(x + Xd, y + Yd, Mod.Find<ModTile>("MarbleFragment").Type, false, true, -1, 0);
                     }
                     if (new Color(colorTex[x + y * tex2.Width].R, colorTex[x + y * tex2.Width].G, colorTex[x + y * tex2.Width].B) == new Color(255, 162, 22))
                     {
                         WorldGen.PlaceTile(x + Xd, y + Yd, 34, false, true, -1, 37);
-                        Main.tile[x + Xd - 1, y + Yd - 1].frameX += 54;
-                        Main.tile[x + Xd, y + Yd - 1].frameX += 54;
-                        Main.tile[x + Xd + 1, y + Yd - 1].frameX += 54;
-                        Main.tile[x + Xd - 1, y + Yd].frameX += 54;
-                        Main.tile[x + Xd, y + Yd].frameX += 54;
-                        Main.tile[x + Xd + 1, y + Yd].frameX += 54;
-                        Main.tile[x + Xd - 1, y + Yd + 1].frameX += 54;
-                        Main.tile[x + Xd, y + Yd + 1].frameX += 54;
-                        Main.tile[x + Xd + 1, y + Yd + 1].frameX += 54;
+                        Main.tile[x + Xd - 1, y + Yd - 1].TileFrameX += 54;
+                        Main.tile[x + Xd, y + Yd - 1].TileFrameX += 54;
+                        Main.tile[x + Xd + 1, y + Yd - 1].TileFrameX += 54;
+                        Main.tile[x + Xd - 1, y + Yd].TileFrameX += 54;
+                        Main.tile[x + Xd, y + Yd].TileFrameX += 54;
+                        Main.tile[x + Xd + 1, y + Yd].TileFrameX += 54;
+                        Main.tile[x + Xd - 1, y + Yd + 1].TileFrameX += 54;
+                        Main.tile[x + Xd, y + Yd + 1].TileFrameX += 54;
+                        Main.tile[x + Xd + 1, y + Yd + 1].TileFrameX += 54;
                     }
                 }
             }
-            Texture2D tex3 = mod.GetTexture("UIImages/World/大理石遗迹Liquid");
+            Texture2D tex3 = Mod.GetTexture("UIImages/World/大理石遗迹Liquid");
             Color[] colortex3 = new Color[tex3.Width * tex3.Height];
             tex3.GetData(colorTex);
 
@@ -263,7 +263,7 @@ namespace MythMod
                 {
                     if (new Color(colorTex[x + y * tex3.Width].R, colorTex[x + y * tex3.Width].G, colorTex[x + y * tex3.Width].B) == new Color(0, 13, 204))
                     {
-                        Main.tile[x + Xd, y + Yd].liquid = byte.MaxValue;
+                        Main.tile[x + Xd, y + Yd].LiquidAmount = byte.MaxValue;
                     }
                 }
             }
@@ -280,14 +280,14 @@ namespace MythMod
                     {
                         for (double num4 = 0.0; num4 < (double)((Main.maxTilesX - 201) * (int)((float)Main.maxTilesY * 0.3f)) / 7250.0; num4 += 1.0)
                         {
-                            WorldGen.TileRunner(WorldGen.genRand.Next(100, Main.maxTilesX - 100), WorldGen.genRand.Next((int)((float)Main.maxTilesY * 0.35f), Main.maxTilesY - 300), (double)WorldGen.genRand.Next(3, 5), WorldGen.genRand.Next(3, 5), base.mod.TileType("绿松石"), false, 0f, 0f, false, true);
+                            WorldGen.TileRunner(WorldGen.genRand.Next(100, Main.maxTilesX - 100), WorldGen.genRand.Next((int)((float)Main.maxTilesY * 0.35f), Main.maxTilesY - 300), (double)WorldGen.genRand.Next(3, 5), WorldGen.genRand.Next(3, 5), base.Mod.Find<ModTile>("绿松石").Type, false, 0f, 0f, false, true);
                         }
                     }
                     else
                     {
                         for (double num4 = 0.0; num4 < (double)((Main.maxTilesX - 201) * (int)((float)Main.maxTilesY * 0.3f)) / 7250.0; num4 += 1.0)
                         {
-                            WorldGen.TileRunner(WorldGen.genRand.Next(100, Main.maxTilesX - 100), WorldGen.genRand.Next((int)((float)Main.maxTilesY * 0.35f), Main.maxTilesY - 300), (double)WorldGen.genRand.Next(3, 5), WorldGen.genRand.Next(3, 5), base.mod.TileType("石榴石"), false, 0f, 0f, false, true);
+                            WorldGen.TileRunner(WorldGen.genRand.Next(100, Main.maxTilesX - 100), WorldGen.genRand.Next((int)((float)Main.maxTilesY * 0.35f), Main.maxTilesY - 300), (double)WorldGen.genRand.Next(3, 5), WorldGen.genRand.Next(3, 5), base.Mod.Find<ModTile>("石榴石").Type, false, 0f, 0f, false, true);
                         }
                     }
                     if (LfX == 0)
@@ -298,7 +298,7 @@ namespace MythMod
                     {
                         LfY = Main.rand.Next(Main.maxTilesY / 30, Main.maxTilesY / 15);
                     }
-                    for (int i = 0; Main.tile[LfX, LfY].active() || Main.tile[LfX + 15, LfY].active() || Main.tile[LfX - 15, LfY].active(); i++)
+                    for (int i = 0; Main.tile[LfX, LfY].HasTile || Main.tile[LfX + 15, LfY].HasTile || Main.tile[LfX - 15, LfY].HasTile; i++)
                     {
                         LfX = Main.rand.Next(60, Main.maxTilesX - 60);
                         LfY = Main.rand.Next(Main.maxTilesY / 30, Main.maxTilesY / 15);
@@ -309,12 +309,12 @@ namespace MythMod
                         {
                             if (new Vector2(x, y).Length() > 2 && new Vector2(x, y).Length() < 5)
                             {
-                                Main.tile[LfX + x, LfY + y].type = 189;
-                                Main.tile[LfX + x, LfY + y].active(true);
+                                Main.tile[LfX + x, LfY + y].TileType = 189;
+                                Main.tile[LfX + x, LfY + y].HasTile = true;
                             }
                         }
                     }
-                    WorldGen.PlaceTile(LfX, LfY + 1, mod.TileType("光之花"));
+                    WorldGen.PlaceTile(LfX, LfY + 1, Mod.Find<ModTile>("光之花").Type);
                     /*int Xd = 2000;
                     int Yd = 600;
                     if (Main.maxTilesX == 6400)
@@ -418,7 +418,7 @@ namespace MythMod
 		private static void Oceanworld(GenerationProgress progress)
 		{
 		}
-        public override void Load(TagCompound tag)
+        public override void LoadWorldData(TagCompound tag)
         {
             IList<string> list = tag.GetList<string>("downed");
             MythWorld.Myth = list.Contains("Myth");

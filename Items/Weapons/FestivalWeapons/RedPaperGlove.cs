@@ -12,20 +12,20 @@ namespace MythMod.Items.Weapons.FestivalWeapons
         }
         public override void SetDefaults()
         {
-            item.damage = 17;
-            item.melee = true;
-            item.width = 30;
-            item.height = 36;
-            item.useTime = 9;
-            item.rare = 6;
-            item.useAnimation = 9;
-            item.useStyle = 1;
-            item.knockBack = 7;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 8;
-            item.value = 99999;
-            item.scale = 1f;
+            Item.damage = 17;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 30;
+            Item.height = 36;
+            Item.useTime = 9;
+            Item.rare = 6;
+            Item.useAnimation = 9;
+            Item.useStyle = 1;
+            Item.knockBack = 7;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 8;
+            Item.value = 99999;
+            Item.scale = 1f;
         }
     }
 }

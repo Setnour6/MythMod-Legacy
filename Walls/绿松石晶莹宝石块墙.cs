@@ -14,11 +14,11 @@ namespace MythMod.Walls
 {
     public class 绿松石晶莹宝石块墙 : ModWall
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.wallHouse[(int)base.Type] = true;
-			this.dustType = 89;
-            this.drop = base.mod.ItemType("绿松石晶莹宝石块墙");
+			this.DustType = 89;
+            this.ItemDrop = base.Mod.Find<ModItem>("绿松石晶莹宝石块墙").Type;
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("绿松石晶莹宝石块墙");
 			base.AddMapEntry(new Color(11, 102, 90), modTranslation);

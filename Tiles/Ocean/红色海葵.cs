@@ -23,7 +23,7 @@ namespace MythMod.Tiles.Ocean
         private int num2 = 0;
         private bool num3 = false;
         private bool flag2 = false;
-        public override void SetDefaults()
+        public override void SetStaticDefaults()
         {
             Main.tileFrameImportant[(int)base.Type] = true;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
@@ -60,30 +60,30 @@ namespace MythMod.Tiles.Ocean
             }
             if (flag)
             {
-                if((int)(Main.time / 5) % 2 == 0 && Main.tile[i, j].frameX < 360)
+                if((int)(Main.time / 5) % 2 == 0 && Main.tile[i, j].TileFrameX < 360)
                 {
-                    Main.tile[i, j].frameX += 40;
+                    Main.tile[i, j].TileFrameX += 40;
                 }
             }
-            if (Main.tile[i, j].frameX >= 40 && !flag)
+            if (Main.tile[i, j].TileFrameX >= 40 && !flag)
             {
-                if ((int)(Main.time / 5) % 3 == 0 && Main.tile[i, j].frameX > 0)
+                if ((int)(Main.time / 5) % 3 == 0 && Main.tile[i, j].TileFrameX > 0)
                 {
-                    Main.tile[i, j].frameX -= 40;
+                    Main.tile[i, j].TileFrameX -= 40;
                 }
             }
-            if(Main.tile[i, j + 1].type == base.mod.TileType("红色海葵"))
+            if(Main.tile[i, j + 1].TileType == base.Mod.Find<ModTile>("红色海葵").Type)
             {
-                Main.tile[i, j + 1].frameX = Main.tile[i, j].frameX;
+                Main.tile[i, j + 1].TileFrameX = Main.tile[i, j].TileFrameX;
             }
-            if (Main.tile[i, j - 1].type == base.mod.TileType("红色海葵"))
+            if (Main.tile[i, j - 1].TileType == base.Mod.Find<ModTile>("红色海葵").Type)
             {
-                Main.tile[i, j - 1].frameX = Main.tile[i, j].frameX;
+                Main.tile[i, j - 1].TileFrameX = Main.tile[i, j].TileFrameX;
             }
         }
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("RedSeaAnemone"));
+            Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("RedSeaAnemone").Type);
         }
     }
 }

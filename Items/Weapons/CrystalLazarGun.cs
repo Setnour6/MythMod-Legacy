@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -17,25 +18,25 @@ namespace MythMod.Items.Weapons
 		}
 		public override void SetDefaults()
 		{
-			base.item.damage = 22;
-			base.item.magic = true;
-            base.item.mana = 4; 
-            base.item.rare = 3;
-			base.item.width = 56;
-			base.item.height = 26;
-			base.item.useTime = 12;
-			base.item.useAnimation = 12;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.knockBack = 3.75f;
-			base.item.value = 35000;
-			base.item.UseSound = SoundID.Item95;
-			base.item.autoReuse = true;
-            base.item.shoot = 83;
+			base.Item.damage = 22;
+			base.Item.DamageType = DamageClass.Magic;
+            base.Item.mana = 4; 
+            base.Item.rare = 3;
+			base.Item.width = 56;
+			base.Item.height = 26;
+			base.Item.useTime = 12;
+			base.Item.useAnimation = 12;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 3.75f;
+			base.Item.value = 35000;
+			base.Item.UseSound = SoundID.Item95;
+			base.Item.autoReuse = true;
+            base.Item.shoot = 83;
 
-            base.item.shootSpeed = 13f;
+            base.Item.shootSpeed = 13f;
 		}
-		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
             int u = Main.rand.Next(0, 12000);
             if(u < 10500)
@@ -58,13 +59,12 @@ namespace MythMod.Items.Weapons
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = Recipe.Create(Mod.Find<ModItem>("CrystalLazarGun").Type, 1);
             recipe.AddIngredient(null, "BloodCryst", 2);
             recipe.AddIngredient(38, 30);
             recipe.AddIngredient(236, 5);
             recipe.requiredTile[0] = 16;
-            recipe.SetResult(mod.ItemType("CrystalLazarGun"), 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

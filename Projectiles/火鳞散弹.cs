@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 using Terraria.ID;
 
@@ -14,64 +15,64 @@ namespace MythMod.Projectiles
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("火鳞散弹");
-			Main.projFrames[base.projectile.type] = 1;
+			Main.projFrames[base.Projectile.type] = 1;
 		}
 
 		// Token: 0x06001F15 RID: 7957 RVA: 0x0018D09C File Offset: 0x0018B29C
 		public override void SetDefaults()
 		{
-			base.projectile.width = 10;
-			base.projectile.height = 10;
-			base.projectile.hostile = false;
-			base.projectile.ignoreWater = true;
-			base.projectile.tileCollide = true;
-			base.projectile.penetrate = 1;
-			base.projectile.timeLeft = 200;
-			base.projectile.alpha = 0;
-            base.projectile.friendly = true;
-			this.cooldownSlot = 1;
-			ProjectileID.Sets.TrailCacheLength[base.projectile.type] = 20;
-            ProjectileID.Sets.TrailingMode[base.projectile.type] = 0;
+			base.Projectile.width = 10;
+			base.Projectile.height = 10;
+			base.Projectile.hostile = false;
+			base.Projectile.ignoreWater = true;
+			base.Projectile.tileCollide = true;
+			base.Projectile.penetrate = 1;
+			base.Projectile.timeLeft = 200;
+			base.Projectile.alpha = 0;
+            base.Projectile.friendly = true;
+			this.CooldownSlot = 1;
+			ProjectileID.Sets.TrailCacheLength[base.Projectile.type] = 20;
+            ProjectileID.Sets.TrailingMode[base.Projectile.type] = 0;
 		}
 		// Token: 0x06001F16 RID: 7958 RVA: 0x0018D118 File Offset: 0x0018B318
 		public override void AI()
 		{
-			Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 0.8f / 255f * base.projectile.scale, (float)(255 - base.projectile.alpha) * 0.6f / 255f * base.projectile.scale, (float)(255 - base.projectile.alpha) * 0f / 255f);
-			base.projectile.spriteDirection = 1;
-			base.projectile.rotation = (float)Math.Atan2((double)base.projectile.velocity.Y, (double)base.projectile.velocity.X);
-			base.projectile.velocity *= Main.rand.Next(95, 98) / 100f;
-			if (projectile.timeLeft < 180)
+			Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 0.8f / 255f * base.Projectile.scale, (float)(255 - base.Projectile.alpha) * 0.6f / 255f * base.Projectile.scale, (float)(255 - base.Projectile.alpha) * 0f / 255f);
+			base.Projectile.spriteDirection = 1;
+			base.Projectile.rotation = (float)Math.Atan2((double)base.Projectile.velocity.Y, (double)base.Projectile.velocity.X);
+			base.Projectile.velocity *= Main.rand.Next(95, 98) / 100f;
+			if (Projectile.timeLeft < 180)
             {
-                projectile.scale *= 0.985f;
+                Projectile.scale *= 0.985f;
             }
 		}
 
 		// Token: 0x06001F17 RID: 7959 RVA: 0x0000C841 File Offset: 0x0000AA41
 		public override Color? GetAlpha(Color lightColor)
 		{
-			return new Color?(new Color(255, 255, 255, base.projectile.alpha));
+			return new Color?(new Color(255, 255, 255, base.Projectile.alpha));
 		}
-		public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D texture2D = Main.projectileTexture[base.projectile.type];
-            int num = Main.projectileTexture[base.projectile.type].Height;
-			Main.spriteBatch.Draw(texture2D, base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY), new Rectangle?(new Rectangle(0, 0, texture2D.Width, num)), base.projectile.GetAlpha(lightColor), base.projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.projectile.scale, SpriteEffects.None, 1f);
+			Texture2D texture2D = TextureAssets.Projectile[base.Projectile.type].Value;
+            int num = TextureAssets.Projectile[base.Projectile.type].Value.Height;
+			Main.spriteBatch.Draw(texture2D, base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), new Rectangle?(new Rectangle(0, 0, texture2D.Width, num)), base.Projectile.GetAlpha(lightColor), base.Projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.Projectile.scale, SpriteEffects.None, 1f);
 			SpriteEffects effects = SpriteEffects.None;
-			if (base.projectile.spriteDirection == 1)
+			if (base.Projectile.spriteDirection == 1)
             {
                 effects = SpriteEffects.FlipHorizontally;
             }
 			int frameHeight = 10;
-            Vector2 value = new Vector2(base.projectile.Center.X, base.projectile.Center.Y);
-            Vector2 drawOrigin = new Vector2(Main.projectileTexture[projectile.type].Width * 0.5f, projectile.height * 0.5f);
+            Vector2 value = new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y);
+            Vector2 drawOrigin = new Vector2(TextureAssets.Projectile[Projectile.type].Value.Width * 0.5f, Projectile.height * 0.5f);
             Vector2 vector2 = value - Main.screenPosition;
-			if(projectile.timeLeft > 110)
+			if(Projectile.timeLeft > 110)
 			{
-				for (int k = 0; k < projectile.oldPos.Length; k++)
+				for (int k = 0; k < Projectile.oldPos.Length; k++)
                 {
-				    Vector2 drawPos = projectile.oldPos[k / 3] - Main.screenPosition + drawOrigin + new Vector2(0f, projectile.gfxOffY);
-                    Color color = projectile.GetAlpha(lightColor) * ((float)(projectile.oldPos.Length - k) / (float)projectile.oldPos.Length);
-                    spriteBatch.Draw(base.mod.GetTexture("Projectiles/火鳞尾迹"), drawPos, new Rectangle(0, frameHeight * projectile.frame, base.mod.GetTexture("Projectiles/渊海磷光光效").Width, frameHeight), color, projectile.rotation, drawOrigin, projectile.scale, SpriteEffects.None, 0f);
+				    Vector2 drawPos = Projectile.oldPos[k / 3] - Main.screenPosition + drawOrigin + new Vector2(0f, Projectile.gfxOffY);
+                    Color color = Projectile.GetAlpha(lightColor) * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
+                    spriteBatch.Draw(base.Mod.GetTexture("Projectiles/火鳞尾迹"), drawPos, new Rectangle(0, frameHeight * Projectile.frame, base.Mod.GetTexture("Projectiles/渊海磷光光效").Width, frameHeight), color, Projectile.rotation, drawOrigin, Projectile.scale, SpriteEffects.None, 0f);
                 }
 			}
             return true;

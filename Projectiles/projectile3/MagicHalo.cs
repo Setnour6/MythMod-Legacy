@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 
 namespace MythMod.Projectiles.projectile3
@@ -18,46 +19,46 @@ namespace MythMod.Projectiles.projectile3
 		// Token: 0x06001F15 RID: 7957 RVA: 0x0018D09C File Offset: 0x0018B29C
 		public override void SetDefaults()
 		{
-			base.projectile.width = 500;
-            base.projectile.scale = 1;
-            base.projectile.height = 500;
-			base.projectile.hostile = false;
-			base.projectile.ignoreWater = true;
-			base.projectile.tileCollide = false;
-			base.projectile.penetrate = -1;
-			base.projectile.timeLeft = 120;
-            base.projectile.friendly = true;
-			this.cooldownSlot = 1;
+			base.Projectile.width = 500;
+            base.Projectile.scale = 1;
+            base.Projectile.height = 500;
+			base.Projectile.hostile = false;
+			base.Projectile.ignoreWater = true;
+			base.Projectile.tileCollide = false;
+			base.Projectile.penetrate = -1;
+			base.Projectile.timeLeft = 120;
+            base.Projectile.friendly = true;
+			this.CooldownSlot = 1;
 		}
         public override void AI()
         {
-            if(NPC.CountNPCS(mod.NPCType("CursedLavaStone")) > 0)
+            if(NPC.CountNPCS(Mod.Find<ModNPC>("CursedLavaStone").Type) > 0)
             {
-                projectile.timeLeft = 120;
+                Projectile.timeLeft = 120;
             }
             else
             {
-                projectile.timeLeft = 1;
+                Projectile.timeLeft = 1;
             }
             for(int i = 0;i < 200;i++)
             {
-                if (Main.npc[i].type == mod.NPCType("CursedLavaStone"))
+                if (Main.npc[i].type == Mod.Find<ModNPC>("CursedLavaStone").Type)
                 {
-                    projectile.Center = Main.npc[i].Center;
+                    Projectile.Center = Main.npc[i].Center;
                 }
             }
-            projectile.rotation += 0.02f;
+            Projectile.rotation += 0.02f;
         }
 		public override Color? GetAlpha(Color lightColor)
 		{
 			return new Color?(new Color(90,90,90, 0));
 		}
-		public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D texture2D = Main.projectileTexture[base.projectile.type];
-			int num = Main.projectileTexture[base.projectile.type].Height / Main.projFrames[base.projectile.type];
-			int y = num * base.projectile.frame;
-			Main.spriteBatch.Draw(texture2D, base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), base.projectile.GetAlpha(lightColor), base.projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.projectile.scale, SpriteEffects.None, 0f);
+			Texture2D texture2D = TextureAssets.Projectile[base.Projectile.type].Value;
+			int num = TextureAssets.Projectile[base.Projectile.type].Value.Height / Main.projFrames[base.Projectile.type];
+			int y = num * base.Projectile.frame;
+			Main.spriteBatch.Draw(texture2D, base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), base.Projectile.GetAlpha(lightColor), base.Projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.Projectile.scale, SpriteEffects.None, 0f);
 			return false;
 		}
     }

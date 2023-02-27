@@ -16,13 +16,13 @@ namespace MythMod.Items.Shields
         }
         public override void SetDefaults()
         {
-            item.width = 42;
-            item.height = 42;
-            item.maxStack = 1;
-            item.flame = true;
-            item.value = 10000;
-            item.defense = 40;
-            item.rare = 10;
+            Item.width = 42;
+            Item.height = 42;
+            Item.maxStack = 1;
+            Item.flame = true;
+            Item.value = 10000;
+            Item.defense = 40;
+            Item.rare = 10;
         }
 
         public override void HoldItem(Player player)
@@ -31,7 +31,7 @@ namespace MythMod.Items.Shields
             if (mplayer.SD != 5)
             {
                 mplayer.SD = 5;
-                Projectile.NewProjectile(player.Center.X, player.Center.Y, 0, 0f, mod.ProjectileType("OceanCrystalShield"), 0, 0f, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(player.Center.X, player.Center.Y, 0, 0f, Mod.Find<ModProjectile>("OceanCrystalShield").Type, 0, 0f, Main.myPlayer, 0f, 0f);
             }
             mplayer.SD2 = 2;
             mplayer.AddDef = 48;

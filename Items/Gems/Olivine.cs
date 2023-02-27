@@ -17,19 +17,19 @@ namespace MythMod.Items.Gems
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetDefaults()
         {
-            base.item.createTile = base.mod.TileType("橄榄石矿");
-            base.item.useStyle = 1;
-            base.item.useTurn = true;
-            base.item.useAnimation = 15;
-            base.item.useTime = 10;
-            base.item.autoReuse = true;
-            base.item.consumable = true;
-            item.width = 30;//宽
-            item.height = 20;//高
-            item.rare = 11;//品质
-            item.scale = 1f;//大小
-            item.value = 9000;
-            item.maxStack = 999;
+            base.Item.createTile = base.Mod.Find<ModTile>("橄榄石矿").Type;
+            base.Item.useStyle = 1;
+            base.Item.useTurn = true;
+            base.Item.useAnimation = 15;
+            base.Item.useTime = 10;
+            base.Item.autoReuse = true;
+            base.Item.consumable = true;
+            Item.width = 30;//宽
+            Item.height = 20;//高
+            Item.rare = 11;//品质
+            Item.scale = 1f;//大小
+            Item.value = 9000;
+            Item.maxStack = 999;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
@@ -17,7 +18,7 @@ namespace MythMod.Tiles.Festivals
         private int i2 = 0;
         private int j2 = 0;
         // Token: 0x0600489C RID: 18588 RVA: 0x003496D4 File Offset: 0x003478D4
-        public override void SetDefaults()
+        public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[(int)base.Type] = true;
 			Main.tileNoAttach[(int)base.Type] = true;
@@ -30,17 +31,17 @@ namespace MythMod.Tiles.Festivals
 				16
 			};
 			TileObjectData.addTile((int)base.Type);
-			this.dustType = 123;
+			this.DustType = 123;
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
-            this.mineResist = 3f;
-			base.SetDefaults();
+            this.MineResist = 3f;
+			base.SetStaticDefaults();
 			modTranslation.AddTranslation(GameCulture.Chinese, "");
             base.AddMapEntry(new Color(193, 131, 139), modTranslation);
         }
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("FireWorkBallShoutDouble"));
+            Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("FireWorkBallShoutDouble").Type);
         }
         // Token: 0x0600489D RID: 18589 RVA: 0x000138D5 File Offset: 0x00011AD5
         public override void NumDust(int i, int j, bool fail, ref int num)
@@ -58,10 +59,10 @@ namespace MythMod.Tiles.Festivals
             bool flag = true;
             for (int num66 = 0; num66 < 58; num66++)
             {
-                if (player.inventory[num66].type == mod.ItemType("FireWorkBall") && player.inventory[num66].stack > 1)
+                if (player.inventory[num66].type == Mod.Find<ModItem>("FireWorkBall").Type && player.inventory[num66].stack > 1)
                 {
-                    Main.PlaySound(2, i * 16, (j * 16) - 15, 14, 1f, 0f);
-                    Projectile.NewProjectile(i * 16, (j * 16) - 15, Main.rand.Next(-1000, 1000) / 10000f, -5f, base.mod.ProjectileType("FireworkExxxx"), 1000, 110, Main.myPlayer, 20f, 0f);
+                    SoundEngine.PlaySound(SoundID.Item14, new Vector2(i * 16, (j * 16) - 15));
+                    Projectile.NewProjectile(i * 16, (j * 16) - 15, Main.rand.Next(-1000, 1000) / 10000f, -5f, base.Mod.Find<ModProjectile>("FireworkExxxx").Type, 1000, 110, Main.myPlayer, 20f, 0f);
                     player.inventory[num66].stack -= 2;
                     for (int k = 0; k < 35; k++)
                     {
@@ -76,10 +77,10 @@ namespace MythMod.Tiles.Festivals
                     }
                     break;
                 }
-                if (player.inventory[num66].type == mod.ItemType("SmallFireWorkBall") && player.inventory[num66].stack > 1)
+                if (player.inventory[num66].type == Mod.Find<ModItem>("SmallFireWorkBall").Type && player.inventory[num66].stack > 1)
                 {
-                    Main.PlaySound(2, i * 16, (j * 16) - 15, 14, 1f, 0f);
-                    Projectile.NewProjectile(i * 16, (j * 16) - 15, Main.rand.Next(-1000, 1000) / 10000f, -4.2f, base.mod.ProjectileType("FireworkSxxxx"), 400, 110, Main.myPlayer, 20f, 0f);
+                    SoundEngine.PlaySound(SoundID.Item14, new Vector2(i * 16, (j * 16) - 15));
+                    Projectile.NewProjectile(i * 16, (j * 16) - 15, Main.rand.Next(-1000, 1000) / 10000f, -4.2f, base.Mod.Find<ModProjectile>("FireworkSxxxx").Type, 400, 110, Main.myPlayer, 20f, 0f);
                     player.inventory[num66].stack -= 2;
                     for (int k = 0; k < 35; k++)
                     {

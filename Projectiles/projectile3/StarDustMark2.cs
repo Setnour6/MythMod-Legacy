@@ -23,33 +23,33 @@ namespace MythMod.Projectiles.projectile3
 		}
 		public override void SetDefaults()
 		{
-            base.projectile.width = 50;
-            base.projectile.height = 50;
-            base.projectile.friendly = true;
-            base.projectile.timeLeft = 120;
-            base.projectile.penetrate = -1;
-            base.projectile.minion = true;
-            base.projectile.tileCollide = false;
-            base.projectile.usesLocalNPCImmunity = true;
-            base.projectile.localNPCHitCooldown = 10;
+            base.Projectile.width = 50;
+            base.Projectile.height = 50;
+            base.Projectile.friendly = true;
+            base.Projectile.timeLeft = 120;
+            base.Projectile.penetrate = -1;
+            base.Projectile.minion = true;
+            base.Projectile.tileCollide = false;
+            base.Projectile.usesLocalNPCImmunity = true;
+            base.Projectile.localNPCHitCooldown = 10;
         }
         public override Color? GetAlpha(Color lightColor)
         {
-            return new Color?(new Color(projectile.ai[0], projectile.ai[0], projectile.ai[0], 0));
+            return new Color?(new Color(Projectile.ai[0], Projectile.ai[0], Projectile.ai[0], 0));
         }
         public override void AI()
         {
-            if(projectile.ai[1] > 0)
+            if(Projectile.ai[1] > 0)
             {
 
             }
-            if (projectile.ai[0] < 1)
+            if (Projectile.ai[0] < 1)
             {
-                projectile.ai[0] += 0.01f;
+                Projectile.ai[0] += 0.01f;
             }
             else
             {
-                projectile.ai[0] = 1;
+                Projectile.ai[0] = 1;
             }
         }
     }

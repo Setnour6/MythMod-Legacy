@@ -18,20 +18,20 @@ namespace MythMod.Items.Accessories
 
 		public override void SetDefaults()
 		{
-			item.width = 44;
-			item.height = 46;
-			item.value = 1000;
-			item.accessory = true;
-            item.rare = 3;
+			Item.width = 44;
+			Item.height = 46;
+			Item.value = 1000;
+			Item.accessory = true;
+            Item.rare = 3;
 
         }
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
 			player.arrowDamage *= 1.05f;
-            player.meleeDamage *= 1.05f;
+            player.GetDamage(DamageClass.Melee) *= 1.05f;
             player.bulletDamage *= 1.05f;
-            player.magicDamage *= 1.05f;
-            player.minionDamage *= 1.05f;
+            player.GetDamage(DamageClass.Magic) *= 1.05f;
+            player.GetDamage(DamageClass.Summon) *= 1.05f;
         }
 	}
 }

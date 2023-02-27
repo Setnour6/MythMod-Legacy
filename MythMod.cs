@@ -95,7 +95,7 @@ namespace MythMod
         public static Texture2D MaskColor4;
         public static Texture2D MaskColor5;
         public static Texture2D MaskColor7;
-        public override void PostUpdateInput()
+        public override void PostUpdateInput()/* tModPorter Note: Removed. Use ModSystem.PostUpdateInput */
         {
             if (!Filters.Scene["MythMod:ShockWave"].IsActive())
             {
@@ -161,32 +161,32 @@ namespace MythMod
             {
                 BMod.Call("AddBoss",
                     5.99f,
-                    new List<int> { mod.NPCType("EvilBotle") },
+                    new List<int> { mod.Find<ModNPC>("EvilBotle").Type },
                     this,
                     "封魔石瓶",
                     (Func<bool>)(() => MythWorld.downedBottle),
-                    new List<int> { mod.ItemType("EvilFragment") },//召唤物
-                    new List<int> { mod.ItemType("GeometryEvil") },//稀有掉落
-                    new List<int> { mod.ItemType("DarkStaff"), mod.ItemType("EvilBomb"), mod.ItemType("EvilRing"), mod.ItemType("EvilShadowBlade"), mod.ItemType("EvilSlingshot"), mod.ItemType("EvilSword"), mod.ItemType("ShadowYoyo") },//常规掉落
+                    new List<int> { mod.Find<ModItem>("EvilFragment").Type },//召唤物
+                    new List<int> { mod.Find<ModItem>("GeometryEvil").Type },//稀有掉落
+                    new List<int> { mod.Find<ModItem>("DarkStaff").Type, mod.Find<ModItem>("EvilBomb").Type, mod.Find<ModItem>("EvilRing").Type, mod.Find<ModItem>("EvilShadowBlade").Type, mod.Find<ModItem>("EvilSlingshot").Type, mod.Find<ModItem>("EvilSword").Type, mod.Find<ModItem>("ShadowYoyo").Type },//常规掉落
                     this,//9
-                    "在大理石教堂废墟的碎片堆中使用[i:" + mod.ItemType("EvilFragment").ToString() + "]召唤",
+                    "在大理石教堂废墟的碎片堆中使用[i:" + mod.Find<ModItem>("EvilFragment").Type.ToString() + "]召唤",
                     mod.GetTexture("NPCs/EvilBotle/EvilBotle"),
                     this);
                 //BMod.Call("AddBoss",/*时期*/4.2f,/*Boss*/new List<int> { mod.NPCType("BloodTusk") }, this,/*名字*/"鲜血獠牙",/*是否击杀*/(Func<bool>)(() => MythWorld.downedXXLY),/*召唤物*/new List<int> { mod.ItemType("CursedJawbone") },/*稀有掉落*/new List<int> { mod.ItemType("SwordXXLY"), mod.ItemType("BrokenBone") },/*常规掉落*/new List<int> { mod.ItemType("BoneLiquid"), mod.ItemType("BrokenTooth"), mod.ItemType("BoneKnife"), mod.ItemType("SpineGun"), mod.ItemType("TuskBow"), mod.ItemType("TuskStaff"), mod.ItemType("TuskLace") },/*召唤方法*/"在猩红之地使用[i:" + mod.ItemType("CursedJawbone").ToString() + "]召唤\n或在猩红之地自然生成", this,/*图像*/mod.GetTexture("NPCs/BloodTuskWhole"), this);
-                BMod.Call("AddBoss",/*时期*/4.09f,/*Boss*/new List<int> { mod.NPCType("BloodTusk") }, this,/*名字*/"鲜血獠牙",/*是否击杀*/(Func<bool>)(() => MythWorld.downedXXLY),/*召唤物*/new List<int> { mod.ItemType("CursedJawbone") },/*稀有掉落*/new List<int> { mod.ItemType("SwordXXLY") , mod.ItemType("BloodyTuskPlatfo") },/*常规掉落*/new List<int> { mod.ItemType("BoneLiquid"), mod.ItemType("BrokenBone"), mod.ItemType("BoneKnife"), mod.ItemType("BrokenTooth"), mod.ItemType("SpineGun"), mod.ItemType("TuskBow"), mod.ItemType("TuskStaff"), mod.ItemType("TuskLace") },/*召唤方法*/"在猩红之地使用[i:" + mod.ItemType("CursedJawbone").ToString() + "]召唤\n或在猩红之地自然生成", this,/*图像*/mod.GetTexture("NPCs/BloodTusk"), this);
-                BMod.Call("AddBoss",/*时期*/4.08f,/*Boss*/new List<int> { mod.NPCType("CorruptMoth") }, this,/*名字*/"腐檀巨蛾",/*是否击杀*/(Func<bool>)(() => MythWorld.downedFTJE),/*召唤物*/new List<int> { mod.ItemType("EvilCocoon") },/*稀有掉落*/new List<int> { mod.ItemType("SwordFTJE") , mod.ItemType("CorruptMothPlatform") },/*常规掉落*/new List<int> { mod.ItemType("BrokenWingOfMoth"), mod.ItemType("EvilScaleDust"), mod.ItemType("EvilChrysalis"), mod.ItemType("DustOfCorrupt"), mod.ItemType("PhosphorescenceGun"), mod.ItemType("ScaleWingBlade"), mod.ItemType("ShadowWingBow"), mod.ItemType("MothEye") },/*召唤方法*/"在腐化之地使用[i:" + mod.ItemType("EvilCocoon").ToString() + "]召唤\n或在腐化之地打破自然生成的魔茧", this,/*图像*/mod.GetTexture("NPCs/CorruptMothBoss"), this);
+                BMod.Call("AddBoss",/*时期*/4.09f,/*Boss*/new List<int> { mod.Find<ModNPC>("BloodTusk").Type }, this,/*名字*/"鲜血獠牙",/*是否击杀*/(Func<bool>)(() => MythWorld.downedXXLY),/*召唤物*/new List<int> { mod.Find<ModItem>("CursedJawbone").Type },/*稀有掉落*/new List<int> { mod.Find<ModItem>("SwordXXLY").Type , mod.Find<ModItem>("BloodyTuskPlatfo").Type },/*常规掉落*/new List<int> { mod.Find<ModItem>("BoneLiquid").Type, mod.Find<ModItem>("BrokenBone").Type, mod.Find<ModItem>("BoneKnife").Type, mod.Find<ModItem>("BrokenTooth").Type, mod.Find<ModItem>("SpineGun").Type, mod.Find<ModItem>("TuskBow").Type, mod.Find<ModItem>("TuskStaff").Type, mod.Find<ModItem>("TuskLace").Type },/*召唤方法*/"在猩红之地使用[i:" + mod.Find<ModItem>("CursedJawbone").Type.ToString() + "]召唤\n或在猩红之地自然生成", this,/*图像*/mod.GetTexture("NPCs/BloodTusk"), this);
+                BMod.Call("AddBoss",/*时期*/4.08f,/*Boss*/new List<int> { mod.Find<ModNPC>("CorruptMoth").Type }, this,/*名字*/"腐檀巨蛾",/*是否击杀*/(Func<bool>)(() => MythWorld.downedFTJE),/*召唤物*/new List<int> { mod.Find<ModItem>("EvilCocoon").Type },/*稀有掉落*/new List<int> { mod.Find<ModItem>("SwordFTJE").Type , mod.Find<ModItem>("CorruptMothPlatform").Type },/*常规掉落*/new List<int> { mod.Find<ModItem>("BrokenWingOfMoth").Type, mod.Find<ModItem>("EvilScaleDust").Type, mod.Find<ModItem>("EvilChrysalis").Type, mod.Find<ModItem>("DustOfCorrupt").Type, mod.Find<ModItem>("PhosphorescenceGun").Type, mod.Find<ModItem>("ScaleWingBlade").Type, mod.Find<ModItem>("ShadowWingBow").Type, mod.Find<ModItem>("MothEye").Type },/*召唤方法*/"在腐化之地使用[i:" + mod.Find<ModItem>("EvilCocoon").Type.ToString() + "]召唤\n或在腐化之地打破自然生成的魔茧", this,/*图像*/mod.GetTexture("NPCs/CorruptMothBoss"), this);
 
-                BMod.Call("AddBoss",/*时期*/9.05f,/*Boss*/new List<int> { mod.NPCType("LanternGhostKing") }, this,/*名字*/"灯笼鬼王",/*是否击杀*/(Func<bool>)(() => MythWorld.downedDLGW),/*召唤物*/new List<int> { mod.ItemType("BloodLamp") },/*稀有掉落*/new List<int> {mod.ItemType("LanternKingPlatform") },/*常规掉落*/new List<int> { mod.ItemType("IlluminatedNight"), mod.ItemType("LampFire"), mod.ItemType("LanternYoyo"), mod.ItemType("RedLanternGun"), mod.ItemType("Wick"), mod.ItemType("LanternHairpin") },/*召唤方法*/"灯笼月第15波出现", this,/*图像*/mod.GetTexture("NPCs/LanternMoon/LanternGhostKing"), this);
-                BMod.Call("AddBoss",/*时期*/15f,/*Boss*/new List<int> { mod.NPCType("AncientTangerineTreeEye") }, this,/*名字*/"千年桔树妖",/*是否击杀*/(Func<bool>)(() => MythWorld.downedQNGSY),/*召唤物*/new List<int> { mod.ItemType("BloodLamp") },/*稀有掉落*/new List<int> {mod.ItemType("OrangeMonstorPlatform") },/*常规掉落*/new List<int> { mod.ItemType("OrangeBlade"), mod.ItemType("OrangeBow"), mod.ItemType("OrangeFurlBlade"), mod.ItemType("OrangeFurlBlade"), mod.ItemType("OrangeStaff"), mod.ItemType("OrangeSummonStaff"), mod.ItemType("OrangeBracelet") },/*召唤方法*/"灯笼月第25波出现", this,/*图像*/mod.GetTexture("NPCs/LanternMoon/AncientTangerineTreeBoss"), this);
+                BMod.Call("AddBoss",/*时期*/9.05f,/*Boss*/new List<int> { mod.Find<ModNPC>("LanternGhostKing").Type }, this,/*名字*/"灯笼鬼王",/*是否击杀*/(Func<bool>)(() => MythWorld.downedDLGW),/*召唤物*/new List<int> { mod.Find<ModItem>("BloodLamp").Type },/*稀有掉落*/new List<int> {mod.Find<ModItem>("LanternKingPlatform").Type },/*常规掉落*/new List<int> { mod.Find<ModItem>("IlluminatedNight").Type, mod.Find<ModItem>("LampFire").Type, mod.Find<ModItem>("LanternYoyo").Type, mod.Find<ModItem>("RedLanternGun").Type, mod.Find<ModItem>("Wick").Type, mod.Find<ModItem>("LanternHairpin").Type },/*召唤方法*/"灯笼月第15波出现", this,/*图像*/mod.GetTexture("NPCs/LanternMoon/LanternGhostKing"), this);
+                BMod.Call("AddBoss",/*时期*/15f,/*Boss*/new List<int> { mod.Find<ModNPC>("AncientTangerineTreeEye").Type }, this,/*名字*/"千年桔树妖",/*是否击杀*/(Func<bool>)(() => MythWorld.downedQNGSY),/*召唤物*/new List<int> { mod.Find<ModItem>("BloodLamp").Type },/*稀有掉落*/new List<int> {mod.Find<ModItem>("OrangeMonstorPlatform").Type },/*常规掉落*/new List<int> { mod.Find<ModItem>("OrangeBlade").Type, mod.Find<ModItem>("OrangeBow").Type, mod.Find<ModItem>("OrangeFurlBlade").Type, mod.Find<ModItem>("OrangeFurlBlade").Type, mod.Find<ModItem>("OrangeStaff").Type, mod.Find<ModItem>("OrangeSummonStaff").Type, mod.Find<ModItem>("OrangeBracelet").Type },/*召唤方法*/"灯笼月第25波出现", this,/*图像*/mod.GetTexture("NPCs/LanternMoon/AncientTangerineTreeBoss"), this);
 
-                  BMod.Call("AddBoss",/*时期*/16.6f,/*Boss*/new List<int> { mod.NPCType("CrystalSword") }, this,/*名字*/"冰洲石剑",/*是否击杀*/(Func<bool>)(() => MythWorld.downedBZSJ),/*召唤物*/new List<int> { mod.ItemType("CrystalScabbard") },/*稀有掉落*/new List<int> { mod.ItemType("CrystalSwordPlatfo") },/*常规掉落*/new List<int> { mod.ItemType("CrystalBall"), mod.ItemType("CrystalBlade"), mod.ItemType("CrystalBow"), mod.ItemType("CrystalEagle"), mod.ItemType("CrystalRose"), mod.ItemType("CrystalSwordStaff"), mod.ItemType("CrystalThrownKnife")},/*召唤方法*/"在水晶岛使用[i:" + mod.ItemType("CrystalScabbard").ToString() + "]召唤", this,/*图像*/mod.GetTexture("NPCs/CrystalSword/CrystalSword"), this);
+                  BMod.Call("AddBoss",/*时期*/16.6f,/*Boss*/new List<int> { mod.Find<ModNPC>("CrystalSword").Type }, this,/*名字*/"冰洲石剑",/*是否击杀*/(Func<bool>)(() => MythWorld.downedBZSJ),/*召唤物*/new List<int> { mod.Find<ModItem>("CrystalScabbard").Type },/*稀有掉落*/new List<int> { mod.Find<ModItem>("CrystalSwordPlatfo").Type },/*常规掉落*/new List<int> { mod.Find<ModItem>("CrystalBall").Type, mod.Find<ModItem>("CrystalBlade").Type, mod.Find<ModItem>("CrystalBow").Type, mod.Find<ModItem>("CrystalEagle").Type, mod.Find<ModItem>("CrystalRose").Type, mod.Find<ModItem>("CrystalSwordStaff").Type, mod.Find<ModItem>("CrystalThrownKnife").Type},/*召唤方法*/"在水晶岛使用[i:" + mod.Find<ModItem>("CrystalScabbard").Type.ToString() + "]召唤", this,/*图像*/mod.GetTexture("NPCs/CrystalSword/CrystalSword"), this);
 
-                BMod.Call("AddBoss",/*时期*/8.88f,/*Boss*/new List<int> { mod.NPCType("OceanCrystal") }, this,/*名字*/"湛海魔晶",/*是否击杀*/(Func<bool>)(() => MythWorld.downedHYFY),/*召唤物*/new List<int> { mod.ItemType("SealTableOfOcean"), mod.ItemType("MysteriesPearl") },/*稀有掉落*/new List<int> {},/*常规掉落*/new List<int> { mod.ItemType("MysteriesPearl"), mod.ItemType("Aquamarine"), mod.ItemType("OceanCrystalClub")},/*召唤方法*/"在海洋封印台上按要求完成拼图,并放置[i:" + mod.ItemType("MysteriesPearl").ToString() + "]", this,/*图像*/mod.GetTexture("NPCs/OceanCrystal/OceanCrystal"), this);
+                BMod.Call("AddBoss",/*时期*/8.88f,/*Boss*/new List<int> { mod.Find<ModNPC>("OceanCrystal").Type }, this,/*名字*/"湛海魔晶",/*是否击杀*/(Func<bool>)(() => MythWorld.downedHYFY),/*召唤物*/new List<int> { mod.Find<ModItem>("SealTableOfOcean").Type, mod.Find<ModItem>("MysteriesPearl").Type },/*稀有掉落*/new List<int> {},/*常规掉落*/new List<int> { mod.Find<ModItem>("MysteriesPearl").Type, mod.Find<ModItem>("Aquamarine").Type, mod.Find<ModItem>("OceanCrystalClub").Type},/*召唤方法*/"在海洋封印台上按要求完成拼图,并放置[i:" + mod.Find<ModItem>("MysteriesPearl").Type.ToString() + "]", this,/*图像*/mod.GetTexture("NPCs/OceanCrystal/OceanCrystal"), this);
 
-                  BMod.Call("AddBoss",/*时期*/0.14f,/*Boss*/new List<int> { mod.NPCType("DirtSprite") }, this,/*名字*/"潜地恶鬼",/*是否击杀*/(Func<bool>)(() => MythWorld.downedQDEG),/*召唤物*/new List<int> { mod.ItemType("DirtSkeleton") },/*稀有掉落*/new List<int> { mod.ItemType("DirtspritePlatfo") },/*常规掉落*/new List<int> { mod.ItemType("GrassGun"), mod.ItemType("MossRay"), mod.ItemType("MountainStaff"), mod.ItemType("MudBlade"), mod.ItemType("RootStaff"), mod.ItemType("VineSlingshot")},/*召唤方法*/"用[i:" + mod.ItemType("DirtSkeleton").ToString() + "]召唤", this,/*图像*/mod.GetTexture("NPCs/DirtSprite"), this);
+                  BMod.Call("AddBoss",/*时期*/0.14f,/*Boss*/new List<int> { mod.Find<ModNPC>("DirtSprite").Type }, this,/*名字*/"潜地恶鬼",/*是否击杀*/(Func<bool>)(() => MythWorld.downedQDEG),/*召唤物*/new List<int> { mod.Find<ModItem>("DirtSkeleton").Type },/*稀有掉落*/new List<int> { mod.Find<ModItem>("DirtspritePlatfo").Type },/*常规掉落*/new List<int> { mod.Find<ModItem>("GrassGun").Type, mod.Find<ModItem>("MossRay").Type, mod.Find<ModItem>("MountainStaff").Type, mod.Find<ModItem>("MudBlade").Type, mod.Find<ModItem>("RootStaff").Type, mod.Find<ModItem>("VineSlingshot").Type},/*召唤方法*/"用[i:" + mod.Find<ModItem>("DirtSkeleton").Type.ToString() + "]召唤", this,/*图像*/mod.GetTexture("NPCs/DirtSprite"), this);
 
-                  BMod.Call("AddBoss",/*时期*/14.4f,/*Boss*/new List<int> { mod.NPCType("StarJellyfish")}, this,/*名字*/"星渊水母",/*是否击杀*/(Func<bool>)(() => MythWorld.downedXYSM),/*召唤物*/new List<int> { mod.ItemType("GlowingShrimpJam") },/*稀有掉落*/new List<int> { mod.ItemType("StarJellyFishPlatf"), mod.ItemType("SwordXYSM") },/*常规掉落*/new List<int> { mod.ItemType("BloodyJellyfishStaff"), mod.ItemType("CarmineBlade"), mod.ItemType("GlowingJellyStaff"), mod.ItemType("LightOfFrozenSea"), mod.ItemType("RedGlassSpear"), mod.ItemType("TentacleBow")},/*召唤方法*/"把[i:" + mod.ItemType("GlowingShrimpJam").ToString() + "]投入大海", this,/*图像*/mod.GetTexture("NPCs/StarJellyfish"), this);
-                BMod.Call("AddBoss",/*时期*/12.7f,/*Boss*/new List<int> { mod.NPCType("LavaStone") }, this,/*名字*/"熔岩巨石怪",/*是否击杀*/(Func<bool>)(() => MythWorld.downedVol),/*召唤物*/new List<int> { mod.ItemType("StoneEye") },/*稀有掉落*/new List<int> {},/*常规掉落*/new List<int> {},/*召唤方法*/"用[i:" + mod.ItemType("StoneEye").ToString() + "]在火山洞穴召唤", this,/*图像*/mod.GetTexture("NPCs/VolCano/LavaStone"), this);
+                  BMod.Call("AddBoss",/*时期*/14.4f,/*Boss*/new List<int> { mod.Find<ModNPC>("StarJellyfish").Type}, this,/*名字*/"星渊水母",/*是否击杀*/(Func<bool>)(() => MythWorld.downedXYSM),/*召唤物*/new List<int> { mod.Find<ModItem>("GlowingShrimpJam").Type },/*稀有掉落*/new List<int> { mod.Find<ModItem>("StarJellyFishPlatf").Type, mod.Find<ModItem>("SwordXYSM").Type },/*常规掉落*/new List<int> { mod.Find<ModItem>("BloodyJellyfishStaff").Type, mod.Find<ModItem>("CarmineBlade").Type, mod.Find<ModItem>("GlowingJellyStaff").Type, mod.Find<ModItem>("LightOfFrozenSea").Type, mod.Find<ModItem>("RedGlassSpear").Type, mod.Find<ModItem>("TentacleBow").Type},/*召唤方法*/"把[i:" + mod.Find<ModItem>("GlowingShrimpJam").Type.ToString() + "]投入大海", this,/*图像*/mod.GetTexture("NPCs/StarJellyfish"), this);
+                BMod.Call("AddBoss",/*时期*/12.7f,/*Boss*/new List<int> { mod.Find<ModNPC>("LavaStone").Type }, this,/*名字*/"熔岩巨石怪",/*是否击杀*/(Func<bool>)(() => MythWorld.downedVol),/*召唤物*/new List<int> { mod.Find<ModItem>("StoneEye").Type },/*稀有掉落*/new List<int> {},/*常规掉落*/new List<int> {},/*召唤方法*/"用[i:" + mod.Find<ModItem>("StoneEye").Type.ToString() + "]在火山洞穴召唤", this,/*图像*/mod.GetTexture("NPCs/VolCano/LavaStone"), this);
             }
             /*Mod bossChecklist = ModLoader.GetMod("BossChecklist");
             if (bossChecklist != null)
@@ -220,12 +220,12 @@ namespace MythMod
                 {
                     for (int j = -2 + (int)(player.position.Y - Terraria.Main.screenHeight) / 16; j <= 2 + (int)(player.position.Y + Terraria.Main.screenHeight) / 16; j++)
                     {
-                        if (Terraria.Lighting.Brightness(i, j) == 0 || ((Terraria.Main.tile[i, j].active() && Terraria.Main.tile[i, j].collisionType == 1) || Terraria.Main.tile[i, j].wall != 0))
+                        if (Terraria.Lighting.Brightness(i, j) == 0 || ((Terraria.Main.tile[i, j].HasTile && Terraria.Main.tile[i, j].collisionType == 1) || Terraria.Main.tile[i, j].WallType != 0))
                         {
                             Color color = Color.Black * (1 - Terraria.Lighting.Brightness(i, j) * 2);
-                            Terraria.Main.spriteBatch.Draw(Terraria.Main.blackTileTexture, new Vector2(i * 16, j * 16) - Terraria.Main.screenPosition, color);
+                            Terraria.Main.spriteBatch.Draw(Terraria.Main.BlackTile.Value, new Vector2(i * 16, j * 16) - Terraria.Main.screenPosition, color);
                         }
-                        else if (i % 4 == 0 && j % 4 == 0 && Terraria.Main.tile[i, j].wall == 0)
+                        else if (i % 4 == 0 && j % 4 == 0 && Terraria.Main.tile[i, j].WallType == 0)
                         {
                             Terraria.Lighting.AddLight(new Vector2(i * 16, j * 16), new Vector3(0.3f, 0.35f, 0.4f) * 2.1f);
                         }
@@ -255,35 +255,35 @@ namespace MythMod
             SkyManager.Instance["MythMod:LanternMoon"] = new LanternMoonSky();
             Mod mod = ModLoader.GetMod("MythMod");
         }
-        public override void UpdateMusic(ref int music, ref MusicPriority priority)
+        public override void UpdateMusic(ref int music, ref SceneEffectPriority priority)/* tModPorter Note: Removed. Use ModSceneEffect.Music and .Priority, aswell as ModSceneEffect.IsSceneEffectActive */
         {
             Mod mod = ModLoader.GetMod("MythMod");
-            if (Terraria.Main.musicVolume != 0f && Terraria.Main.myPlayer != -1 && !Terraria.Main.gameMenu && Terraria.Main.LocalPlayer.active && Terraria.NPC.CountNPCS(mod.NPCType("StarJellyfish")) <= 0 && Terraria.NPC.CountNPCS(mod.NPCType("LanternGhostKing")) <= 0 && Terraria.NPC.CountNPCS(mod.NPCType("AncientTangerineTreeEye")) <= 0)
+            if (Terraria.Main.musicVolume != 0f && Terraria.Main.myPlayer != -1 && !Terraria.Main.gameMenu && Terraria.Main.LocalPlayer.active && Terraria.NPC.CountNPCS(mod.Find<ModNPC>("StarJellyfish").Type) <= 0 && Terraria.NPC.CountNPCS(mod.Find<ModNPC>("LanternGhostKing").Type) <= 0 && Terraria.NPC.CountNPCS(mod.Find<ModNPC>("AncientTangerineTreeEye").Type) <= 0)
             {
                 if (Terraria.Main.LocalPlayer.GetModPlayer<MythPlayer>().ZoneOcean && !Terraria.Main.LocalPlayer.GetModPlayer<MythPlayer>().ZoneDeepocean)
                 {
                     music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/CurtisSchweitzer-Haiku");
-                    priority = MusicPriority.BossHigh;
+                    priority = SceneEffectPriority.BossHigh;
                 }
                 if (Terraria.Main.LocalPlayer.GetModPlayer<MythPlayer>().ZoneDeepocean && !Terraria.Main.LocalPlayer.GetModPlayer<MythPlayer>().ZoneVolcano)
                 {
                     music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/CurtisSchweitzer-OceanExploration2");
-                    priority = MusicPriority.BossHigh;
+                    priority = SceneEffectPriority.BossHigh;
                 }
                 if (Terraria.Main.LocalPlayer.GetModPlayer<MythPlayer>().ZoneVolcano)
                 {
                     music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/CurtisSchweitzer-ArcticBattle1");
-                    priority = MusicPriority.BossHigh;
+                    priority = SceneEffectPriority.BossHigh;
                 }
                 if (Terraria.Main.LocalPlayer.GetModPlayer<MythPlayer>().LanternMoon && Terraria.Main.LocalPlayer.GetModPlayer<MythPlayer>().LanternMoonWave <= 15 && !LanternGhostKing.Canai)
                 {
                     music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/Foxtail-Grass Studio - メグリネ");
-                    priority = MusicPriority.BossHigh;
+                    priority = SceneEffectPriority.BossHigh;
                 }
                 if (Terraria.Main.LocalPlayer.GetModPlayer<MythPlayer>().LanternMoon && Terraria.Main.LocalPlayer.GetModPlayer<MythPlayer>().LanternMoonWave > 15 && Terraria.Main.LocalPlayer.GetModPlayer<MythPlayer>().LanternMoonWave <=25)
                 {
                     music = mod.GetSoundSlot(SoundType.Music, "Sounds/Music/Foxtail-Grass Studio - 不思議のとびらを覗いたら");
-                    priority = MusicPriority.BossHigh;
+                    priority = SceneEffectPriority.BossHigh;
                 }
             }
         }
@@ -292,13 +292,13 @@ namespace MythMod
             Mod mod = ModLoader.GetMod("MythMod");
             if (!Terraria.Main.dedServ)
             {
-                Texture2D[] glowMasks = new Texture2D[Terraria.Main.glowMaskTexture.Length + 1];
-                for (int i = 0; i < Terraria.Main.glowMaskTexture.Length; i++)
+                Texture2D[] glowMasks = new Texture2D[Terraria.Main.GlowMask.Value.Length + 1];
+                for (int i = 0; i < Terraria.Main.GlowMask.Value.Length; i++)
                 {
-                    glowMasks[i] = Terraria.Main.glowMaskTexture[i];
+                    glowMasks[i] = Terraria.Main.GlowMask[i].Value;
                 }
                 glowMasks[glowMasks.Length - 1] = mod.GetTexture("Glows/" + modItem.GetType().Name + "_Glow");
-                Terraria.Main.glowMaskTexture = glowMasks;
+                Terraria.Main.GlowMask.Value = glowMasks;
                 return (short)(glowMasks.Length - 1);
             }
             else return 0;
@@ -330,18 +330,18 @@ namespace MythMod
             Mod mod = ModLoader.GetMod("MythMod");
             Filters.Scene["MythMod:GBlur"] = new Filter(new MythGlobalEffects(new Ref<Effect>(GetEffect("Effects/Wave")), "Test"), EffectPriority.Medium);
             Filters.Scene["MythMod:GBlur"].Load();
-            ModTranslation modTranslation = base.CreateTranslation("Myth.on");
+            ModTranslation modTranslation = LocalizationLoader.CreateTranslation(base, "Myth.on");
             modTranslation.AddTranslation(GameCulture.Chinese, "你躯体和周围空气的界线开始模糊，空间已经难以承受你释放的怒火");
             modTranslation.SetDefault("!");
-            AddTranslation(modTranslation);
-            modTranslation = CreateTranslation("Myth.on1");
+            LocalizationLoader.AddTranslation(modTranslation);
+            modTranslation = LocalizationLoader.CreateTranslation(this, "Myth.on1");
             modTranslation.AddTranslation(GameCulture.Chinese, "直面毁灭……");
             modTranslation.SetDefault("!");
-            AddTranslation(modTranslation);
-            ModTranslation text = CreateTranslation("LivesLeft");
-			text = CreateTranslation("双子魔眼已被打败!");
+            LocalizationLoader.AddTranslation(modTranslation);
+            ModTranslation text = LocalizationLoader.CreateTranslation(this, "LivesLeft");
+			text = LocalizationLoader.CreateTranslation(this, "双子魔眼已被打败!");
 			text.SetDefault("双子魔眼已被打败!");
-			AddTranslation(text);
+			LocalizationLoader.AddTranslation(text);
 
             HookBackGround.Load();
 
@@ -789,7 +789,7 @@ namespace MythMod
             }
             return lightColor;
         }
-        public override void UpdateUI(GameTime gameTime)
+        public override void UpdateUI(GameTime gameTime)/* tModPorter Note: Removed. Use ModSystem.UpdateUI */
         {
             TrailManager.UpdateTrails();
             if (YinYangLifeUserInterface != null && YinYangLife.Open)
@@ -852,7 +852,7 @@ namespace MythMod
                 }
             }
         }
-        public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
+        public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)/* tModPorter Note: Removed. Use ModSystem.ModifyInterfaceLayers */
         {
             int MouseTextIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
             if (MouseTextIndex != -1)

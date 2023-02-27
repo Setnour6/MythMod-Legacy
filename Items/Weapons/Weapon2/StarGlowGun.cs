@@ -27,24 +27,24 @@ namespace MythMod.Items.Weapons.Weapon2
         }
 		public override void SetDefaults()
 		{
-			base.item.damage = 90;
-			base.item.width = 48;
-			base.item.height = 22;
-			base.item.useTime = 11;
-			base.item.useAnimation = 11;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.ranged = true;
-			base.item.knockBack = 1f;
-			base.item.value = 20000;
-			base.item.rare = 9;
-			base.item.UseSound = SoundID.Item31;
-			base.item.autoReuse = true;
-            base.item.shoot = 14;
-			base.item.shootSpeed = 10f;
-			base.item.useAmmo = 97;
+			base.Item.damage = 90;
+			base.Item.width = 48;
+			base.Item.height = 22;
+			base.Item.useTime = 11;
+			base.Item.useAnimation = 11;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.DamageType = DamageClass.Ranged;
+			base.Item.knockBack = 1f;
+			base.Item.value = 20000;
+			base.Item.rare = 9;
+			base.Item.UseSound = SoundID.Item31;
+			base.Item.autoReuse = true;
+            base.Item.shoot = 14;
+			base.Item.shootSpeed = 10f;
+			base.Item.useAmmo = 97;
 		}
-		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
             if(Main.rand.Next(50) == 1)
             {
@@ -78,14 +78,13 @@ namespace MythMod.Items.Weapons.Weapon2
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(824, 10);//日盘块
             recipe.AddIngredient(164, 1);//手枪
             recipe.AddIngredient(3337, 1);//闪亮石
             recipe.AddIngredient(75, 10);//落星
-            recipe.SetResult(this, 1);
             recipe.requiredTile[0] = 134;
-            recipe.AddRecipe();
+            recipe.Register();
         }
         public override Vector2? HoldoutOffset()
         {

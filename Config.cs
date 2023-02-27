@@ -181,7 +181,7 @@ namespace MythMod
 		private static Preferences Configuration = new Preferences(Config.ConfigPath, false, false);
 
 		// Token: 0x0200000C RID: 12
-		private class MultiplayerSyncWorld : ModWorld
+		private class MultiplayerSyncWorld : ModSystem
 		{
 			// Token: 0x060000A7 RID: 167 RVA: 0x00040800 File Offset: 0x0003EA00
 			public override void NetSend(BinaryWriter writer)

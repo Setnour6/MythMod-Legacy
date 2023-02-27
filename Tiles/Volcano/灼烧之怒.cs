@@ -11,11 +11,11 @@ namespace MythMod.Tiles.Volcano
 {
 	public class 灼烧之怒 : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileFrameImportant[(int)base.Type] = true;
 			Main.tileNoAttach[(int)base.Type] = true;
-            this.minPick = 50;
+            this.MinPick = 50;
             Main.tileLavaDeath[(int)base.Type] = true;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
             TileObjectData.newTile.Height = 2;
@@ -27,12 +27,12 @@ namespace MythMod.Tiles.Volcano
             };
             TileObjectData.newTile.CoordinateWidth = 54;
             TileObjectData.addTile((int)base.Type);
-			this.dustType = 6;
+			this.DustType = 6;
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
             base.AddMapEntry(new Color(255, 63, 0), modTranslation);
-			this.mineResist = 3f;
-			base.SetDefaults();
+			this.MineResist = 3f;
+			base.SetStaticDefaults();
 			modTranslation.AddTranslation(GameCulture.Chinese, "");
 		}
 		public override void NumDust(int i, int j, bool fail, ref int num)
@@ -58,7 +58,7 @@ namespace MythMod.Tiles.Volcano
         }
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("CalciningFire"));
+            Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("CalciningFire").Type);
         }
     }
 }

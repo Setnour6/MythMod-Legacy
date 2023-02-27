@@ -25,18 +25,18 @@ namespace MythMod.Items.Ammos
 		}
 		public override void SetDefaults()
 		{
-			base.item.ranged = true;
-			base.item.width = 12;
-            base.item.damage = 42;
-			base.item.height = 12;
-			base.item.maxStack = 999;
-			base.item.consumable = true;
-			base.item.knockBack = 1.5f;
-			base.item.value = 30;
-			base.item.rare = 2;
-            base.item.shoot = mod.ProjectileType("TangerineBullet");
-            base.item.shootSpeed = 0;
-            base.item.ammo = AmmoID.Bullet;
+			base.Item.DamageType = DamageClass.Ranged;
+			base.Item.width = 12;
+            base.Item.damage = 42;
+			base.Item.height = 12;
+			base.Item.maxStack = 999;
+			base.Item.consumable = true;
+			base.Item.knockBack = 1.5f;
+			base.Item.value = 30;
+			base.Item.rare = 2;
+            base.Item.shoot = Mod.Find<ModProjectile>("TangerineBullet").Type;
+            base.Item.shootSpeed = 0;
+            base.Item.ammo = AmmoID.Bullet;
 		}
 	}
 }

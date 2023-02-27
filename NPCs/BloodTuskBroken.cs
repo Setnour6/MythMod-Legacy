@@ -29,32 +29,32 @@ namespace MythMod.NPCs
         private int[] I = new int[9];
         public override void SetDefaults()
 		{
-			base.npc.damage = 0;
-			base.npc.width = 110;
-			base.npc.height = 132;
-			base.npc.defense = 0;
-			base.npc.lifeMax = 1;
-			base.npc.knockBackResist = 0f;
-			base.npc.value = (float)Item.buyPrice(0, 0, 0, 0);
-            base.npc.color = new Color(0, 0, 0, 0);
-			base.npc.alpha = 0;
-            base.npc.boss = false;
-			base.npc.lavaImmune = true;
-			base.npc.noGravity = true;
-			base.npc.noTileCollide = false;
-			base.npc.HitSound = SoundID.NPCHit1;
-			base.npc.DeathSound = SoundID.NPCDeath1;
-			base.npc.aiStyle = -1;
-            npc.behindTiles = true;
-            this.aiType = -1;
-			base.npc.dontTakeDamage = true;
+			base.NPC.damage = 0;
+			base.NPC.width = 110;
+			base.NPC.height = 132;
+			base.NPC.defense = 0;
+			base.NPC.lifeMax = 1;
+			base.NPC.knockBackResist = 0f;
+			base.NPC.value = (float)Item.buyPrice(0, 0, 0, 0);
+            base.NPC.color = new Color(0, 0, 0, 0);
+			base.NPC.alpha = 0;
+            base.NPC.boss = false;
+			base.NPC.lavaImmune = true;
+			base.NPC.noGravity = true;
+			base.NPC.noTileCollide = false;
+			base.NPC.HitSound = SoundID.NPCHit1;
+			base.NPC.DeathSound = SoundID.NPCDeath1;
+			base.NPC.aiStyle = -1;
+            NPC.behindTiles = true;
+            this.AIType = -1;
+			base.NPC.dontTakeDamage = true;
 		}
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
         {
-            Color color = Lighting.GetColor((int)(npc.Center.X / 16d), (int)(npc.Center.Y / 16d));
-            color = npc.GetAlpha(color) * ((255 - npc.alpha) / 255f);
+            Color color = Lighting.GetColor((int)(NPC.Center.X / 16d), (int)(NPC.Center.Y / 16d));
+            color = NPC.GetAlpha(color) * ((255 - NPC.alpha) / 255f);
 
-            Main.spriteBatch.Draw(base.mod.GetTexture("NPCs/BloodTuskBroken"), npc.position - Main.screenPosition + new Vector2(30, 60), new Rectangle?(base.npc.frame), color, base.npc.rotation, new Vector2(110, 156), 1f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(base.Mod.GetTexture("NPCs/BloodTuskBroken"), NPC.position - Main.screenPosition + new Vector2(30, 60), new Rectangle?(base.NPC.frame), color, base.NPC.rotation, new Vector2(110, 156), 1f, SpriteEffects.None, 0f);
             return false;
         }
     }

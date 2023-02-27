@@ -16,16 +16,16 @@ namespace MythMod.Items.Magicpaper
         }
         public override void SetDefaults()
         {
-            item.width = 26;//长度
-            item.height = 40;//高度
-            item.maxStack = 999;//最大叠加
-            item.damage = 300;
-            item.value = 240000;//价值
-            item.rare = 3;//稀有度
-            base.item.useStyle = 1;
-            item.consumable = false;
-            base.item.useAnimation = 17;
-            base.item.useTime = 17;
+            Item.width = 26;//长度
+            Item.height = 40;//高度
+            Item.maxStack = 999;//最大叠加
+            Item.damage = 300;
+            Item.value = 240000;//价值
+            Item.rare = 3;//稀有度
+            base.Item.useStyle = 1;
+            Item.consumable = false;
+            base.Item.useAnimation = 17;
+            base.Item.useTime = 17;
         }
         public override void HoldItem(Player player)
         {
@@ -41,25 +41,25 @@ namespace MythMod.Items.Magicpaper
                 {
                     Vector2 v1 = Main.screenPosition + new Vector2(Main.mouseX, Main.mouseY);
                     Vector2 v2 = (v1 - new Vector2(v1.X, v1.Y - 1000)) / (v1 - new Vector2(v1.X, v1.Y - 1000)).Length() * 12f + new Vector2(0, 3).RotatedByRandom(MathHelper.Pi * 2);
-                    int num = Projectile.NewProjectile(v1.X + Main.rand.Next(-600, 600), v1.Y - 1000 + Main.rand.Next(-900, 200), v2.X * 4f * 0.15f, v2.Y * 4f * 0.015f, mod.ProjectileType("CuCoin"), item.damage, 0.5f, Main.myPlayer, 10f, 25f);
+                    int num = Projectile.NewProjectile(v1.X + Main.rand.Next(-600, 600), v1.Y - 1000 + Main.rand.Next(-900, 200), v2.X * 4f * 0.15f, v2.Y * 4f * 0.015f, Mod.Find<ModProjectile>("CuCoin").Type, Item.damage, 0.5f, Main.myPlayer, 10f, 25f);
                     Main.projectile[num].frame = Main.rand.Next(0, 4);
                 }
                 for (int t = 0; t < 18; t++)
                 {
                     Vector2 v1 = Main.screenPosition + new Vector2(Main.mouseX, Main.mouseY);
                     Vector2 v2 = (v1 - new Vector2(v1.X, v1.Y - 1000)) / (v1 - new Vector2(v1.X, v1.Y - 1000)).Length() * 12f + new Vector2(0, 3).RotatedByRandom(MathHelper.Pi * 2);
-                    int num = Projectile.NewProjectile(v1.X + Main.rand.Next(-600, 600), v1.Y - 1000 + Main.rand.Next(-900, 200), v2.X * 4f * 0.15f, v2.Y * 4f * 0.015f, mod.ProjectileType("AgCoin"), item.damage, 0.5f, Main.myPlayer, 10f, 25f);
+                    int num = Projectile.NewProjectile(v1.X + Main.rand.Next(-600, 600), v1.Y - 1000 + Main.rand.Next(-900, 200), v2.X * 4f * 0.15f, v2.Y * 4f * 0.015f, Mod.Find<ModProjectile>("AgCoin").Type, Item.damage, 0.5f, Main.myPlayer, 10f, 25f);
                     Main.projectile[num].frame = Main.rand.Next(0, 4);
                 }
                 for (int t = 0; t < 18; t++)
                 {
                     Vector2 v1 = Main.screenPosition + new Vector2(Main.mouseX, Main.mouseY);
                     Vector2 v2 = (v1 - new Vector2(v1.X, v1.Y - 1000)) / (v1 - new Vector2(v1.X, v1.Y - 1000)).Length() * 12f + new Vector2(0, 3).RotatedByRandom(MathHelper.Pi * 2);
-                    int num = Projectile.NewProjectile(v1.X + Main.rand.Next(-600, 600), v1.Y - 1000 + Main.rand.Next(-900, 200), v2.X * 4f * 0.15f, v2.Y * 4f * 0.015f, mod.ProjectileType("AuCoin"), item.damage, 0.5f, Main.myPlayer, 10f, 25f);
+                    int num = Projectile.NewProjectile(v1.X + Main.rand.Next(-600, 600), v1.Y - 1000 + Main.rand.Next(-900, 200), v2.X * 4f * 0.15f, v2.Y * 4f * 0.015f, Mod.Find<ModProjectile>("AuCoin").Type, Item.damage, 0.5f, Main.myPlayer, 10f, 25f);
                     Main.projectile[num].frame = Main.rand.Next(0, 4);
                 }
                 mplayer.MagicCool += 600;
-                player.AddBuff(mod.BuffType("愚昧诅咒"), 600, true);
+                player.AddBuff(Mod.Find<ModBuff>("愚昧诅咒").Type, 600, true);
             }
             return mplayer.MagicCool > 0;
         }
@@ -69,12 +69,11 @@ namespace MythMod.Items.Magicpaper
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(null, "CoinIII", 1);
             recipe.AddIngredient(null, "MagicStone", 1);
             recipe.requiredTile[0] = 26;
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

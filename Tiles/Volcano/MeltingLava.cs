@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria.Graphics.Capture;
 using Terraria;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
@@ -10,19 +11,19 @@ namespace MythMod.Tiles.Volcano
 {
     public class MeltingLava : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileSolid[(int)base.Type] = true;
 			Main.tileMergeDirt[(int)base.Type] = true;
 			Main.tileBlendAll[(int)base.Type] = true;
 			Main.tileBlockLight[(int)base.Type] = true;
 			Main.tileShine2[(int)base.Type] = false;
-			Main.tileValue[(int)base.Type] = 0;
-			this.dustType = 6;
-			this.minPick = 270;
-			this.soundType = 21;
-			this.soundStyle = 2;
-            this.drop = base.mod.ItemType("LavaStone");
+			Main.tileOreFinderPriority[(int)base.Type] = 0;
+			this.DustType = 6;
+			this.MinPick = 270;
+			this.HitSound = 21;
+			this.soundStyle/* tModPorter Note: Removed. Integrate into HitSound */ = 2;
+            this.ItemDrop = base.Mod.Find<ModItem>("LavaStone").Type;
 			Main.tileSpelunker[(int)base.Type] = true;
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
@@ -39,15 +40,15 @@ namespace MythMod.Tiles.Volcano
             {
                 return;
             }
-            int num = (int)Main.tile[i, j].frameX;
-            int num2 = (int)Main.tile[i, j].frameY;
+            int num = (int)Main.tile[i, j].TileFrameX;
+            int num2 = (int)Main.tile[i, j].TileFrameY;
             int num3 = i % 1;
             int num4 = j % 1;
             num3 *= 288;
             num4 *= 270;
             num += num3;
             num2 += num4;
-            Texture2D texture = base.mod.GetTexture("Tiles/玄武岩礁石Glow");
+            Texture2D texture = base.Mod.GetTexture("Tiles/玄武岩礁石Glow");
             Vector2 position = new Vector2((float)(i * 16) - Main.screenPosition.X + (float)this.GetDrawOffset(), (float)(j * 16) - Main.screenPosition.Y + (float)this.GetDrawOffset());
             if (CaptureManager.Instance.IsCapturing)
             {
@@ -58,7 +59,7 @@ namespace MythMod.Tiles.Volcano
             {
                 for (int y = j - 4; y < j + 4; y++)
                 {
-                    if(Main.tile[x,y].lava() && new Vector2(i - x, j - y).Length() <= 4)
+                    if((Main.tile[x,y].LiquidType == LiquidID.Lava) && new Vector2(i - x, j - y).Length() <= 4)
                     {
                         l += 0.99f;
                     }

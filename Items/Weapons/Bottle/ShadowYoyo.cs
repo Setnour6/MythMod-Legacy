@@ -12,29 +12,29 @@ namespace MythMod.Items.Weapons.Bottle
     {
         public override void SetStaticDefaults()
         {
-            ItemID.Sets.Yoyo[item.type] = true;
-            ItemID.Sets.GamepadExtraRange[item.type] = 15;
-            ItemID.Sets.GamepadSmartQuickReach[item.type] = true;
+            ItemID.Sets.Yoyo[Item.type] = true;
+            ItemID.Sets.GamepadExtraRange[Item.type] = 15;
+            ItemID.Sets.GamepadSmartQuickReach[Item.type] = true;
             DisplayName.SetDefault("封印球");
         }
         public override void SetDefaults()
         {
-            item.useStyle = 5;
-            item.width = 24;
-            item.height = 24;
-            item.noUseGraphic = true;
-            item.UseSound = SoundID.Item1;
-            item.melee = true;
-            item.channel = true;
-            item.shoot = mod.ProjectileType("ShadowYoyo");
-            item.useAnimation = 5;
-            item.useTime = 14;
-            item.shootSpeed = 0f;
-            item.knockBack = 0.2f;
-            item.damage = 20;
-            item.noMelee = true;
-            item.value = Item.sellPrice(0, 0, 3, 0);
-            item.rare = 3;
+            Item.useStyle = 5;
+            Item.width = 24;
+            Item.height = 24;
+            Item.noUseGraphic = true;
+            Item.UseSound = SoundID.Item1;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.channel = true;
+            Item.shoot = Mod.Find<ModProjectile>("ShadowYoyo").Type;
+            Item.useAnimation = 5;
+            Item.useTime = 14;
+            Item.shootSpeed = 0f;
+            Item.knockBack = 0.2f;
+            Item.damage = 20;
+            Item.noMelee = true;
+            Item.value = Item.sellPrice(0, 0, 3, 0);
+            Item.rare = 3;
         }
     }
 }

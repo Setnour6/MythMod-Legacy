@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class U8Grapefruit : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("U8西柚");
             base.Description.SetDefault("增加4%攻击,增加3生命回复");

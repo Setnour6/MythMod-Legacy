@@ -18,17 +18,17 @@ namespace MythMod.Items.Magicpaper
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            item.width = 26;
-            item.height = 40;
-            item.maxStack = 999;
-            item.value = 3000;
-            item.rare = 1;
-            base.item.useStyle = 1;
-            item.consumable = true;
-            base.item.useAnimation = 17;
-            base.item.useTime = 17;
-            base.item.consumable = true;
+            Item.glowMask = GetGlowMask;
+            Item.width = 26;
+            Item.height = 40;
+            Item.maxStack = 999;
+            Item.value = 3000;
+            Item.rare = 1;
+            base.Item.useStyle = 1;
+            Item.consumable = true;
+            base.Item.useAnimation = 17;
+            base.Item.useTime = 17;
+            base.Item.consumable = true;
         }
         public override bool CanUseItem(Player player)
         {
@@ -37,47 +37,47 @@ namespace MythMod.Items.Magicpaper
             switch (Main.rand.Next(1, 14))
             {
                 case 1:
-                    type = base.mod.ItemType("FlamII");
+                    type = base.Mod.Find<ModItem>("FlamII").Type;
                     break;
                 case 2:
-                    type = base.mod.ItemType("MeteI");
+                    type = base.Mod.Find<ModItem>("MeteI").Type;
                     break;
                 case 3:
-                    type = base.mod.ItemType("ProjII");
+                    type = base.Mod.Find<ModItem>("ProjII").Type;
                     break;
                 case 4:
-                    type = base.mod.ItemType("FrozI");
+                    type = base.Mod.Find<ModItem>("FrozI").Type;
                     break;
                 case 5:
-                    type = base.mod.ItemType("ProjII");
+                    type = base.Mod.Find<ModItem>("ProjII").Type;
                     break;
                 case 6:
-                    type = base.mod.ItemType("ArrowII");
+                    type = base.Mod.Find<ModItem>("ArrowII").Type;
                     break;
                 case 7:
-                    type = base.mod.ItemType("LazarII");
+                    type = base.Mod.Find<ModItem>("LazarII").Type;
                     break;
                 case 8:
-                    type = base.mod.ItemType("StonII");
+                    type = base.Mod.Find<ModItem>("StonII").Type;
                     break;
                 case 9:
-                    type = base.mod.ItemType("PoisI");
+                    type = base.Mod.Find<ModItem>("PoisI").Type;
                     break;
                 case 10:
-                    type = base.mod.ItemType("WitcII");
+                    type = base.Mod.Find<ModItem>("WitcII").Type;
                     break;
                 case 11:
-                    type = base.mod.ItemType("FireBoII");
+                    type = base.Mod.Find<ModItem>("FireBoII").Type;
                     break;
                 case 12:
-                    type = base.mod.ItemType("BStarI");
+                    type = base.Mod.Find<ModItem>("BStarI").Type;
                     break;
                 case 13:
-                    type = base.mod.ItemType("FreLoopI");
+                    type = base.Mod.Find<ModItem>("FreLoopI").Type;
                     break;
             }
             player.QuickSpawnItem(type, 1);
-            item.stack--;
+            Item.stack--;
             return true;
         }
     }

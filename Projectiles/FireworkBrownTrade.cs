@@ -1,9 +1,10 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
@@ -27,21 +28,21 @@ namespace MythMod.Projectiles
         //7359668
         public override void SetDefaults()
         {
-            projectile.width = 6;
-            projectile.height = 6;
-            projectile.aiStyle = -1;
-            projectile.friendly = true;
-            projectile.melee = true;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = false;
-            projectile.extraUpdates = 3;
-            projectile.timeLeft = 700;
-            projectile.alpha = 255;
-            projectile.penetrate = -1;
-            projectile.scale = 0.5f;
-            this.cooldownSlot = 1;
-            ProjectileID.Sets.TrailCacheLength[projectile.type] = 50;
-            ProjectileID.Sets.TrailingMode[projectile.type] = 0;
+            Projectile.width = 6;
+            Projectile.height = 6;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = true;
+            Projectile.DamageType = DamageClass.Melee;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
+            Projectile.extraUpdates = 3;
+            Projectile.timeLeft = 700;
+            Projectile.alpha = 255;
+            Projectile.penetrate = -1;
+            Projectile.scale = 0.5f;
+            this.CooldownSlot = 1;
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 50;
+            ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
         }
         //55555
         private bool initialization = true;
@@ -51,18 +52,18 @@ namespace MythMod.Projectiles
         private float z;
         public override void AI()
         {
-            projectile.rotation = (float)System.Math.Atan2((double)projectile.velocity.Y,(double)projectile.velocity.X) + 1.57f;
+            Projectile.rotation = (float)System.Math.Atan2((double)Projectile.velocity.Y,(double)Projectile.velocity.X) + 1.57f;
             if (initialization)
             {
-                if (projectile.velocity.Length() >= 1)
+                if (Projectile.velocity.Length() >= 1)
                 {
-                    z = projectile.velocity.Length();
+                    z = Projectile.velocity.Length();
                 }
                 else
                 {
                     z = 1;
                 }
-                X = (float)Math.Sqrt((double)projectile.velocity.X * (double)projectile.velocity.X + (double)projectile.velocity.Y * (double)projectile.velocity.Y);
+                X = (float)Math.Sqrt((double)Projectile.velocity.X * (double)Projectile.velocity.X + (double)Projectile.velocity.Y * (double)Projectile.velocity.Y);
                 b = Main.rand.Next(-50, 50);
                 initialization = false;
                 if(Main.rand.Next(0,2) == 1)
@@ -74,49 +75,49 @@ namespace MythMod.Projectiles
                     Y = (float)Math.Sin(-(double)X / 5f * 3.1415926535f / 1f) / 1000 + 1;
                 }
             }
-            projectile.velocity *= 0.995f;
+            Projectile.velocity *= 0.995f;
             NPC target = null;
-            if (projectile.timeLeft < 700 && projectile.timeLeft >= 685)
+            if (Projectile.timeLeft < 700 && Projectile.timeLeft >= 685)
             {
                 if (Y < 1)
                 {
-                    projectile.scale *= (float)Y / (projectile.timeLeft / 685);
+                    Projectile.scale *= (float)Y / (Projectile.timeLeft / 685);
                 }
                 else
                 {
-                    projectile.scale *= (float)Y * projectile.timeLeft / 685;
+                    Projectile.scale *= (float)Y * Projectile.timeLeft / 685;
                 }
             }
-            if (projectile.timeLeft < 685 && projectile.timeLeft >= 480 + (float)b)
+            if (Projectile.timeLeft < 685 && Projectile.timeLeft >= 480 + (float)b)
             {
-                projectile.scale *= (float)Y;
+                Projectile.scale *= (float)Y;
             }
-            if (projectile.timeLeft < 480+ (float)b)
+            if (Projectile.timeLeft < 480+ (float)b)
             {
-                projectile.scale *= 0.994f;
+                Projectile.scale *= 0.994f;
             }
-            projectile.velocity.Y += 0.01f;
-            Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 1f / 255f * projectile.scale, (float)(255 - base.projectile.alpha) * 0.3f / 255f * projectile.scale, (float)(255 - base.projectile.alpha) * 0f / 255f *projectile.scale);
+            Projectile.velocity.Y += 0.01f;
+            Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 1f / 255f * Projectile.scale, (float)(255 - base.Projectile.alpha) * 0.3f / 255f * Projectile.scale, (float)(255 - base.Projectile.alpha) * 0f / 255f *Projectile.scale);
         }
         //14141414141414
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
             target.AddBuff(24, 1200);
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D t = Main.projectileTexture[projectile.type];
-             int frameHeight = t.Height / Main.projFrames[projectile.type];
-            Vector2 drawOrigin = new Vector2(Main.projectileTexture[projectile.type].Width * 0.5f, projectile.height * 0.5f);
-            for (int k = 0; k < projectile.oldPos.Length; k++)
+			Texture2D t = TextureAssets.Projectile[Projectile.type].Value;
+             int frameHeight = t.Height / Main.projFrames[Projectile.type];
+            Vector2 drawOrigin = new Vector2(TextureAssets.Projectile[Projectile.type].Value.Width * 0.5f, Projectile.height * 0.5f);
+            for (int k = 0; k < Projectile.oldPos.Length; k++)
             {
-                Vector2 drawPos = projectile.oldPos[k] - Main.screenPosition + drawOrigin + new Vector2(1f, projectile.gfxOffY);
-                Color color = (Color.Wheat * 0.2f) * ((float)(projectile.oldPos.Length - k) / (float)projectile.oldPos.Length);
-                spriteBatch.Draw(t, drawPos, new Rectangle(0, frameHeight * projectile.frame, t.Width, frameHeight), color, projectile.rotation, drawOrigin, projectile.scale, SpriteEffects.None, 0f);
+                Vector2 drawPos = Projectile.oldPos[k] - Main.screenPosition + drawOrigin + new Vector2(1f, Projectile.gfxOffY);
+                Color color = (Color.Wheat * 0.2f) * ((float)(Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length);
+                spriteBatch.Draw(t, drawPos, new Rectangle(0, frameHeight * Projectile.frame, t.Width, frameHeight), color, Projectile.rotation, drawOrigin, Projectile.scale, SpriteEffects.None, 0f);
             }
-            if (projectile.timeLeft >= 300)
+            if (Projectile.timeLeft >= 300)
             {
-                spriteBatch.Draw(base.mod.GetTexture("Projectiles/烟花火球棕light"), base.projectile.Center - Main.screenPosition, null, new Color(projectile.scale * (projectile.timeLeft - 300) / (6000f * z * z), projectile.scale * (projectile.timeLeft - 500) / (6000f * z * z), projectile.scale * (projectile.timeLeft - 500) / (6000f * z * z), 0), base.projectile.rotation, new Vector2(56f, 56f), 1 + (800 - projectile.timeLeft) / 200f * z, SpriteEffects.None, 0f);
+                spriteBatch.Draw(base.Mod.GetTexture("Projectiles/烟花火球棕light"), base.Projectile.Center - Main.screenPosition, null, new Color(Projectile.scale * (Projectile.timeLeft - 300) / (6000f * z * z), Projectile.scale * (Projectile.timeLeft - 500) / (6000f * z * z), Projectile.scale * (Projectile.timeLeft - 500) / (6000f * z * z), 0), base.Projectile.rotation, new Vector2(56f, 56f), 1 + (800 - Projectile.timeLeft) / 200f * z, SpriteEffects.None, 0f);
             }
             return true;
 		}

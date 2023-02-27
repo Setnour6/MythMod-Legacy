@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,30 +22,30 @@ namespace MythMod.Projectiles.projectile2
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("幻鱼");
-            Main.projFrames[base.projectile.type] = 8;
+            Main.projFrames[base.Projectile.type] = 8;
         }
         //7359668
         public override void SetDefaults()
         {
-            projectile.width = 20;
-            projectile.height = 52;
-            projectile.aiStyle = -1;
-            projectile.friendly = false;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = false;
-            projectile.timeLeft = 400;
-            projectile.hostile = true;
-            projectile.penetrate = 1;
-            projectile.scale = 1f;
+            Projectile.width = 20;
+            Projectile.height = 52;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = false;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = false;
+            Projectile.timeLeft = 400;
+            Projectile.hostile = true;
+            Projectile.penetrate = 1;
+            Projectile.scale = 1f;
         }
         //55555
         public override Color? GetAlpha(Color lightColor)
 		{
-            if(projectile.timeLeft > 60)
+            if(Projectile.timeLeft > 60)
             {
-                if(projectile.timeLeft > 370)
+                if(Projectile.timeLeft > 370)
                 {
-                    return new Color?(new Color((400 - projectile.timeLeft) / 30f, (400 - projectile.timeLeft) / 30f, (400 - projectile.timeLeft) / 30f, 0));
+                    return new Color?(new Color((400 - Projectile.timeLeft) / 30f, (400 - Projectile.timeLeft) / 30f, (400 - Projectile.timeLeft) / 30f, 0));
                 }
                 else
                 {
@@ -54,35 +54,35 @@ namespace MythMod.Projectiles.projectile2
             }
             else
             {
-                return new Color?(new Color(1 * projectile.timeLeft / 60f, 1 * projectile.timeLeft / 60f, 1 * projectile.timeLeft / 60f, 0));
+                return new Color?(new Color(1 * Projectile.timeLeft / 60f, 1 * Projectile.timeLeft / 60f, 1 * Projectile.timeLeft / 60f, 0));
             }
         }
         private bool initialization = true;
         private float b;
         public override void AI()
         {
-            base.projectile.rotation = (float)Math.Atan2((double)base.projectile.velocity.Y, (double)base.projectile.velocity.X) + (float)Math.PI * 1.5f;
-            if (projectile.timeLeft > 200)
+            base.Projectile.rotation = (float)Math.Atan2((double)base.Projectile.velocity.Y, (double)base.Projectile.velocity.X) + (float)Math.PI * 1.5f;
+            if (Projectile.timeLeft > 200)
             {
-                projectile.velocity = projectile.velocity.RotatedBy(projectile.ai[0] / 40f * (projectile.timeLeft - 200) / 200f);
+                Projectile.velocity = Projectile.velocity.RotatedBy(Projectile.ai[0] / 40f * (Projectile.timeLeft - 200) / 200f);
             }
-            base.projectile.frameCounter++;
-            if (base.projectile.frameCounter > 8)
+            base.Projectile.frameCounter++;
+            if (base.Projectile.frameCounter > 8)
             {
-                base.projectile.frame++;
-                base.projectile.frameCounter = 0;
+                base.Projectile.frame++;
+                base.Projectile.frameCounter = 0;
             }
-            if (base.projectile.frame > 7)
+            if (base.Projectile.frame > 7)
             {
-                base.projectile.frame = 0;
+                base.Projectile.frame = 0;
             }
-            if (projectile.timeLeft > 120)
+            if (Projectile.timeLeft > 120)
             {
-                Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 0f / 255f * projectile.scale, (float)(255 - base.projectile.alpha) * 0.23f * projectile.scale / 255f, (float)(255 - base.projectile.alpha) * 2.55f / 255f * projectile.scale);
+                Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 0f / 255f * Projectile.scale, (float)(255 - base.Projectile.alpha) * 0.23f * Projectile.scale / 255f, (float)(255 - base.Projectile.alpha) * 2.55f / 255f * Projectile.scale);
             }
             else
             {
-                Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 0f / 255f * projectile.scale * projectile.timeLeft / 120f, (float)(255 - base.projectile.alpha) * 0.23f * projectile.scale / 255f * projectile.timeLeft / 120f, (float)(255 - base.projectile.alpha) * 2.55f / 255f * projectile.scale * projectile.timeLeft / 120f);
+                Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 0f / 255f * Projectile.scale * Projectile.timeLeft / 120f, (float)(255 - base.Projectile.alpha) * 0.23f * Projectile.scale / 255f * Projectile.timeLeft / 120f, (float)(255 - base.Projectile.alpha) * 2.55f / 255f * Projectile.scale * Projectile.timeLeft / 120f);
             }
         }
         //14141414141414

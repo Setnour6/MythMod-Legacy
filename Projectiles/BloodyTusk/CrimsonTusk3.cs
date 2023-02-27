@@ -17,21 +17,21 @@ namespace MythMod.Projectiles.BloodyTusk
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("CrimsonTusk");
-			Main.projFrames[base.projectile.type] = 6;
+			Main.projFrames[base.Projectile.type] = 6;
 		}
 
 		// Token: 0x06001EC4 RID: 7876 RVA: 0x0018A990 File Offset: 0x00188B90
 		public override void SetDefaults()
 		{
-			base.projectile.width = 7;
-			base.projectile.height = 48;
-			base.projectile.hostile = false;
-			base.projectile.friendly = false;
-			base.projectile.ignoreWater = true;
-			base.projectile.penetrate = -1;
-			base.projectile.timeLeft = 1000;
-			base.projectile.extraUpdates = 10;
-			base.projectile.tileCollide = true;
+			base.Projectile.width = 7;
+			base.Projectile.height = 48;
+			base.Projectile.hostile = false;
+			base.Projectile.friendly = false;
+			base.Projectile.ignoreWater = true;
+			base.Projectile.penetrate = -1;
+			base.Projectile.timeLeft = 1000;
+			base.Projectile.extraUpdates = 10;
+			base.Projectile.tileCollide = true;
 		}
 
 		// Token: 0x06001EC5 RID: 7877 RVA: 0x0018AA00 File Offset: 0x00188C00
@@ -41,42 +41,42 @@ namespace MythMod.Projectiles.BloodyTusk
 			{
 				X = 0;
 				initialization2 = false;
-				Y = base.projectile.Center.Y;
+				Y = base.Projectile.Center.Y;
 			}
-			if(projectile.velocity.Y == 0 && projectile.timeLeft >= 2390)
+			if(Projectile.velocity.Y == 0 && Projectile.timeLeft >= 2390)
 			{
-				base.projectile.timeLeft = 0;
+				base.Projectile.timeLeft = 0;
 			}
-			if(projectile.velocity.Y == 0 && projectile.timeLeft % 15 == 0 && X < 5)
+			if(Projectile.velocity.Y == 0 && Projectile.timeLeft % 15 == 0 && X < 5)
 			{
-                base.projectile.frame++;
+                base.Projectile.frame++;
 				if(X == 0)
 				{            
 					for (int i = 0; i < 25; i++)
                     {
-				        int r = Dust.NewDust( new Vector2(base.projectile.Center.X , base.projectile.Center.Y + 22f) + base.projectile.velocity * 3f, 0, 0, 5, (float)Main.rand.Next(-2000,2000) / 6000f, -1f, 0, default(Color), 0.7f);
+				        int r = Dust.NewDust( new Vector2(base.Projectile.Center.X , base.Projectile.Center.Y + 22f) + base.Projectile.velocity * 3f, 0, 0, 5, (float)Main.rand.Next(-2000,2000) / 6000f, -1f, 0, default(Color), 0.7f);
 			            Main.dust[r].velocity.X *= 0.95f;
 			            Main.dust[r].noGravity = false;
 					}
-					base.projectile.hostile = true;
+					base.Projectile.hostile = true;
 				}
 				X += 1;
 		    }
-            if(projectile.timeLeft <= 500 && projectile.timeLeft % 10 == 0 && base.projectile.frame > 0)
+            if(Projectile.timeLeft <= 500 && Projectile.timeLeft % 10 == 0 && base.Projectile.frame > 0)
 			{
-				base.projectile.hostile = false;
-                base.projectile.frame--;
+				base.Projectile.hostile = false;
+                base.Projectile.frame--;
 			}
 		}
 		public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            if (base.projectile.velocity.X != oldVelocity.X)
+            if (base.Projectile.velocity.X != oldVelocity.X)
             {
-                base.projectile.velocity.X = 0f;
+                base.Projectile.velocity.X = 0f;
             }
-            if (base.projectile.velocity.Y != oldVelocity.Y)
+            if (base.Projectile.velocity.Y != oldVelocity.Y)
             {
-                base.projectile.velocity.Y = 0f;
+                base.Projectile.velocity.Y = 0f;
             }
 			return false;
 		}

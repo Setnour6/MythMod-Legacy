@@ -16,23 +16,23 @@ namespace MythMod.Items.Weapons.Weapon2
 		}
 		public override void SetDefaults()
 		{
-            base.item.damage = 37;
-            base.item.thrown = true;
-            base.item.crit = 6;
-            base.item.width = 20;
-            base.item.height = 38;
-            base.item.useTime = 16;
-            base.item.useAnimation = 16;
-            base.item.useStyle = 5;
-            base.item.noMelee = true;
-            base.item.knockBack = 2f;
-            base.item.autoReuse = true;
-            base.item.value = 5000;
-            base.item.shoot = base.mod.ProjectileType("HoneyBottle");
-            base.item.noUseGraphic = true;
-            base.item.rare = 4;
-            base.item.UseSound = SoundID.Item5;
-            base.item.shootSpeed = 11f;
+            base.Item.damage = 37;
+            base.Item.DamageType = DamageClass.Throwing;
+            base.Item.crit = 6;
+            base.Item.width = 20;
+            base.Item.height = 38;
+            base.Item.useTime = 16;
+            base.Item.useAnimation = 16;
+            base.Item.useStyle = 5;
+            base.Item.noMelee = true;
+            base.Item.knockBack = 2f;
+            base.Item.autoReuse = true;
+            base.Item.value = 5000;
+            base.Item.shoot = base.Mod.Find<ModProjectile>("HoneyBottle").Type;
+            base.Item.noUseGraphic = true;
+            base.Item.rare = 4;
+            base.Item.UseSound = SoundID.Item5;
+            base.Item.shootSpeed = 11f;
         }
 		public override void AddRecipes()
         {

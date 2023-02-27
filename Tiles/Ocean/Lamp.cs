@@ -12,7 +12,7 @@ namespace MythMod.Tiles.Ocean
 {
     public class Lamp : ModTile
     {
-        public override void SetDefaults()
+        public override void SetStaticDefaults()
         {
             Main.tileLighted[(int)base.Type] = true;
             Main.tileFrameImportant[(int)base.Type] = true;
@@ -39,7 +39,7 @@ namespace MythMod.Tiles.Ocean
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("灯塔巨灯");
             base.AddMapEntry(new Color(191, 142, 111), modTranslation);
-            this.adjTiles = new int[]
+            this.AdjTiles = new int[]
             {
                 4
             };
@@ -57,9 +57,9 @@ namespace MythMod.Tiles.Ocean
                 {
                     for (int Y = j - 6; Y < j + 6; Y++)
                     {
-                        if(Main.tile[X,Y].type == mod.TileType("Lamp"))
+                        if(Main.tile[X,Y].TileType == Mod.Find<ModTile>("Lamp").Type)
                         {
-                            Main.tile[X, Y].frameY -= (short)((((Main.tile[X, Y].frameY + 45) / 90) - 1) * 90);
+                            Main.tile[X, Y].TileFrameY -= (short)((((Main.tile[X, Y].TileFrameY + 45) / 90) - 1) * 90);
                         }
                     }
                 }
@@ -71,9 +71,9 @@ namespace MythMod.Tiles.Ocean
                 {
                     for (int Y = j - 6; Y < j + 6; Y++)
                     {
-                        if (Main.tile[X, Y].type == mod.TileType("Lamp") && Main.tile[X, Y].frameY < 90)
+                        if (Main.tile[X, Y].TileType == Mod.Find<ModTile>("Lamp").Type && Main.tile[X, Y].TileFrameY < 90)
                         {
-                            Main.tile[X, Y].frameY += 90;
+                            Main.tile[X, Y].TileFrameY += 90;
                         }
                     }
                 }
@@ -85,9 +85,9 @@ namespace MythMod.Tiles.Ocean
                 {
                     for (int Y = j - 6; Y < j + 6; Y++)
                     {
-                        if (Main.tile[X, Y].type == mod.TileType("Lamp") && Main.tile[X, Y].frameY < 180)
+                        if (Main.tile[X, Y].TileType == Mod.Find<ModTile>("Lamp").Type && Main.tile[X, Y].TileFrameY < 180)
                         {
-                            Main.tile[X, Y].frameY += 90;
+                            Main.tile[X, Y].TileFrameY += 90;
                         }
                     }
                 }
@@ -99,9 +99,9 @@ namespace MythMod.Tiles.Ocean
                 {
                     for (int Y = j - 6; Y < j + 6; Y++)
                     {
-                        if (Main.tile[X, Y].type == mod.TileType("Lamp") && Main.tile[X, Y].frameY < 270)
+                        if (Main.tile[X, Y].TileType == Mod.Find<ModTile>("Lamp").Type && Main.tile[X, Y].TileFrameY < 270)
                         {
-                            Main.tile[X, Y].frameY += 90;
+                            Main.tile[X, Y].TileFrameY += 90;
                         }
                     }
                 }
@@ -113,9 +113,9 @@ namespace MythMod.Tiles.Ocean
                 {
                     for (int Y = j - 6; Y < j + 6; Y++)
                     {
-                        if (Main.tile[X, Y].type == mod.TileType("Lamp") && Main.tile[X, Y].frameY < 360)
+                        if (Main.tile[X, Y].TileType == Mod.Find<ModTile>("Lamp").Type && Main.tile[X, Y].TileFrameY < 360)
                         {
-                            Main.tile[X, Y].frameY += 90;
+                            Main.tile[X, Y].TileFrameY += 90;
                         }
                     }
                 }
@@ -127,9 +127,9 @@ namespace MythMod.Tiles.Ocean
                 {
                     for (int Y = j - 6; Y < j + 6; Y++)
                     {
-                        if (Main.tile[X, Y].type == mod.TileType("Lamp") && Main.tile[X, Y].frameY < 450)
+                        if (Main.tile[X, Y].TileType == Mod.Find<ModTile>("Lamp").Type && Main.tile[X, Y].TileFrameY < 450)
                         {
-                            Main.tile[X, Y].frameY += 90;
+                            Main.tile[X, Y].TileFrameY += 90;
                         }
                     }
                 }
@@ -141,9 +141,9 @@ namespace MythMod.Tiles.Ocean
                 {
                     for (int Y = j - 6; Y < j + 6; Y++)
                     {
-                        if (Main.tile[X, Y].type == mod.TileType("Lamp") && Main.tile[X, Y].frameY < 540)
+                        if (Main.tile[X, Y].TileType == Mod.Find<ModTile>("Lamp").Type && Main.tile[X, Y].TileFrameY < 540)
                         {
-                            Main.tile[X, Y].frameY += 90;
+                            Main.tile[X, Y].TileFrameY += 90;
                         }
                     }
                 }
@@ -155,9 +155,9 @@ namespace MythMod.Tiles.Ocean
                 {
                     for (int Y = j - 6; Y < j + 6; Y++)
                     {
-                        if (Main.tile[X, Y].type == mod.TileType("Lamp") && Main.tile[X, Y].frameY < 630)
+                        if (Main.tile[X, Y].TileType == Mod.Find<ModTile>("Lamp").Type && Main.tile[X, Y].TileFrameY < 630)
                         {
-                            Main.tile[X, Y].frameY -= 450;
+                            Main.tile[X, Y].TileFrameY -= 450;
                         }
                     }
                 }
@@ -184,11 +184,11 @@ namespace MythMod.Tiles.Ocean
         }
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("LighthouseLamp"));
+            Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("LighthouseLamp").Type);
         }
         public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
         {
-            if (Main.tile[i, j].frameY >= 108)
+            if (Main.tile[i, j].TileFrameY >= 108)
             {
                 r = 1f;
                 g = 0.8f;

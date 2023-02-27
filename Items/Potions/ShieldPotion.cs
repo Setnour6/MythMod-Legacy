@@ -17,38 +17,37 @@ namespace MythMod.Items.Potions
         public override void SetDefaults()
         {
             Item refItem = new Item();
-            item.width = refItem.width;
-            item.height = refItem.height;
-            item.maxStack = 30;
-            item.value = 60000;
-            item.rare = 7;
-            item.consumable = true;
-            base.item.useAnimation = 17;
-            base.item.useTime = 17;
-            base.item.useStyle = 2;
-            base.item.UseSound = SoundID.Item3;
-            base.item.consumable = true;
-            item.buffType = mod.BuffType("ShieldPotion");
-            item.buffTime = 10800;
+            Item.width = refItem.width;
+            Item.height = refItem.height;
+            Item.maxStack = 30;
+            Item.value = 60000;
+            Item.rare = 7;
+            Item.consumable = true;
+            base.Item.useAnimation = 17;
+            base.Item.useTime = 17;
+            base.Item.useStyle = 2;
+            base.Item.UseSound = SoundID.Item3;
+            base.Item.consumable = true;
+            Item.buffType = Mod.Find<ModBuff>("ShieldPotion").Type;
+            Item.buffTime = 10800;
         }
         public override bool CanUseItem(Player player)
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
-            if (!player.HasBuff(mod.BuffType("ShieldPotion")))
+            if (!player.HasBuff(Mod.Find<ModBuff>("ShieldPotion").Type))
             {
-                player.AddBuff(base.mod.BuffType("ShieldPotion"), 18000, true);
-                item.stack--;
+                player.AddBuff(base.Mod.Find<ModBuff>("ShieldPotion").Type, 18000, true);
+                Item.stack--;
             }
-            return player.HasBuff(mod.BuffType("ShieldPotion"));
+            return player.HasBuff(Mod.Find<ModBuff>("ShieldPotion").Type);
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(947, 3);
             recipe.AddIngredient(292, 1);
             recipe.requiredTile[0] = 13;
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

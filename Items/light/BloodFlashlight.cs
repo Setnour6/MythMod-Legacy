@@ -13,11 +13,11 @@ namespace MythMod.Items.light
         }
         public override void SetDefaults()
         {
-            item.width = 10;
-            item.height = 12;
-            item.maxStack = 99;
-            item.flame = true;
-            item.value = 50;
+            Item.width = 10;
+            Item.height = 12;
+            Item.maxStack = 99;
+            Item.flame = true;
+            Item.value = 50;
         }
 
         public override void HoldItem(Player player)
@@ -26,17 +26,16 @@ namespace MythMod.Items.light
             if (mplayer.SD != 12)
             {
                 mplayer.SD = 12;
-                Projectile.NewProjectile(player.Center.X, player.Center.Y, 0, 0f, mod.ProjectileType("BloodFlashlight"), 0, 0f, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(player.Center.X, player.Center.Y, 0, 0f, Mod.Find<ModProjectile>("BloodFlashlight").Type, 0, 0f, Main.myPlayer, 0f, 0f);
             }
             mplayer.SD2 = 2;
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(1333, 3);
             recipe.AddIngredient(763, 15);
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

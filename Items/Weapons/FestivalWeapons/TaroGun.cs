@@ -20,23 +20,23 @@ namespace MythMod.Items.Weapons.FestivalWeapons
 		}
 		public override void SetDefaults()
 		{
-			base.item.damage = 155;
-            base.item.crit = 12;
-            base.item.width = 64;
-			base.item.height = 32;
-			base.item.useTime = 9;
-			base.item.useAnimation = 9;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-            base.item.magic = true;
-            base.item.mana = 8;
-            base.item.knockBack = 1f;
-			base.item.value = 99999;
-			base.item.rare = 11;
-			base.item.UseSound = SoundID.Item31;
-			base.item.autoReuse = true;
-            base.item.shoot = base.mod.ProjectileType("Taro");
-			base.item.shootSpeed = 14f;
+			base.Item.damage = 155;
+            base.Item.crit = 12;
+            base.Item.width = 64;
+			base.Item.height = 32;
+			base.Item.useTime = 9;
+			base.Item.useAnimation = 9;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+            base.Item.DamageType = DamageClass.Magic;
+            base.Item.mana = 8;
+            base.Item.knockBack = 1f;
+			base.Item.value = 99999;
+			base.Item.rare = 11;
+			base.Item.UseSound = SoundID.Item31;
+			base.Item.autoReuse = true;
+            base.Item.shoot = base.Mod.Find<ModProjectile>("Taro").Type;
+			base.Item.shootSpeed = 14f;
 		}
         public override Vector2? HoldoutOffset()
         {
@@ -50,29 +50,29 @@ namespace MythMod.Items.Weapons.FestivalWeapons
         {
             if (player.altFunctionUse == 2)
             {
-                base.item.useTime = 2;
-                base.item.useAnimation = 6;
-                base.item.mana = 12;
+                base.Item.useTime = 2;
+                base.Item.useAnimation = 6;
+                base.Item.mana = 12;
             }
             else
             {
-                base.item.useTime = 25;
-                base.item.useAnimation = 25;
-                base.item.autoReuse = false;
-                base.item.mana = 40;
+                base.Item.useTime = 25;
+                base.Item.useAnimation = 25;
+                base.Item.autoReuse = false;
+                base.Item.mana = 40;
             }
             return base.CanUseItem(player);
         }
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             if (player.altFunctionUse == 2)
             {
                 float num = speedX;
                 float num2 = speedY;
-                Projectile.NewProjectile(position.X, position.Y, num * 0.15f, num2 * 0.15f, base.mod.ProjectileType("Taro"), (int)(damage * 0.4f), knockBack * 0.5f, player.whoAmI, 0f, 0f);
+                Projectile.NewProjectile(position.X, position.Y, num * 0.15f, num2 * 0.15f, base.Mod.Find<ModProjectile>("Taro").Type, (int)(damage * 0.4f), knockBack * 0.5f, player.whoAmI, 0f, 0f);
                 return false;
             }
-            Projectile.NewProjectile(position.X, position.Y, speedX, speedY, base.mod.ProjectileType("TaroTangyuan"), (int)((double)damage * 16f), knockBack * 5, player.whoAmI, 0f, 0f);
+            Projectile.NewProjectile(position.X, position.Y, speedX, speedY, base.Mod.Find<ModProjectile>("TaroTangyuan").Type, (int)((double)damage * 16f), knockBack * 5, player.whoAmI, 0f, 0f);
             return false;
         }
     }

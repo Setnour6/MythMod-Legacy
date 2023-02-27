@@ -28,25 +28,25 @@ namespace MythMod.Items.Weapons
 		}
 		public override void SetDefaults()
 		{
-			base.item.damage = 180;
-			base.item.magic = true;
-			base.item.mana = 10;
-			base.item.width = 28;
-			base.item.height = 30;
-			base.item.useTime = 12;
-			base.item.useAnimation = 12;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.knockBack = 6f;
-			base.item.value = 50000;
-			base.item.rare = 7;
-			base.item.UseSound = SoundID.Item14;
-			base.item.autoReuse = true;
-			base.item.shoot = 467;
-			base.item.shootSpeed = 20f;
+			base.Item.damage = 180;
+			base.Item.DamageType = DamageClass.Magic;
+			base.Item.mana = 10;
+			base.Item.width = 28;
+			base.Item.height = 30;
+			base.Item.useTime = 12;
+			base.Item.useAnimation = 12;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 6f;
+			base.Item.value = 50000;
+			base.Item.rare = 7;
+			base.Item.UseSound = SoundID.Item14;
+			base.Item.autoReuse = true;
+			base.Item.shoot = 467;
+			base.Item.shootSpeed = 20f;
         }
         private int l = 0;
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             if (l % 3 == 0)
             {

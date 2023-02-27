@@ -19,21 +19,21 @@ namespace MythMod.Items.Pickaxes
 		}
 		public override void SetDefaults()
 		{
-			base.item.damage = 121;
-			base.item.melee = true;
-			base.item.width = 40;
-			base.item.height = 42;
-			base.item.useTime = 4;
-			base.item.useAnimation = 9;
-			base.item.useTurn = true;
-			base.item.pick = 290;
-			base.item.useStyle = 1;
-			base.item.knockBack = 9f;
-			base.item.value = 90000;
-			base.item.UseSound = SoundID.Item1;
-			base.item.autoReuse = true;
-			base.item.tileBoost += 4;
-            base.item.rare = 11;
+			base.Item.damage = 121;
+			base.Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+			base.Item.width = 40;
+			base.Item.height = 42;
+			base.Item.useTime = 4;
+			base.Item.useAnimation = 9;
+			base.Item.useTurn = true;
+			base.Item.pick = 290;
+			base.Item.useStyle = 1;
+			base.Item.knockBack = 9f;
+			base.Item.value = 90000;
+			base.Item.UseSound = SoundID.Item1;
+			base.Item.autoReuse = true;
+			base.Item.tileBoost += 4;
+            base.Item.rare = 11;
 		}
 		public override void MeleeEffects(Player player, Rectangle hitbox)
 		{
@@ -42,27 +42,26 @@ namespace MythMod.Items.Pickaxes
 				int num = Main.rand.Next(3);
 				if (num == 0)
 				{
-					num = mod.DustType("Olivine");
+					num = Mod.Find<ModDust>("Olivine").Type;
 				}
 				else if (num == 1)
 				{
-					num = mod.DustType("Olivine");
+					num = Mod.Find<ModDust>("Olivine").Type;
 				}
 				else
 				{
-					num = mod.DustType("Olivine");
+					num = Mod.Find<ModDust>("Olivine").Type;
 				}
 				Dust.NewDust(new Vector2((float)hitbox.X, (float)hitbox.Y), hitbox.Width, hitbox.Height, num, 0f, 0f, 0, default(Color), 1f);
 			}
 		}
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(null, "Olivine", 10);
             recipe.AddIngredient(null, "GoldGorgonianBranch", 15);
             recipe.requiredTile[0] = 412;
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

@@ -10,57 +10,57 @@ namespace MythMod.Projectiles.projectile3
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("超级咒火球");
-            Main.projFrames[projectile.type] = 4;
+            Main.projFrames[Projectile.type] = 4;
         }
 		public override void SetDefaults()
 		{
-			base.projectile.width = 54;
-			base.projectile.height = 52;
-			base.projectile.friendly = false;
-			base.projectile.melee = true;
-			base.projectile.aiStyle = -1;
-            base.projectile.penetrate = 1;
-            base.projectile.timeLeft = 3600;
-            base.projectile.hostile = true;
-            projectile.tileCollide = false;
+			base.Projectile.width = 54;
+			base.Projectile.height = 52;
+			base.Projectile.friendly = false;
+			base.Projectile.DamageType = DamageClass.Melee;
+			base.Projectile.aiStyle = -1;
+            base.Projectile.penetrate = 1;
+            base.Projectile.timeLeft = 3600;
+            base.Projectile.hostile = true;
+            Projectile.tileCollide = false;
         }
         public override void AI()
 		{
             Player player = Main.player[Main.myPlayer];
-            base.projectile.rotation = (float)Math.Atan2((double)base.projectile.velocity.Y, (double)base.projectile.velocity.X) + 1.57f;
-            if(projectile.timeLeft < 3599)
+            base.Projectile.rotation = (float)Math.Atan2((double)base.Projectile.velocity.Y, (double)base.Projectile.velocity.X) + 1.57f;
+            if(Projectile.timeLeft < 3599)
             {
-                projectile.tileCollide = true;
-                int r = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) - new Vector2(Main.rand.NextFloat(0,24), 0).RotatedByRandom(MathHelper.TwoPi) - new Vector2(8, 8), 0, 0, 75, 0, 0, 0, default(Color), 3f);
+                Projectile.tileCollide = true;
+                int r = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) - new Vector2(Main.rand.NextFloat(0,24), 0).RotatedByRandom(MathHelper.TwoPi) - new Vector2(8, 8), 0, 0, 75, 0, 0, 0, default(Color), 3f);
                 Main.dust[r].velocity.X = 0;
                 Main.dust[r].velocity.Y = 0;
                 Main.dust[r].noGravity = true;
-                int r2 = Dust.NewDust(new Vector2(base.projectile.Center.X, base.projectile.Center.Y) - base.projectile.velocity.RotatedBy(Main.rand.NextFloat(-0.25f,0.25f)) * 0.15f - new Vector2(Main.rand.NextFloat(0, 24), 0).RotatedByRandom(MathHelper.TwoPi) - new Vector2(8, 8), 0, 0, 75, 0, 0, 0, default(Color), 5f);
+                int r2 = Dust.NewDust(new Vector2(base.Projectile.Center.X, base.Projectile.Center.Y) - base.Projectile.velocity.RotatedBy(Main.rand.NextFloat(-0.25f,0.25f)) * 0.15f - new Vector2(Main.rand.NextFloat(0, 24), 0).RotatedByRandom(MathHelper.TwoPi) - new Vector2(8, 8), 0, 0, 75, 0, 0, 0, default(Color), 5f);
                 Main.dust[r2].velocity.X = 0;
                 Main.dust[r2].velocity.Y = 0;
                 Main.dust[r2].noGravity = true;
             }
-            if(projectile.timeLeft % 6 == 0)
+            if(Projectile.timeLeft % 6 == 0)
             {
-                if(projectile.frame < 3)
+                if(Projectile.frame < 3)
                 {
-                    projectile.frame += 1;
+                    Projectile.frame += 1;
                 }
                 else
                 {
-                    projectile.frame = 0;
+                    Projectile.frame = 0;
                 }
             }
         }
         public override void OnHitPlayer(Player target, int damage, bool crit)
         {
             target.AddBuff(39, 3600);
-            projectile.Kill();
+            Projectile.Kill();
         }
 
         public override bool OnTileCollide(Vector2 oldVelocity)
 		{
-		    base.projectile.Kill();
+		    base.Projectile.Kill();
 			return false;
 		}
         public override void Kill(int timeLeft)
@@ -88,10 +88,10 @@ namespace MythMod.Projectiles.projectile3
                 {
                     num8 = 75;
                 }
-                int num9 = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, num8, 0f, 0f, 100, default(Color), 6f);
+                int num9 = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, num8, 0f, 0f, 100, default(Color), 6f);
                 Main.dust[num9].noGravity = true;
-                Main.dust[num9].position.X = base.projectile.Center.X;
-                Main.dust[num9].position.Y = base.projectile.Center.Y;
+                Main.dust[num9].position.X = base.Projectile.Center.X;
+                Main.dust[num9].position.Y = base.Projectile.Center.Y;
                 Dust dust = Main.dust[num9];
                 dust.position.X = dust.position.X + (float)Main.rand.Next(-10, 11);
                 Dust dust2 = Main.dust[num9];
@@ -101,14 +101,14 @@ namespace MythMod.Projectiles.projectile3
                 num10++;
             }
 
-                Projectile.NewProjectile(base.projectile.Center.X, base.projectile.Center.Y, 0, 0, base.mod.ProjectileType("SuperCurseBallWave"), 0, 0, base.projectile.owner, 0f, 0f);
+                Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, 0, 0, base.Mod.Find<ModProjectile>("SuperCurseBallWave").Type, 0, 0, base.Projectile.owner, 0f, 0f);
 
             for (int k = 0; k <= 10; k++)
             {
                 Vector2 v = new Vector2(0, 40).RotatedByRandom(Math.PI * 2);
-                int num4 = Projectile.NewProjectile(base.projectile.Center.X + v.X, base.projectile.Center.Y + v.Y, 0, 0, base.mod.ProjectileType("GreenFireGas"), base.projectile.damage / 10, base.projectile.knockBack, base.projectile.owner, 0f, 0f);
+                int num4 = Projectile.NewProjectile(base.Projectile.Center.X + v.X, base.Projectile.Center.Y + v.Y, 0, 0, base.Mod.Find<ModProjectile>("GreenFireGas").Type, base.Projectile.damage / 10, base.Projectile.knockBack, base.Projectile.owner, 0f, 0f);
                 Vector2 v2 = new Vector2(0, 9).RotatedByRandom(Math.PI * k / 5d);
-                int num6 = Projectile.NewProjectile(base.projectile.Center.X, base.projectile.Center.Y, v2.X, v2.Y, 96, base.projectile.damage / 10, base.projectile.knockBack, base.projectile.owner, 0f, 0f);
+                int num6 = Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, v2.X, v2.Y, 96, base.Projectile.damage / 10, base.Projectile.knockBack, base.Projectile.owner, 0f, 0f);
                 Main.projectile[num4].friendly = false;
                 Main.projectile[num4].hostile = true;
                 Main.projectile[num6].friendly = false;

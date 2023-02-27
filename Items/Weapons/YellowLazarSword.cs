@@ -20,29 +20,29 @@ namespace MythMod.Items.Weapons
         private int o = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            item.damage = 150;
-            item.melee = true;
-            item.width = 88;
-            item.height = 88;
-            item.useTime = 42;
-            item.rare = 6;
-            item.useAnimation = 42;
-            item.useStyle = 1;
-            item.knockBack = 5.0f;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 4;
-            item.value = 100000;
-            item.scale = 1f;
-            item.noMelee = true;
-            item.noUseGraphic = true;
+            Item.glowMask = GetGlowMask;
+            Item.damage = 150;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 88;
+            Item.height = 88;
+            Item.useTime = 42;
+            Item.rare = 6;
+            Item.useAnimation = 42;
+            Item.useStyle = 1;
+            Item.knockBack = 5.0f;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 4;
+            Item.value = 100000;
+            Item.scale = 1f;
+            Item.noMelee = true;
+            Item.noUseGraphic = true;
         }
-        public override bool UseItem(Player player)
+        public override bool? UseItem(Player player)/* tModPorter Suggestion: Return null instead of false */
         {
             if (o == 0)
             {
-                Projectile.NewProjectile(player.Center.X, player.Center.Y, 0, 0, mod.ProjectileType("YellowLazarSwordHead"), (int)(item.damage * player.meleeDamage), item.knockBack, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(player.Center.X, player.Center.Y, 0, 0, Mod.Find<ModProjectile>("YellowLazarSwordHead").Type, (int)(Item.damage * player.GetDamage(DamageClass.Melee)), Item.knockBack, Main.myPlayer, 0f, 0f);
                 o += 1;
             }
             if (!Main.mouseLeft)
@@ -57,12 +57,11 @@ namespace MythMod.Items.Weapons
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(3769, 1);
             recipe.AddIngredient(null, "LazarBattery", 9);
-            recipe.SetResult(this, 1);
             recipe.requiredTile[0] = 16;
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace MythMod.Buffs
 {
     public class GoldBird : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("金乌");
             base.Description.SetDefault("金乌为你而战");
@@ -17,7 +17,7 @@ namespace MythMod.Buffs
 		public override void Update(Player player, ref int buffIndex)
 		{
 			MythPlayer modPlayer = player.GetModPlayer<MythPlayer>();
-            if (player.ownedProjectileCounts[base.mod.ProjectileType("GoldBird")] > 0)
+            if (player.ownedProjectileCounts[base.Mod.Find<ModProjectile>("GoldBird").Type] > 0)
 			{
 				modPlayer.GXJL = true;
 			}

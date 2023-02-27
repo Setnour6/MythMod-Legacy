@@ -16,34 +16,33 @@ namespace MythMod.Items
 
 		public override void SetDefaults()
 		{
-			base.item.damage = 95;
-			base.item.melee = true;
-			base.item.width = 20;
-			base.item.height = 12;
-			base.item.useTime = 3;
-			base.item.useAnimation = 24;
-			base.item.tileBoost = 1;
-			base.item.channel = true;
-			base.item.noUseGraphic = true;
-			base.item.noMelee = true;
-			base.item.pick = 240;
-			base.item.useStyle = 5;
-			base.item.knockBack = 3f;
-			base.item.value = Item.sellPrice(0, 4, 16, 0);
-			base.item.rare = 11;
-			base.item.UseSound = SoundID.Item23;
-			base.item.autoReuse = true;
-			base.item.shoot = base.mod.ProjectileType("漩涡钻头Pro");
-			base.item.shootSpeed = 40f;
+			base.Item.damage = 95;
+			base.Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+			base.Item.width = 20;
+			base.Item.height = 12;
+			base.Item.useTime = 3;
+			base.Item.useAnimation = 24;
+			base.Item.tileBoost = 1;
+			base.Item.channel = true;
+			base.Item.noUseGraphic = true;
+			base.Item.noMelee = true;
+			base.Item.pick = 240;
+			base.Item.useStyle = 5;
+			base.Item.knockBack = 3f;
+			base.Item.value = Item.sellPrice(0, 4, 16, 0);
+			base.Item.rare = 11;
+			base.Item.UseSound = SoundID.Item23;
+			base.Item.autoReuse = true;
+			base.Item.shoot = base.Mod.Find<ModProjectile>("漩涡钻头Pro").Type;
+			base.Item.shootSpeed = 40f;
 		}
 
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(null, "OceanBlueBar", 30);
             modRecipe.requiredTile[0] = 412;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
     }
 }

@@ -16,18 +16,18 @@ namespace MythMod.Items.Magicpaper
         }
         public override void SetDefaults()
         {
-            item.width = 26;
-            item.height = 40;
-            item.maxStack = 999;
-            item.damage = 900;
-            item.value = 5000;
-            item.rare = 2;
-            base.item.useStyle = 1;
-            item.consumable = true;
-            base.item.useAnimation = 17;
-            base.item.useTime = 17;
-            item.noMelee = true;
-            base.item.consumable = true;
+            Item.width = 26;
+            Item.height = 40;
+            Item.maxStack = 999;
+            Item.damage = 900;
+            Item.value = 5000;
+            Item.rare = 2;
+            base.Item.useStyle = 1;
+            Item.consumable = true;
+            base.Item.useAnimation = 17;
+            base.Item.useTime = 17;
+            Item.noMelee = true;
+            base.Item.consumable = true;
         }
         public override void HoldItem(Player player)
         {
@@ -44,11 +44,11 @@ namespace MythMod.Items.Magicpaper
                     Vector2 v1 = Main.screenPosition + new Vector2(Main.mouseX, Main.mouseY);
                     Vector2 v2 = (v1 - player.Center) / (v1 - player.Center).Length() * 10f;
                     v2 = v2.RotatedBy(Main.rand.NextFloat(-0.7f, 0.7f)) * Main.rand.NextFloat(0.7f, 1.4f);
-                    Projectile.NewProjectile(player.Center.X, player.Center.Y, v2.X, v2.Y, mod.ProjectileType("ShadowFireBall"), item.damage, 0.5f, Main.myPlayer, 10f, 25f);
+                    Projectile.NewProjectile(player.Center.X, player.Center.Y, v2.X, v2.Y, Mod.Find<ModProjectile>("ShadowFireBall").Type, Item.damage, 0.5f, Main.myPlayer, 10f, 25f);
                 }
                 mplayer.MagicCool += 600;
-                item.stack--;
-                player.AddBuff(mod.BuffType("愚昧诅咒"), 600, true);
+                Item.stack--;
+                player.AddBuff(Mod.Find<ModBuff>("愚昧诅咒").Type, 600, true);
             }
             return mplayer.MagicCool > 0;
         }
@@ -58,12 +58,11 @@ namespace MythMod.Items.Magicpaper
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(null, "EmpMagic", 1);
             recipe.AddIngredient(521, 15);
             recipe.requiredTile[0] = 26;
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

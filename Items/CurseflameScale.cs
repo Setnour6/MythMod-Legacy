@@ -22,12 +22,12 @@ namespace MythMod.Items
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            base.item.width = 26;
-			base.item.height = 22;
-			base.item.maxStack = 999;
-			base.item.value = Item.sellPrice(0, 2, 50, 0);
-			base.item.rare = 6;
+            Item.glowMask = GetGlowMask;
+            base.Item.width = 26;
+			base.Item.height = 22;
+			base.Item.maxStack = 999;
+			base.Item.value = Item.sellPrice(0, 2, 50, 0);
+			base.Item.rare = 6;
 		}
     }
 }

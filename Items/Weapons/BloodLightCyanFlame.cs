@@ -26,36 +26,36 @@ namespace MythMod.Items.Weapons
 
 		public override void SetDefaults()
 		{
-			item.useStyle = 1;
-			item.shootSpeed = 17f;
-			item.shoot = mod.ProjectileType("BloodLightCyanFlame1");
-			item.width = 68;
-			item.height = 68;
-			item.UseSound = SoundID.Item1;
-			item.useAnimation = 20;
-			item.useTime = 20;
-			item.noUseGraphic = true;
-			item.noMelee = true;
-			item.rare = 5;
-            item.damage = 150;
-            item.autoReuse = true;
-            item.melee = true;
+			Item.useStyle = 1;
+			Item.shootSpeed = 17f;
+			Item.shoot = Mod.Find<ModProjectile>("BloodLightCyanFlame1").Type;
+			Item.width = 68;
+			Item.height = 68;
+			Item.UseSound = SoundID.Item1;
+			Item.useAnimation = 20;
+			Item.useTime = 20;
+			Item.noUseGraphic = true;
+			Item.noMelee = true;
+			Item.rare = 5;
+            Item.damage = 150;
+            Item.autoReuse = true;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
         }
         public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
         {
-            Vector2 origin = new Vector2(item.width / 2f, item.height / 2f);
-            spriteBatch.Draw(base.mod.GetTexture("Items/Weapons/血光青炎Glow"), base.item.Center - Main.screenPosition, null, new Color(255, 255, 255, 0), rotation, origin, 1f, SpriteEffects.None, 0f);
+            Vector2 origin = new Vector2(Item.width / 2f, Item.height / 2f);
+            spriteBatch.Draw(base.Mod.GetTexture("Items/Weapons/血光青炎Glow"), base.Item.Center - Main.screenPosition, null, new Color(255, 255, 255, 0), rotation, origin, 1f, SpriteEffects.None, 0f);
         }
         private int l = 0;
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             if(l % 2 == 0)
             {
-                type = mod.ProjectileType("BloodLightCyanFlame");
+                type = Mod.Find<ModProjectile>("BloodLightCyanFlame").Type;
             }
             else
             {
-                type = mod.ProjectileType("BloodLightCyanFlame1");
+                type = Mod.Find<ModProjectile>("BloodLightCyanFlame1").Type;
             }
             Projectile.NewProjectile(position.X, position.Y, speedX, speedY, type, damage, knockBack, Main.myPlayer, 0f, 0f);
             l++;

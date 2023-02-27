@@ -26,31 +26,30 @@ namespace MythMod.Items.Weapons
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            item.damage = 300;//伤害
-            item.melee = true;//是否是近战
-            item.width = 58;//宽
-            item.height = 58;//高
-            item.useTime = 27;//使用时挥动间隔时间
-            item.rare = 4;//品质
-            item.useAnimation = 16;//挥动时动作持续时间
-            item.useStyle = 1;//使用动画，这里是挥动
-            item.knockBack = 1.5f;//击退
-            item.UseSound = SoundID.Item1;//挥动声音
-            item.autoReuse = true;//能否持续挥动
-            item.crit = 8;//暴击
-            item.value = 45000;//价值，1表示一铜币，这里是100铂金币
-            item.shoot = mod.ProjectileType("AbyssBeam");//??????????yoyo??
-            item.scale = 1f;//大小
-            item.shootSpeed = 5f;//??Ч???????
+            Item.glowMask = GetGlowMask;
+            Item.damage = 300;//伤害
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;//是否是近战
+            Item.width = 58;//宽
+            Item.height = 58;//高
+            Item.useTime = 27;//使用时挥动间隔时间
+            Item.rare = 4;//品质
+            Item.useAnimation = 16;//挥动时动作持续时间
+            Item.useStyle = 1;//使用动画，这里是挥动
+            Item.knockBack = 1.5f;//击退
+            Item.UseSound = SoundID.Item1;//挥动声音
+            Item.autoReuse = true;//能否持续挥动
+            Item.crit = 8;//暴击
+            Item.value = 45000;//价值，1表示一铜币，这里是100铂金币
+            Item.shoot = Mod.Find<ModProjectile>("AbyssBeam").Type;//??????????yoyo??
+            Item.scale = 1f;//大小
+            Item.shootSpeed = 5f;//??Ч???????
         }
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(null, "DarkSeaBar", 7);
             modRecipe.requiredTile[0] = 412;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
         public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
         {
@@ -69,7 +68,7 @@ namespace MythMod.Items.Weapons
             {
                 return;
             }
-            Projectile.NewProjectile(target.Center.X, target.Center.Y, 2f, 2f, base.mod.ProjectileType("AbyssBomb"), damage, knockback, player.whoAmI, 0f, 0f);
+            Projectile.NewProjectile(target.Center.X, target.Center.Y, 2f, 2f, base.Mod.Find<ModProjectile>("AbyssBomb").Type, damage, knockback, player.whoAmI, 0f, 0f);
         }
         // Token: 0x060002D2 RID: 722 RVA: 0x000354AC File Offset: 0x000336AC
         public override void MeleeEffects(Player player, Rectangle hitbox)

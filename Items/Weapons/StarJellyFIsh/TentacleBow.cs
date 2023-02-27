@@ -1,4 +1,4 @@
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -27,28 +27,28 @@ namespace MythMod.Items.Weapons.StarJellyFIsh
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            item.ranged = true;
-            item.width = 32;
-            item.height = 50;
-            item.useTime = 11;
-            item.useAnimation = 11;
-            item.damage = 168;
-            item.UseSound = SoundID.Item11;
-            item.autoReuse = true;
-            item.crit = 24;
-            item.value = 80000;
-            item.scale = 1f;
-            item.rare = 8;
-            item.useStyle = 5;
-            item.knockBack = 1;
-            item.useAmmo = 40;
-            item.noMelee = true;
-            item.shoot = mod.ProjectileType("PoisonArrow");
-            item.shootSpeed = 0.02f;
-            item.reuseDelay = 14;
+            Item.glowMask = GetGlowMask;
+            Item.DamageType = DamageClass.Ranged;
+            Item.width = 32;
+            Item.height = 50;
+            Item.useTime = 11;
+            Item.useAnimation = 11;
+            Item.damage = 168;
+            Item.UseSound = SoundID.Item11;
+            Item.autoReuse = true;
+            Item.crit = 24;
+            Item.value = 80000;
+            Item.scale = 1f;
+            Item.rare = 8;
+            Item.useStyle = 5;
+            Item.knockBack = 1;
+            Item.useAmmo = 40;
+            Item.noMelee = true;
+            Item.shoot = Mod.Find<ModProjectile>("PoisonArrow").Type;
+            Item.shootSpeed = 0.02f;
+            Item.reuseDelay = 14;
         }
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             Vector2 perturbedSpeed = new Vector2(speedX, speedY).RotatedByRandom(MathHelper.ToRadians(1));
             speedX = perturbedSpeed.X;
@@ -58,42 +58,42 @@ namespace MythMod.Items.Weapons.StarJellyFIsh
                 int i = Main.rand.Next(-5, 25);
                     if (i == 15)
                     {
-                        Projectile.NewProjectile(position.X, position.Y, speedX * 0.24f, speedY * 0.24f, mod.ProjectileType("TouchArrow"), damage * 3, knockBack, player.whoAmI);
+                        Projectile.NewProjectile(position.X, position.Y, speedX * 0.24f, speedY * 0.24f, Mod.Find<ModProjectile>("TouchArrow").Type, damage * 3, knockBack, player.whoAmI);
                     }
                     else
                     {
-                        Projectile.NewProjectile(position.X, position.Y, speedX * 0.2f, speedY * 0.2f, mod.ProjectileType("PoisonArrow"), damage, knockBack, player.whoAmI);
+                        Projectile.NewProjectile(position.X, position.Y, speedX * 0.2f, speedY * 0.2f, Mod.Find<ModProjectile>("PoisonArrow").Type, damage, knockBack, player.whoAmI);
                     }
             }
             else
             {
-                Projectile.NewProjectile(position.X, position.Y, speedX * 0.16f, speedY * 0.16f, mod.ProjectileType("PoisonArrow"), damage, knockBack, player.whoAmI);
+                Projectile.NewProjectile(position.X, position.Y, speedX * 0.16f, speedY * 0.16f, Mod.Find<ModProjectile>("PoisonArrow").Type, damage, knockBack, player.whoAmI);
             }
             return false;
         }
-        public override bool ConsumeAmmo(Player player)
+        public override bool CanConsumeAmmo(Item ammo, Player player)
         {
-            return !(player.itemAnimation < item.useAnimation - 2);
+            return !(player.itemAnimation < Item.useAnimation - 2);
         }
         public override bool CanUseItem(Player player)
         {
             if (player.wet)
             {
-                base.item.damage = 274;
-                base.item.useTime = 3;
-                base.item.useAnimation = 3;
+                base.Item.damage = 274;
+                base.Item.useTime = 3;
+                base.Item.useAnimation = 3;
             }
             else
             {
-                base.item.damage = 168;
-                base.item.useTime = 11;
-                base.item.useAnimation = 11;
+                base.Item.damage = 168;
+                base.Item.useTime = 11;
+                base.Item.useAnimation = 11;
             }
             return base.CanUseItem(player);
         }
         public override void PostUpdate()
         {
-            Lighting.AddLight((int)((base.item.position.X + (float)(base.item.width / 4)) / 16f), (int)((base.item.position.Y + (float)(base.item.height / 2)) / 16f), 0.1f, 0.08f, 0.0f);
+            Lighting.AddLight((int)((base.Item.position.X + (float)(base.Item.width / 4)) / 16f), (int)((base.Item.position.Y + (float)(base.Item.height / 2)) / 16f), 0.1f, 0.08f, 0.0f);
         }
     }
 }

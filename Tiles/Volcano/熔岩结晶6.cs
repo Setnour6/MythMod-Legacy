@@ -14,7 +14,7 @@ namespace MythMod.Tiles.Volcano
 	public class 熔岩结晶6 : ModTile
 	{
 		// Token: 0x06004868 RID: 18536 RVA: 0x0034883C File Offset: 0x00346A3C
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             Main.tileLighted[(int)base.Type] = true;
             Main.tileFrameImportant[(int)base.Type] = true;
@@ -23,7 +23,7 @@ namespace MythMod.Tiles.Volcano
             Main.tileWaterDeath[(int)base.Type] = false;
             TileObjectData.newTile.Width = 1;
             TileObjectData.newTile.Height = 5;
-            this.minPick = 300;
+            this.MinPick = 300;
             TileObjectData.newTile.CoordinateHeights = new int[]
             {
                 20,
@@ -42,7 +42,7 @@ namespace MythMod.Tiles.Volcano
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("熔岩结晶");
             base.AddMapEntry(new Color(191, 142, 111), modTranslation);
-            this.adjTiles = new int[]
+            this.AdjTiles = new int[]
             {
                 4
             };
@@ -64,7 +64,7 @@ namespace MythMod.Tiles.Volcano
         {
             for(int z = Main.rand.Next(46, 48);z < 50;z++)
             {
-                Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("LavaCrystal"));
+                Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("LavaCrystal").Type);
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -16,17 +17,17 @@ namespace MythMod.Items.Magicpaper
         }
         public override void SetDefaults()
         {
-            item.width = 26;
-            item.height = 40;
-            item.maxStack = 999;
-            item.damage = 570;
-            item.value = 1000;
-            item.rare = 1;
-            base.item.useStyle = 1;
-            item.consumable = true;
-            base.item.useAnimation = 17;
-            base.item.useTime = 17;
-            base.item.consumable = true;
+            Item.width = 26;
+            Item.height = 40;
+            Item.maxStack = 999;
+            Item.damage = 570;
+            Item.value = 1000;
+            Item.rare = 1;
+            base.Item.useStyle = 1;
+            Item.consumable = true;
+            base.Item.useAnimation = 17;
+            base.Item.useTime = 17;
+            base.Item.consumable = true;
         }
         public override void HoldItem(Player player)
         {
@@ -36,7 +37,7 @@ namespace MythMod.Items.Magicpaper
         public override bool CanUseItem(Player player)
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
-            Main.PlaySound(2, (int)player.position.X, (int)player.position.Y, 27, 1f, 0f);
+            SoundEngine.PlaySound(SoundID.Item27, player.position);
             if (mplayer.MagicCool == 0)
             {
                 Vector2 v1 = Main.screenPosition + new Vector2(Main.mouseX, Main.mouseY);
@@ -44,18 +45,18 @@ namespace MythMod.Items.Magicpaper
                 for (int k = 0; k <= 40; k++)
                 {
                     Vector2 v = new Vector2(0, 40).RotatedBy(MathHelper.Pi * k / 20d);
-                    int num4 = Projectile.NewProjectile(player.Center.X, player.Center.Y, v.X * 0.06f, v.Y * 0.06f, base.mod.ProjectileType("FreezeLoop"), item.damage, item.knockBack, Main.myPlayer, 0f, 300/*决定了冰冻时间*/);
+                    int num4 = Projectile.NewProjectile(player.Center.X, player.Center.Y, v.X * 0.06f, v.Y * 0.06f, base.Mod.Find<ModProjectile>("FreezeLoop").Type, Item.damage, Item.knockBack, Main.myPlayer, 0f, 300/*决定了冰冻时间*/);
                     Main.projectile[num4].timeLeft = 110;
                 }
                 for (int k = 0; k <= 40; k++)
                 {
                     Vector2 v = new Vector2(0, 36.8f).RotatedBy(MathHelper.Pi * (k + 0.5) / 20d);
-                    int num4 = Projectile.NewProjectile(player.Center.X, player.Center.Y, v.X * 0.06f, v.Y * 0.06f, base.mod.ProjectileType("FreezeLoop"), item.damage, item.knockBack, Main.myPlayer, 0f, 300/*决定了冰冻时间*/);
+                    int num4 = Projectile.NewProjectile(player.Center.X, player.Center.Y, v.X * 0.06f, v.Y * 0.06f, base.Mod.Find<ModProjectile>("FreezeLoop").Type, Item.damage, Item.knockBack, Main.myPlayer, 0f, 300/*决定了冰冻时间*/);
                     Main.projectile[num4].timeLeft = 110;
                 }
                 mplayer.MagicCool += 600;
-                item.stack--;
-                player.AddBuff(mod.BuffType("愚昧诅咒"), 600, true);
+                Item.stack--;
+                player.AddBuff(Mod.Find<ModBuff>("愚昧诅咒").Type, 600, true);
             }
             return mplayer.MagicCool > 0;
         }
@@ -65,12 +66,11 @@ namespace MythMod.Items.Magicpaper
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(null, "EmpMagic", 1);
             recipe.AddIngredient(2161, 1);
             recipe.requiredTile[0] = 26;
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

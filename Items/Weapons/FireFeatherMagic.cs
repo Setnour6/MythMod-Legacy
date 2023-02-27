@@ -31,24 +31,24 @@ namespace MythMod.Items.Weapons
         }
         public override void SetDefaults()
         {
-            base.item.damage = 65;
-			base.item.magic = true;
-			base.item.mana = 6;
-			base.item.width = 28;
-			base.item.height = 30;
-			base.item.useTime = 15;
-			base.item.useAnimation = 15;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.knockBack = 6f;
-			base.item.value = 2000;
-			base.item.rare = 2;
-			base.item.UseSound = SoundID.Item8;
-			base.item.autoReuse = true;
-			base.item.shoot = mod.ProjectileType("FireFeather");
-			base.item.shootSpeed = 8f;
+            base.Item.damage = 65;
+			base.Item.DamageType = DamageClass.Magic;
+			base.Item.mana = 6;
+			base.Item.width = 28;
+			base.Item.height = 30;
+			base.Item.useTime = 15;
+			base.Item.useAnimation = 15;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 6f;
+			base.Item.value = 2000;
+			base.Item.rare = 2;
+			base.Item.UseSound = SoundID.Item8;
+			base.Item.autoReuse = true;
+			base.Item.shoot = Mod.Find<ModProjectile>("FireFeather").Type;
+			base.Item.shootSpeed = 8f;
         }
-		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
             Vector2 v = new Vector2(speedX, speedY);
             for (int k = 0; k < 8; k++)
@@ -62,12 +62,11 @@ namespace MythMod.Items.Weapons
         }
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(null, "FeatherMagic", 1);
             modRecipe.AddIngredient(1518, 3);
             modRecipe.requiredTile[0] = 125;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
     }
 }

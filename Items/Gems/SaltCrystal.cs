@@ -15,20 +15,20 @@ namespace MythMod.Items.Gems
         }
         public override void SetDefaults()
         {
-            base.item.createTile = base.mod.TileType("SaltCrystal");
-            base.item.useStyle = 1;
-			base.item.useTurn = true;
-            base.item.useAnimation = 15;
-			base.item.useTime = 10;
-            base.item.autoReuse = true;
-			base.item.consumable = true;
-            item.width = 32;//宽
-            item.height = 26;//高
-            item.rare = 2;//品质
-            item.scale = 1f;//大小
-            item.value = 60;
-            item.maxStack = 999;
-            item.useTime = 14;
+            base.Item.createTile = base.Mod.Find<ModTile>("SaltCrystal").Type;
+            base.Item.useStyle = 1;
+			base.Item.useTurn = true;
+            base.Item.useAnimation = 15;
+			base.Item.useTime = 10;
+            base.Item.autoReuse = true;
+			base.Item.consumable = true;
+            Item.width = 32;//宽
+            Item.height = 26;//高
+            Item.rare = 2;//品质
+            Item.scale = 1f;//大小
+            Item.value = 60;
+            Item.maxStack = 999;
+            Item.useTime = 14;
         }
     }
 }

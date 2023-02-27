@@ -17,7 +17,7 @@ namespace MythMod.Waters
 		// Token: 0x06004984 RID: 18820 RVA: 0x00014446 File Offset: 0x00012646
 		public override int ChooseWaterfallStyle()
 		{
-			return base.mod.GetWaterfallStyleSlot("VolcanoWaterflow");
+			return base.Mod.GetWaterfallStyleSlot("VolcanoWaterflow");
 		}
 
 		// Token: 0x06004985 RID: 18821 RVA: 0x00014458 File Offset: 0x00012658

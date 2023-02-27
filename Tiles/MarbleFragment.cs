@@ -11,13 +11,13 @@ namespace MythMod.Tiles
 {
     public class MarbleFragment : ModTile
     {
-        public override void SetDefaults()
+        public override void SetStaticDefaults()
         {
             Main.tileLighted[(int)base.Type] = true;
             Main.tileFrameImportant[(int)base.Type] = true;
             Main.tileLavaDeath[(int)base.Type] = true;
             Main.tileWaterDeath[(int)base.Type] = false;
-            this.minPick = 190;
+            this.MinPick = 190;
             TileObjectData.newTile.CopyFrom(TileObjectData.Style1x1);
             TileObjectData.newTile.Height = 4;
             TileObjectData.newTile.Width = 1;
@@ -34,8 +34,8 @@ namespace MythMod.Tiles
             modTranslation.SetDefault("碎片堆");
             base.AddMapEntry(new Color(146, 151, 176), modTranslation);
             base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
-            this.disableSmartCursor = true;
-            this.adjTiles = new int[]
+            this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+            this.AdjTiles = new int[]
             {
                 4
             };
@@ -53,11 +53,11 @@ namespace MythMod.Tiles
         public override void PlaceInWorld(int i, int j, Item item)
         {
             short num = (short)(Main.rand.Next(0, 2));
-            Main.tile[i, j].frameX = (short)(num * 64);
+            Main.tile[i, j].TileFrameX = (short)(num * 64);
         }
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(i * 16, j * 16, 16, 32, mod.ItemType("MarbleFragment"));
+            Item.NewItem(i * 16, j * 16, 16, 32, Mod.Find<ModItem>("MarbleFragment").Type);
         }
         public override void RightClick(int i, int j)//右击
         {
@@ -65,12 +65,12 @@ namespace MythMod.Tiles
             bool flag = true;
             for (int num66 = 0; num66 < 58; num66++)
             {
-                if (player.inventory[num66].type == mod.ItemType("EvilFragment") && player.inventory[num66].stack > 0)
+                if (player.inventory[num66].type == Mod.Find<ModItem>("EvilFragment").Type && player.inventory[num66].stack > 0)
                 {
                     player.inventory[num66].stack--;
-                    if (NPC.CountNPCS(mod.NPCType("EvilBotle")) == 0)
+                    if (NPC.CountNPCS(Mod.Find<ModNPC>("EvilBotle").Type) == 0)
                     {
-                        NPC.NewNPC((int)player.Center.X, (int)player.Center.Y - 200, mod.NPCType("EvilBotle"), 0, 0, 0, 0, 255);
+                        NPC.NewNPC((int)player.Center.X, (int)player.Center.Y - 200, Mod.Find<ModNPC>("EvilBotle").Type, 0, 0, 0, 0, 255);
                     }
                 }
             }

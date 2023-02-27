@@ -17,11 +17,11 @@ namespace MythMod.Projectiles
 		// Token: 0x06003182 RID: 12674 RVA: 0x0000EF18 File Offset: 0x0000D118
 		public override void SetDefaults()
 		{
-			base.projectile.CloneDefaults(547);
-			base.projectile.width = 16;
-			base.projectile.height = 16;
-			base.projectile.scale = 1f;
-            ProjectileID.Sets.YoyosMaximumRange[projectile.type] = 600f;
+			base.Projectile.CloneDefaults(547);
+			base.Projectile.width = 16;
+			base.Projectile.height = 16;
+			base.Projectile.scale = 1f;
+            ProjectileID.Sets.YoyosMaximumRange[Projectile.type] = 600f;
         }
 		// Token: 0x06002220 RID: 8736 RVA: 0x001B7C54 File Offset: 0x001B5E54
 		public override void AI()
@@ -31,17 +31,17 @@ namespace MythMod.Projectiles
                 X = 0;
 				initialization = false;
             }
-            ProjectileExtras.YoyoAI(base.projectile.whoAmI, 3600f, 600f, 16f);
+            ProjectileExtras.YoyoAI(base.Projectile.whoAmI, 3600f, 600f, 16f);
             float i = (float)Math.Sin((float)X / 20 * Math.PI);
 			float j = (float)Math.Cos((float)X / 20 * Math.PI);
-			int num = Dust.NewDust(base.projectile.position, base.projectile.width, base.projectile.height, 16, 0, 0, 150, default(Color), 2.4f);
+			int num = Dust.NewDust(base.Projectile.position, base.Projectile.width, base.Projectile.height, 16, 0, 0, 150, default(Color), 2.4f);
 			Main.dust[num].velocity.Y = (float)i * 6f;
 			Main.dust[num].velocity.X = (float)j * 6f;
             Main.dust[num].scale *= 1.02f;
 			Main.dust[num].alpha = (int)(255 - 255 * (float)Main.dust[num].scale / 1.2f);
 			Main.dust[num].velocity *= 1.02f;
 		    Main.dust[num].noGravity = true;
-			int num1 = Dust.NewDust(base.projectile.position, base.projectile.width, base.projectile.height, 16, 0, 0, 150, default(Color), 2.4f);
+			int num1 = Dust.NewDust(base.Projectile.position, base.Projectile.width, base.Projectile.height, 16, 0, 0, 150, default(Color), 2.4f);
 			Main.dust[num1].velocity.Y = (float)-i * 6f;
 			Main.dust[num1].velocity.X = (float)-j * 6f;
             Main.dust[num1].scale *= 1.02f;
@@ -51,18 +51,18 @@ namespace MythMod.Projectiles
 			X ++;
             for(int m = 0;m < 200; m++)
             {
-                if((Main.npc[m].Center - base.projectile.Center).Length() <= 150 && Main.npc[m].friendly == false && Main.npc[m].dontTakeDamage == false)
+                if((Main.npc[m].Center - base.Projectile.Center).Length() <= 150 && Main.npc[m].friendly == false && Main.npc[m].dontTakeDamage == false)
                 {
-                    Main.npc[m].velocity += (base.projectile.Center - Main.npc[m].Center) / (Main.npc[m].Center - base.projectile.Center).Length() * (150 - (Main.npc[m].Center - base.projectile.Center).Length()) * 10f / (Main.npc[m].height * Main.npc[m].width);
+                    Main.npc[m].velocity += (base.Projectile.Center - Main.npc[m].Center) / (Main.npc[m].Center - base.Projectile.Center).Length() * (150 - (Main.npc[m].Center - base.Projectile.Center).Length()) * 10f / (Main.npc[m].height * Main.npc[m].width);
                 }
             }
             for (int n = 0; n < 600; n++)
             {
-                if ((Main.projectile[n].Center - base.projectile.Center).Length() <= 150 && Main.projectile[n].type != mod.ProjectileType("Cyclone"))
+                if ((Main.projectile[n].Center - base.Projectile.Center).Length() <= 150 && Main.projectile[n].type != Mod.Find<ModProjectile>("Cyclone").Type)
                 {
-                    Main.projectile[n].velocity += (base.projectile.Center - Main.projectile[n].Center) / (Main.projectile[n].Center - base.projectile.Center).Length() * (150 - (Main.projectile[n].Center - base.projectile.Center).Length()) * 0.1f;
+                    Main.projectile[n].velocity += (base.Projectile.Center - Main.projectile[n].Center) / (Main.projectile[n].Center - base.Projectile.Center).Length() * (150 - (Main.projectile[n].Center - base.Projectile.Center).Length()) * 0.1f;
                 }
-                if ((Main.projectile[n].Center - base.projectile.Center).Length() <= 10 && Main.projectile[n].type != mod.ProjectileType("Cyclone"))
+                if ((Main.projectile[n].Center - base.Projectile.Center).Length() <= 10 && Main.projectile[n].type != Mod.Find<ModProjectile>("Cyclone").Type)
                 {
                     Main.projectile[n].friendly = true;
                     Main.projectile[n].hostile = false;

@@ -1,4 +1,4 @@
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -28,25 +28,25 @@ namespace MythMod.Items.Weapons
         }
         public override void SetDefaults()
         {
-            item.ranged = true;
-            item.width = 62;
-            item.height = 78;
-            item.useTime = 11;
-            item.useAnimation = 11;
-            item.damage = 26;
-            item.UseSound = SoundID.Item11;
-            item.autoReuse = true;
-            item.crit = 4;
-            item.value = 3000;
-            item.scale = 1f;
-            item.rare = 3;
-            item.shoot = 1;
-            item.useStyle = 5;
-            item.knockBack = 1;
-            item.useAmmo = 40;
-            item.noMelee = true;
-            item.shootSpeed = 7f;
-            item.reuseDelay = 14;
+            Item.DamageType = DamageClass.Ranged;
+            Item.width = 62;
+            Item.height = 78;
+            Item.useTime = 11;
+            Item.useAnimation = 11;
+            Item.damage = 26;
+            Item.UseSound = SoundID.Item11;
+            Item.autoReuse = true;
+            Item.crit = 4;
+            Item.value = 3000;
+            Item.scale = 1f;
+            Item.rare = 3;
+            Item.shoot = 1;
+            Item.useStyle = 5;
+            Item.knockBack = 1;
+            Item.useAmmo = 40;
+            Item.noMelee = true;
+            Item.shootSpeed = 7f;
+            Item.reuseDelay = 14;
         }
         // Token: 0x06000D6F RID: 3439 RVA: 0x0006A288 File Offset: 0x00068488
 		public override Vector2? HoldoutOffset()
@@ -55,14 +55,13 @@ namespace MythMod.Items.Weapons
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);//����һ������
             recipe.AddIngredient(null, "BoneLiquid", 6); //��Ҫһ������
             recipe.AddIngredient(null, "BrokenTooth", 14); //��Ҫһ������
             recipe.requiredTile[0] = 26;
-            recipe.SetResult(this, 1); //����һ������
-            recipe.AddRecipe();
+            recipe.Register();
         }
-        public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+        public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             float num = speedX + (float)Main.rand.Next(-10, 11) * 0.05f;
             float num2 = speedY + (float)Main.rand.Next(-10, 11) * 0.05f;
@@ -72,7 +71,7 @@ namespace MythMod.Items.Weapons
             }
             else
             {
-                Projectile.NewProjectile(position.X, position.Y, speedX * 1.5f, speedY * 1.5f, mod.ProjectileType("TuskArrow"), damage * 2, knockBack * 2f, player.whoAmI, 0f, 0f);
+                Projectile.NewProjectile(position.X, position.Y, speedX * 1.5f, speedY * 1.5f, Mod.Find<ModProjectile>("TuskArrow").Type, damage * 2, knockBack * 2f, player.whoAmI, 0f, 0f);
             }
             return false;
         }

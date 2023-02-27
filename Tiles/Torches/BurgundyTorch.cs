@@ -11,7 +11,7 @@ namespace MythMod.Tiles.Torches
 {
 	public class BurgundyTorch : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileLighted[Type] = true;
 			Main.tileFrameImportant[Type] = true;
@@ -37,11 +37,11 @@ namespace MythMod.Tiles.Torches
 			ModTranslation name = CreateMapEntryName();
 			name.SetDefault("Torch");
 			AddMapEntry(new Color(77, 165, 0), name);
-			dustType = mod.DustType("Garnet");
-			drop = mod.ItemType("BurgundyTorch");
-			disableSmartCursor = true;
-			adjTiles = new int[]{ TileID.Torches };
-			torch = true;
+			DustType = Mod.Find<ModDust>("Garnet").Type;
+			ItemDrop = Mod.Find<ModItem>("BurgundyTorch").Type;
+			disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
+			AdjTiles = new int[]{ TileID.Torches };
+			torch/* tModPorter Note: Removed. Use TileID.Sets.Torch instead */ = true;
 		}
 
 		public override void NumDust(int i, int j, bool fail, ref int num)
@@ -52,7 +52,7 @@ namespace MythMod.Tiles.Torches
 		public override void ModifyLight(int i, int j, ref float r, ref float g, ref float b)
 		{
 			Tile tile = Main.tile[i, j];
-			if (tile.frameX < 66)
+			if (tile.TileFrameX < 66)
 			{
 				r = 0.98f;
 				g = 0.27f;
@@ -60,7 +60,7 @@ namespace MythMod.Tiles.Torches
 			}
 		}
 
-		public override void SetDrawPositions(int i, int j, ref int width, ref int offsetY, ref int height)
+		public override void SetDrawPositions(int i, int j, ref int width, ref int offsetY, ref int height, ref short tileFrameX, ref short tileFrameY)
 		{
 			offsetY = 0;
 			if (WorldGen.SolidTile(i, j - 1))
@@ -77,8 +77,8 @@ namespace MythMod.Tiles.Torches
 		{
 			ulong randSeed = Main.TileFrameSeed ^ (ulong)((long)j << 32 | (long)((ulong)i));
 			Color color = new Color(211, 14, 68, 0);
-			int frameX = Main.tile[i, j].frameX;
-			int frameY = Main.tile[i, j].frameY;
+			int frameX = Main.tile[i, j].TileFrameX;
+			int frameY = Main.tile[i, j].TileFrameY;
 			int width = 20;
 			int offsetY = 0;
 			int height = 20;
@@ -99,7 +99,7 @@ namespace MythMod.Tiles.Torches
 			{
 				float x = (float)Utils.RandomInt(ref randSeed, -10, 11) * 0.15f;
 				float y = (float)Utils.RandomInt(ref randSeed, -10, 1) * 0.35f;
-				Main.spriteBatch.Draw(mod.GetTexture("Tiles/Torches/BurgundyTorch_Flame"), new Vector2((float)(i * 16 - (int)Main.screenPosition.X) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
+				Main.spriteBatch.Draw(Mod.GetTexture("Tiles/Torches/BurgundyTorch_Flame"), new Vector2((float)(i * 16 - (int)Main.screenPosition.X) - (width - 16f) / 2f + x, (float)(j * 16 - (int)Main.screenPosition.Y + offsetY) + y) + zero, new Rectangle(frameX, frameY, width, height), color, 0f, default(Vector2), 1f, SpriteEffects.None, 0f);
 			}
 		}
 	}

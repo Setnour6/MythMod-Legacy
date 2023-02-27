@@ -16,14 +16,14 @@ namespace MythMod.Projectiles.projectile5
 		}
 		public override void SetDefaults()
 		{
-			projectile.width = 32;
-			projectile.height = 32;
-            projectile.friendly = false;
-            projectile.hostile = false;
-            projectile.aiStyle = -1;
-            projectile.penetrate = -1;
-            projectile.timeLeft = 8000;
-            projectile.tileCollide = false;
+			Projectile.width = 32;
+			Projectile.height = 32;
+            Projectile.friendly = false;
+            Projectile.hostile = false;
+            Projectile.aiStyle = -1;
+            Projectile.penetrate = -1;
+            Projectile.timeLeft = 8000;
+            Projectile.tileCollide = false;
         }
         float r = 0;
         private Vector2 v0;
@@ -31,23 +31,23 @@ namespace MythMod.Projectiles.projectile5
         
         public override void AI()
         {
-            if (projectile.timeLeft == 7999)
+            if (Projectile.timeLeft == 7999)
             {
-                projectile.timeLeft = Main.rand.Next(600, 700);
+                Projectile.timeLeft = Main.rand.Next(600, 700);
                 b = Main.rand.NextFloat(0, 100f);
-                v0 = projectile.Center;
+                v0 = Projectile.Center;
             }
-            if (projectile.timeLeft > 300 && r < 200)
+            if (Projectile.timeLeft > 300 && r < 200)
             {
                 r += 5f;
             }
-            if (projectile.timeLeft > 200 && projectile.timeLeft % 4 == 1)
+            if (Projectile.timeLeft > 200 && Projectile.timeLeft % 4 == 1)
             {
-                int h = Projectile.NewProjectile(projectile.Center.X + Main.rand.NextFloat(-50f,50f), projectile.Center.Y - 1800, 0, Main.rand.NextFloat(7f, 8f), mod.ProjectileType("floatLantern5"), 50, 0f, Main.myPlayer, 0, 0);
+                int h = Projectile.NewProjectile(Projectile.Center.X + Main.rand.NextFloat(-50f,50f), Projectile.Center.Y - 1800, 0, Main.rand.NextFloat(7f, 8f), Mod.Find<ModProjectile>("floatLantern5").Type, 50, 0f, Main.myPlayer, 0, 0);
                 Main.projectile[h].timeLeft = 360;
                 Main.projectile[h].scale = Main.rand.NextFloat(1f, 2.7f);
             }
-            if (projectile.timeLeft < 200 && r > 2.5f)
+            if (Projectile.timeLeft < 200 && r > 2.5f)
             {
                 r -= 2.5f;
             }
@@ -56,11 +56,11 @@ namespace MythMod.Projectiles.projectile5
 
             if(v0 != Vector2.Zero)
             {
-                projectile.position = v0 - new Vector2(Dx, Dy) / 2f;
+                Projectile.position = v0 - new Vector2(Dx, Dy) / 2f;
             }
 
-            projectile.width = Dx;
-            projectile.height = Dy;
+            Projectile.width = Dx;
+            Projectile.height = Dy;
             /* if(projectile.timeLeft >= 200 && projectile.timeLeft <= 1000 && projectile.timeLeft % 100 == 0)
              {
                  double io = Main.rand.NextFloat(0, 10f);
@@ -81,7 +81,7 @@ namespace MythMod.Projectiles.projectile5
         }
         public override bool OnTileCollide(Vector2 oldVelocity)
 		{
-		    projectile.Kill();
+		    Projectile.Kill();
 			return false;
 		}
         /*public override void Kill(int timeLeft)
@@ -105,11 +105,11 @@ namespace MythMod.Projectiles.projectile5
         {
             target.AddBuff(153, 900);
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
         {
             return false;
         }
-        public override void PostDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override void PostDraw(Color lightColor)
         {
             List<CustomVertexInfo> bars = new List<CustomVertexInfo>();
 
@@ -129,8 +129,8 @@ namespace MythMod.Projectiles.projectile5
                 var factor = k / 18f;
                 var color = Color.Lerp(Color.White, Color.Red, 0.2f);
                 var w = MathHelper.Lerp(1f, 0.05f, alpha);
-                bars.Add(new CustomVertexInfo(projectile.Center + new Vector2(r, -1800 + k * 20), color, new Vector3((float)Math.Sqrt(factor), 1, w)));
-                bars.Add(new CustomVertexInfo(projectile.Center + new Vector2(-r, -1800 + k * 20), color, new Vector3((float)Math.Sqrt(factor), 0, w)));
+                bars.Add(new CustomVertexInfo(Projectile.Center + new Vector2(r, -1800 + k * 20), color, new Vector3((float)Math.Sqrt(factor), 1, w)));
+                bars.Add(new CustomVertexInfo(Projectile.Center + new Vector2(-r, -1800 + k * 20), color, new Vector3((float)Math.Sqrt(factor), 0, w)));
             }
 
 
@@ -173,7 +173,7 @@ namespace MythMod.Projectiles.projectile5
                 MythMod.DefaultEffect2.Parameters["uTime"].SetValue(-(float)Main.time * 0.03f + b);
                 Main.graphics.GraphicsDevice.Textures[0] = MythMod.MainColorRed;
                 Main.graphics.GraphicsDevice.Textures[1] = MythMod.MainShape;
-                Main.graphics.GraphicsDevice.Textures[2] = mod.GetTexture("UIImages/FogTraceBeta");
+                Main.graphics.GraphicsDevice.Textures[2] = Mod.GetTexture("UIImages/FogTraceBeta");
                 Main.graphics.GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[1] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[2] = SamplerState.PointWrap;
@@ -189,7 +189,7 @@ namespace MythMod.Projectiles.projectile5
                 Main.graphics.GraphicsDevice.RasterizerState = originalState;
                 spriteBatch.End();
                 spriteBatch.Begin();
-                Main.spriteBatch.Draw(mod.GetTexture("Projectiles/projectile5/Redlight"), base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY) + new Vector2(0, -2560), new Rectangle?(new Rectangle(128 - (int)(r * 0.64), 0, (int)(r * 1.28), 5120)), new Color(r / 10f, 0, 0, 0), 0, new Vector2((int)(r * 0.64), 128), base.projectile.scale, SpriteEffects.None, 1f);
+                Main.spriteBatch.Draw(Mod.GetTexture("Projectiles/projectile5/Redlight"), base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY) + new Vector2(0, -2560), new Rectangle?(new Rectangle(128 - (int)(r * 0.64), 0, (int)(r * 1.28), 5120)), new Color(r / 10f, 0, 0, 0), 0, new Vector2((int)(r * 0.64), 128), base.Projectile.scale, SpriteEffects.None, 1f);
             }
         }
 

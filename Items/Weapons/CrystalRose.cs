@@ -14,27 +14,27 @@ namespace MythMod.Items.Weapons
 		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("璀璨晶莲");
-			Item.staff[base.item.type] = true;
+			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "璀璨晶莲");
         }
         public override void SetDefaults()
         {
-            base.item.damage = 600;
-			base.item.magic = true;
-			base.item.mana = 12;
-			base.item.width = 64;
-			base.item.height = 64;
-			base.item.useTime = 15;
-			base.item.useAnimation = 15;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.knockBack = 0.5f;
-			base.item.value = 120000;
-			base.item.rare = 11;
-			base.item.UseSound = SoundID.Item60;
-			base.item.autoReuse = true;
-            base.item.shoot = base.mod.ProjectileType("CrystalMagic");
-			base.item.shootSpeed = 19f;
+            base.Item.damage = 600;
+			base.Item.DamageType = DamageClass.Magic;
+			base.Item.mana = 12;
+			base.Item.width = 64;
+			base.Item.height = 64;
+			base.Item.useTime = 15;
+			base.Item.useAnimation = 15;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 0.5f;
+			base.Item.value = 120000;
+			base.Item.rare = 11;
+			base.Item.UseSound = SoundID.Item60;
+			base.Item.autoReuse = true;
+            base.Item.shoot = base.Mod.Find<ModProjectile>("CrystalMagic").Type;
+			base.Item.shootSpeed = 19f;
 		}
 	}
 }

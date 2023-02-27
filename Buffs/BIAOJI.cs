@@ -8,14 +8,14 @@ namespace MythMod.Buffs
 {
     public class BIAOJI : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			base.DisplayName.SetDefault("BIAOJI");
 			base.Description.SetDefault("被制成了巫毒娃娃");
 			Main.debuff[base.Type] = false;
 			Main.pvpBuff[base.Type] = true;
 			Main.buffNoSave[base.Type] = true;
-			this.longerExpertDebuff = false;
+			this.longerExpertDebuff/* tModPorter Note: Removed. Use BuffID.Sets.LongerExpertDebuff instead */ = false;
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "标记");
 			base.Description.AddTranslation(GameCulture.Chinese, "被制成了巫毒娃娃");
 		}

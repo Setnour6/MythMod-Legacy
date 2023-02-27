@@ -18,17 +18,17 @@ namespace MythMod.Items.Magicpaper
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            item.width = 26;
-            item.height = 40;
-            item.maxStack = 999;
-            item.value = 9400;
-            item.rare = 2;
-            base.item.useStyle = 1;
-            item.consumable = true;
-            base.item.useAnimation = 17;
-            base.item.useTime = 17;
-            base.item.consumable = true;
+            Item.glowMask = GetGlowMask;
+            Item.width = 26;
+            Item.height = 40;
+            Item.maxStack = 999;
+            Item.value = 9400;
+            Item.rare = 2;
+            base.Item.useStyle = 1;
+            Item.consumable = true;
+            base.Item.useAnimation = 17;
+            base.Item.useTime = 17;
+            base.Item.consumable = true;
         }
         public override bool CanUseItem(Player player)
         {
@@ -37,56 +37,56 @@ namespace MythMod.Items.Magicpaper
             switch (Main.rand.Next(1, 17))
             {
                 case 1:
-                    type = base.mod.ItemType("FlamIII");
+                    type = base.Mod.Find<ModItem>("FlamIII").Type;
                     break;
                 case 2:
-                    type = base.mod.ItemType("PoisII");
+                    type = base.Mod.Find<ModItem>("PoisII").Type;
                     break;
                 case 3:
-                    type = base.mod.ItemType("MeteII");
+                    type = base.Mod.Find<ModItem>("MeteII").Type;
                     break;
                 case 4:
-                    type = base.mod.ItemType("FrozII");
+                    type = base.Mod.Find<ModItem>("FrozII").Type;
                     break;
                 case 5:
-                    type = base.mod.ItemType("ProjIII");
+                    type = base.Mod.Find<ModItem>("ProjIII").Type;
                     break;
                 case 6:
-                    type = base.mod.ItemType("ArrowIII");
+                    type = base.Mod.Find<ModItem>("ArrowIII").Type;
                     break;
                 case 7:
-                    type = base.mod.ItemType("LazaIII");
+                    type = base.Mod.Find<ModItem>("LazaIII").Type;
                     break;
                 case 8:
-                    type = base.mod.ItemType("PoisIII");
+                    type = base.Mod.Find<ModItem>("PoisIII").Type;
                     break;
                 case 9:
-                    type = base.mod.ItemType("LighI");
+                    type = base.Mod.Find<ModItem>("LighI").Type;
                     break;
                 case 10:
-                    type = base.mod.ItemType("ShadI");
+                    type = base.Mod.Find<ModItem>("ShadI").Type;
                     break;
                 case 11:
-                    type = base.mod.ItemType("PoisII");
+                    type = base.Mod.Find<ModItem>("PoisII").Type;
                     break;
                 case 12:
-                    type = base.mod.ItemType("WitcII");
+                    type = base.Mod.Find<ModItem>("WitcII").Type;
                     break;
                 case 13:
-                    type = base.mod.ItemType("FireBoII");
+                    type = base.Mod.Find<ModItem>("FireBoII").Type;
                     break;
                 case 14:
-                    type = base.mod.ItemType("BStarII");
+                    type = base.Mod.Find<ModItem>("BStarII").Type;
                     break;
                 case 15:
-                    type = base.mod.ItemType("FreLoopII");
+                    type = base.Mod.Find<ModItem>("FreLoopII").Type;
                     break;
                 case 16:
-                    type = base.mod.ItemType("FlowerI");
+                    type = base.Mod.Find<ModItem>("FlowerI").Type;
                     break;
             }
             player.QuickSpawnItem(type, 1);
-            item.stack--;
+            Item.stack--;
             return true;
         }
     }

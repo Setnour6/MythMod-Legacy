@@ -13,18 +13,18 @@ namespace MythMod.Items.Seeds
 		}
 		public override void SetDefaults()
 		{
-			base.item.useTurn = true;
-			base.item.autoReuse = true;
-			base.item.useStyle = 1;
-			base.item.useAnimation = 15;
-			base.item.useTime = 10;
-			base.item.maxStack = 99;
-			base.item.consumable = true;
-			base.item.placeStyle = 0;
-			base.item.width = 14;
-			base.item.height = 14;
-			base.item.value = 100;
-            base.item.createTile = base.mod.TileType("芒果树");
+			base.Item.useTurn = true;
+			base.Item.autoReuse = true;
+			base.Item.useStyle = 1;
+			base.Item.useAnimation = 15;
+			base.Item.useTime = 10;
+			base.Item.maxStack = 99;
+			base.Item.consumable = true;
+			base.Item.placeStyle = 0;
+			base.Item.width = 14;
+			base.Item.height = 14;
+			base.Item.value = 100;
+            base.Item.createTile = base.Mod.Find<ModTile>("芒果树").Type;
 		}
 	}
 }

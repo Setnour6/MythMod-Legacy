@@ -27,28 +27,27 @@ namespace MythMod.Items.Ammos
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            base.item.ranged = true;
-			base.item.width = 12;
-            base.item.damage = 38;
-			base.item.height = 12;
-			base.item.maxStack = 999;
-			base.item.consumable = true;
-			base.item.knockBack = 1.5f;
-			base.item.value = 30;
-			base.item.rare = 2;
-            base.item.shoot = mod.ProjectileType("StarPoisonBullet");
-            base.item.shootSpeed = 0;
-            base.item.ammo = AmmoID.Bullet;
+            Item.glowMask = GetGlowMask;
+            base.Item.DamageType = DamageClass.Ranged;
+			base.Item.width = 12;
+            base.Item.damage = 38;
+			base.Item.height = 12;
+			base.Item.maxStack = 999;
+			base.Item.consumable = true;
+			base.Item.knockBack = 1.5f;
+			base.Item.value = 30;
+			base.Item.rare = 2;
+            base.Item.shoot = Mod.Find<ModProjectile>("StarPoisonBullet").Type;
+            base.Item.shootSpeed = 0;
+            base.Item.ammo = AmmoID.Bullet;
 		}
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(20);
             recipe.AddIngredient(40, 20);
             recipe.AddIngredient(null, "StarAbyssCell", 1);
-            recipe.SetResult(this, 20);
             recipe.requiredTile[0] = 134;
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

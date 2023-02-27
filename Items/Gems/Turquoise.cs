@@ -18,11 +18,11 @@ namespace MythMod.Items.Gems
 		// Token: 0x060019E9 RID: 6633 RVA: 0x000A8668 File Offset: 0x000A6868
 		public override void SetDefaults()
 		{
-			base.item.width = 20;
-			base.item.height = 20;
-			base.item.maxStack = 999;
-			base.item.value = Item.sellPrice(0, 0, 30, 0);
-			base.item.rare = 0;
+			base.Item.width = 20;
+			base.Item.height = 20;
+			base.Item.maxStack = 999;
+			base.Item.value = Item.sellPrice(0, 0, 30, 0);
+			base.Item.rare = 0;
 		}
 	}
 }

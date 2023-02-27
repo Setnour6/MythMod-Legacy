@@ -27,12 +27,12 @@ namespace MythMod.Items.TreasureBag
         }
         public override void SetDefaults()
         {
-            base.item.maxStack = 999;
-            base.item.consumable = true;
-            base.item.width = 24;
-            base.item.height = 24;
-            base.item.rare = 9;
-            base.item.expert = true;
+            base.Item.maxStack = 999;
+            base.Item.consumable = true;
+            base.Item.width = 24;
+            base.Item.height = 24;
+            base.Item.rare = 9;
+            base.Item.expert = true;
         }
         public override bool CanRightClick()
         {
@@ -44,25 +44,25 @@ namespace MythMod.Items.TreasureBag
             switch (Main.rand.Next(1, 8))
             {
                 case 1:
-                    type = base.mod.ItemType("CrystalBall");
+                    type = base.Mod.Find<ModItem>("CrystalBall").Type;
                     break;
                 case 2:
-                    type = base.mod.ItemType("CrystalBlade");
+                    type = base.Mod.Find<ModItem>("CrystalBlade").Type;
                     break;
                 case 3:
-                    type = base.mod.ItemType("CrystalBow");
+                    type = base.Mod.Find<ModItem>("CrystalBow").Type;
                     break;
                 case 4:
-                    type = base.mod.ItemType("CrystalEagle");
+                    type = base.Mod.Find<ModItem>("CrystalEagle").Type;
                     break;
                 case 5:
-                    type = base.mod.ItemType("CrystalRose");
+                    type = base.Mod.Find<ModItem>("CrystalRose").Type;
                     break;
                 case 6:
-                    type = base.mod.ItemType("CrystalSwordStaff");
+                    type = base.Mod.Find<ModItem>("CrystalSwordStaff").Type;
                     break;
                 case 7:
-                    type = base.mod.ItemType("CrystalThrownKnife");
+                    type = base.Mod.Find<ModItem>("CrystalThrownKnife").Type;
                     break;
             }
             player.QuickSpawnItem(type, 1);

@@ -16,8 +16,8 @@ using Terraria.ModLoader.IO;
 using MythMod;
 using MythMod.NPCs;
 using System.Linq;
-using Terraria.World.Generation;
 using Terraria.GameContent.Generation;
+using Terraria.WorldBuilding;
 
 namespace MythMod.Tiles
 {
@@ -29,19 +29,19 @@ namespace MythMod.Tiles
 		private int num11 = 0;
 		private int num12 = 0;
 		// Token: 0x060045D6 RID: 17878 RVA: 0x0027A6F0 File Offset: 0x002788F0
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileSolid[(int)base.Type] = true;
 			Main.tileMergeDirt[(int)base.Type] = true;
 			Main.tileBlendAll[(int)base.Type] = true;
 			Main.tileBlockLight[(int)base.Type] = true;
 			Main.tileShine2[(int)base.Type] = true;
-			Main.tileValue[(int)base.Type] = 0;
-			this.minPick = 120;
-			this.drop = base.mod.ItemType("MachineBrick2");
-			this.dustType = 6;
-			this.soundType = 21;
-			this.soundStyle = 2;
+			Main.tileOreFinderPriority[(int)base.Type] = 0;
+			this.MinPick = 120;
+			this.ItemDrop = base.Mod.Find<ModItem>("MachineBrick2").Type;
+			this.DustType = 6;
+			this.HitSound = 21;
+			this.soundStyle/* tModPorter Note: Removed. Integrate into HitSound */ = 2;
 			Main.tileSpelunker[(int)base.Type] = true;
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("机械砖2");
@@ -56,15 +56,15 @@ namespace MythMod.Tiles
 			{
 				return;
 			}
-			int num = (int)Main.tile[i, j].frameX;
-			int num2 = (int)Main.tile[i, j].frameY;
+			int num = (int)Main.tile[i, j].TileFrameX;
+			int num2 = (int)Main.tile[i, j].TileFrameY;
 			int num3 = i % 1;
 			int num4 = j % 1;
 			num3 *= 288;
 			num4 *= 270;
 			num += num3;
 			num2 += num4;
-			Texture2D texture = base.mod.GetTexture("Tiles/机械砖_Glowmask");
+			Texture2D texture = base.Mod.GetTexture("Tiles/机械砖_Glowmask");
 			Vector2 position = new Vector2((float)(i * 16) - Main.screenPosition.X + (float)this.GetDrawOffset(), (float)(j * 16) - Main.screenPosition.Y + (float)this.GetDrawOffset());
 			if (CaptureManager.Instance.IsCapturing)
 			{
@@ -95,7 +95,7 @@ namespace MythMod.Tiles
 			if (closer && !NPC.AnyNPCs(134))
 		    {
 				WorldGen.KillTile(i, j, false, false, false);
-			    if (!Main.tile[i, j].active() && Main.netMode != 0)
+			    if (!Main.tile[i, j].HasTile && Main.netMode != 0)
 			    {
 		    		NetMessage.SendData(17, -1, -1, null, 0, (float)i, (float)j, 0f, 0, 0, 0);
 		    	}

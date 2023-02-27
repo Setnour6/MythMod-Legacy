@@ -14,11 +14,11 @@ using Terraria.ModLoader.IO;
 
 namespace MythMod.Backgrounds
 {
-	public class TownSurfaceFar : ModSurfaceBgStyle
+	public class TownSurfaceFar : ModSurfaceBackgroundStyle
 	{
-		public override bool ChooseBgStyle()
+		public override bool ChooseBgStyle()/* tModPorter Note: Removed. Create a ModBiome (or ModSceneEffect) class and override SurfaceBackgroundStyle property to return this object through Mod/ModContent.Find, then move this code into IsBiomeActive (or IsSceneEffectActive) */
 		{
-            return !Main.gameMenu && ((MythPlayer)Main.player[Main.myPlayer].GetModPlayer(mod, "MythPlayer")).ZoneTown;
+            return !Main.gameMenu && ((MythPlayer)Main.player[Main.myPlayer].GetModPlayer(Mod, "MythPlayer")).ZoneTown;
         }
 
 		// Use this to keep far Backgrounds like the mountains.
@@ -48,7 +48,7 @@ namespace MythMod.Backgrounds
 		public override int ChooseFarTexture()
 		{
             Player player = Main.player[Main.myPlayer];
-            return mod.GetBackgroundSlot("Backgrounds/TownFar");
+            return BackgroundTextureLoader.GetBackgroundSlot(Mod, "Backgrounds/TownFar");
         }
 
 		static int SurfaceFrameCounter = 0;
@@ -56,18 +56,18 @@ namespace MythMod.Backgrounds
 		public override int ChooseMiddleTexture()
 		{
             Player player = Main.player[Main.myPlayer];
-            return mod.GetBackgroundSlot("Backgrounds/TownMiddle");
+            return BackgroundTextureLoader.GetBackgroundSlot(Mod, "Backgrounds/TownMiddle");
         }
         public override bool PreDrawCloseBackground(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(mod.GetTexture("Backgrounds/TownClose"), new Vector2(0, 0), null, Color.White, 0, new Vector2(512, 600), 1f, SpriteEffects.None, 0);
+            spriteBatch.Draw(Mod.GetTexture("Backgrounds/TownClose"), new Vector2(0, 0), null, Color.White, 0, new Vector2(512, 600), 1f, SpriteEffects.None, 0);
             return true;
         }
         public override int ChooseCloseTexture(ref float scale, ref double parallax, ref float a, ref float b)
 		{
             Player player = Main.player[Main.myPlayer];
             b = 900;
-            return mod.GetBackgroundSlot("Backgrounds/TownClose");
+            return BackgroundTextureLoader.GetBackgroundSlot(Mod, "Backgrounds/TownClose");
         }
 	}
 }

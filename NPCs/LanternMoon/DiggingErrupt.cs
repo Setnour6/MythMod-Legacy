@@ -34,26 +34,26 @@ namespace MythMod.NPCs.LanternMoon
 		}
 		public override void SetDefaults()
 		{
-			base.npc.damage = 182;
-			base.npc.width = 34;
-			base.npc.height = 42;
-			base.npc.defense = 90;
-			base.npc.lifeMax = 2600;
-			base.npc.knockBackResist = 0f;
-			base.npc.value = (float)Item.buyPrice(0, 2, 0, 0);
-            base.npc.lavaImmune = false;
-			base.npc.noGravity = false;
-			base.npc.noTileCollide = false;
-			base.npc.HitSound = SoundID.NPCHit1;
-			base.npc.DeathSound = SoundID.NPCDeath1;
-            this.banner = base.npc.type;
-            npc.behindTiles = true;
+			base.NPC.damage = 182;
+			base.NPC.width = 34;
+			base.NPC.height = 42;
+			base.NPC.defense = 90;
+			base.NPC.lifeMax = 2600;
+			base.NPC.knockBackResist = 0f;
+			base.NPC.value = (float)Item.buyPrice(0, 2, 0, 0);
+            base.NPC.lavaImmune = false;
+			base.NPC.noGravity = false;
+			base.NPC.noTileCollide = false;
+			base.NPC.HitSound = SoundID.NPCHit1;
+			base.NPC.DeathSound = SoundID.NPCDeath1;
+            this.Banner = base.NPC.type;
+            NPC.behindTiles = true;
             //this.bannerItem = base.mod.ItemType("青苹果糖史莱姆Banner");
         }
 		public override void HitEffect(int hitDirection, double damage)
 		{
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
-            if (base.npc.life <= 0)
+            if (base.NPC.life <= 0)
             {
                 if (mplayer.LanternMoonWave != 25)
                 {
@@ -71,62 +71,62 @@ namespace MythMod.NPCs.LanternMoon
                     }
                 }
             }
-            if (Main.netMode != 1 && base.npc.life <= 0)
+            if (Main.netMode != 1 && base.NPC.life <= 0)
             {
                 float scaleFactor = (float)(Main.rand.Next(-200, 200) / 100f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/钻地喷花碎块1"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/钻地喷花碎块2"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/钻地喷花碎块1"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/钻地喷花碎块2"), 1f);
             }
         }
         public override void AI()
         {
-            npc.localAI[0] += 1;
-            int pl = Player.FindClosest(npc.Center, 1, 1);
-            if(npc.localAI[0] < 300 && npc.localAI[0] % 3 == 0 && npc.collideY)
+            NPC.localAI[0] += 1;
+            int pl = Player.FindClosest(NPC.Center, 1, 1);
+            if(NPC.localAI[0] < 300 && NPC.localAI[0] % 3 == 0 && NPC.collideY)
             {
                 float vX = Main.rand.NextFloat(-1.5f, 1.5f);
-                Projectile.NewProjectile(npc.Center.X, npc.Top.Y, vX, -Main.rand.NextFloat(3f, 8f) + Math.Abs(vX * 2), mod.ProjectileType("EruptWork"), 75, 0);
+                Projectile.NewProjectile(NPC.Center.X, NPC.Top.Y, vX, -Main.rand.NextFloat(3f, 8f) + Math.Abs(vX * 2), Mod.Find<ModProjectile>("EruptWork").Type, 75, 0);
             }
-            if(npc.localAI[0] >= 300 && npc.localAI[0] < 326)
+            if(NPC.localAI[0] >= 300 && NPC.localAI[0] < 326)
             {
-                npc.noTileCollide = true;
-                if (npc.velocity.Y < 255)
+                NPC.noTileCollide = true;
+                if (NPC.velocity.Y < 255)
                 {
-                    npc.alpha += 10;
+                    NPC.alpha += 10;
                 }
                 else
                 {
-                    npc.alpha = 255;
+                    NPC.alpha = 255;
                 }
             }
-            if(npc.localAI[0] == 326)
+            if(NPC.localAI[0] == 326)
             {
-                npc.position.X = Main.player[pl].position.X + Main.rand.Next(-150, 150);
+                NPC.position.X = Main.player[pl].position.X + Main.rand.Next(-150, 150);
             }
-            if(npc.localAI[0] >= 326)
+            if(NPC.localAI[0] >= 326)
             {
-                npc.velocity.Y -= 0.3f;
-                npc.noGravity = true;
-                if (npc.alpha >= 10)
+                NPC.velocity.Y -= 0.3f;
+                NPC.noGravity = true;
+                if (NPC.alpha >= 10)
                 {
-                    npc.alpha -= 10;
+                    NPC.alpha -= 10;
                 }
                 else
                 {
-                    npc.alpha = 0;
+                    NPC.alpha = 0;
                 }
-                if (npc.position.Y < Main.player[pl].position.Y + 150)
+                if (NPC.position.Y < Main.player[pl].position.Y + 150)
                 {
-                    npc.noGravity = false;
-                    npc.noTileCollide = false;
+                    NPC.noGravity = false;
+                    NPC.noTileCollide = false;
                 }
-                if(npc.collideY && !npc.noTileCollide)
+                if(NPC.collideY && !NPC.noTileCollide)
                 {
-                    npc.localAI[0] = 0;
+                    NPC.localAI[0] = 0;
                 }
             }
         }
-        public override void NPCLoot()
+        public override void OnKill()
 		{
 		}
     }

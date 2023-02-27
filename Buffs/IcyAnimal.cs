@@ -7,7 +7,7 @@ namespace MythMod.Buffs
 {
     public class IcyAnimal : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("冰晶雪兽");
             base.Description.SetDefault("冰晶雪兽为你而战");
@@ -18,7 +18,7 @@ namespace MythMod.Buffs
 		public override void Update(Player player, ref int buffIndex)
 		{
 			MythPlayer modPlayer = player.GetModPlayer<MythPlayer>();
-            if (player.ownedProjectileCounts[base.mod.ProjectileType("IcyAnimal")] > 0)
+            if (player.ownedProjectileCounts[base.Mod.Find<ModProjectile>("IcyAnimal").Type] > 0)
 			{
 				modPlayer.GXJL = true;
 			}

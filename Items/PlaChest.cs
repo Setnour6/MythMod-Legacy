@@ -16,12 +16,12 @@ namespace MythMod.Items
 		}
 		public override void SetDefaults()
 		{
-            base.item.maxStack = 1;
-            base.item.consumable = false;
-            base.item.width = 24;
-            base.item.height = 24;
-            base.item.rare = 9;
-            base.item.expert = true;
+            base.Item.maxStack = 1;
+            base.Item.consumable = false;
+            base.Item.width = 24;
+            base.Item.height = 24;
+            base.Item.rare = 9;
+            base.Item.expert = true;
             //this.bossBagNPC = 50;
 		}
 		public override bool CanRightClick()
@@ -30,7 +30,7 @@ namespace MythMod.Items
 		}
         public override void RightClick(Player player)
         {
-            player.QuickSpawnItem(base.mod.ItemType("PlaChest2"), 1);
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("PlaChest2").Type, 1);
 			//player.QuickSpawnItem(1121, 1);
 			//player.QuickSpawnItem(1123, 1);
 			//player.QuickSpawnItem(2888, 1);
@@ -49,14 +49,14 @@ namespace MythMod.Items
 			//player.QuickSpawnItem(3333, 1);
             if(Main.rand.Next(100) >= 50)
             {
-                player.QuickSpawnItem(base.mod.ItemType("SwordPla"), 1);
+                player.QuickSpawnItem(base.Mod.Find<ModItem>("SwordPla").Type, 1);
             }
-            player.QuickSpawnItem(base.mod.ItemType("ThornBomb"), 1);
-            item.stack--;
+            player.QuickSpawnItem(base.Mod.Find<ModItem>("ThornBomb").Type, 1);
+            Item.stack--;
         }
         public override void PostUpdate()
         {
-            Lighting.AddLight((int)((base.item.position.X + (float)(base.item.width / 2)) / 16f), (int)((base.item.position.Y + (float)(base.item.height / 2f)) / 16f), 0.7f, 0.0f, 0.3f);
+            Lighting.AddLight((int)((base.Item.position.X + (float)(base.Item.width / 2)) / 16f), (int)((base.Item.position.Y + (float)(base.Item.height / 2f)) / 16f), 0.7f, 0.0f, 0.3f);
         }
     }
 }

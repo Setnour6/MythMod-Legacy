@@ -7,7 +7,7 @@ namespace MythMod.Buffs.Drinks
 {
     public class Boluolita : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("菠萝丽塔");
             base.Description.SetDefault("生命回复增加3,魔法回复增加4");

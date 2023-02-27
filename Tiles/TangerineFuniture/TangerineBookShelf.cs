@@ -10,7 +10,7 @@ namespace MythMod.Tiles.TangerineFuniture
 {
 	public class TangerineBookShelf : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileSolidTop[(int)base.Type] = true;
 			Main.tileLighted[(int)base.Type] = true;
@@ -24,8 +24,8 @@ namespace MythMod.Tiles.TangerineFuniture
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
 			modTranslation.SetDefault("年桔木书架");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
-			this.animationFrameHeight = 54;
-			this.adjTiles = new int[]
+			this.AnimationFrameHeight = 54;
+			this.AdjTiles = new int[]
 			{
 				101
 			};
@@ -42,7 +42,7 @@ namespace MythMod.Tiles.TangerineFuniture
 		}
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("TangerineBookShelf"), 1, false, 0, false, false);
+			Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("TangerineBookShelf").Type, 1, false, 0, false, false);
 		}
 	}
 }

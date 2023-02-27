@@ -1,4 +1,5 @@
 ﻿using System;
+using Terraria.Audio;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria;
@@ -27,13 +28,13 @@ namespace MythMod.Items
         private float X;
         public override void SetDefaults()
         {
-            base.item.width = 58;
-            base.item.height = 26;
-            base.item.useAnimation = 45;
-            base.item.useTime = 60;
-            base.item.useStyle = 4;
-            base.item.maxStack = 999;
-            base.item.consumable = true;
+            base.Item.width = 58;
+            base.Item.height = 26;
+            base.Item.useAnimation = 45;
+            base.Item.useTime = 60;
+            base.Item.useStyle = 4;
+            base.Item.maxStack = 999;
+            base.Item.consumable = true;
         }
 		public override void ModifyTooltips(List<TooltipLine> list)
 		{
@@ -41,12 +42,12 @@ namespace MythMod.Items
 		public override void Update(ref float gravity, ref float maxFallSpeed)
         {
         }
-		public override bool UseItem(Player player)
+		public override bool? UseItem(Player player)/* tModPorter Suggestion: Return null instead of false */
 		{
-			if(NPC.CountNPCS(mod.NPCType("BloodTusk")) < 1 && player.ZoneCrimson)
+			if(NPC.CountNPCS(Mod.Find<ModNPC>("BloodTusk").Type) < 1 && player.ZoneCrimson)
 			{
-		    	NPC.NewNPC((int)player.position.X, (int)player.position.Y - 50, mod.NPCType("BloodTusk"), 0, 0f, 0f, 0f, 0f, 255);
-	    	    Main.PlaySound(15, player.position, 0);
+		    	NPC.NewNPC((int)player.position.X, (int)player.position.Y - 50, Mod.Find<ModNPC>("BloodTusk").Type, 0, 0f, 0f, 0f, 0f, 255);
+	    	    SoundEngine.PlaySound(SoundID.Roar, player.position);
 				return true;
 			}
 			return false;
@@ -54,12 +55,11 @@ namespace MythMod.Items
 		public override void AddRecipes()
         {
             {
-                ModRecipe recipe = new ModRecipe(mod);
+                Recipe recipe = CreateRecipe(1);
                 recipe.AddIngredient(ItemID.TissueSample, 40);
 				recipe.AddIngredient(ItemID.Vertebrae, 12);
-                recipe.SetResult(this, 1);
                 recipe.requiredTile[0] = 26;
-                recipe.AddRecipe();
+                recipe.Register();
             }
         }
 	}

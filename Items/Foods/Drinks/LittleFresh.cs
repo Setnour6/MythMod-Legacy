@@ -17,18 +17,18 @@ namespace MythMod.Items.Foods.Drinks
         }
 		public override void SetDefaults()
 		{
-			item.width = 18;
-            item.height = 44;
-            item.rare = 5;
-            item.useAnimation = 15;
-            item.value = 50000;
-            item.useTurn = true;
-            item.consumable = true;
-            item.maxStack = 30;
-            base.item.useAnimation = 17;
-            base.item.useTime = 17;
-            base.item.useStyle = 2;
-            base.item.UseSound = SoundID.Item3;
+			Item.width = 18;
+            Item.height = 44;
+            Item.rare = 5;
+            Item.useAnimation = 15;
+            Item.value = 50000;
+            Item.useTurn = true;
+            Item.consumable = true;
+            Item.maxStack = 30;
+            base.Item.useAnimation = 17;
+            base.Item.useTime = 17;
+            base.Item.useStyle = 2;
+            base.Item.UseSound = SoundID.Item3;
             /*item.buffType = mod.BuffType("LonelyJelly");
             item.buffTime = 14400;*/
         }

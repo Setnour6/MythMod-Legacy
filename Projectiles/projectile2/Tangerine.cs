@@ -15,20 +15,20 @@ namespace MythMod.Projectiles.projectile2
 		}
 		public override void SetDefaults()
 		{
-			base.projectile.width = 12;
-            base.projectile.tileCollide = true;
-            base.projectile.height = 12;
-			base.projectile.friendly = false;
-            base.projectile.hostile = true;
-            base.projectile.penetrate = 1;
-			base.projectile.timeLeft = 600;
-			base.projectile.melee = true;
-            base.projectile.aiStyle = -1;
-			base.projectile.scale = 1f;
+			base.Projectile.width = 12;
+            base.Projectile.tileCollide = true;
+            base.Projectile.height = 12;
+			base.Projectile.friendly = false;
+            base.Projectile.hostile = true;
+            base.Projectile.penetrate = 1;
+			base.Projectile.timeLeft = 600;
+			base.Projectile.DamageType = DamageClass.Melee;
+            base.Projectile.aiStyle = -1;
+			base.Projectile.scale = 1f;
 		}
 		public override void AI()
 		{
-            projectile.velocity.Y += 0.15f;
+            Projectile.velocity.Y += 0.15f;
         }
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
 		{
@@ -37,7 +37,7 @@ namespace MythMod.Projectiles.projectile2
         {
             for(int i = 0; i < 25; i++)
             {
-                int num3 = Dust.NewDust(base.projectile.Center - new Vector2(4, 4), 0, 0, 174, 0, 0, 0, default(Color), 2f);
+                int num3 = Dust.NewDust(base.Projectile.Center - new Vector2(4, 4), 0, 0, 174, 0, 0, 0, default(Color), 2f);
             }
         }
 	}

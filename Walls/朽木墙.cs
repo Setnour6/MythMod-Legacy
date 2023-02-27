@@ -14,10 +14,10 @@ namespace MythMod.Walls
 {
     public class 朽木墙 : ModWall
     {
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.wallHouse[(int)base.Type] = true;
-			this.dustType = 240;
+			this.DustType = 240;
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
 			base.AddMapEntry(new Color(37, 25, 16), modTranslation);

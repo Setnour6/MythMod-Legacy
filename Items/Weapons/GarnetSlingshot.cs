@@ -20,22 +20,22 @@ namespace MythMod.Items.Weapons
 		// Token: 0x06001751 RID: 5969 RVA: 0x0009AFD0 File Offset: 0x000991D0
 		public override void SetDefaults()
 		{
-			base.item.damage = 16;
-			base.item.crit = 6;
-			base.item.ranged = true;
-			base.item.width = 38;
-			base.item.height = 36;
-			base.item.useTime = 22;
-			base.item.useAnimation = 14;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.knockBack = 2f;
-			base.item.autoReuse = false;
-			base.item.value = Item.sellPrice(0, 0, 10, 0);
-			base.item.rare = 3;
-			base.item.UseSound = SoundID.Item5;
-                 item.shoot = base.mod.ProjectileType("HotPinkGemBead");
-			base.item.shootSpeed = 11.5f;
+			base.Item.damage = 16;
+			base.Item.crit = 6;
+			base.Item.DamageType = DamageClass.Ranged;
+			base.Item.width = 38;
+			base.Item.height = 36;
+			base.Item.useTime = 22;
+			base.Item.useAnimation = 14;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.knockBack = 2f;
+			base.Item.autoReuse = false;
+			base.Item.value = Item.sellPrice(0, 0, 10, 0);
+			base.Item.rare = 3;
+			base.Item.UseSound = SoundID.Item5;
+                 Item.shoot = base.Mod.Find<ModProjectile>("HotPinkGemBead").Type;
+			base.Item.shootSpeed = 11.5f;
 		}
 
 		public override Vector2? HoldoutOffset()
@@ -45,12 +45,11 @@ namespace MythMod.Items.Weapons
 
 		public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(mod.ItemType("Garnet"), 8);
+            Recipe recipe = CreateRecipe(1);
+            recipe.AddIngredient(Mod.Find<ModItem>("Garnet").Type, 8);
             recipe.AddIngredient(57, 6);
-            recipe.SetResult(this, 1);
             recipe.requiredTile[0] = 16;
-            recipe.AddRecipe();
+            recipe.Register();
         }
 	}
 }

@@ -13,13 +13,13 @@ namespace MythMod.Items.Festival
         }
         public override void SetDefaults()
         {
-            item.width = 40;
-            item.height = 40;
-            item.rare = 24;
-            item.scale = 1f;
-            item.value = 2000;
-            item.maxStack = 999;
-            item.useTime = 14;
+            Item.width = 40;
+            Item.height = 40;
+            Item.rare = 24;
+            Item.scale = 1f;
+            Item.value = 2000;
+            Item.maxStack = 999;
+            Item.useTime = 14;
         }
     }
 }

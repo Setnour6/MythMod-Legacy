@@ -17,26 +17,26 @@ namespace MythMod.Projectiles
 		// Token: 0x06002460 RID: 9312 RVA: 0x001D6574 File Offset: 0x001D4774
 		public override void SetDefaults()
 		{
-			base.projectile.width = 20;
-			base.projectile.height = 20;
-			base.projectile.friendly = false;
-			base.projectile.melee = true;
-			base.projectile.penetrate = 3;
-			base.projectile.aiStyle = 14;
-			base.projectile.timeLeft = 600;
-            base.projectile.hostile = true;
+			base.Projectile.width = 20;
+			base.Projectile.height = 20;
+			base.Projectile.friendly = false;
+			base.Projectile.DamageType = DamageClass.Melee;
+			base.Projectile.penetrate = 3;
+			base.Projectile.aiStyle = 14;
+			base.Projectile.timeLeft = 600;
+            base.Projectile.hostile = true;
 		}
 
 		// Token: 0x06002461 RID: 9313 RVA: 0x001D65DC File Offset: 0x001D47DC
 		public override void AI()
 		{
-			Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 0.9f / 255f, (float)(255 - base.projectile.alpha) * 0f / 255f, (float)(255 - base.projectile.alpha) * 0f / 255f);
-			base.projectile.localAI[0] += 1f;
-			if (base.projectile.localAI[0] > 4f)
+			Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 0.9f / 255f, (float)(255 - base.Projectile.alpha) * 0f / 255f, (float)(255 - base.Projectile.alpha) * 0f / 255f);
+			base.Projectile.localAI[0] += 1f;
+			if (base.Projectile.localAI[0] > 4f)
 			{
 				for (int i = 0; i < 10; i++)
 				{
-					int num = Dust.NewDust(new Vector2(base.projectile.position.X, base.projectile.position.Y), base.projectile.width, base.projectile.height, 104, 0f, 0f, 100, Color.Red, 1.5f);
+					int num = Dust.NewDust(new Vector2(base.Projectile.position.X, base.Projectile.position.Y), base.Projectile.width, base.Projectile.height, 104, 0f, 0f, 100, Color.Red, 1.5f);
 					Main.dust[num].noGravity = true;
 					Main.dust[num].velocity *= 0f;
 				}
@@ -51,23 +51,23 @@ namespace MythMod.Projectiles
 		// Token: 0x06002462 RID: 9314 RVA: 0x0018A49C File Offset: 0x0018869C
 		public override bool OnTileCollide(Vector2 oldVelocity)
 		{
-			base.projectile.penetrate--;
-			if (base.projectile.penetrate <= 0)
+			base.Projectile.penetrate--;
+			if (base.Projectile.penetrate <= 0)
 			{
-				base.projectile.Kill();
+				base.Projectile.Kill();
 			}
 			else
 			{
-				base.projectile.ai[0] += 0.1f;
-				if (base.projectile.velocity.X != oldVelocity.X)
+				base.Projectile.ai[0] += 0.1f;
+				if (base.Projectile.velocity.X != oldVelocity.X)
 				{
-					base.projectile.velocity.X = -oldVelocity.X;
+					base.Projectile.velocity.X = -oldVelocity.X;
 				}
-				if (base.projectile.velocity.Y != oldVelocity.Y)
+				if (base.Projectile.velocity.Y != oldVelocity.Y)
 				{
-					base.projectile.velocity.Y = -oldVelocity.Y;
+					base.Projectile.velocity.Y = -oldVelocity.Y;
 				}
-				base.projectile.velocity *= 0.98f;
+				base.Projectile.velocity *= 0.98f;
 			}
 			return false;
 		}
@@ -77,7 +77,7 @@ namespace MythMod.Projectiles
 		{
 			for (int i = 0; i < 10; i++)
 			{
-				Dust.NewDust(base.projectile.position + base.projectile.velocity, base.projectile.width, base.projectile.height, 104, base.projectile.oldVelocity.X * 0.5f, base.projectile.oldVelocity.Y * 0.5f, 0, Color.Red, 1f);
+				Dust.NewDust(base.Projectile.position + base.Projectile.velocity, base.Projectile.width, base.Projectile.height, 104, base.Projectile.oldVelocity.X * 0.5f, base.Projectile.oldVelocity.Y * 0.5f, 0, Color.Red, 1f);
 			}
 		}
 		public int projTime = 15;

@@ -10,19 +10,19 @@ namespace MythMod.Tiles.Volcano
     public class 硫磺矿 : ModTile
 	{
 		// Token: 0x060045D6 RID: 17878 RVA: 0x0027A6F0 File Offset: 0x002788F0
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
 			Main.tileSolid[(int)base.Type] = true;
 			Main.tileMergeDirt[(int)base.Type] = true;
 			Main.tileBlendAll[(int)base.Type] = true;
 			Main.tileBlockLight[(int)base.Type] = true;
 			Main.tileShine2[(int)base.Type] = true;
-			Main.tileValue[(int)base.Type] = 415;
-			this.minPick = 264;
-			this.dustType = 113;
-			this.soundType = 21;
-			this.soundStyle = 2;
-            this.drop = base.mod.ItemType("Sulfur");
+			Main.tileOreFinderPriority[(int)base.Type] = 415;
+			this.MinPick = 264;
+			this.DustType = 113;
+			this.HitSound = 21;
+			this.soundStyle/* tModPorter Note: Removed. Integrate into HitSound */ = 2;
+            this.ItemDrop = base.Mod.Find<ModItem>("Sulfur").Type;
 			Main.tileSpelunker[(int)base.Type] = true;
 			ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("硫磺矿");

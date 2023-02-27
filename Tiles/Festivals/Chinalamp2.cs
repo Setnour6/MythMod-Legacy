@@ -10,7 +10,7 @@ namespace MythMod.Tiles.Festivals
 {
 	public class Chinalamp2 : ModTile
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             Main.tileFrameImportant[(int)base.Type] = true;
 			Main.tileNoAttach[(int)base.Type] = true;
@@ -26,29 +26,29 @@ namespace MythMod.Tiles.Festivals
             };
             TileObjectData.newTile.CoordinateWidth = 48;
             TileObjectData.addTile((int)base.Type);
-			this.dustType = 22;
+			this.DustType = 22;
             ModTranslation modTranslation = base.CreateMapEntryName(null);
             modTranslation.SetDefault("");
             base.AddMapEntry(new Color(122, 87, 73), modTranslation);
-			this.mineResist = 3f;
-			base.SetDefaults();
+			this.MineResist = 3f;
+			base.SetStaticDefaults();
 			modTranslation.AddTranslation(GameCulture.Chinese, "中国灯");
 		}
         public override void NearbyEffects(int i, int j, bool closer)
         {
-            if (Main.tile[i, j].frameX < 40 && Main.tile[i, j].frameY < 40)
+            if (Main.tile[i, j].TileFrameX < 40 && Main.tile[i, j].TileFrameY < 40)
             {
                 Lighting.AddLight(new Vector2(i * 16, j * 16), new Vector3(1f, 0.8f, 0.5f));
             }
         }
         public override void KillMultiTile(int i, int j, int frameX, int frameY)
         {
-            Item.NewItem(i * 16, j * 16, 16, 32, base.mod.ItemType("Chinalamp2"));
+            Item.NewItem(i * 16, j * 16, 16, 32, base.Mod.Find<ModItem>("Chinalamp2").Type);
         }
         public override void HitWire(int i, int j)
         {
-            int num = i - (int)(Main.tile[i, j].frameX / 18 % 3);
-            int num2 = j - (int)(Main.tile[i, j].frameY / 18 % 3);
+            int num = i - (int)(Main.tile[i, j].TileFrameX / 18 % 3);
+            int num2 = j - (int)(Main.tile[i, j].TileFrameY / 18 % 3);
             for (int k = num; k < num + 3; k++)
             {
                 for (int l = num2; l < num2 + 3; l++)
@@ -57,17 +57,17 @@ namespace MythMod.Tiles.Festivals
                     {
                         Main.tile[k, l] = new Tile();
                     }
-                    if (Main.tile[k, l].active() && Main.tile[k, l].type == base.Type)
+                    if (Main.tile[k, l].HasTile && Main.tile[k, l].TileType == base.Type)
                     {
-                        if (Main.tile[k, l].frameX < 48)
+                        if (Main.tile[k, l].TileFrameX < 48)
                         {
                             Tile tile = Main.tile[k, l];
-                            tile.frameX += 48;
+                            tile.TileFrameX += 48;
                         }
                         else
                         {
                             Tile tile2 = Main.tile[k, l];
-                            tile2.frameX -= 48;
+                            tile2.TileFrameX -= 48;
                         }
                     }
                 }

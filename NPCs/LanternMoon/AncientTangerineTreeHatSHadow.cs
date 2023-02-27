@@ -33,7 +33,7 @@ namespace MythMod.NPCs.LanternMoon
         public override void SetStaticDefaults()
 		{
 			base.DisplayName.SetDefault("Thousand years orange monster");
-			Main.npcFrameCount[base.npc.type] = 1;
+			Main.npcFrameCount[base.NPC.type] = 1;
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "千年桔树妖");
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -44,41 +44,41 @@ namespace MythMod.NPCs.LanternMoon
 		// Token: 0x06001809 RID: 6153 RVA: 0x0010AD00 File Offset: 0x00108F00
 		public override void SetDefaults()
 		{
-			base.npc.aiStyle = -1;
-			base.npc.damage = 0;
-			base.npc.width = 720;
-			base.npc.height = 1008;
-			base.npc.defense = 90;
+			base.NPC.aiStyle = -1;
+			base.NPC.damage = 0;
+			base.NPC.width = 720;
+			base.NPC.height = 1008;
+			base.NPC.defense = 90;
             if (Main.expertMode)
             {
-                base.npc.lifeMax = 450000;
+                base.NPC.lifeMax = 450000;
                 if (MythWorld.Myth)
                 {
-                    base.npc.lifeMax = 300000;
+                    base.NPC.lifeMax = 300000;
                 }
             }
             else
             {
-                base.npc.lifeMax = 600000;
+                base.NPC.lifeMax = 600000;
             }
-            npc.behindTiles = true;
-            base.npc.dontTakeDamage = true;
-            base.npc.knockBackResist = 0f;
-			base.npc.value = (float)Item.buyPrice(0, 50, 0, 0);
-			base.npc.alpha = 160;
-            base.npc.scale = 1;
-            base.npc.lavaImmune = true;
-			base.npc.noGravity = true;
-			base.npc.noTileCollide = true;
-			base.npc.HitSound = SoundID.NPCHit1;
-			base.npc.DeathSound = SoundID.NPCDeath1;
+            NPC.behindTiles = true;
+            base.NPC.dontTakeDamage = true;
+            base.NPC.knockBackResist = 0f;
+			base.NPC.value = (float)Item.buyPrice(0, 50, 0, 0);
+			base.NPC.alpha = 160;
+            base.NPC.scale = 1;
+            base.NPC.lavaImmune = true;
+			base.NPC.noGravity = true;
+			base.NPC.noTileCollide = true;
+			base.NPC.HitSound = SoundID.NPCHit1;
+			base.NPC.DeathSound = SoundID.NPCDeath1;
 		}
 
 		// Token: 0x0600180B RID: 6155 RVA: 0x0010AE44 File Offset: 0x00109044
 		public override void HitEffect(int hitDirection, double damage)
 		{
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
-            if (base.npc.life <= 0)
+            if (base.NPC.life <= 0)
             {
                 if (mplayer.LanternMoonWave != 25)
                 {
@@ -103,21 +103,21 @@ namespace MythMod.NPCs.LanternMoon
             Player player = Main.player[Main.myPlayer];
             if (!Main.dayTime)
             {
-                npc.velocity += ((player.Center - new Vector2(0, 495)) - npc.Center) / ((player.Center - new Vector2(0, 495)) - npc.Center).Length() * 0.29f;
-                npc.velocity *= 0.95f;
+                NPC.velocity += ((player.Center - new Vector2(0, 495)) - NPC.Center) / ((player.Center - new Vector2(0, 495)) - NPC.Center).Length() * 0.29f;
+                NPC.velocity *= 0.95f;
             }
             if (Main.dayTime)
             {
-                npc.velocity.Y += 1;
+                NPC.velocity.Y += 1;
             }
             o += 1;
-            if(NPC.CountNPCS(mod.NPCType("AncientTangerineTreeEye")) < 1 && o >= 10)
+            if(NPC.CountNPCS(Mod.Find<ModNPC>("AncientTangerineTreeEye").Type) < 1 && o >= 10)
             {
-                npc.active = false;
+                NPC.active = false;
             }
         }
         // Token: 0x0600180C RID: 6156 RVA: 0x0010AEF8 File Offset: 0x001090F8
-        public override void NPCLoot()
+        public override void OnKill()
 		{
 		}
     }

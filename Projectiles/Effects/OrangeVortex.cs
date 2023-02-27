@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.GameContent;
 using Terraria.GameInput;
 using Terraria.Graphics.Effects;
 using Terraria.Graphics.Shaders;
@@ -20,21 +21,21 @@ namespace MythMod.Projectiles.Effects
         public override void SetStaticDefaults()
         {
             base.DisplayName.SetDefault("OrangeVortex");
-            Main.projFrames[projectile.type] = 1;
+            Main.projFrames[Projectile.type] = 1;
         }
 
         public override void SetDefaults()
         {
-            base.projectile.width = 50;
-            base.projectile.height = 50;
-            base.projectile.friendly = false;
-            base.projectile.hostile = false;
-            base.projectile.ignoreWater = true;
-            base.projectile.penetrate = -1;
-            base.projectile.timeLeft = 60;
-            base.projectile.usesLocalNPCImmunity = true;
-            base.projectile.localNPCHitCooldown = 1;
-            base.projectile.tileCollide = false;
+            base.Projectile.width = 50;
+            base.Projectile.height = 50;
+            base.Projectile.friendly = false;
+            base.Projectile.hostile = false;
+            base.Projectile.ignoreWater = true;
+            base.Projectile.penetrate = -1;
+            base.Projectile.timeLeft = 60;
+            base.Projectile.usesLocalNPCImmunity = true;
+            base.Projectile.localNPCHitCooldown = 1;
+            base.Projectile.tileCollide = false;
         }
         private float num4;
         private int ML = 0;
@@ -51,62 +52,62 @@ namespace MythMod.Projectiles.Effects
             if(Main.mouseLeft && E < 60 && p.statMana > 13)
             {
                 E += 1;
-                projectile.timeLeft = E;
+                Projectile.timeLeft = E;
             }
             else
             {
                 if(E > 2)
                 {
                     E -= 1;
-                    projectile.timeLeft = E;
+                    Projectile.timeLeft = E;
                 }
                 else
                 {
                     mplayer.Ost = true;
-                    projectile.Kill();
+                    Projectile.Kill();
                 }
             }
             Vector2 v = Main.screenPosition + new Vector2(Main.mouseX, Main.mouseY) - p.Center;
             v = v / v.Length();
-            projectile.velocity = v * 15f;
-            projectile.position = p.Center + v;
-            projectile.spriteDirection = p.direction;
-            base.projectile.rotation = (float)Math.Atan2((double)base.projectile.velocity.Y * p.direction, (double)base.projectile.velocity.X * p.direction) + (float)Math.PI / 4f * projectile.spriteDirection;
+            Projectile.velocity = v * 15f;
+            Projectile.position = p.Center + v;
+            Projectile.spriteDirection = p.direction;
+            base.Projectile.rotation = (float)Math.Atan2((double)base.Projectile.velocity.Y * p.direction, (double)base.Projectile.velocity.X * p.direction) + (float)Math.PI / 4f * Projectile.spriteDirection;
             if (mplayer.SD2 > 0 && mplayer.SD == 5)
             {
-                base.projectile.timeLeft = 2;
+                base.Projectile.timeLeft = 2;
             }
-            p.ChangeDir(base.projectile.direction);
-            p.heldProj = base.projectile.whoAmI;
+            p.ChangeDir(base.Projectile.direction);
+            p.heldProj = base.Projectile.whoAmI;
             float Lig = 1;
             for (int step = 1; step < 40; step++)
             {
-                Lighting.AddLight(base.projectile.Center + step * projectile.velocity, (float)(255 - base.projectile.alpha) * 1.2f / 255f * (40 - (float)step) / 40f * Lig, (float)(255 - base.projectile.alpha) * 0.8f / 255f * (40 - (float)step) / 40f * Lig, (float)(255 - base.projectile.alpha) * 0f / 255f * (40 - (float)step) / 40f * Lig);
+                Lighting.AddLight(base.Projectile.Center + step * Projectile.velocity, (float)(255 - base.Projectile.alpha) * 1.2f / 255f * (40 - (float)step) / 40f * Lig, (float)(255 - base.Projectile.alpha) * 0.8f / 255f * (40 - (float)step) / 40f * Lig, (float)(255 - base.Projectile.alpha) * 0f / 255f * (40 - (float)step) / 40f * Lig);
             }
-            p.direction = projectile.spriteDirection;
+            p.direction = Projectile.spriteDirection;
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
         {
-            Texture2D texture2D = Main.projectileTexture[base.projectile.type];
-            int num = Main.projectileTexture[base.projectile.type].Height / Main.projFrames[base.projectile.type];
-            int y = num * base.projectile.frame;
+            Texture2D texture2D = TextureAssets.Projectile[base.Projectile.type].Value;
+            int num = TextureAssets.Projectile[base.Projectile.type].Value.Height / Main.projFrames[base.Projectile.type];
+            int y = num * base.Projectile.frame;
             float nu = (float)Math.Sin(D / 20f) * 0.15f + 1;
             float nv = (float)Math.Sin(D / 40f) * 0.06f;
-            Vector2 v = projectile.velocity * 5;
+            Vector2 v = Projectile.velocity * 5;
             for(int i = 0;i < 5;i++)
             {
                 Vector2 v1 = new Vector2(v.RotatedBy((D / 4f + Math.PI * 2 / 5f * i)).X, v.RotatedBy((D / 4f + Math.PI * 2 / 5f * i)).Y / 3f);
-                Vector2 v2 = v1.RotatedBy(Math.Atan2((double)base.projectile.velocity.Y, (double)base.projectile.velocity.X) + Math.PI * 0.5f + nv) * nu;
-                Main.spriteBatch.Draw(texture2D, base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY) + v + v2 - new Vector2(25,25), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), new Color(0.95f, 0.45f, 0,0), base.projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), 0.5f / 60f * (float)E, SpriteEffects.None, 0f);
+                Vector2 v2 = v1.RotatedBy(Math.Atan2((double)base.Projectile.velocity.Y, (double)base.Projectile.velocity.X) + Math.PI * 0.5f + nv) * nu;
+                Main.spriteBatch.Draw(texture2D, base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY) + v + v2 - new Vector2(25,25), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), new Color(0.95f, 0.45f, 0,0), base.Projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), 0.5f / 60f * (float)E, SpriteEffects.None, 0f);
             }
             float nu2 = (float)Math.Cos(D / 20f) * 0.15f + 1;
             float nv2 = (float)Math.Cos(D / 40f) * 0.06f;
-            Vector2 v3 = projectile.velocity * 4;
+            Vector2 v3 = Projectile.velocity * 4;
             for (int i = 0; i < 5; i++)
             {
                 Vector2 v5 = new Vector2(v.RotatedBy((D / 4f + Math.PI * 2 / 5f * i)).X, v.RotatedBy((D / 4f + Math.PI * 2 / 5f * i)).Y / 3f);
-                Vector2 v4 = v5.RotatedBy(Math.Atan2((double)base.projectile.velocity.Y, (double)base.projectile.velocity.X) + Math.PI * 0.5f + nv2) * nu2;
-                Main.spriteBatch.Draw(mod.GetTexture("Projectiles/Effects/GreenVortex"), base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY) + v3 + v4 - new Vector2(25, 25), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), new Color(0.95f, 0.45f, 0, 0), base.projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), 0.3f / 60f * (float)E, SpriteEffects.None, 0f);
+                Vector2 v4 = v5.RotatedBy(Math.Atan2((double)base.Projectile.velocity.Y, (double)base.Projectile.velocity.X) + Math.PI * 0.5f + nv2) * nu2;
+                Main.spriteBatch.Draw(Mod.GetTexture("Projectiles/Effects/GreenVortex"), base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY) + v3 + v4 - new Vector2(25, 25), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), new Color(0.95f, 0.45f, 0, 0), base.Projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), 0.3f / 60f * (float)E, SpriteEffects.None, 0f);
             }
             return false;
         }

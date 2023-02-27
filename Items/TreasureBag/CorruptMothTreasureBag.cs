@@ -27,13 +27,13 @@ namespace MythMod.Items.TreasureBag
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            base.item.maxStack = 999;
-            base.item.consumable = true;
-            base.item.width = 24;
-            base.item.height = 24;
-            base.item.rare = 9;
-            base.item.expert = true;
+            Item.glowMask = GetGlowMask;
+            base.Item.maxStack = 999;
+            base.Item.consumable = true;
+            base.Item.width = 24;
+            base.Item.height = 24;
+            base.Item.rare = 9;
+            base.Item.expert = true;
 		}
 		public override bool CanRightClick()
 		{
@@ -45,22 +45,22 @@ namespace MythMod.Items.TreasureBag
             switch (Main.rand.Next(1, 7))
             {
                 case 1:
-                    type = base.mod.ItemType("DustOfCorrupt");
+                    type = base.Mod.Find<ModItem>("DustOfCorrupt").Type;
                     break;
                 case 2:
-                    type = base.mod.ItemType("PhosphorescenceGun");
+                    type = base.Mod.Find<ModItem>("PhosphorescenceGun").Type;
                     break;
                 case 3:
-                    type = base.mod.ItemType("ScaleWingBlade");
+                    type = base.Mod.Find<ModItem>("ScaleWingBlade").Type;
                     break;
                 case 4:
-                    type = base.mod.ItemType("MothYoyo");
+                    type = base.Mod.Find<ModItem>("MothYoyo").Type;
                     break;
                 case 5:
-                    type = base.mod.ItemType("EvilChrysalis");
+                    type = base.Mod.Find<ModItem>("EvilChrysalis").Type;
                     break;
                 case 6:
-                    type = base.mod.ItemType("ShadowWingBow");
+                    type = base.Mod.Find<ModItem>("ShadowWingBow").Type;
                     break;
             }
             player.QuickSpawnItem(type, 1);

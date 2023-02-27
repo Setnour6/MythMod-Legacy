@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
@@ -16,24 +18,24 @@ namespace MythMod.Items
         }
         public override void SetDefaults()
         {
-            base.item.width = 28;
-            base.item.height = 18;
-            base.item.useAnimation = 45;
-            base.item.useTime = 60;
-            base.item.useStyle = 4;
-            base.item.rare = 11;
-            base.item.consumable = true;
+            base.Item.width = 28;
+            base.Item.height = 18;
+            base.Item.useAnimation = 45;
+            base.Item.useTime = 60;
+            base.Item.useStyle = 4;
+            base.Item.rare = 11;
+            base.Item.consumable = true;
         }
         public override bool CanUseItem(Player player)
         {
-            return !NPC.AnyNPCs(base.mod.NPCType("熔岩巨石怪"));
+            return !NPC.AnyNPCs(base.Mod.Find<ModNPC>("熔岩巨石怪").Type);
         }
-        public override bool UseItem(Player player)
+        public override bool? UseItem(Player player)/* tModPorter Suggestion: Return null instead of false */
         {
-            if (NPC.CountNPCS(mod.NPCType("熔岩巨石怪")) < 1 && NPC.CountNPCS(mod.NPCType("熔岩巨石怪")) < 1)
+            if (NPC.CountNPCS(Mod.Find<ModNPC>("熔岩巨石怪").Type) < 1 && NPC.CountNPCS(Mod.Find<ModNPC>("熔岩巨石怪").Type) < 1)
             {
-                NPC.NewNPC((int)player.position.X, (int)player.position.Y - 750, mod.NPCType("熔岩巨石怪"), 0, 0f, 0f, 0f, 0f, 255);
-                Main.PlaySound(15, player.position, 0);
+                NPC.NewNPC((int)player.position.X, (int)player.position.Y - 750, Mod.Find<ModNPC>("熔岩巨石怪").Type, 0, 0f, 0f, 0f, 0f, 255);
+                SoundEngine.PlaySound(SoundID.Roar, player.position);
                 //item.stack--;
                 return true;
             }
@@ -41,11 +43,10 @@ namespace MythMod.Items
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(null, "LavaStone", 30);
             recipe.requiredTile[0] = 412;
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }

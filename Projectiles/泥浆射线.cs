@@ -13,25 +13,25 @@ namespace MythMod.Projectiles
 		}
 		public override void SetDefaults()
 		{
-			base.projectile.width = 4;
-			base.projectile.height = 4;
-			base.projectile.friendly = true;
-			base.projectile.magic = true;
-			base.projectile.penetrate = 10;
-			base.projectile.extraUpdates = 100;
-			base.projectile.timeLeft = 400;
+			base.Projectile.width = 4;
+			base.Projectile.height = 4;
+			base.Projectile.friendly = true;
+			base.Projectile.DamageType = DamageClass.Magic;
+			base.Projectile.penetrate = 10;
+			base.Projectile.extraUpdates = 100;
+			base.Projectile.timeLeft = 400;
 		}
 		public override void AI()
 		{
-            if (base.projectile.timeLeft < 398)
+            if (base.Projectile.timeLeft < 398)
             {
-                base.projectile.localAI[0] += 1f;
-                if (base.projectile.localAI[0] > 12f)
+                base.Projectile.localAI[0] += 1f;
+                if (base.Projectile.localAI[0] > 12f)
                 {
-                    Vector2 vector = base.projectile.position;
-                    vector -= base.projectile.velocity;
-                    base.projectile.alpha = 255;
-                    int num = Dust.NewDust(vector, 4, 4, mod.DustType("Mud"), 0f, 0f, 0, default(Color), 1.5f);
+                    Vector2 vector = base.Projectile.position;
+                    vector -= base.Projectile.velocity;
+                    base.Projectile.alpha = 255;
+                    int num = Dust.NewDust(vector, 4, 4, Mod.Find<ModDust>("Mud").Type, 0f, 0f, 0, default(Color), 1.5f);
                     Main.dust[num].position = vector;
                     Main.dust[num].scale *= 0.8f;
                     Main.dust[num].velocity *= 0.97f;

@@ -21,34 +21,34 @@ namespace MythMod.Items.Potions
 		// Token: 0x060005E4 RID: 1508 RVA: 0x00041780 File Offset: 0x0003F980
 		public override void SetDefaults()
 		{
-			base.item.width = 20;
-			base.item.height = 26;
-            base.item.rare = 3;
-			base.item.useAnimation = 20;
-			base.item.useTime = 20;
-			base.item.useStyle = 2;
-			base.item.UseSound = SoundID.Item8;
-			base.item.consumable = true;
-            base.item.maxStack = 200;
-            item.value = 10000;
+			base.Item.width = 20;
+			base.Item.height = 26;
+            base.Item.rare = 3;
+			base.Item.useAnimation = 20;
+			base.Item.useTime = 20;
+			base.Item.useStyle = 2;
+			base.Item.UseSound = SoundID.Item8;
+			base.Item.consumable = true;
+            base.Item.maxStack = 200;
+            Item.value = 10000;
         }
 
 		// Token: 0x060005E5 RID: 1509 RVA: 0x000043CB File Offset: 0x000025CB
 		// Token: 0x060005E6 RID: 1510 RVA: 0x000417F8 File Offset: 0x0003F9F8
-        public override bool UseItem(Player player)
+        public override bool? UseItem(Player player)/* tModPorter Suggestion: Return null instead of false */
         {
             MythPlayer modPlayer = player.GetModPlayer<MythPlayer>();
             if (player.itemAnimation > 0 && player.itemTime == 0)
             {
-                player.itemTime = base.item.useTime;
+                player.itemTime = base.Item.useTime;
                 if(Main.dayTime)
                 {
-                    base.item.consumable = true;
+                    base.Item.consumable = true;
                     modPlayer.YangLife += 5;
                 }
                 else
                 {
-                    base.item.consumable = false;
+                    base.Item.consumable = false;
                     return false;
                 }
             }
@@ -56,7 +56,7 @@ namespace MythMod.Items.Potions
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(5, 10); //需要一个材料
             recipe.AddIngredient(27, 10); //需要一个材料
             recipe.AddIngredient(38, 3); //需要一个材料
@@ -64,14 +64,12 @@ namespace MythMod.Items.Potions
             recipe.AddIngredient(210, 3); //需要一个材料
             recipe.AddIngredient(126, 1); //需要一个材料
             recipe.requiredTile[0] = 13;
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
-            ModRecipe recipe2 = new ModRecipe(mod);
+            recipe.Register();
+            Recipe recipe2 = CreateRecipe(2);
             recipe2.AddIngredient(29, 1); //需要一个材料
             recipe2.AddIngredient(126, 1); //需要一个材料
             recipe2.requiredTile[0] = 13;
-            recipe2.SetResult(this, 2);
-            recipe2.AddRecipe();
+            recipe2.Register();
         }
 	}
 }

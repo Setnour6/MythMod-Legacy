@@ -27,24 +27,24 @@ namespace MythMod.Items.Weapons
 		}
 		public override void SetDefaults()
 		{
-			base.item.damage = 100;
-			base.item.width = 52;
-			base.item.height = 26;
-			base.item.useTime = 30;
-			base.item.useAnimation = 30;
-			base.item.useStyle = 5;
-			base.item.noMelee = true;
-			base.item.ranged = true;
-			base.item.knockBack = 1f;
-			base.item.value = 50000;
-			base.item.rare = 14;
-			base.item.UseSound = SoundID.Item36;
-			base.item.autoReuse = true;
-            base.item.shoot = base.mod.ProjectileType("火鳞散弹");
-			base.item.shootSpeed = 13f;
-			base.item.useAmmo = 97;
+			base.Item.damage = 100;
+			base.Item.width = 52;
+			base.Item.height = 26;
+			base.Item.useTime = 30;
+			base.Item.useAnimation = 30;
+			base.Item.useStyle = 5;
+			base.Item.noMelee = true;
+			base.Item.DamageType = DamageClass.Ranged;
+			base.Item.knockBack = 1f;
+			base.Item.value = 50000;
+			base.Item.rare = 14;
+			base.Item.UseSound = SoundID.Item36;
+			base.Item.autoReuse = true;
+            base.Item.shoot = base.Mod.Find<ModProjectile>("火鳞散弹").Type;
+			base.Item.shootSpeed = 13f;
+			base.Item.useAmmo = 97;
 		}
-		public override bool Shoot(Player player, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
+		public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
 		{
 			for(int j = 0;j < 5;j++)
 			{
@@ -52,12 +52,12 @@ namespace MythMod.Items.Weapons
 	    		{
 					Vector2 v2 = position + new Vector2(speedX, speedY) * 2.1f;
 			    	Vector2 v = new Vector2(speedX, speedY).RotatedBy((float)Math.PI * (4 - i) / 50f) * (0.3f + j / 8f) * Main.rand.Next(10,40) / 15f;
-		    		Projectile.NewProjectile(v2.X, v2.Y - 4, v.X, v.Y, base.mod.ProjectileType("火鳞散弹"), damage, knockBack, player.whoAmI, 0f, 0f);
+		    		Projectile.NewProjectile(v2.X, v2.Y - 4, v.X, v.Y, base.Mod.Find<ModProjectile>("火鳞散弹").Type, damage, knockBack, player.whoAmI, 0f, 0f);
 	    		}
 			}
 			return false;
 		}
-		public override bool ConsumeAmmo(Player player)
+		public override bool CanConsumeAmmo(Item ammo, Player player)
 		{
 			return Main.rand.Next(0, 100) > 24;
 		}
@@ -68,7 +68,7 @@ namespace MythMod.Items.Weapons
 		public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
 		{
 			Vector2 origin = new Vector2(26f, 13f);
-			spriteBatch.Draw(base.mod.GetTexture("Items/Weapons/火鳞散弹Glow"), base.item.Center - Main.screenPosition, null, Color.White, rotation, origin, 1f, SpriteEffects.None, 0f);
+			spriteBatch.Draw(base.Mod.GetTexture("Items/Weapons/火鳞散弹Glow"), base.Item.Center - Main.screenPosition, null, Color.White, rotation, origin, 1f, SpriteEffects.None, 0f);
 		}
 	}
 }

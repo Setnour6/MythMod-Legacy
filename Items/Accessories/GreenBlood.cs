@@ -25,10 +25,10 @@ namespace MythMod.Items.Accessories
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 48;
-			base.item.height = 32;
-			base.item.value = 10000;
-			base.item.accessory = true;
+			base.Item.width = 48;
+			base.Item.height = 32;
+			base.Item.value = 10000;
+			base.Item.accessory = true;
             //Player player = Main.player[Main.myPlayer];
             //if (player.name != "万象元素")
             //{

@@ -17,28 +17,27 @@ namespace MythMod.Items.Foods
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 40;
-            base.item.height = 28;
-            base.item.rare = 1;
-            base.item.value = Item.sellPrice(0, 0, 5, 0);
-			base.item.UseSound = SoundID.Item8;
-            base.item.maxStack = 200;
-            base.item.useAnimation = 15;
-            base.item.useTime = 10;
-            base.item.useStyle = 1;
-            base.item.consumable = true;
-            base.item.useTurn = true;
-            base.item.autoReuse = true;
-            base.item.createTile = base.mod.TileType("蛋挞");
+			base.Item.width = 40;
+            base.Item.height = 28;
+            base.Item.rare = 1;
+            base.Item.value = Item.sellPrice(0, 0, 5, 0);
+			base.Item.UseSound = SoundID.Item8;
+            base.Item.maxStack = 200;
+            base.Item.useAnimation = 15;
+            base.Item.useTime = 10;
+            base.Item.useStyle = 1;
+            base.Item.consumable = true;
+            base.Item.useTurn = true;
+            base.Item.autoReuse = true;
+            base.Item.createTile = base.Mod.Find<ModTile>("蛋挞").Type;
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(5);
             recipe.AddIngredient(null, "Egg", 2);
             recipe.AddIngredient(null, "Curst", 5);
-            recipe.requiredTile[0] = mod.TileType("烤箱");
-            recipe.SetResult(this, 5);
-            recipe.AddRecipe();
+            recipe.requiredTile[0] = Mod.Find<ModTile>("烤箱").Type;
+            recipe.Register();
         }
 	}
 }

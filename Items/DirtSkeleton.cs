@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
@@ -16,35 +18,34 @@ namespace MythMod.Items
         }
         public override void SetDefaults()
         {
-            base.item.width = 32;
-            base.item.height = 30;
-            base.item.useAnimation = 45;
-            base.item.useTime = 60;
-            base.item.useStyle = 4;
-            item.maxStack = 20;
-            base.item.consumable = true;
+            base.Item.width = 32;
+            base.Item.height = 30;
+            base.Item.useAnimation = 45;
+            base.Item.useTime = 60;
+            base.Item.useStyle = 4;
+            Item.maxStack = 20;
+            base.Item.consumable = true;
         }
         public override bool CanUseItem(Player player)
         {
-            return !NPC.AnyNPCs(base.mod.NPCType("DirtSprite"));
+            return !NPC.AnyNPCs(base.Mod.Find<ModNPC>("DirtSprite").Type);
         }
-        public override bool UseItem(Player player)
+        public override bool? UseItem(Player player)/* tModPorter Suggestion: Return null instead of false */
         {
-            if (NPC.CountNPCS(mod.NPCType("DirtSprite")) < 1)
+            if (NPC.CountNPCS(Mod.Find<ModNPC>("DirtSprite").Type) < 1)
             {
-                NPC.NewNPC((int)player.position.X, (int)player.position.Y - 750, mod.NPCType("DirtSprite"), 0, 0f, 0f, 0f, 0f, 255);
-                Main.PlaySound(15, player.position, 0);
+                NPC.NewNPC((int)player.position.X, (int)player.position.Y - 750, Mod.Find<ModNPC>("DirtSprite").Type, 0, 0f, 0f, 0f, 0f, 255);
+                SoundEngine.PlaySound(SoundID.Roar, player.position);
                 return true;
             }
             return false;
         }
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(176, 40);
             modRecipe.requiredTile[0] = 26;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
     }
 }

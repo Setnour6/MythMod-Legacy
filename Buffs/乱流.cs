@@ -8,7 +8,7 @@ namespace MythMod.Buffs
 {
     public class 乱流 : ModBuff
 	{
-		public override void SetDefaults()
+		public override void SetStaticDefaults()
 		{
             base.DisplayName.SetDefault("乱流");
             base.Description.SetDefault("强劲力场混乱");

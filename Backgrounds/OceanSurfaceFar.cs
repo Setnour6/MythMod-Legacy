@@ -14,11 +14,11 @@ using Terraria.ModLoader.IO;
 
 namespace MythMod.Backgrounds
 {
-    public class OceanSurfaceBgStyle : ModSurfaceBgStyle
+    public class OceanSurfaceBgStyle : ModSurfaceBackgroundStyle
 	{
-		public override bool ChooseBgStyle()
+		public override bool ChooseBgStyle()/* tModPorter Note: Removed. Create a ModBiome (or ModSceneEffect) class and override SurfaceBackgroundStyle property to return this object through Mod/ModContent.Find, then move this code into IsBiomeActive (or IsSceneEffectActive) */
 		{
-			return !Main.gameMenu && ((MythPlayer)Main.player[Main.myPlayer].GetModPlayer(mod, "MythPlayer")).ZoneOcean;
+			return !Main.gameMenu && ((MythPlayer)Main.player[Main.myPlayer].GetModPlayer(Mod, "MythPlayer")).ZoneOcean;
 		}
 
 		// Use this to keep far Backgrounds like the mountains.
@@ -50,11 +50,11 @@ namespace MythMod.Backgrounds
             Player player = Main.player[Main.myPlayer];
             if (player.wet)
             {
-                return mod.GetBackgroundSlot("Backgrounds/DeepOceanSurfaceFar");
+                return BackgroundTextureLoader.GetBackgroundSlot(Mod, "Backgrounds/DeepOceanSurfaceFar");
             }
             else
             {
-                return mod.GetBackgroundSlot("Backgrounds/OceanSurfaceFar");
+                return BackgroundTextureLoader.GetBackgroundSlot(Mod, "Backgrounds/OceanSurfaceFar");
             }
         }
 
@@ -65,11 +65,11 @@ namespace MythMod.Backgrounds
             Player player = Main.player[Main.myPlayer];
             if (player.wet)
             {
-                return mod.GetBackgroundSlot("Backgrounds/DeepOceanSurfaceMiddle");
+                return BackgroundTextureLoader.GetBackgroundSlot(Mod, "Backgrounds/DeepOceanSurfaceMiddle");
             }
             else
             {
-                return mod.GetBackgroundSlot("Backgrounds/OceanSurfaceMiddle");
+                return BackgroundTextureLoader.GetBackgroundSlot(Mod, "Backgrounds/OceanSurfaceMiddle");
             }
         }
 
@@ -78,11 +78,11 @@ namespace MythMod.Backgrounds
             Player player = Main.player[Main.myPlayer];
             if (player.wet)
             {
-                return mod.GetBackgroundSlot("Backgrounds/DeepOceanSurfaceClose");
+                return BackgroundTextureLoader.GetBackgroundSlot(Mod, "Backgrounds/DeepOceanSurfaceClose");
             }
             else
             {
-                return mod.GetBackgroundSlot("Backgrounds/OceanSurfaceClose");
+                return BackgroundTextureLoader.GetBackgroundSlot(Mod, "Backgrounds/OceanSurfaceClose");
             }	
 		}
 	}

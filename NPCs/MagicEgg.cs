@@ -24,34 +24,34 @@ namespace MythMod.NPCs
 		// Token: 0x06001809 RID: 6153 RVA: 0x0010AD00 File Offset: 0x00108F00
 		public override void SetDefaults()
 		{
-			base.npc.damage = 0;
-			base.npc.width = 44;
-			base.npc.height = 58;
-			base.npc.defense = 0;
-			base.npc.lifeMax = (Main.expertMode ? 250 : 200);
+			base.NPC.damage = 0;
+			base.NPC.width = 44;
+			base.NPC.height = 58;
+			base.NPC.defense = 0;
+			base.NPC.lifeMax = (Main.expertMode ? 250 : 200);
 			if(MythWorld.Myth)
 			{
-				base.npc.lifeMax = 150;
+				base.NPC.lifeMax = 150;
 			}
-			base.npc.knockBackResist = 0f;
-			base.npc.value = (float)Item.buyPrice(0, 0, 0, 0);
-            base.npc.color = new Color(0, 0, 0, 0);
-			base.npc.alpha = 0;
-            base.npc.boss = false;
-			base.npc.lavaImmune = true;
-			base.npc.noGravity = false;
-			base.npc.noTileCollide = false;
-			base.npc.HitSound = SoundID.NPCHit1;
-			base.npc.DeathSound = SoundID.NPCDeath1;
-			base.npc.aiStyle = -1;
-			this.aiType = -1;
+			base.NPC.knockBackResist = 0f;
+			base.NPC.value = (float)Item.buyPrice(0, 0, 0, 0);
+            base.NPC.color = new Color(0, 0, 0, 0);
+			base.NPC.alpha = 0;
+            base.NPC.boss = false;
+			base.NPC.lavaImmune = true;
+			base.NPC.noGravity = false;
+			base.NPC.noTileCollide = false;
+			base.NPC.HitSound = SoundID.NPCHit1;
+			base.NPC.DeathSound = SoundID.NPCDeath1;
+			base.NPC.aiStyle = -1;
+			this.AIType = -1;
 		}
 		// Token: 0x06001B19 RID: 6937 RVA: 0x0014B900 File Offset: 0x00149B00
 		public override void AI()
 		{
-			Vector2 vector = new Vector2(base.npc.Center.X, base.npc.Center.Y);
-			base.npc.localAI[0] += 1;
-			if(base.npc.localAI[0] >= 450)
+			Vector2 vector = new Vector2(base.NPC.Center.X, base.NPC.Center.Y);
+			base.NPC.localAI[0] += 1;
+			if(base.NPC.localAI[0] >= 450)
 			{
 				if(Main.rand.Next(100) <= 85)
 				{
@@ -65,29 +65,29 @@ namespace MythMod.NPCs
 				{
 					NPC.NewNPC((int)vector.X, (int)vector.Y, 98, 0, 0f, 0f, 0f, 0f, 255);
 				}
-				base.npc.life = 0;
-			    base.npc.position.X = base.npc.position.X + (float)(base.npc.width / 2);
-                base.npc.position.Y = base.npc.position.Y + (float)(base.npc.height / 2);
-                base.npc.position.X = base.npc.position.X - (float)(base.npc.width / 2);
-                base.npc.position.Y = base.npc.position.Y - (float)(base.npc.height / 2);
+				base.NPC.life = 0;
+			    base.NPC.position.X = base.NPC.position.X + (float)(base.NPC.width / 2);
+                base.NPC.position.Y = base.NPC.position.Y + (float)(base.NPC.height / 2);
+                base.NPC.position.X = base.NPC.position.X - (float)(base.NPC.width / 2);
+                base.NPC.position.Y = base.NPC.position.Y - (float)(base.NPC.height / 2);
                 float scaleFactor = (float)(Main.rand.Next(-200, 200) / 100);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/魔卵碎块1"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/魔卵碎块2"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/魔卵碎块3"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/魔卵碎块1"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/魔卵碎块2"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/魔卵碎块3"), 1f);
 			}
 		}
 		public override void HitEffect(int hitDirection, double damage)
 		{
-			if (base.npc.life <= 0)
+			if (base.NPC.life <= 0)
 			{
-			    base.npc.position.X = base.npc.position.X + (float)(base.npc.width / 2);
-                base.npc.position.Y = base.npc.position.Y + (float)(base.npc.height / 2);
-                base.npc.position.X = base.npc.position.X - (float)(base.npc.width / 2);
-                base.npc.position.Y = base.npc.position.Y - (float)(base.npc.height / 2);
+			    base.NPC.position.X = base.NPC.position.X + (float)(base.NPC.width / 2);
+                base.NPC.position.Y = base.NPC.position.Y + (float)(base.NPC.height / 2);
+                base.NPC.position.X = base.NPC.position.X - (float)(base.NPC.width / 2);
+                base.NPC.position.Y = base.NPC.position.Y - (float)(base.NPC.height / 2);
                 float scaleFactor = (float)(Main.rand.Next(-200, 200) / 100);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/魔卵碎块1"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/魔卵碎块2"), 1f);
-                Gore.NewGore(base.npc.position, base.npc.velocity * scaleFactor, base.mod.GetGoreSlot("Gores/魔卵碎块3"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/魔卵碎块1"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/魔卵碎块2"), 1f);
+                Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/魔卵碎块3"), 1f);
 			}
 		}
 	}

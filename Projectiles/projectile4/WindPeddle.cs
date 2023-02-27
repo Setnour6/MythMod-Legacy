@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 using Terraria.ID;
 using System.Collections.Generic;
@@ -16,25 +17,25 @@ namespace MythMod.Projectiles.projectile4
 		}
 		public override void SetDefaults()
 		{
-			base.projectile.width = 210;
-			base.projectile.height = 210;
-			base.projectile.hostile = false;
-			base.projectile.ignoreWater = true;
-			base.projectile.tileCollide = false;
-			base.projectile.penetrate = -1;
-            base.projectile.tileCollide = false;
-            base.projectile.timeLeft = 50;
-            base.projectile.friendly = true;
-			this.cooldownSlot = 1;
-            base.projectile.scale = 1;
-            ProjectileID.Sets.TrailingMode[projectile.type] = 0;
-            ProjectileID.Sets.TrailCacheLength[projectile.type] = 20;
+			base.Projectile.width = 210;
+			base.Projectile.height = 210;
+			base.Projectile.hostile = false;
+			base.Projectile.ignoreWater = true;
+			base.Projectile.tileCollide = false;
+			base.Projectile.penetrate = -1;
+            base.Projectile.tileCollide = false;
+            base.Projectile.timeLeft = 50;
+            base.Projectile.friendly = true;
+			this.CooldownSlot = 1;
+            base.Projectile.scale = 1;
+            ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 20;
         }
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
             if(!target.boss)
             {
-                target.velocity += projectile.velocity * 0.5f;
+                target.velocity += Projectile.velocity * 0.5f;
             }
         }
         private bool boom = false;
@@ -43,25 +44,25 @@ namespace MythMod.Projectiles.projectile4
         }
 		public override Color? GetAlpha(Color lightColor)
 		{
-            if(base.projectile.timeLeft > 30)
+            if(base.Projectile.timeLeft > 30)
             {
-                if(projectile.timeLeft > 40)
+                if(Projectile.timeLeft > 40)
                 {
-                    return new Color?(new Color((50 - projectile.timeLeft) / 20f, (50 - projectile.timeLeft) / 20f, (50 - projectile.timeLeft) / 20f, 0));
+                    return new Color?(new Color((50 - Projectile.timeLeft) / 20f, (50 - Projectile.timeLeft) / 20f, (50 - Projectile.timeLeft) / 20f, 0));
                 }
                 return new Color?(new Color(0.5f, 0.5f, 0.5f, 0));
             }
             else
             {
-                return new Color?(new Color(base.projectile.timeLeft / 60f, base.projectile.timeLeft / 60f, base.projectile.timeLeft / 60f, 0));
+                return new Color?(new Color(base.Projectile.timeLeft / 60f, base.Projectile.timeLeft / 60f, base.Projectile.timeLeft / 60f, 0));
             }
 		}
         private int Fy = 0;
         private int fyc = 0;
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D texture2D = Main.projectileTexture[base.projectile.type];
-			int num = Main.projectileTexture[base.projectile.type].Height / Main.projFrames[base.projectile.type];
+			Texture2D texture2D = TextureAssets.Projectile[base.Projectile.type].Value;
+			int num = TextureAssets.Projectile[base.Projectile.type].Value.Height / Main.projFrames[base.Projectile.type];
             fyc += 1;
             if (fyc == 8)
             {
@@ -72,39 +73,39 @@ namespace MythMod.Projectiles.projectile4
             {
                 Fy = 0;
             }
-            int y = num * base.projectile.frame;
-			Main.spriteBatch.Draw(texture2D, base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), base.projectile.GetAlpha(lightColor), base.projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.projectile.scale * 0.5f, SpriteEffects.None, 0f);
-            Main.spriteBatch.Draw(mod.GetTexture("Projectiles/projectile4/WindFlowerpetal"), base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY), new Rectangle?(new Rectangle(0, 28 * Fy, 24, 28)), base.projectile.GetAlpha(lightColor), base.projectile.rotation, new Vector2(12,14), base.projectile.scale, SpriteEffects.None, 0f);
+            int y = num * base.Projectile.frame;
+			Main.spriteBatch.Draw(texture2D, base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), base.Projectile.GetAlpha(lightColor), base.Projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.Projectile.scale * 0.5f, SpriteEffects.None, 0f);
+            Main.spriteBatch.Draw(Mod.GetTexture("Projectiles/projectile4/WindFlowerpetal"), base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), new Rectangle?(new Rectangle(0, 28 * Fy, 24, 28)), base.Projectile.GetAlpha(lightColor), base.Projectile.rotation, new Vector2(12,14), base.Projectile.scale, SpriteEffects.None, 0f);
             return false;
 		}
-        public override void PostDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override void PostDraw(Color lightColor)
         {
             List<CustomVertexInfo> bars = new List<CustomVertexInfo>();
 
             // 把所有的点都生成出来，按照顺序
-            for (int i = 1; i < projectile.oldPos.Length; ++i)
+            for (int i = 1; i < Projectile.oldPos.Length; ++i)
             {
-                if (projectile.oldPos[i] == Vector2.Zero) break;
+                if (Projectile.oldPos[i] == Vector2.Zero) break;
                 //spriteBatch.Draw(Main.magicPixel, projectile.oldPos[i] - Main.screenPosition,
                 //    new Rectangle(0, 0, 1, 1), Color.White, 0f, new Vector2(0.5f, 0.5f), 5f, SpriteEffects.None, 0f);
                 int width = 90;
-                if (projectile.timeLeft > 30)
+                if (Projectile.timeLeft > 30)
                 {
                     width = 90;
                 }
                 else
                 {
-                    width = projectile.timeLeft * 3;
+                    width = Projectile.timeLeft * 3;
                 }
-                var normalDir = projectile.oldPos[i - 1] - projectile.oldPos[i];
+                var normalDir = Projectile.oldPos[i - 1] - Projectile.oldPos[i];
                 normalDir = Vector2.Normalize(new Vector2(-normalDir.Y, normalDir.X));
 
-                var factor = i / (float)projectile.oldPos.Length;
+                var factor = i / (float)Projectile.oldPos.Length;
                 var color = Color.Lerp(Color.White, Color.Red, factor);
                 var w = MathHelper.Lerp(1f, 0.05f, factor);
 
-                bars.Add(new CustomVertexInfo(projectile.oldPos[i] + normalDir * width + new Vector2(105), color, new Vector3(factor, 1, w)));
-                bars.Add(new CustomVertexInfo(projectile.oldPos[i] + normalDir * -width + new Vector2(105), color, new Vector3(factor, 0, w)));
+                bars.Add(new CustomVertexInfo(Projectile.oldPos[i] + normalDir * width + new Vector2(105), color, new Vector3(factor, 1, w)));
+                bars.Add(new CustomVertexInfo(Projectile.oldPos[i] + normalDir * -width + new Vector2(105), color, new Vector3(factor, 0, w)));
             }
 
             List<CustomVertexInfo> triangleList = new List<CustomVertexInfo>();
@@ -114,7 +115,7 @@ namespace MythMod.Projectiles.projectile4
 
                 // 按照顺序连接三角形
                 triangleList.Add(bars[0]);
-                var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + Vector2.Normalize(projectile.velocity) * 2, Color.White,
+                var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + Vector2.Normalize(Projectile.velocity) * 2, Color.White,
                     new Vector3(0, 0.5f, 1));
                 triangleList.Add(bars[1]);
                 triangleList.Add(vertex);
@@ -145,9 +146,9 @@ namespace MythMod.Projectiles.projectile4
                 // 把变换和所需信息丢给shader
                 MythMod.DefaultEffect2.Parameters["uTransform"].SetValue(model * projection);
                 MythMod.DefaultEffect2.Parameters["uTime"].SetValue(-(float)Main.time * 0.03f);
-                Main.graphics.GraphicsDevice.Textures[0] = mod.GetTexture("UIImages/heatmapWindCyan");
+                Main.graphics.GraphicsDevice.Textures[0] = Mod.GetTexture("UIImages/heatmapWindCyan");
                 Main.graphics.GraphicsDevice.Textures[1] = MythMod.MainShape;
-                Main.graphics.GraphicsDevice.Textures[2] = mod.GetTexture("UIImages/FogTrace");
+                Main.graphics.GraphicsDevice.Textures[2] = Mod.GetTexture("UIImages/FogTrace");
                 Main.graphics.GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[1] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[2] = SamplerState.PointWrap;

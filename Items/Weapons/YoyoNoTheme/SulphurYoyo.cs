@@ -21,38 +21,37 @@ namespace MythMod.Items.Weapons.YoyoNoTheme
         public override void SetStaticDefaults()
         {
             DisplayName.SetDefault("硫磺悠悠球");
-            ItemID.Sets.Yoyo[item.type] = true;
-            ItemID.Sets.GamepadExtraRange[item.type] = 15;
-            ItemID.Sets.GamepadSmartQuickReach[item.type] = true;
+            ItemID.Sets.Yoyo[Item.type] = true;
+            ItemID.Sets.GamepadExtraRange[Item.type] = 15;
+            ItemID.Sets.GamepadSmartQuickReach[Item.type] = true;
             base.Tooltip.AddTranslation(GameCulture.Chinese, "");
         }
         public override void SetDefaults()
         {
-            item.useStyle = 5;
-            item.width = 30;
-            item.height = 28;
-            item.noUseGraphic = true;
-            item.UseSound = SoundID.Item1;
-            item.melee = true;
-            item.channel = true;
-            item.shoot = mod.ProjectileType("SulphurYoyo");
-            item.useAnimation = 5;
-            item.useTime = 14;
-            item.shootSpeed = 0f;
-            item.noMelee = true;
-            item.knockBack = 0.2f;
-            item.damage = 250;
-            item.value = Item.sellPrice(0, 3, 0, 0);
-            item.rare = 11;
+            Item.useStyle = 5;
+            Item.width = 30;
+            Item.height = 28;
+            Item.noUseGraphic = true;
+            Item.UseSound = SoundID.Item1;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.channel = true;
+            Item.shoot = Mod.Find<ModProjectile>("SulphurYoyo").Type;
+            Item.useAnimation = 5;
+            Item.useTime = 14;
+            Item.shootSpeed = 0f;
+            Item.noMelee = true;
+            Item.knockBack = 0.2f;
+            Item.damage = 250;
+            Item.value = Item.sellPrice(0, 3, 0, 0);
+            Item.rare = 11;
         }
         public override void AddRecipes()
         {
-            ModRecipe modRecipe = new ModRecipe(base.mod);
+            Recipe modRecipe = /* base */Recipe.Create(this.Type, 1);
             modRecipe.AddIngredient(null, "Basalt", 20);
             modRecipe.AddIngredient(null, "Sulfur", 64);
             modRecipe.requiredTile[0] = 412;
-            modRecipe.SetResult(this, 1);
-            modRecipe.AddRecipe();
+            modRecipe.Register();
         }
     }
 }

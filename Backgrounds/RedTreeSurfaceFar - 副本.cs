@@ -14,11 +14,11 @@ using Terraria.ModLoader.IO;
 
 namespace MythMod.Backgrounds
 {
-	public class RedTreeSurfaceBgStyle : ModSurfaceBgStyle
+	public class RedTreeSurfaceBgStyle : ModSurfaceBackgroundStyle
 	{
-		public override bool ChooseBgStyle()
+		public override bool ChooseBgStyle()/* tModPorter Note: Removed. Create a ModBiome (or ModSceneEffect) class and override SurfaceBackgroundStyle property to return this object through Mod/ModContent.Find, then move this code into IsBiomeActive (or IsSceneEffectActive) */
 		{
-			return !Main.gameMenu && ((MythPlayer)Main.player[Main.myPlayer].GetModPlayer(mod, "MythPlayer")).ZoneRedTree;
+			return !Main.gameMenu && ((MythPlayer)Main.player[Main.myPlayer].GetModPlayer(Mod, "MythPlayer")).ZoneRedTree;
 		}
 
 		// Use this to keep far Backgrounds like the mountains.
@@ -50,11 +50,11 @@ namespace MythMod.Backgrounds
             Player player = Main.player[Main.myPlayer];
             if (player.wet)
             {
-                return mod.GetBackgroundSlot("Backgrounds/RedTreeSurfaceFar");
+                return BackgroundTextureLoader.GetBackgroundSlot(Mod, "Backgrounds/RedTreeSurfaceFar");
             }
             else
             {
-                return mod.GetBackgroundSlot("Backgrounds/RedTreeSurfaceFar");
+                return BackgroundTextureLoader.GetBackgroundSlot(Mod, "Backgrounds/RedTreeSurfaceFar");
             }
         }
 
@@ -65,11 +65,11 @@ namespace MythMod.Backgrounds
             Player player = Main.player[Main.myPlayer];
             if (player.wet)
             {
-                return mod.GetBackgroundSlot("Backgrounds/RedTreeSurfaceMiddle");
+                return BackgroundTextureLoader.GetBackgroundSlot(Mod, "Backgrounds/RedTreeSurfaceMiddle");
             }
             else
             {
-                return mod.GetBackgroundSlot("Backgrounds/RedTreeSurfaceMiddle");
+                return BackgroundTextureLoader.GetBackgroundSlot(Mod, "Backgrounds/RedTreeSurfaceMiddle");
             }
         }
 
@@ -79,11 +79,11 @@ namespace MythMod.Backgrounds
             b = 600f;
             if (player.wet)
             {
-                return mod.GetBackgroundSlot("Backgrounds/RedTreeSurfaceClose");
+                return BackgroundTextureLoader.GetBackgroundSlot(Mod, "Backgrounds/RedTreeSurfaceClose");
             }
             else
             {
-                return mod.GetBackgroundSlot("Backgrounds/RedTreeSurfaceClose");
+                return BackgroundTextureLoader.GetBackgroundSlot(Mod, "Backgrounds/RedTreeSurfaceClose");
             }
         }
 	}

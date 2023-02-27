@@ -1,9 +1,10 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 using System.IO;
 using Microsoft.Xna.Framework.Graphics;
@@ -27,26 +28,26 @@ namespace MythMod.Projectiles.projectile2
         //7359668
         public override void SetDefaults()
         {
-            projectile.width = 12;
-            projectile.height = 12;
-            projectile.aiStyle = -1;
-            projectile.friendly = true;
-            projectile.hostile = false;
-            projectile.ignoreWater = true;
-            projectile.tileCollide = true;
-            projectile.extraUpdates = 3;
-            projectile.timeLeft = 10000;
-            projectile.alpha = 0;
-            projectile.penetrate = 9;
-            projectile.scale = 1f;
-            this.cooldownSlot = 1;
-            ProjectileID.Sets.TrailingMode[projectile.type] = 0;
-            ProjectileID.Sets.TrailCacheLength[projectile.type] = 60;
+            Projectile.width = 12;
+            Projectile.height = 12;
+            Projectile.aiStyle = -1;
+            Projectile.friendly = true;
+            Projectile.hostile = false;
+            Projectile.ignoreWater = true;
+            Projectile.tileCollide = true;
+            Projectile.extraUpdates = 3;
+            Projectile.timeLeft = 10000;
+            Projectile.alpha = 0;
+            Projectile.penetrate = 9;
+            Projectile.scale = 1f;
+            this.CooldownSlot = 1;
+            ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
+            ProjectileID.Sets.TrailCacheLength[Projectile.type] = 60;
         }
         //55555
         public override Color? GetAlpha(Color lightColor)
 		{
-			return new Color?(new Color(255, 255, 255, base.projectile.alpha));
+			return new Color?(new Color(255, 255, 255, base.Projectile.alpha));
 		}
         private bool initialization = true;
         private double X;
@@ -57,7 +58,7 @@ namespace MythMod.Projectiles.projectile2
         {
             if (initialization)
             {
-                X = (float)Math.Sqrt((double)projectile.velocity.X * (double)projectile.velocity.X + (double)projectile.velocity.Y * (double)projectile.velocity.Y);
+                X = (float)Math.Sqrt((double)Projectile.velocity.X * (double)Projectile.velocity.X + (double)Projectile.velocity.Y * (double)Projectile.velocity.Y);
                 b = Main.rand.Next(-50, 50);
                 initialization = false;
                 if(Main.rand.Next(0,2) == 1)
@@ -69,10 +70,10 @@ namespace MythMod.Projectiles.projectile2
                     Y = (float)Math.Sin(-(double)X / 5f * 3.1415926535f / 1f) / 1000 + 1;
                 }
             }
-            if(projectile.timeLeft == 9999)
+            if(Projectile.timeLeft == 9999)
             {
                 rg = (float)Main.time;
-                int o = Projectile.NewProjectile(base.projectile.Center.X + 30, base.projectile.Center.Y + 30, projectile.velocity.X, projectile.velocity.Y, 435, (int)((double)base.projectile.damage * 0.5f), base.projectile.knockBack, base.projectile.owner, 0f, 0f);
+                int o = Projectile.NewProjectile(base.Projectile.Center.X + 30, base.Projectile.Center.Y + 30, Projectile.velocity.X, Projectile.velocity.Y, 435, (int)((double)base.Projectile.damage * 0.5f), base.Projectile.knockBack, base.Projectile.owner, 0f, 0f);
                 Main.projectile[o].hostile = false;
                 Main.projectile[o].friendly = true;
                 Main.projectile[o].tileCollide = false;
@@ -84,18 +85,18 @@ namespace MythMod.Projectiles.projectile2
             {
                 if(Main.projectile[i].type == 435 && Main.projectile[i].ai[1] == rg)
                 {
-                    Main.projectile[i].velocity += (base.projectile.Center - Main.projectile[i].Center) / (Main.projectile[i].Center - base.projectile.Center).Length() * (150 - (Main.projectile[i].Center - base.projectile.Center).Length()) * 0.03f;
+                    Main.projectile[i].velocity += (base.Projectile.Center - Main.projectile[i].Center) / (Main.projectile[i].Center - base.Projectile.Center).Length() * (150 - (Main.projectile[i].Center - base.Projectile.Center).Length()) * 0.03f;
                 }
-                if (Main.projectile[i].type == 435 && Main.projectile[i].ai[1] == rg && (Main.projectile[i].Center - projectile.Center).Length() > 100)
+                if (Main.projectile[i].type == 435 && Main.projectile[i].ai[1] == rg && (Main.projectile[i].Center - Projectile.Center).Length() > 100)
                 {
-                    Main.projectile[i].velocity = (base.projectile.Center - Main.projectile[i].Center) / (Main.projectile[i].Center - base.projectile.Center).Length() * 10 + projectile.velocity * 2.5f;
+                    Main.projectile[i].velocity = (base.Projectile.Center - Main.projectile[i].Center) / (Main.projectile[i].Center - base.Projectile.Center).Length() * 10 + Projectile.velocity * 2.5f;
                 }
             }
-            base.projectile.rotation = (float)Math.Atan2((double)base.projectile.velocity.Y, (double)base.projectile.velocity.X) - (float)Math.PI * 0.5f;
-            if (projectile.timeLeft < 9995)
+            base.Projectile.rotation = (float)Math.Atan2((double)base.Projectile.velocity.Y, (double)base.Projectile.velocity.X) - (float)Math.PI * 0.5f;
+            if (Projectile.timeLeft < 9995)
             {
-                Vector2 vector = base.projectile.Center - new Vector2(4, 4);
-                int num = Dust.NewDust(vector, 2, 2, 229, 0f, 0f, 0, default(Color), (float)projectile.scale * 0.8f);
+                Vector2 vector = base.Projectile.Center - new Vector2(4, 4);
+                int num = Dust.NewDust(vector, 2, 2, 229, 0f, 0f, 0, default(Color), (float)Projectile.scale * 0.8f);
                 Main.dust[num].noGravity = true;
             }
             if(Main.rand.Next(30) == 0)
@@ -104,59 +105,59 @@ namespace MythMod.Projectiles.projectile2
                 double num45 = Math.Cos((float)num44);
                 double num46 = Math.Sin((float)num44);
                 float num47 = (float)Main.rand.Next(50000, 100000) / 60000f;
-                int num40 = Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, (float)num45 * (float)num47 * 0.7f, (float)num46 * (float)num47 * 0.7f, base.mod.ProjectileType("Lighting2"), 65, 2f, Main.myPlayer, 0f, 0);
+                int num40 = Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, (float)num45 * (float)num47 * 0.7f, (float)num46 * (float)num47 * 0.7f, base.Mod.Find<ModProjectile>("Lighting2").Type, 65, 2f, Main.myPlayer, 0f, 0);
                 Main.projectile[num40].tileCollide = false;
                 Main.projectile[num40].timeLeft = 200;
             }
-            if (projectile.timeLeft < 600 && projectile.timeLeft >= 585)
+            if (Projectile.timeLeft < 600 && Projectile.timeLeft >= 585)
             {
                 if (Y < 1)
                 {
-                    projectile.scale *= (float)Y / (projectile.timeLeft / 585);
+                    Projectile.scale *= (float)Y / (Projectile.timeLeft / 585);
                 }
                 else
                 {
-                    projectile.scale *= (float)Y * projectile.timeLeft / 585;
+                    Projectile.scale *= (float)Y * Projectile.timeLeft / 585;
                 }
             }
-            if (projectile.timeLeft < 580 && projectile.timeLeft >= 100 + (float)b)
+            if (Projectile.timeLeft < 580 && Projectile.timeLeft >= 100 + (float)b)
             {
-                projectile.scale *= (float)Y;
+                Projectile.scale *= (float)Y;
             }
-            if (projectile.timeLeft < 100+ (float)b)
+            if (Projectile.timeLeft < 100+ (float)b)
             {
-                projectile.scale *= 0.95f;
+                Projectile.scale *= 0.95f;
             }
-            if(projectile.velocity.Y < 15)
+            if(Projectile.velocity.Y < 15)
             {
-                projectile.velocity.Y += 0.01f;
+                Projectile.velocity.Y += 0.01f;
             }
-            Lighting.AddLight(base.projectile.Center, (float)(255 - base.projectile.alpha) * 0f / 255f * projectile.scale, (float)(255 - base.projectile.alpha) * 0.01f / 255f, (float)(255 - base.projectile.alpha) * 0.6f / 255f * projectile.scale);
+            Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 0f / 255f * Projectile.scale, (float)(255 - base.Projectile.alpha) * 0.01f / 255f, (float)(255 - base.Projectile.alpha) * 0.6f / 255f * Projectile.scale);
         }
-        public override bool PreDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D texture2D = Main.projectileTexture[base.projectile.type];
-            int num = Main.projectileTexture[base.projectile.type].Height;
-			Main.spriteBatch.Draw(texture2D, base.projectile.Center - Main.screenPosition + new Vector2(0f, base.projectile.gfxOffY), new Rectangle?(new Rectangle(0, 0, texture2D.Width, num)), base.projectile.GetAlpha(lightColor), base.projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.projectile.scale, SpriteEffects.None, 1f);
+			Texture2D texture2D = TextureAssets.Projectile[base.Projectile.type].Value;
+            int num = TextureAssets.Projectile[base.Projectile.type].Value.Height;
+			Main.spriteBatch.Draw(texture2D, base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), new Rectangle?(new Rectangle(0, 0, texture2D.Width, num)), base.Projectile.GetAlpha(lightColor), base.Projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.Projectile.scale, SpriteEffects.None, 1f);
 			return false;
 		}
         public override bool OnTileCollide(Vector2 oldVelocity)
         {
-            base.projectile.penetrate--;
-            if (base.projectile.penetrate <= 0)
+            base.Projectile.penetrate--;
+            if (base.Projectile.penetrate <= 0)
             {
-                base.projectile.Kill();
+                base.Projectile.Kill();
             }
             else
             {
-                base.projectile.ai[0] += 0.1f;
-                if (base.projectile.velocity.X != oldVelocity.X)
+                base.Projectile.ai[0] += 0.1f;
+                if (base.Projectile.velocity.X != oldVelocity.X)
                 {
-                    base.projectile.velocity.X = -oldVelocity.X;
+                    base.Projectile.velocity.X = -oldVelocity.X;
                 }
-                if (base.projectile.velocity.Y != oldVelocity.Y)
+                if (base.Projectile.velocity.Y != oldVelocity.Y)
                 {
-                    base.projectile.velocity.Y = -oldVelocity.Y;
+                    base.Projectile.velocity.Y = -oldVelocity.Y;
                 }
             }
             for (int i = 0; i < 3; i++)
@@ -165,21 +166,21 @@ namespace MythMod.Projectiles.projectile2
                 double num45 = Math.Cos((float)num44);
                 double num46 = Math.Sin((float)num44);
                 float num47 = (float)Main.rand.Next(50000, 100000) / 60000f;
-                int num40 = Projectile.NewProjectile(projectile.Center.X, projectile.Center.Y, (float)num45 * (float)num47 * 0.7f, (float)num46 * (float)num47 * 0.7f, base.mod.ProjectileType("闪电2"), 35, 2f, Main.myPlayer, 0f, 0);
+                int num40 = Projectile.NewProjectile(Projectile.Center.X, Projectile.Center.Y, (float)num45 * (float)num47 * 0.7f, (float)num46 * (float)num47 * 0.7f, base.Mod.Find<ModProjectile>("闪电2").Type, 35, 2f, Main.myPlayer, 0f, 0);
                 Main.projectile[num40].tileCollide = false;
                 Main.projectile[num40].timeLeft = 200;
             }
             for (int a = 0; a < 90; a++)
             {
                 Vector2 v = new Vector2(0, Main.rand.Next(25, 75) / 50f).RotatedByRandom(Math.PI * 2);
-                int num25 = Dust.NewDust(base.projectile.position, base.projectile.width, base.projectile.height, 88, v.X, v.Y, 150, default(Color), 0.6f);
+                int num25 = Dust.NewDust(base.Projectile.position, base.Projectile.width, base.Projectile.height, 88, v.X, v.Y, 150, default(Color), 0.6f);
                 Main.dust[num25].noGravity = false;
             }
             return false;
         }
         public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
         {
-            target.AddBuff(base.mod.BuffType("ElectriShock"), 60);
+            target.AddBuff(base.Mod.Find<ModBuff>("ElectriShock").Type, 60);
         }
         public override void Kill(int timeLeft)
         {
@@ -191,34 +192,34 @@ namespace MythMod.Projectiles.projectile2
                 }
             }
         }
-        public override void PostDraw(SpriteBatch spriteBatch, Color lightColor)
+        public override void PostDraw(Color lightColor)
         {
             List<CustomVertexInfo> bars = new List<CustomVertexInfo>();
 
             // 把所有的点都生成出来，按照顺序
-            for (int i = 1; i < projectile.oldPos.Length; ++i)
+            for (int i = 1; i < Projectile.oldPos.Length; ++i)
             {
-                if (projectile.oldPos[i] == Vector2.Zero) break;
+                if (Projectile.oldPos[i] == Vector2.Zero) break;
                 //spriteBatch.Draw(Main.magicPixel, projectile.oldPos[i] - Main.screenPosition,
                 //    new Rectangle(0, 0, 1, 1), Color.White, 0f, new Vector2(0.5f, 0.5f), 5f, SpriteEffects.None, 0f);
                 int width = 30;
-                if (projectile.timeLeft > 30)
+                if (Projectile.timeLeft > 30)
                 {
                     width = 30;
                 }
                 else
                 {
-                    width = projectile.timeLeft;
+                    width = Projectile.timeLeft;
                 }
-                var normalDir = projectile.oldPos[i - 1] - projectile.oldPos[i];
+                var normalDir = Projectile.oldPos[i - 1] - Projectile.oldPos[i];
                 normalDir = Vector2.Normalize(new Vector2(-normalDir.Y, normalDir.X));
 
-                var factor = i / (float)projectile.oldPos.Length;
+                var factor = i / (float)Projectile.oldPos.Length;
                 var color = Color.Lerp(Color.White, Color.Red, factor);
                 var w = MathHelper.Lerp(1f, 0.05f, factor);
 
-                bars.Add(new CustomVertexInfo(projectile.oldPos[i] + normalDir * width + new Vector2(6), color, new Vector3(factor, 1, w)));
-                bars.Add(new CustomVertexInfo(projectile.oldPos[i] + normalDir * -width + new Vector2(6), color, new Vector3(factor, 0, w)));
+                bars.Add(new CustomVertexInfo(Projectile.oldPos[i] + normalDir * width + new Vector2(6), color, new Vector3(factor, 1, w)));
+                bars.Add(new CustomVertexInfo(Projectile.oldPos[i] + normalDir * -width + new Vector2(6), color, new Vector3(factor, 0, w)));
             }
 
             List<CustomVertexInfo> triangleList = new List<CustomVertexInfo>();
@@ -228,7 +229,7 @@ namespace MythMod.Projectiles.projectile2
 
                 // 按照顺序连接三角形
                 triangleList.Add(bars[0]);
-                var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + Vector2.Normalize(projectile.velocity) * 2, Color.White,
+                var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + Vector2.Normalize(Projectile.velocity) * 2, Color.White,
                     new Vector3(0, 0.5f, 1));
                 triangleList.Add(bars[1]);
                 triangleList.Add(vertex);
@@ -261,7 +262,7 @@ namespace MythMod.Projectiles.projectile2
                 MythMod.DefaultEffect2.Parameters["uTime"].SetValue(-(float)Main.time * 0.133f);
                 Main.graphics.GraphicsDevice.Textures[0] = MythMod.MainColorBlue;
                 Main.graphics.GraphicsDevice.Textures[1] = MythMod.MainShape;
-                Main.graphics.GraphicsDevice.Textures[2] = mod.GetTexture("UIImages/ElectricityTrace");
+                Main.graphics.GraphicsDevice.Textures[2] = Mod.GetTexture("UIImages/ElectricityTrace");
                 Main.graphics.GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[1] = SamplerState.PointWrap;
                 Main.graphics.GraphicsDevice.SamplerStates[2] = SamplerState.PointWrap;

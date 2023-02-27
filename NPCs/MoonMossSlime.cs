@@ -15,29 +15,29 @@ namespace MythMod.NPCs
 		public override void SetStaticDefaults()
 		{
 			base.DisplayName.SetDefault("Moon slime");
-			Main.npcFrameCount[base.npc.type] = 2;
+			Main.npcFrameCount[base.NPC.type] = 2;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "月苔史莱姆");
 		}
 
 		// Token: 0x06001809 RID: 6153 RVA: 0x0010AD00 File Offset: 0x00108F00
 		public override void SetDefaults()
 		{
-			base.npc.aiStyle = 1;
-			base.npc.damage = 563;
-			base.npc.width = 40;
-			base.npc.height = 30;
-			base.npc.defense = 267;
-			base.npc.lifeMax = 7560;
-			base.npc.knockBackResist = 0f;
-			this.animationType = 81;
-			base.npc.value = (float)Item.buyPrice(0, 0, 3, 0);
-            base.npc.color = new Color(0, 0, 0, 0);
-			base.npc.alpha = 50;
-			base.npc.lavaImmune = false;
-			base.npc.noGravity = false;
-			base.npc.noTileCollide = false;
-			base.npc.HitSound = SoundID.NPCHit1;
-			base.npc.DeathSound = SoundID.NPCDeath1;
+			base.NPC.aiStyle = 1;
+			base.NPC.damage = 563;
+			base.NPC.width = 40;
+			base.NPC.height = 30;
+			base.NPC.defense = 267;
+			base.NPC.lifeMax = 7560;
+			base.NPC.knockBackResist = 0f;
+			this.AnimationType = 81;
+			base.NPC.value = (float)Item.buyPrice(0, 0, 3, 0);
+            base.NPC.color = new Color(0, 0, 0, 0);
+			base.NPC.alpha = 50;
+			base.NPC.lavaImmune = false;
+			base.NPC.noGravity = false;
+			base.NPC.noTileCollide = false;
+			base.NPC.HitSound = SoundID.NPCHit1;
+			base.NPC.DeathSound = SoundID.NPCDeath1;
 		}
 
 		// Token: 0x0600180A RID: 6154 RVA: 0x0010ADF8 File Offset: 0x00108FF8
@@ -51,21 +51,21 @@ namespace MythMod.NPCs
 		{
 			for (int i = 0; i < 5; i++)
 			{
-				Dust.NewDust(base.npc.position, base.npc.width, base.npc.height, 59, (float)hitDirection, -1f, 0, default(Color), 1f);
+				Dust.NewDust(base.NPC.position, base.NPC.width, base.NPC.height, 59, (float)hitDirection, -1f, 0, default(Color), 1f);
 			}
-			if (base.npc.life <= 0)
+			if (base.NPC.life <= 0)
 			{
 				for (int j = 0; j < 20; j++)
 				{
-					Dust.NewDust(base.npc.position, base.npc.width, base.npc.height, 59, (float)hitDirection, -1f, 0, default(Color), 1f);
+					Dust.NewDust(base.NPC.position, base.NPC.width, base.NPC.height, 59, (float)hitDirection, -1f, 0, default(Color), 1f);
 				}
 			}
 		}
 
 		// Token: 0x0600180C RID: 6156 RVA: 0x0010AEF8 File Offset: 0x001090F8
-		public override void NPCLoot()
+		public override void OnKill()
 		{
-            Item.NewItem((int)base.npc.position.X, (int)base.npc.position.Y, base.npc.width, base.npc.height, base.mod.ItemType("月苔矿"), Main.rand.Next(8, 15), false, 0, false, false);
+            Item.NewItem((int)base.NPC.position.X, (int)base.NPC.position.Y, base.NPC.width, base.NPC.height, base.Mod.Find<ModItem>("月苔矿").Type, Main.rand.Next(8, 15), false, 0, false, false);
 		}
 	}
 }

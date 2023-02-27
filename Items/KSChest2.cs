@@ -13,17 +13,17 @@ namespace MythMod.Items
 		}
 		public override void SetDefaults()
 		{
-			base.item.width = 22;
-			base.item.height = 22;
-			base.item.maxStack = 99;
-			base.item.useTurn = true;
-			base.item.autoReuse = true;
-			base.item.useAnimation = 15;
-			base.item.useTime = 10;
-			base.item.useStyle = 1;
-			base.item.consumable = true;
-			base.item.value = 500;
-            base.item.createTile = base.mod.TileType("KS宝藏箱2");
+			base.Item.width = 22;
+			base.Item.height = 22;
+			base.Item.maxStack = 99;
+			base.Item.useTurn = true;
+			base.Item.autoReuse = true;
+			base.Item.useAnimation = 15;
+			base.Item.useTime = 10;
+			base.Item.useStyle = 1;
+			base.Item.consumable = true;
+			base.Item.value = 500;
+            base.Item.createTile = base.Mod.Find<ModTile>("KS宝藏箱2").Type;
 		}
 	}
 }

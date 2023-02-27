@@ -1,4 +1,4 @@
-using Terraria.ID;
+﻿using Terraria.ID;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 using Terraria;
@@ -21,12 +21,11 @@ namespace MythMod.Items.Weapons
     {
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
+            Recipe recipe = CreateRecipe(1);
             recipe.AddIngredient(null, "EvilScaleDust", 15);
             recipe.AddIngredient(155, 1);
             recipe.requiredTile[0] = 26;
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }
         public override void SetStaticDefaults()
         {
@@ -37,21 +36,21 @@ namespace MythMod.Items.Weapons
         public static short GetGlowMask = 0;
         public override void SetDefaults()
         {
-            item.glowMask = GetGlowMask;
-            item.damage = 29;
-            item.melee = true;
-            item.width = 52;
-            item.height = 62;
-            item.useTime = 16;
-            item.rare = 3;
-            item.useAnimation = 14;
-            item.useStyle = 1;
-            item.knockBack = 2;
-            item.UseSound = SoundID.Item1;
-            item.autoReuse = true;
-            item.crit = 7;
-            item.value = 10000;
-            item.scale = 1f;
+            Item.glowMask = GetGlowMask;
+            Item.damage = 29;
+            Item.DamageType = DamageClass.Melee/* tModPorter Suggestion: Consider MeleeNoSpeed for no attack speed scaling */;
+            Item.width = 52;
+            Item.height = 62;
+            Item.useTime = 16;
+            Item.rare = 3;
+            Item.useAnimation = 14;
+            Item.useStyle = 1;
+            Item.knockBack = 2;
+            Item.UseSound = SoundID.Item1;
+            Item.autoReuse = true;
+            Item.crit = 7;
+            Item.value = 10000;
+            Item.scale = 1f;
         }
         public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
         {
@@ -69,7 +68,7 @@ namespace MythMod.Items.Weapons
             {
                 return;
             }
-            Projectile.NewProjectile(target.Center.X, target.Center.Y, 2f, 2f, base.mod.ProjectileType("烛光"), damage, knockback, player.whoAmI, 0f, 0f);
+            Projectile.NewProjectile(target.Center.X, target.Center.Y, 2f, 2f, base.Mod.Find<ModProjectile>("烛光").Type, damage, knockback, player.whoAmI, 0f, 0f);
         }
         public override void MeleeEffects(Player player, Rectangle hitbox)
         {

@@ -16,12 +16,12 @@ namespace MythMod.Items.Shields
         }
         public override void SetDefaults()
         {
-            item.width = 42;
-            item.height = 42;
-            item.maxStack = 1;
-            item.flame = true;
-            item.value = 100;
-            item.defense = 72;
+            Item.width = 42;
+            Item.height = 42;
+            Item.maxStack = 1;
+            Item.flame = true;
+            Item.value = 100;
+            Item.defense = 72;
         }
 
         public override void HoldItem(Player player)
@@ -30,7 +30,7 @@ namespace MythMod.Items.Shields
             if (mplayer.SD != 5)
             {
                 mplayer.SD = 5;
-                Projectile.NewProjectile(player.Center.X, player.Center.Y, 0, 0f, mod.ProjectileType("OceanShield"), 0, 0f, Main.myPlayer, 0f, 0f);
+                Projectile.NewProjectile(player.Center.X, player.Center.Y, 0, 0f, Mod.Find<ModProjectile>("OceanShield").Type, 0, 0f, Main.myPlayer, 0f, 0f);
             }
             mplayer.SD2 = 2;
             mplayer.AddDef = 72;
@@ -38,11 +38,10 @@ namespace MythMod.Items.Shields
         }
         public override void AddRecipes()
         {
-            ModRecipe recipe = new ModRecipe(mod);
-            recipe.AddIngredient(mod.ItemType("OceanBlueBar"), 30);
+            Recipe recipe = CreateRecipe(1);
+            recipe.AddIngredient(Mod.Find<ModItem>("OceanBlueBar").Type, 30);
             recipe.requiredTile[0] = 16;
-            recipe.SetResult(this, 1);
-            recipe.AddRecipe();
+            recipe.Register();
         }
     }
 }
