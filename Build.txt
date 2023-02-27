@@ -1,0 +1,8 @@
+﻿author = 万象元素
+version = 2.5.96.1204
+displayName = [c/00536B:M][c/000089:y][c/3700FF:t][c/872BFF:h][i:521][c/872BFF:M][c/000089:o][c/00536B:d]
+hideCode = true
+hideResources = false
+includeSource = true
+buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*
+includePDB = true

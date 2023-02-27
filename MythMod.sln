@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.779
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MythMod", "MythMod.csproj", "{2A0CB1BE-ECDE-45C9-94C1-5EA41DD660CA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A0CB1BE-ECDE-45C9-94C1-5EA41DD660CA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2A0CB1BE-ECDE-45C9-94C1-5EA41DD660CA}.Debug|x86.Build.0 = Debug|Any CPU
+		{2A0CB1BE-ECDE-45C9-94C1-5EA41DD660CA}.Release|x86.ActiveCfg = Release|Any CPU
+		{2A0CB1BE-ECDE-45C9-94C1-5EA41DD660CA}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4E68E652-E9C9-43E7-B83B-4C5A682E97A1}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,23 @@
+Message at 2021/2/9 10:38:12: Importing Grey.fx with Microsoft.Xna.Framework.Content.Pipeline.EffectImporter
+Message at 2021/2/9 10:38:12: Processing Grey.fx with Microsoft.Xna.Framework.Content.Pipeline.Processors.EffectProcessor
+Message at 2021/2/9 10:38:12: Compiling C:\Users\51165\Documents\My Games\Terraria\ModLoader\Mod Sources\MythMod\Effects\Shader生成器\Content\Grey.xnb
+Message at 2021/2/9 10:38:58: Importing Grey.fx with Microsoft.Xna.Framework.Content.Pipeline.EffectImporter
+Message at 2021/2/9 10:38:58: Processing Grey.fx with Microsoft.Xna.Framework.Content.Pipeline.Processors.EffectProcessor
+Message at 2021/2/9 10:38:58: Compiling C:\Users\51165\Documents\My Games\Terraria\ModLoader\Mod Sources\MythMod\Effects\Shader生成器\Content\Grey.xnb
+Message at 2021/2/9 12:36:18: Importing Grey.fx with Microsoft.Xna.Framework.Content.Pipeline.EffectImporter
+Message at 2021/2/9 12:36:18: Processing Grey.fx with Microsoft.Xna.Framework.Content.Pipeline.Processors.EffectProcessor
+Error at 2021/2/9 12:36:18: Errors compiling C:\Users\51165\Documents\My Games\Terraria\ModLoader\Mod Sources\MythMod\Effects\Shader生成器\input\Grey.fx:
+C:\Users\51165\Documents\My Games\Terraria\ModLoader\Mod Sources\MythMod\Effects\Shader??????\memory(25,12): error X4000: variable 'MouseX' used without having been completely initialized
+C:\Users\51165\Documents\My Games\Terraria\ModLoader\Mod Sources\MythMod\Effects\Shader??????\memory(25,12): error X4000: variable 'MouseY' used without having been completely initialized
+C:\Users\51165\Documents\My Games\Terraria\ModLoader\Mod Sources\MythMod\Effects\Shader??????\memory(39,17): ID3DXEffectCompiler::CompileEffect: There was an error compiling expression
+ID3DXEffectCompiler: Compilation failed
+Message at 2021/2/9 12:36:36: Importing Grey.fx with Microsoft.Xna.Framework.Content.Pipeline.EffectImporter
+Message at 2021/2/9 12:36:36: Processing Grey.fx with Microsoft.Xna.Framework.Content.Pipeline.Processors.EffectProcessor
+Error at 2021/2/9 12:36:36: Errors compiling C:\Users\51165\Documents\My Games\Terraria\ModLoader\Mod Sources\MythMod\Effects\Shader生成器\input\Grey.fx:
+C:\Users\51165\Documents\My Games\Terraria\ModLoader\Mod Sources\MythMod\Effects\Shader??????\memory(25,12): error X4000: variable 'MouseX' used without having been completely initialized
+C:\Users\51165\Documents\My Games\Terraria\ModLoader\Mod Sources\MythMod\Effects\Shader??????\memory(25,12): error X4000: variable 'MouseY' used without having been completely initialized
+C:\Users\51165\Documents\My Games\Terraria\ModLoader\Mod Sources\MythMod\Effects\Shader??????\memory(39,17): ID3DXEffectCompiler::CompileEffect: There was an error compiling expression
+ID3DXEffectCompiler: Compilation failed
+Message at 2021/2/9 12:37:19: Importing Grey.fx with Microsoft.Xna.Framework.Content.Pipeline.EffectImporter
+Message at 2021/2/9 12:37:19: Processing Grey.fx with Microsoft.Xna.Framework.Content.Pipeline.Processors.EffectProcessor
+Message at 2021/2/9 12:37:19: Compiling C:\Users\51165\Documents\My Games\Terraria\ModLoader\Mod Sources\MythMod\Effects\Shader生成器\Content\Grey.xnb
