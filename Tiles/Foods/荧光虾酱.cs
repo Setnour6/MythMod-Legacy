@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Terraria;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -37,8 +38,8 @@ namespace MythMod.Tiles.Foods
                 15
             };
             this.DustType = -1;
-            ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("");
+            LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("");
             base.AddMapEntry(new Color(153, 107, 0), modTranslation);
 		}
         public override void PostDraw(int i, int j, SpriteBatch spriteBatch)

@@ -21,7 +21,7 @@ namespace MythMod.Projectiles.projectile2
         //4444444
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("硫磺爆炸");
+            // DisplayName.SetDefault("硫磺爆炸");
             Main.projFrames[base.Projectile.type] = 5;
         }
         //7359668

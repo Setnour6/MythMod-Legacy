@@ -13,7 +13,7 @@ namespace MythMod.NPCs.VolCano
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("Abyss slime");
+            // base.DisplayName.SetDefault("Abyss slime");
             Main.npcFrameCount[base.NPC.type] = 2;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "火山史莱姆");
         }
@@ -72,7 +72,7 @@ namespace MythMod.NPCs.VolCano
             Color color = new Color(0.49f, 0.49f, 0.49f, 0);
             Main.spriteBatch.Draw(base.Mod.GetTexture("NPCs/火山史莱姆Glow"), vector2, new Rectangle?(base.NPC.frame), color, base.NPC.rotation, vector, 1f, effects, 0f);
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             for (int i = 0; i < 5; i++)
             {

@@ -14,7 +14,7 @@ namespace MythMod.Items.Weapons
 		// Token: 0x060019F2 RID: 6642 RVA: 0x00008ED2 File Offset: 0x000070D2
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("硫磺法杖");
+            // base.DisplayName.SetDefault("硫磺法杖");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "硫磺法杖");
 		}
 		public override void SetDefaults()

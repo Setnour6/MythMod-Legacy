@@ -20,7 +20,7 @@ namespace MythMod.Projectiles.projectile2
         // Token: 0x0600221E RID: 8734 RVA: 0x0000BDFD File Offset: 0x00009FFD
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("毁灭者剑气");
+            // base.DisplayName.SetDefault("毁灭者剑气");
 
         }
 

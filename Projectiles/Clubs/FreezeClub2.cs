@@ -21,7 +21,7 @@ namespace MythMod.Projectiles.Clubs
 	{
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("冰封耀天极");
+            // base.DisplayName.SetDefault("冰封耀天极");
         }
 		public override void SetDefaults()
 		{
@@ -37,7 +37,7 @@ namespace MythMod.Projectiles.Clubs
             base.Projectile.tileCollide = false;
             base.Projectile.alpha = 55;
 		}
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             for (int y = 0; y < 40; y++)
             {

@@ -8,7 +8,7 @@ namespace MythMod.Items
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("fire cloud");
+            // base.DisplayName.SetDefault("fire cloud");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "火烧云");
         }
         public override void SetDefaults()

@@ -13,8 +13,8 @@ namespace MythMod.Items.Magicpaper//在虚无mod的Items文件夹里
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("三阶毒池符咒");
-            Tooltip.SetDefault("在正下方释放一个剧毒池,释放出毒气\n液体中无效\n冷却10s");//物品介绍
+            // DisplayName.SetDefault("三阶毒池符咒");
+            // Tooltip.SetDefault("在正下方释放一个剧毒池,释放出毒气\n液体中无效\n冷却10s");//物品介绍
         }
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetDefaults()

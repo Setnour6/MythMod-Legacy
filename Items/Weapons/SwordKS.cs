@@ -13,8 +13,8 @@ namespace MythMod.Items.Weapons//制作是mod名字
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("荣耀之剑·史莱姆王");
-            base.Tooltip.SetDefault("你的实力已经碾压了史莱姆王，这把属于你的剑里面封印了它的灵魂\n放出弹来弹去的史莱姆剑气\n神话");
+            // base.DisplayName.SetDefault("荣耀之剑·史莱姆王");
+            // base.Tooltip.SetDefault("你的实力已经碾压了史莱姆王，这把属于你的剑里面封印了它的灵魂\n放出弹来弹去的史莱姆剑气\n神话");
         }
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetDefaults()

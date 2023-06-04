@@ -20,7 +20,7 @@ namespace MythMod.Items.Drawings
 		// Token: 0x060009BA RID: 2490 RVA: 0x00005A27 File Offset: 0x00003C27
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("烈焰彩虹");
+			// base.DisplayName.SetDefault("烈焰彩虹");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "烈焰彩虹");
 		}
 

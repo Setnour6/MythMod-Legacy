@@ -19,7 +19,7 @@ namespace MythMod.NPCs
         private bool A = true;
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("");
+            // base.DisplayName.SetDefault("");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "");
 		}
 		public override void SetDefaults()
@@ -107,7 +107,7 @@ namespace MythMod.NPCs
                 }
             }
         }
-        public override void OnHitPlayer(Player player, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
         }
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)

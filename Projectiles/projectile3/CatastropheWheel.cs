@@ -20,7 +20,7 @@ namespace MythMod.Projectiles.projectile3
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("浩劫轮回");
+            // DisplayName.SetDefault("浩劫轮回");
         }
         public override void SetDefaults()
         {
@@ -98,7 +98,7 @@ namespace MythMod.Projectiles.projectile3
             }
             Projectile.spriteDirection = (int)Projectile.ai[0];
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Projectile.timeLeft > 55)
             {

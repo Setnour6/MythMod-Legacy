@@ -30,7 +30,7 @@ namespace MythMod.Projectiles
 		private float Distance;
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("水母闪电");
+            // base.DisplayName.SetDefault("水母闪电");
 			Main.projFrames[base.Projectile.type] = 4;
 		}
 
@@ -66,7 +66,7 @@ namespace MythMod.Projectiles
 				Projectile.hostile = true;
 			}
 		}
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
         }
 		public override Color? GetAlpha(Color lightColor)

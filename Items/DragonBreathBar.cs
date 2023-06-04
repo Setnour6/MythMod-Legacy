@@ -25,8 +25,8 @@ namespace MythMod.Items
         // Token: 0x06000D75 RID: 3445 RVA: 0x0006A410 File Offset: 0x00068610
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("Abyss Bar");
-            base.Tooltip.SetDefault("'Ocean deep……'");
+            // base.DisplayName.SetDefault("Abyss Bar");
+            // base.Tooltip.SetDefault("'Ocean deep……'");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "龙息锭");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "'摸起来有一种远古的震颤……'");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);

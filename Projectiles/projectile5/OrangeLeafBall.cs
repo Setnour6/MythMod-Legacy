@@ -19,7 +19,7 @@ namespace MythMod.Projectiles.projectile5
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("橘色光球");
+            // DisplayName.SetDefault("橘色光球");
             Main.projFrames[Projectile.type] = 4;
         }
         public override void SetDefaults()
@@ -74,7 +74,7 @@ namespace MythMod.Projectiles.projectile5
                 Projectile.scale *= 0.99f;
             }
         }
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             Projectile.Kill();
         }

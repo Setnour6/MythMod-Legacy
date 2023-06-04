@@ -10,7 +10,7 @@ namespace MythMod.Projectiles.projectile2
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("火球");
+            // base.DisplayName.SetDefault("火球");
 		}
 		public override void SetDefaults()
 		{
@@ -53,7 +53,7 @@ namespace MythMod.Projectiles.projectile2
                 Projectile.tileCollide = false;
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(24, 1200);
         }

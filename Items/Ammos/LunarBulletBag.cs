@@ -21,8 +21,8 @@ namespace MythMod.Items.Ammos
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("无尽夜明弹袋");
-            base.Tooltip.SetDefault("供应无限量的夜明弹作为弹药");
+            // base.DisplayName.SetDefault("无尽夜明弹袋");
+            // base.Tooltip.SetDefault("供应无限量的夜明弹作为弹药");
 		}
 		public override void SetDefaults()
 		{

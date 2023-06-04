@@ -12,7 +12,7 @@ namespace MythMod.Items.Weapons.YoyoNoTheme
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("漩涡球");
+            // DisplayName.SetDefault("漩涡球");
             ItemID.Sets.Yoyo[Item.type] = true;
             ItemID.Sets.GamepadExtraRange[Item.type] = 15;
             ItemID.Sets.GamepadSmartQuickReach[Item.type] = true;

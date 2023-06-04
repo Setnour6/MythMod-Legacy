@@ -19,10 +19,10 @@ namespace MythMod.Items.Feathers
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("蜂之翎");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("蜂之翎");
+			// base.Tooltip.SetDefault("");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "蜂之翎");
-            Tooltip.SetDefault("如果装进饰品栏:增加6%闪避,增加1个召唤栏位\n如果装进羽毛槽:增加3%闪避,1个召唤栏位,0.24速度,⅔秒飞行时间\n神话");//教程是物品介绍
+            // Tooltip.SetDefault("如果装进饰品栏:增加6%闪避,增加1个召唤栏位\n如果装进羽毛槽:增加3%闪避,1个召唤栏位,0.24速度,⅔秒飞行时间\n神话");//教程是物品介绍
 		}
 		public override void SetDefaults()
 		{

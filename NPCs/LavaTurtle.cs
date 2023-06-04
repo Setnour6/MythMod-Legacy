@@ -13,7 +13,7 @@ namespace MythMod.NPCs
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("lava tortoise");
+			// base.DisplayName.SetDefault("lava tortoise");
 			Main.npcFrameCount[base.NPC.type] = 8;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "熔岩陆龟");
 		}
@@ -78,7 +78,7 @@ namespace MythMod.NPCs
                 return 0f;
             }
 		}
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             for (int i = 0; i < 5; i++)
             {

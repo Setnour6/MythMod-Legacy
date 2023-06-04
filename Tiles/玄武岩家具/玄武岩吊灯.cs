@@ -35,8 +35,8 @@ namespace MythMod.Tiles.玄武岩家具
 			TileObjectData.newTile.AnchorTop = new AnchorData((Terraria.Enums.AnchorType)1, 1, 1);
 			TileObjectData.addTile((int)base.Type);
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("玄武岩吊灯");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("玄武岩吊灯");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
 			this.AdjTiles = new int[]
 			{

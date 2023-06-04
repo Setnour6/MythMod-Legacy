@@ -29,8 +29,8 @@ namespace MythMod.Tiles.电梯
 			TileObjectData.addTile((int)base.Type);
 			this.DustType = 7;
 			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("水晶电梯楼层显示标");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("水晶电梯楼层显示标");
 			base.AddMapEntry(new Color(60, 60, 60), modTranslation);
 			modTranslation.AddTranslation(GameCulture.Chinese, "水晶电梯楼层显示标");
 		}

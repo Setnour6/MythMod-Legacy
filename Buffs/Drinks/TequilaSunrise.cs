@@ -9,8 +9,8 @@ namespace MythMod.Buffs.Drinks
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("特基拉日出");
-            base.Description.SetDefault("魔法回复增加6");
+            // base.DisplayName.SetDefault("特基拉日出");
+            // base.Description.SetDefault("魔法回复增加6");
 			Main.buffNoTimeDisplay[base.Type] = false;
 			Main.buffNoSave[base.Type] = true;
 		}

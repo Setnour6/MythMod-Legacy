@@ -21,7 +21,7 @@ namespace MythMod.Projectiles.projectile2
         //4444444
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("幻鱼");
+            // DisplayName.SetDefault("幻鱼");
             Main.projFrames[base.Projectile.type] = 8;
         }
         //7359668

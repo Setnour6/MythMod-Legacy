@@ -9,7 +9,7 @@ namespace MythMod.Projectiles.projectile3
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("影火球");
+            // base.DisplayName.SetDefault("影火球");
             Main.projFrames[Projectile.type] = 4;
         }
 		public override void SetDefaults()
@@ -81,7 +81,7 @@ namespace MythMod.Projectiles.projectile3
                 base.Projectile.velocity.Y = (base.Projectile.velocity.Y * 20f + num10) / 21f;
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(153, 900);
         }

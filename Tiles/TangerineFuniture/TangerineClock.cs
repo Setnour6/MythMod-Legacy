@@ -33,8 +33,8 @@ namespace MythMod.Tiles.TangerineFuniture
 			TileObjectData.newTile.Origin = new Point16(0, 4);
 			TileObjectData.newTile.UsesCustomCanPlace = true;
 			TileObjectData.addTile((int)base.Type);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("年桔木时钟");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("年桔木时钟");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
 			this.AdjTiles = new int[]
 			{

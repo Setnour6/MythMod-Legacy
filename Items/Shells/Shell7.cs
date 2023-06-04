@@ -12,8 +12,8 @@ namespace MythMod.Items.Shells
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("女王凤凰螺");
-            base.Tooltip.SetDefault("");
+            // base.DisplayName.SetDefault("女王凤凰螺");
+            // base.Tooltip.SetDefault("");
 		}
 		public override void SetDefaults()
 		{

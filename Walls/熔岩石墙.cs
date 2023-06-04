@@ -20,8 +20,8 @@ namespace MythMod.Walls
 		{
 			Main.wallHouse[(int)base.Type] = false;
 			this.DustType = 240;
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("");
 			base.AddMapEntry(new Color(15, 2, 0), modTranslation);
 		}
         public override bool CanExplode(int i, int j)

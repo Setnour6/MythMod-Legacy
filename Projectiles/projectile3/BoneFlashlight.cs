@@ -19,7 +19,7 @@ namespace MythMod.Projectiles.projectile3
 
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("骨头手电筒");
+            // base.DisplayName.SetDefault("骨头手电筒");
             Main.projFrames[Projectile.type] = 2;
         }
 

@@ -9,8 +9,8 @@ namespace MythMod.Buffs.Drinks
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("莓你不行");
-            base.Description.SetDefault("增加9%攻击,增加1生命回复");
+            // base.DisplayName.SetDefault("莓你不行");
+            // base.Description.SetDefault("增加9%攻击,增加1生命回复");
 			Main.buffNoTimeDisplay[base.Type] = false;
 			Main.buffNoSave[base.Type] = true;
 		}

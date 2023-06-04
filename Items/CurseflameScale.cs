@@ -13,8 +13,8 @@ namespace MythMod.Items
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("");
+			// base.Tooltip.SetDefault("");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "咒火鳞");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);

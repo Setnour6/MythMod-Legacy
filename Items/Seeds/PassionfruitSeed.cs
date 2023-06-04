@@ -10,7 +10,7 @@ namespace MythMod.Items.Seeds
 		// Token: 0x06000DEF RID: 3567 RVA: 0x0000638B File Offset: 0x0000458B
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("百香果种子");
+			// base.DisplayName.SetDefault("百香果种子");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "百香果种子");
 		}
 

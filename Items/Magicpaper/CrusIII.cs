@@ -11,8 +11,8 @@ namespace MythMod.Items.Magicpaper
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("三阶咒火球符咒");
-            Tooltip.SetDefault("释放一发更超级咒火球\n冷却10s");
+            // DisplayName.SetDefault("三阶咒火球符咒");
+            // Tooltip.SetDefault("释放一发更超级咒火球\n冷却10s");
         }
         public override void SetDefaults()
         {

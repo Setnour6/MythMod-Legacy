@@ -14,7 +14,7 @@ namespace MythMod.Projectiles.BloodyTusk
 		private float Y;
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("CrimsonTusk");
+            // base.DisplayName.SetDefault("CrimsonTusk");
 			Main.projFrames[base.Projectile.type] = 6;
 		}
 		public override void SetDefaults()

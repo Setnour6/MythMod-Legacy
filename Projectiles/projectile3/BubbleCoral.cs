@@ -21,7 +21,7 @@ namespace MythMod.Projectiles.projectile3
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("气泡珊瑚");
+            // DisplayName.SetDefault("气泡珊瑚");
         }
         private bool num100 = true;
         private Vector2 v = new Vector2(0, 0);

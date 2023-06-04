@@ -12,8 +12,8 @@ namespace MythMod.Items.Magicpaper
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("万箭齐发符咒石");
-            Tooltip.SetDefault("让玩家射出箭雨\n冷却10s\n无消耗");
+            // DisplayName.SetDefault("万箭齐发符咒石");
+            // Tooltip.SetDefault("让玩家射出箭雨\n冷却10s\n无消耗");
         }
         public override void SetDefaults()
         {

@@ -10,9 +10,9 @@ namespace MythMod.Items.Weapons.Weapon2
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("MESword");
+            // DisplayName.SetDefault("MESword");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "电磁刃");
-            Tooltip.SetDefault("MESword");
+            // Tooltip.SetDefault("MESword");
             Tooltip.AddTranslation(GameCulture.Chinese, "");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
@@ -66,7 +66,7 @@ namespace MythMod.Items.Weapons.Weapon2
         {
             return base.HoldoutOrigin();    
         }
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             for(int i = 0;i < 4;i++)
             {

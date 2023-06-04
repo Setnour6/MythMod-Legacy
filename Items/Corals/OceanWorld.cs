@@ -19,8 +19,8 @@ namespace MythMod.Items.Corals
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("海洋世界");
-            base.Tooltip.SetDefault("传送到泰拉大陆边缘");
+            // base.DisplayName.SetDefault("海洋世界");
+            // base.Tooltip.SetDefault("传送到泰拉大陆边缘");
         }
         public override void SetDefaults()
         {

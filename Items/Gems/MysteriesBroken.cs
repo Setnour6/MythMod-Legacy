@@ -9,8 +9,8 @@ namespace MythMod.Items.Gems
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("这似乎是某些东西的碎片");
-            DisplayName.SetDefault("MysteriesPearlBroken");
+            // Tooltip.SetDefault("这似乎是某些东西的碎片");
+            // DisplayName.SetDefault("MysteriesPearlBroken");
             DisplayName.AddTranslation(GameCulture.Chinese, "神秘碎片");
         }
         public override void SetDefaults()

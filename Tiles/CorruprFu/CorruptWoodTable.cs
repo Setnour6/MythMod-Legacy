@@ -22,8 +22,8 @@ namespace MythMod.Tiles.CorruprFu
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style3x2);
 			TileObjectData.addTile((int)base.Type);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("朽木桌");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("朽木桌");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
 			this.AdjTiles = new int[]
 			{

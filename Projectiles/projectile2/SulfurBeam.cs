@@ -11,7 +11,7 @@ namespace MythMod.Projectiles.projectile2
 		// Token: 0x060028BD RID: 10429 RVA: 0x0000D7C0 File Offset: 0x0000B9C0
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("硫磺剑气");
+            // base.DisplayName.SetDefault("硫磺剑气");
 		}
 
 		// Token: 0x060028BE RID: 10430 RVA: 0x00208FC8 File Offset: 0x002071C8
@@ -43,7 +43,7 @@ namespace MythMod.Projectiles.projectile2
                 Main.dust[num4].velocity = new Vector2(0, 0);
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
 		}
 		// Token: 0x060028C0 RID: 10432 RVA: 0x00208E28 File Offset: 0x00207028

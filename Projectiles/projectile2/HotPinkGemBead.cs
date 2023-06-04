@@ -11,7 +11,7 @@ namespace MythMod.Projectiles.projectile2
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("石榴石弹球");
+            // base.DisplayName.SetDefault("石榴石弹球");
 		}
 		public override void SetDefaults()
 		{
@@ -36,7 +36,7 @@ namespace MythMod.Projectiles.projectile2
 		    base.Projectile.Kill();
 			return false;
 		}
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             int num = Projectile.NewProjectile(base.Projectile.Center.X + base.Projectile.velocity.X * 2f, base.Projectile.Center.Y + base.Projectile.velocity.Y * 2f, base.Projectile.velocity.X, base.Projectile.velocity.Y, 51, 10, 0, Main.myPlayer, 0f, 0f);
             Main.projectile[num].penetrate = 4;

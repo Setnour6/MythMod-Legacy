@@ -208,7 +208,7 @@ namespace MythMod.Items
 		{
 			this.postMoonLordRarity = tag.GetInt("rarity");
 		}
-        public override void OnHitNPC(Item item, Player player, NPC target, int damage, float knockBack, bool crit)
+        public override void OnHitNPC(Item item, Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             if (player.HasBuff(Mod.Find<ModBuff>("嗜血狂暴").Type))

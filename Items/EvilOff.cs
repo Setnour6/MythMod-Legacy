@@ -14,8 +14,8 @@ namespace MythMod.Items
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("恶灵封印卡");
-            base.Tooltip.SetDefault("用于封印整个世界的能量,难度和你的收获都将下降\n神话");
+            // base.DisplayName.SetDefault("恶灵封印卡");
+            // base.Tooltip.SetDefault("用于封印整个世界的能量,难度和你的收获都将下降\n神话");
         }
         public override void SetDefaults()
         {

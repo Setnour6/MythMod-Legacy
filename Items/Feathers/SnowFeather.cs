@@ -19,10 +19,10 @@ namespace MythMod.Items.Feathers
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("纯白雪羽");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("纯白雪羽");
+			// base.Tooltip.SetDefault("");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "纯白雪羽");
-            Tooltip.SetDefault("增加0.16速度,½秒飞行时间,10生命,7‱概率冰冻敌人,1%闪避");
+            // Tooltip.SetDefault("增加0.16速度,½秒飞行时间,10生命,7‱概率冰冻敌人,1%闪避");
 		}
 		public override void SetDefaults()
 		{

@@ -21,7 +21,7 @@ namespace MythMod.Projectiles.CorruptMoth
         //4444444
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("茧");
+            // DisplayName.SetDefault("茧");
         }
         //7359668
         public override void SetDefaults()

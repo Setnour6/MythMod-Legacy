@@ -34,8 +34,8 @@ namespace MythMod.Tiles.Volcano
             TileObjectData.newTile.CoordinateWidth = 96;
             TileObjectData.addTile((int)base.Type);
 			this.DustType = 112;
-            ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("");
+            LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("");
             base.AddMapEntry(new Color(247, 165, 0), modTranslation);
 			this.MineResist = 3f;
 			base.SetStaticDefaults();

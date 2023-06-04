@@ -13,8 +13,8 @@ namespace MythMod.Items.Armors
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("");
+			// base.Tooltip.SetDefault("");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "渊海头饰");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "魔法伤害和暴击各增加18%,法力上限增加120");
 		}

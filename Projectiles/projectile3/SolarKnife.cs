@@ -21,7 +21,7 @@ namespace MythMod.Projectiles.projectile3
 
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("日炎双刀");
+            // base.DisplayName.SetDefault("日炎双刀");
             Main.projFrames[Projectile.type] = 7;
         }
 
@@ -97,7 +97,7 @@ namespace MythMod.Projectiles.projectile3
         {
             return new Color?(new Color(1f, 0.3f, 0.5f, 0.2f));
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(189, 900, false);
         }

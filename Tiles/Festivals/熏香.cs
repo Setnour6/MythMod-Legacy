@@ -28,8 +28,8 @@ namespace MythMod.Tiles.Festivals
             TileObjectData.newTile.CoordinateWidth = 18;
             TileObjectData.addTile((int)base.Type);
 			this.DustType = 0;
-            ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("");
+            LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("");
             base.AddMapEntry(new Color(219, 153, 61), modTranslation);
 			this.MineResist = 3f;
 			base.SetStaticDefaults();

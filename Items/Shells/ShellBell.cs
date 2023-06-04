@@ -12,8 +12,8 @@ namespace MythMod.Items.Shells
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("贝壳风铃");
-            base.Tooltip.SetDefault("");
+            // base.DisplayName.SetDefault("贝壳风铃");
+            // base.Tooltip.SetDefault("");
 		}
 		public override void SetDefaults()
 		{

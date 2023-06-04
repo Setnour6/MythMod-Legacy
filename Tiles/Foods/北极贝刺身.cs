@@ -24,11 +24,11 @@ namespace MythMod.Tiles.Foods
             TileObjectData.newTile.CoordinateWidth = 54;
             TileObjectData.addTile((int)base.Type);
 			this.DustType = 31;
-            ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("");
+            LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("");
             base.AddMapEntry(new Color(242, 141, 0), modTranslation);
             this.MineResist = 3f;
-            this.ItemDrop = Mod.Find<ModItem>("北极贝刺身").Type;
+            this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = Mod.Find<ModItem>("北极贝刺身").Type;
             base.SetStaticDefaults();
 			modTranslation.AddTranslation(GameCulture.Chinese, "");
 		}

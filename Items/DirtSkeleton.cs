@@ -13,8 +13,8 @@ namespace MythMod.Items
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("泥塑颅骨");
-            base.Tooltip.SetDefault("召唤潜地恶鬼");
+            // base.DisplayName.SetDefault("泥塑颅骨");
+            // base.Tooltip.SetDefault("召唤潜地恶鬼");
         }
         public override void SetDefaults()
         {

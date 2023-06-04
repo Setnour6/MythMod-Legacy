@@ -11,7 +11,7 @@ namespace MythMod.Projectiles.projectile3
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("雪碧");
+            // base.DisplayName.SetDefault("雪碧");
 		}
         private float num = 0;
         public override void SetDefaults()
@@ -66,7 +66,7 @@ namespace MythMod.Projectiles.projectile3
                 //Main.dust[num].noLight = true;
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
 		}
 	}

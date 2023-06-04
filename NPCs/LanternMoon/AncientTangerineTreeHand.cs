@@ -27,7 +27,7 @@ namespace MythMod.NPCs.LanternMoon
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("Thousand years orange monster");
+			// base.DisplayName.SetDefault("Thousand years orange monster");
 			Main.npcFrameCount[base.NPC.type] = 1;
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "千年桔树的枝条");
 		}
@@ -70,7 +70,7 @@ namespace MythMod.NPCs.LanternMoon
         private int K = -1;
         private Vector2 p0;
         private Vector2 pM;
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
 		{
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             if(NPC.life <= 0)

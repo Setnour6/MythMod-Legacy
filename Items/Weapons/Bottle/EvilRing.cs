@@ -19,10 +19,10 @@ namespace MythMod.Items.Weapons.Bottle
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("怨念之戒");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("怨念之戒");
+			// base.Tooltip.SetDefault("");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "怨念之戒");
-            Tooltip.SetDefault("封印着仇恨与痛苦\n所有伤害提升27%,暴击增加14%\n生命将缓缓流逝");
+            // Tooltip.SetDefault("封印着仇恨与痛苦\n所有伤害提升27%,暴击增加14%\n生命将缓缓流逝");
 		}
 		public override void SetDefaults()
 		{

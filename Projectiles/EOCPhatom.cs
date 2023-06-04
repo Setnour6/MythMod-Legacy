@@ -13,7 +13,7 @@ namespace MythMod.Projectiles
 		// Token: 0x06001EC3 RID: 7875 RVA: 0x0000C81D File Offset: 0x0000AA1D
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("克苏鲁之眼之影");
+            // base.DisplayName.SetDefault("克苏鲁之眼之影");
 			Main.projFrames[base.Projectile.type] = 1;
 		}
 		public override void SetDefaults()

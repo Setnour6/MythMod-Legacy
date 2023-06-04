@@ -15,7 +15,7 @@ namespace MythMod.Projectiles.projectile4
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("血月棱镜");
+            // DisplayName.SetDefault("血月棱镜");
         }
         public override void SetDefaults()
         {

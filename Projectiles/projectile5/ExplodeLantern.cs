@@ -21,7 +21,7 @@ namespace MythMod.Projectiles.projectile5
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("超级爆炸灯笼");
+            // DisplayName.SetDefault("超级爆炸灯笼");
         }
         public override void SetDefaults()
         {
@@ -194,7 +194,7 @@ namespace MythMod.Projectiles.projectile5
             }
             return false;
 		}
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             Projectile.Kill();
         }

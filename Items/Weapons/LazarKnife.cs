@@ -21,7 +21,7 @@ namespace MythMod.Items.Weapons
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault("激光手里剑");
+			// DisplayName.SetDefault("激光手里剑");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;

@@ -22,8 +22,8 @@ namespace MythMod.Tiles.玄武岩家具
 				20
 			};
 			TileObjectData.addTile((int)base.Type);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("玄武岩蜡烛");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("玄武岩蜡烛");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
 			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
@@ -31,7 +31,7 @@ namespace MythMod.Tiles.玄武岩家具
 			{
 				4
 			};
-			this.ItemDrop = base.Mod.Find<ModItem>("BasaltCandle").Type;
+			this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = base.Mod.Find<ModItem>("BasaltCandle").Type;
 			modTranslation.AddTranslation(GameCulture.Chinese, "玄武岩蜡烛");
 		}
 		public override bool CreateDust(int i, int j, ref int type)

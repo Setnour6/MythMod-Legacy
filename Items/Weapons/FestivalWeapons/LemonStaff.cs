@@ -19,7 +19,7 @@ namespace MythMod.Items.Weapons.FestivalWeapons
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("柠檬喜糖法杖");
+            // base.DisplayName.SetDefault("柠檬喜糖法杖");
 			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "柠檬喜糖法杖");
 		}

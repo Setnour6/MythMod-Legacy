@@ -13,7 +13,7 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("晶状体激光枪");
+            // base.DisplayName.SetDefault("晶状体激光枪");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "晶状体激光枪");
 		}
 		public override void SetDefaults()

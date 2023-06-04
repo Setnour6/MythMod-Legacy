@@ -8,8 +8,8 @@ namespace MythMod.Items.Corals
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("海盗船旗帜");
-            Tooltip.SetDefault("");
+            // DisplayName.SetDefault("海盗船旗帜");
+            // Tooltip.SetDefault("");
         }
         public override void SetDefaults()
         {

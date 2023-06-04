@@ -21,8 +21,8 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault(".");
-			base.Tooltip.SetDefault(".");
+			// base.DisplayName.SetDefault(".");
+			// base.Tooltip.SetDefault(".");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "混沌妖法");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "神话");
 		}

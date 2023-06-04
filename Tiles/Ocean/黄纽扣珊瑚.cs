@@ -27,17 +27,17 @@ namespace MythMod.Tiles.Ocean
 			this.DustType = 183;
 			this.HitSound = 21;
 			this.soundStyle/* tModPorter Note: Removed. Integrate into HitSound */ = 2;
-            this.ItemDrop = base.Mod.Find<ModItem>("YellowGorgonian").Type;
+            this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = base.Mod.Find<ModItem>("YellowGorgonian").Type;
 			Main.tileSpelunker[(int)base.Type] = true;
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
 			base.AddMapEntry(new Color(159, 101, 196), modTranslation);
-            modTranslation.SetDefault("");
+            // modTranslation.SetDefault("");
             modTranslation.AddTranslation(GameCulture.Chinese, "");
 		}
 		public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
 		{
 			num5 += 0.3f;
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
 			base.AddMapEntry(new Color(159 * (int)(Math.Sin(num5 / 10000f) * 0.5 + 1), 101, 196), modTranslation);
 			if (!Lighting.NotRetro)
 			{

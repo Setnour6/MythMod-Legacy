@@ -12,8 +12,8 @@ namespace MythMod.Items.Magicpaper
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("二阶绽花符咒");
-            Tooltip.SetDefault("从鼠标炸出落花\n冷却10s");
+            // DisplayName.SetDefault("二阶绽花符咒");
+            // Tooltip.SetDefault("从鼠标炸出落花\n冷却10s");
         }
         public override void SetDefaults()
         {

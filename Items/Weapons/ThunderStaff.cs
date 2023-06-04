@@ -12,7 +12,7 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("Death");
+            // base.DisplayName.SetDefault("Death");
 			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "天雷法杖");
 		}

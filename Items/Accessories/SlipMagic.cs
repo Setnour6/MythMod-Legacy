@@ -19,10 +19,10 @@ namespace MythMod.Items.Accessories
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("滑脱护符");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("滑脱护符");
+			// base.Tooltip.SetDefault("");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "滑脱护符");
-            Tooltip.SetDefault("增加8%闪避\n神话");//教程是物品介绍
+            // Tooltip.SetDefault("增加8%闪避\n神话");//教程是物品介绍
 		}
 		public override void SetDefaults()
 		{

@@ -20,7 +20,7 @@ namespace MythMod.Items.Weapons
         public override void SetStaticDefaults()
         {
             DisplayName.AddTranslation(GameCulture.Chinese, "深渊暗流");
-            Tooltip.SetDefault("击中敌人引发浑浊的深渊爆炸");
+            // Tooltip.SetDefault("击中敌人引发浑浊的深渊爆炸");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;
@@ -51,7 +51,7 @@ namespace MythMod.Items.Weapons
             modRecipe.requiredTile[0] = 412;
             modRecipe.Register();
         }
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(24, 360, true);
             for (int i = 0; i < 228; i++)

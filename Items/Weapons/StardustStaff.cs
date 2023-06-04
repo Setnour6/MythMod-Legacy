@@ -21,8 +21,8 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("星光斑");
-			base.Tooltip.SetDefault("召唤星尘光标协助作战");
+            // base.DisplayName.SetDefault("星光斑");
+			// base.Tooltip.SetDefault("召唤星尘光标协助作战");
 		}
 		public override void SetDefaults()
 		{

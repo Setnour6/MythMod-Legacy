@@ -13,7 +13,7 @@ namespace MythMod.Projectiles.projectile3
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("晶体投刃");
+            // base.DisplayName.SetDefault("晶体投刃");
 		}
         private float num = 0;
         public override void SetDefaults()
@@ -75,7 +75,7 @@ namespace MythMod.Projectiles.projectile3
             Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, Main.rand.Next(-10, 10), Main.rand.Next(-10, 10), base.Mod.Find<ModProjectile>("水晶碎块3").Type, base.Projectile.damage / 3, base.Projectile.knockBack, base.Projectile.owner, 0f, 0f);
             Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, Main.rand.Next(-10, 10), Main.rand.Next(-10, 10), base.Mod.Find<ModProjectile>("水晶碎块4").Type, base.Projectile.damage / 3, base.Projectile.knockBack, base.Projectile.owner, 0f, 0f);
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
 		}
 	}

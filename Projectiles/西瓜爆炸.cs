@@ -11,7 +11,7 @@ namespace MythMod.Projectiles
 		// Token: 0x06002989 RID: 10633 RVA: 0x0000C341 File Offset: 0x0000A541
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("西瓜爆炸");
+            // base.DisplayName.SetDefault("西瓜爆炸");
 		}
 
 		// Token: 0x0600298A RID: 10634 RVA: 0x002137B8 File Offset: 0x002119B8

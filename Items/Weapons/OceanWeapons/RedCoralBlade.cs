@@ -12,7 +12,7 @@ namespace MythMod.Items.Weapons.OceanWeapons
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("");
+            // Tooltip.SetDefault("");
             DisplayName.AddTranslation(GameCulture.Chinese, "红珊瑚剑");
         }
         private int num = 0;
@@ -37,7 +37,7 @@ namespace MythMod.Items.Weapons.OceanWeapons
             Item.shootSpeed = 3f;
 
         }
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

@@ -11,7 +11,7 @@ namespace MythMod.Projectiles.projectile2
 		// Token: 0x060028BD RID: 10429 RVA: 0x0000D7C0 File Offset: 0x0000B9C0
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("兰花剑气");
+            // base.DisplayName.SetDefault("兰花剑气");
 		}
 
 		// Token: 0x060028BE RID: 10430 RVA: 0x00208FC8 File Offset: 0x002071C8
@@ -44,7 +44,7 @@ namespace MythMod.Projectiles.projectile2
                 Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 2f / 255f * Projectile.scale * Projectile.timeLeft / 120f, (float)(255 - base.Projectile.alpha) * 0.23f * Projectile.scale / 255f * Projectile.timeLeft / 120f, (float)(255 - base.Projectile.alpha) * 2.55f / 255f * Projectile.scale * Projectile.timeLeft / 120f);
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
 		}
         public override Color? GetAlpha(Color lightColor)

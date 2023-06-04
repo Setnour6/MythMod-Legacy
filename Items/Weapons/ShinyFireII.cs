@@ -26,8 +26,8 @@ namespace MythMod.Items.Weapons
 		// Token: 0x06001381 RID: 4993 RVA: 0x0008E404 File Offset: 0x0008C604
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault(".");
-			base.Tooltip.SetDefault(".");
+			// base.DisplayName.SetDefault(".");
+			// base.Tooltip.SetDefault(".");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "火树银花II");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "让它在夜空中绽放吧！\n绚烂无比，但是会迅速耗尽你的法力");
 		}

@@ -11,7 +11,7 @@ namespace MythMod.Projectiles.projectile3
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("迷你喷流");
+            // base.DisplayName.SetDefault("迷你喷流");
 			Main.projFrames[base.Projectile.type] = 1;
 		}
 		public override void SetDefaults()
@@ -27,7 +27,7 @@ namespace MythMod.Projectiles.projectile3
             base.Projectile.friendly = true;
 			this.CooldownSlot = 1;
 		}
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             float num7 = (float)(Main.rand.Next(0, 2000) / 1000f * Math.PI);
             for (int i = 0; i < 8; i++)

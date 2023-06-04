@@ -11,8 +11,8 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("骨片飞刀");
-            base.Tooltip.SetDefault("");
+            // base.DisplayName.SetDefault("骨片飞刀");
+            // base.Tooltip.SetDefault("");
 		}
         public override void AddRecipes()
         {

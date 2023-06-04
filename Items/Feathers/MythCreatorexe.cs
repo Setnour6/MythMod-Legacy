@@ -21,8 +21,8 @@ namespace MythMod.Items.Feathers
         private bool num = true;
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("MythCreator.exe");
-            base.Tooltip.SetDefault("");
+            // base.DisplayName.SetDefault("MythCreator.exe");
+            // base.Tooltip.SetDefault("");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "MythCreator.exe");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "地形生成器\n警告:非开发人员勿用\n可能导致地图存档毁坏和游戏崩溃");
         }

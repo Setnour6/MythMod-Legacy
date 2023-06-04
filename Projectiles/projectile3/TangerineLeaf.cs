@@ -19,7 +19,7 @@ namespace MythMod.Projectiles.projectile3
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("桔叶飞刀");
+            // DisplayName.SetDefault("桔叶飞刀");
         }
         public override void SetDefaults()
         {

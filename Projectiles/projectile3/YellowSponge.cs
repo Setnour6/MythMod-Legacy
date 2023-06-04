@@ -9,7 +9,7 @@ namespace MythMod.Projectiles.projectile3
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("黄色海绵喷流");
+            // base.DisplayName.SetDefault("黄色海绵喷流");
         }
 		public override void SetDefaults()
 		{

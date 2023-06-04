@@ -18,8 +18,8 @@ namespace MythMod.Items
         private bool num = true;
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("不稳定的传送杖");
-            base.Tooltip.SetDefault("Teleport you to your mouse's mirrorpoint of you");
+            // base.DisplayName.SetDefault("不稳定的传送杖");
+            // base.Tooltip.SetDefault("Teleport you to your mouse's mirrorpoint of you");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "不稳定的传送杖");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "传送到鼠标关于你的中心对称点");
         }

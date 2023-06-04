@@ -19,7 +19,7 @@ namespace MythMod.Projectiles.projectile3
 
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("晶状体短刃");
+            // base.DisplayName.SetDefault("晶状体短刃");
             Main.projFrames[Projectile.type] = 12;
         }
 

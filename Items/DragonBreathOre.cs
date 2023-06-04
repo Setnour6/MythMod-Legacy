@@ -23,7 +23,7 @@ namespace MythMod.Items//制作是mod名字
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("封印的远古脉搏，依稀可以感受到，大地呼吸的节奏");//教程是物品介绍
+            // Tooltip.SetDefault("封印的远古脉搏，依稀可以感受到，大地呼吸的节奏");//教程是物品介绍
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;

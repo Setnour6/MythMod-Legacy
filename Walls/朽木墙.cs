@@ -18,8 +18,8 @@ namespace MythMod.Walls
 		{
 			Main.wallHouse[(int)base.Type] = true;
 			this.DustType = 240;
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("");
 			base.AddMapEntry(new Color(37, 25, 16), modTranslation);
 		}
 	}

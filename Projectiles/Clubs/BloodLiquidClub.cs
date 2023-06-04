@@ -21,7 +21,7 @@ namespace MythMod.Projectiles.Clubs
 
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("灵液棍");
+            // base.DisplayName.SetDefault("灵液棍");
         }
 
         public override void SetDefaults()
@@ -104,7 +104,7 @@ namespace MythMod.Projectiles.Clubs
         {
             spriteBatch.Draw(base.Mod.GetTexture("Glows/BloodLiquidClub_Glow"), base.Projectile.Center - Main.screenPosition, null, Color.White, base.Projectile.rotation + (float)Math.PI / 2f, new Vector2(32f, 32f), 1f, SpriteEffects.None, 0f);
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(69, 600);
         }

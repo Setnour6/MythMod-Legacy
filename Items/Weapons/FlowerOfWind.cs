@@ -11,7 +11,7 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("风之花");
+            // base.DisplayName.SetDefault("风之花");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "风之花");
         }
         public static short GetGlowMask = 0;

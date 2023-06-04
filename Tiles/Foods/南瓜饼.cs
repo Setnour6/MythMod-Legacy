@@ -25,8 +25,8 @@ namespace MythMod.Tiles.Foods
 			};
             TileObjectData.newTile.CoordinateWidth = 54;
             TileObjectData.addTile((int)base.Type);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("南瓜饼");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("南瓜饼");
             base.AddMapEntry(new Color(242, 141, 0), modTranslation);
             base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
 			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;

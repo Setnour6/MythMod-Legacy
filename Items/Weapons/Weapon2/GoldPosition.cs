@@ -11,9 +11,9 @@ namespace MythMod.Items.Weapons.Weapon2
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("GoldPosition");
+            // DisplayName.SetDefault("GoldPosition");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "金相");
-            Tooltip.SetDefault("集普天下之金气,铸此神剑");
+            // Tooltip.SetDefault("集普天下之金气,铸此神剑");
             Tooltip.AddTranslation(GameCulture.Chinese, "集普天下之金气,铸此神剑");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
@@ -53,7 +53,7 @@ namespace MythMod.Items.Weapons.Weapon2
         {
             return base.HoldoutOrigin();    
         }
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

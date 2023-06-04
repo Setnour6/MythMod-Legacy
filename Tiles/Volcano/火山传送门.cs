@@ -33,8 +33,8 @@ namespace MythMod.Tiles.Volcano
 			TileObjectData.addTile((int)base.Type);
 			this.DustType = 7;
 			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("火山传送门");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("火山传送门");
 			base.AddMapEntry(new Color(0, 0, 0), modTranslation);
 			modTranslation.AddTranslation(GameCulture.Chinese, "火山传送门");
 		}

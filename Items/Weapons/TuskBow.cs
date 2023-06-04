@@ -23,7 +23,7 @@ namespace MythMod.Items.Weapons
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("");
+            // Tooltip.SetDefault("");
             DisplayName.AddTranslation(GameCulture.Chinese, "獠牙巨弓");
         }
         public override void SetDefaults()

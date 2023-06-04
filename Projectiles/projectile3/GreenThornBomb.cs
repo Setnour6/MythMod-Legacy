@@ -12,7 +12,7 @@ namespace MythMod.Projectiles.projectile3
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("青刺球炸弹");
+            // base.DisplayName.SetDefault("青刺球炸弹");
             Main.projFrames[base.Projectile.type] = 5;
         }
         private float num = 0;
@@ -93,7 +93,7 @@ namespace MythMod.Projectiles.projectile3
                 spriteBatch.Draw(base.Mod.GetTexture("Projectiles/projectile3/GreenThornBomb"), base.Projectile.Center - Main.screenPosition, new Rectangle(0, Projectile.frame * 60, 38, 60), new Color(S, S, S, 0), base.Projectile.rotation, new Vector2(19f, 19f), Projectile.scale, SpriteEffects.None, 0f);
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             stick = true;
             v = Projectile.position - target.position;

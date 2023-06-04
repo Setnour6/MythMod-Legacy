@@ -11,7 +11,7 @@ namespace MythMod.Projectiles.projectile2
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("桔子");
+            // base.DisplayName.SetDefault("桔子");
 		}
 		public override void SetDefaults()
 		{
@@ -30,7 +30,7 @@ namespace MythMod.Projectiles.projectile2
 		{
             Projectile.velocity.Y += 0.15f;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
 		}
         public override void Kill(int timeLeft)

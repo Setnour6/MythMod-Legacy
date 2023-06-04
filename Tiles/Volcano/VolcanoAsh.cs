@@ -17,16 +17,16 @@ namespace MythMod.Tiles.Volcano
             Main.tileOreFinderPriority[(int)base.Type] = 0;
             this.MinPick = 264;
 			this.DustType = 39;
-            this.ItemDrop = base.Mod.Find<ModItem>("VolcanoAsh").Type;
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("火山灰");
+            this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = base.Mod.Find<ModItem>("VolcanoAsh").Type;
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("火山灰");
 			base.AddMapEntry(new Color(70, 70, 70), modTranslation);
 			this.MineResist = 5f;
 			this.HitSound = 21;
 			Main.tileSpelunker[(int)base.Type] = true;
             modTranslation.AddTranslation(GameCulture.Chinese, "火山灰");
 		}
-        public override bool Drop(int i, int j)
+        public override bool Drop(int i, int j)/* tModPorter Note: Removed. Use CanDrop to decide if an item should drop. Use GetItemDrops to decide which item drops. Item drops based on placeStyle are handled automatically now, so this method might be able to be removed altogether. */
         {
             Item.NewItem(i * 16, j * 16, 16, 16, base.Mod.Find<ModItem>("VolcanoAsh").Type, 1, false, 0, false, false);
             return false;

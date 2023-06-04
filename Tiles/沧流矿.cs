@@ -16,9 +16,9 @@ namespace MythMod.Tiles
 			Main.tileOreFinderPriority[(int)base.Type] = 700;
 			this.MinPick = 234;
 			this.DustType = 91;
-            this.ItemDrop = base.Mod.Find<ModItem>("OceanBlueOre").Type;
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("沧流矿");
+            this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = base.Mod.Find<ModItem>("OceanBlueOre").Type;
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("沧流矿");
 			base.AddMapEntry(new Color(30, 144, 255), modTranslation);
 			this.MineResist = 5f;
 			this.HitSound = 21;

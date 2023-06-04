@@ -12,7 +12,7 @@ namespace MythMod.Items.Weapons
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault("向日飞盘");
+			// DisplayName.SetDefault("向日飞盘");
             Tooltip.AddTranslation(GameCulture.Chinese, "白天威力提升,夜晚威力下降");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }

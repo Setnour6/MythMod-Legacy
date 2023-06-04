@@ -16,7 +16,7 @@ namespace MythMod.NPCs.Yuanbao
 		private int num2;
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("虚弱元宝");
+            // base.DisplayName.SetDefault("虚弱元宝");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "虚弱元宝");
 		}
 		public override void SetDefaults()
@@ -75,7 +75,7 @@ namespace MythMod.NPCs.Yuanbao
 			return 0f;
 		}
 		// Token: 0x06001B1A RID: 6938 RVA: 0x000037AF File Offset: 0x000019AF
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             SoundEngine.PlaySound(SoundID.Item10, new Vector2(base.NPC.position.X, base.NPC.position.Y));
@@ -137,7 +137,7 @@ namespace MythMod.NPCs.Yuanbao
 			return false;
 		}
 		// Token: 0x06001B1C RID: 6940 RVA: 0x0000B461 File Offset: 0x00009661
-		public override void OnHitPlayer(Player player, int damage, bool crit)
+		public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
 		{
 		}
 	}

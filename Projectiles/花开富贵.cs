@@ -30,7 +30,7 @@ namespace MythMod.Projectiles
                 int num34 = Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, V.X, V.Y, base.Mod.Find<ModProjectile>("FireworkRed2").Type, base.Projectile.damage, 0.2f, Main.myPlayer, 0f, 0f);
             }
         }
-		public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
 			target.AddBuff(70, 240, true);
 		}

@@ -13,8 +13,8 @@ namespace MythMod.Items.Fishes
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("");
+			// base.Tooltip.SetDefault("");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "秋刀鱼");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "秋刀鱼");
 		}

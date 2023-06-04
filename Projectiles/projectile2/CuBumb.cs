@@ -12,7 +12,7 @@ namespace MythMod.Projectiles.projectile2
 		// Token: 0x06001C81 RID: 7297 RVA: 0x0000BBD6 File Offset: 0x00009DD6
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("铜钱手雷");
+            // base.DisplayName.SetDefault("铜钱手雷");
 		}
         private float num = 0;
         // Token: 0x06001C82 RID: 7298 RVA: 0x0016F518 File Offset: 0x0016D718
@@ -112,7 +112,7 @@ namespace MythMod.Projectiles.projectile2
             }
         }
         // Token: 0x06001E99 RID: 7833 RVA: 0x00188F8C File Offset: 0x0018718C
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
 		}
 	}

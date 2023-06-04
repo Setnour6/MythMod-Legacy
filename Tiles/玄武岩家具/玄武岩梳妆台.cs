@@ -41,8 +41,8 @@ namespace MythMod.Tiles.玄武岩家具
 			TileObjectData.newTile.AnchorBottom = new AnchorData((Terraria.Enums.AnchorType)11, TileObjectData.newTile.Width, 0);
 			TileObjectData.addTile((int)base.Type);
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("玄武岩梳妆台");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("玄武岩梳妆台");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
 			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
 			this.AdjTiles = new int[]
@@ -50,7 +50,7 @@ namespace MythMod.Tiles.玄武岩家具
 				88
 			};
 			this.dresser/* tModPorter Note: Removed. Use ContainerName.SetDefault() and TileID.Sets.BasicDresser instead */ = "玄武岩梳妆台";
-			this.DresserDrop = base.Mod.Find<ModItem>("BasaltDressingtable").Type;
+			this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = base.Mod.Find<ModItem>("BasaltDressingtable").Type;
 			modTranslation.AddTranslation(GameCulture.Chinese, "玄武岩梳妆台");
 		}
 		public override bool CreateDust(int i, int j, ref int type)
@@ -237,7 +237,7 @@ namespace MythMod.Tiles.玄武岩家具
 		}
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			Item.NewItem(i * 16, j * 16, 48, 32, this.DresserDrop, 1, false, 0, false, false);
+			Item.NewItem(i * 16, j * 16, 48, 32, this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */, 1, false, 0, false, false);
 			Chest.DestroyChest(i, j);
 		}
 	}

@@ -8,8 +8,8 @@ namespace MythMod.Items
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("");
-            base.DisplayName.SetDefault("碎蛾翼");
+            // Tooltip.SetDefault("");
+            // base.DisplayName.SetDefault("碎蛾翼");
         }
         public override void SetDefaults()
         {

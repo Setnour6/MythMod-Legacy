@@ -9,8 +9,8 @@ namespace MythMod.Buffs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("冰晶雪兽");
-            base.Description.SetDefault("冰晶雪兽为你而战");
+            // base.DisplayName.SetDefault("冰晶雪兽");
+            // base.Description.SetDefault("冰晶雪兽为你而战");
 			Main.buffNoTimeDisplay[base.Type] = true;
 			Main.buffNoSave[base.Type] = true;
 		}

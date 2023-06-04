@@ -9,8 +9,8 @@ namespace MythMod.Buffs.Drinks
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("燃烧地狱");
-            base.Description.SetDefault("生命回复增加25,防御减少18");
+            // base.DisplayName.SetDefault("燃烧地狱");
+            // base.Description.SetDefault("生命回复增加25,防御减少18");
 			Main.buffNoTimeDisplay[base.Type] = false;
 			Main.buffNoSave[base.Type] = true;
 		}

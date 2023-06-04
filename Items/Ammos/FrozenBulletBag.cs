@@ -20,8 +20,8 @@ namespace MythMod.Items.Ammos
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("无尽冰霜弹袋");
-            base.Tooltip.SetDefault("供应无限量的冰霜弹作为弹药");
+            // base.DisplayName.SetDefault("无尽冰霜弹袋");
+            // base.Tooltip.SetDefault("供应无限量的冰霜弹作为弹药");
 		}
 		public override void SetDefaults()
 		{

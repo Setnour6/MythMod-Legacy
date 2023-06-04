@@ -9,8 +9,8 @@ namespace MythMod.Buffs.Drinks
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("红绿灯");
-            base.Description.SetDefault("减少7防御,增加8%攻击,增加6%闪避");
+            // base.DisplayName.SetDefault("红绿灯");
+            // base.Description.SetDefault("减少7防御,增加8%攻击,增加6%闪避");
 			Main.buffNoTimeDisplay[base.Type] = false;
 			Main.buffNoSave[base.Type] = true;
 		}

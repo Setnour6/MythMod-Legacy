@@ -18,7 +18,7 @@ namespace MythMod.Projectiles.projectile3
 	{
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("风之刃");
+            // base.DisplayName.SetDefault("风之刃");
         }
 		public override void SetDefaults()
 		{

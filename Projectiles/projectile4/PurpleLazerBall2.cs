@@ -13,7 +13,7 @@ namespace MythMod.Projectiles.projectile4
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("紫激光球");
+            // DisplayName.SetDefault("紫激光球");
         }
         public override void SetDefaults()
         {

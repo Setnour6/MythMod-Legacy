@@ -14,8 +14,8 @@ namespace MythMod.Items.Weapons
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("荣耀之剑·机械骷髅王");
-            base.Tooltip.SetDefault("你的实力已经碾压了机械骷髅王，这把属于你的剑里面封印了它的灵魂");
+            // base.DisplayName.SetDefault("荣耀之剑·机械骷髅王");
+            // base.Tooltip.SetDefault("你的实力已经碾压了机械骷髅王，这把属于你的剑里面封印了它的灵魂");
         }
         public override void SetDefaults()
         {

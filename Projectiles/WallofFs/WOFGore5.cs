@@ -11,7 +11,7 @@ namespace MythMod.Projectiles.WallofFs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("被诅咒的肉碎片");
+            // base.DisplayName.SetDefault("被诅咒的肉碎片");
 		}
 		public override void SetDefaults()
 		{

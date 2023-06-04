@@ -21,8 +21,8 @@ namespace MythMod.Items.Ammos
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("无尽幽魂弹袋");
-            base.Tooltip.SetDefault("供应无限量的幽魂弹作为弹药");
+            // base.DisplayName.SetDefault("无尽幽魂弹袋");
+            // base.Tooltip.SetDefault("供应无限量的幽魂弹作为弹药");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;

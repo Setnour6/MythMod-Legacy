@@ -40,8 +40,8 @@ namespace MythMod.Tiles.CorruprFu
 			TileObjectData.newTile.LavaDeath = false;
 			TileObjectData.newTile.AnchorBottom = new AnchorData((Terraria.Enums.AnchorType)11, TileObjectData.newTile.Width, 0);
 			TileObjectData.addTile((int)base.Type);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("缠藻箱");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("缠藻箱");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation, new Func<string, int, int, string>(this.MapChestName));
 			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
 			this.AdjTiles = new int[]
@@ -49,7 +49,7 @@ namespace MythMod.Tiles.CorruprFu
 				21
 			};
 			this.chest/* tModPorter Note: Removed. Use ContainerName.SetDefault() and TileID.Sets.BasicChest instead */ = "缠藻箱";
-			this.ChestDrop = base.Mod.Find<ModItem>("CorruptWoodChest").Type;
+			this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = base.Mod.Find<ModItem>("CorruptWoodChest").Type;
 			modTranslation.AddTranslation(GameCulture.Chinese, "缠藻箱");
 		}
 		public override bool CreateDust(int i, int j, ref int type)
@@ -87,7 +87,7 @@ namespace MythMod.Tiles.CorruprFu
 		}
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			Item.NewItem(i * 16, j * 16, 32, 32, this.ChestDrop, 1, false, 0, false, false);
+			Item.NewItem(i * 16, j * 16, 32, 32, this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */, 1, false, 0, false, false);
 			Chest.DestroyChest(i, j);
 		}
 		public override void RightClick(int i, int j)

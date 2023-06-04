@@ -11,7 +11,7 @@ namespace MythMod.Projectiles.projectile4
 	{
 		public override void SetStaticDefaults()
 		{
-            DisplayName.SetDefault("伤害");
+            // DisplayName.SetDefault("伤害");
 		}
 		public override void SetDefaults()
 		{

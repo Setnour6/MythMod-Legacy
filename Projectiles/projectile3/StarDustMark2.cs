@@ -19,7 +19,7 @@ namespace MythMod.Projectiles.projectile3
 		private float Distance;
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("星尘光标");
+            // base.DisplayName.SetDefault("星尘光标");
 		}
 		public override void SetDefaults()
 		{

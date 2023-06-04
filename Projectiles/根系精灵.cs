@@ -11,7 +11,7 @@ namespace MythMod.Projectiles
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("根系精灵");
+            // base.DisplayName.SetDefault("根系精灵");
 			ProjectileID.Sets.MinionSacrificable[base.Projectile.type] = true;
 			ProjectileID.Sets.MinionTargettingFeature[base.Projectile.type] = true;
 		}

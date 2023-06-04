@@ -21,7 +21,7 @@ namespace MythMod.Projectiles.Clubs
 
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("水晶棍");
+            // base.DisplayName.SetDefault("水晶棍");
         }
 
         public override void SetDefaults()
@@ -100,7 +100,7 @@ namespace MythMod.Projectiles.Clubs
             Main.spriteBatch.Draw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY), new Rectangle?(new Rectangle(0, y, texture.Width, num)), base.Projectile.GetAlpha(drawColor), Projectile.rotation, new Vector2(32, 32), Projectile.scale, effects, 0f);
             return false;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
         }
     }

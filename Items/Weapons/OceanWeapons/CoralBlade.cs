@@ -13,7 +13,7 @@ namespace MythMod.Items.Weapons.OceanWeapons
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("花鹿角珊瑚刃");
+            // base.DisplayName.SetDefault("花鹿角珊瑚刃");
         }
         private int num = 0;
         private bool k = true;

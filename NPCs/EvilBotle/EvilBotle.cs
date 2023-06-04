@@ -22,7 +22,7 @@ namespace MythMod.NPCs.EvilBotle
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("封魔石瓶");
+            // base.DisplayName.SetDefault("封魔石瓶");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "封魔石瓶");
         }
         private bool X = true;
@@ -410,7 +410,7 @@ namespace MythMod.NPCs.EvilBotle
         }
         public static float Blife = 1000;
         public static float Addlig = 0.5f;
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             if (base.NPC.life <= 0)
             {
@@ -429,7 +429,7 @@ namespace MythMod.NPCs.EvilBotle
                 Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/EvilBotleGore4"), 1f);
             }
         }
-        public override void OnHitPlayer(Player player, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
         }
         public Vector2[] Pm = new Vector2[1024];

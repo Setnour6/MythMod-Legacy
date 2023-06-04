@@ -36,7 +36,7 @@ namespace MythMod.Items.Weapons
         {
             return base.HoldoutOrigin();    
         }
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (!target.boss)
             {

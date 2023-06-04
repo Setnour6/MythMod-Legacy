@@ -19,8 +19,8 @@ namespace MythMod.Tiles.玄武岩家具
 			Main.tileWaterDeath[(int)base.Type] = false;
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style4x2);
 			TileObjectData.addTile((int)base.Type);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("玄武岩浴缸");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("玄武岩浴缸");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
 			this.AnimationFrameHeight = 54;
 			modTranslation.AddTranslation(GameCulture.Chinese, "玄武岩浴缸");

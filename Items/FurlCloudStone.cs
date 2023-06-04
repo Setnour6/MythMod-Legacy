@@ -10,7 +10,7 @@ namespace MythMod.Items
 		// Token: 0x06001CB0 RID: 7344 RVA: 0x00009BBE File Offset: 0x00007DBE
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("Swirl Cloud Stone");
+			// base.DisplayName.SetDefault("Swirl Cloud Stone");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "卷云岩");
 		}
 

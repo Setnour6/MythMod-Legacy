@@ -38,13 +38,13 @@ namespace MythMod.Tiles
 			Main.tileShine2[(int)base.Type] = true;
 			Main.tileOreFinderPriority[(int)base.Type] = 0;
 			this.MinPick = 120;
-			this.ItemDrop = base.Mod.Find<ModItem>("MachineBrick2").Type;
+			this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = base.Mod.Find<ModItem>("MachineBrick2").Type;
 			this.DustType = 6;
 			this.HitSound = 21;
 			this.soundStyle/* tModPorter Note: Removed. Integrate into HitSound */ = 2;
 			Main.tileSpelunker[(int)base.Type] = true;
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("机械砖2");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("机械砖2");
 			base.AddMapEntry(new Color(235, 20, 0), modTranslation);
             modTranslation.AddTranslation(GameCulture.Chinese, "机械砖");
 		}

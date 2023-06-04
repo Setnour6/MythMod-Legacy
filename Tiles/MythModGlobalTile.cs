@@ -171,7 +171,7 @@ namespace MythMod.Tiles
         public override void FloorVisuals(int type, Player player)
         {
         }
-        public override bool Drop(int i, int j, int type)
+        public override void Drop(int i, int j, int type)/* tModPorter Suggestion: Use CanDrop to decide if items can drop, use this method to drop additional items. See documentation. */
         {
             Player player = Main.LocalPlayer;
             return base.Drop(i, j, type);

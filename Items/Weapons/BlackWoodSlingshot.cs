@@ -13,8 +13,8 @@ namespace MythMod.Items.Weapons
 		// Token: 0x06001750 RID: 5968 RVA: 0x0009AF78 File Offset: 0x00099178
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("乌木弹弓");
-            base.Tooltip.SetDefault("遍地皆是石子，弹药这种东西怎么会缺呢");
+            // base.DisplayName.SetDefault("乌木弹弓");
+            // base.Tooltip.SetDefault("遍地皆是石子，弹药这种东西怎么会缺呢");
 		}
 
 		// Token: 0x06001751 RID: 5969 RVA: 0x0009AFD0 File Offset: 0x000991D0

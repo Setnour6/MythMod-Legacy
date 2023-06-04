@@ -9,8 +9,8 @@ namespace MythMod.Buffs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("力量丧失");
-            base.Description.SetDefault("攻击力丧失");
+            // base.DisplayName.SetDefault("力量丧失");
+            // base.Description.SetDefault("攻击力丧失");
 			Main.buffNoTimeDisplay[base.Type] = false;
 			Main.buffNoSave[base.Type] = true;
 		}

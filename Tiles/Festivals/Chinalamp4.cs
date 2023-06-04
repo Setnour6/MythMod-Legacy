@@ -32,8 +32,8 @@ namespace MythMod.Tiles.Festivals
             TileObjectData.addTile((int)base.Type);
             this.DustType = 22;
             this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
-            ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("中国灯");
+            LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("中国灯");
             base.AddMapEntry(new Color(122, 87, 73), modTranslation);
             modTranslation.AddTranslation(GameCulture.Chinese, "中国灯");
         }

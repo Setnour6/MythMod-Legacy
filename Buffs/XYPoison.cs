@@ -10,8 +10,8 @@ namespace MythMod.Buffs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("");
-            base.Description.SetDefault("");
+            // base.DisplayName.SetDefault("");
+            // base.Description.SetDefault("");
 			Main.debuff[base.Type] = true;
 		}
         public override void Update(NPC npc, ref int buffIndex)

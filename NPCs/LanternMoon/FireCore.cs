@@ -27,7 +27,7 @@ namespace MythMod.NPCs.LanternMoon
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("FireCore");
+			// base.DisplayName.SetDefault("FireCore");
 			Main.npcFrameCount[base.NPC.type] = 1;
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "焰火幻之心");
 		}
@@ -70,7 +70,7 @@ namespace MythMod.NPCs.LanternMoon
         private int i0 = 0;
         public static bool canai = false;
         private bool can2ai = false;
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
 		{
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
         }

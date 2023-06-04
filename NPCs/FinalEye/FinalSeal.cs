@@ -24,7 +24,7 @@ namespace MythMod.NPCs.FinalEye
 		// Token: 0x06001B17 RID: 6935 RVA: 0x0000B428 File Offset: 0x00009628
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("末日封印");
+            // base.DisplayName.SetDefault("末日封印");
 			Main.npcFrameCount[base.NPC.type] = 4;
 		}
 
@@ -380,7 +380,7 @@ namespace MythMod.NPCs.FinalEye
 			Main.spriteBatch.Draw(texture2D, base.NPC.Center - Main.screenPosition + new Vector2(0f, base.NPC.gfxOffY), new Rectangle?(new Rectangle(0, 0, texture2D.Width, num)), base.NPC.GetAlpha(lightColor), base.NPC.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.NPC.scale, SpriteEffects.None, 1f);
 			return false;
 		}
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
 		{
 			if (base.NPC.life <= 0)
 			{

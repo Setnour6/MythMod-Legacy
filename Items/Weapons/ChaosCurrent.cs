@@ -12,9 +12,9 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("混乱炸流");
+            // base.DisplayName.SetDefault("混乱炸流");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "混乱炸流");
-            base.Tooltip.SetDefault("鼠标周围爆炸出一圈乱流,鼠标和玩家距离越远威力越小");
+            // base.Tooltip.SetDefault("鼠标周围爆炸出一圈乱流,鼠标和玩家距离越远威力越小");
         }
 		public override void SetDefaults()
 		{

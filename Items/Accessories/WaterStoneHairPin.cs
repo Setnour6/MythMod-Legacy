@@ -18,8 +18,8 @@ namespace MythMod.Items.Accessories
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("XXX");
-			base.Tooltip.SetDefault("XXX");
+			// base.DisplayName.SetDefault("XXX");
+			// base.Tooltip.SetDefault("XXX");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "水源石头饰");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "水下伤害提升17%");
 		}

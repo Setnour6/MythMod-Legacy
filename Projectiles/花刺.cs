@@ -20,7 +20,7 @@ namespace MythMod.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("花刺");
+            // DisplayName.SetDefault("花刺");
         }
         private bool num100 = true;
         private Vector2 v = new Vector2(0, 0);

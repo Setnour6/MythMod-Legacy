@@ -32,8 +32,8 @@ namespace MythMod.Tiles.Festivals
 			TileObjectData.newTile.AnchorTop = new AnchorData((Terraria.Enums.AnchorType)1, 1, 1);
 			TileObjectData.addTile((int)base.Type);
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("大红灯笼");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("大红灯笼");
 			base.AddMapEntry(new Color(255, 0, 0), modTranslation);
 			this.AdjTiles = new int[]
 			{

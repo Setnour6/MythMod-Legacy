@@ -11,7 +11,7 @@ namespace MythMod.Items.Weapons
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("日炎双杀");
+            // base.DisplayName.SetDefault("日炎双杀");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "快速旋转挥舞可以反射敌人的攻击，且反射后伤害提高10倍\n对高速密集弹幕或激光及不可反射弹幕无效\n神话");
         }
         public override void SetDefaults()

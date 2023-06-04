@@ -12,8 +12,8 @@ namespace MythMod.Items
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("荧光虾酱");
-			base.Tooltip.SetDefault("打开盖子,把它丢到海里\n它会吸引一些有趣的东西过来");
+            // base.DisplayName.SetDefault("荧光虾酱");
+			// base.Tooltip.SetDefault("打开盖子,把它丢到海里\n它会吸引一些有趣的东西过来");
 		}
 		private bool initialization = true;
         private float X;

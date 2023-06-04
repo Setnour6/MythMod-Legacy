@@ -14,8 +14,8 @@ namespace MythMod.Items.Shells
 		// Token: 0x060005E3 RID: 1507 RVA: 0x00041728 File Offset: 0x0003F928
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("黑星宝螺");
-            base.Tooltip.SetDefault("");
+            // base.DisplayName.SetDefault("黑星宝螺");
+            // base.Tooltip.SetDefault("");
 		}
 
 		// Token: 0x060005E4 RID: 1508 RVA: 0x00041780 File Offset: 0x0003F980

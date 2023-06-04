@@ -11,8 +11,8 @@ namespace MythMod.Items.Magicpaper
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("三阶爆炸烈焰符咒");
-            Tooltip.SetDefault("释放一个巨型爆炸陷阱,和若干小爆炸陷阱\n冷却10s");
+            // DisplayName.SetDefault("三阶爆炸烈焰符咒");
+            // Tooltip.SetDefault("释放一个巨型爆炸陷阱,和若干小爆炸陷阱\n冷却10s");
         }
         public override void SetDefaults()
         {

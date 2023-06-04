@@ -16,7 +16,7 @@ namespace MythMod.Projectiles
         private int num18 = 0;
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("嗜血水螅杖");
+            // base.DisplayName.SetDefault("嗜血水螅杖");
             ProjectileID.Sets.MinionSacrificable[base.Projectile.type] = true;
             ProjectileID.Sets.MinionTargettingFeature[base.Projectile.type] = true;
             Main.projFrames[base.Projectile.type] = 5;

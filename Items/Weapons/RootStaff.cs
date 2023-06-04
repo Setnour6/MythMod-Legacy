@@ -22,8 +22,8 @@ namespace MythMod.Items.Weapons
 		// Token: 0x06001301 RID: 4865 RVA: 0x0008B390 File Offset: 0x00089590
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("根系法杖");
-			base.Tooltip.SetDefault("召唤一个根系精灵协助作战");
+            // base.DisplayName.SetDefault("根系法杖");
+			// base.Tooltip.SetDefault("召唤一个根系精灵协助作战");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;

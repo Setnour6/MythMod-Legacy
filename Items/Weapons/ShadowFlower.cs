@@ -11,7 +11,7 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("影之花");
+            // base.DisplayName.SetDefault("影之花");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "影之花");
 		}
 		public override void SetDefaults()

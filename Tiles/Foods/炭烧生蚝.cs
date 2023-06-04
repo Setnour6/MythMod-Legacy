@@ -23,8 +23,8 @@ namespace MythMod.Tiles.Foods
 			};
             TileObjectData.newTile.CoordinateWidth = 32;
             TileObjectData.addTile((int)base.Type);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("炭烧生蚝");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("炭烧生蚝");
             base.AddMapEntry(new Color(242, 141, 0), modTranslation);
             base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
 			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
@@ -32,7 +32,7 @@ namespace MythMod.Tiles.Foods
 			{
 				4
 			};
-			this.ItemDrop = base.Mod.Find<ModItem>("炭烧生蚝").Type;
+			this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = base.Mod.Find<ModItem>("炭烧生蚝").Type;
 			modTranslation.AddTranslation(GameCulture.Chinese, "炭烧生蚝");
 		}
         public override void NearbyEffects(int i, int j, bool closer)

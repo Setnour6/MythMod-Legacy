@@ -21,8 +21,8 @@ namespace MythMod.Items.Weapons
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("孖璟");
-            Tooltip.SetDefault("右键全屏伤害,但也对你自己造成自身1/4血量的伤害\n近战造成撕裂伤害");
+            // DisplayName.SetDefault("孖璟");
+            // Tooltip.SetDefault("右键全屏伤害,但也对你自己造成自身1/4血量的伤害\n近战造成撕裂伤害");
         }
         public override void SetDefaults()
         {
@@ -155,7 +155,7 @@ namespace MythMod.Items.Weapons
             }
             base.MeleeEffects(player, hitbox);
         }
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             damage = 270;
             target.AddBuff(Mod.Find<ModBuff>("Break").Type, 900, false);

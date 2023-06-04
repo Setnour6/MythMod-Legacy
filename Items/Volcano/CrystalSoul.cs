@@ -19,7 +19,7 @@ namespace MythMod.Items.Volcano
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("");
+            // Tooltip.SetDefault("");
             DisplayName.AddTranslation(GameCulture.Chinese, "结晶原萃");
             Tooltip.AddTranslation(GameCulture.Chinese, "把天地间所有含灵力之物高强度压缩淬炼得到的结晶,内部磅礴的能量让人望而生畏");
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(4, 4));

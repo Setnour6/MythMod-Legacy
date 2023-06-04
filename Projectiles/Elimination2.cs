@@ -11,7 +11,7 @@ namespace MythMod.Projectiles
 		// Token: 0x06002BA0 RID: 11168 RVA: 0x0000C67F File Offset: 0x0000A87F
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("代码杀射线");
+            // base.DisplayName.SetDefault("代码杀射线");
 		}
 
 		// Token: 0x06002BA1 RID: 11169 RVA: 0x00185D40 File Offset: 0x00183F40
@@ -56,7 +56,7 @@ namespace MythMod.Projectiles
 				}
 			}
 		}
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.lifeMax = 0;
             target.life = 0;

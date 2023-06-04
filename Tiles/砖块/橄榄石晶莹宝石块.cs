@@ -15,9 +15,9 @@ namespace MythMod.Tiles.砖块
             Main.tileMergeDirt[(int)base.Type] = false;
 			Main.tileBlockLight[(int)base.Type] = true;
 			this.DustType = 163;
-            this.ItemDrop = base.Mod.Find<ModItem>("OlivineBrick").Type;
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("橄榄石晶莹宝石块");
+            this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = base.Mod.Find<ModItem>("OlivineBrick").Type;
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("橄榄石晶莹宝石块");
 			base.AddMapEntry(new Color(87, 150, 0), modTranslation);
 			this.MineResist = 5f;
 			this.HitSound = 21;

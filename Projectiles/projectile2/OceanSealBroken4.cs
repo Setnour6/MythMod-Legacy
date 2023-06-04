@@ -23,7 +23,7 @@ namespace MythMod.Projectiles.projectile2
         //4444444
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("海洋封印碎块");
+            // DisplayName.SetDefault("海洋封印碎块");
         }
         //7359668
         public override void SetDefaults()

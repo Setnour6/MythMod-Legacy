@@ -21,7 +21,7 @@ namespace MythMod.Projectiles.Clubs
 
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("丛林维生素");
+            // base.DisplayName.SetDefault("丛林维生素");
         }
 
         public override void SetDefaults()

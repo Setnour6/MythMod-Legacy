@@ -19,7 +19,7 @@ namespace MythMod.Projectiles.projectile3
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("金相");
+            // base.DisplayName.SetDefault("金相");
         }
 
         public override void SetDefaults()
@@ -83,7 +83,7 @@ namespace MythMod.Projectiles.projectile3
                 Main.projectile[k].timeLeft = Main.rand.Next(92, 143);
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             for (int i = 0; i < 200; i++)
             {

@@ -9,8 +9,8 @@ namespace MythMod.Buffs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("鲜果III");
-            base.Description.SetDefault("附近有水果,让你状态良好\n提升魔力回复速度");
+            // base.DisplayName.SetDefault("鲜果III");
+            // base.Description.SetDefault("附近有水果,让你状态良好\n提升魔力回复速度");
 			Main.debuff[base.Type] = false;
 			Main.pvpBuff[base.Type] = true;
 			Main.buffNoSave[base.Type] = true;

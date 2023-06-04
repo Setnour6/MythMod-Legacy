@@ -21,7 +21,7 @@ namespace MythMod.NPCs.Yasitaya
 
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("深渊烈焰刀");
+            // base.DisplayName.SetDefault("深渊烈焰刀");
             Main.projFrames[Projectile.type] = 1;
         }
 
@@ -112,7 +112,7 @@ namespace MythMod.NPCs.Yasitaya
             }
             return false;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.velocity += (Projectile.Center - Main.npc[n].Center) / (Projectile.Center - Main.npc[n].Center).Length() * 10f;
             base.OnHitNPC(target, damage, knockback, crit);

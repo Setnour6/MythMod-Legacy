@@ -20,7 +20,7 @@ namespace MythMod.Projectiles.projectile3
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("海日");
+            // base.DisplayName.SetDefault("海日");
             base.SetStaticDefaults();
         }
 
@@ -96,7 +96,7 @@ namespace MythMod.Projectiles.projectile3
         {
             return new Color?(new Color(255, 255, 255, base.Projectile.alpha));
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             int k = Projectile.NewProjectile(Projectile.position.X, Projectile.position.Y, 0, 0, 612, Projectile.damage, Projectile.knockBack, Main.myPlayer, 0f, 0f);
             for (int i = 0; i < 200; i++)

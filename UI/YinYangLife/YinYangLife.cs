@@ -1,4 +1,4 @@
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Graphics;
 //using System.Drawing;
@@ -37,8 +37,8 @@ namespace MythMod.UI.YinYangLife
             yinYangMain.Left.Set(5, 0);
             yinYangMain.Top.Set(Main.screenHeight - 74, 0);
 
-            yinYangMain.OnMouseDown += new UIElement.MouseEvent(DragStart);
-            yinYangMain.OnMouseUp += new UIElement.MouseEvent(DragEnd);
+            yinYangMain.OnLeftMouseDown += new UIElement.MouseEvent(DragStart);
+            yinYangMain.OnLeftMouseUp += new UIElement.MouseEvent(DragEnd);
 
             Append(yinYangMain);
         }

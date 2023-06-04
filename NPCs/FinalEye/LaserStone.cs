@@ -14,7 +14,7 @@ namespace MythMod.NPCs.FinalEye
 		// Token: 0x06001475 RID: 5237 RVA: 0x000082F6 File Offset: 0x000064F6
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("Stone");
+            // base.DisplayName.SetDefault("Stone");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "激光封印石");
 		}
 		public override void SetDefaults()
@@ -41,7 +41,7 @@ namespace MythMod.NPCs.FinalEye
 		{
 		}
 		// Token: 0x0600147B RID: 5243 RVA: 0x000A99DC File Offset: 0x000A7BDC
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
 		{
 		}
         // Token: 0x02000413 RID: 1043

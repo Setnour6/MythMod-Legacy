@@ -268,7 +268,7 @@ namespace MythMod
                 }
             }
         }
-        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
+        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
             int num = tasks.FindIndex((GenPass genpass) => genpass.Name.Equals("Shinies"));
 			if (num != -1)

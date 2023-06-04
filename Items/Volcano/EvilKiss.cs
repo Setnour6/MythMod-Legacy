@@ -11,8 +11,8 @@ namespace MythMod.Items.Volcano
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("");
+			// base.Tooltip.SetDefault("");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "恶魔之吻");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "击中怪物造成毁灭一般的伤害,有概率直接爆炸");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
@@ -44,7 +44,7 @@ namespace MythMod.Items.Volcano
 				Dust.NewDust(new Vector2((float)hitbox.X, (float)hitbox.Y), hitbox.Width, hitbox.Height, Mod.Find<ModDust>("Flame").Type, 0f, 0f, 0, default(Color), 1f);
 			}
 		}
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(24, 900, false);
             target.AddBuff(189, 900, false);

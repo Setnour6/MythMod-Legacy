@@ -13,8 +13,8 @@ namespace MythMod.Items.Magicpaper//在虚无mod的Items文件夹里
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("三阶万箭齐发符咒");
-            Tooltip.SetDefault("让玩家射出箭雨\n冷却10s");//物品介绍
+            // DisplayName.SetDefault("三阶万箭齐发符咒");
+            // Tooltip.SetDefault("让玩家射出箭雨\n冷却10s");//物品介绍
         }
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetDefaults()

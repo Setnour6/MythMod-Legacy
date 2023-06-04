@@ -21,7 +21,7 @@ namespace MythMod.Projectiles.projectile3
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("剑影");
+            // DisplayName.SetDefault("剑影");
             Main.projFrames[base.Projectile.type] = 8;
         }
         public override void SetDefaults()

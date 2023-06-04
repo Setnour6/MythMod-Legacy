@@ -10,7 +10,7 @@ namespace MythMod.Items
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("Vortex Drill");
+			// base.DisplayName.SetDefault("Vortex Drill");
 			base.DisplayName.AddTranslation(GameCulture.English, "漩涡钻头");
 		}
 

@@ -9,7 +9,7 @@ namespace MythMod.Projectiles.projectile2
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("海蓝");
+            // base.DisplayName.SetDefault("海蓝");
 		}
 		public override void SetDefaults()
 		{
@@ -81,7 +81,7 @@ namespace MythMod.Projectiles.projectile2
                 base.Projectile.velocity.Y = (base.Projectile.velocity.Y * 40f + num10) / 41f;
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
 		}
         public override Color? GetAlpha(Color lightColor)

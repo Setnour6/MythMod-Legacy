@@ -21,7 +21,7 @@ namespace MythMod.Projectiles.projectile3
 		private float Distance;
 		public override void SetStaticDefaults()
 		{
-            DisplayName.SetDefault("金相");
+            // DisplayName.SetDefault("金相");
 		}
 		public override void SetDefaults()
 		{

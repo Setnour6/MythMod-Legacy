@@ -9,8 +9,8 @@ namespace MythMod.Buffs.Drinks
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("U8西柚");
-            base.Description.SetDefault("增加4%攻击,增加3生命回复");
+            // base.DisplayName.SetDefault("U8西柚");
+            // base.Description.SetDefault("增加4%攻击,增加3生命回复");
 			Main.buffNoTimeDisplay[base.Type] = false;
 			Main.buffNoSave[base.Type] = true;
 		}

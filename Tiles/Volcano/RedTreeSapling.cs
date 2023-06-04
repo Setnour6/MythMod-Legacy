@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -32,8 +33,8 @@ namespace MythMod.Tiles.Volcano
 			TileObjectData.newTile.RandomStyleRange = 3;
 			TileObjectData.addTile(Type);
 			sapling/* tModPorter Note: Removed. Use TileID.Sets.TreeSapling and TileID.Sets.CommonSapling instead */ = true;
-			ModTranslation name = CreateMapEntryName();
-			name.SetDefault("Sapling");
+			LocalizedText name = CreateMapEntryName();
+			// name.SetDefault("Sapling");
 			AddMapEntry(new Color(68, 65, 48), name);
 			//dustType = mod.DustType("Sparkle");
 			AdjTiles = new int[]{ TileID.Saplings };

@@ -16,7 +16,7 @@ namespace MythMod.NPCs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("星渊水母");
+            // base.DisplayName.SetDefault("星渊水母");
 			Main.npcFrameCount[base.NPC.type] = 5;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "星渊水母");
 		}
@@ -822,7 +822,7 @@ namespace MythMod.NPCs
 		// Token: 0x06001479 RID: 5241 RVA: 0x000B4268 File Offset: 0x000B2468
 
 		// Token: 0x0600147A RID: 5242 RVA: 0x0000801E File Offset: 0x0000621E
-		public override void OnHitPlayer(Player player, int damage, bool crit)
+		public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
 		{
 			player.AddBuff(70, 240, true);
             player.AddBuff(base.Mod.Find<ModBuff>("ExPoi").Type, 60, true);
@@ -867,7 +867,7 @@ namespace MythMod.NPCs
             Main.spriteBatch.Draw(base.Mod.GetTexture("NPCs/星渊水母光辉"), vector2, new Rectangle?(base.NPC.frame), color, base.NPC.rotation, vector, 1f, effects, 0f);
         }
 		// Token: 0x0600147B RID: 5243 RVA: 0x000A99DC File Offset: 0x000A7BDC
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
 		{
 			for (int i = 0; i < 3; i++)
 			{

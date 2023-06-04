@@ -11,7 +11,7 @@ namespace MythMod.NPCs.VolCano
 	{
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("燃烬飞龙");
+            // base.DisplayName.SetDefault("燃烬飞龙");
             Main.npcFrameCount[base.NPC.type] = 5;
         }
 		public override void SetDefaults()
@@ -74,7 +74,7 @@ namespace MythMod.NPCs.VolCano
             Item.NewItem((int)base.NPC.position.X, (int)base.NPC.position.Y, base.NPC.width, base.NPC.height, Mod.Find<ModItem>("LavaStone").Type, Main.rand.Next(1, 4), false, 0, false, false);
             return true;
 		}
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
 		{
 			for (int i = 0; i < 5; i++)
 			{

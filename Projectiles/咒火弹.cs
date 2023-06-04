@@ -11,7 +11,7 @@ namespace MythMod.Projectiles
 		// Token: 0x06001C81 RID: 7297 RVA: 0x0000BBD6 File Offset: 0x00009DD6
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("咒火弹");
+            // base.DisplayName.SetDefault("咒火弹");
             Main.projFrames[Projectile.type] = 4; /*【帧数为6】对应的贴图也要画6帧哦*/
 		}
 
@@ -46,7 +46,7 @@ namespace MythMod.Projectiles
 		}
 
 		// Token: 0x06001C85 RID: 7301 RVA: 0x0000BBE8 File Offset: 0x00009DE8
-		public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
 			target.AddBuff(39, 1800, false);
 		}

@@ -8,7 +8,7 @@ namespace MythMod.Items
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("MarbleFragment");
+            // base.DisplayName.SetDefault("MarbleFragment");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "碎片堆");
 		}
 		public override void SetDefaults()

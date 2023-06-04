@@ -8,8 +8,8 @@ namespace MythMod.Items.Potions
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("星渊刺胞");
-            Tooltip.SetDefault("1g足以杀死一万个成年男子");
+            // DisplayName.SetDefault("星渊刺胞");
+            // Tooltip.SetDefault("1g足以杀死一万个成年男子");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;

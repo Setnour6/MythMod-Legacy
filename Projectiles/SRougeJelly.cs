@@ -13,7 +13,7 @@ namespace MythMod.Projectiles
 		// Token: 0x06001DBA RID: 7610 RVA: 0x0000C2EA File Offset: 0x0000A4EA
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("胭脂果冻");
+            // base.DisplayName.SetDefault("胭脂果冻");
             Main.projFrames[Projectile.type] = 7;
         }
         private float num16 = 0;
@@ -79,7 +79,7 @@ namespace MythMod.Projectiles
         }
 
 		// Token: 0x06001DBE RID: 7614 RVA: 0x0000C2FC File Offset: 0x0000A4FC
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(70, 600);
             target.AddBuff(69, 600);

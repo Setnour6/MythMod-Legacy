@@ -1,7 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 
-using On.Terraria;
-
 using Terraria.ModLoader;
 
 using MythMod;
@@ -19,9 +17,9 @@ namespace MythMod.Backgrounds
         public static void Load()
         {
             /*On.Terraria.Main.DrawBG += Main_DrawBG;*/
-            On.Terraria.Main.DrawBG += Main_DrawBG;
+            Terraria.On_Main.DrawBG += Main_DrawBG;
         }
-        private static void Main_DrawBG(On.Terraria.Main.orig_DrawBG orig, Terraria.Main self)
+        private static void Main_DrawBG(Terraria.On_Main.orig_DrawBG orig, Terraria.Main self)
         {
             orig.Invoke(self);
             Mod mod = ModLoader.GetMod("MythMod");
@@ -36,7 +34,7 @@ namespace MythMod.Backgrounds
         }
         public static void UnLoad()
         {
-            On.Terraria.Main.DrawBG -= Main_DrawBG;
+            Terraria.On_Main.DrawBG -= Main_DrawBG;
         }
     }
 }

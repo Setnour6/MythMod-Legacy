@@ -13,7 +13,7 @@ namespace MythMod.Items.Weapons
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("黄绿陨石光剑");
+            // base.DisplayName.SetDefault("黄绿陨石光剑");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;

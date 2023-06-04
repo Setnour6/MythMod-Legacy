@@ -19,8 +19,8 @@ namespace MythMod.Tiles.玄武岩家具
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style3x2);
 			TileObjectData.addTile((int)base.Type);
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("玄武岩钢琴");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("玄武岩钢琴");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
 			modTranslation.AddTranslation(GameCulture.Chinese, "玄武岩钢琴");
 		}

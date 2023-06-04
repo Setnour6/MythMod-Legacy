@@ -45,8 +45,8 @@ namespace MythMod.Tiles.Ocean
 			TileObjectData.newTile.StyleHorizontal = true;
 			TileObjectData.newTile.LavaDeath = false;
 			TileObjectData.addTile((int)base.Type);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("砗磲商店");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("砗磲商店");
 			base.AddMapEntry(new Color(247, 145, 156), modTranslation);
 			this.DustType = 155;
 			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;

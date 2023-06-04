@@ -13,8 +13,8 @@ namespace MythMod.Items
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("石眼");
-            base.Tooltip.SetDefault("你感到火山深处的颤抖");
+            // base.DisplayName.SetDefault("石眼");
+            // base.Tooltip.SetDefault("你感到火山深处的颤抖");
         }
         public override void SetDefaults()
         {

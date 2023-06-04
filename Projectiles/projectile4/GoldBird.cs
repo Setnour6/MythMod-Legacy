@@ -16,7 +16,7 @@ namespace MythMod.Projectiles.projectile4
         private int num18 = 0;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("金乌");
+            // DisplayName.SetDefault("金乌");
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             Main.projFrames[Projectile.type] = 8;
@@ -108,7 +108,7 @@ namespace MythMod.Projectiles.projectile4
             }
 
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             int k = Projectile.NewProjectile(Projectile.position.X, Projectile.position.Y, 0, 0, 612, Projectile.damage, Projectile.knockBack, Main.myPlayer, 0f, 0f);
             for (int i = 0; i < 200; i++)

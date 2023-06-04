@@ -18,7 +18,7 @@ namespace MythMod.Projectiles
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("碧海长矛");
+            // base.DisplayName.SetDefault("碧海长矛");
 		}
 		public override void SetDefaults()
 		{
@@ -73,7 +73,7 @@ namespace MythMod.Projectiles
 				base.Projectile.rotation -= 1.57f;
 			}
 		}
-		public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
 		}
 	}

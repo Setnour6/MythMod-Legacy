@@ -24,7 +24,7 @@ namespace MythMod.Items.Weapons.FestivalWeapons//教程是你的mod文件夹的�
             ItemID.Sets.Yoyo[Item.type] = true;//这是一个yoyo球
             ItemID.Sets.GamepadExtraRange[Item.type] = 15;
             ItemID.Sets.GamepadSmartQuickReach[Item.type] = true;//这两个不用做变动
-            base.DisplayName.SetDefault("金钟罩");
+            // base.DisplayName.SetDefault("金钟罩");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "释放一个免疫所有攻击的绝对安全区域,冷却时间60s");
         }
 

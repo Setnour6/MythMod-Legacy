@@ -22,7 +22,7 @@ namespace MythMod.Projectiles
 		// Token: 0x0600221E RID: 8734 RVA: 0x0000BDFD File Offset: 0x00009FFD
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("星渊凝胶剑气");
+            // base.DisplayName.SetDefault("星渊凝胶剑气");
 		}
 
 		// Token: 0x0600221F RID: 8735 RVA: 0x001B7BC8 File Offset: 0x001B5DC8
@@ -57,7 +57,7 @@ namespace MythMod.Projectiles
 		{
 		}
 		// Token: 0x06002224 RID: 8740 RVA: 0x0000D83A File Offset: 0x0000BA3A
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             SoundEngine.PlaySound(SoundID.Item14, new Vector2(base.Projectile.position.X, base.Projectile.position.Y));
             for (int i = 0; i < 45; i++)

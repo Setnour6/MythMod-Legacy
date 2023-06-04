@@ -9,8 +9,8 @@ namespace MythMod.Buffs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("海的味道I");
-            base.Description.SetDefault("附近有海鲜\n提升3%闪避");
+            // base.DisplayName.SetDefault("海的味道I");
+            // base.Description.SetDefault("附近有海鲜\n提升3%闪避");
 			Main.debuff[base.Type] = false;
 			Main.pvpBuff[base.Type] = true;
 			Main.buffNoSave[base.Type] = true;

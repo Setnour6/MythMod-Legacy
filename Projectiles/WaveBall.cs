@@ -16,7 +16,7 @@ namespace MythMod.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("º£ÀËÇò");
+            // DisplayName.SetDefault("0†20„50†80‡90‡5¨°");
             Main.projFrames[Projectile.type] = 4;
 
         }
@@ -61,9 +61,9 @@ namespace MythMod.Projectiles
             #endregion
             if (Projectile.timeLeft % 2 == 0 && Projectile.timeLeft < 895)
             {
-                int dustID = Dust.NewDust(Projectile.position, (int)(Projectile.width / 2f), (int)(Projectile.height / 2f), Mod.Find<ModDust>("Wave").Type, Projectile.velocity.X * 0.1f, Projectile.velocity.Y * 0.1f, 201, Color.White, 1.5f);/*·Û³¾Ð§¹û²»ÓÃ¹Ü*/
-                int dustID2 = Dust.NewDust(Projectile.position, (int)(Projectile.width / 2f), (int)(Projectile.height / 2f), 56, Projectile.velocity.X * 0.1f, Projectile.velocity.Y * 0.1f, 201, Color.White, 1f);/*·Û³¾Ð§¹û²»ÓÃ¹Ü*/
-                int dustID3 = Dust.NewDust(Projectile.position, (int)(Projectile.width / 2f), (int)(Projectile.height / 2f), Mod.Find<ModDust>("Wave").Type, Projectile.velocity.X * 0.1f, Projectile.velocity.Y * 0.1f, 201, Color.White, 1f);/*·Û³¾Ð§¹û²»ÓÃ¹Ü*/
+                int dustID = Dust.NewDust(Projectile.position, (int)(Projectile.width / 2f), (int)(Projectile.height / 2f), Mod.Find<ModDust>("Wave").Type, Projectile.velocity.X * 0.1f, Projectile.velocity.Y * 0.1f, 201, Color.White, 1.5f);/*¡¤0‰40…60†60ˆ4¡ì0†10‹40…50†30ˆ70‡10†10‰5*/
+                int dustID2 = Dust.NewDust(Projectile.position, (int)(Projectile.width / 2f), (int)(Projectile.height / 2f), 56, Projectile.velocity.X * 0.1f, Projectile.velocity.Y * 0.1f, 201, Color.White, 1f);/*¡¤0‰40…60†60ˆ4¡ì0†10‹40…50†30ˆ70‡10†10‰5*/
+                int dustID3 = Dust.NewDust(Projectile.position, (int)(Projectile.width / 2f), (int)(Projectile.height / 2f), Mod.Find<ModDust>("Wave").Type, Projectile.velocity.X * 0.1f, Projectile.velocity.Y * 0.1f, 201, Color.White, 1f);/*¡¤0‰40…60†60ˆ4¡ì0†10‹40…50†30ˆ70‡10†10‰5*/
                 Main.dust[dustID].noGravity = true;
             }
         }

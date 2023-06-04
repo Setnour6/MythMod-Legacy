@@ -23,7 +23,7 @@ namespace MythMod.Items.Weapons.OceanWeapons
 	{
 		public override void SetStaticDefaults()
 		{
-			Tooltip.SetDefault("");
+			// Tooltip.SetDefault("");
 		}
 
 		public override void SetDefaults()

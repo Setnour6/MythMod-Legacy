@@ -34,7 +34,7 @@ namespace MythMod.NPCs
         private int num24;
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("机械炮");
+            // base.DisplayName.SetDefault("机械炮");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "机械炮");
 		}
 		public override void SetDefaults()
@@ -129,7 +129,7 @@ namespace MythMod.NPCs
                 }
             }
         }
-        public override void OnHitPlayer(Player player, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
         }
         public int dustTimer = 60;

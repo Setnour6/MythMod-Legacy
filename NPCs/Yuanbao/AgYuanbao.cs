@@ -15,7 +15,7 @@ namespace MythMod.NPCs.Yuanbao
 		private int num2;
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("银元宝");
+            // base.DisplayName.SetDefault("银元宝");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "银元宝");
 		}
 		public override void SetDefaults()
@@ -48,7 +48,7 @@ namespace MythMod.NPCs.Yuanbao
 		{
 			return 0f;
 		}
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             SoundEngine.PlaySound(SoundID.Item37, new Vector2(base.NPC.position.X, base.NPC.position.Y));
@@ -122,7 +122,7 @@ namespace MythMod.NPCs.Yuanbao
 		{
 			return false;
 		}
-		public override void OnHitPlayer(Player player, int damage, bool crit)
+		public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
 		{
 		}
 	}

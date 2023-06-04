@@ -12,8 +12,8 @@ namespace MythMod.Items.Magicpaper
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("二阶魔法落星符咒");
-            Tooltip.SetDefault("从鼠标往下释放蓝色落星\n冷却10s");
+            // DisplayName.SetDefault("二阶魔法落星符咒");
+            // Tooltip.SetDefault("从鼠标往下释放蓝色落星\n冷却10s");
         }
         public override void SetDefaults()
         {

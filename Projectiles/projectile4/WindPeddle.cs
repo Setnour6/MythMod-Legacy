@@ -13,7 +13,7 @@ namespace MythMod.Projectiles.projectile4
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("风花瓣");
+            // base.DisplayName.SetDefault("风花瓣");
 		}
 		public override void SetDefaults()
 		{
@@ -31,7 +31,7 @@ namespace MythMod.Projectiles.projectile4
             ProjectileID.Sets.TrailingMode[Projectile.type] = 0;
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 20;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if(!target.boss)
             {

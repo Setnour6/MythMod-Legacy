@@ -11,7 +11,7 @@ namespace MythMod.Projectiles.projectile2
 		// Token: 0x060028BD RID: 10429 RVA: 0x0000D7C0 File Offset: 0x0000B9C0
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("灯头");
+            // base.DisplayName.SetDefault("灯头");
 		}
 
 		// Token: 0x060028BE RID: 10430 RVA: 0x00208FC8 File Offset: 0x002071C8
@@ -52,7 +52,7 @@ namespace MythMod.Projectiles.projectile2
             int num = Dust.NewDust(base.Projectile.Center - new Vector2(4, 4), 0, 0, 16, 0, 0, 0, default(Color), 1.5f);
             Main.dust[num].velocity *= 0;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
 		}
         public override Color? GetAlpha(Color lightColor)

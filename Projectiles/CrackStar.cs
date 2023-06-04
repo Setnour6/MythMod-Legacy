@@ -13,7 +13,7 @@ namespace MythMod.Projectiles
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("爆炸星星");
+            // base.DisplayName.SetDefault("爆炸星星");
 		}
 		public override void SetDefaults()
 		{

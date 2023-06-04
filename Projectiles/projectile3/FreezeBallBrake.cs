@@ -11,7 +11,7 @@ namespace MythMod.Projectiles.projectile3
 		// Token: 0x0600245F RID: 9311 RVA: 0x0000C7BC File Offset: 0x0000A9BC
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("冰封球");
+            // base.DisplayName.SetDefault("冰封球");
 		}
 
 		// Token: 0x06002460 RID: 9312 RVA: 0x001D6574 File Offset: 0x001D4774
@@ -59,7 +59,7 @@ namespace MythMod.Projectiles.projectile3
             }
             Projectile.tileCollide = false;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (target.type != 396 && target.type != 397 && target.type != 398 && target.type != Mod.Find<ModNPC>("千年桔树妖之眼").Type)
             {

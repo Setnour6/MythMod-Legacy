@@ -22,8 +22,8 @@ namespace MythMod.Items.Weapons.FestivalWeapons
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("银币弓");
-            Tooltip.SetDefault("");
+            // base.DisplayName.SetDefault("银币弓");
+            // Tooltip.SetDefault("");
         }
         public override void SetDefaults()
         {

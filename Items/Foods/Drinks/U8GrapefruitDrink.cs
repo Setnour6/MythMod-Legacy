@@ -12,8 +12,8 @@ namespace MythMod.Items.Foods.Drinks
 	{
 		public override void SetStaticDefaults()
 		{
-            DisplayName.SetDefault("U8西柚");
-            Tooltip.SetDefault("喝下去才知道效果");
+            // DisplayName.SetDefault("U8西柚");
+            // Tooltip.SetDefault("喝下去才知道效果");
         }
 		public override void SetDefaults()
 		{

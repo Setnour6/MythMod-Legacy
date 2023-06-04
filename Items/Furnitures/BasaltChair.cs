@@ -8,7 +8,7 @@ namespace MythMod.Items.Furnitures
 	{
 		public override void SetStaticDefaults()
 		{
-            Tooltip.SetDefault("玄武岩椅子");
+            // Tooltip.SetDefault("玄武岩椅子");
         }
 		public override void SetDefaults()
 		{

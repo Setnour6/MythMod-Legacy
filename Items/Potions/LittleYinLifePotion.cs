@@ -12,8 +12,8 @@ namespace MythMod.Items.Potions
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("小阴魂药剂");
-            base.Tooltip.SetDefault("可以在夜间回复阴寿命");
+            // base.DisplayName.SetDefault("小阴魂药剂");
+            // base.Tooltip.SetDefault("可以在夜间回复阴寿命");
 		}
 		public override void SetDefaults()
 		{

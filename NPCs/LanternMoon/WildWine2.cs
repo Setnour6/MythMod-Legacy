@@ -26,7 +26,7 @@ namespace MythMod.NPCs.LanternMoon
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("狂野藤蔓");
+			// base.DisplayName.SetDefault("狂野藤蔓");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "狂野藤蔓");
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)

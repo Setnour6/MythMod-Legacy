@@ -19,7 +19,7 @@ namespace MythMod.Projectiles.projectile3
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("暗影光球");
+            // DisplayName.SetDefault("暗影光球");
         }
         public override void SetDefaults()
         {

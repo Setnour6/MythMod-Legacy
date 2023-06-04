@@ -9,7 +9,7 @@ namespace MythMod.Items.Weapons.Weapon2
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("函数与导数");
+            // DisplayName.SetDefault("函数与导数");
             DisplayName.AddTranslation(GameCulture.Chinese, "函数与导数");
             Tooltip.AddTranslation(GameCulture.Chinese, "导数之终极Boss,变幻莫测,无可定夺");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);

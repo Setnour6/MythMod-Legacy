@@ -12,7 +12,7 @@ namespace MythMod.Projectiles.projectile3
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("熔岩滚石");
+            // base.DisplayName.SetDefault("熔岩滚石");
 		}
         private float num = 0;
         public override void SetDefaults()
@@ -92,7 +92,7 @@ namespace MythMod.Projectiles.projectile3
                 Gore.NewGore(base.Projectile.position, base.Projectile.velocity * scaleFactor5, base.Mod.GetGoreSlot("Gores/火山浮石碎块" + (i % 2 + 6).ToString()), 0.8f);
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
 		}
         public override void PostDraw(Color lightColor)

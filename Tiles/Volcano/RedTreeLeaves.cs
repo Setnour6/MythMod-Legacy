@@ -24,8 +24,8 @@ namespace MythMod.Tiles.Volcano
 			this.soundStyle/* tModPorter Note: Removed. Integrate into HitSound */ = 2;
             /*this.drop = base.mod.ItemType("ShoreWood");*/
 			Main.tileSpelunker[(int)base.Type] = true;
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("");
 			base.AddMapEntry(new Color(48, 82, 19), modTranslation);
             modTranslation.AddTranslation(GameCulture.Chinese, "");
             SetModTree(new RedTree())/* tModPorter Note: Removed. Assign GrowsOnTileId to this tile type in ModTree.SetStaticDefaults instead */;

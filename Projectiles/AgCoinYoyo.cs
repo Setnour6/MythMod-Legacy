@@ -31,7 +31,7 @@ namespace MythMod.Projectiles
             spriteBatch.Draw(base.Mod.GetTexture("Projectiles/银币悠悠球light"), base.Projectile.Center - Main.screenPosition, null, new Color(0.4f, 0.4f, 0.4f, 0), 0, new Vector2(8f, 8f), 1f, SpriteEffects.None, 0f);
         }
         // Token: 0x06003183 RID: 12675 RVA: 0x001AA8C0 File Offset: 0x001A8AC0
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
             X = 100;
             for (int j = 0; j < 3; j++)

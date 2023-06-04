@@ -14,7 +14,7 @@ namespace MythMod.Projectiles.projectile2
 		// Token: 0x06001F14 RID: 7956 RVA: 0x0000C97C File Offset: 0x0000AB7C
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("混乱炸流");
+            // base.DisplayName.SetDefault("混乱炸流");
 		}
 
 		// Token: 0x06001F15 RID: 7957 RVA: 0x0018D09C File Offset: 0x0018B29C
@@ -32,7 +32,7 @@ namespace MythMod.Projectiles.projectile2
 			this.CooldownSlot = 1;
 
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(31, 300, false);
         }

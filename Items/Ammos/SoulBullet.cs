@@ -20,8 +20,8 @@ namespace MythMod.Items.Ammos
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("幽魂弹");
-            base.Tooltip.SetDefault("强追踪性,有概率吸血");
+            // base.DisplayName.SetDefault("幽魂弹");
+            // base.Tooltip.SetDefault("强追踪性,有概率吸血");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;

@@ -15,7 +15,7 @@ namespace MythMod.NPCs
 		// Token: 0x06001475 RID: 5237 RVA: 0x000082F6 File Offset: 0x000064F6
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("jellyfish");
+            // base.DisplayName.SetDefault("jellyfish");
 			Main.npcFrameCount[base.NPC.type] = 5;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "警报水母");
 		}
@@ -239,14 +239,14 @@ namespace MythMod.NPCs
 		// Token: 0x06001479 RID: 5241 RVA: 0x000B4268 File Offset: 0x000B2468
 
 		// Token: 0x0600147A RID: 5242 RVA: 0x0000801E File Offset: 0x0000621E
-		public override void OnHitPlayer(Player player, int damage, bool crit)
+		public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
 		{
 			player.AddBuff(70, 320, true);
             player.AddBuff(base.Mod.Find<ModBuff>("极剧毒").Type, 32, true);
 		}
 
 		// Token: 0x0600147B RID: 5243 RVA: 0x000A99DC File Offset: 0x000A7BDC
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
 		{
 			for (int i = 0; i < 3; i++)
 			{

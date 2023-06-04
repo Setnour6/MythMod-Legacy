@@ -12,8 +12,8 @@ namespace MythMod.Items.Magicpaper
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("二阶万箭齐发符咒");
-            Tooltip.SetDefault("让玩家射出箭雨\n冷却10s");//物品介绍
+            // DisplayName.SetDefault("二阶万箭齐发符咒");
+            // Tooltip.SetDefault("让玩家射出箭雨\n冷却10s");//物品介绍
         }
         public override void SetDefaults()
         {

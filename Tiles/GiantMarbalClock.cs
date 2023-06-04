@@ -19,9 +19,9 @@ namespace MythMod.Tiles
 			Main.tileOreFinderPriority[(int)base.Type] = 700;
 			this.MinPick = 500;
 			this.DustType = 51;
-            this.ItemDrop = base.Mod.Find<ModItem>("GiantMarbalClock").Type;
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("遗迹大理石巨钟");
+            this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = base.Mod.Find<ModItem>("GiantMarbalClock").Type;
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("遗迹大理石巨钟");
 			base.AddMapEntry(new Color(30, 144, 255), modTranslation);
 			this.MineResist = 5f;
 			this.HitSound = 21;

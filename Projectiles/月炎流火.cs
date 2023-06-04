@@ -11,7 +11,7 @@ namespace MythMod.Projectiles
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("月炎流火");
+            // base.DisplayName.SetDefault("月炎流火");
 		}
 		public override void SetDefaults()
 		{

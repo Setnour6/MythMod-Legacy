@@ -9,8 +9,8 @@ namespace MythMod.Buffs.Drinks
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("孤独的水母");
-            base.Description.SetDefault("生命回复增加5");
+            // base.DisplayName.SetDefault("孤独的水母");
+            // base.Description.SetDefault("生命回复增加5");
 			Main.buffNoTimeDisplay[base.Type] = false;
 			Main.buffNoSave[base.Type] = true;
 		}

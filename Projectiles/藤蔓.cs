@@ -17,7 +17,7 @@ namespace MythMod.Projectiles
 		private int num;
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("藤蔓");
+            // base.DisplayName.SetDefault("藤蔓");
 			Main.projFrames[base.Projectile.type] = 1;
 		}
 		public override void SetDefaults()

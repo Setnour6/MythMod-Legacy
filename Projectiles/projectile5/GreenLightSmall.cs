@@ -13,7 +13,7 @@ namespace MythMod.Projectiles.projectile5
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("青苍射线");
+            // DisplayName.SetDefault("青苍射线");
         }
         public override void SetDefaults()
         {

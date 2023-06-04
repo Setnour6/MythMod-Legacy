@@ -23,7 +23,7 @@ namespace MythMod.Projectiles
         //4444444
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("鹿角珊瑚");
+            // DisplayName.SetDefault("鹿角珊瑚");
         }
         private bool num100 = true;
         private Vector2 v = new Vector2(0, 0);

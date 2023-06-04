@@ -16,7 +16,7 @@ namespace MythMod.Items
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("CrystalSword Trophy");
+			// base.DisplayName.SetDefault("CrystalSword Trophy");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "冰洲石剑纪念章");
 		}
 		public override void SetDefaults()

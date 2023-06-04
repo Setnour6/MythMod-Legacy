@@ -30,7 +30,7 @@ namespace MythMod.Projectiles.projectile2
         private float Distance;
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("剧毒射线");
+            // base.DisplayName.SetDefault("剧毒射线");
             Main.projFrames[base.Projectile.type] = 5;
         }
 
@@ -83,7 +83,7 @@ namespace MythMod.Projectiles.projectile2
             Projectile.velocity = Projectile.velocity.RotatedBy(-0.04f);
 
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
         }
         public override Color? GetAlpha(Color lightColor)

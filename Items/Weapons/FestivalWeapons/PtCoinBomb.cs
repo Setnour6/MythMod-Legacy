@@ -13,8 +13,8 @@ namespace MythMod.Items.Weapons.FestivalWeapons
 		// Token: 0x06001750 RID: 5968 RVA: 0x0009AF78 File Offset: 0x00099178
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("铂金钱手雷");
-            base.Tooltip.SetDefault("");
+            // base.DisplayName.SetDefault("铂金钱手雷");
+            // base.Tooltip.SetDefault("");
 		}
 
 		// Token: 0x06001751 RID: 5969 RVA: 0x0009AFD0 File Offset: 0x000991D0

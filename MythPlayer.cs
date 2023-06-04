@@ -249,7 +249,7 @@ namespace MythMod
             }
         }
         public int IMMUNE = 0;
-        public override bool PreHurt(bool pvp, bool quiet, ref int damage, ref int hitDirection, ref bool crit, ref bool customDamage, ref bool playSound, ref bool genGore, ref PlayerDeathReason damageSource, ref int cooldownCounter)
+        public override void ModifyHurt(ref Player.HurtModifiers modifiers)/* tModPorter Override ImmuneTo, FreeDodge or ConsumableDodge instead to prevent taking damage */
         {
             if (DONTTAKEDAMDGE)
             {
@@ -3043,7 +3043,7 @@ namespace MythMod
         }
         public int FREEZE = 0;
         public int Absorb = 0;
-        public override void OnEnterWorld(Player player)
+        public override void OnEnterWorld()
         {
             //base.OnEnterWorld(player);
             if (MythWorld.Myth)
@@ -3420,13 +3420,13 @@ namespace MythMod
                 }
             }
         }
-        public override void OnRespawn(Player player)
+        public override void OnRespawn()
         {
             if(ZoneOcean || ZoneVolcano || ZoneDeepocean || ZoneCoral)
             {
-                player.SpawnX = 160;
-                player.SpawnY = (int)((Main.maxTilesY / 10f + 60) * 16f) ;
-                player.FindSpawn();
+                Player.SpawnX = 160;
+                Player.SpawnY = (int)((Main.maxTilesY / 10f + 60) * 16f) ;
+                Player.FindSpawn();
             }
         }
         public override void UpdateDead()

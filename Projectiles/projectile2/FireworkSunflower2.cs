@@ -22,7 +22,7 @@ namespace MythMod.Projectiles.projectile2
         //4444444
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("烟花火球向日葵");
+            // DisplayName.SetDefault("烟花火球向日葵");
         }
         //7359668
         public override void SetDefaults()
@@ -90,7 +90,7 @@ namespace MythMod.Projectiles.projectile2
             }
             return false;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(24, 1200);
         }

@@ -23,7 +23,7 @@ namespace MythMod.Projectiles.projectile2
         //4444444
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("闪电");
+            // DisplayName.SetDefault("闪电");
         }
         //7359668
         public override void SetDefaults()
@@ -120,7 +120,7 @@ namespace MythMod.Projectiles.projectile2
                 }
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(base.Mod.Find<ModBuff>("ElectriShock").Type, 60);
         }

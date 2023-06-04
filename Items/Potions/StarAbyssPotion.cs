@@ -11,8 +11,8 @@ namespace MythMod.Items.Potions
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("星渊毒剂");
-            Tooltip.SetDefault("血色毒素中流动着撕裂神经的能量\n近战携带恐怖的剧毒\n一瓶撒下自来水系统足以毁灭一座城");
+            // DisplayName.SetDefault("星渊毒剂");
+            // Tooltip.SetDefault("血色毒素中流动着撕裂神经的能量\n近战携带恐怖的剧毒\n一瓶撒下自来水系统足以毁灭一座城");
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(4, 4));
         }
         public override void SetDefaults()

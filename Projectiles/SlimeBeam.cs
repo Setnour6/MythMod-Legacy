@@ -11,7 +11,7 @@ namespace MythMod.Projectiles
 		// Token: 0x060028BD RID: 10429 RVA: 0x0000D7C0 File Offset: 0x0000B9C0
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("史莱姆剑气");
+            // base.DisplayName.SetDefault("史莱姆剑气");
 		}
 
 		// Token: 0x060028BE RID: 10430 RVA: 0x00208FC8 File Offset: 0x002071C8

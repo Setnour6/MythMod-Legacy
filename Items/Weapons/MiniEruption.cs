@@ -19,8 +19,8 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("");
+			// base.Tooltip.SetDefault("");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "迷你喷流");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "射出高能喷流,火力很猛的\n神话");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);

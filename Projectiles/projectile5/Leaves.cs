@@ -14,7 +14,7 @@ namespace MythMod.Projectiles.projectile5
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("叶");
+            // DisplayName.SetDefault("叶");
         }
         public override void SetDefaults()
         {
@@ -39,7 +39,7 @@ namespace MythMod.Projectiles.projectile5
         {
             return new Color?(new Color(1f, 1f, 1f, 0.5f));
         }
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             Projectile.Kill();
         }

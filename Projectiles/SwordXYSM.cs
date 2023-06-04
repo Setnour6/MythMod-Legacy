@@ -10,7 +10,7 @@ namespace MythMod.Projectiles
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("星渊水母剑气");
+            // base.DisplayName.SetDefault("星渊水母剑气");
 		}
         private int num = 0;
 		public override void SetDefaults()

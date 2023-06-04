@@ -20,8 +20,8 @@ namespace MythMod.Items.Ammos
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("桔子弹");
-            base.Tooltip.SetDefault("由年桔制成,果汁会溅射");
+            // base.DisplayName.SetDefault("桔子弹");
+            // base.Tooltip.SetDefault("由年桔制成,果汁会溅射");
 		}
 		public override void SetDefaults()
 		{

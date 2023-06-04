@@ -21,7 +21,7 @@ namespace MythMod.Items
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("Lu宝藏箱2");
+            // base.DisplayName.SetDefault("Lu宝藏箱2");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "宝藏箱");
         }
         public override void SetDefaults()

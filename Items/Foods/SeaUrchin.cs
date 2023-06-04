@@ -14,8 +14,8 @@ namespace MythMod.Items.Foods
 		// Token: 0x060005E3 RID: 1507 RVA: 0x00041728 File Offset: 0x0003F928
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("海胆刺身");
-            base.Tooltip.SetDefault("看样子……有点重口");
+            // base.DisplayName.SetDefault("海胆刺身");
+            // base.Tooltip.SetDefault("看样子……有点重口");
 		}
 
 		// Token: 0x060005E4 RID: 1508 RVA: 0x00041780 File Offset: 0x0003F980

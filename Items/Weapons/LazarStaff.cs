@@ -12,7 +12,7 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("LazarStaff");
+            // base.DisplayName.SetDefault("LazarStaff");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "深红凝视");
 		}
 		public override void SetDefaults()

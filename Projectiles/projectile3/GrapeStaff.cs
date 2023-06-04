@@ -19,7 +19,7 @@ namespace MythMod.Projectiles.projectile3
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("葡萄喜糖法杖");
+            // DisplayName.SetDefault("葡萄喜糖法杖");
         }
         public override void SetDefaults()
         {
@@ -59,7 +59,7 @@ namespace MythMod.Projectiles.projectile3
             }
             Lighting.AddLight(Projectile.Center, -1, -1, -1);
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Player player = Main.player[Main.myPlayer];
             if(Projectile.ai[0] == 1)

@@ -19,7 +19,7 @@ namespace MythMod.Projectiles.projectile3
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("波动");
+            // base.DisplayName.SetDefault("波动");
         }
 
         public override void SetDefaults()
@@ -143,7 +143,7 @@ namespace MythMod.Projectiles.projectile3
                 }
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
         }
         public override bool PreDraw(ref Color lightColor)

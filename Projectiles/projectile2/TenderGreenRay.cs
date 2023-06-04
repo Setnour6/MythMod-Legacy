@@ -11,7 +11,7 @@ namespace MythMod.Projectiles.projectile2
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("青绿射线");
+            // base.DisplayName.SetDefault("青绿射线");
 		}
 		public override void SetDefaults()
 		{

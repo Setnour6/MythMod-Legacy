@@ -9,7 +9,7 @@ namespace MythMod.Items
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("12字雕像");
+            // base.DisplayName.SetDefault("12字雕像");
         }
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetDefaults()

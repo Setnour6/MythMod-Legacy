@@ -13,7 +13,7 @@ namespace MythMod.Items.Weapons.Weapon2
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("NeutralBloodSword");
+            // base.DisplayName.SetDefault("NeutralBloodSword");
 			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "神经刺刀");
         }

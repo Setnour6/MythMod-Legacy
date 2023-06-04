@@ -9,7 +9,7 @@ namespace MythMod.Items.Weapons.Weapon2
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("新手太刀");
+            // DisplayName.SetDefault("新手太刀");
             DisplayName.AddTranslation(GameCulture.Chinese, "新手太刀");
             Tooltip.AddTranslation(GameCulture.Chinese, "");
         }

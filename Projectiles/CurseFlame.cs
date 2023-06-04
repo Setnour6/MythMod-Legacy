@@ -11,7 +11,7 @@ namespace MythMod.Projectiles
 		// Token: 0x060028BD RID: 10429 RVA: 0x0000D7C0 File Offset: 0x0000B9C0
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("诅咒焰");
+            // base.DisplayName.SetDefault("诅咒焰");
 		}
 
 		// Token: 0x060028BE RID: 10430 RVA: 0x00208FC8 File Offset: 0x002071C8
@@ -37,7 +37,7 @@ namespace MythMod.Projectiles
 			Main.dust[num3].noGravity = true;
 			Main.dust[num3].velocity= new Vector2(0, 0);
 		}
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
 			target.AddBuff(39, 300, false);
 		}

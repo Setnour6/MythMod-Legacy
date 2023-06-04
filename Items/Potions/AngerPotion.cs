@@ -11,8 +11,8 @@ namespace MythMod.Items.Potions
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("狂暴药剂");
-            Tooltip.SetDefault("\n攻击次数越多伤害越高,近战武器效果更佳\n神话");
+            // DisplayName.SetDefault("狂暴药剂");
+            // Tooltip.SetDefault("\n攻击次数越多伤害越高,近战武器效果更佳\n神话");
         }
         public override void SetDefaults()
         {

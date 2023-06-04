@@ -24,8 +24,8 @@ namespace MythMod.Tiles.Foods
             TileObjectData.newTile.CoordinateWidth = 20;
             TileObjectData.addTile((int)base.Type);
             this.DustType = 31;
-            ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("");
+            LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("");
             base.AddMapEntry(new Color(242, 141, 0), modTranslation);
             this.MineResist = 3f;
             base.SetStaticDefaults();

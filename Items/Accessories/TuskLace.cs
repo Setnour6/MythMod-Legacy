@@ -9,10 +9,10 @@ namespace MythMod.Items.Accessories
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("獠牙吊坠");
-			Tooltip.SetDefault("");
+			// DisplayName.SetDefault("獠牙吊坠");
+			// Tooltip.SetDefault("");
 			DisplayName.AddTranslation(GameCulture.Chinese, "獠牙吊坠");
-            Tooltip.SetDefault("伤害增加5%");
+            // Tooltip.SetDefault("伤害增加5%");
             Tooltip.AddTranslation(GameCulture.Chinese, "伤害增加5%");
 		}
 

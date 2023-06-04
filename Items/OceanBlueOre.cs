@@ -8,7 +8,7 @@ namespace MythMod.Items
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("来自海洋");
+            // Tooltip.SetDefault("来自海洋");
             DisplayName.AddTranslation(GameCulture.Chinese, "沧流矿");
         }
         public override void SetDefaults()

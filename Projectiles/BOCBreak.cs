@@ -10,7 +10,7 @@ namespace MythMod.Projectiles
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("克苏鲁之脑残片");
+            // base.DisplayName.SetDefault("克苏鲁之脑残片");
 			ProjectileID.Sets.MinionSacrificable[base.Projectile.type] = true;
 			ProjectileID.Sets.MinionTargettingFeature[base.Projectile.type] = true;
 			Main.projFrames[Projectile.type] = 6;
@@ -93,7 +93,7 @@ namespace MythMod.Projectiles
 			}
 		}
         private int y = 0;
-		public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if(target.type != NPCID.TargetDummy)
             {

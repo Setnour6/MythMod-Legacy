@@ -22,10 +22,10 @@ namespace MythMod.Tiles.Volcano
 			this.MinPick = 0;
 			this.HitSound = 21;
             this.soundStyle/* tModPorter Note: Removed. Integrate into HitSound */ = 2;
-            this.ItemDrop = base.Mod.Find<ModItem>("Gypsum").Type;
+            this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = base.Mod.Find<ModItem>("Gypsum").Type;
 			Main.tileSpelunker[(int)base.Type] = true;
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("");
 			base.AddMapEntry(new Color(242, 216, 138), modTranslation);
             modTranslation.AddTranslation(GameCulture.Chinese, "石膏");
             SetModTree(new RedTree())/* tModPorter Note: Removed. Assign GrowsOnTileId to this tile type in ModTree.SetStaticDefaults instead */;

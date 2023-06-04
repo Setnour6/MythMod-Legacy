@@ -19,8 +19,8 @@ namespace MythMod.Items.Weapons.Bottle
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("");
-            DisplayName.SetDefault("遗迹大理石巨钟");
+            // Tooltip.SetDefault("");
+            // DisplayName.SetDefault("遗迹大理石巨钟");
         }
         public override void SetDefaults()
         {

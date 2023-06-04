@@ -75,7 +75,7 @@ namespace MythMod.Projectiles.projectile2
                 base.Projectile.velocity.Y = (base.Projectile.velocity.Y * 40f + num10) / 41f;
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if(Projectile.penetrate >= 1)
             {

@@ -4,6 +4,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.Enums;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -34,11 +35,11 @@ namespace MythMod.Tiles.Torches
 			TileObjectData.addAlternate(0);
 			TileObjectData.addTile(Type);
 			AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
-			ModTranslation name = CreateMapEntryName();
-			name.SetDefault("Torch");
+			LocalizedText name = CreateMapEntryName();
+			// name.SetDefault("Torch");
 			AddMapEntry(new Color(0, 189, 181), name);
 			DustType = 111;
-			ItemDrop = Mod.Find<ModItem>("CyanTorch").Type;
+			ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = Mod.Find<ModItem>("CyanTorch").Type;
 			disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
 			AdjTiles = new int[]{ TileID.Torches };
 			torch/* tModPorter Note: Removed. Use TileID.Sets.Torch instead */ = true;

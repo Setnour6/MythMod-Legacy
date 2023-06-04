@@ -13,7 +13,7 @@ namespace MythMod.Projectiles.projectile2
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("硫磺熔团");
+            // base.DisplayName.SetDefault("硫磺熔团");
 			Main.projFrames[base.Projectile.type] = 1;
 		}
 		public override void SetDefaults()

@@ -8,8 +8,8 @@ namespace MythMod.Items.UnderSea
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("利刃鳞");
-            Tooltip.SetDefault("");
+            // DisplayName.SetDefault("利刃鳞");
+            // Tooltip.SetDefault("");
         }
         public override void SetDefaults()
         {

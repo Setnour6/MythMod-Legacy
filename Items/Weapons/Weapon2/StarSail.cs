@@ -11,9 +11,9 @@ namespace MythMod.Items.Weapons.Weapon2
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("StarSail");
+            // DisplayName.SetDefault("StarSail");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "星际漫游");
-            Tooltip.SetDefault("StarSail");
+            // Tooltip.SetDefault("StarSail");
             Tooltip.AddTranslation(GameCulture.Chinese, "星河欲转千帆舞");
         }
         public override void SetDefaults()
@@ -43,7 +43,7 @@ namespace MythMod.Items.Weapons.Weapon2
         {
             return base.HoldoutOrigin();    
         }
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)

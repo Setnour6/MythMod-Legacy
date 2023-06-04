@@ -9,7 +9,7 @@ namespace MythMod.Projectiles.projectile3
 	{
 		public override void SetStaticDefaults()
 		{
-            DisplayName.SetDefault("");
+            // DisplayName.SetDefault("");
 		}
 		public override void SetDefaults()
 		{

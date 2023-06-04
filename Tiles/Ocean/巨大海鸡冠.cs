@@ -34,9 +34,9 @@ namespace MythMod.Tiles.Ocean
             TileObjectData.newTile.AnchorTop = default(AnchorData);
             TileObjectData.addTile((int)base.Type);
 			this.DustType = 123;
-            ModTranslation modTranslation = base.CreateMapEntryName(null);
+            LocalizedText modTranslation = base.CreateMapEntryName(null);
             base.AddMapEntry(new Color(193, 131, 139), modTranslation);
-            modTranslation.SetDefault("");
+            // modTranslation.SetDefault("");
             this.MineResist = 3f;
 			base.SetStaticDefaults();
 			modTranslation.AddTranslation(GameCulture.Chinese, "");

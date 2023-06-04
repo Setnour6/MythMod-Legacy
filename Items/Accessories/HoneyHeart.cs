@@ -9,8 +9,8 @@ namespace MythMod.Items.Accessories
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("XXX");
-			base.Tooltip.SetDefault("XXX");
+			// base.DisplayName.SetDefault("XXX");
+			// base.Tooltip.SetDefault("XXX");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "甜蜜之心");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "弄湿之后提升回血速度\n神话");
 		}

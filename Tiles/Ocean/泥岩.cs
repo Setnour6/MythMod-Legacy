@@ -23,8 +23,8 @@ namespace MythMod.Tiles.Ocean
 				16
 			};
 			TileObjectData.addTile((int)base.Type);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("");
 			modTranslation.AddTranslation(GameCulture.English, "");
 			AddMapEntry(new Color(148, 107, 74), modTranslation);
 			this.DustType = 37;

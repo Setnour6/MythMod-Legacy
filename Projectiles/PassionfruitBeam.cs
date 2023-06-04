@@ -18,7 +18,7 @@ namespace MythMod.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("百香果剑气");
+            // base.DisplayName.SetDefault("百香果剑气");
         }
         public override Color? GetAlpha(Color lightColor)
         {

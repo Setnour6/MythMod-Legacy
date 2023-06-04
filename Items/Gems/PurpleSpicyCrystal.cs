@@ -10,7 +10,7 @@ namespace MythMod.Items.Gems
         public override void SetStaticDefaults()
         {
             //Tooltip.SetDefault("来自地狱的结晶");
-            DisplayName.SetDefault("SaltCrystal");
+            // DisplayName.SetDefault("SaltCrystal");
             DisplayName.AddTranslation(GameCulture.Chinese, "紫罗兰棱晶");
         }
         public override void SetDefaults()

@@ -19,7 +19,7 @@ namespace MythMod.Projectiles
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("火山剑气");
+            // base.DisplayName.SetDefault("火山剑气");
 		}
 		public override void SetDefaults()
 		{

@@ -9,8 +9,8 @@ namespace MythMod.Buffs.Drinks
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("新加坡司令");
-            base.Description.SetDefault("生命回复增加6");
+            // base.DisplayName.SetDefault("新加坡司令");
+            // base.Description.SetDefault("生命回复增加6");
 			Main.buffNoTimeDisplay[base.Type] = false;
 			Main.buffNoSave[base.Type] = true;
 		}

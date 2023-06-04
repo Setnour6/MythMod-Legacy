@@ -13,7 +13,7 @@ namespace MythMod.NPCs.LanternMoon
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("腊肠妖灵");
+            // base.DisplayName.SetDefault("腊肠妖灵");
 			Main.npcFrameCount[base.NPC.type] = 1;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "腊肠妖灵");
 		}
@@ -54,7 +54,7 @@ namespace MythMod.NPCs.LanternMoon
 		{
 			return false;
 		}
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
 		{
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             if (base.NPC.life <= 0)

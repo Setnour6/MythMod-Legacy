@@ -12,10 +12,10 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("");
+            // base.DisplayName.SetDefault("");
 			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "断魂裂骨之杖");
-            Tooltip.SetDefault("释放出吸食骨髓的鬼虫");
+            // Tooltip.SetDefault("释放出吸食骨髓的鬼虫");
         }
         public override void SetDefaults()
 		{

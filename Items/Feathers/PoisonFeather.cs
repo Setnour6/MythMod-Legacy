@@ -19,10 +19,10 @@ namespace MythMod.Items.Feathers
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("毒羽");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("毒羽");
+			// base.Tooltip.SetDefault("");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "毒羽");
-            Tooltip.SetDefault("增加0.5速度,0.5秒飞行时间,30生命,2%闪避,攻击2%附带中毒效果");
+            // Tooltip.SetDefault("增加0.5速度,0.5秒飞行时间,30生命,2%闪避,攻击2%附带中毒效果");
 		}
 		public override void SetDefaults()
 		{

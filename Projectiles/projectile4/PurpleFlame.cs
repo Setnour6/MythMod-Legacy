@@ -12,7 +12,7 @@ namespace MythMod.Projectiles.projectile4
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("紫冥鬼火");
+            // base.DisplayName.SetDefault("紫冥鬼火");
 		}
 		public override void SetDefaults()
 		{
@@ -83,7 +83,7 @@ namespace MythMod.Projectiles.projectile4
 		{
 			return new Color?(new Color(100, 100, 100, 0));
 		}
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(153, 300);
         }

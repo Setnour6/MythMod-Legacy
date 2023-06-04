@@ -19,8 +19,8 @@ namespace MythMod.Items
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("深渊之下");
-            DisplayName.SetDefault("渊海矿");
+            // Tooltip.SetDefault("深渊之下");
+            // DisplayName.SetDefault("渊海矿");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;

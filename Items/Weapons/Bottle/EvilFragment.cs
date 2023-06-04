@@ -11,8 +11,8 @@ namespace MythMod.Items.Weapons.Bottle
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("封印碎片");
-            base.Tooltip.SetDefault("这是封印碎片堆里的最后一块碎块,放回碎片堆以修复一件上古魔器\n召唤封魔石瓶");
+            // base.DisplayName.SetDefault("封印碎片");
+            // base.Tooltip.SetDefault("这是封印碎片堆里的最后一块碎块,放回碎片堆以修复一件上古魔器\n召唤封魔石瓶");
         }
         public override void SetDefaults()
         {

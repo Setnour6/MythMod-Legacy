@@ -21,7 +21,7 @@ namespace MythMod.Projectiles.Clubs
 
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("星之舞者");
+            // base.DisplayName.SetDefault("星之舞者");
         }
 
         public override void SetDefaults()

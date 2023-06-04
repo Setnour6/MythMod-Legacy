@@ -16,8 +16,8 @@ namespace MythMod.Items.Festival
 		// Token: 0x0600090F RID: 2319 RVA: 0x0004B530 File Offset: 0x00049730
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("Treasure Bag");
-			base.Tooltip.SetDefault("{$CommonItemTooltip.RightClickToOpen}");
+			// base.DisplayName.SetDefault("Treasure Bag");
+			// base.Tooltip.SetDefault("{$CommonItemTooltip.RightClickToOpen}");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "种子秘宝袋");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "右键点击打开");
 		}

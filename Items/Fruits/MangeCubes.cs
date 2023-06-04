@@ -12,7 +12,7 @@ namespace MythMod.Items.Fruits
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("芒果丁");
+            // base.DisplayName.SetDefault("芒果丁");
 		}
 		public override void SetDefaults()
 		{

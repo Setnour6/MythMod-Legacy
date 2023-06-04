@@ -20,7 +20,7 @@ namespace MythMod.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("骷髅守护粒子");
+            // DisplayName.SetDefault("骷髅守护粒子");
         }
         public override void SetDefaults()
         {

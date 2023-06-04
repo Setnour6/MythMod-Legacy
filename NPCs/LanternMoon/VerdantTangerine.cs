@@ -13,7 +13,7 @@ namespace MythMod.NPCs.LanternMoon
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("青翠年桔木");
+            // base.DisplayName.SetDefault("青翠年桔木");
 			Main.npcFrameCount[base.NPC.type] = 4;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "青翠年桔木");
 		}
@@ -186,7 +186,7 @@ namespace MythMod.NPCs.LanternMoon
             Main.spriteBatch.Draw(base.mod.GetTexture("NPCs/LanternMoon/年桔树眼睛"), vector2, new Rectangle(0,U,180,256), new Color(255,255,255,0), base.npc.rotation, vector, 1f, effects, 0f);
         }*/
         // Token: 0x06001B1B RID: 6939 RVA: 0x0014B944 File Offset: 0x00149B44
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
 		{
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             if (base.NPC.life <= 0)

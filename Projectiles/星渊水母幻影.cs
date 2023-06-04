@@ -13,7 +13,7 @@ namespace MythMod.Projectiles
 		// Token: 0x06001C81 RID: 7297 RVA: 0x0000BBD6 File Offset: 0x00009DD6
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("星渊水母幻影");
+            // base.DisplayName.SetDefault("星渊水母幻影");
             Main.projFrames[Projectile.type] = 5; /*【帧数为6】对应的贴图也要画6帧哦*/
 		}
 		private bool initialization = true;
@@ -72,7 +72,7 @@ namespace MythMod.Projectiles
 		public override void Kill(int timeLeft)
 		{
 		}
-		public override void OnHitPlayer(Player player, int damage, bool crit)
+		public override void OnHitPlayer(Player target, Player.HurtInfo info)
 		{
 			player.AddBuff(70, 120, true);
             player.AddBuff(base.Mod.Find<ModBuff>("极剧毒").Type, 30, true);

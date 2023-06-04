@@ -23,7 +23,7 @@ namespace MythMod.Projectiles.projectile2
         //4444444
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("闪电");
+            // DisplayName.SetDefault("闪电");
         }
         //7359668
         public override void SetDefaults()
@@ -82,7 +82,7 @@ namespace MythMod.Projectiles.projectile2
                 Main.projectile[num40].timeLeft = Projectile.timeLeft;
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (Main.rand.Next(1, 6) == 1)
             {

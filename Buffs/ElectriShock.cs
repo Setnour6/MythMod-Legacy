@@ -10,8 +10,8 @@ namespace MythMod.Buffs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("ElectriShock");
-            base.Description.SetDefault("ElectriShock");
+            // base.DisplayName.SetDefault("ElectriShock");
+            // base.Description.SetDefault("ElectriShock");
 			Main.debuff[base.Type] = true;
 			Main.pvpBuff[base.Type] = true;
 			Main.buffNoSave[base.Type] = true;

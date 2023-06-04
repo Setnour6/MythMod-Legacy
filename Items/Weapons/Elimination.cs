@@ -20,10 +20,10 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("Elimination");
+            // base.DisplayName.SetDefault("Elimination");
 			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "代码杀射线");
-            base.Tooltip.SetDefault("∞ 代码伤害\n开发者专用\n反反作弊武器");
+            // base.Tooltip.SetDefault("∞ 代码伤害\n开发者专用\n反反作弊武器");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;

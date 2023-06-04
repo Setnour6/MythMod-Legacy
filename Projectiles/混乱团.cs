@@ -24,7 +24,7 @@ namespace MythMod.Projectiles
         //4444444
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("混乱团");
+            // DisplayName.SetDefault("混乱团");
         }
         //7359668
         public override void SetDefaults()
@@ -73,7 +73,7 @@ namespace MythMod.Projectiles
             }
             Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 0.2176f / 2550f * Projectile.scale, (float)(255 - base.Projectile.alpha) * 0.8196f / 2550f, (float)(255 - base.Projectile.alpha) * 0.6373f / 2550f * Projectile.scale);
         }
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(Mod.Find<ModBuff>("乱流").Type, 360, true);
         }

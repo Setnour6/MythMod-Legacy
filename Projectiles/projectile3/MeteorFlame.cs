@@ -11,7 +11,7 @@ namespace MythMod.Projectiles.projectile3
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("熔岩陨石");
+            // base.DisplayName.SetDefault("熔岩陨石");
 		}
 		public override void SetDefaults()
 		{
@@ -49,7 +49,7 @@ namespace MythMod.Projectiles.projectile3
                 Projectile.tileCollide = false;
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(24, 600);
         }

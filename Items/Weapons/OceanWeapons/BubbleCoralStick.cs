@@ -13,7 +13,7 @@ namespace MythMod.Items.Weapons.OceanWeapons
         private bool k = true;
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("");
+            // Tooltip.SetDefault("");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;
@@ -38,7 +38,7 @@ namespace MythMod.Items.Weapons.OceanWeapons
             Item.shootSpeed = 1.5f;
 
         }
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
         }
         public override void MeleeEffects(Player player, Rectangle hitbox)

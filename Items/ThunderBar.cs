@@ -22,8 +22,8 @@ namespace MythMod.Items
         // Token: 0x06001FC4 RID: 8132 RVA: 0x000C4C50 File Offset: 0x000C2E50
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("123");
-            base.Tooltip.SetDefault("'456'");
+            // base.DisplayName.SetDefault("123");
+            // base.Tooltip.SetDefault("'456'");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "云雷锭");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "'带有大量电荷'");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);

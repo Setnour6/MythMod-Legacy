@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace MythMod.Tiles.Volcano
@@ -19,7 +20,7 @@ namespace MythMod.Tiles.Volcano
             this.DustType = 191;
             this.soundStyle/* tModPorter Note: Removed. Integrate into HitSound */ = 1;
 			this.HitSound = 6;
-            ModTranslation modTranslation = base.CreateMapEntryName(null);
+            LocalizedText modTranslation = base.CreateMapEntryName(null);
             base.AddMapEntry(new Color(127, 111, 144), modTranslation);
 			base.SetStaticDefaults();
 		}

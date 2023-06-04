@@ -9,7 +9,7 @@ namespace MythMod.Items.Weapons//������mod����
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("看起来很好吃");//�̳� ����Ʒ����
+            // Tooltip.SetDefault("看起来很好吃");//�̳� ����Ʒ����
         }
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetDefaults()
@@ -33,7 +33,7 @@ namespace MythMod.Items.Weapons//������mod����
 
         }
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             for (int i = 0; i < 24; i++)
             {

@@ -24,7 +24,7 @@ namespace MythMod.Projectiles.projectile2
         //4444444
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("烟花火球金沙");
+            // DisplayName.SetDefault("烟花火球金沙");
         }
         //7359668
         public override void SetDefaults()
@@ -109,7 +109,7 @@ namespace MythMod.Projectiles.projectile2
             Lighting.AddLight(base.Projectile.Center, (float)(255 - base.Projectile.alpha) * 1f / 255f * Projectile.scale, (float)(255 - base.Projectile.alpha) * 0f / 255f, (float)(255 - base.Projectile.alpha) * 0f / 255f * Projectile.scale);
         }
         //14141414141414
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(24, 1200);
         }

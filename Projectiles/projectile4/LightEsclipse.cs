@@ -19,7 +19,7 @@ namespace MythMod.Projectiles.projectile4
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("日食球");
+            // DisplayName.SetDefault("日食球");
         }
         public override void SetDefaults()
         {
@@ -80,7 +80,7 @@ namespace MythMod.Projectiles.projectile4
         {
             return new Color?(new Color(255, 255, 255, 0) * ((Projectile.timeLeft) / 1000f));
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             for (int i = 0; i < 3; i++)
             {

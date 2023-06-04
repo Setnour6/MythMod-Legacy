@@ -13,7 +13,7 @@ namespace MythMod.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("水晶碎块");
+            // base.DisplayName.SetDefault("水晶碎块");
         }
         public override void SetDefaults()
         {

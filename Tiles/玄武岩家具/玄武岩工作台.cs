@@ -25,8 +25,8 @@ namespace MythMod.Tiles.玄武岩家具
 			};
 			TileObjectData.addTile((int)base.Type);
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("玄武岩工作台");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("玄武岩工作台");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
 			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
 			this.AdjTiles = new int[]

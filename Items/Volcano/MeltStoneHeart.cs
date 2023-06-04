@@ -13,8 +13,8 @@ namespace MythMod.Items.Volcano
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("熔岩心石");
-            base.Tooltip.SetDefault("在火山区域内生命上限永久提升5点");
+            // base.DisplayName.SetDefault("熔岩心石");
+            // base.Tooltip.SetDefault("在火山区域内生命上限永久提升5点");
 		}
 		public override void SetDefaults()
 		{

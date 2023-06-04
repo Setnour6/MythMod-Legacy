@@ -9,7 +9,7 @@ namespace MythMod.Projectiles.projectile2
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("双子魔眼剑气");
+            // base.DisplayName.SetDefault("双子魔眼剑气");
 		}
 		public override void SetDefaults()
 		{
@@ -30,7 +30,7 @@ namespace MythMod.Projectiles.projectile2
 			float num2 = base.Projectile.Center.Y;
 			Main.dust[num3].noGravity = true;
 		}
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
 			target.AddBuff(39, 600, false);
 		}

@@ -23,7 +23,7 @@ namespace MythMod.Projectiles.projectile2
         //4444444
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("海星");
+            // DisplayName.SetDefault("海星");
         }
         //7359668
         public override void SetDefaults()
@@ -60,7 +60,7 @@ namespace MythMod.Projectiles.projectile2
             Projectile.velocity.X *= 0.995f;
             Projectile.velocity.Y += 0.07f;
         }
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(Mod.Find<ModBuff>("Starfishes").Type, 180, true);
             Projectile.timeLeft = 0;

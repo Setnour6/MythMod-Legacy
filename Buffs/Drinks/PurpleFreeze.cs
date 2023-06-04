@@ -9,8 +9,8 @@ namespace MythMod.Buffs.Drinks
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("紫气东来");
-            base.Description.SetDefault("暴击增加12%");
+            // base.DisplayName.SetDefault("紫气东来");
+            // base.Description.SetDefault("暴击增加12%");
 			Main.buffNoTimeDisplay[base.Type] = false;
 			Main.buffNoSave[base.Type] = true;
 		}

@@ -9,7 +9,7 @@ namespace MythMod.Items.Furnitures
 	{
 		public override void SetStaticDefaults()
 		{
-			Tooltip.SetDefault("");
+			// Tooltip.SetDefault("");
 			Tooltip.AddTranslation(GameCulture.Chinese, "玄武岩工作台");
 		}
         public override void SetDefaults()

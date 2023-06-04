@@ -21,10 +21,10 @@ namespace MythMod.Items.Accessories
 		// Token: 0x060005CF RID: 1487 RVA: 0x0004F58C File Offset: 0x0004D78C
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("赤炼魔戒");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("赤炼魔戒");
+			// base.Tooltip.SetDefault("");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "赤炼魔戒");
-            Tooltip.SetDefault("免疫火山熔岩造成的秒杀");//教程是物品介绍
+            // Tooltip.SetDefault("免疫火山熔岩造成的秒杀");//教程是物品介绍
 		}
 
 		// Token: 0x060005D0 RID: 1488 RVA: 0x0004F5E4 File Offset: 0x0004D7E4

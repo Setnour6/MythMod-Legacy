@@ -19,7 +19,7 @@ namespace MythMod.Projectiles.projectile3
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("耀斑");
+            // DisplayName.SetDefault("耀斑");
         }
         public override void SetDefaults()
         {
@@ -60,7 +60,7 @@ namespace MythMod.Projectiles.projectile3
                 Projectile.scale *= 0.95f;
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(189, 300, false);
         }

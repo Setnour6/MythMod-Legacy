@@ -12,7 +12,7 @@ namespace MythMod.Items.Volcano
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("熔珠");
+            // base.DisplayName.SetDefault("熔珠");
 			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "熔珠");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);

@@ -22,7 +22,7 @@ namespace MythMod.Items.Weapons
         public override void SetStaticDefaults()
         {
             base.DisplayName.AddTranslation(GameCulture.Chinese, "冰火寂灭");
-            Tooltip.SetDefault("力量足以震动地壳");
+            // Tooltip.SetDefault("力量足以震动地壳");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;

@@ -11,7 +11,7 @@ namespace MythMod.NPCs.EvilBotle
 	{
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("古咒飞龙");
+            // base.DisplayName.SetDefault("古咒飞龙");
             Main.npcFrameCount[base.NPC.type] = 5;
         }
 		public override void SetDefaults()
@@ -61,7 +61,7 @@ namespace MythMod.NPCs.EvilBotle
         {
             return new Color?(new Color(255, 255, 255, base.NPC.alpha));
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
 		{
 			for (int i = 0; i < 25; i++)
 			{

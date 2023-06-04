@@ -21,7 +21,7 @@ namespace MythMod.Projectiles.Clubs
 	{
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("水晶棍气");
+            // base.DisplayName.SetDefault("水晶棍气");
         }
 		public override void SetDefaults()
 		{
@@ -119,7 +119,7 @@ namespace MythMod.Projectiles.Clubs
                 return new Color?(new Color((float)Projectile.timeLeft / 60f, (float)Projectile.timeLeft / 60f, (float)Projectile.timeLeft / 60f, 0));
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             for (int y = 0; y < 40; y++)
             {

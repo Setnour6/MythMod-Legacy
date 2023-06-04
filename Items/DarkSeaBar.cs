@@ -19,8 +19,8 @@ namespace MythMod.Items
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("Abyss Bar");
-            base.Tooltip.SetDefault("'Ocean deep……'");
+            // base.DisplayName.SetDefault("Abyss Bar");
+            // base.Tooltip.SetDefault("'Ocean deep……'");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "渊海锭");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "'深海之下……'");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);

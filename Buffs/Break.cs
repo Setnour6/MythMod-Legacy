@@ -10,8 +10,8 @@ namespace MythMod.Buffs
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("Break");
-			base.Description.SetDefault("防御大幅下降");
+			// base.DisplayName.SetDefault("Break");
+			// base.Description.SetDefault("防御大幅下降");
 			Main.debuff[base.Type] = false;
 			Main.pvpBuff[base.Type] = true;
 			Main.buffNoSave[base.Type] = true;

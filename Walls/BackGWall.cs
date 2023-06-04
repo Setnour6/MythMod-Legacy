@@ -18,8 +18,8 @@ namespace MythMod.Walls
     {
         public override void SetStaticDefaults()
         {
-            ModTranslation modTranslation = CreateMapEntryName(null);
-            modTranslation.SetDefault("");
+            LocalizedText modTranslation = CreateMapEntryName(null);
+            // modTranslation.SetDefault("");
             AddMapEntry(new Color(0, 0, 0, 255), modTranslation);
         }
         public override bool PreDraw(int i, int j, SpriteBatch spriteBatch)

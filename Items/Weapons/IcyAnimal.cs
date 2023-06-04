@@ -20,8 +20,8 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("冰封遗骸");
-			base.Tooltip.SetDefault("召唤一个冰晶雪兽协助作战");
+            // base.DisplayName.SetDefault("冰封遗骸");
+			// base.Tooltip.SetDefault("召唤一个冰晶雪兽协助作战");
         }
         public override void SetDefaults()
         {

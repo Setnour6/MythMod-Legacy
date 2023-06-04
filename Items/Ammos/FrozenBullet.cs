@@ -20,8 +20,8 @@ namespace MythMod.Items.Ammos
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("冰霜弹");
-            base.Tooltip.SetDefault("有概率冻结敌人");
+            // base.DisplayName.SetDefault("冰霜弹");
+            // base.Tooltip.SetDefault("有概率冻结敌人");
 		}
 		public override void SetDefaults()
 		{

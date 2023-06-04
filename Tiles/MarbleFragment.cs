@@ -30,8 +30,8 @@ namespace MythMod.Tiles
             };
             TileObjectData.newTile.CoordinateWidth = 192;
             TileObjectData.addTile((int)base.Type);
-            ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("碎片堆");
+            LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("碎片堆");
             base.AddMapEntry(new Color(146, 151, 176), modTranslation);
             base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
             this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;

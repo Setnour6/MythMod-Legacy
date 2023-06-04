@@ -19,7 +19,7 @@ namespace MythMod.Projectiles.projectile4
 	{
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("冰寒血锋");
+            // DisplayName.SetDefault("冰寒血锋");
         }
 		public override void SetDefaults()
 		{
@@ -72,7 +72,7 @@ namespace MythMod.Projectiles.projectile4
                 return new Color?(new Color((float)Projectile.timeLeft / 180f, (float)Projectile.timeLeft / 180f, (float)Projectile.timeLeft / 180f, 0f));
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             for (int y = 0; y < 40; y++)
             {

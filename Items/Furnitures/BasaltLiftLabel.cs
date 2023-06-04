@@ -9,7 +9,7 @@ namespace MythMod.Items.Furnitures
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("玄武岩电梯楼层显示标");
+            // Tooltip.SetDefault("玄武岩电梯楼层显示标");
         }
         public override void SetDefaults()
         {

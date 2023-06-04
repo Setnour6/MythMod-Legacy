@@ -11,8 +11,8 @@ namespace MythMod.Buffs
 		// Token: 0x060000B3 RID: 179 RVA: 0x0002DB34 File Offset: 0x0002BD34
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("高温窒息");
-            base.Description.SetDefault("无法使用翅膀和坐骑");
+            // base.DisplayName.SetDefault("高温窒息");
+            // base.Description.SetDefault("无法使用翅膀和坐骑");
 			Main.debuff[base.Type] = false;
 			Main.pvpBuff[base.Type] = true;
             Main.buffNoSave[base.Type] = true;

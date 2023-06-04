@@ -9,8 +9,8 @@ namespace MythMod.Buffs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("熔岩杯子");
-            base.Description.SetDefault("多喝岩浆哦");
+            // base.DisplayName.SetDefault("熔岩杯子");
+            // base.Description.SetDefault("多喝岩浆哦");
 			Main.buffNoTimeDisplay[base.Type] = true;
 			Main.buffNoSave[base.Type] = true;
 		}

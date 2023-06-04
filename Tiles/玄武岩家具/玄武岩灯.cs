@@ -18,8 +18,8 @@ namespace MythMod.Tiles.玄武岩家具
 			Main.tileWaterDeath[(int)base.Type] = false;
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style1xX);
 			TileObjectData.addTile((int)base.Type);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("玄武岩灯");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("玄武岩灯");
             base.AddMapEntry(new Color(191, 142, 111), modTranslation);
             base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
 			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;

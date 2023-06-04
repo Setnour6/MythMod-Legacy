@@ -12,7 +12,7 @@ namespace MythMod.Projectiles.projectile5
 	{
 		public override void SetStaticDefaults()
 		{
-            DisplayName.SetDefault("灯火环");
+            // DisplayName.SetDefault("灯火环");
 		}
 		public override void SetDefaults()
 		{

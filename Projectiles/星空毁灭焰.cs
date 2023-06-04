@@ -14,7 +14,7 @@ namespace MythMod.Projectiles
 		// Token: 0x06001F14 RID: 7956 RVA: 0x0000C97C File Offset: 0x0000AB7C
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("星空毁灭焰");
+            // base.DisplayName.SetDefault("星空毁灭焰");
 			Main.projFrames[base.Projectile.type] = 3;
 		}
 

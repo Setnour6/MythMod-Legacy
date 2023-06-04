@@ -8,7 +8,7 @@ namespace MythMod.Items
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("Shining Jelly Brick");
+			// base.DisplayName.SetDefault("Shining Jelly Brick");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "幻海琉璃瓦");
 		}
 		public override void SetDefaults()

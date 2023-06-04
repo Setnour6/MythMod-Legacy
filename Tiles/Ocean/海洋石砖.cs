@@ -22,12 +22,12 @@ namespace MythMod.Tiles.Ocean
 			this.DustType = 224;
 			this.MinPick = 235;
 			this.HitSound = 21;
-            this.ItemDrop = base.Mod.Find<ModItem>("OceanStoneBlock").Type;
+            this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = base.Mod.Find<ModItem>("OceanStoneBlock").Type;
 
             this.soundStyle/* tModPorter Note: Removed. Integrate into HitSound */ = 2;
 			Main.tileSpelunker[(int)base.Type] = true;
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("海洋石砖");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("海洋石砖");
 			base.AddMapEntry(new Color(6, 61, 54), modTranslation);
             modTranslation.AddTranslation(GameCulture.Chinese, "海洋石砖");
 		}

@@ -15,7 +15,7 @@ namespace MythMod.Projectiles.projectile4
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("咒火球");
+            // DisplayName.SetDefault("咒火球");
         }
         public override void SetDefaults()
         {

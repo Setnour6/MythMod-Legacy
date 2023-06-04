@@ -15,7 +15,7 @@ namespace MythMod.Projectiles.Ocean
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("火山生成");
+            // base.DisplayName.SetDefault("火山生成");
         }
         public override void SetDefaults()
         {
@@ -34,7 +34,7 @@ namespace MythMod.Projectiles.Ocean
         {
             Projectile.velocity.Y += 2.5f;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
         }
         public override void Kill(int timeLeft)//熔岩心石

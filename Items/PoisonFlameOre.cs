@@ -10,7 +10,7 @@ namespace MythMod.Items//制作是mod名字
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("毒与火的千年沉淀");//教程是物品介绍
+            // Tooltip.SetDefault("毒与火的千年沉淀");//教程是物品介绍
             DisplayName.AddTranslation(GameCulture.Chinese, "毒焰矿");
         }
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8

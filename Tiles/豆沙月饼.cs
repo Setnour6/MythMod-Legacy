@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -17,9 +18,9 @@ namespace MythMod.Tiles
             TileObjectData.newTile.StyleHorizontal = true;
 			TileObjectData.newTile.LavaDeath = false;
             TileObjectData.addTile((int)base.Type);
-            this.ItemDrop = base.Mod.Find<ModItem>("BeanMooncake").Type;
-            ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("月饼");
+            this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = base.Mod.Find<ModItem>("BeanMooncake").Type;
+            LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("月饼");
             base.AddMapEntry(new Color(200, 76, 25), modTranslation);
 		}
         public override void NearbyEffects(int i, int j, bool closer)

@@ -26,7 +26,7 @@ namespace MythMod.NPCs.LanternMoon
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("berry Sweat Slime");
+			// base.DisplayName.SetDefault("berry Sweat Slime");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "大橘子");
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -75,7 +75,7 @@ namespace MythMod.NPCs.LanternMoon
                 }
             }
         }
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             NPC.active = false;
             for (int i = 0; i < 25; i++)

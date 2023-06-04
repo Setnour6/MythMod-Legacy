@@ -19,7 +19,7 @@ namespace MythMod.Projectiles.projectile5.Sweats
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("柠檬糖");
+            // DisplayName.SetDefault("柠檬糖");
         }
         public override void SetDefaults()
         {
@@ -59,7 +59,7 @@ namespace MythMod.Projectiles.projectile5.Sweats
             }
             Lighting.AddLight(Projectile.Center, -1, -1, -1);
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Player player = Main.player[Main.myPlayer];
             if(Projectile.ai[0] == 1)

@@ -18,8 +18,8 @@ namespace MythMod.Tiles.TangerineFuniture
 			Main.tileWaterDeath[(int)base.Type] = false;
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style1x2Top);
 			TileObjectData.addTile((int)base.Type);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("年桔木灯笼");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("年桔木灯笼");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
 			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;

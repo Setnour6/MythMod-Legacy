@@ -19,10 +19,10 @@ namespace MythMod.Items.Feathers
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("羽毛挂饰");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("羽毛挂饰");
+			// base.Tooltip.SetDefault("");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "羽毛挂饰");
-            Tooltip.SetDefault("增加3%闪避");
+            // Tooltip.SetDefault("增加3%闪避");
 		}
 		public override void SetDefaults()
 		{

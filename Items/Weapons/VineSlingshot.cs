@@ -11,8 +11,8 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-            DisplayName.SetDefault("藤蔓弹弓");
-			Tooltip.SetDefault("");
+            // DisplayName.SetDefault("藤蔓弹弓");
+			// Tooltip.SetDefault("");
 		}
 		public override void SetDefaults()
 		{

@@ -19,10 +19,10 @@ namespace MythMod.Items.Accessories
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("沁桔手环");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("沁桔手环");
+			// base.Tooltip.SetDefault("");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "沁桔手环");
-            Tooltip.SetDefault("增加生命回复速度,免疫绝大多数负面Buff");
+            // Tooltip.SetDefault("增加生命回复速度,免疫绝大多数负面Buff");
             Tooltip.AddTranslation(GameCulture.Chinese, "增加生命回复速度,免疫绝大多数负面Buff");
 		}
 		public override void SetDefaults()

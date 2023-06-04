@@ -13,7 +13,7 @@ namespace MythMod.Projectiles.projectile2
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("雾气");
+            // base.DisplayName.SetDefault("雾气");
         }
         public override void SetDefaults()
         {
@@ -93,7 +93,7 @@ namespace MythMod.Projectiles.projectile2
             Main.spriteBatch.Draw(texture2D, base.Projectile.Center - Main.screenPosition + new Vector2(0f, base.Projectile.gfxOffY), new Rectangle?(new Rectangle(0, y, texture2D.Width, num)), base.Projectile.GetAlpha(lightColor), base.Projectile.rotation, new Vector2((float)texture2D.Width / 2f, (float)num / 2f), base.Projectile.scale, SpriteEffects.None, 0f);
             return false;
         }
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             //target.AddBuff(31, projectile.timeLeft / 4, true);
         }

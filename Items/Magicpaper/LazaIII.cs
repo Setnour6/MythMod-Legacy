@@ -11,8 +11,8 @@ namespace MythMod.Items.Magicpaper
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("三阶激光雨符咒");
-            Tooltip.SetDefault("降下激光雨\n无精准度可言\n冷却10s");
+            // DisplayName.SetDefault("三阶激光雨符咒");
+            // Tooltip.SetDefault("降下激光雨\n无精准度可言\n冷却10s");
         }
         public override void SetDefaults()
         {

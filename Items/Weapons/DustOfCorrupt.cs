@@ -13,7 +13,7 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("腐化粉尘");
+            // base.DisplayName.SetDefault("腐化粉尘");
 			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "腐化粉尘");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);

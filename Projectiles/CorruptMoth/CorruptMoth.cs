@@ -10,7 +10,7 @@ namespace MythMod.Projectiles.CorruptMoth
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("腐化飞蛾");
+            // base.DisplayName.SetDefault("腐化飞蛾");
 			ProjectileID.Sets.MinionSacrificable[base.Projectile.type] = true;
 			ProjectileID.Sets.MinionTargettingFeature[base.Projectile.type] = true;
 			Main.projFrames[Projectile.type] = 3;
@@ -122,7 +122,7 @@ namespace MythMod.Projectiles.CorruptMoth
 			}
 		}
         private int y = 0;
-		public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
         }
         public override void Kill(int timeLeft)

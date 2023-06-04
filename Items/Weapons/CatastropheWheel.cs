@@ -11,8 +11,8 @@ namespace MythMod.Items.Weapons
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("浩劫轮回");
-            Tooltip.SetDefault("轮 回 终 尽");
+            // DisplayName.SetDefault("浩劫轮回");
+            // Tooltip.SetDefault("轮 回 终 尽");
         }
         public override void SetDefaults()
         {

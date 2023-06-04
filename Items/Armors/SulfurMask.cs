@@ -14,8 +14,8 @@ namespace MythMod.Items.Armors
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("");
+			// base.Tooltip.SetDefault("");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "硫磺面具");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "近战伤害提高14%,近战暴击率提高14%");
 		}

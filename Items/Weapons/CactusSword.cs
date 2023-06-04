@@ -11,8 +11,8 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("仙人掌弹弓");
-            base.Tooltip.SetDefault("遍地皆是石子，弹药这种东西怎么会缺呢");
+            // base.DisplayName.SetDefault("仙人掌弹弓");
+            // base.Tooltip.SetDefault("遍地皆是石子，弹药这种东西怎么会缺呢");
 		}
 		public override void SetDefaults()
 		{

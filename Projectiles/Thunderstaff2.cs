@@ -24,7 +24,7 @@ namespace MythMod.Projectiles
         //4444444
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("天雷法杖");
+            // DisplayName.SetDefault("天雷法杖");
         }
         //7359668
         public override void SetDefaults()
@@ -76,7 +76,7 @@ namespace MythMod.Projectiles
                 }
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
             if(Main.rand.Next(1,3) == 1)
             {

@@ -9,8 +9,8 @@ namespace MythMod.Buffs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("低阶混乱");
-            base.Description.SetDefault("使用不稳定的传送杖将消耗生命");
+            // base.DisplayName.SetDefault("低阶混乱");
+            // base.Description.SetDefault("使用不稳定的传送杖将消耗生命");
 			Main.debuff[base.Type] = true;
 			Main.pvpBuff[base.Type] = true;
 			Main.buffNoSave[base.Type] = true;

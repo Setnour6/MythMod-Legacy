@@ -17,7 +17,7 @@ namespace MythMod.NPCs
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("防御型探测怪");
+            // base.DisplayName.SetDefault("防御型探测怪");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "防御型探测怪");
         }
         public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -128,7 +128,7 @@ namespace MythMod.NPCs
                 }
             }
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             SoundEngine.PlaySound(SoundID.Item37, new Vector2(base.NPC.position.X, base.NPC.position.Y));
             if (NPC.life < 50)

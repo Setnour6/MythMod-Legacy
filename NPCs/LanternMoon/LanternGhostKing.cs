@@ -20,7 +20,7 @@ namespace MythMod.NPCs.LanternMoon
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("灯笼鬼王");
+            // base.DisplayName.SetDefault("灯笼鬼王");
 			Main.npcFrameCount[base.NPC.type] = 3;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "灯笼鬼王");
 		}
@@ -425,7 +425,7 @@ namespace MythMod.NPCs.LanternMoon
             Cirposi = Cirposi * 0.99f + Cirpo * 0.01f;
         }
         public static float Adc = 0;
-        public override void OnHitPlayer(Player player, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
         }
         public override bool CheckActive()
@@ -433,7 +433,7 @@ namespace MythMod.NPCs.LanternMoon
             return this.canDespawn;
         }
         private bool canDespawn;
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             if(20000 - (int)(NPC.life / (float)NPC.lifeMax * 10000f) < 20000)

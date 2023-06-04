@@ -30,7 +30,7 @@ namespace MythMod.NPCs.LanternMoon
         }
         public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("Thousand years orange monster");
+			// base.DisplayName.SetDefault("Thousand years orange monster");
 			Main.npcFrameCount[base.NPC.type] = 1;
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "千年桔树妖");
 		}
@@ -69,7 +69,7 @@ namespace MythMod.NPCs.LanternMoon
 			base.NPC.HitSound = SoundID.NPCHit1;
 			base.NPC.DeathSound = SoundID.NPCDeath1;
 		}
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
 		{
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             if (base.NPC.life <= 0)

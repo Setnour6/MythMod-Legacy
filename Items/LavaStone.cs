@@ -20,7 +20,7 @@ namespace MythMod.Items
         public override void SetStaticDefaults()
         {
             DisplayName.AddTranslation(GameCulture.Chinese, "熔岩石");
-            Tooltip.SetDefault("");
+            // Tooltip.SetDefault("");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;

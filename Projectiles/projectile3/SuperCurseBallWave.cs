@@ -11,7 +11,7 @@ namespace MythMod.Projectiles.projectile3
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("咒火球冲击波");
+            // base.DisplayName.SetDefault("咒火球冲击波");
 		}
 		public override void SetDefaults()
 		{

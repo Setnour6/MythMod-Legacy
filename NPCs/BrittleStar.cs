@@ -14,7 +14,7 @@ namespace MythMod.NPCs
 		// Token: 0x06001475 RID: 5237 RVA: 0x00082F6 File Offset: 0x00064F6
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("Stone");
+            // base.DisplayName.SetDefault("Stone");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "海蛇尾");
 		}
 		private bool canDespawn;
@@ -140,7 +140,7 @@ namespace MythMod.NPCs
 		{
 		}
         // Token: 0x0600147B RID: 5243 RVA: 0x00A99DC File Offset: 0x00A7BDC
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             for (int i = 0; i < 5; i++)
             {

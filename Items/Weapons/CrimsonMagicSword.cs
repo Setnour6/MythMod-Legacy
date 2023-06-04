@@ -10,7 +10,7 @@ namespace MythMod.Items.Weapons
         public override void SetStaticDefaults()
         {
             //Tooltip.SetDefault("附魔血剑");
-            DisplayName.SetDefault("附魔血剑");
+            // DisplayName.SetDefault("附魔血剑");
         }
         public override void SetDefaults()
         {

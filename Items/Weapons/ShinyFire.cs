@@ -21,8 +21,8 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault(".");
-			base.Tooltip.SetDefault(".");
+			// base.DisplayName.SetDefault(".");
+			// base.Tooltip.SetDefault(".");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "火树银花");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "让它在夜空中绽放吧!\n威力远远大于普通烟花");
 		}

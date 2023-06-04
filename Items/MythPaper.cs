@@ -14,8 +14,8 @@ namespace MythMod.Items
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("神话卷轴");
-            base.Tooltip.SetDefault("里面压抑着无数先辈勇士和邪恶势力相互的血海深仇和毁天灭地的烈怒\n使用它，为了无上的荣耀和财富，并带来极其可怕的诅咒降临你身\n如果你怕死，赶紧扔了它！\n \n释放了这个卷轴的力量后，你必再无宁日\n这会带来一切的仇视和敌意\nBoss金币掉落提升100倍\nBoss将掉落宝藏箱，战利品变得更加丰厚\nDebuff的持续时间会延长\n你将获得阴寿命和阳寿命各30点，死亡时阴阳寿命各-1\n当你的阴寿命或阳寿命为0时，你的生命降低为20\n你死亡时，掉光所有钱\n不要在Boss存活时使用,否则所有被封印的能量会瞬间向你袭来\n谨慎使用！");
+            // base.DisplayName.SetDefault("神话卷轴");
+            // base.Tooltip.SetDefault("里面压抑着无数先辈勇士和邪恶势力相互的血海深仇和毁天灭地的烈怒\n使用它，为了无上的荣耀和财富，并带来极其可怕的诅咒降临你身\n如果你怕死，赶紧扔了它！\n \n释放了这个卷轴的力量后，你必再无宁日\n这会带来一切的仇视和敌意\nBoss金币掉落提升100倍\nBoss将掉落宝藏箱，战利品变得更加丰厚\nDebuff的持续时间会延长\n你将获得阴寿命和阳寿命各30点，死亡时阴阳寿命各-1\n当你的阴寿命或阳寿命为0时，你的生命降低为20\n你死亡时，掉光所有钱\n不要在Boss存活时使用,否则所有被封印的能量会瞬间向你袭来\n谨慎使用！");
         }
         public override void SetDefaults()
         {

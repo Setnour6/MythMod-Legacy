@@ -11,8 +11,8 @@ namespace MythMod.Items.Magicpaper
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("金银雨符咒石");
-            Tooltip.SetDefault("从天降钱\n全屏范围\n冷却10s\n无消耗");
+            // DisplayName.SetDefault("金银雨符咒石");
+            // Tooltip.SetDefault("从天降钱\n全屏范围\n冷却10s\n无消耗");
         }
         public override void SetDefaults()
         {

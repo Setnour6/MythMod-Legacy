@@ -12,8 +12,8 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("埋山法杖");
-			base.Tooltip.SetDefault("从天而降无数土块\n 神话");
+            // base.DisplayName.SetDefault("埋山法杖");
+			// base.Tooltip.SetDefault("从天而降无数土块\n 神话");
 		}
 		public override void SetDefaults()
 		{

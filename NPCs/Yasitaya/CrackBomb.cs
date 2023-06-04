@@ -11,7 +11,7 @@ namespace MythMod.NPCs.Yasitaya
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("");
+            // base.DisplayName.SetDefault("");
             Main.projFrames[Projectile.type] = 6;
 		}
 		public override void SetDefaults()

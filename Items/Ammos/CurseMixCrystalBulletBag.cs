@@ -20,8 +20,8 @@ namespace MythMod.Items.Ammos
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("无尽咒火混杂水晶弹袋");
-            base.Tooltip.SetDefault("供应无限量的咒火弹混杂水晶弹作为弹药");
+            // base.DisplayName.SetDefault("无尽咒火混杂水晶弹袋");
+            // base.Tooltip.SetDefault("供应无限量的咒火弹混杂水晶弹作为弹药");
 		}
 		public override void SetDefaults()
 		{

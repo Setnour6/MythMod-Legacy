@@ -9,8 +9,8 @@ namespace MythMod.Buffs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("冰爽III");
-            base.Description.SetDefault("附近有解暑的东西,让你状态良好\n提升11%攻速");
+            // base.DisplayName.SetDefault("冰爽III");
+            // base.Description.SetDefault("附近有解暑的东西,让你状态良好\n提升11%攻速");
 			Main.debuff[base.Type] = false;
 			Main.pvpBuff[base.Type] = true;
 			Main.buffNoSave[base.Type] = true;

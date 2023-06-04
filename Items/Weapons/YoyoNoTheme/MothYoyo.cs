@@ -21,7 +21,7 @@ namespace MythMod.Items.Weapons.YoyoNoTheme
         public override void SetStaticDefaults()
         {
             ItemID.Sets.Yoyo[Item.type] = true;
-            base.DisplayName.SetDefault("蛾翼球");
+            // base.DisplayName.SetDefault("蛾翼球");
             ItemID.Sets.GamepadExtraRange[Item.type] = 15;
             ItemID.Sets.GamepadSmartQuickReach[Item.type] = true;
             base.Tooltip.AddTranslation(GameCulture.Chinese, "残翅制成");

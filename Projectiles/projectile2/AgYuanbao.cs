@@ -14,7 +14,7 @@ namespace MythMod.Projectiles.projectile2
 		// Token: 0x06001F14 RID: 7956 RVA: 0x0000C97C File Offset: 0x0000AB7C
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("银元宝");
+            // base.DisplayName.SetDefault("银元宝");
 			Main.projFrames[base.Projectile.type] = 1;
 		}
 
@@ -51,7 +51,7 @@ namespace MythMod.Projectiles.projectile2
             Gore.NewGore(base.Projectile.position, base.Projectile.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/银元宝碎块2"), 1f);
             Gore.NewGore(base.Projectile.position, base.Projectile.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/银元宝碎块3"), 1f);
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             SoundEngine.PlaySound(SoundID.Item37, new Vector2(base.Projectile.position.X, base.Projectile.position.Y));
             target.velocity = Projectile.velocity * (float)Math.Sqrt(target.knockBackResist) * 0.75f;

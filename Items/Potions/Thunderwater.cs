@@ -12,8 +12,8 @@ namespace MythMod.Items.Potions//在虚无mod的Items文件夹里
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("天雷药剂");//在游戏里的名称
-            Tooltip.SetDefault("");//物品介绍
+            // DisplayName.SetDefault("天雷药剂");//在游戏里的名称
+            // Tooltip.SetDefault("");//物品介绍
         }
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetDefaults()

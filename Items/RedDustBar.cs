@@ -11,8 +11,8 @@ namespace MythMod.Items
         // Token: 0x06000D75 RID: 3445 RVA: 0x0006A410 File Offset: 0x00068610
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("Firesand Bar");
-            base.Tooltip.SetDefault("");
+            // base.DisplayName.SetDefault("Firesand Bar");
+            // base.Tooltip.SetDefault("");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "火沙锭");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "红尘漫天,风沙肆虐");
         }

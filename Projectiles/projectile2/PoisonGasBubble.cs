@@ -55,7 +55,7 @@ namespace MythMod.Projectiles.projectile2
                 Projectile.velocity.Y -= 0.025f;
             }
 		}
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(20, Projectile.timeLeft * 2, true);
             target.AddBuff(70, Projectile.timeLeft / 2, true);

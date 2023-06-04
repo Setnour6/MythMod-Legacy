@@ -12,7 +12,7 @@ namespace MythMod.Projectiles.projectile3
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("珍珠弹");
+            // base.DisplayName.SetDefault("珍珠弹");
 			Main.projFrames[base.Projectile.type] = 1;
 		}
 		public override void SetDefaults()

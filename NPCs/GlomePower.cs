@@ -14,7 +14,7 @@ namespace MythMod.NPCs
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("石巨人能源");
+            // base.DisplayName.SetDefault("石巨人能源");
             Main.npcFrameCount[base.NPC.type] = 6;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "石巨人能源");
         }
@@ -45,7 +45,7 @@ namespace MythMod.NPCs
             NPC.rotation += Omega;
             Omega *= 0.99f;
         }
-        public override void OnHitPlayer(Player player, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
         }
         public override void FindFrame(int frameHeight)
@@ -91,7 +91,7 @@ namespace MythMod.NPCs
                 NPC.chaseable = false;
             }
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             Omega = Main.rand.NextFloat(-0.4f, 0.4f);
             if (NPC.life <= 0)

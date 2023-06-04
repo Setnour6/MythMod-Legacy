@@ -9,8 +9,8 @@ namespace MythMod.Buffs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("星渊毒素");
-            base.Description.SetDefault("浅海的阳光下,星渊毒素正在加速溶解你的身体");
+            // base.DisplayName.SetDefault("星渊毒素");
+            // base.Description.SetDefault("浅海的阳光下,星渊毒素正在加速溶解你的身体");
 			Main.buffNoTimeDisplay[base.Type] = true;
 			Main.pvpBuff[base.Type] = true;
 			Main.buffNoSave[base.Type] = true;

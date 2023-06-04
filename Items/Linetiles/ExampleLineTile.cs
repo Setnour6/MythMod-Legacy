@@ -11,9 +11,9 @@ namespace MythMod.Items.Linetiles
         public override void SetStaticDefaults()
         {
             Tooltip.AddTranslation(GameCulture.Chinese, "");
-            Tooltip.SetDefault("这个……ta出了点问题,总之,别用, 会坏哒！");
+            // Tooltip.SetDefault("这个……ta出了点问题,总之,别用, 会坏哒！");
             base.SetStaticDefaults();
-            DisplayName.SetDefault("悬链测试");
+            // DisplayName.SetDefault("悬链测试");
         }
         public override void SetDefaults()
 		{

@@ -11,7 +11,7 @@ namespace MythMod.Projectiles.projectile2
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("夜光孢子珠");
+            // base.DisplayName.SetDefault("夜光孢子珠");
 		}
 		public override void SetDefaults()
 		{

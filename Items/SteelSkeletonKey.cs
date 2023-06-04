@@ -22,8 +22,8 @@ namespace MythMod.Items
 		// Token: 0x06001301 RID: 4865 RVA: 0x0008B390 File Offset: 0x00089590
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("机械骷髅钥匙");
-			base.Tooltip.SetDefault("别再问了……");
+            // base.DisplayName.SetDefault("机械骷髅钥匙");
+			// base.Tooltip.SetDefault("别再问了……");
 		}
 
 		// Token: 0x06001302 RID: 4866 RVA: 0x0008B3E8 File Offset: 0x000895E8

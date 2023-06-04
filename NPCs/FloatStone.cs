@@ -16,7 +16,7 @@ namespace MythMod.NPCs
 		private int num2;
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("火山浮石");
+            // base.DisplayName.SetDefault("火山浮石");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "火山浮石");
 		}
 		public override void SetDefaults()
@@ -90,7 +90,7 @@ namespace MythMod.NPCs
             Color color = Utils.MultiplyRGBA(new Color(97 - base.NPC.alpha, 97 - base.NPC.alpha, 97 - base.NPC.alpha, 0), Color.White);
             Main.spriteBatch.Draw(base.Mod.GetTexture("NPCs/火山浮石发光部分"), vector2, new Rectangle?(base.NPC.frame), color, base.NPC.rotation, vector, 1f, effects, 0f);
         }
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
         {
 			SoundEngine.PlaySound(SoundID.Item10, new Vector2(base.NPC.position.X, base.NPC.position.Y));
             for (int i = 0; i < 5; i++)
@@ -131,7 +131,7 @@ namespace MythMod.NPCs
             }
             Item.NewItem((int)base.NPC.position.X, (int)base.NPC.position.Y, base.NPC.width, base.NPC.height, Mod.Find<ModItem>("LavaStone").Type, Main.rand.Next(1, 4), false, 0, false, false);
         }
-        public override void OnHitPlayer(Player player, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
 		{
 		}
 	}

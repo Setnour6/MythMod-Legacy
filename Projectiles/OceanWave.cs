@@ -12,7 +12,7 @@ namespace MythMod.Projectiles
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("海洋波纹");
+            // base.DisplayName.SetDefault("海洋波纹");
 			Main.projFrames[base.Projectile.type] = 1;
 		}
 		public override void SetDefaults()

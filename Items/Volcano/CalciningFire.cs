@@ -19,8 +19,8 @@ namespace MythMod.Items.Volcano
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("");
+			// base.Tooltip.SetDefault("");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "灼烧之怒");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);

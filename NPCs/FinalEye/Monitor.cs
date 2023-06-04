@@ -23,7 +23,7 @@ namespace MythMod.NPCs.FinalEye
 		// Token: 0x06001BA4 RID: 7076 RVA: 0x0000B6E0 File Offset: 0x000098E0
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("Eye");
+			// base.DisplayName.SetDefault("Eye");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "监测之眼");
 			Main.npcFrameCount[base.NPC.type] = 1;
 		}

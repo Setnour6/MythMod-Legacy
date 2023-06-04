@@ -13,7 +13,7 @@ namespace MythMod.NPCs
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("Lava Slime");
+			// base.DisplayName.SetDefault("Lava Slime");
 			Main.npcFrameCount[base.NPC.type] = 2;
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "尖刺火山史莱姆");
 		}
@@ -105,7 +105,7 @@ namespace MythMod.NPCs
 				}
 			}
 		}
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
 		{
 			for (int i = 0; i < 5; i++)
 			{
@@ -135,7 +135,7 @@ namespace MythMod.NPCs
             }
             Item.NewItem((int)base.NPC.position.X, (int)base.NPC.position.Y, base.NPC.width, base.NPC.height, Mod.Find<ModItem>("LavaStone").Type, Main.rand.Next(1,4), false, 0, false, false);
 		}
-		public override void OnHitPlayer(Player player, int damage, bool crit)
+		public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
 		{
 			if (Main.expertMode)
 			{

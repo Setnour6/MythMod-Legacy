@@ -13,8 +13,8 @@ namespace MythMod.Items.Armors
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("");
-            base.Tooltip.SetDefault("");
+            // base.DisplayName.SetDefault("");
+            // base.Tooltip.SetDefault("");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "OK的胸甲");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "开发人员装备");
         }

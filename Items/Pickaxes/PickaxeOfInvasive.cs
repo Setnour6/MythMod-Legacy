@@ -12,8 +12,8 @@ namespace MythMod.Items.Pickaxes
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("海蚀镐");
-			base.Tooltip.SetDefault("brush!");
+            // base.DisplayName.SetDefault("海蚀镐");
+			// base.Tooltip.SetDefault("brush!");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "海蚀镐");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "像海潮一样，冲刷，销蚀");
 		}

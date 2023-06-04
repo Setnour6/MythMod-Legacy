@@ -9,7 +9,7 @@ namespace MythMod.Items.Furnitures.Routers
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("棕榈木路由器");
+            // DisplayName.SetDefault("棕榈木路由器");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "右键使用手机,靠近获得联网,可以网购");
         }
         public override void SetDefaults()

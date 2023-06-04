@@ -22,7 +22,7 @@ namespace MythMod.Projectiles.projectile3
         //4444444
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("正无穷");
+            // DisplayName.SetDefault("正无穷");
         }
         //7359668
         public override void SetDefaults()

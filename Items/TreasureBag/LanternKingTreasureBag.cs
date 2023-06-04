@@ -16,8 +16,8 @@ namespace MythMod.Items.TreasureBag
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("Treasure Bag");
-			base.Tooltip.SetDefault("{$CommonItemTooltip.RightClickToOpen}");
+			// base.DisplayName.SetDefault("Treasure Bag");
+			// base.Tooltip.SetDefault("{$CommonItemTooltip.RightClickToOpen}");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "宝藏袋");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "右键点击打开");
 		}

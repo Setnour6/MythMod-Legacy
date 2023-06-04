@@ -9,7 +9,7 @@ namespace MythMod.Items.Weapons.SkyWeapons
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("火虹之刃");
+            // DisplayName.SetDefault("火虹之刃");
             DisplayName.AddTranslation(GameCulture.Chinese, "火虹之刃");
             Tooltip.AddTranslation(GameCulture.Chinese, "");
             //GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);

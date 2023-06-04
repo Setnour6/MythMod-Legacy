@@ -19,7 +19,7 @@ namespace MythMod.Projectiles.projectile3
 	{
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("赤月");
+            // base.DisplayName.SetDefault("赤月");
         }
 		public override void SetDefaults()
 		{
@@ -122,7 +122,7 @@ namespace MythMod.Projectiles.projectile3
             }
             return false;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.velocity = new Vector2(0, Main.rand.NextFloat(9f)).RotatedByRandom(Math.PI * 2);
             Hit = true;

@@ -13,7 +13,7 @@ namespace MythMod.Items.Festival
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("血莲灯");
+            // DisplayName.SetDefault("血莲灯");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "召唤灯笼月");
         }
         public override void SetDefaults()

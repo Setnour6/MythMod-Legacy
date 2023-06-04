@@ -10,7 +10,7 @@ namespace MythMod.Projectiles.projectile2
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("巨咒骷髅");
+            // base.DisplayName.SetDefault("巨咒骷髅");
 			Main.projFrames[base.Projectile.type] = 2;
 		}
 		public override void SetDefaults()

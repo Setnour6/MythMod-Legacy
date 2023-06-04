@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -33,9 +34,9 @@ namespace MythMod.Tiles.CorruprFu
 			TileObjectData.newTile.LavaDeath = true;
 			TileObjectData.addTile((int)base.Type);
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsDoor);
-            ModTranslation modTranslation = base.CreateMapEntryName(null);
+            LocalizedText modTranslation = base.CreateMapEntryName(null);
             base.AddMapEntry(new Color(191, 142, 111), modTranslation);
-            this.ItemDrop = base.Mod.Find<ModItem>("CorruptWoodPlatform").Type;
+            this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = base.Mod.Find<ModItem>("CorruptWoodPlatform").Type;
 			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
 			this.AdjTiles = new int[]
 			{

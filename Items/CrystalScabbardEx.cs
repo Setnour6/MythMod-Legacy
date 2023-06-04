@@ -13,8 +13,8 @@ namespace MythMod.Items
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("诅咒冰晶剑鞘");
-            base.Tooltip.SetDefault("召唤冰洲石剑Ex\n无消耗\n这个你打不过");
+            // base.DisplayName.SetDefault("诅咒冰晶剑鞘");
+            // base.Tooltip.SetDefault("召唤冰洲石剑Ex\n无消耗\n这个你打不过");
         }
         public override void SetDefaults()
         {

@@ -13,8 +13,8 @@ namespace MythMod.Items.Volcano
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("火山传送门");
-            base.Tooltip.SetDefault("");
+            // base.DisplayName.SetDefault("火山传送门");
+            // base.Tooltip.SetDefault("");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;

@@ -12,8 +12,8 @@ namespace MythMod.Items.Potions
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("小阳血药剂");
-            base.Tooltip.SetDefault("可以在白天回复阳寿命");
+            // base.DisplayName.SetDefault("小阳血药剂");
+            // base.Tooltip.SetDefault("可以在白天回复阳寿命");
 		}
 		public override void SetDefaults()
 		{

@@ -10,8 +10,8 @@ namespace MythMod.Buffs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("乱流");
-            base.Description.SetDefault("强劲力场混乱");
+            // base.DisplayName.SetDefault("乱流");
+            // base.Description.SetDefault("强劲力场混乱");
 			Main.buffNoTimeDisplay[base.Type] = false;
 			Main.buffNoSave[base.Type] = true;
 		}

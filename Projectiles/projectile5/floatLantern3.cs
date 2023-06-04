@@ -20,7 +20,7 @@ namespace MythMod.Projectiles.projectile5
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("漂浮灯笼");
+            // DisplayName.SetDefault("漂浮灯笼");
         }
         public override void SetDefaults()
         {

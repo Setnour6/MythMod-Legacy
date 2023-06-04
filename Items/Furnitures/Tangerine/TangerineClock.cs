@@ -8,7 +8,7 @@ namespace MythMod.Items.Furnitures.Tangerine
 	{
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("TangerineClock");
+            // DisplayName.SetDefault("TangerineClock");
             DisplayName.AddTranslation(GameCulture.Chinese, "年桔木时钟");
         }
         public override void SetDefaults()

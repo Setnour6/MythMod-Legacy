@@ -15,8 +15,8 @@ namespace MythMod.Tiles.Ocean
 			Main.tileBlockLight[(int)base.Type] = true;
 			Main.tileLavaDeath[(int)base.Type] = true;
 			Main.tileNoFail[(int)base.Type] = true;
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("藻华");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("藻华");
 			base.AddMapEntry(new Color(0, 50, 0), modTranslation);
 			this.HitSound = 6;
 			this.DustType = 2;

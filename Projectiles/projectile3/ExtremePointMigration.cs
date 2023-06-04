@@ -21,7 +21,7 @@ namespace MythMod.Projectiles.projectile3
 
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("极值点偏移");
+            // base.DisplayName.SetDefault("极值点偏移");
             Main.projFrames[Projectile.type] = 1;
         }
 
@@ -88,7 +88,7 @@ namespace MythMod.Projectiles.projectile3
             return false;
         }
         private float DisFri = 0;
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             DisFri = 60;
             base.OnHitNPC(target, damage, knockback, crit);

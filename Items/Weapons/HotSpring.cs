@@ -25,7 +25,7 @@ namespace MythMod.Items.Weapons
 		// Token: 0x060010A9 RID: 4265 RVA: 0x00007320 File Offset: 0x00005520
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("深海热泉");
+            // base.DisplayName.SetDefault("深海热泉");
 			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "深海热泉");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);

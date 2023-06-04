@@ -20,8 +20,8 @@ namespace MythMod.Items.Volcano
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("熔岩灌顶");
-			base.Tooltip.SetDefault("召唤熔岩杯,请你多喝岩浆");
+            // base.DisplayName.SetDefault("熔岩灌顶");
+			// base.Tooltip.SetDefault("召唤熔岩杯,请你多喝岩浆");
 		}
 		public override void SetDefaults()
 		{

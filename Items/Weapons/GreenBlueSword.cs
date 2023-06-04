@@ -14,7 +14,7 @@ namespace MythMod.Items.Weapons//制作是mod名字
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("蓝绿陨石光剑");
+            // base.DisplayName.SetDefault("蓝绿陨石光剑");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;

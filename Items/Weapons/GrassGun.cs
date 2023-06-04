@@ -19,8 +19,8 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("");
+			// base.Tooltip.SetDefault("");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "草本手枪");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "泥土和草木做的枪，好用吗？");
 		}

@@ -19,7 +19,7 @@ namespace MythMod.Projectiles.projectile3
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("雷鸣");
+            // DisplayName.SetDefault("雷鸣");
         }
         public override void SetDefaults()
         {
@@ -106,7 +106,7 @@ namespace MythMod.Projectiles.projectile3
             }
             Lighting.AddLight(Projectile.Center, -1, -1, -1);
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Player player = Main.player[Main.myPlayer];
         }

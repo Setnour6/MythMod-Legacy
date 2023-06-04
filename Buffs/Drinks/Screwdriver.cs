@@ -9,8 +9,8 @@ namespace MythMod.Buffs.Drinks
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("螺丝刀鸡尾酒");
-            base.Description.SetDefault("伤害增加20%,防御减少20");
+            // base.DisplayName.SetDefault("螺丝刀鸡尾酒");
+            // base.Description.SetDefault("伤害增加20%,防御减少20");
 			Main.buffNoTimeDisplay[base.Type] = false;
 			Main.buffNoSave[base.Type] = true;
 		}

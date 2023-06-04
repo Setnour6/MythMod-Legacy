@@ -18,7 +18,7 @@ namespace MythMod.NPCs
 		
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("克苏鲁之脑");
+            // base.DisplayName.SetDefault("克苏鲁之脑");
 			Main.npcFrameCount[base.NPC.type] = 4;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "克苏鲁之脑");
 		}
@@ -70,7 +70,7 @@ namespace MythMod.NPCs
                 NPC.active = false;
             }
         }
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
 		{
             NPC.life = NPC.lifeMax;
 		}

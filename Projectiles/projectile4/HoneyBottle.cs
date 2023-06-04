@@ -11,7 +11,7 @@ namespace MythMod.Projectiles.projectile4
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("HoneyBottle");
+            // base.DisplayName.SetDefault("HoneyBottle");
 		}
         private float num = 0;
         public override void SetDefaults()
@@ -91,7 +91,7 @@ namespace MythMod.Projectiles.projectile4
                 Main.player[pl].AddBuff(48,120);
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
 		}
 	}

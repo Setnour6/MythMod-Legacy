@@ -12,8 +12,8 @@ namespace MythMod.Items
         // Token: 0x06001FC4 RID: 8132 RVA: 0x000C4C50 File Offset: 0x000C2E50
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("");
-            base.Tooltip.SetDefault("");
+            // base.DisplayName.SetDefault("");
+            // base.Tooltip.SetDefault("");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "毒焰锭");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "粘稠毒气与冥火闪电的完美结合");
         }

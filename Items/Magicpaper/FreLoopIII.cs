@@ -12,8 +12,8 @@ namespace MythMod.Items.Magicpaper
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("三阶冰环符咒");
-            Tooltip.SetDefault("释放一个冰环\n冷却10s");
+            // DisplayName.SetDefault("三阶冰环符咒");
+            // Tooltip.SetDefault("释放一个冰环\n冷却10s");
         }
         public override void SetDefaults()
         {

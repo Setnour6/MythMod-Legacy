@@ -20,7 +20,7 @@ namespace MythMod.Items.Volcano
         public override void SetStaticDefaults()
         {
             base.DisplayName.AddTranslation(GameCulture.Chinese, "烈焰边锋");
-            Tooltip.SetDefault("");
+            // Tooltip.SetDefault("");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;
@@ -45,7 +45,7 @@ namespace MythMod.Items.Volcano
             Item.shootSpeed = 6f;
         }
         private int a = 0;
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(24, 900, false);
         }

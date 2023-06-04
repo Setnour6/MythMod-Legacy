@@ -40,8 +40,8 @@ namespace MythMod.Tiles
 			TileObjectData.newTile.StyleHorizontal = true;
 			TileObjectData.newTile.LavaDeath = false;
 			TileObjectData.addTile((int)base.Type);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("腐檀巨蛾宝藏箱 ");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("腐檀巨蛾宝藏箱 ");
 			base.AddMapEntry(new Color(247, 145, 156), modTranslation, new Func<string, int, int, string>(this.MapChestName));
 			this.DustType = 155;
 			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
@@ -50,7 +50,7 @@ namespace MythMod.Tiles
 				21
 			};
             this.chest/* tModPorter Note: Removed. Use ContainerName.SetDefault() and TileID.Sets.BasicChest instead */ = "腐檀巨蛾宝藏箱";
-            this.ChestDrop = base.Mod.Find<ModItem>("FTJEChest2").Type;
+            this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = base.Mod.Find<ModItem>("FTJEChest2").Type;
             modTranslation.AddTranslation(GameCulture.Chinese, "腐檀巨蛾宝藏箱 ");
 		}
 
@@ -95,7 +95,7 @@ namespace MythMod.Tiles
 		// Token: 0x06004655 RID: 18005 RVA: 0x002728E0 File Offset: 0x00270AE0
 		public override void KillMultiTile(int i, int j, int frameX, int frameY)
 		{
-			Item.NewItem(i * 16, j * 16, 32, 32, this.ChestDrop, 1, false, 0, false, false);
+			Item.NewItem(i * 16, j * 16, 32, 32, this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */, 1, false, 0, false, false);
 			Chest.DestroyChest(i, j);
 		}
 

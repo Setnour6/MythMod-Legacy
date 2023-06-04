@@ -9,8 +9,8 @@ namespace MythMod.Items
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("Iridium Bar");
-            base.Tooltip.SetDefault("''");
+            // base.DisplayName.SetDefault("Iridium Bar");
+            // base.Tooltip.SetDefault("''");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "铱金锭");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "'过度锋利'");
         }

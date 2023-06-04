@@ -24,7 +24,7 @@ namespace MythMod.Projectiles
         //4444444
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("金绿烈焰团");
+            // DisplayName.SetDefault("金绿烈焰团");
         }
         //7359668
         public override void SetDefaults()

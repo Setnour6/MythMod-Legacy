@@ -19,8 +19,8 @@ namespace MythMod.Items.Pickaxes
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("渊影镐");
-			base.Tooltip.SetDefault("crash!");
+            // base.DisplayName.SetDefault("渊影镐");
+			// base.Tooltip.SetDefault("crash!");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "渊影镐");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "深渊的炽岩，具有灼热的破坏力");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);

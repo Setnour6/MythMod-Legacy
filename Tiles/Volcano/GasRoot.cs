@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ObjectData;
 
@@ -36,8 +37,8 @@ namespace MythMod.Tiles.Volcano
                 15
             };
             this.DustType = 5;
-            ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("");
+            LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("");
             base.AddMapEntry(new Color(153, 107, 0), modTranslation);
 		}
 		public override bool CreateDust(int i, int j, ref int type)

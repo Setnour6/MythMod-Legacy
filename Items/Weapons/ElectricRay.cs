@@ -22,7 +22,7 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("Electrical Fish");
+            // base.DisplayName.SetDefault("Electrical Fish");
 			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "电鳐");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);

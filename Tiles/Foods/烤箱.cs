@@ -19,8 +19,8 @@ namespace MythMod.Tiles.Foods
 			Main.tileWaterDeath[(int)base.Type] = false;
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style2x2);
 			TileObjectData.addTile((int)base.Type);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("烤箱");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("烤箱");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
 			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;

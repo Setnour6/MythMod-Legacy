@@ -9,7 +9,7 @@ namespace MythMod.Projectiles.projectile3
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("超级咒火球");
+            // base.DisplayName.SetDefault("超级咒火球");
             Main.projFrames[Projectile.type] = 4;
         }
 		public override void SetDefaults()
@@ -52,7 +52,7 @@ namespace MythMod.Projectiles.projectile3
                 }
             }
         }
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(39, 3600);
             Projectile.Kill();

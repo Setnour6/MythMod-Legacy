@@ -22,7 +22,7 @@ namespace MythMod.Projectiles
         //4444444
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("孔明灯");
+            // DisplayName.SetDefault("孔明灯");
         }
         //7359668
         public override void SetDefaults()

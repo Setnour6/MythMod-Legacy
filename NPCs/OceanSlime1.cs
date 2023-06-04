@@ -11,7 +11,7 @@ namespace MythMod.NPCs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("海蓝史莱姆前置");
+            // base.DisplayName.SetDefault("海蓝史莱姆前置");
 			Main.npcFrameCount[base.NPC.type] = 4;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "海蓝史莱姆");
 		}
@@ -64,7 +64,7 @@ namespace MythMod.NPCs
 		{
 			return false;
 		}
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
 		{
 			if (Main.netMode != 1 && base.NPC.life <= 0)
 			{
@@ -83,7 +83,7 @@ namespace MythMod.NPCs
 				}
 			}
 		}
-		public override void OnHitPlayer(Player player, int damage, bool crit)
+		public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
 		{
 			if (Main.expertMode)
 			{

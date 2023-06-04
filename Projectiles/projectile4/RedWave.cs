@@ -15,7 +15,7 @@ namespace MythMod.Projectiles.projectile4
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("RedWave");
+            // DisplayName.SetDefault("RedWave");
         }
         public override void SetDefaults()
         {

@@ -12,7 +12,7 @@ namespace MythMod.Items.Foods
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("海鲜披萨");
+            // base.DisplayName.SetDefault("海鲜披萨");
             //base.Tooltip.SetDefault("放在身边获得增益,美味等级I");
 		}
 		public override void SetDefaults()

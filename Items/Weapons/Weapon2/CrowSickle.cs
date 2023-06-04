@@ -20,7 +20,7 @@ namespace MythMod.Items.Weapons.Weapon2
         public override void SetStaticDefaults()
         {
             base.DisplayName.AddTranslation(GameCulture.Chinese, "凶鸦夺命镰");
-            Tooltip.SetDefault("厄运降临");
+            // Tooltip.SetDefault("厄运降临");
         }
         public override void SetDefaults()
         {

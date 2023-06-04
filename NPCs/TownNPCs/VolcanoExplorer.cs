@@ -14,7 +14,7 @@ namespace MythMod.NPCs.TownNPCs
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("VolcanoExplorer");
+			// base.DisplayName.SetDefault("VolcanoExplorer");
 			Main.npcFrameCount[base.NPC.type] = 23;
 			NPCID.Sets.ExtraFramesCount[base.NPC.type] = 9;
 			NPCID.Sets.AttackFrameCount[base.NPC.type] = 4;
@@ -40,7 +40,7 @@ namespace MythMod.NPCs.TownNPCs
 			this.AnimationType = 22;
 		}
 
-		public override bool CanTownNPCSpawn(int numTownNPCs, int money)
+		public override bool CanTownNPCSpawn(int numTownNPCs)/* tModPorter Suggestion: Copy the implementation of NPC.SpawnAllowed_Merchant in vanilla if you to count money, and be sure to set a flag when unlocked, so you don't count every tick. */
 		{
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             if (mplayer.ZoneVolcano)
@@ -121,7 +121,7 @@ namespace MythMod.NPCs.TownNPCs
 			button = Language.GetTextValue("商店");
 			button2 = Language.GetTextValue("关闭");
 		}
-		public override void OnChatButtonClicked(bool firstButton, ref bool shop)
+		public override void OnChatButtonClicked(bool firstButton, ref string shopName)
 		{
 			if (firstButton)
 			{
@@ -130,7 +130,7 @@ namespace MythMod.NPCs.TownNPCs
 			}
 			shop = false;
 		}
-		public override void SetupShop(Chest shop, ref int nextSlot)
+		public override void ModifyActiveShop(string shopName, Item[] items)
 		{
 			shop.item[nextSlot].SetDefaults(base.Mod.Find<ModItem>("StarMark").Type, false);
 			shop.item[nextSlot].shopCustomPrice = new int?(Item.buyPrice(0, 70, 0, 0));

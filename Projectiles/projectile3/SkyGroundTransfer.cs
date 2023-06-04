@@ -20,7 +20,7 @@ namespace MythMod.Projectiles.projectile3
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("乾坤大挪移");
+            // DisplayName.SetDefault("乾坤大挪移");
         }
         public override void SetDefaults()
         {
@@ -99,7 +99,7 @@ namespace MythMod.Projectiles.projectile3
                 Projectile.tileCollide = true;
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Player player = Main.player[Main.myPlayer];
             for (int i = 0; i < 30; i++)

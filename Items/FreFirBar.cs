@@ -9,8 +9,8 @@ namespace MythMod.Items
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("123");
-            base.Tooltip.SetDefault("'456'");
+            // base.DisplayName.SetDefault("123");
+            // base.Tooltip.SetDefault("'456'");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "冰火锭");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "'摸起来冷热交集，挺诡异的'");
         }

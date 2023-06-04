@@ -8,7 +8,7 @@ namespace MythMod.Items.Corals
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("´ó³ÈÉ«º£ÐÇ");
+            // DisplayName.SetDefault("0…7¨®0…60‡60‡70…00†20„50ˆ40‡5");
         }
         public override void SetDefaults()
         {
@@ -16,7 +16,7 @@ namespace MythMod.Items.Corals
             base.Item.height = 16;
             base.Item.rare = 2;
             base.Item.scale = 1f;
-            base.Item.createTile = base.Mod.Find<ModTile>("´ó³ÈÉ«º£ÐÇ").Type;
+            base.Item.createTile = base.Mod.Find<ModTile>("0…7¨®0…60‡60‡70…00†20„50ˆ40‡5").Type;
             base.Item.useStyle = 1;
             base.Item.useTurn = true;
             base.Item.useAnimation = 15;

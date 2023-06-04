@@ -22,7 +22,7 @@ namespace MythMod.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("触须箭");
+            // DisplayName.SetDefault("触须箭");
         }
         public override void SetDefaults()
         {
@@ -138,7 +138,7 @@ namespace MythMod.Projectiles
             }
             return true;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             for (int m = 0; m < 20; m++)
             {

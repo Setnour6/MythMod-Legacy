@@ -13,8 +13,8 @@ namespace MythMod.Items.Foods
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("一阶美食手册");
-            base.Tooltip.SetDefault("");
+            // base.DisplayName.SetDefault("一阶美食手册");
+            // base.Tooltip.SetDefault("");
 		}
 		public override void SetDefaults()
 		{

@@ -17,7 +17,7 @@ namespace MythMod.NPCs
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("鲜血獠牙残骸");
+			// base.DisplayName.SetDefault("鲜血獠牙残骸");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "鲜血獠牙残骸");
 		}
         private bool X = true;

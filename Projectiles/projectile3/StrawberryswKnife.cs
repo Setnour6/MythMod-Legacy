@@ -9,7 +9,7 @@ namespace MythMod.Projectiles.projectile3
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("草莓喜糖投刃");
+            // base.DisplayName.SetDefault("草莓喜糖投刃");
 		}
         private float num = 0;
         public override void SetDefaults()
@@ -54,7 +54,7 @@ namespace MythMod.Projectiles.projectile3
                 Main.dust[num].noGravity = true;
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
 		}
 	}

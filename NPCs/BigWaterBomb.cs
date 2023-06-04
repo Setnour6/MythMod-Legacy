@@ -14,7 +14,7 @@ namespace MythMod.NPCs
 		// Token: 0x06001BA4 RID: 7076 RVA: 0x0000B6E0 File Offset: 0x000098E0
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("WaterBoom");
+			// base.DisplayName.SetDefault("WaterBoom");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "大型水雷");
 			Main.npcFrameCount[base.NPC.type] = 1;
 		}
@@ -41,7 +41,7 @@ namespace MythMod.NPCs
             base.NPC.velocity.Y = (float)Math.Sin((float)u / 105f * Math.PI);
         }
         // Token: 0x06001BA7 RID: 7079 RVA: 0x0000B73F File Offset: 0x0000993F
-        public override void ModifyHitByProjectile(Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitByProjectile(Projectile projectile, ref NPC.HitModifiers modifiers)
 		{
 			if (projectile.penetrate == -1)
 			{
@@ -56,7 +56,7 @@ namespace MythMod.NPCs
 			projectile.penetrate = 1;
 		}
         // Token: 0x02000413 RID: 1043
-        public override void OnHitPlayer(Player player, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             SoundEngine.PlaySound(Mod.GetLegacySoundSlot(SoundType.Item, "Sounds/Item/烟花爆炸"), (int)NPC.Center.X, (int)NPC.Center.Y);
             player.velocity = (NPC.velocity - player.velocity) / (NPC.velocity - player.velocity).Length() * 13;
@@ -89,7 +89,7 @@ namespace MythMod.NPCs
             }
         }
         // Token: 0x02000413 RID: 1043
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             Player player = Main.player[Main.myPlayer];
             SoundEngine.PlaySound(Mod.GetLegacySoundSlot(SoundType.Item, "Sounds/Item/烟花爆炸"), (int)NPC.Center.X, (int)NPC.Center.Y);

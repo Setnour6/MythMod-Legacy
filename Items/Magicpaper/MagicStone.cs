@@ -11,7 +11,7 @@ namespace MythMod.Items.Magicpaper
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("魔法石");
+            // DisplayName.SetDefault("魔法石");
         }
         public override void SetDefaults()
         {

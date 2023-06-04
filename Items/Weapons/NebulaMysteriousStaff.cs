@@ -19,8 +19,8 @@ namespace MythMod.Items.Weapons
         private bool num = true;
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("星云诡迷杖");
-            base.Tooltip.SetDefault("传送到鼠标并释放星云激光");
+            // base.DisplayName.SetDefault("星云诡迷杖");
+            // base.Tooltip.SetDefault("传送到鼠标并释放星云激光");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "星云诡迷杖");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "传送到鼠标并释放星云针弹");
         }

@@ -14,7 +14,7 @@ namespace MythMod.Projectiles.projectile5
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("灯笼须");
+            // DisplayName.SetDefault("灯笼须");
         }
         public override void SetDefaults()
         {
@@ -59,7 +59,7 @@ namespace MythMod.Projectiles.projectile5
                 Wid = 12;
             }
         }
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             Projectile.Kill();
         }

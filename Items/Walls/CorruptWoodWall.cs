@@ -9,7 +9,7 @@ namespace MythMod.Items.Walls
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("CorruptWood Wall");
+			// base.DisplayName.SetDefault("CorruptWood Wall");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "朽木墙");
 		}
 		public override void SetDefaults()

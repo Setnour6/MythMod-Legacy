@@ -14,7 +14,7 @@ namespace MythMod.NPCs
 		// Token: 0x06001808 RID: 6152 RVA: 0x00009BEC File Offset: 0x00007DEC
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("Moon slime");
+			// base.DisplayName.SetDefault("Moon slime");
 			Main.npcFrameCount[base.NPC.type] = 2;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "月苔史莱姆");
 		}
@@ -47,7 +47,7 @@ namespace MythMod.NPCs
 		}
 
 		// Token: 0x0600180B RID: 6155 RVA: 0x0010AE44 File Offset: 0x00109044
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
 		{
 			for (int i = 0; i < 5; i++)
 			{

@@ -36,7 +36,7 @@ namespace MythMod.NPCs
 		// Token: 0x0600163F RID: 5695 RVA: 0x00008D5D File Offset: 0x00006F5D
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("小激光眼");
+            // base.DisplayName.SetDefault("小激光眼");
 			Main.npcFrameCount[base.NPC.type] = 3;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "小激光眼");
 		}
@@ -150,7 +150,7 @@ namespace MythMod.NPCs
             Main.spriteBatch.Draw(base.Mod.GetTexture("NPCs/小激光眼光辉"), vector2, new Rectangle?(base.NPC.frame), color, base.NPC.rotation, vector, 1f, effects, 0f);
         }
         // Token: 0x02000413 RID: 1043
-        public override void OnHitPlayer(Player player, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
         }
         // Token: 0x02000413 RID: 1043

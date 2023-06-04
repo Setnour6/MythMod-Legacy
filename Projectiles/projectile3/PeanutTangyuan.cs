@@ -20,7 +20,7 @@ namespace MythMod.Projectiles.projectile3
         // Token: 0x0600221E RID: 8734 RVA: 0x0000BDFD File Offset: 0x00009FFD
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("花生汤圆");
+            // base.DisplayName.SetDefault("花生汤圆");
         }
 
         // Token: 0x0600221F RID: 8735 RVA: 0x001B7BC8 File Offset: 0x001B5DC8

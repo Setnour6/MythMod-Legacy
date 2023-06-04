@@ -14,8 +14,8 @@ namespace MythMod.Items.Weapons.OceanWeapons
 		// Token: 0x060002CE RID: 718 RVA: 0x0003529C File Offset: 0x0003349C
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("海蓝宝石斧");
-			base.Tooltip.SetDefault("brush!");
+            // base.DisplayName.SetDefault("海蓝宝石斧");
+			// base.Tooltip.SetDefault("brush!");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "海蓝宝石斧");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "");
 		}

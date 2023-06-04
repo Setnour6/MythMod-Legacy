@@ -20,7 +20,7 @@ namespace MythMod.Items
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("");
+            // Tooltip.SetDefault("");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "激光电池");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }

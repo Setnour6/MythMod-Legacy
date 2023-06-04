@@ -19,10 +19,10 @@ namespace MythMod.Items.Feathers
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("猩红血羽");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("猩红血羽");
+			// base.Tooltip.SetDefault("");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "猩红血羽");
-            Tooltip.SetDefault("增加0.34速度,⅘秒飞行时间,3%暴击,2%闪避,2生命回复\n在猩红之地效果翻倍");
+            // Tooltip.SetDefault("增加0.34速度,⅘秒飞行时间,3%暴击,2%闪避,2生命回复\n在猩红之地效果翻倍");
 		}
 		public override void SetDefaults()
 		{

@@ -13,8 +13,8 @@ namespace MythMod.Items.Volcano
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("熔火心晶");
-            base.Tooltip.SetDefault("让火焰的能量融入血液,就像在火山一样");
+            // base.DisplayName.SetDefault("熔火心晶");
+            // base.Tooltip.SetDefault("让火焰的能量融入血液,就像在火山一样");
 		}
 		public override void SetDefaults()
 		{

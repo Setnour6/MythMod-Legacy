@@ -9,8 +9,8 @@ namespace MythMod.Buffs.Drinks
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("B25轰炸机");
-            base.Description.SetDefault("攻击力增加19%");
+            // base.DisplayName.SetDefault("B25轰炸机");
+            // base.Description.SetDefault("攻击力增加19%");
 			Main.buffNoTimeDisplay[base.Type] = false;
 			Main.buffNoSave[base.Type] = true;
 		}

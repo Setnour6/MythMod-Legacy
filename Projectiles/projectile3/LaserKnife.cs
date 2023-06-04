@@ -20,7 +20,7 @@ namespace MythMod.Projectiles.projectile3
             Projectile.penetrate = -1;
 			Projectile.timeLeft = 3000;
 		}
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             for (int u = 0; u < 5; u++)
             {

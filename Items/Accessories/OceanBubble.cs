@@ -19,10 +19,10 @@ namespace MythMod.Items.Accessories
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("气泡项链");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("气泡项链");
+			// base.Tooltip.SetDefault("");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "气泡项链");
-            Tooltip.SetDefault("");
+            // Tooltip.SetDefault("");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "提供水下呼吸");
         }
         public override void SetDefaults()

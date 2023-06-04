@@ -22,9 +22,9 @@ namespace MythMod.Projectiles
         //4444444
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("混乱团3");
+            // DisplayName.SetDefault("混乱团3");
         }
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(Mod.Find<ModBuff>("乱流").Type, 360, true);
         }

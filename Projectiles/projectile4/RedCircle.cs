@@ -13,7 +13,7 @@ namespace MythMod.Projectiles.projectile4
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("红环");
+            // DisplayName.SetDefault("红环");
         }
         private float Stre = 0.01f;
         private bool Smax = false;

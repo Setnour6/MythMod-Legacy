@@ -12,9 +12,9 @@ namespace MythMod.Items.Weapons
 		// Token: 0x06001CC0 RID: 7360 RVA: 0x000087A1 File Offset: 0x000069A1
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("硫磺玄武岩链球");
+			// base.DisplayName.SetDefault("硫磺玄武岩链球");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "硫磺玄武岩链球");
-            base.Tooltip.SetDefault("这个东西太重了,可能难以操控");
+            // base.Tooltip.SetDefault("这个东西太重了,可能难以操控");
         }
 
 		// Token: 0x06001CC1 RID: 7361 RVA: 0x000D4A44 File Offset: 0x000D2C44

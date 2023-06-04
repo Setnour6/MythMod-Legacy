@@ -20,7 +20,7 @@ namespace MythMod.Projectiles.projectile2
 		// Token: 0x06001E9E RID: 7838 RVA: 0x0000C77A File Offset: 0x0000A97A
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("极夜封霜");
+            // base.DisplayName.SetDefault("极夜封霜");
 		}
 
 		// Token: 0x06001E9F RID: 7839 RVA: 0x00178250 File Offset: 0x00176450
@@ -81,7 +81,7 @@ namespace MythMod.Projectiles.projectile2
 		}
         // Token: 0x06002224 RID: 8740 RVA: 0x0000D83A File Offset: 0x0000BA3A
 		// Token: 0x06001EA1 RID: 7841 RVA: 0x00189878 File Offset: 0x00187A78
-		public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
             for(int i = 0; i < 15; i++)
             {

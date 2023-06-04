@@ -19,7 +19,7 @@ namespace MythMod.Items.Weapons
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("»÷ÖÐµÐÈËÓÐ¸ÅÂÊÒý·¢ÁÒ»ð±¬Õ¨");
+            // Tooltip.SetDefault("0†3¡Â0‰00ˆ40…80ˆ40‡60‡90ˆ70ˆ40†00‡30‡00‡80ˆ60‹5¡¤0„40†90ˆ60†30Š8¡À0…10ˆ9¡§");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;
@@ -39,9 +39,9 @@ namespace MythMod.Items.Weapons
             Item.autoReuse = true;
             Item.crit = 15;
             Item.value = 60000;
-            Item.scale = 1f;//´óÐ¡
+            Item.scale = 1f;//0…7¨®0ˆ40„3
         }
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             for (int i = 0; i < 48; i++)
             {
@@ -59,7 +59,7 @@ namespace MythMod.Items.Weapons
             }
             if (Main.rand.Next(5) == 1)
             {
-                Projectile.NewProjectile(target.Center.X, target.Center.Y, 2f, 2f, base.Mod.Find<ModProjectile>("»ðÉ½±¬Õ¨").Type, damage * 3, knockback, player.whoAmI, 0f, 0f);
+                Projectile.NewProjectile(target.Center.X, target.Center.Y, 2f, 2f, base.Mod.Find<ModProjectile>("0†30Š80‡70†5¡À0…10ˆ9¡§").Type, damage * 3, knockback, player.whoAmI, 0f, 0f);
             }
             target.AddBuff(24, 600);
         }

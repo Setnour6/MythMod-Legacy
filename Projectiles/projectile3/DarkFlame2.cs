@@ -20,7 +20,7 @@ namespace MythMod.Projectiles.projectile3
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("恶魔火");
+            // DisplayName.SetDefault("恶魔火");
         }
         public override void SetDefaults()
         {

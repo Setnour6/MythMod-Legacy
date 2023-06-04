@@ -8,8 +8,8 @@ namespace MythMod.Items
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("Turquoise Gem Lock");
-			base.Tooltip.SetDefault("Right click to place or remove Large Turquoises");
+			// base.DisplayName.SetDefault("Turquoise Gem Lock");
+			// base.Tooltip.SetDefault("Right click to place or remove Large Turquoises");
 			base.DisplayName.AddTranslation(GameCulture.English, "石榴石宝石锁");
 			base.Tooltip.AddTranslation(GameCulture.English, "右键镶嵌或取下大石榴石宝石锁");
 		}

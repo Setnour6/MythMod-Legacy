@@ -22,7 +22,7 @@ namespace MythMod.Projectiles.projectile2
         //4444444
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("蝴蝶兰");
+            // DisplayName.SetDefault("蝴蝶兰");
         }
         //7359668
         public override void SetDefaults()

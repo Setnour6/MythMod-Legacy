@@ -11,7 +11,7 @@ namespace MythMod.Items.Bricks
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("");
+			// base.DisplayName.SetDefault("");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "海蓝宝石晶莹宝石块");
 		}
 		public override void SetDefaults()

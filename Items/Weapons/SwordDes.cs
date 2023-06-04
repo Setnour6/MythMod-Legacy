@@ -15,8 +15,8 @@ namespace MythMod.Items.Weapons//制作是mod名字
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("荣耀之剑·毁灭者");
-            base.Tooltip.SetDefault("你的实力已经碾压了毁灭者，这把属于你的剑里面封印了它的灵魂");
+            // base.DisplayName.SetDefault("荣耀之剑·毁灭者");
+            // base.Tooltip.SetDefault("你的实力已经碾压了毁灭者，这把属于你的剑里面封印了它的灵魂");
         }
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetDefaults()

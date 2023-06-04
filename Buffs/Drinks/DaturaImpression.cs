@@ -9,8 +9,8 @@ namespace MythMod.Buffs.Drinks
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("曼陀罗印象");
-            base.Description.SetDefault("闪避率增加6%");
+            // base.DisplayName.SetDefault("曼陀罗印象");
+            // base.Description.SetDefault("闪避率增加6%");
 			Main.buffNoTimeDisplay[base.Type] = false;
 			Main.buffNoSave[base.Type] = true;
 		}

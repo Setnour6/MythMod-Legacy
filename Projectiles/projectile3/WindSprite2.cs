@@ -16,7 +16,7 @@ namespace MythMod.Projectiles.projectile3
         private int num18 = 0;
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("风之精灵");
+            // DisplayName.SetDefault("风之精灵");
             ProjectileID.Sets.MinionSacrificable[Projectile.type] = true;
             ProjectileID.Sets.MinionTargettingFeature[Projectile.type] = true;
             Main.projFrames[Projectile.type] = 8;

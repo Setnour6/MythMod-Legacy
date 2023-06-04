@@ -11,7 +11,7 @@ namespace MythMod.Items
 		// Token: 0x06001CA4 RID: 7332 RVA: 0x00009B49 File Offset: 0x00007D49
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("海洋床");
+            // base.DisplayName.SetDefault("海洋床");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "海洋床");
 		}
 

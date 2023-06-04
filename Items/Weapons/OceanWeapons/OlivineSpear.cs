@@ -12,8 +12,8 @@ namespace MythMod.Items.Weapons.OceanWeapons
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("");
+			// base.Tooltip.SetDefault("");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "橄榄石长枪");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "");
 		}

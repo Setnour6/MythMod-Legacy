@@ -9,7 +9,7 @@ namespace MythMod.Items.Weapons.Bottle
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("附邪魔剑");
+            // DisplayName.SetDefault("附邪魔剑");
         }
         public override void SetDefaults()
         {
@@ -31,7 +31,7 @@ namespace MythMod.Items.Weapons.Bottle
             Item.shootSpeed = 4f;
 
         }
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
         }
         public override void MeleeEffects(Player player, Rectangle hitbox)

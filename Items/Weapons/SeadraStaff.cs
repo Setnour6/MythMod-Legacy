@@ -22,7 +22,7 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("海龙风暴");
+            // base.DisplayName.SetDefault("海龙风暴");
 			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "海龙风暴");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "扶摇直上九万里\n神话");

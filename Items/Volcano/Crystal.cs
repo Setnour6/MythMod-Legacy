@@ -19,7 +19,7 @@ namespace MythMod.Items.Volcano
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("");
+            // Tooltip.SetDefault("");
             DisplayName.AddTranslation(GameCulture.Chinese, "石英");
         }
         public override void SetDefaults()

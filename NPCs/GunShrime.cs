@@ -12,7 +12,7 @@ namespace MythMod.NPCs
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("枪虾");
+			// base.DisplayName.SetDefault("枪虾");
 			Main.npcFrameCount[base.NPC.type] = 4;
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "枪虾");
 		}
@@ -85,7 +85,7 @@ namespace MythMod.NPCs
                 Main.projectile[num3].friendly = false;
             }
 		}
-		public override void OnHitPlayer(Player player, int damage, bool crit)
+		public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
 		{
 			if (Main.netMode != 1)
 			{

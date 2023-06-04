@@ -13,7 +13,7 @@ namespace MythMod.Projectiles
 		// Token: 0x060020B3 RID: 8371 RVA: 0x0000C20B File Offset: 0x0000A40B
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("烈焰毒刺");
+			// base.DisplayName.SetDefault("烈焰毒刺");
 		}
 
 		// Token: 0x060020B4 RID: 8372 RVA: 0x001A5BBC File Offset: 0x001A3DBC
@@ -56,7 +56,7 @@ namespace MythMod.Projectiles
 		}
 
 		// Token: 0x060020B6 RID: 8374 RVA: 0x0000D160 File Offset: 0x0000B360
-		public override void OnHitPlayer(Player target, int damage, bool crit)
+		public override void OnHitPlayer(Player target, Player.HurtInfo info)
 		{
 			target.AddBuff(24, 360, true);
 		}

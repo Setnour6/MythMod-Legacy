@@ -13,7 +13,7 @@ namespace MythMod.NPCs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("泥潭怪");
+            // base.DisplayName.SetDefault("泥潭怪");
 			Main.npcFrameCount[base.NPC.type] = 3;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "泥潭怪");
 		}
@@ -217,7 +217,7 @@ namespace MythMod.NPCs
         {
             return this.canDespawn;
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
 		{
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             for (int j = 0; j < 20; j++)

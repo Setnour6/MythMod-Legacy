@@ -17,7 +17,7 @@ namespace MythMod.Projectiles.projectile3
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("水晶魔法");
+            // DisplayName.SetDefault("水晶魔法");
         }
         public override void SetDefaults()
         {

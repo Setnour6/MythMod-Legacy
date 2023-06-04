@@ -18,7 +18,7 @@ namespace MythMod.NPCs.Yasitaya
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("Yasitaya");
+            // base.DisplayName.SetDefault("Yasitaya");
             Main.npcFrameCount[base.NPC.type] = 50;
             NPCID.Sets.ExtraFramesCount[base.NPC.type] = 9;
             NPCID.Sets.AttackFrameCount[base.NPC.type] = 4;
@@ -906,7 +906,7 @@ namespace MythMod.NPCs.Yasitaya
             button = Language.GetTextValue("挑战");
             button2 = Language.GetTextValue("帮助");
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             if (NPC.life < 2000 && Battle)
             {
@@ -937,7 +937,7 @@ namespace MythMod.NPCs.Yasitaya
             }
         }
         /*String Ta = "挑战";*/
-        public override void OnChatButtonClicked(bool firstButton, ref bool shop)
+        public override void OnChatButtonClicked(bool firstButton, ref string shopName)
         {
             shop = false;
             /*Main.npcChatText = "";*/
@@ -1010,7 +1010,7 @@ namespace MythMod.NPCs.Yasitaya
                 Main.npcChatText = list[Main.rand.Next(list.Count)];
             }
         }
-        public override void SetupShop(Chest shop, ref int nextSlot)
+        public override void ModifyActiveShop(string shopName, Item[] items)
         {
             /*shop.item[nextSlot].SetDefaults(base.mod.ItemType("StarMark"), false);
 			shop.item[nextSlot].shopCustomPrice = new int?(Item.buyPrice(0, 70, 0, 0));

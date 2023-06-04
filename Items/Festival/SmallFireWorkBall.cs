@@ -8,8 +8,8 @@ namespace MythMod.Items.Festival
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("6寸礼花弹");
-            Tooltip.SetDefault("美丽的烟花，爆出千变万化的造型");
+            // base.DisplayName.SetDefault("6寸礼花弹");
+            // Tooltip.SetDefault("美丽的烟花，爆出千变万化的造型");
         }
         public override void SetDefaults()
         {

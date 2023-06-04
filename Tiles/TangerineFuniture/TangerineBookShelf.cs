@@ -21,8 +21,8 @@ namespace MythMod.Tiles.TangerineFuniture
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style3x4);
 			TileObjectData.addTile((int)base.Type);
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("年桔木书架");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("年桔木书架");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
 			this.AnimationFrameHeight = 54;
 			this.AdjTiles = new int[]

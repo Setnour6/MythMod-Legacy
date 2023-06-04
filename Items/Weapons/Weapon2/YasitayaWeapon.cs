@@ -9,7 +9,7 @@ namespace MythMod.Items.Weapons.Weapon2
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("赤血金鳞");
+            // DisplayName.SetDefault("赤血金鳞");
             DisplayName.AddTranslation(GameCulture.Chinese, "赤血金鳞");
             Tooltip.AddTranslation(GameCulture.Chinese, "");
         }

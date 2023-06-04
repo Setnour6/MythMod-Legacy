@@ -11,7 +11,7 @@ namespace MythMod.Items.Weapons.Clubs
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("尖刺狼牙棒");
+            // base.DisplayName.SetDefault("尖刺狼牙棒");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "快速旋转挥舞\n造成撕裂伤害");
         }
         public override void SetDefaults()

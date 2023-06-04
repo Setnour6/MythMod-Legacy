@@ -20,7 +20,7 @@ namespace MythMod.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("剧毒箭");
+            // DisplayName.SetDefault("剧毒箭");
         }
         public override void SetDefaults()
         {
@@ -124,7 +124,7 @@ namespace MythMod.Projectiles
                 Projectile.velocity *= 1.6f / Projectile.velocity.Length();
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             for (int i = 0; i < 15; i++)
             {

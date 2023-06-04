@@ -9,7 +9,7 @@ namespace MythMod.Projectiles.BloodyTusk
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("CrimsonTusk");
+            // base.DisplayName.SetDefault("CrimsonTusk");
 		}
 		public override void SetDefaults()
 		{

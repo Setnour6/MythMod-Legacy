@@ -11,7 +11,7 @@ namespace MythMod.NPCs
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("WaterBoom");
+			// base.DisplayName.SetDefault("WaterBoom");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "水雷");
 			Main.npcFrameCount[base.NPC.type] = 3;
 		}
@@ -42,7 +42,7 @@ namespace MythMod.NPCs
 			int num = (int)base.NPC.frameCounter;
 			base.NPC.frame.Y = num * frameHeight;
 		}
-		public override void ModifyHitByProjectile(Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+		public override void ModifyHitByProjectile(Projectile projectile, ref NPC.HitModifiers modifiers)
 		{
 			if (projectile.penetrate == -1)
 			{
@@ -56,7 +56,7 @@ namespace MythMod.NPCs
 			}
 			projectile.penetrate = 1;
 		}
-        public override void OnHitPlayer(Player player, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             player.velocity = (NPC.velocity - player.velocity) / (NPC.velocity - player.velocity).Length() * 5;
             Projectile.NewProjectile(base.NPC.position.X + (float)base.NPC.width * 0.5f, base.NPC.position.Y + (float)base.NPC.height * 0.5f, 0f, 0f, 164, 10, 4f, Main.myPlayer, 0f, 0f);
@@ -66,7 +66,7 @@ namespace MythMod.NPCs
             Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/水雷碎块3"), 1f);
             Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/水雷碎块4"), 1f);
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             Projectile.NewProjectile(base.NPC.position.X + (float)base.NPC.width * 0.5f, base.NPC.position.Y + (float)base.NPC.height * 0.5f, 0f, 0f, 164, 150, 4f, Main.myPlayer, 0f, 0f);
             float scaleFactor = (float)(Main.rand.Next(-200, 200) / 100);

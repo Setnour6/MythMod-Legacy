@@ -20,8 +20,8 @@ namespace MythMod.Items.Ammos
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("星渊毒素弹");
-            base.Tooltip.SetDefault("施加夺命剧毒");
+            // base.DisplayName.SetDefault("星渊毒素弹");
+            // base.Tooltip.SetDefault("施加夺命剧毒");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;

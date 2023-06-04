@@ -9,8 +9,8 @@ namespace MythMod.Buffs.Drinks
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("夏夜星空");
-            base.Description.SetDefault("魔法回复增加4");
+            // base.DisplayName.SetDefault("夏夜星空");
+            // base.Description.SetDefault("魔法回复增加4");
 			Main.buffNoTimeDisplay[base.Type] = false;
 			Main.buffNoSave[base.Type] = true;
 		}

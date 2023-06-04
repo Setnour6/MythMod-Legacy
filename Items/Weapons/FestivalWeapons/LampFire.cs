@@ -20,7 +20,7 @@ namespace MythMod.Items.Weapons.FestivalWeapons
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("");
+            // Tooltip.SetDefault("");
             Tooltip.AddTranslation(GameCulture.Chinese, "每攻击3次就放出大灯火之箭");
             DisplayName.AddTranslation(GameCulture.Chinese, "灯火通明");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);

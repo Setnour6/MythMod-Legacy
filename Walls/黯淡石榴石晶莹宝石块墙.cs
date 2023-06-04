@@ -18,9 +18,9 @@ namespace MythMod.Walls
 		{
 			Main.wallHouse[(int)base.Type] = true;
 			this.DustType = 254;
-            this.ItemDrop = base.Mod.Find<ModItem>("黯淡石榴石晶莹宝石块墙").Type;
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("黯淡石榴石晶莹宝石块墙");
+            this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = base.Mod.Find<ModItem>("黯淡石榴石晶莹宝石块墙").Type;
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("黯淡石榴石晶莹宝石块墙");
 			base.AddMapEntry(new Color(111, 9, 42), modTranslation);
 		}
     }

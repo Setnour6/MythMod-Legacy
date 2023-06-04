@@ -11,7 +11,7 @@ namespace MythMod.Items.Walls
 		// Token: 0x06001C9C RID: 7324 RVA: 0x00009B22 File Offset: 0x00007D22
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("VolcanoStone Wall");
+			// base.DisplayName.SetDefault("VolcanoStone Wall");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "海洋密室砖墙");
 		}
 

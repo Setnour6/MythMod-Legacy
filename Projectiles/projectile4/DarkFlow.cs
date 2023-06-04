@@ -17,7 +17,7 @@ namespace MythMod.Projectiles.projectile4
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("DarkFlow");
+            // DisplayName.SetDefault("DarkFlow");
         }
         public override void SetDefaults()
         {
@@ -41,7 +41,7 @@ namespace MythMod.Projectiles.projectile4
         private float Omega;
         private float b;
         private float K = 10;
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             for (int y = 0; y < 40; y++)
             {
@@ -143,7 +143,7 @@ namespace MythMod.Projectiles.projectile4
         {
             List<CustomVertexInfo> bars = new List<CustomVertexInfo>();
 
-            // °ÑËùÓÐµÄµã¶¼Éú³É³öÀ´£¬°´ÕÕË³Ðò
+            // ¡ã0ˆ50‡9¨´0ˆ70ˆ40…80‡20…80Š00…90†40‡7¨²0…60‡70…60‹20†80…70„50…1¡ã0…70ˆ90ˆ90‡90…60ˆ4¨°
             for (int i = 2; i < Projectile.oldPos.Length - 1; ++i)
             {
                 if (Projectile.oldPos[i] == Vector2.Zero) break;
@@ -168,7 +168,7 @@ namespace MythMod.Projectiles.projectile4
             if (bars.Count > 2)
             {
 
-                // °´ÕÕË³ÐòÁ¬½ÓÈý½ÇÐÎ
+                // ¡ã0…70ˆ90ˆ90‡90…60ˆ4¨°0†90…10†50ˆ70‡60‹50†50‡50ˆ40ˆ2
                 triangleList.Add(bars[0]);
                 var vertex = new CustomVertexInfo((bars[0].Position + bars[1].Position) * 0.5f + Projectile.velocity * 2, Color.White, new Vector3(0, 0.5f, 1));
                 triangleList.Add(bars[1]);
@@ -191,7 +191,7 @@ namespace MythMod.Projectiles.projectile4
                 spriteBatch.End();
                 spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.PointWrap, DepthStencilState.Default, RasterizerState.CullNone);
                 RasterizerState originalState = Main.graphics.GraphicsDevice.RasterizerState;
-                // ¸Éµô×¢ÊÍµô¾Í¿ÉÒÔÖ»ÏÔÊ¾Èý½ÇÐÎÕ¤¸ñ
+                // 0†00‡70…80‹0¡Á0„40‡80ˆ10…80‹00†60ˆ10†70‡70ˆ60ˆ80‰00†30ˆ30ˆ80‡80†60‡60‹50†50‡50ˆ40ˆ20ˆ9¡è0†00Š9
                 //RasterizerState rasterizerState = new RasterizerState();
                 //rasterizerState.CullMode = CullMode.None;
                 //rasterizerState.FillMode = FillMode.WireFrame;
@@ -200,7 +200,7 @@ namespace MythMod.Projectiles.projectile4
                 var projection = Matrix.CreateOrthographicOffCenter(0, Main.screenWidth, Main.screenHeight, 0, 0, 1);
                 var model = Matrix.CreateTranslation(new Vector3(-Main.screenPosition.X, -Main.screenPosition.Y, 0));
 
-                // °Ñ±ä»»ºÍËùÐèÐÅÏ¢¶ª¸øshader
+                // ¡ã0ˆ5¡À0Š10†30†30†20ˆ10‡9¨´0ˆ4¨¨0ˆ40‡30ˆ30„40…90„90†00‹3shader
                 MythMod.DefaultEffectDarkRedGold2.Parameters["uTransform"].SetValue(model * projection);
                 MythMod.DefaultEffectDarkRedGold2.Parameters["uTime"].SetValue(-(float)Main.time * 0.03f);
                 Main.graphics.GraphicsDevice.Textures[0] = MythMod.MainColorDarkRedGold;
@@ -225,7 +225,7 @@ namespace MythMod.Projectiles.projectile4
         }
 
 
-        // ×Ô¶¨Òå¶¥µãÊý¾Ý½á¹¹£¬×¢ÒâÕâ¸ö½á¹¹ÌåÀïÃæµÄË³ÐòÐèÒªºÍshaderÀïÃæµÄÊý¾ÝÏàÍ¬
+        // ¡Á0ˆ80…9¡§0ˆ60Š20…90„60…80Š00‡80‹50†60‰60†5¨¢0†10†10„50…1¡Á0„40ˆ60‰90ˆ90‰90†00‹20†5¨¢0†10†10ˆ00Š20†80Š70‡10Š30…80‡20‡90…60ˆ4¨°0ˆ4¨¨0ˆ60„90†20ˆ1shader0†80Š70‡10Š30…80‡20‡80‹50†60‰60ˆ3¨¤0ˆ10…1
         private struct CustomVertexInfo : IVertexType
         {
             private static VertexDeclaration _vertexDeclaration = new VertexDeclaration(new VertexElement[3]

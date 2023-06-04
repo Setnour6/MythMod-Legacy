@@ -8,7 +8,7 @@ namespace MythMod.Items.Seeds
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("芒果种子");
+			// base.DisplayName.SetDefault("芒果种子");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "芒果种子");
 		}
 		public override void SetDefaults()

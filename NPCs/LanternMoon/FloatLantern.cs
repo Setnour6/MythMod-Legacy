@@ -35,7 +35,7 @@ namespace MythMod.NPCs.LanternMoon
         private int num24;
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("鬼灯笼");
+            // base.DisplayName.SetDefault("鬼灯笼");
 			Main.npcFrameCount[base.NPC.type] = 3;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "鬼灯笼");
 		}
@@ -96,10 +96,10 @@ namespace MythMod.NPCs.LanternMoon
                 NPC.velocity.Y += 1;
             }
         }
-        public override void OnHitPlayer(Player player, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             if (base.NPC.life <= 0)

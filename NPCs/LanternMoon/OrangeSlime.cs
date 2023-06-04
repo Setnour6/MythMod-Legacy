@@ -26,7 +26,7 @@ namespace MythMod.NPCs.LanternMoon
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("berry Sweat Slime");
+			// base.DisplayName.SetDefault("berry Sweat Slime");
 			Main.npcFrameCount[base.NPC.type] = 2;
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "香橙糖史莱姆");
 		}
@@ -55,7 +55,7 @@ namespace MythMod.NPCs.LanternMoon
             this.Banner = base.NPC.type;
             this.BannerItem = base.Mod.Find<ModItem>("OrangeSlimeBanner").Type;
         }
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
 		{
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             if (base.NPC.life <= 0)

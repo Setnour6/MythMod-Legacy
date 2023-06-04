@@ -11,7 +11,7 @@ namespace MythMod.Projectiles.projectile2
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("高能年桔");
+            // base.DisplayName.SetDefault("高能年桔");
 		}
 		public override void SetDefaults()
 		{
@@ -29,7 +29,7 @@ namespace MythMod.Projectiles.projectile2
 		public override void AI()
 		{
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
 		}
         public override void Kill(int timeLeft)

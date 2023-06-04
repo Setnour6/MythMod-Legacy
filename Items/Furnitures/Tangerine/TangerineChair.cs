@@ -8,7 +8,7 @@ namespace MythMod.Items.Furnitures.Tangerine
 	{
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("TangerineChair");
+            // DisplayName.SetDefault("TangerineChair");
             DisplayName.AddTranslation(GameCulture.Chinese, "年桔木椅");
         }
         public override void SetDefaults()

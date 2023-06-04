@@ -21,7 +21,7 @@ namespace MythMod.Projectiles.projectile4
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("落花");
+            // base.DisplayName.SetDefault("落花");
             Main.projFrames[Projectile.type] = 8;
 		}
 		public override void SetDefaults()
@@ -114,7 +114,7 @@ namespace MythMod.Projectiles.projectile4
 		{
             Main.PlaySound(2, (int)base.projectile.position.X, (int)base.projectile.position.Y, 37, 0.5f, 0f);
         }*/
-		public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
 		}
         public override bool PreDraw(ref Color lightColor)

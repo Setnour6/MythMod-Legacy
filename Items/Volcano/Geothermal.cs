@@ -22,7 +22,7 @@ namespace MythMod.Items.Volcano
         public override void SetStaticDefaults()
         {
             base.DisplayName.AddTranslation(GameCulture.Chinese, "地炎");
-            Tooltip.SetDefault("灼热导致它真实伤害远远高于面板");
+            // Tooltip.SetDefault("灼热导致它真实伤害远远高于面板");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;
@@ -55,7 +55,7 @@ namespace MythMod.Items.Volcano
             modRecipe.Register();
         }
         private int a = 0;
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(24, 900, false);
         }

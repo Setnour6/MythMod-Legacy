@@ -74,7 +74,7 @@ namespace MythMod.NPCs
         private Vector2 vector19;
         private int Misspo = 0;
 
-        public override void SetupShop(int type, Chest shop, ref int nextSlot)
+        public override void ModifyActiveShop(NPC npc, string shopName, Item[] items)
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             if (type == 38 && Main.hardMode)
@@ -2957,7 +2957,7 @@ namespace MythMod.NPCs
             this.Stunned = false;
             this.ElectriShock = false;
         }
-        public override void HitEffect(NPC npc, int hitDirection, double damage)
+        public override void HitEffect(NPC npc, NPC.HitInfo hit)
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             Player player = Main.LocalPlayer;
@@ -3735,10 +3735,10 @@ namespace MythMod.NPCs
         public bool BIAOJI;
         public bool ElectriShock;
         public bool GoldFlame;
-        public override void OnHitByProjectile(NPC npc, Projectile projectile, int damage, float knockback, bool crit)
+        public override void OnHitByProjectile(NPC npc, Projectile projectile, NPC.HitInfo hit, int damageDone)
         {
         }
-        public override void OnHitPlayer(NPC npc, Player target, int damage, bool crit)
+        public override void OnHitPlayer(NPC npc, Player target, Player.HurtInfo hurtInfo)
         {
             if(MythWorld.MythIndex == 4)
             {

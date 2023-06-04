@@ -27,7 +27,7 @@ namespace MythMod.Projectiles.projectile2
             Lighting.AddLight(Projectile.Center,0, 0.2f, 0);
             return false;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(39, 600, false);
             for (int u = 0; u < 35; u++)

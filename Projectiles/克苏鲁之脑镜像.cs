@@ -12,7 +12,7 @@ namespace MythMod.Projectiles
 		// Token: 0x06001C81 RID: 7297 RVA: 0x0000BBD6 File Offset: 0x00009DD6
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("克苏鲁之脑镜像");
+            // base.DisplayName.SetDefault("克苏鲁之脑镜像");
             Main.projFrames[Projectile.type] = 8; /*【帧数为6】对应的贴图也要画6帧哦*/
 		}
 		private bool initialization = true;

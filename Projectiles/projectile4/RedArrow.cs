@@ -15,7 +15,7 @@ namespace MythMod.Projectiles.projectile4
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("RedArrow");
+            // DisplayName.SetDefault("RedArrow");
         }
         public override void SetDefaults()
         {

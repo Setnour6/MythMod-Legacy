@@ -12,7 +12,7 @@ namespace MythMod.Items.Weapons.Bottle
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("");
+            // base.DisplayName.SetDefault("");
 			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "影焰法杖");
         }

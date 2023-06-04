@@ -12,8 +12,8 @@ namespace MythMod.Items.Weapons.Bottle
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault(".");
-			base.Tooltip.SetDefault(".");
+			// base.DisplayName.SetDefault(".");
+			// base.Tooltip.SetDefault(".");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "几何魔焰");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "");
         }

@@ -15,7 +15,7 @@ namespace MythMod.Projectiles.projectile3
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("骨羽");
+            // DisplayName.SetDefault("骨羽");
         }
         public override void SetDefaults()
         {
@@ -106,7 +106,7 @@ namespace MythMod.Projectiles.projectile3
                 Main.dust[num2].noGravity = true;
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             stick = true;
             v = Projectile.position - target.position;

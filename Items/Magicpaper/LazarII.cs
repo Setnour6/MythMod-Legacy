@@ -11,8 +11,8 @@ namespace MythMod.Items.Magicpaper
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("二阶激光雨符咒");
-            Tooltip.SetDefault("降下激光雨\n无精准度可言\n冷却10s");
+            // DisplayName.SetDefault("二阶激光雨符咒");
+            // Tooltip.SetDefault("降下激光雨\n无精准度可言\n冷却10s");
         }
         public override void HoldItem(Player player)
         {

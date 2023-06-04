@@ -19,7 +19,7 @@ namespace MythMod.Projectiles.projectile5
 
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("灭日");
+            // base.DisplayName.SetDefault("灭日");
             Main.projFrames[Projectile.type] = 1;
         }
 

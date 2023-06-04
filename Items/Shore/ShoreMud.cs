@@ -20,8 +20,8 @@ namespace MythMod.Items.Shore
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("");
-            DisplayName.SetDefault("滩涂泥");
+            // Tooltip.SetDefault("");
+            // DisplayName.SetDefault("滩涂泥");
         }
         public override void SetDefaults()
         {

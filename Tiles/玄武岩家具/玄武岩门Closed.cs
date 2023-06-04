@@ -48,15 +48,15 @@ namespace MythMod.Tiles.玄武岩家具
 			TileObjectData.addAlternate(0);
 			TileObjectData.addTile((int)base.Type);
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsDoor);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("玄武岩门");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("玄武岩门");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
 			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
 			this.AdjTiles = new int[]
 			{
 				10
 			};
-			this.OpenDoorID = base.Mod.Find<ModTile>("玄武岩门Open").Type;
+			this.OpenDoorID/* tModPorter Note: Removed. Use TileID.Sets.OpenDoorID instead */ = base.Mod.Find<ModTile>("玄武岩门Open").Type;
 			modTranslation.AddTranslation(GameCulture.Chinese, "玄武岩门");
 		}
 

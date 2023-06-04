@@ -19,7 +19,7 @@ namespace MythMod.Projectiles.projectile5.Sweats
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("苹果糖");
+            // DisplayName.SetDefault("苹果糖");
         }
         public override void SetDefaults()
         {

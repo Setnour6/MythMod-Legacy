@@ -20,7 +20,7 @@ namespace MythMod.Items.Weapons.StarJellyFIsh
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("射出触手箭矢抽打敌人,下水加强");
+            // Tooltip.SetDefault("射出触手箭矢抽打敌人,下水加强");
             DisplayName.AddTranslation(GameCulture.Chinese, "渊灯魔触弓");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }

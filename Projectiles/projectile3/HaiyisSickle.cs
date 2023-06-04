@@ -21,7 +21,7 @@ namespace MythMod.Projectiles.projectile3
 		private float Distance;
 		public override void SetStaticDefaults()
 		{
-            DisplayName.SetDefault("海伊的镰刀");
+            // DisplayName.SetDefault("海伊的镰刀");
 		}
 		public override void SetDefaults()
 		{

@@ -22,8 +22,8 @@ namespace MythMod.Items.Weapons
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("鳞翅之刃");
-            Tooltip.SetDefault("");
+            // DisplayName.SetDefault("鳞翅之刃");
+            // Tooltip.SetDefault("");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;

@@ -23,8 +23,8 @@ namespace MythMod.Items
 		// Token: 0x06000B03 RID: 2819 RVA: 0x000573AC File Offset: 0x000555AC
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("无尽星辰袋");
-            base.Tooltip.SetDefault("供应无限量的坠星作为弹药");
+            // base.DisplayName.SetDefault("无尽星辰袋");
+            // base.Tooltip.SetDefault("供应无限量的坠星作为弹药");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;

@@ -21,8 +21,8 @@ namespace MythMod.Items.Ammos
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("无尽星渊毒素箭袋");
-            base.Tooltip.SetDefault("供应无限量的渊毒素箭作为弹药");
+            // base.DisplayName.SetDefault("无尽星渊毒素箭袋");
+            // base.Tooltip.SetDefault("供应无限量的渊毒素箭作为弹药");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;

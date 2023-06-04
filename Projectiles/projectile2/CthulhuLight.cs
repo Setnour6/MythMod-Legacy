@@ -24,7 +24,7 @@ namespace MythMod.Projectiles.projectile2
         //4444444
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("克苏鲁闪电");
+            // DisplayName.SetDefault("克苏鲁闪电");
         }
         //7359668
         public override void SetDefaults()

@@ -25,7 +25,7 @@ namespace MythMod.Items.Weapons
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault("渊海风暴");
+			// DisplayName.SetDefault("渊海风暴");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;

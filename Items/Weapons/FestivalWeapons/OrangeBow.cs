@@ -20,8 +20,8 @@ namespace MythMod.Items.Weapons.FestivalWeapons
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("");
-            base.DisplayName.SetDefault("年桔木弓");
+            // Tooltip.SetDefault("");
+            // base.DisplayName.SetDefault("年桔木弓");
         }
         public override void SetDefaults()
         {

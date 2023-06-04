@@ -15,8 +15,8 @@ namespace MythMod.Items
 		// Token: 0x060013DF RID: 5087 RVA: 0x00090C04 File Offset: 0x0008EE04
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("终结符文");
-			base.Tooltip.SetDefault("让一切归于无有\n在玩家正上方召唤终天灭世眼\n无消耗");
+            // base.DisplayName.SetDefault("终结符文");
+			// base.Tooltip.SetDefault("让一切归于无有\n在玩家正上方召唤终天灭世眼\n无消耗");
 		}
 
 		// Token: 0x060013E0 RID: 5088 RVA: 0x00051D1C File Offset: 0x0004FF1C

@@ -9,7 +9,7 @@ namespace MythMod.Projectiles
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("鳞翅粉尘");
+            // base.DisplayName.SetDefault("鳞翅粉尘");
             Main.projFrames[Projectile.type] = 1;
 		}
 		public override void SetDefaults()
@@ -145,7 +145,7 @@ namespace MythMod.Projectiles
                 Projectile.velocity *= 1.01f;
             }
         }
-		public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
 		}
 	}

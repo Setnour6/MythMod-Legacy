@@ -23,7 +23,7 @@ namespace MythMod.Projectiles
 			Projectile.timeLeft = 3000;
 		}
 
-		public override void ModifyHitNPC(NPC target, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+		public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
 		{
 		}
 
@@ -50,7 +50,7 @@ namespace MythMod.Projectiles
             }
 			return false;
 		}
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Projectile.damage += 50;
             target.AddBuff(24, 600);

@@ -26,10 +26,10 @@ namespace MythMod.Tiles.Volcano
 			this.DustType = 6;
 			this.HitSound = 21;
 			this.soundStyle/* tModPorter Note: Removed. Integrate into HitSound */ = 2;
-            this.ItemDrop = base.Mod.Find<ModItem>("LavaStoneCore").Type;
+            this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = base.Mod.Find<ModItem>("LavaStoneCore").Type;
 			Main.tileSpelunker[(int)base.Type] = true;
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("熔岩石");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("熔岩石");
 			base.AddMapEntry(new Color(235, 20, 0), modTranslation);
             modTranslation.AddTranslation(GameCulture.Chinese, "熔岩石");
 		}

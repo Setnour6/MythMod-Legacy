@@ -9,8 +9,8 @@ namespace MythMod.Buffs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("热乎乎的美味II");
-            base.Description.SetDefault("附近有新出炉的东西,让你状态良好\n提升生命回复速度");
+            // base.DisplayName.SetDefault("热乎乎的美味II");
+            // base.Description.SetDefault("附近有新出炉的东西,让你状态良好\n提升生命回复速度");
 			Main.debuff[base.Type] = false;
 			Main.pvpBuff[base.Type] = true;
 			Main.buffNoSave[base.Type] = true;

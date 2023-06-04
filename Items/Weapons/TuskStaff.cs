@@ -16,10 +16,10 @@ namespace MythMod.Items.Weapons
 		// Token: 0x060010A9 RID: 4265 RVA: 0x00007320 File Offset: 0x00005520
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("Death");
+            // base.DisplayName.SetDefault("Death");
 			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "血腥獠牙杖");
-			base.Tooltip.SetDefault("让地面长出獠牙");
+			// base.Tooltip.SetDefault("让地面长出獠牙");
 		}
 
         public override void AddRecipes()

@@ -10,8 +10,8 @@ namespace MythMod.Items
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("电雷之魂");
-            Tooltip.SetDefault("闪电，雷暴，台风，骤雨……");
+            // DisplayName.SetDefault("电雷之魂");
+            // Tooltip.SetDefault("闪电，雷暴，台风，骤雨……");
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(15, 5));
             ItemID.Sets.AnimatesAsSoul[Item.type] = false;
             ItemID.Sets.ItemIconPulse[Item.type] = true; 

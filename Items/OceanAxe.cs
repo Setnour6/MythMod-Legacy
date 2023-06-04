@@ -12,8 +12,8 @@ namespace MythMod.Items
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("碧海战斧");
-			base.Tooltip.SetDefault("brush!");
+            // base.DisplayName.SetDefault("碧海战斧");
+			// base.Tooltip.SetDefault("brush!");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "碧海战斧");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "像海啸一样破坏植被");
 		}

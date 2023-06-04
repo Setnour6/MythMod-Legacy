@@ -20,7 +20,7 @@ namespace MythMod.Projectiles.Effects
 
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("OrangeVortex");
+            // base.DisplayName.SetDefault("OrangeVortex");
             Main.projFrames[Projectile.type] = 1;
         }
 

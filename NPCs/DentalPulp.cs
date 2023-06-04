@@ -17,7 +17,7 @@ namespace MythMod.NPCs
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("牙髓");
+			// base.DisplayName.SetDefault("牙髓");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "牙髓");
 		}
         private Texture2D[] T = new Texture2D[8];

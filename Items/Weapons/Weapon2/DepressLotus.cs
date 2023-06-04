@@ -13,7 +13,7 @@ namespace MythMod.Items.Weapons.Weapon2
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("DepressLotus");
+            // base.DisplayName.SetDefault("DepressLotus");
 			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "黯莲");
             Tooltip.AddTranslation(GameCulture.Chinese, "抑郁之花,美丽的外表下藏着深渊");

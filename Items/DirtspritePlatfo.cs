@@ -15,7 +15,7 @@ namespace MythMod.Items
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("Dirtsprite Trophy");
+			// base.DisplayName.SetDefault("Dirtsprite Trophy");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "潜地恶鬼纪念章");
 		}
 		public override void SetDefaults()

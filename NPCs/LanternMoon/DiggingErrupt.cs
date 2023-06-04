@@ -25,7 +25,7 @@ namespace MythMod.NPCs.LanternMoon
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("钻地喷花");
+			// base.DisplayName.SetDefault("钻地喷花");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "钻地喷花");
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -50,7 +50,7 @@ namespace MythMod.NPCs.LanternMoon
             NPC.behindTiles = true;
             //this.bannerItem = base.mod.ItemType("青苹果糖史莱姆Banner");
         }
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
 		{
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             if (base.NPC.life <= 0)

@@ -10,7 +10,7 @@ namespace MythMod.Items.Festival
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("忽悠币");
+            // DisplayName.SetDefault("忽悠币");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "看它笑得多么真诚\n召唤元宝大作战,此事件不会对玩家造成伤害,请放心使用\nBoss存在时不能使用\n元宝大作战期间意外介入Boss自动消除");
         }
         public override void SetDefaults()

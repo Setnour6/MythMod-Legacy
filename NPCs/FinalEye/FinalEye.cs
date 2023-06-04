@@ -18,7 +18,7 @@ namespace MythMod.NPCs.FinalEye
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("终天灭世眼");
+            // base.DisplayName.SetDefault("终天灭世眼");
 			Main.npcFrameCount[base.NPC.type] = 3;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "终天灭世眼");
 		}
@@ -780,13 +780,13 @@ namespace MythMod.NPCs.FinalEye
             }
         }
         // Token: 0x02000413 RID: 1043
-		public override void ScaleExpertStats(int numPlayers, float bossLifeScale)
+		public override void ApplyDifficultyAndPlayerScaling(int numPlayers, float balance, float bossAdjustment)/* tModPorter Note: bossLifeScale -> balance (bossAdjustment is different, see the docs for details) */
 		{
 			base.NPC.lifeMax = (int)((float)base.NPC.lifeMax * 0.8f * bossLifeScale);
 			base.NPC.damage = (int)((float)base.NPC.damage * 0.8f);
 		}
         // Token: 0x02000413 RID: 1043
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             for (int i = 0; i < 5; i++)
             {
@@ -813,7 +813,7 @@ namespace MythMod.NPCs.FinalEye
 		{
 			return this.canDespawn;
 		}
-        public override void OnHitPlayer(Player player, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
             player.lastDeathPostion = player.Center;
             player.lastDeathTime = DateTime.Now;
@@ -822,7 +822,7 @@ namespace MythMod.NPCs.FinalEye
             {
                 player.lostCoinString = Main.ValueToCoins(player.lostCoins);
             }
-            SoundEngine.PlaySound(SoundID.PlayerKilled, player.position);
+            SoundEngine.PlaySound(SoundID.PlayerKilled);
             player.headVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
             player.bodyVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
             player.legVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;

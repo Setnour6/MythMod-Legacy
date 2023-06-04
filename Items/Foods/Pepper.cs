@@ -12,8 +12,8 @@ namespace MythMod.Items.Foods
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("辣椒");
-            base.Tooltip.SetDefault("调味料");
+            // base.DisplayName.SetDefault("辣椒");
+            // base.Tooltip.SetDefault("调味料");
 		}
 		public override void SetDefaults()
 		{

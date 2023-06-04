@@ -9,8 +9,8 @@ namespace MythMod.Buffs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("劲辣III");
-            base.Description.SetDefault("附近有辣椒的味道,这味儿对,辣!\n提升11%伤害");
+            // base.DisplayName.SetDefault("劲辣III");
+            // base.Description.SetDefault("附近有辣椒的味道,这味儿对,辣!\n提升11%伤害");
 			Main.debuff[base.Type] = false;
 			Main.pvpBuff[base.Type] = true;
 			Main.buffNoSave[base.Type] = true;

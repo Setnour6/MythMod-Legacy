@@ -22,7 +22,7 @@ namespace MythMod.Projectiles
 		// Token: 0x06002466 RID: 9318 RVA: 0x0000D1B0 File Offset: 0x0000B3B0
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("空间粒子流");
+            // base.DisplayName.SetDefault("空间粒子流");
 		}
 
 		// Token: 0x06002467 RID: 9319 RVA: 0x001D6884 File Offset: 0x001D4A84

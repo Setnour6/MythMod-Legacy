@@ -12,7 +12,7 @@ namespace MythMod.Projectiles.projectile2
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("断魂裂骨");
+            // base.DisplayName.SetDefault("断魂裂骨");
         }
 		public override void SetDefaults()
 		{
@@ -83,7 +83,7 @@ namespace MythMod.Projectiles.projectile2
             base.Projectile.timeLeft = 60;
             return false;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             T = true;
             base.Projectile.timeLeft = 60;

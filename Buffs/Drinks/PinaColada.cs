@@ -9,8 +9,8 @@ namespace MythMod.Buffs.Drinks
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("椰林飘香");
-            base.Description.SetDefault("防御增加9,闪避增加4%");
+            // base.DisplayName.SetDefault("椰林飘香");
+            // base.Description.SetDefault("防御增加9,闪避增加4%");
 			Main.buffNoTimeDisplay[base.Type] = false;
 			Main.buffNoSave[base.Type] = true;
 		}

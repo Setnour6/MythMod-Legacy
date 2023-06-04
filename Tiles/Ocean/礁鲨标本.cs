@@ -34,8 +34,8 @@ namespace MythMod.Tiles.Ocean
             TileObjectData.addTile((int)base.Type);
 			this.DustType = 7;
 			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("礁鲨标本");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("礁鲨标本");
 			base.AddMapEntry(new Color(0, 24, 123), modTranslation);
 			modTranslation.AddTranslation(GameCulture.Chinese, "礁鲨标本");
 		}

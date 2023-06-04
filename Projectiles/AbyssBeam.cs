@@ -16,7 +16,7 @@ namespace MythMod.Projectiles
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("深渊剑气");
+            // base.DisplayName.SetDefault("深渊剑气");
 		}
 		public override void SetDefaults()
 		{
@@ -64,7 +64,7 @@ namespace MythMod.Projectiles
         {
             return new Color?(new Color(1f, 1f, 1f, 0.75f));
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             for (int i = 0; i < 14; i++)
             {

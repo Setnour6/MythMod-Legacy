@@ -11,7 +11,7 @@ namespace MythMod.Projectiles.Lazars
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("RedLazar");
+            // base.DisplayName.SetDefault("RedLazar");
 		}
 		public override void SetDefaults()
 		{

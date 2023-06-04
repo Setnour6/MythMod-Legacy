@@ -18,9 +18,9 @@ namespace MythMod.Tiles
             Main.tileOreFinderPriority[(int)base.Type] = 0;
             this.MinPick = 0;
 			this.DustType = 55;
-            this.ItemDrop = base.Mod.Find<ModItem>("RedCloud").Type;
-            ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("");
+            this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = base.Mod.Find<ModItem>("RedCloud").Type;
+            LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("");
 			base.AddMapEntry(new Color(255, 222, 173), modTranslation);
 			this.MineResist = 5f;
 			this.HitSound = 21;

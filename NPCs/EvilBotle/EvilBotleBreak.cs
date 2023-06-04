@@ -22,7 +22,7 @@ namespace MythMod.NPCs.EvilBotle
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("封魔石瓶");
+            // base.DisplayName.SetDefault("封魔石瓶");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "封魔石瓶");
         }
         private bool X = true;
@@ -63,7 +63,7 @@ namespace MythMod.NPCs.EvilBotle
             }
             O = NPC.Center;
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
         }
         public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)

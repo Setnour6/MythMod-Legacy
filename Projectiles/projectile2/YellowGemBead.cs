@@ -13,7 +13,7 @@ namespace MythMod.Projectiles.projectile2
 		// Token: 0x0600245F RID: 9311 RVA: 0x0000C7BC File Offset: 0x0000A9BC
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("黄玉弹球");
+            // base.DisplayName.SetDefault("黄玉弹球");
 		}
 
 		// Token: 0x06002460 RID: 9312 RVA: 0x001D6574 File Offset: 0x001D4774
@@ -44,7 +44,7 @@ namespace MythMod.Projectiles.projectile2
 		    base.Projectile.Kill();
 			return false;
 		}
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             int num = Projectile.NewProjectile(base.Projectile.Center.X + base.Projectile.velocity.X * 2f, base.Projectile.Center.Y + base.Projectile.velocity.Y * 2f, base.Projectile.velocity.X, base.Projectile.velocity.Y, 51, 10, 0, Main.myPlayer, 0f, 0f);
             Main.projectile[num].penetrate = 4;

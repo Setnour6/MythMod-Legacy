@@ -13,7 +13,7 @@ namespace MythMod.Items.Weapons.FestivalWeapons
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("千灯耀夜");
+            // base.DisplayName.SetDefault("千灯耀夜");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "千灯耀夜");
         }
 		public override void SetDefaults()

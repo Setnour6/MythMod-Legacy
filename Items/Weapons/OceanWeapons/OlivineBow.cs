@@ -20,7 +20,7 @@ namespace MythMod.Items.Weapons.OceanWeapons
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("");
+            // Tooltip.SetDefault("");
             DisplayName.AddTranslation(GameCulture.Chinese, "éÏé­Ê¯¹­");
         }
         public override void SetDefaults()

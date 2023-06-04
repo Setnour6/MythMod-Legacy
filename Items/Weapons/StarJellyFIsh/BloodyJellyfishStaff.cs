@@ -19,8 +19,8 @@ namespace MythMod.Items.Weapons.StarJellyFIsh
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("血红水螅杖");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("血红水螅杖");
+			// base.Tooltip.SetDefault("");
 			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "血红水螅杖");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "召唤水螅蚕食敌人\n下水增强");

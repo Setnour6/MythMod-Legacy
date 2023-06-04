@@ -9,7 +9,7 @@ namespace MythMod.Items.light
 	{
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("海蓝手电筒");
+            // DisplayName.SetDefault("海蓝手电筒");
         }
         public override void SetDefaults()
         {

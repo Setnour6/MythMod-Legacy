@@ -9,8 +9,8 @@ namespace MythMod.Buffs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("风之精灵");
-            base.Description.SetDefault("风之精灵将守护你");
+            // base.DisplayName.SetDefault("风之精灵");
+            // base.Description.SetDefault("风之精灵将守护你");
 			Main.debuff[base.Type] = false;
 			Main.pvpBuff[base.Type] = true;
 			Main.buffNoSave[base.Type] = true;

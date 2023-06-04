@@ -10,8 +10,8 @@ namespace MythMod.Items.UnderSea
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("空灵泡");
-            Tooltip.SetDefault("");
+            // DisplayName.SetDefault("空灵泡");
+            // Tooltip.SetDefault("");
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(4, 4));
             ItemID.Sets.AnimatesAsSoul[Item.type] = true;
             ItemID.Sets.ItemIconPulse[Item.type] = true;

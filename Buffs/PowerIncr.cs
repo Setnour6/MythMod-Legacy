@@ -9,8 +9,8 @@ namespace MythMod.Buffs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("力量暴增");
-            base.Description.SetDefault("攻击力暴增");
+            // base.DisplayName.SetDefault("力量暴增");
+            // base.Description.SetDefault("攻击力暴增");
 			Main.buffNoTimeDisplay[base.Type] = false;
 			Main.buffNoSave[base.Type] = true;
 		}

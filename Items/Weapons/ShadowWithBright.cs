@@ -20,8 +20,8 @@ namespace MythMod.Items.Weapons
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("耀影之刃");
-            Tooltip.SetDefault("由昼夜之辉交叠铸造而成");
+            // DisplayName.SetDefault("耀影之刃");
+            // Tooltip.SetDefault("由昼夜之辉交叠铸造而成");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;
@@ -60,7 +60,7 @@ namespace MythMod.Items.Weapons
                 Main.projectile[num40].timeLeft = 200;
             }
         }
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if(Main.rand.Next(3) == 1)
             {

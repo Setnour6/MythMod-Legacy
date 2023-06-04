@@ -11,7 +11,7 @@ namespace MythMod.Projectiles.projectile4
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("");
+            // base.DisplayName.SetDefault("");
             Main.projFrames[Projectile.type] = 11;
 		}
 		public override void SetDefaults()

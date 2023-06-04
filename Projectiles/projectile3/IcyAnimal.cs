@@ -16,7 +16,7 @@ namespace MythMod.Projectiles.projectile3
         private int num18 = 0;
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("冰晶雪兽");
+            // base.DisplayName.SetDefault("冰晶雪兽");
             ProjectileID.Sets.MinionSacrificable[base.Projectile.type] = true;
             ProjectileID.Sets.MinionTargettingFeature[base.Projectile.type] = true;
             Main.projFrames[base.Projectile.type] = 10;
@@ -232,7 +232,7 @@ namespace MythMod.Projectiles.projectile3
             }
             return false;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(44, 300);
         }

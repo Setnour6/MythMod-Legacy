@@ -9,8 +9,8 @@ namespace MythMod.Buffs.Drinks
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("自由古巴");
-            base.Description.SetDefault("移动速度增加7%");
+            // base.DisplayName.SetDefault("自由古巴");
+            // base.Description.SetDefault("移动速度增加7%");
 			Main.buffNoTimeDisplay[base.Type] = false;
 			Main.buffNoSave[base.Type] = true;
 		}

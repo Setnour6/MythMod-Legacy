@@ -8,15 +8,15 @@ using Terraria.Audio;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace MythMod/*modÃû*/.Projectiles
+namespace MythMod/*mod0‡10‹4*/.Projectiles
 {
     public class Phosphorescence : ModProjectile
     {
         // Brought to you with <3 by Gorateron
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Á×¹â");//½éÉÜ
-            Main.projFrames[Projectile.type] = 4; /*¡¾Ö¡ÊýÎª6¡¿¶ÔÓ¦µÄÌùÍ¼Ò²Òª»­6Ö¡Å¶*/
+            // DisplayName.SetDefault("0†9¡Á0†10‰9");//0†5¨¦0‡70‰5
+            Main.projFrames[Projectile.type] = 4; /*0„30†60‰00„30‡80‹50ˆ20„960„30†70…90ˆ80ˆ70„70…80‡20ˆ0¨´0ˆ10†40ˆ60…50ˆ60„90†30…260‰00„30‡30…9*/
 
         }
         // Token: 0x0600298B RID: 10635 RVA: 0x00213848 File Offset: 0x00211A48
@@ -24,13 +24,13 @@ namespace MythMod/*modÃû*/.Projectiles
         {
             Projectile.width = 4;
             Projectile.height = 4;
-            Projectile.friendly = true;//ÓÑºÃ
-            Projectile.melee = false/* tModPorter Suggestion: Remove. See Item.DamageType */;//½üÕ½
-            Projectile.ignoreWater = true;//²»±»Ë®Ó°Ïì
-            Projectile.tileCollide = false;//ÄÜ´©Ç½£¬·´ÒåÎªfalse
-            Projectile.timeLeft = 1800;//´æÔÚÊ±¼ä£¬60ÊÇ1Ãë
-            Projectile.scale = 1f;//´óÐ¡
-            Projectile.alpha = 140;//´óÐ¡
+            Projectile.friendly = true;//0ˆ70ˆ50†20‡1
+            Projectile.melee = false/* tModPorter Suggestion: Remove. See Item.DamageType */;//0†5¨¹0ˆ90†5
+            Projectile.ignoreWater = true;//0…50†3¡À0†30‡90…30ˆ7¡ã0ˆ3¨¬
+            Projectile.tileCollide = false;//0‡20‰50…70„80‡50†50„50…1¡¤0…70ˆ60Š20ˆ20„9false
+            Projectile.timeLeft = 1800;//0…70Š30ˆ80‰30‡8¡À0†40Š10„50…1600‡80‡510‡10Š5
+            Projectile.scale = 1f;//0…7¨®0ˆ40„3
+            Projectile.alpha = 140;//0…7¨®0ˆ40„3
             Projectile.extraUpdates = (int)3f;
 
         }
@@ -61,10 +61,10 @@ namespace MythMod/*modÃû*/.Projectiles
                 Main.dust[num1].velocity *= 0f;
                 Main.dust[num1].noGravity = true;
             #region
-            if (Projectile.timeLeft == 710) { Projectile.tileCollide = true; }//µ±ÄãµÄÌØÐ§´æÔÚ710ìõÊ±£¬²»ÄÜ´©Ç½
-            Projectile.light = 0.1f;//·¢¹â//0Îª²»·¢¹â
-            Vector2 pc = Projectile.position + new Vector2(Projectile.width, Projectile.height) / 2;//ÈÃÄãµÄÌØÐ§Õý³£»¯
-            Projectile.light = 0.1f;//·¢¹â
+            if (Projectile.timeLeft == 710) { Projectile.tileCollide = true; }//0…8¡À0‡20Š00…80‡20ˆ00‰10ˆ4¡ì0…70Š30ˆ80‰3710¨¬0‹10‡8¡À0„50…10…50†30‡20‰50…70„80‡50†5
+            Projectile.light = 0.1f;//¡¤0„40†10‰9//00ˆ20„90…50†3¡¤0„40†10‰9
+            Vector2 pc = Projectile.position + new Vector2(Projectile.width, Projectile.height) / 2;//0‡60‡10‡20Š00…80‡20ˆ00‰10ˆ4¡ì0ˆ90‹50…60„50†30…4
+            Projectile.light = 0.1f;//¡¤0„40†10‰9
             #endregion
             if (Main.rand.Next(2) == 0)
             {

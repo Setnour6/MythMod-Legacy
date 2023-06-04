@@ -12,7 +12,7 @@ namespace MythMod.Projectiles
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("火山溅射");
+            // base.DisplayName.SetDefault("火山溅射");
 		}
 		public override void SetDefaults()
 		{

@@ -15,8 +15,8 @@ namespace MythMod.Items.Pickaxes
 		// Token: 0x060002CE RID: 718 RVA: 0x0003529C File Offset: 0x0003349C
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("地热");
-			base.Tooltip.SetDefault("brush!");
+            // base.DisplayName.SetDefault("地热");
+			// base.Tooltip.SetDefault("brush!");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "地热");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "用无穷的炽热熔化冰冻的心");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);

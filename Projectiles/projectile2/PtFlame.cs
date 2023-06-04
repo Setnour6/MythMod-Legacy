@@ -11,7 +11,7 @@ namespace MythMod.Projectiles.projectile2
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("铂金钱爆炸");
+            // base.DisplayName.SetDefault("铂金钱爆炸");
 		}
 		public override void SetDefaults()
 		{

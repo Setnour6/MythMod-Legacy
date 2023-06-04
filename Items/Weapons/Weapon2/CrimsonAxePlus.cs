@@ -10,7 +10,7 @@ namespace MythMod.Items.Weapons.Weapon2
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("CrimsonAxePlus");
+            // DisplayName.SetDefault("CrimsonAxePlus");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "冰寒血锋");
         }
         public override void SetDefaults()
@@ -40,7 +40,7 @@ namespace MythMod.Items.Weapons.Weapon2
         {
             return base.HoldoutOrigin();    
         }
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
         }
     }

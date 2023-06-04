@@ -21,7 +21,7 @@ namespace MythMod.Projectiles.Clubs
 
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("尖刺狼牙棒");
+            // base.DisplayName.SetDefault("尖刺狼牙棒");
         }
 
         public override void SetDefaults()

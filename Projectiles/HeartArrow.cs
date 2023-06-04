@@ -9,7 +9,7 @@ namespace MythMod.Projectiles
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("爱心箭");
+            // base.DisplayName.SetDefault("爱心箭");
 		}
 		public override void SetDefaults()
 		{
@@ -35,7 +35,7 @@ namespace MythMod.Projectiles
             Projectile.rotation = (float)System.Math.Atan2((double)Projectile.velocity.Y, (double)Projectile.velocity.X) + 1.57f;
             Projectile.light = 0.1f;
         }
-		public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
             if (Main.rand.Next(3) == 1)
             {

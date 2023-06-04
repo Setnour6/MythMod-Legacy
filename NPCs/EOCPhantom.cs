@@ -21,7 +21,7 @@ namespace MythMod.NPCs
 		// Token: 0x06001808 RID: 6152 RVA: 0x00009BEC File Offset: 0x00007DEC
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("克苏鲁之眼幻影");
+            // base.DisplayName.SetDefault("克苏鲁之眼幻影");
 			Main.npcFrameCount[base.NPC.type] = 2;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "克苏鲁之眼幻影");
 		}
@@ -88,7 +88,7 @@ namespace MythMod.NPCs
 			    base.NPC.velocity *= 0.98f;
 			} 
 		}
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
 		{
 			for (int i = 0; i < 5; i++)
 			{

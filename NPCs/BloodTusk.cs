@@ -19,7 +19,7 @@ namespace MythMod.NPCs
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("鲜血獠牙");
+			// base.DisplayName.SetDefault("鲜血獠牙");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "鲜血獠牙");
         }
 		private bool X = true;
@@ -255,7 +255,7 @@ namespace MythMod.NPCs
                 }
             }
         }
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
 		{
 			if (base.NPC.life <= 0)
 			{
@@ -304,7 +304,7 @@ namespace MythMod.NPCs
                 /*NPC.NewNPC((int)(base.npc.position.X + 55f), (int)(base.npc.position.Y + 66f), mod.NPCType("BloodTuskBroken"), 0, 0f, 0f, 0f, 0f, 255);*/
             }
 		}
-        public override void OnHitPlayer(Player player, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
 		{
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)

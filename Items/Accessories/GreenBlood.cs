@@ -18,8 +18,8 @@ namespace MythMod.Items.Accessories
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("碧血戒");
-			base.Tooltip.SetDefault("有10%的概率不会受到伤害,反而改为治愈你");
+			// base.DisplayName.SetDefault("碧血戒");
+			// base.Tooltip.SetDefault("有10%的概率不会受到伤害,反而改为治愈你");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "碧血戒");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "有10%的概率不会受到伤害,反而改为治愈你,在水中此概率升为20%");
 		}

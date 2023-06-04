@@ -14,8 +14,8 @@ namespace MythMod.Items
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("恶灵释放卡");
-            base.Tooltip.SetDefault("用于释放整个世界的能量,难度和你的收获都将上升\n神话");
+            // base.DisplayName.SetDefault("恶灵释放卡");
+            // base.Tooltip.SetDefault("用于释放整个世界的能量,难度和你的收获都将上升\n神话");
         }
         public override void SetDefaults()
         {

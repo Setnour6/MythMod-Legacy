@@ -23,8 +23,8 @@ namespace MythMod.Tiles.玄武岩家具
 			TileObjectData.newTile.CopyFrom(TileObjectData.Style3x4);
 			TileObjectData.addTile((int)base.Type);
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTable);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("玄武岩书架");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("玄武岩书架");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
 			this.AnimationFrameHeight = 54;
 			this.AdjTiles = new int[]

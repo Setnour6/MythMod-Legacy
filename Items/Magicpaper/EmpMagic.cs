@@ -12,8 +12,8 @@ namespace MythMod.Items.Magicpaper//在虚无mod的Items文件夹里
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("空符咒");
-            Tooltip.SetDefault("在恶魔或猩红祭坛附魔后变成符咒");//物品介绍
+            // DisplayName.SetDefault("空符咒");
+            // Tooltip.SetDefault("在恶魔或猩红祭坛附魔后变成符咒");//物品介绍
         }
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetDefaults()

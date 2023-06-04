@@ -11,7 +11,7 @@ namespace MythMod.NPCs
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("Ocean Slime");
+            // base.DisplayName.SetDefault("Ocean Slime");
             Main.npcFrameCount[base.NPC.type] = 2;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "海蓝史莱姆");
         }
@@ -49,7 +49,7 @@ namespace MythMod.NPCs
             this.Banner = base.NPC.type;
             this.BannerItem = base.Mod.Find<ModItem>("OceanSlimeBanner").Type;
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             for (int i = 0; i < 5; i++)
             {

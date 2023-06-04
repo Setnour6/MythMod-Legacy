@@ -11,8 +11,8 @@ namespace MythMod.Items.Magicpaper
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("一阶附魔符咒");
-            Tooltip.SetDefault("随机获得一个常见一阶符咒");
+            // DisplayName.SetDefault("一阶附魔符咒");
+            // Tooltip.SetDefault("随机获得一个常见一阶符咒");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;

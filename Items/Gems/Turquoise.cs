@@ -11,7 +11,7 @@ namespace MythMod.Items.Gems
 		// Token: 0x060019E8 RID: 6632 RVA: 0x00008E84 File Offset: 0x00007084
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("绿松石");
+            // base.DisplayName.SetDefault("绿松石");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "绿松石");
 		}
 

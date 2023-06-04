@@ -11,7 +11,7 @@ namespace MythMod.Projectiles
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("爆裂音波");
+            // base.DisplayName.SetDefault("爆裂音波");
 		}
 		public override void SetDefaults()
 		{

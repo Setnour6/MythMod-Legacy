@@ -15,7 +15,7 @@ namespace MythMod.NPCs.Yasitaya
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("BloodBlade");
+            // DisplayName.SetDefault("BloodBlade");
         }
         public override void SetDefaults()
         {

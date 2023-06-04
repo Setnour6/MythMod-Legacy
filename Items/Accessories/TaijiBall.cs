@@ -19,10 +19,10 @@ namespace MythMod.Items.Accessories
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("太极球");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("太极球");
+			// base.Tooltip.SetDefault("");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "太极球");
-            Tooltip.SetDefault("阴阳寿命复活消耗的寿命变为各5点");
+            // Tooltip.SetDefault("阴阳寿命复活消耗的寿命变为各5点");
 		}
 		public override void SetDefaults()
 		{

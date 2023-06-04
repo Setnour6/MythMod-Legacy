@@ -10,8 +10,8 @@ namespace MythMod.Buffs
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("BIAOJISJRYoyo");
-			base.Description.SetDefault("");
+			// base.DisplayName.SetDefault("BIAOJISJRYoyo");
+			// base.Description.SetDefault("");
 			Main.debuff[base.Type] = true;
 			Main.pvpBuff[base.Type] = true;
 			Main.buffNoSave[base.Type] = true;

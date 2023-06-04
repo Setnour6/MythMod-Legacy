@@ -12,8 +12,8 @@ namespace MythMod.Items.Weapons.Bottle
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("妖火弹弓");
-            base.Tooltip.SetDefault("");
+            // base.DisplayName.SetDefault("妖火弹弓");
+            // base.Tooltip.SetDefault("");
 		}
 		public override void SetDefaults()
 		{

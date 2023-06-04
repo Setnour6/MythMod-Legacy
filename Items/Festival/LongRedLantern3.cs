@@ -8,8 +8,8 @@ namespace MythMod.Items.Festival
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("侧挂灯笼");
-            Tooltip.SetDefault("充满年味");
+            // DisplayName.SetDefault("侧挂灯笼");
+            // Tooltip.SetDefault("充满年味");
         }
         public override void SetDefaults()
         {

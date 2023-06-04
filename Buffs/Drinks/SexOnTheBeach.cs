@@ -9,8 +9,8 @@ namespace MythMod.Buffs.Drinks
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("激情海岸");
-            base.Description.SetDefault("伤害增加8%");
+            // base.DisplayName.SetDefault("激情海岸");
+            // base.Description.SetDefault("伤害增加8%");
 			Main.buffNoTimeDisplay[base.Type] = false;
 			Main.buffNoSave[base.Type] = true;
 		}

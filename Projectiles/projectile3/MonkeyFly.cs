@@ -20,7 +20,7 @@ namespace MythMod.Projectiles.projectile3
 
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("窜天猴");
+            // base.DisplayName.SetDefault("窜天猴");
             Main.projFrames[Projectile.type] = 1;
         }
 

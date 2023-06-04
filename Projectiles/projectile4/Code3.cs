@@ -28,7 +28,7 @@ namespace MythMod.Projectiles.projectile4
                 int num = Dust.NewDust(Projectile.Center - new Vector2(4, 4), 2, 2, 226, 0, 0, 0, default(Color), X * 0.02f);
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             int num = Projectile.NewProjectile(base.Projectile.Center.X, base.Projectile.Center.Y, 0, 0, 645, (int)((double)base.Projectile.damage * 3f), base.Projectile.knockBack, base.Projectile.owner, 0f, 0f);
             Main.projectile[num].timeLeft = 1;

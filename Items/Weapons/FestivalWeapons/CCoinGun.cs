@@ -13,8 +13,8 @@ namespace MythMod.Items.Weapons.FestivalWeapons
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("");
+			// base.Tooltip.SetDefault("");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "钻石发射器");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "不需要消耗钻石币，因为根本就没有钻石币");
 		}

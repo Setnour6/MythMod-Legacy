@@ -23,7 +23,7 @@ namespace MythMod.Projectiles.projectile3
             ProjectileID.Sets.TrailCacheLength[Projectile.type] = 10;
         }
         private int k = 120;
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             float num7 = (float)(Main.rand.Next(0, 2000) / 1000f * Math.PI);
             for (int i = 0; i < 20; i++)

@@ -9,7 +9,7 @@ namespace MythMod.Items.Weapons.Bottle
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("魔影太刀");
+            // DisplayName.SetDefault("魔影太刀");
             DisplayName.AddTranslation(GameCulture.Chinese, "魔影太刀");
             Tooltip.AddTranslation(GameCulture.Chinese, "");
             //GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);

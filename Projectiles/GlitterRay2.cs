@@ -15,7 +15,7 @@ namespace MythMod.Projectiles
 		// Token: 0x06002156 RID: 8534 RVA: 0x0000D493 File Offset: 0x0000B693
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("灿金射线");
+            // base.DisplayName.SetDefault("灿金射线");
 		}
 
 		// Token: 0x06002157 RID: 8535 RVA: 0x001AC3AC File Offset: 0x001AA5AC

@@ -19,7 +19,7 @@ namespace MythMod.NPCs
 		// Token: 0x06001808 RID: 6152 RVA: 0x00009BEC File Offset: 0x00007DEC
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("克苏鲁之眼残影");
+            // base.DisplayName.SetDefault("克苏鲁之眼残影");
 			Main.npcFrameCount[base.NPC.type] = 3;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "克苏鲁之眼残影");
 		}

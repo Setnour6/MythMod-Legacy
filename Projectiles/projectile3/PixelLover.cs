@@ -16,7 +16,7 @@ namespace MythMod.Projectiles.projectile3
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("像素之恋");
+            // DisplayName.SetDefault("像素之恋");
         }
         public override void SetDefaults()
         {

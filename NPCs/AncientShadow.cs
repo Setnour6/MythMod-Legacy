@@ -15,7 +15,7 @@ namespace MythMod.NPCs
 		public override void SetStaticDefaults()
 		{
             Main.npcFrameCount[base.NPC.type] = 4;
-            base.DisplayName.SetDefault("远古暗影球");
+            // base.DisplayName.SetDefault("远古暗影球");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "远古暗影球");
 		}
 		public override void SetDefaults()

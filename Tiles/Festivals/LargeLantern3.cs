@@ -23,8 +23,8 @@ namespace MythMod.Tiles.Festivals
 			TileObjectData.newTile.AnchorRight = new AnchorData((Terraria.Enums.AnchorType)1, 2, 0);
 			TileObjectData.addTile((int)base.Type);
 			this.DustType = 115;
-            ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("");
+            LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("");
             modTranslation.AddTranslation(GameCulture.Chinese, "");
             base.AddMapEntry(new Color(255, 0, 0), modTranslation);
 			this.MineResist = 3f;

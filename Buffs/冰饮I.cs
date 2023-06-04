@@ -9,8 +9,8 @@ namespace MythMod.Buffs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("冰饮I");
-            base.Description.SetDefault("附近有解暑的饮料,让你状态良好\n提升3%移速");
+            // base.DisplayName.SetDefault("冰饮I");
+            // base.Description.SetDefault("附近有解暑的饮料,让你状态良好\n提升3%移速");
 			Main.debuff[base.Type] = false;
 			Main.pvpBuff[base.Type] = true;
 			Main.buffNoSave[base.Type] = true;

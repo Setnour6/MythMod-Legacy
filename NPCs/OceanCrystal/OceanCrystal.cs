@@ -16,7 +16,7 @@ namespace MythMod.NPCs.OceanCrystal
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("湛海魔晶");
+            // base.DisplayName.SetDefault("湛海魔晶");
 			Main.npcFrameCount[base.NPC.type] = 3;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "湛海魔晶");
 		}
@@ -559,7 +559,7 @@ namespace MythMod.NPCs.OceanCrystal
 			return this.canDespawn;
 		}
       
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
 		{
             SoundEngine.PlaySound(SoundID.Item27, new Vector2(base.NPC.position.X, base.NPC.position.Y));
             for (int i = 0; i < 15; i++)

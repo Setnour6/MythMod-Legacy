@@ -42,8 +42,8 @@ namespace MythMod.Tiles
 			this.HitSound = 21;
 			this.soundStyle/* tModPorter Note: Removed. Integrate into HitSound */ = 2;
 			Main.tileSpelunker[(int)base.Type] = true;
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("机械砖");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("机械砖");
 			base.AddMapEntry(new Color(235, 20, 0), modTranslation);
             modTranslation.AddTranslation(GameCulture.Chinese, "机械砖");
 		}

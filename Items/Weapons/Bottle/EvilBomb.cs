@@ -11,8 +11,8 @@ namespace MythMod.Items.Weapons.Bottle
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("魔焰法瓶");
-            base.Tooltip.SetDefault("");
+            // base.DisplayName.SetDefault("魔焰法瓶");
+            // base.Tooltip.SetDefault("");
 		}
 		public override void SetDefaults()
 		{

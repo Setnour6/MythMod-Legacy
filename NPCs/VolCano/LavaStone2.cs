@@ -17,7 +17,7 @@ namespace MythMod.NPCs.VolCano
 		private int num2;
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("熔岩巨石怪");
+            // base.DisplayName.SetDefault("熔岩巨石怪");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "熔岩巨石怪");
 		}
 		public override void SetDefaults()
@@ -128,7 +128,7 @@ namespace MythMod.NPCs.VolCano
             Color color = Utils.MultiplyRGBA(new Color(97 - base.NPC.alpha, 97 - base.NPC.alpha, 97 - base.NPC.alpha, 0), Color.White);
             Main.spriteBatch.Draw(base.Mod.GetTexture("NPCs/VolCano/熔岩巨石怪2Glow"), vector2, new Rectangle?(base.NPC.frame), color, base.NPC.rotation, vector, 1f, effects, 0f);
         }
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
         {
 			SoundEngine.PlaySound(SoundID.Item10, new Vector2(base.NPC.position.X, base.NPC.position.Y));
             for (int i = 0; i < 5; i++)
@@ -208,7 +208,7 @@ namespace MythMod.NPCs.VolCano
                 }
             }
         }
-        public override void OnHitPlayer(Player player, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
 		{
 		}
 	}

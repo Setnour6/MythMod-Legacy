@@ -20,7 +20,7 @@ namespace MythMod.Projectiles
 		private float Distance;
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("代码杀射线");
+            // base.DisplayName.SetDefault("代码杀射线");
 		}
 		public override void SetDefaults()
 		{
@@ -82,7 +82,7 @@ namespace MythMod.Projectiles
                 }
             }
 		}
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.lifeMax = 1;
             target.life = 1;

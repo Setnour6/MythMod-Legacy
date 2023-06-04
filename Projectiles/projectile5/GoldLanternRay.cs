@@ -12,7 +12,7 @@ namespace MythMod.Projectiles.projectile5
 	{
 		public override void SetStaticDefaults()
 		{
-            DisplayName.SetDefault("金光柱");
+            // DisplayName.SetDefault("金光柱");
 		}
 		public override void SetDefaults()
 		{
@@ -106,7 +106,7 @@ namespace MythMod.Projectiles.projectile5
                 Main.dust[num].fadeIn = 1f + (float)Main.rand.NextFloat(-0.5f, 0.5f) * 0.1f;
             }
         }*/
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(153, 900);
         }

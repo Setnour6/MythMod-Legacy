@@ -11,8 +11,8 @@ namespace MythMod.Buffs
 		// Token: 0x060000B3 RID: 179 RVA: 0x0002DB34 File Offset: 0x0002BD34
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("愚昧诅咒");
-            base.Description.SetDefault("你看不懂咒符上面的咒语了");
+            // base.DisplayName.SetDefault("愚昧诅咒");
+            // base.Description.SetDefault("你看不懂咒符上面的咒语了");
 			Main.debuff[base.Type] = true;
 			Main.pvpBuff[base.Type] = true;
 			Main.buffNoSave[base.Type] = true;

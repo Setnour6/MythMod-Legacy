@@ -22,7 +22,7 @@ namespace MythMod.Projectiles.projectile2
         //4444444
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("漩涡");
+            // DisplayName.SetDefault("漩涡");
         }
         //7359668
         public override void SetDefaults()

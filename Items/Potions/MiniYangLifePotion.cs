@@ -14,8 +14,8 @@ namespace MythMod.Items.Potions
 		// Token: 0x060005E3 RID: 1507 RVA: 0x00041728 File Offset: 0x0003F928
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("迷你阳血药剂");
-            base.Tooltip.SetDefault("可以在白天回复阳寿命");
+            // base.DisplayName.SetDefault("迷你阳血药剂");
+            // base.Tooltip.SetDefault("可以在白天回复阳寿命");
 		}
 
 		// Token: 0x060005E4 RID: 1508 RVA: 0x00041780 File Offset: 0x0003F980

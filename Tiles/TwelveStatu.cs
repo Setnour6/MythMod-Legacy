@@ -29,8 +29,8 @@ namespace MythMod.Tiles
 			};
 			TileObjectData.addTile((int)base.Type);
 			this.DustType = 123;
-            ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("");
+            LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("");
             this.MineResist = 3f;
 			base.SetStaticDefaults();
 			modTranslation.AddTranslation(GameCulture.Chinese, "");

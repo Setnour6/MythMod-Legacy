@@ -14,7 +14,7 @@ namespace MythMod.NPCs.LanternMoon
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("FireButterfly");
+            // base.DisplayName.SetDefault("FireButterfly");
             Main.npcFrameCount[base.NPC.type] = 3;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "花火蝶");
         }
@@ -230,7 +230,7 @@ namespace MythMod.NPCs.LanternMoon
             base.NPC.ai[0] = num;
             base.NPC.ai[1] = num2;
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             if (base.NPC.life <= 0)

@@ -11,7 +11,7 @@ namespace MythMod.Projectiles.projectile4
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("神经箭");
+            // base.DisplayName.SetDefault("神经箭");
 		}
 		public override void SetDefaults()
 		{
@@ -68,7 +68,7 @@ namespace MythMod.Projectiles.projectile4
 		{
 			return new Color?(new Color(100, 100, 100, 0));
 		}
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(31, 300, false);
         }

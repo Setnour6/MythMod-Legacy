@@ -24,8 +24,8 @@ namespace MythMod.Items.Weapons.StarJellyFIsh
 		// Token: 0x06000AFF RID: 2815 RVA: 0x00057200 File Offset: 0x00055400
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("");
+			// base.Tooltip.SetDefault("");
 			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "荧光果冻杖");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "射出死亡果冻凝胶\n下水增强");

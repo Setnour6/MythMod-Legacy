@@ -19,10 +19,10 @@ namespace MythMod.Items.Feathers
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("腐化魔羽");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("腐化魔羽");
+			// base.Tooltip.SetDefault("");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "腐化魔羽");
-            Tooltip.SetDefault("增加0.34速度,⅘秒飞行时间,3%闪避,2%暴击,4防御\n在腐化之地效果翻倍");
+            // Tooltip.SetDefault("增加0.34速度,⅘秒飞行时间,3%闪避,2%暴击,4防御\n在腐化之地效果翻倍");
 		}
 		public override void SetDefaults()
 		{

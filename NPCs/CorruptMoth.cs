@@ -18,7 +18,7 @@ namespace MythMod.NPCs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("腐檀巨蛾");
+            // base.DisplayName.SetDefault("腐檀巨蛾");
 			Main.npcFrameCount[base.NPC.type] = 4;
 		}
 		private float m;
@@ -365,7 +365,7 @@ namespace MythMod.NPCs
 				base.NPC.localAI[0] = 0;
 			}
 		}
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
 		{
 			if (base.NPC.life <= 0)
 			{

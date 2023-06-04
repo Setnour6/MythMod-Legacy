@@ -18,7 +18,7 @@ namespace MythMod.NPCs
 		// Token: 0x06001808 RID: 6152 RVA: 0x00009BEC File Offset: 0x00007DEC
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("巫毒娃娃");
+			// base.DisplayName.SetDefault("巫毒娃娃");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "巫毒娃娃");
         }
         public override void SetDefaults()
@@ -69,7 +69,7 @@ namespace MythMod.NPCs
                 }
             }
 		}
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             for (int i = 0; i < 200; i++)
             {

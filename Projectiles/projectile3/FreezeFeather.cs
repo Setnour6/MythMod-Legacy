@@ -17,7 +17,7 @@ namespace MythMod.Projectiles.projectile3
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("冰羽");
+            // DisplayName.SetDefault("冰羽");
         }
         public override void SetDefaults()
         {

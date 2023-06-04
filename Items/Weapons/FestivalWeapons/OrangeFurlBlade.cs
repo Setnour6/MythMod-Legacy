@@ -20,7 +20,7 @@ namespace MythMod.Items.Weapons.FestivalWeapons
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault("金桔旋刃");
+			// DisplayName.SetDefault("金桔旋刃");
         }
 
 		public override void SetDefaults()

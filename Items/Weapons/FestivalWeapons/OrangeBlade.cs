@@ -9,8 +9,8 @@ namespace MythMod.Items.Weapons.FestivalWeapons
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("");
-            DisplayName.SetDefault("桔之锋");
+            // Tooltip.SetDefault("");
+            // DisplayName.SetDefault("桔之锋");
         }
         public override void SetDefaults()
         {
@@ -32,7 +32,7 @@ namespace MythMod.Items.Weapons.FestivalWeapons
             Item.shootSpeed = 4f;
 
         }
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
         }
         public override void MeleeEffects(Player player, Rectangle hitbox)

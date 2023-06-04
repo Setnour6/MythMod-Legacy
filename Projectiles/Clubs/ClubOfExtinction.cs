@@ -21,7 +21,7 @@ namespace MythMod.Projectiles.Clubs
 
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("灭绝棍棒");
+            // base.DisplayName.SetDefault("灭绝棍棒");
         }
 
         public override void SetDefaults()
@@ -74,7 +74,7 @@ namespace MythMod.Projectiles.Clubs
                 Projectile.NewProjectile(p.Center.X + vk.X, p.Center.Y + vk.Y, vk.X, vk.Y, 409, 100000, 1000, p.whoAmI, 0, 0);
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.life = 0;
             target.lifeMax = 0;

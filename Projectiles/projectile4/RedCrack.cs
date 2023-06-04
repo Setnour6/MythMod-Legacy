@@ -20,7 +20,7 @@ namespace MythMod.Projectiles.projectile4
 
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("绯红割裂");
+            // base.DisplayName.SetDefault("绯红割裂");
             Main.projFrames[Projectile.type] = 1;
         }
 
@@ -83,7 +83,7 @@ namespace MythMod.Projectiles.projectile4
             return false;
         }
         private float DisFri = 0;
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             DisFri = 20;
             base.OnHitNPC(target, damage, knockback, crit);

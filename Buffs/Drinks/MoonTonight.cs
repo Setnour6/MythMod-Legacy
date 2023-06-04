@@ -9,8 +9,8 @@ namespace MythMod.Buffs.Drinks
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("今晚的月亮");
-            base.Description.SetDefault("魔法回复增加8");
+            // base.DisplayName.SetDefault("今晚的月亮");
+            // base.Description.SetDefault("魔法回复增加8");
 			Main.buffNoTimeDisplay[base.Type] = false;
 			Main.buffNoSave[base.Type] = true;
 		}

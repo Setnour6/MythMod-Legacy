@@ -11,7 +11,7 @@ namespace MythMod.Projectiles.BloodyTusk
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("ToothBlade");
+            // base.DisplayName.SetDefault("ToothBlade");
 			Main.projFrames[base.Projectile.type] = 1;
 		}
 		public override void SetDefaults()
@@ -53,7 +53,7 @@ namespace MythMod.Projectiles.BloodyTusk
                 Projectile.active = false;
             }
 		}
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             stick = true;
             v = Projectile.position - target.position;

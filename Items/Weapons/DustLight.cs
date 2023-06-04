@@ -29,8 +29,8 @@ namespace MythMod.Items.Weapons
         }
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("击中敌人爆发出蓝色火焰");
-            base.DisplayName.SetDefault("尘光");
+            // Tooltip.SetDefault("击中敌人爆发出蓝色火焰");
+            // base.DisplayName.SetDefault("尘光");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;
@@ -52,7 +52,7 @@ namespace MythMod.Items.Weapons
             Item.value = 10000;
             Item.scale = 1f;
         }
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             for (int i = 0; i < 228; i++)
             {

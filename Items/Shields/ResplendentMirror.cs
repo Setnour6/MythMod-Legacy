@@ -10,7 +10,7 @@ namespace MythMod.Items.Shields
 	{
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("璀璨镜");
+            // DisplayName.SetDefault("璀璨镜");
             Tooltip.AddTranslation(GameCulture.Chinese, "拿在手上增加250防御,并且受到伤害减少60%\n反射盾牌方向的弹幕");
             base.SetStaticDefaults();
         }

@@ -22,7 +22,7 @@ namespace MythMod.Items.Banners
 				// Token: 0x06001475 RID: 5237 RVA: 0x000082F6 File Offset: 0x000064F6
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("警报水母Banner");
+            // base.DisplayName.SetDefault("警报水母Banner");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "警报水母旗");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }

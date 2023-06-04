@@ -20,8 +20,8 @@ namespace MythMod.Items.Weapons.FestivalWeapons
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("蜜桔召唤杖");
-			base.Tooltip.SetDefault("召唤一个根系精灵协助作战");
+            // base.DisplayName.SetDefault("蜜桔召唤杖");
+			// base.Tooltip.SetDefault("召唤一个根系精灵协助作战");
 		}
 		public override void SetDefaults()
 		{

@@ -22,7 +22,7 @@ namespace MythMod.Projectiles.projectile3
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("冰晶石剑影");
+            // DisplayName.SetDefault("冰晶石剑影");
         }
         public override void SetDefaults()
         {

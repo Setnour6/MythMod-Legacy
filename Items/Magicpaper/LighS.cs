@@ -11,8 +11,8 @@ namespace MythMod.Items.Magicpaper
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("闪电符咒石");
-            Tooltip.SetDefault("劈下一道闪电穿过你的鼠标\n冷却10s");
+            // DisplayName.SetDefault("闪电符咒石");
+            // Tooltip.SetDefault("劈下一道闪电穿过你的鼠标\n冷却10s");
         }
         public override void SetDefaults()
         {

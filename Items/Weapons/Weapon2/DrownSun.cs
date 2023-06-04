@@ -9,7 +9,7 @@ namespace MythMod.Items.Weapons.Weapon2
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("灭日");
+            // DisplayName.SetDefault("灭日");
             DisplayName.AddTranslation(GameCulture.Chinese, "灭日");
             Tooltip.AddTranslation(GameCulture.Chinese, "释放一道毁灭黑光\n制作尚未完成不要使用可能会闪退");
         }

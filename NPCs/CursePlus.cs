@@ -37,7 +37,7 @@ namespace MythMod.NPCs
         private float num25;
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("魔焰眼");
+            // base.DisplayName.SetDefault("魔焰眼");
             Main.npcFrameCount[base.NPC.type] = 3;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "魔焰眼");
         }
@@ -64,11 +64,11 @@ namespace MythMod.NPCs
             NPCID.Sets.TrailingMode[base.NPC.type] = 0;
         }
         private bool A2 = true;
-        public override void ModifyHitByProjectile(Projectile projectile, ref int damage, ref float knockback, ref bool crit, ref int hitDirection)
+        public override void ModifyHitByProjectile(Projectile projectile, ref NPC.HitModifiers modifiers)
         {
             damage *= 0;
         }
-        public override void ModifyHitByItem(Player player, Item item, ref int damage, ref float knockback, ref bool crit)
+        public override void ModifyHitByItem(Player player, Item item, ref NPC.HitModifiers modifiers)
         {
             damage *= 0;
         }
@@ -276,7 +276,7 @@ namespace MythMod.NPCs
             Main.spriteBatch.Draw(base.Mod.GetTexture("NPCs/咒炎炼狱眼光辉"), vector2, new Rectangle?(base.NPC.frame), color, base.NPC.rotation, vector, 1f, effects, 0f);
         }
         // Token: 0x02000413 RID: 1043
-        public override void OnHitPlayer(Player player, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
         }
         // Token: 0x02000413 RID: 1043

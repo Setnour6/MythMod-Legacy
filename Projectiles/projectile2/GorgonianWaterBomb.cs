@@ -10,7 +10,7 @@ namespace MythMod.Projectiles.projectile2
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("柳珊瑚水雷");
+            // base.DisplayName.SetDefault("柳珊瑚水雷");
 		}
         private float num = 0;
         public override void SetDefaults()
@@ -88,7 +88,7 @@ namespace MythMod.Projectiles.projectile2
                 }
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
 		}
 	}

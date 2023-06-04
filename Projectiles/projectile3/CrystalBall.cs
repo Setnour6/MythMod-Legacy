@@ -19,7 +19,7 @@ namespace MythMod.Projectiles.projectile3
 
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("CrystalBall");
+            // base.DisplayName.SetDefault("CrystalBall");
             Main.projFrames[Projectile.type] = 1;
         }
 

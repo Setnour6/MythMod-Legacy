@@ -25,8 +25,8 @@ namespace MythMod.Tiles.Routers
 			};
             TileObjectData.newTile.CoordinateWidth = 24;
             TileObjectData.addTile((int)base.Type);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("天域路由器");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("天域路由器");
 			base.AddMapEntry(new Color(0, 17, 6), modTranslation);
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
 			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
@@ -34,7 +34,7 @@ namespace MythMod.Tiles.Routers
 			{
 				4
 			};
-			this.ItemDrop = base.Mod.Find<ModItem>("SkyRouter").Type;
+			this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = base.Mod.Find<ModItem>("SkyRouter").Type;
 			modTranslation.AddTranslation(GameCulture.Chinese, "天域路由器");
 		}
         public override void KillMultiTile(int i, int j, int frameX, int frameY)

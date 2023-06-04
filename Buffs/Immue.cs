@@ -10,8 +10,8 @@ namespace MythMod.Buffs
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("Immue");
-			base.Description.SetDefault("防御力提升很多很多");
+			// base.DisplayName.SetDefault("Immue");
+			// base.Description.SetDefault("防御力提升很多很多");
 			Main.debuff[base.Type] = false;
 			Main.pvpBuff[base.Type] = true;
 			Main.buffNoSave[base.Type] = true;

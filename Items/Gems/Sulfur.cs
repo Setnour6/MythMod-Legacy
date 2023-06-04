@@ -10,8 +10,8 @@ namespace MythMod.Items.Gems
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("来自地狱的结晶");//教程是物品介绍
-            DisplayName.SetDefault("Sulfur");
+            // Tooltip.SetDefault("来自地狱的结晶");//教程是物品介绍
+            // DisplayName.SetDefault("Sulfur");
             DisplayName.AddTranslation(GameCulture.Chinese, "硫磺石");
         }
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8

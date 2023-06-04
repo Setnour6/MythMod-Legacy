@@ -19,10 +19,10 @@ namespace MythMod.Items.Accessories
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("海恒石");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("海恒石");
+			// base.Tooltip.SetDefault("");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "海恒石");
-            Tooltip.SetDefault("坚定如海,永恒不变");
+            // Tooltip.SetDefault("坚定如海,永恒不变");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "坚定如海,永恒不变\n增加10防御,并提升回血速度");
         }
         public override void SetDefaults()

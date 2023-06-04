@@ -12,8 +12,8 @@ namespace MythMod.Items.UnderSea
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("海因子");
-            Tooltip.SetDefault("");
+            // DisplayName.SetDefault("海因子");
+            // Tooltip.SetDefault("");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;

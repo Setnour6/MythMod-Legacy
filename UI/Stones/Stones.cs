@@ -48,8 +48,8 @@ namespace MythMod.UI.Stones
             StonesMain.Left.Set(Main.screenWidth * 0.5f, 0);
             StonesMain.Top.Set(Main.screenHeight * 0.5f, 0);
 
-            StonesMain.OnMouseDown += new UIElement.MouseEvent(DragStart);
-            StonesMain.OnMouseUp += new UIElement.MouseEvent(DragEnd);
+            StonesMain.OnLeftMouseDown += new UIElement.MouseEvent(DragStart);
+            StonesMain.OnLeftMouseUp += new UIElement.MouseEvent(DragEnd);
 
             Append(StonesMain);
         }

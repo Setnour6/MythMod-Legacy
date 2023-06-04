@@ -18,9 +18,9 @@ namespace MythMod.Walls
 		{
 			Main.wallHouse[(int)base.Type] = true;
 			this.DustType = 163;
-            this.ItemDrop = base.Mod.Find<ModItem>("CrystalWall").Type;
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("CrystalWall");
+            this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = base.Mod.Find<ModItem>("CrystalWall").Type;
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("CrystalWall");
 			base.AddMapEntry(new Color(88, 88, 88), modTranslation);
 		}
     }

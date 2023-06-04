@@ -19,7 +19,7 @@ namespace MythMod.Items.UnderSea
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("");
+            // Tooltip.SetDefault("");
             DisplayName.AddTranslation(GameCulture.Chinese, "璀璨琉璃");
         }
         public override void SetDefaults()

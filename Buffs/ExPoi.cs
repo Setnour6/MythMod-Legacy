@@ -9,8 +9,8 @@ namespace MythMod.Buffs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("ExPoi");
-            base.Description.SetDefault("撕心裂肺的刺痛");
+            // base.DisplayName.SetDefault("ExPoi");
+            // base.Description.SetDefault("撕心裂肺的刺痛");
 			Main.debuff[base.Type] = true;
 			Main.pvpBuff[base.Type] = true;
 			Main.buffNoSave[base.Type] = true;

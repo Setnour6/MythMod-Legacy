@@ -8,8 +8,8 @@ namespace MythMod.Items.Weapons
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("");
-            DisplayName.SetDefault("铸日荣耀");
+            // Tooltip.SetDefault("");
+            // DisplayName.SetDefault("铸日荣耀");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;
@@ -34,7 +34,7 @@ namespace MythMod.Items.Weapons
             Item.shootSpeed = 9f;
 
         }
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(189, 900, false);
             Dust.NewDust(new Vector2(target.position.X, target.position.Y), target.width, target.height, 6, 0f, 0f, 0, default(Color), 1f);

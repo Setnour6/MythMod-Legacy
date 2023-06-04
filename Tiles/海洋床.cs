@@ -22,8 +22,8 @@ namespace MythMod.Tiles
 			};
 			TileObjectData.addTile((int)base.Type);
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsChair);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("海洋床");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("海洋床");
 			base.AddMapEntry(new Color(80, 200, 200), modTranslation);
 			this.DustType = 15;
 			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;

@@ -19,7 +19,7 @@ namespace MythMod.Projectiles.projectile3
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("暗影光球");
+            // DisplayName.SetDefault("暗影光球");
         }
         public override void SetDefaults()
         {
@@ -60,7 +60,7 @@ namespace MythMod.Projectiles.projectile3
             }
             Lighting.AddLight(Projectile.Center, -1, -1, -1);
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             for (int i = 0; i < 3; i++)
             {

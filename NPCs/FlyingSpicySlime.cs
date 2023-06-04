@@ -11,7 +11,7 @@ namespace MythMod.NPCs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("飞行尖刺史莱姆");
+            // base.DisplayName.SetDefault("飞行尖刺史莱姆");
 			Main.npcFrameCount[base.NPC.type] = 4;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "飞行尖刺史莱姆");
 		}
@@ -54,7 +54,7 @@ namespace MythMod.NPCs
 		{
 			return false;
 		}
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
 		{
 			if (Main.netMode != 1 && base.NPC.life <= 0)
 			{

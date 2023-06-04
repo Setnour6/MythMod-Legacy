@@ -24,8 +24,8 @@ namespace MythMod.Items.Weapons
 		// Token: 0x06001224 RID: 4644 RVA: 0x00084DFC File Offset: 0x00082FFC
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("");
+			// base.Tooltip.SetDefault("");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "磷光手枪");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "在腐化的深渊中发出幽光");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);

@@ -18,8 +18,8 @@ namespace MythMod.Items.Accessories
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("暗影鳞之眼");
-			base.Tooltip.SetDefault("增加5防御,8%暴击");
+			// base.DisplayName.SetDefault("暗影鳞之眼");
+			// base.Tooltip.SetDefault("增加5防御,8%暴击");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "暗影鳞之眼");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "增加5防御,8%暴击");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);

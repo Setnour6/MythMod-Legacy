@@ -47,8 +47,8 @@ namespace MythMod.UI.smartPhone
             smartPhoneMain.Height.Set(340, 0);
             smartPhoneMain.Left.Set(Main.screenWidth * 0.5f - 134, 0);
             smartPhoneMain.Top.Set(Main.screenHeight * 0.5f - 220, 0);
-            smartPhoneMain.OnMouseDown += new UIElement.MouseEvent(DragStart);
-            smartPhoneMain.OnMouseUp += new UIElement.MouseEvent(DragEnd);
+            smartPhoneMain.OnLeftMouseDown += new UIElement.MouseEvent(DragStart);
+            smartPhoneMain.OnLeftMouseUp += new UIElement.MouseEvent(DragEnd);
 
             Append(smartPhoneMain);
         }

@@ -12,7 +12,7 @@ namespace MythMod.Projectiles.projectile2
 		// Token: 0x060033CB RID: 13259 RVA: 0x000109F0 File Offset: 0x0000EBF0
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("硫磺战锤");
+			// base.DisplayName.SetDefault("硫磺战锤");
 		}
 
 		// Token: 0x060033CC RID: 13260 RVA: 0x00287724 File Offset: 0x00285924
@@ -45,7 +45,7 @@ namespace MythMod.Projectiles.projectile2
         }
 
         // Token: 0x060033CE RID: 13262 RVA: 0x0021D458 File Offset: 0x0021B658
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             for (int j = 0; j < 16; j++)
             {

@@ -20,7 +20,7 @@ namespace MythMod.Projectiles.projectile3
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("爆炸鞭炮");
+            // DisplayName.SetDefault("爆炸鞭炮");
             Main.projFrames[base.Projectile.type] = 5;
         }
         public override void SetDefaults()

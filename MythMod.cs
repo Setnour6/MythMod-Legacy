@@ -19,7 +19,6 @@ using MythMod.UI.Stones;
 using MythMod.UI.smartPhone;
 using MythMod.UI.Starfish;
 using MythMod.Projectiles;
-using On.Terraria;
 using MythMod.UI.Lifebutton;
 using MythMod.UI.SpringAct;
 using MythMod.UI.OceanWorld;
@@ -29,7 +28,6 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Linq;
 using ReLogic.Graphics;
-using On.Terraria.GameContent.UI.Elements;
 using Terraria.GameContent.UI.Elements;
 using System.Reflection;
 using UICharacter = Terraria.GameContent.UI.Elements.UICharacter;
@@ -197,7 +195,7 @@ namespace MythMod
             base.PostSetupContent();
         }
         
-        public void drawVitricBackground(On.Terraria.Main.orig_DrawBackgroundBlackFill orig, Terraria.Main self)
+        public void drawVitricBackground(Terraria.On_Main.orig_DrawBackgroundBlackFill orig, Terraria.Main self)
         {
             orig(self);
             Terraria.Player player = Terraria.Main.LocalPlayer;
@@ -303,12 +301,12 @@ namespace MythMod
             }
             else return 0;
         }
-        private void Main_DrawProjectiles(On.Terraria.Main.orig_DrawProjectiles orig, Terraria.Main self)
+        private void Main_DrawProjectiles(Terraria.On_Main.orig_DrawProjectiles orig, Terraria.Main self)
         {
             TrailManager.DrawTrails(Terraria.Main.spriteBatch);
             orig(self);
         }
-        private int Projectile_NewProjectile(On.Terraria.Projectile.orig_NewProjectile_float_float_float_float_int_int_float_int_float_float orig, float X, float Y, float SpeedX, float SpeedY, int Type, int Damage, float KnockBack, int Owner, float ai0, float ai1)
+        private int Projectile_NewProjectile(Terraria.On_Projectile.orig_NewProjectile_float_float_float_float_int_int_float_int_float_float orig, float X, float Y, float SpeedX, float SpeedY, int Type, int Damage, float KnockBack, int Owner, float ai0, float ai1)
         {
             int index = orig(X, Y, SpeedX, SpeedY, Type, Damage, KnockBack, Owner, ai0, ai1);
             Terraria.Projectile projectile = Terraria.Main.projectile[index];
@@ -330,25 +328,25 @@ namespace MythMod
             Mod mod = ModLoader.GetMod("MythMod");
             Filters.Scene["MythMod:GBlur"] = new Filter(new MythGlobalEffects(new Ref<Effect>(GetEffect("Effects/Wave")), "Test"), EffectPriority.Medium);
             Filters.Scene["MythMod:GBlur"].Load();
-            ModTranslation modTranslation = LocalizationLoader.CreateTranslation(base, "Myth.on");
+            LocalizedText modTranslation = Language.GetOrRegister(base, "Myth.on");
             modTranslation.AddTranslation(GameCulture.Chinese, "你躯体和周围空气的界线开始模糊，空间已经难以承受你释放的怒火");
-            modTranslation.SetDefault("!");
-            LocalizationLoader.AddTranslation(modTranslation);
-            modTranslation = LocalizationLoader.CreateTranslation(this, "Myth.on1");
+            // modTranslation.SetDefault("!");
+            LocalizationLoader.AddTranslation(modTranslation)/* tModPorter Note: Removed. Use Language.GetOrRegister */;
+            modTranslation = Language.GetOrRegister(this, "Myth.on1");
             modTranslation.AddTranslation(GameCulture.Chinese, "直面毁灭……");
-            modTranslation.SetDefault("!");
-            LocalizationLoader.AddTranslation(modTranslation);
-            ModTranslation text = LocalizationLoader.CreateTranslation(this, "LivesLeft");
-			text = LocalizationLoader.CreateTranslation(this, "双子魔眼已被打败!");
-			text.SetDefault("双子魔眼已被打败!");
-			LocalizationLoader.AddTranslation(text);
+            // modTranslation.SetDefault("!");
+            LocalizationLoader.AddTranslation(modTranslation)/* tModPorter Note: Removed. Use Language.GetOrRegister */;
+            LocalizedText text = Language.GetOrRegister(this, "LivesLeft");
+			text = Language.GetOrRegister(this, "双子魔眼已被打败!");
+			// text.SetDefault("双子魔眼已被打败!");
+			LocalizationLoader.AddTranslation(text)/* tModPorter Note: Removed. Use Language.GetOrRegister */;
 
             HookBackGround.Load();
 
             TrailManager = new TrailManager(this);
 
-            On.Terraria.Main.DrawProjectiles += Main_DrawProjectiles;
-            On.Terraria.Projectile.NewProjectile_float_float_float_float_int_int_float_int_float_float += Projectile_NewProjectile;
+            Terraria.On_Main.DrawProjectiles += Main_DrawProjectiles;
+            Terraria.On_Projectile.NewProjectile_float_float_float_float_int_int_float_int_float_float += Projectile_NewProjectile;
             YinYangLife = new YinYangLife();
             YinYangLife.Activate();
             YinYangLifeUserInterface = new UserInterface();

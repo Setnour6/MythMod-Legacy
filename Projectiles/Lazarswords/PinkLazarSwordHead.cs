@@ -20,7 +20,7 @@ namespace MythMod.Projectiles.Lazarswords
 
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("粉红激光刃");
+            // base.DisplayName.SetDefault("粉红激光刃");
         }
 
         public override void SetDefaults()

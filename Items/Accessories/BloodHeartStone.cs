@@ -9,8 +9,8 @@ namespace MythMod.Items.Accessories
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("XXX");
-			base.Tooltip.SetDefault("XXX");
+			// base.DisplayName.SetDefault("XXX");
+			// base.Tooltip.SetDefault("XXX");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "血泵石");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "移动速度越快提升回血速度越多,伤害也越高\n神话");
 		}

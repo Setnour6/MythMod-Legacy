@@ -10,7 +10,7 @@ namespace MythMod.Items.Weapons
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("晶状体短刃");
+            // DisplayName.SetDefault("晶状体短刃");
             DisplayName.AddTranslation(GameCulture.Chinese, "晶状体短刃");
         }
         public override void SetDefaults()

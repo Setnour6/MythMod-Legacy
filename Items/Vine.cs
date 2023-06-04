@@ -10,7 +10,7 @@ namespace MythMod.Items
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("缠绕藤蔓");
+            // base.DisplayName.SetDefault("缠绕藤蔓");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "缠绕藤蔓");
 		}
 		public override void SetDefaults()

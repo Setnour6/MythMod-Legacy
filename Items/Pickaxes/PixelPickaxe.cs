@@ -12,8 +12,8 @@ namespace MythMod.Items.Pickaxes
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("PixelPickaxe");
-			base.Tooltip.SetDefault("");
+            // base.DisplayName.SetDefault("PixelPickaxe");
+			// base.Tooltip.SetDefault("");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "像素分割者");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "");
 		}

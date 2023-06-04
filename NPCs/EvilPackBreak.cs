@@ -20,7 +20,7 @@ namespace MythMod.NPCs
 		// Token: 0x06001808 RID: 6152 RVA: 0x00009BEC File Offset: 0x00007DEC
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("魔茧");
+			// base.DisplayName.SetDefault("魔茧");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "魔茧");
 		}
 		// Token: 0x06001809 RID: 6153 RVA: 0x0010AD00 File Offset: 0x00108F00

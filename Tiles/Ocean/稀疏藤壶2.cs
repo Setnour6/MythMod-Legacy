@@ -26,9 +26,9 @@ namespace MythMod.Tiles.Ocean
             TileObjectData.addTile((int)base.Type);
 			this.DustType = 7;
 			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
-            this.ItemDrop = Mod.Find<ModItem>("Barnacle").Type;
-            ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("藤壶");
+            this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = Mod.Find<ModItem>("Barnacle").Type;
+            LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("藤壶");
 			base.AddMapEntry(new Color(178, 178 ,138), modTranslation);
 			modTranslation.AddTranslation(GameCulture.Chinese, "藤壶");
 		}

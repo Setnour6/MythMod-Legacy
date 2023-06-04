@@ -11,8 +11,8 @@ namespace MythMod.Items.Potions
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("飘幻药剂");
-            Tooltip.SetDefault("闪避率提高6%");
+            // DisplayName.SetDefault("飘幻药剂");
+            // Tooltip.SetDefault("闪避率提高6%");
         }
         public override void SetDefaults()
         {

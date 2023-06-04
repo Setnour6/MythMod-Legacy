@@ -22,7 +22,7 @@ namespace MythMod.NPCs.EvilBotle
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("魔化力场");
+            // base.DisplayName.SetDefault("魔化力场");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "魔化力场");
         }
         private bool X = true;
@@ -53,7 +53,7 @@ namespace MythMod.NPCs.EvilBotle
         {
             NPC.dontTakeDamage = false;
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             EvilBotle.Addlig = 2;
             if (base.NPC.life <= 0)

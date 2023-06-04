@@ -35,7 +35,7 @@ namespace MythMod.Tiles.玄武岩家具
 			TileObjectData.newTile.LavaDeath = true;
 			TileObjectData.addTile((int)base.Type);
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsDoor);
-			this.ItemDrop = base.Mod.Find<ModItem>("BasaltPlatform").Type;
+			this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = base.Mod.Find<ModItem>("BasaltPlatform").Type;
 			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
 			this.AdjTiles = new int[]
 			{

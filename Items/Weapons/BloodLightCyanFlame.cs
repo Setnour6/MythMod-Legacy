@@ -20,7 +20,7 @@ namespace MythMod.Items.Weapons
 		public override void SetStaticDefaults()
 		{
 			base.SetStaticDefaults();
-			DisplayName.SetDefault("血光青炎");
+			// DisplayName.SetDefault("血光青炎");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "一共有两种回旋刃,交替放出\n神话");
         }
 

@@ -9,8 +9,8 @@ namespace MythMod.Buffs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("矿物精华形成的保护层环绕着你");
-            base.Description.SetDefault("防御力+24");
+            // base.DisplayName.SetDefault("矿物精华形成的保护层环绕着你");
+            // base.Description.SetDefault("防御力+24");
 			Main.debuff[base.Type] = false;
 			Main.pvpBuff[base.Type] = true;
 			Main.buffNoSave[base.Type] = true;

@@ -14,7 +14,7 @@ namespace MythMod.Projectiles.projectile5
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("青针");
+            // DisplayName.SetDefault("青针");
         }
         public override void SetDefaults()
         {

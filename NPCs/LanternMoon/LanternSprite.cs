@@ -36,7 +36,7 @@ namespace MythMod.NPCs.LanternMoon
 		// Token: 0x0600163F RID: 5695 RVA: 0x00008D5D File Offset: 0x00006F5D
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("灯笼幽灵");
+            // base.DisplayName.SetDefault("灯笼幽灵");
 			Main.npcFrameCount[base.NPC.type] = 4;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "灯笼幽灵");
 		}
@@ -110,10 +110,10 @@ namespace MythMod.NPCs.LanternMoon
             }
         }
         // Token: 0x02000413 RID: 1043
-        public override void OnHitPlayer(Player player, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             if (base.NPC.life <= 0)

@@ -23,8 +23,8 @@ namespace MythMod.Items.Weapons
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("");
-            base.DisplayName.SetDefault("影翼巨弓");
+            // Tooltip.SetDefault("");
+            // base.DisplayName.SetDefault("影翼巨弓");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;

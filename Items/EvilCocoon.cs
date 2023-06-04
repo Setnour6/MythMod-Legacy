@@ -23,8 +23,8 @@ namespace MythMod.Items
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("魔茧");
-			base.Tooltip.SetDefault("在你附近召唤腐檀巨蛾，要求腐化环境");
+            // base.DisplayName.SetDefault("魔茧");
+			// base.Tooltip.SetDefault("在你附近召唤腐檀巨蛾，要求腐化环境");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;

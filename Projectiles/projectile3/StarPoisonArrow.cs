@@ -9,7 +9,7 @@ namespace MythMod.Projectiles.projectile3
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("星渊毒素箭");
+            // base.DisplayName.SetDefault("星渊毒素箭");
 		}
 		public override void SetDefaults()
 		{
@@ -44,7 +44,7 @@ namespace MythMod.Projectiles.projectile3
                 }
             }
         }
-		public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+		public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
 		{
             target.AddBuff(Mod.Find<ModBuff>("XYPoison").Type, 360, false);
 		}

@@ -18,7 +18,7 @@ namespace MythMod.NPCs.Yuanbao
 		// Token: 0x06001B17 RID: 6935 RVA: 0x0000B428 File Offset: 0x00009628
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("逆时元宝");
+            // base.DisplayName.SetDefault("逆时元宝");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "逆时元宝");
 		}
 
@@ -56,7 +56,7 @@ namespace MythMod.NPCs.Yuanbao
 			return 0f;
 		}
 		// Token: 0x06001B1A RID: 6938 RVA: 0x000037AF File Offset: 0x000019AF
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
         {
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             SoundEngine.PlaySound(SoundID.Item10, new Vector2(base.NPC.position.X, base.NPC.position.Y));
@@ -132,7 +132,7 @@ namespace MythMod.NPCs.Yuanbao
             Color color = Utils.MultiplyRGBA(new Color(297 - base.NPC.alpha, 297 - base.NPC.alpha, 297 - base.NPC.alpha, 0), Color.White);
             Main.spriteBatch.Draw(base.Mod.GetTexture("NPCs/Yuanbao/逆时元宝Glow"), vector2, new Rectangle?(base.NPC.frame), new Color(0.3f * (255 - NPC.alpha) / 255f, 0.3f * (255 - NPC.alpha) / 255f, 0.3f * (255 - NPC.alpha) / 255f, 0), base.NPC.rotation, vector, 1f, effects, 0f);
         }
-        public override void OnHitPlayer(Player player, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
 		{
 		}
 	}

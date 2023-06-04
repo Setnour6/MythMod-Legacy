@@ -19,7 +19,7 @@ namespace MythMod.Projectiles.projectile3
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("日耀剑气");
+            // base.DisplayName.SetDefault("日耀剑气");
         }
 
         public override void SetDefaults()
@@ -108,7 +108,7 @@ namespace MythMod.Projectiles.projectile3
                 }
             }
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             int k = Projectile.NewProjectile(Projectile.position.X, Projectile.position.Y, 0, 0, 612, Projectile.damage, Projectile.knockBack, Main.myPlayer, 0f, 0f);
             for (int i = 0; i < 200; i++)

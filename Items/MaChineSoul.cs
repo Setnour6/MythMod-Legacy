@@ -11,8 +11,8 @@ namespace MythMod.Items
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("机械之魂");
-            Tooltip.SetDefault("");
+            // DisplayName.SetDefault("机械之魂");
+            // Tooltip.SetDefault("");
             Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(4, 4));
             ItemID.Sets.AnimatesAsSoul[Item.type] = true;
             ItemID.Sets.ItemIconPulse[Item.type] = true; 

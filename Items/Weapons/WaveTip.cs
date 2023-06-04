@@ -12,8 +12,8 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("Tip of the wave");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("Tip of the wave");
+			// base.Tooltip.SetDefault("");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "浪尖");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "");
 		}

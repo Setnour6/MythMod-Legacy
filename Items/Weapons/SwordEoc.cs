@@ -12,8 +12,8 @@ namespace MythMod.Items.Weapons
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("荣耀之剑·克苏鲁之眼");
-            base.Tooltip.SetDefault("你的实力已经碾压克苏鲁之眼\n这把剑是你的见证");
+            // base.DisplayName.SetDefault("荣耀之剑·克苏鲁之眼");
+            // base.Tooltip.SetDefault("你的实力已经碾压克苏鲁之眼\n这把剑是你的见证");
         }
         public override void SetDefaults()
         {
@@ -32,7 +32,7 @@ namespace MythMod.Items.Weapons
             Item.value = 10000;
             Item.scale = 1f;
         }
-		public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
+		public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             float num2 = 25f;
             Vector2 vector = player.RotatedRelativePoint(player.MountedCenter, true);

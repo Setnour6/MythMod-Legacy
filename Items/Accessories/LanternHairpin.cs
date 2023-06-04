@@ -19,10 +19,10 @@ namespace MythMod.Items.Accessories
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("红灯笼发钗");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("红灯笼发钗");
+			// base.Tooltip.SetDefault("");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "红灯笼发钗");
-            Tooltip.SetDefault("增加4个召唤栏位");
+            // Tooltip.SetDefault("增加4个召唤栏位");
             Tooltip.AddTranslation(GameCulture.Chinese, "增加4个召唤栏位");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }

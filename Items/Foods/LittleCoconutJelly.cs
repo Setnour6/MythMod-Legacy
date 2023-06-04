@@ -12,8 +12,8 @@ namespace MythMod.Items.Foods
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("小椰子果冻");
-            base.Tooltip.SetDefault("放在身边获得增益,美味等级II");
+            // base.DisplayName.SetDefault("小椰子果冻");
+            // base.Tooltip.SetDefault("放在身边获得增益,美味等级II");
 		}
         public override void SetDefaults()
         {

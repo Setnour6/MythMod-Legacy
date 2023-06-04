@@ -19,7 +19,7 @@ namespace MythMod.NPCs.CrystalSword
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("冰洲石剑EX");
+            // base.DisplayName.SetDefault("冰洲石剑EX");
             Main.npcFrameCount[base.NPC.type] = 1;
         }
         private int m = 0;
@@ -1430,7 +1430,7 @@ namespace MythMod.NPCs.CrystalSword
             Main.spriteBatch.Draw(texture, NPC.Center - Main.screenPosition + new Vector2(0f, NPC.gfxOffY), NPC.frame, NPC.GetAlpha(drawColor), NPC.rotation, new Vector2(110, 110), NPC.scale, SpriteEffects.None, 0f);
             return false;
         }
-        public override void HitEffect(int hitDirection, double damage)
+        public override void HitEffect(NPC.HitInfo hit)
         {
             SoundEngine.PlaySound(SoundID.Item27, NPC.position);
             if (Main.rand.Next(3) == 1)

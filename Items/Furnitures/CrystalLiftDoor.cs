@@ -8,7 +8,7 @@ namespace MythMod.Items.Furnitures
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("");
+            // Tooltip.SetDefault("");
         }
         public override void SetDefaults()
         {

@@ -15,7 +15,7 @@ namespace MythMod.Projectiles.projectile2
         private int num18 = 0;
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("熔岩灌顶");
+            // base.DisplayName.SetDefault("熔岩灌顶");
             ProjectileID.Sets.MinionSacrificable[base.Projectile.type] = true;
             ProjectileID.Sets.MinionTargettingFeature[base.Projectile.type] = true;
             Main.projFrames[base.Projectile.type] = 1;

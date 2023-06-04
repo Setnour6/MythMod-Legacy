@@ -30,8 +30,8 @@ namespace MythMod.Tiles
             TileObjectData.addTile((int)base.Type);
             this.DustType = -1;
             this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
-            ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("Banner");
+            LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("Banner");
             base.AddMapEntry(new Color(13, 88, 130), modTranslation);
             modTranslation.AddTranslation(GameCulture.Chinese, "旗帜");
         }

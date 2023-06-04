@@ -227,7 +227,7 @@ namespace MythMod
 		private class MultiplayerSyncPlayer : ModPlayer
 		{
 			// Token: 0x060000AA RID: 170 RVA: 0x000026BD File Offset: 0x000008BD
-			public override void PlayerDisconnect(Player player)
+			public override void PlayerDisconnect()
 			{
 				Config.ReadConfig();
 			}

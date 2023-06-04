@@ -10,7 +10,7 @@ namespace MythMod.Projectiles.projectile3
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("钢铁巨龙炮");
+            // base.DisplayName.SetDefault("钢铁巨龙炮");
 		}
 		public override void SetDefaults()
 		{
@@ -99,7 +99,7 @@ namespace MythMod.Projectiles.projectile3
             }
             Projectile.spriteDirection = (int)((Projectile.velocity.X) / Math.Abs(Projectile.velocity.X));
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(24, 1200);
         }

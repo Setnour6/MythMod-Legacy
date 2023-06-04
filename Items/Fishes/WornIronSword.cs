@@ -14,8 +14,8 @@ namespace MythMod.Items.Fishes
 		// Token: 0x060002CE RID: 718 RVA: 0x0003529C File Offset: 0x0003349C
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("锈铁剑");
-			base.Tooltip.SetDefault("brush!");
+            // base.DisplayName.SetDefault("锈铁剑");
+			// base.Tooltip.SetDefault("brush!");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "锈铁剑");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "都锈成这样了……");
 		}

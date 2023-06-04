@@ -9,8 +9,8 @@ namespace MythMod.Buffs.Drinks
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("南美不眠夜");
-            base.Description.SetDefault("移速增加10%,增大飞行时间");
+            // base.DisplayName.SetDefault("南美不眠夜");
+            // base.Description.SetDefault("移速增加10%,增大飞行时间");
 			Main.buffNoTimeDisplay[base.Type] = false;
 			Main.buffNoSave[base.Type] = true;
 		}

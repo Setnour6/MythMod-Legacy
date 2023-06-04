@@ -20,8 +20,8 @@ namespace MythMod.Items.Ammos
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("无尽高射速弹袋");
-            base.Tooltip.SetDefault("供应无限量的高射速弹作为弹药");
+            // base.DisplayName.SetDefault("无尽高射速弹袋");
+            // base.Tooltip.SetDefault("供应无限量的高射速弹作为弹药");
 		}
 		public override void SetDefaults()
 		{

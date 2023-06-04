@@ -32,8 +32,8 @@ namespace MythMod.Tiles.电梯
             TileObjectData.newTile.AnchorTop = default(AnchorData);
             TileObjectData.addTile((int)base.Type);
             this.DustType = 224;
-            ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("");
+            LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("");
             base.AddMapEntry(new Color(60, 60, 60), modTranslation);
             this.MineResist = 3f;
             base.SetStaticDefaults();

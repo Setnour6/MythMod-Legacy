@@ -8,7 +8,7 @@ namespace MythMod.Items.Weapons
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("松松垮垮的泥土剑");
+            // Tooltip.SetDefault("松松垮垮的泥土剑");
         }
         public override void SetDefaults()
         {

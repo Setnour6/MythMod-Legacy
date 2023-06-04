@@ -9,8 +9,8 @@ namespace MythMod.Items.Ammos
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("Arctic Arrow");
-			base.Tooltip.SetDefault("Freezes enemies for a short time");
+			// base.DisplayName.SetDefault("Arctic Arrow");
+			// base.Tooltip.SetDefault("Freezes enemies for a short time");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "星渊毒素箭");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "施加夺命剧毒");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);

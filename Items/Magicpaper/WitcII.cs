@@ -12,8 +12,8 @@ namespace MythMod.Items.Magicpaper//在虚无mod的Items文件夹里
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("二阶巫毒符咒");
-            Tooltip.SetDefault("射出灵魂标记,成功标记一个怪物,释放一个巫毒娃娃\n巫毒娃娃存在10秒\n冷却10s");//物品介绍
+            // DisplayName.SetDefault("二阶巫毒符咒");
+            // Tooltip.SetDefault("射出灵魂标记,成功标记一个怪物,释放一个巫毒娃娃\n巫毒娃娃存在10秒\n冷却10s");//物品介绍
         }
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetDefaults()

@@ -20,7 +20,7 @@ namespace MythMod.Items.Weapons.SkyWeapons
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("风之子");
+            // base.DisplayName.SetDefault("风之子");
 			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "风之子");
 			Main.RegisterItemAnimation(Item.type, new DrawAnimationVertical(8, 6));

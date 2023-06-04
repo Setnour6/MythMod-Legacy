@@ -8,8 +8,8 @@ namespace MythMod.Items.Corals
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("大金柳珊瑚");
-            Tooltip.SetDefault("珊瑚礁很美丽，不要让它受伤");
+            // DisplayName.SetDefault("大金柳珊瑚");
+            // Tooltip.SetDefault("珊瑚礁很美丽，不要让它受伤");
         }
         public override void SetDefaults()
         {

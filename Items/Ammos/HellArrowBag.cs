@@ -21,8 +21,8 @@ namespace MythMod.Items.Ammos
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("无尽狱炎箭袋");
-            base.Tooltip.SetDefault("供应无限量的狱炎箭作为弹药");
+            // base.DisplayName.SetDefault("无尽狱炎箭袋");
+            // base.Tooltip.SetDefault("供应无限量的狱炎箭作为弹药");
 		}
 		public override void SetDefaults()
 		{

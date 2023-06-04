@@ -12,8 +12,8 @@ namespace MythMod.Items.Magicpaper//在虚无mod的Items文件夹里
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("岩石神盾符咒石");
-            Tooltip.SetDefault("让你防御极大地提升\n持续10s\n冷却10s\n无消耗\n禁忌");//物品介绍
+            // DisplayName.SetDefault("岩石神盾符咒石");
+            // Tooltip.SetDefault("让你防御极大地提升\n持续10s\n冷却10s\n无消耗\n禁忌");//物品介绍
         }
         // Token: 0x0600462B RID: 17963 RVA: 0x0027BBA8 File Offset: 0x00279DA8
         public override void SetDefaults()

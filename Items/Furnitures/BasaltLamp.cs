@@ -9,7 +9,7 @@ namespace MythMod.Items.Furnitures
 	{
 		public override void SetStaticDefaults()
 		{
-            Tooltip.SetDefault("玄武岩灯");
+            // Tooltip.SetDefault("玄武岩灯");
         }
 		public override void SetDefaults()
 		{

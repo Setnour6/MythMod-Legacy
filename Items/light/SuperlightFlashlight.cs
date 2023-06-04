@@ -18,7 +18,7 @@ namespace MythMod.Items.light
         }
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("超亮手电筒");
+            // DisplayName.SetDefault("超亮手电筒");
         }
         public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
         {

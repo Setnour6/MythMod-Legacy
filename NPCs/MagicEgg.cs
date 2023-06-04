@@ -18,7 +18,7 @@ namespace MythMod.NPCs
 		// Token: 0x06001808 RID: 6152 RVA: 0x00009BEC File Offset: 0x00007DEC
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("魔卵");
+			// base.DisplayName.SetDefault("魔卵");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "魔卵");
 		}
 		// Token: 0x06001809 RID: 6153 RVA: 0x0010AD00 File Offset: 0x00108F00
@@ -76,7 +76,7 @@ namespace MythMod.NPCs
                 Gore.NewGore(base.NPC.position, base.NPC.velocity * scaleFactor, base.Mod.GetGoreSlot("Gores/魔卵碎块3"), 1f);
 			}
 		}
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
 		{
 			if (base.NPC.life <= 0)
 			{

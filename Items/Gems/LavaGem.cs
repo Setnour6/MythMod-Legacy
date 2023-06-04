@@ -9,8 +9,8 @@ namespace MythMod.Items.Gems
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("");
-            DisplayName.SetDefault("LavaGem");
+            // Tooltip.SetDefault("");
+            // DisplayName.SetDefault("LavaGem");
             DisplayName.AddTranslation(GameCulture.Chinese, "熔岩结核");
         }
         public override void SetDefaults()

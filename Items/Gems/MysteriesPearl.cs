@@ -9,8 +9,8 @@ namespace MythMod.Items.Gems
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("这奇怪的颜色,看上去似乎有些特别的作用……");
-            DisplayName.SetDefault("MysteriesPearl");
+            // Tooltip.SetDefault("这奇怪的颜色,看上去似乎有些特别的作用……");
+            // DisplayName.SetDefault("MysteriesPearl");
             DisplayName.AddTranslation(GameCulture.Chinese, "神秘宝珠");
         }
         public override void SetDefaults()

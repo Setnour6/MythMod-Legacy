@@ -23,7 +23,7 @@ namespace MythMod.Items
 		// Token: 0x06001CC8 RID: 7368 RVA: 0x00009CA8 File Offset: 0x00007EA8
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("XYSM宝藏箱2");
+            // base.DisplayName.SetDefault("XYSM宝藏箱2");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "宝藏箱");
 		}
 

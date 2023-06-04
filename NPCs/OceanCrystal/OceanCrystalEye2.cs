@@ -15,7 +15,7 @@ namespace MythMod.NPCs.OceanCrystal
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("海洋封印之眼");
+            // base.DisplayName.SetDefault("海洋封印之眼");
 			Main.npcFrameCount[base.NPC.type] = 1;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "海洋封印之眼");
 		}

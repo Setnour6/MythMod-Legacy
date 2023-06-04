@@ -19,8 +19,8 @@ namespace MythMod.Walls
 			Main.wallHouse[(int)base.Type] = true;
 			this.DustType = 163;
             /*this.drop = base.mod.ItemType("RedTreeLeavesWall");*/
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("");
 			base.AddMapEntry(new Color(27, 30, 9), modTranslation);
 		}
     }

@@ -12,7 +12,7 @@ namespace MythMod.Projectiles
 		// Token: 0x06001F14 RID: 7956 RVA: 0x0000C97C File Offset: 0x0000AB7C
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("霜雪破二阶散裂");
+            // base.DisplayName.SetDefault("霜雪破二阶散裂");
 		}
 
 		// Token: 0x06001F15 RID: 7957 RVA: 0x0018D09C File Offset: 0x0018B29C

@@ -11,7 +11,7 @@ namespace MythMod.NPCs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("风史莱姆");
+            // base.DisplayName.SetDefault("风史莱姆");
 			Main.npcFrameCount[base.NPC.type] = 4;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "风史莱姆");
 		}
@@ -52,7 +52,7 @@ namespace MythMod.NPCs
 		{
 
 		}
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
 		{
 		}
         public override void OnKill()

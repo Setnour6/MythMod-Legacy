@@ -19,10 +19,10 @@ namespace MythMod.Items.Accessories
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("公爵之牙");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("公爵之牙");
+			// base.Tooltip.SetDefault("");
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "公爵之牙");
-            Tooltip.SetDefault("增加12%暴击和闪避");
+            // Tooltip.SetDefault("增加12%暴击和闪避");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "增加12%暴击和闪避");
         }
         public override void SetDefaults()

@@ -22,7 +22,7 @@ namespace MythMod.Projectiles.projectile2
         //4444444
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("Miss");
+            // DisplayName.SetDefault("Miss");
         }
         //7359668
         public override void SetDefaults()

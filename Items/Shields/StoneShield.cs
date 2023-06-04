@@ -10,7 +10,7 @@ namespace MythMod.Items.Shields
 	{
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("石盾");
+            // DisplayName.SetDefault("石盾");
             Tooltip.AddTranslation(GameCulture.Chinese, "拿在手上增加15防御,并且受到伤害减少15%\n有概率挡住盾牌方向的弹幕,越慢的越容易被挡住");
             base.SetStaticDefaults();
         }

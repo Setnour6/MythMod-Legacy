@@ -10,8 +10,8 @@ namespace MythMod.Items
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("空明凝胶");
-            Tooltip.SetDefault("只少量的存在于极个别体型巨大的地球史莱姆体内\n这是世界上最纯净的凝胶\n神话");
+            // DisplayName.SetDefault("空明凝胶");
+            // Tooltip.SetDefault("只少量的存在于极个别体型巨大的地球史莱姆体内\n这是世界上最纯净的凝胶\n神话");
             ItemID.Sets.AnimatesAsSoul[Item.type] = false;
             ItemID.Sets.ItemIconPulse[Item.type] = false; 
             ItemID.Sets.ItemNoGravity[Item.type] = false;

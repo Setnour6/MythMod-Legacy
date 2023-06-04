@@ -11,8 +11,8 @@ namespace MythMod.Items.Weapons.FestivalWeapons
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("菠萝喜糖投刃");
-            base.Tooltip.SetDefault("");
+            // base.DisplayName.SetDefault("菠萝喜糖投刃");
+            // base.Tooltip.SetDefault("");
 		}
 		public override void SetDefaults()
 		{

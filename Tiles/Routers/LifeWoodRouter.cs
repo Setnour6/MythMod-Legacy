@@ -25,8 +25,8 @@ namespace MythMod.Tiles.Routers
 			};
             TileObjectData.newTile.CoordinateWidth = 24;
             TileObjectData.addTile((int)base.Type);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("生命木路由器");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("生命木路由器");
 			base.AddMapEntry(new Color(0, 17, 6), modTranslation);
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsTorch);
 			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;

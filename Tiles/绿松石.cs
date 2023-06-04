@@ -21,10 +21,10 @@ namespace MythMod.Tiles
 			this.DustType = 119;
 			this.HitSound = 21;
 			this.soundStyle/* tModPorter Note: Removed. Integrate into HitSound */ = 2;
-            this.ItemDrop = base.Mod.Find<ModItem>("Turquoise").Type;
+            this.ItemDrop/* tModPorter Note: Removed. Tiles and walls will drop the item which places them automatically. Use RegisterItemDrop to alter the automatic drop if necessary. */ = base.Mod.Find<ModItem>("Turquoise").Type;
 			Main.tileSpelunker[(int)base.Type] = true;
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-            modTranslation.SetDefault("绿松石");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+            // modTranslation.SetDefault("绿松石");
 			base.AddMapEntry(new Color(18, 202, 192), modTranslation);
             modTranslation.AddTranslation(GameCulture.Chinese, "绿松石");
 		}

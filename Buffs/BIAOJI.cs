@@ -10,8 +10,8 @@ namespace MythMod.Buffs
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("BIAOJI");
-			base.Description.SetDefault("被制成了巫毒娃娃");
+			// base.DisplayName.SetDefault("BIAOJI");
+			// base.Description.SetDefault("被制成了巫毒娃娃");
 			Main.debuff[base.Type] = false;
 			Main.pvpBuff[base.Type] = true;
 			Main.buffNoSave[base.Type] = true;

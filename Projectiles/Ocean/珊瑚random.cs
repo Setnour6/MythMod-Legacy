@@ -14,7 +14,7 @@ namespace MythMod.Projectiles.Ocean
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("珊瑚random");
+            // base.DisplayName.SetDefault("珊瑚random");
         }
         public override void SetDefaults()
         {
@@ -33,7 +33,7 @@ namespace MythMod.Projectiles.Ocean
         {
             Projectile.velocity.Y += 30f;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(70, 600);
             target.AddBuff(69, 600);

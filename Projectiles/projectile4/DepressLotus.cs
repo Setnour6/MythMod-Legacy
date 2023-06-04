@@ -15,7 +15,7 @@ namespace MythMod.Projectiles.projectile4
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("DepressLotus");
+            // DisplayName.SetDefault("DepressLotus");
         }
         public override void SetDefaults()
         {

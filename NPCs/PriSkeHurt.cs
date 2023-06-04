@@ -16,7 +16,7 @@ namespace MythMod.NPCs
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("骷髅王判伤");
+			// base.DisplayName.SetDefault("骷髅王判伤");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "机械骷髅王");
 		}
 		public override void SetDefaults()

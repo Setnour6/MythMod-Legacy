@@ -9,8 +9,8 @@ namespace MythMod.Buffs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("酒香I");
-            base.Description.SetDefault("好酒,好酒\n提升3%暴击");
+            // base.DisplayName.SetDefault("酒香I");
+            // base.Description.SetDefault("好酒,好酒\n提升3%暴击");
 			Main.debuff[base.Type] = false;
 			Main.pvpBuff[base.Type] = true;
 			Main.buffNoSave[base.Type] = true;

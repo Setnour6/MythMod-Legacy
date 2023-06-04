@@ -21,8 +21,8 @@ namespace MythMod.Items.Corals
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("泰拉大陆");
-            base.Tooltip.SetDefault("传送回主世界\n开发者专用");
+            // base.DisplayName.SetDefault("泰拉大陆");
+            // base.Tooltip.SetDefault("传送回主世界\n开发者专用");
         }
         public override void SetDefaults()
         {

@@ -8,7 +8,7 @@ namespace MythMod.Items.Weapons
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("红尘沙卷");
+            // Tooltip.SetDefault("红尘沙卷");
         }
         public override void SetDefaults()
         {

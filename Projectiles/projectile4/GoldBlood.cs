@@ -21,7 +21,7 @@ namespace MythMod.Projectiles.projectile4
 
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("赤血金鳞");
+            // base.DisplayName.SetDefault("赤血金鳞");
             Main.projFrames[Projectile.type] = 1;
         }
 
@@ -116,7 +116,7 @@ namespace MythMod.Projectiles.projectile4
             }
             return false;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Player p = Main.player[Main.myPlayer];
             target.velocity += (Projectile.Center - p.Center) / (Projectile.Center - p.Center).Length() * 10f;

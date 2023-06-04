@@ -19,10 +19,10 @@ namespace MythMod.Items.Accessories
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("幻影之心");
-            base.Tooltip.SetDefault("");
+            // base.DisplayName.SetDefault("幻影之心");
+            // base.Tooltip.SetDefault("");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "幻影之心");
-            Tooltip.SetDefault("增加17%闪避和伤害");
+            // Tooltip.SetDefault("增加17%闪避和伤害");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "增加17%闪避和伤害");
         }
         public override void SetDefaults()

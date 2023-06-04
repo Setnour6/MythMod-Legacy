@@ -11,7 +11,7 @@ namespace MythMod.NPCs.LanternMoon
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("火焰风车");
+            // base.DisplayName.SetDefault("火焰风车");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "火焰风车");
 		}
 		public override float SpawnChance(NPCSpawnInfo spawnInfo)
@@ -98,7 +98,7 @@ namespace MythMod.NPCs.LanternMoon
 		{
 			return false;
 		}
-		public override void HitEffect(int hitDirection, double damage)
+		public override void HitEffect(NPC.HitInfo hit)
 		{
             MythPlayer mplayer = Main.player[Main.myPlayer].GetModPlayer<MythPlayer>();
             if (Main.netMode != 1 && base.NPC.life <= 0)

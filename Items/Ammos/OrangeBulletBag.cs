@@ -21,8 +21,8 @@ namespace MythMod.Items.Ammos
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("无尽桔子弹袋");
-            base.Tooltip.SetDefault("供应无限量的桔子弹作为弹药");
+            // base.DisplayName.SetDefault("无尽桔子弹袋");
+            // base.Tooltip.SetDefault("供应无限量的桔子弹作为弹药");
 		}
 		public override void SetDefaults()
 		{

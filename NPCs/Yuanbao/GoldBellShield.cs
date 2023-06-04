@@ -27,7 +27,7 @@ namespace MythMod.NPCs.Yuanbao
 		private int num2;
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("金钟罩");
+            // base.DisplayName.SetDefault("金钟罩");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "金钟罩");
 		}
 		public override void SetDefaults()

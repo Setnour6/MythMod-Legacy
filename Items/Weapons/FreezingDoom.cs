@@ -12,7 +12,7 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("末日暴雪");
+            // base.DisplayName.SetDefault("末日暴雪");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "末日暴雪");
 		}
 

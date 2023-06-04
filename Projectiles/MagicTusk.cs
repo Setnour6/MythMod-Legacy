@@ -18,7 +18,7 @@ namespace MythMod.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("附魔獠牙");
+            // base.DisplayName.SetDefault("附魔獠牙");
         }
         public override void SetDefaults()
         {

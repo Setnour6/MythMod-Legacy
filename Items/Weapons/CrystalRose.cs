@@ -13,7 +13,7 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("璀璨晶莲");
+            // base.DisplayName.SetDefault("璀璨晶莲");
 			Item.staff[base.Item.type] = true;
             base.DisplayName.AddTranslation(GameCulture.Chinese, "璀璨晶莲");
         }

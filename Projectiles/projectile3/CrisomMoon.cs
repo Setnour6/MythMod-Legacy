@@ -19,7 +19,7 @@ namespace MythMod.Projectiles.projectile3
 	{
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("赤月");
+            // base.DisplayName.SetDefault("赤月");
         }
 		public override void SetDefaults()
 		{
@@ -117,7 +117,7 @@ namespace MythMod.Projectiles.projectile3
             }
             return false;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.AddBuff(24, 600);
         }

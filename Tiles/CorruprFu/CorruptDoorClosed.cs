@@ -46,15 +46,15 @@ namespace MythMod.Tiles.CorruprFu
 			TileObjectData.addAlternate(0);
 			TileObjectData.addTile((int)base.Type);
 			base.AddToArray(ref TileID.Sets.RoomNeeds.CountsAsDoor);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("朽木门");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("朽木门");
 			base.AddMapEntry(new Color(191, 142, 111), modTranslation);
 			this.disableSmartCursor/* tModPorter Note: Removed. Use TileID.Sets.DisableSmartCursor instead */ = true;
 			this.AdjTiles = new int[]
 			{
 				10
 			};
-			this.OpenDoorID = base.Mod.Find<ModTile>("CorruptDoorOpen").Type;
+			this.OpenDoorID/* tModPorter Note: Removed. Use TileID.Sets.OpenDoorID instead */ = base.Mod.Find<ModTile>("CorruptDoorOpen").Type;
 			modTranslation.AddTranslation(GameCulture.Chinese, "朽木门");
 		}
 		public override bool CreateDust(int i, int j, ref int type)

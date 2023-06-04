@@ -34,7 +34,7 @@ namespace MythMod.NPCs
         private int num24;
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("机械激光");
+            // base.DisplayName.SetDefault("机械激光");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "机械激光");
 		}
 		public override void SetDefaults()
@@ -129,7 +129,7 @@ namespace MythMod.NPCs
                 }
             }
         }
-        public override void OnHitPlayer(Player player, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurtInfo)
         {
         }
         public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)

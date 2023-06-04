@@ -11,8 +11,8 @@ namespace MythMod.Items.Potions
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("神盾药剂");
-            Tooltip.SetDefault("提升24点防御");
+            // DisplayName.SetDefault("神盾药剂");
+            // Tooltip.SetDefault("提升24点防御");
         }
         public override void SetDefaults()
         {

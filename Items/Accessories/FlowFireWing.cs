@@ -16,8 +16,8 @@ namespace MythMod.Items.Accessories
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("Flameflow Wings");
-            base.Tooltip.SetDefault("It can fly in volcano");
+            // base.DisplayName.SetDefault("Flameflow Wings");
+            // base.Tooltip.SetDefault("It can fly in volcano");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "流火之翼");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "可以在火山飞行");
         }

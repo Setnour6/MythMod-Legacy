@@ -15,7 +15,7 @@ namespace MythMod.Projectiles.projectile4
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("FireBomb");
+            // DisplayName.SetDefault("FireBomb");
         }
         public override void SetDefaults()
         {

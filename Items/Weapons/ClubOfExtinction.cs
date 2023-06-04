@@ -21,8 +21,8 @@ namespace MythMod.Items.Weapons
         private int num = 0;
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("灭绝棍棒");
-            Tooltip.SetDefault("作弊武器\n产生大量高能漩涡，触碰消除");
+            // base.DisplayName.SetDefault("灭绝棍棒");
+            // Tooltip.SetDefault("作弊武器\n产生大量高能漩涡，触碰消除");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;
@@ -64,7 +64,7 @@ namespace MythMod.Items.Weapons
             }
             return false;
         }
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             target.lifeMax = 0;
             target.life = 0;

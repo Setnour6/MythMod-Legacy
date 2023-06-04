@@ -11,7 +11,7 @@ namespace MythMod.NPCs
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("Shell");
+			// base.DisplayName.SetDefault("Shell");
 			Main.npcFrameCount[base.NPC.type] = 6;
 			base.DisplayName.AddTranslation(GameCulture.Chinese, "黑星宝螺");
 		}

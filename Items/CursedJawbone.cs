@@ -21,8 +21,8 @@ namespace MythMod.Items
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("诅咒颌骨");
-			base.Tooltip.SetDefault("在你附近召唤鲜血獠牙，要求血腥环境");
+            // base.DisplayName.SetDefault("诅咒颌骨");
+			// base.Tooltip.SetDefault("在你附近召唤鲜血獠牙，要求血腥环境");
 		}
 		private bool initialization = true;
         private float X;

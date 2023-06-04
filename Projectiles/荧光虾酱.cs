@@ -13,7 +13,7 @@ namespace MythMod.Projectiles
 		private int num = 480;
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("荧光虾酱");
+            // base.DisplayName.SetDefault("荧光虾酱");
 		}
 		public override void SetDefaults()
 		{

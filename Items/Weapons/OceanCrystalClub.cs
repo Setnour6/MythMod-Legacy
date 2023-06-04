@@ -13,7 +13,7 @@ namespace MythMod.Items.Weapons
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("蓝晶石棍棒");
+            // base.DisplayName.SetDefault("蓝晶石棍棒");
         }
         public override void SetDefaults()
         {

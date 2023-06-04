@@ -13,8 +13,8 @@ namespace MythMod.Items.Weapons
     {
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("魔星之辉");
-            base.Tooltip.SetDefault("降下魔化落星");
+            // base.DisplayName.SetDefault("魔星之辉");
+            // base.Tooltip.SetDefault("降下魔化落星");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
         public static short GetGlowMask = 0;

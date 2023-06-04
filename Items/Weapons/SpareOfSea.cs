@@ -20,8 +20,8 @@ namespace MythMod.Items.Weapons
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("");
+			// base.Tooltip.SetDefault("");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "碧海长矛");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "让海潮伴我来守护你");
 		}

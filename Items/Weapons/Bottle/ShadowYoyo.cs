@@ -15,7 +15,7 @@ namespace MythMod.Items.Weapons.Bottle
             ItemID.Sets.Yoyo[Item.type] = true;
             ItemID.Sets.GamepadExtraRange[Item.type] = 15;
             ItemID.Sets.GamepadSmartQuickReach[Item.type] = true;
-            DisplayName.SetDefault("封印球");
+            // DisplayName.SetDefault("封印球");
         }
         public override void SetDefaults()
         {

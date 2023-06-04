@@ -14,7 +14,7 @@ namespace MythMod.Projectiles
 		// Token: 0x06001F14 RID: 7956 RVA: 0x0000C97C File Offset: 0x0000AB7C
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("晶刺");
+            // base.DisplayName.SetDefault("晶刺");
 			Main.projFrames[base.Projectile.type] = 4;
 		}
 
@@ -73,7 +73,7 @@ namespace MythMod.Projectiles
 			return new Color?(new Color(255, 255, 255, base.Projectile.alpha));
 		}
         // Token: 0x0600298B RID: 10635 RVA: 0x00213848 File Offset: 0x00211A48
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.velocity = Projectile.velocity * 0.2f;
         }

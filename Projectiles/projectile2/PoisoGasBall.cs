@@ -14,10 +14,10 @@ namespace MythMod.Projectiles.projectile2
 		// Token: 0x06001F14 RID: 7956 RVA: 0x0000C97C File Offset: 0x0000AB7C
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("毒气弹");
+            // base.DisplayName.SetDefault("毒气弹");
 			Main.projFrames[base.Projectile.type] = 1;
 		}
-        public override void OnHitPlayer(Player target, int damage, bool crit)
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
         {
             target.AddBuff(20, Projectile.timeLeft * 2, true);
             target.AddBuff(70, Projectile.timeLeft / 2, true);

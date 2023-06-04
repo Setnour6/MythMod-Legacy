@@ -16,7 +16,7 @@ namespace MythMod.Projectiles
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("º£ÀËÇò");
+            // DisplayName.SetDefault("0†20„50†80‡90‡5¨°");
             Main.projFrames[Projectile.type] = 4; 
 
         }
@@ -54,17 +54,17 @@ namespace MythMod.Projectiles
 				base.Projectile.frame = 0;
 			}
             #region
-            if (Projectile.timeLeft == 710) { Projectile.tileCollide = true; }//µ±ÄãµÄÌØÐ§´æÔÚ710ìõÊ±£¬²»ÄÜ´©Ç½
-            Projectile.rotation = (float)System.Math.Atan2((double)Projectile.velocity.Y, (double)Projectile.velocity.X) + 1.57f;//ÈÃÄãµÄÌØÐ§Õý³£»¯
-            Projectile.light = 0.1f;//·¢¹â//0Îª²»·¢¹â
-            Vector2 pc = Projectile.position + new Vector2(Projectile.width, Projectile.height) / 2;//ÈÃÄãµÄÌØÐ§Õý³£»¯
-            Projectile.light = 0.1f;//·¢¹â
+            if (Projectile.timeLeft == 710) { Projectile.tileCollide = true; }//0…8¡À0‡20Š00…80‡20ˆ00‰10ˆ4¡ì0…70Š30ˆ80‰3710¨¬0‹10‡8¡À0„50…10…50†30‡20‰50…70„80‡50†5
+            Projectile.rotation = (float)System.Math.Atan2((double)Projectile.velocity.Y, (double)Projectile.velocity.X) + 1.57f;//0‡60‡10‡20Š00…80‡20ˆ00‰10ˆ4¡ì0ˆ90‹50…60„50†30…4
+            Projectile.light = 0.1f;//¡¤0„40†10‰9//00ˆ20„90…50†3¡¤0„40†10‰9
+            Vector2 pc = Projectile.position + new Vector2(Projectile.width, Projectile.height) / 2;//0‡60‡10‡20Š00…80‡20ˆ00‰10ˆ4¡ì0ˆ90‹50…60„50†30…4
+            Projectile.light = 0.1f;//¡¤0„40†10‰9
             #endregion
             if (Projectile.timeLeft % 5 == 0 && Projectile.timeLeft < 895)
             {
-                int dustID = Dust.NewDust(Projectile.position, (int)(Projectile.width / 2f), (int)(Projectile.height / 2f), Mod.Find<ModDust>("Wave").Type, Projectile.velocity.X * 0.1f, Projectile.velocity.Y * 0.1f ,201, Color.White , 1.5f);/*·Û³¾Ð§¹û²»ÓÃ¹Ü*/
-                int dustID2 = Dust.NewDust(Projectile.position, (int)(Projectile.width / 2f), (int)(Projectile.height / 2f), 56, Projectile.velocity.X * 0.1f, Projectile.velocity.Y * 0.1f ,201, Color.White , 1f);/*·Û³¾Ð§¹û²»ÓÃ¹Ü*/
-                int dustID3 = Dust.NewDust(Projectile.position, (int)(Projectile.width / 2f), (int)(Projectile.height / 2f), Mod.Find<ModDust>("Wave").Type, Projectile.velocity.X * 0.1f, Projectile.velocity.Y * 0.1f ,201, Color.White , 1f);/*·Û³¾Ð§¹û²»ÓÃ¹Ü*/
+                int dustID = Dust.NewDust(Projectile.position, (int)(Projectile.width / 2f), (int)(Projectile.height / 2f), Mod.Find<ModDust>("Wave").Type, Projectile.velocity.X * 0.1f, Projectile.velocity.Y * 0.1f ,201, Color.White , 1.5f);/*¡¤0‰40…60†60ˆ4¡ì0†10‹40…50†30ˆ70‡10†10‰5*/
+                int dustID2 = Dust.NewDust(Projectile.position, (int)(Projectile.width / 2f), (int)(Projectile.height / 2f), 56, Projectile.velocity.X * 0.1f, Projectile.velocity.Y * 0.1f ,201, Color.White , 1f);/*¡¤0‰40…60†60ˆ4¡ì0†10‹40…50†30ˆ70‡10†10‰5*/
+                int dustID3 = Dust.NewDust(Projectile.position, (int)(Projectile.width / 2f), (int)(Projectile.height / 2f), Mod.Find<ModDust>("Wave").Type, Projectile.velocity.X * 0.1f, Projectile.velocity.Y * 0.1f ,201, Color.White , 1f);/*¡¤0‰40…60†60ˆ4¡ì0†10‹40…50†30ˆ70‡10†10‰5*/
                 Main.dust[dustID].noGravity = true;
             }
             Projectile.velocity *= 0.97f;

@@ -19,7 +19,7 @@ namespace MythMod.Projectiles.Shields
 
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("猩红之躯");
+            // base.DisplayName.SetDefault("猩红之躯");
             Main.projFrames[Projectile.type] = 1;
         }
 

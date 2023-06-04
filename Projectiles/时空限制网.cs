@@ -21,7 +21,7 @@ namespace MythMod.Projectiles
 	{
 		public override void SetStaticDefaults()
 		{
-			DisplayName.SetDefault("时空限制网");
+			// DisplayName.SetDefault("时空限制网");
 		}
 
 		public override void SetDefaults()
@@ -60,7 +60,7 @@ namespace MythMod.Projectiles
 			}
 		}
 
-		public override void OnHitPlayer(Player player, int damage, bool crit)
+		public override void OnHitPlayer(Player target, Player.HurtInfo info)
 		{
 			if (Projectile.localAI[0] > 200f)
 			{
@@ -71,7 +71,7 @@ namespace MythMod.Projectiles
             {
                 player.lostCoinString = Main.ValueToCoins(player.lostCoins);
             }
-            SoundEngine.PlaySound(SoundID.PlayerKilled, player.position);
+            SoundEngine.PlaySound(SoundID.PlayerKilled);
             player.headVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
             player.bodyVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;
             player.legVelocity.Y = (float)Main.rand.Next(-40, -10) * 0.1f;

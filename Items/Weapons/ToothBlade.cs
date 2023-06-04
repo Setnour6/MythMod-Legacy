@@ -10,7 +10,7 @@ namespace MythMod.Items.Weapons
     {
         public override void SetStaticDefaults()
         {
-            Tooltip.SetDefault("");
+            // Tooltip.SetDefault("");
             DisplayName.AddTranslation(GameCulture.Chinese, "齿刃");
         }
         public override void AddRecipes()
@@ -62,7 +62,7 @@ namespace MythMod.Items.Weapons
                 m = true;
             }
         }
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
             if(k && m && Main.rand.Next(5) == 0)
             {

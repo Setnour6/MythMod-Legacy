@@ -11,7 +11,7 @@ namespace MythMod.Items.Walls
 	{
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("");
+			// base.DisplayName.SetDefault("");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "青纽扣珊瑚墙");
 		}
 		public override void SetDefaults()

@@ -9,8 +9,8 @@ namespace MythMod.Buffs
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("StarPoi");
-            base.Description.SetDefault("海水已经被星渊毒素污染\n深海的黑暗抑制了毒素在你体内蔓延");
+            // base.DisplayName.SetDefault("StarPoi");
+            // base.Description.SetDefault("海水已经被星渊毒素污染\n深海的黑暗抑制了毒素在你体内蔓延");
 			Main.debuff[base.Type] = true;
 			Main.pvpBuff[base.Type] = true;
 			Main.buffNoSave[base.Type] = true;

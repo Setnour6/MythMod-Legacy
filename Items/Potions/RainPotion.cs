@@ -11,8 +11,8 @@ namespace MythMod.Items.Potions
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("雨露药剂");
-            Tooltip.SetDefault("\n下雨越大你的攻击伤害越高,且你的生命在雨中缓缓回复");
+            // DisplayName.SetDefault("雨露药剂");
+            // Tooltip.SetDefault("\n下雨越大你的攻击伤害越高,且你的生命在雨中缓缓回复");
         }
         public override void SetDefaults()
         {

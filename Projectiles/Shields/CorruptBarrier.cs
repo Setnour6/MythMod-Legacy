@@ -19,7 +19,7 @@ namespace MythMod.Projectiles.Shields
 
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("腐朽屏障");
+            // base.DisplayName.SetDefault("腐朽屏障");
             Main.projFrames[Projectile.type] = 1;
         }
 

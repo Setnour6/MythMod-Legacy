@@ -24,8 +24,8 @@ namespace MythMod.Items.Weapons.StarJellyFIsh
 		// Token: 0x06001224 RID: 4644 RVA: 0x00084DFC File Offset: 0x00082FFC
 		public override void SetStaticDefaults()
 		{
-			base.DisplayName.SetDefault("");
-			base.Tooltip.SetDefault("");
+			// base.DisplayName.SetDefault("");
+			// base.Tooltip.SetDefault("");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "血琉璃长矛");
 			base.Tooltip.AddTranslation(GameCulture.Chinese, "让血晶石琉璃刺穿邪恶\n下水增强");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);

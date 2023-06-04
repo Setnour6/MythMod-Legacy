@@ -20,8 +20,8 @@ namespace MythMod.Items.Ammos
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("珍珠弹");
-            base.Tooltip.SetDefault("随机分裂");
+            // base.DisplayName.SetDefault("珍珠弹");
+            // base.Tooltip.SetDefault("随机分裂");
 		}
 		public override void SetDefaults()
 		{

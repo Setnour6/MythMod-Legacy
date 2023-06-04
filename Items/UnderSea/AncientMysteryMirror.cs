@@ -17,8 +17,8 @@ namespace MythMod.Items.UnderSea
         private bool num = true;
         public override void SetStaticDefaults()
         {
-            base.DisplayName.SetDefault("古老的暗镜");
-            base.Tooltip.SetDefault("Teleport you to your mouse's mirrorpoint of you");
+            // base.DisplayName.SetDefault("古老的暗镜");
+            // base.Tooltip.SetDefault("Teleport you to your mouse's mirrorpoint of you");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "古老的暗镜");
             base.Tooltip.AddTranslation(GameCulture.Chinese, "连通另一个世界的入口");
         }

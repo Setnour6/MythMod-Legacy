@@ -25,8 +25,8 @@ namespace MythMod.Tiles.Festivals
 			TileObjectData.newTile.StyleHorizontal = true;
 			TileObjectData.newTile.LavaDeath = false;
 			TileObjectData.addTile((int)base.Type);
-			ModTranslation modTranslation = base.CreateMapEntryName(null);
-			modTranslation.SetDefault("Currency Bar");
+			LocalizedText modTranslation = base.CreateMapEntryName(null);
+			// modTranslation.SetDefault("Currency Bar");
 			base.AddMapEntry(new Color(224, 194, 101), modTranslation);
 			modTranslation.AddTranslation(GameCulture.Chinese, "元宝");
 		}
@@ -54,7 +54,7 @@ namespace MythMod.Tiles.Festivals
 			}
 			return true;
 		}
-		public override bool Drop(int i, int j)
+		public override bool Drop(int i, int j)/* tModPorter Note: Removed. Use CanDrop to decide if an item should drop. Use GetItemDrops to decide which item drops. Item drops based on placeStyle are handled automatically now, so this method might be able to be removed altogether. */
 		{
 			string text;
 			switch (Main.tile[i, j].TileFrameX / 18)

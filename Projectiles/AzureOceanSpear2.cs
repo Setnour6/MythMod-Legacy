@@ -13,7 +13,7 @@ namespace MythMod.Projectiles
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("碧海长矛");
+            // base.DisplayName.SetDefault("碧海长矛");
 		}
         private bool initialization = true;
         private float X;
@@ -58,7 +58,7 @@ namespace MythMod.Projectiles
             spriteBatch.Draw(texture2D, base.Projectile.Center - Main.screenPosition, null, base.Projectile.GetAlpha(lightColor), base.Projectile.rotation, Utils.Size(texture2D) / 2f, base.Projectile.scale, SpriteEffects.None, 0f);
             return false;
         }
-        public override void OnHitNPC(NPC target, int damage, float knockback, bool crit)
+        public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
         }
         public override void Kill(int timeLeft)

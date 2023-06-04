@@ -11,7 +11,7 @@ namespace MythMod.Projectiles.Effects
 	{
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("铂金火粒");
+            // base.DisplayName.SetDefault("铂金火粒");
 		}
 		public override void SetDefaults()
 		{

@@ -14,7 +14,7 @@ namespace MythMod.Items.Banners
 				// Token: 0x06001475 RID: 5237 RVA: 0x000082F6 File Offset: 0x000064F6
 		public override void SetStaticDefaults()
 		{
-            base.DisplayName.SetDefault("灯笼鱼Banner");
+            // base.DisplayName.SetDefault("灯笼鱼Banner");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "灯笼鱼旗");
 		}
 		// Token: 0x06000FC6 RID: 4038 RVA: 0x00088C14 File Offset: 0x00086E14

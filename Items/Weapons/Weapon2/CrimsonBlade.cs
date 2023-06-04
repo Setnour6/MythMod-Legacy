@@ -11,7 +11,7 @@ namespace MythMod.Items.Weapons.Weapon2
     {
         public override void SetStaticDefaults()
         {
-            DisplayName.SetDefault("CrimsonBlade");
+            // DisplayName.SetDefault("CrimsonBlade");
             base.DisplayName.AddTranslation(GameCulture.Chinese, "绯红之刃");
             GetGlowMask = MythMod.SetStaticDefaultsGlowMask(this);
         }
@@ -55,7 +55,7 @@ namespace MythMod.Items.Weapons.Weapon2
         {
             return base.HoldoutOrigin();    
         }
-        public override void OnHitNPC(Player player, NPC target, int damage, float knockBack, bool crit)
+        public override void OnHitNPC(Player player, NPC target, NPC.HitInfo hit, int damageDone)
         {
         }
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
